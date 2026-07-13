@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Holiday Kenya Safaris — Wayfinder production specimen</title>
+  <style>
+    :root {
+      --navy: #182b3a;
+      --teal: #2c7a78;
+      --saffron: #e1a62b;
+      --mist: #f3f1ea;
+      --white: #fff;
+      --line: rgb(24 43 58 / 16%);
+      color-scheme: light;
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      color: var(--navy);
+      background: var(--mist);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    img { display: block; max-width: 100%; }
+    .page { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 64px 0 96px; }
+    .eyebrow { margin: 0 0 12px; color: var(--teal); font-size: 12px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+    h1, h2, h3 { margin: 0; font-family: Sora, ui-sans-serif, system-ui, sans-serif; letter-spacing: -.035em; }
+    h1 { max-width: 800px; font-size: clamp(40px, 6vw, 72px); line-height: 1.02; }
+    h2 { font-size: clamp(26px, 4vw, 38px); }
+    h3 { font-size: 18px; letter-spacing: -.02em; }
+    p { line-height: 1.65; }
+    .lede { max-width: 720px; margin: 20px 0 0; font-size: 18px; color: rgb(24 43 58 / 78%); }
+    .notice { margin: 28px 0 0; padding: 14px 16px; border-left: 4px solid var(--saffron); background: var(--white); font-size: 14px; }
+    section { margin-top: 72px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+    .section-head p { max-width: 520px; margin: 0; color: rgb(24 43 58 / 70%); font-size: 14px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; margin-top: 24px; }
+    .panel { min-height: 260px; padding: 32px; border: 1px solid var(--line); background: var(--white); }
+    .panel.dark { color: var(--white); background: var(--navy); border-color: transparent; }
+    .panel.mist { background: var(--mist); }
+    .span-6 { grid-column: span 6; }
+    .span-4 { grid-column: span 4; }
+    .span-8 { grid-column: span 8; }
+    .asset-label { margin: 0 0 28px; color: rgb(24 43 58 / 58%); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .dark .asset-label { color: rgb(255 255 255 / 62%); }
+    .lockup { width: min(100%, 620px); }
+    .icon { width: min(100%, 240px); margin: 0 auto; }
+    .size-row { display: flex; flex-wrap: wrap; align-items: end; gap: 28px; }
+    .size-item { display: grid; gap: 10px; justify-items: center; color: rgb(24 43 58 / 62%); font-size: 12px; }
+    .favicon-zoom { image-rendering: pixelated; width: 128px; height: 128px; }
+    .circle-mask { overflow: hidden; width: min(100%, 260px); aspect-ratio: 1; margin: 0 auto; border-radius: 50%; }
+    .circle-mask img { width: 100%; height: 100%; object-fit: cover; }
+    .header-shell { overflow: hidden; border: 1px solid var(--line); background: var(--white); }
+    .header-demo { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 88px; padding: 16px 24px; }
+    .header-demo img { width: 212px; }
+    .nav-demo { display: flex; align-items: center; gap: 24px; font-size: 14px; font-weight: 650; }
+    .button { padding: 13px 18px; background: var(--teal); color: var(--white); text-decoration: none; }
+    .mobile-shell { width: 390px; max-width: 100%; margin-top: 16px; border: 1px solid var(--line); background: var(--white); }
+    .mobile-shell .header-demo { min-height: 72px; padding: 12px 16px; }
+    .mobile-shell .header-demo img { width: 48px; }
+    .mobile-shell .nav-demo span { display: none; }
+    .vehicle { position: relative; overflow: hidden; min-height: 390px; background: #d9c7a5; }
+    .vehicle::before { content: ""; position: absolute; inset: 48px 6% 42px; border: 3px solid rgb(24 43 58 / 22%); border-radius: 42px 42px 10px 10px; }
+    .vehicle::after { content: ""; position: absolute; left: 50%; top: 48px; bottom: 42px; width: 3px; background: rgb(24 43 58 / 18%); }
+    .vehicle img { position: absolute; z-index: 1; left: 50%; top: 50%; width: 70%; transform: translate(-50%, -45%); }
+    .photo-test { position: relative; min-height: 430px; background: linear-gradient(90deg, rgb(24 43 58 / 8%), rgb(24 43 58 / 76%)), url('../outputs/assets/maasai-mara-escape.png') center / cover; }
+    .photo-test img { position: absolute; right: 5%; bottom: 8%; width: min(52%, 520px); filter: drop-shadow(0 6px 18px rgb(0 0 0 / 28%)); }
+    .photo-test .qa-label { position: absolute; top: 16px; left: 16px; padding: 8px 10px; background: var(--saffron); color: var(--navy); font-size: 11px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+    .swatches { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin-top: 24px; border: 1px solid var(--line); }
+    .swatch { min-height: 150px; padding: 18px; display: flex; align-items: end; font-size: 13px; font-weight: 700; }
+    .swatch.navy { color: var(--white); background: var(--navy); }
+    .swatch.teal { color: var(--white); background: var(--teal); }
+    .swatch.saffron { background: var(--saffron); }
+    .swatch.mist { background: var(--mist); }
+    .swatch.white { background: var(--white); }
+    @media (max-width: 760px) {
+      .page { padding-top: 40px; }
+      section { margin-top: 56px; }
+      .section-head { display: block; }
+      .section-head p { margin-top: 12px; }
+      .span-4, .span-6, .span-8 { grid-column: 1 / -1; }
+      .panel { min-height: 220px; padding: 24px; }
+      .nav-demo span { display: none; }
+      .swatches { grid-template-columns: 1fr; }
+      .swatch { min-height: 90px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <p class="eyebrow">Phase 1 · production identity QA</p>
+    <h1>The Wayfinder, rebuilt for real use.</h1>
+    <p class="lede">Outlined SVG masters, small-size variants, restrained lockups, and one-colour applications for the Holiday Kenya Safaris WordPress build.</p>
+    <p class="notice"><strong>Internal specimen.</strong> The Mara background below is generated presentation material and is not approved for the public website.</p>
+
+    <section aria-labelledby="lockups">
+      <div class="section-head">
+        <h2 id="lockups">Core lockups</h2>
+        <p>Full colour is preferred on White or Pale Mist. Use the one-colour or reversed masters where the background requires it.</p>
+      </div>
+      <div class="grid">
+        <article class="panel span-8">
+          <p class="asset-label">Primary · white</p>
+          <img class="lockup" src="masters/hks-wayfinder-horizontal-primary.svg" alt="Holiday Kenya Safaris Wayfinder horizontal logo">
+        </article>
+        <article class="panel mist span-4">
+          <p class="asset-label">Icon · Pale Mist</p>
+          <img class="icon" src="masters/hks-wayfinder-icon-primary.svg" alt="HKS Wayfinder compass icon">
+        </article>
+        <article class="panel dark span-6">
+          <p class="asset-label">Reversed · Midnight Navy</p>
+          <img class="lockup" src="masters/hks-wayfinder-horizontal-reversed.svg" alt="Holiday Kenya Safaris reversed Wayfinder logo">
+        </article>
+        <article class="panel span-6">
+          <p class="asset-label">One colour · Midnight Navy</p>
+          <img class="lockup" src="masters/hks-wayfinder-horizontal-navy.svg" alt="Holiday Kenya Safaris one-colour Wayfinder logo">
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="small-sizes">
+      <div class="section-head">
+        <h2 id="small-sizes">Small-size behaviour</h2>
+        <p>The full icon begins at 56px. Below 48px, the dedicated compass/H favicon replaces it.</p>
+      </div>
+      <div class="grid">
+        <article class="panel span-8">
+          <p class="asset-label">Native-size ladder</p>
+          <div class="size-row">
+            <div class="size-item"><img src="exports/favicon-16.png" width="16" height="16" alt=""><span>16px</span></div>
+            <div class="size-item"><img src="exports/favicon-32.png" width="32" height="32" alt=""><span>32px</span></div>
+            <div class="size-item"><img src="exports/favicon-48.png" width="48" height="48" alt=""><span>48px</span></div>
+            <div class="size-item"><img src="masters/hks-wayfinder-icon-primary.svg" width="56" height="56" alt=""><span>56px</span></div>
+            <div class="size-item"><img src="masters/hks-wayfinder-icon-primary.svg" width="96" height="96" alt=""><span>96px</span></div>
+            <div class="size-item"><img src="masters/hks-wayfinder-icon-primary.svg" width="144" height="144" alt=""><span>144px</span></div>
+          </div>
+        </article>
+        <article class="panel mist span-4">
+          <p class="asset-label">16px raster · 8× nearest-neighbour</p>
+          <img class="favicon-zoom" src="exports/favicon-16.png" alt="Enlarged 16 pixel favicon inspection">
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="placements">
+      <div class="section-head">
+        <h2 id="placements">Header and avatar placements</h2>
+        <p>The compact icon is a responsive substitution, not an app icon or a second brand.</p>
+      </div>
+      <div class="grid">
+        <article class="span-8">
+          <div class="header-shell">
+            <div class="header-demo">
+              <img src="masters/hks-wayfinder-horizontal-primary.svg" alt="Holiday Kenya Safaris">
+              <div class="nav-demo"><span>Safaris</span><span>Destinations</span><span>About</span><a class="button" href="#">Plan your trip</a></div>
+            </div>
+          </div>
+          <div class="mobile-shell">
+            <div class="header-demo">
+              <img src="masters/hks-wayfinder-favicon.svg" alt="Holiday Kenya Safaris">
+              <div class="nav-demo"><a class="button" href="#">Plan your trip</a></div>
+            </div>
+          </div>
+        </article>
+        <article class="panel mist span-4">
+          <p class="asset-label">Circular avatar safe crop</p>
+          <div class="circle-mask"><img src="exports/social-avatar-512.png" alt="HKS social avatar preview"></div>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="physical">
+      <div class="section-head">
+        <h2 id="physical">Physical and difficult backgrounds</h2>
+        <p>Vector masters remain the production source. These panels test silhouette, legibility, and background discipline only.</p>
+      </div>
+      <div class="grid">
+        <article class="vehicle span-6">
+          <img src="masters/hks-wayfinder-vehicle-door-navy.svg" alt="Holiday Kenya Safaris one-colour vehicle-door logo preview">
+        </article>
+        <article class="photo-test span-6">
+          <span class="qa-label">Internal image · do not publish</span>
+          <img src="masters/hks-wayfinder-horizontal-reversed.svg" alt="Holiday Kenya Safaris reversed logo over a destination image test">
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="palette">
+      <div class="section-head">
+        <h2 id="palette">Production palette</h2>
+        <p>Saffron is directional emphasis, not body text. Navy carries the system's most important information.</p>
+      </div>
+      <div class="swatches">
+        <div class="swatch navy">Midnight Navy · #182B3A</div>
+        <div class="swatch teal">Lake Teal · #2C7A78</div>
+        <div class="swatch saffron">Wayfinder Saffron · #E1A62B</div>
+        <div class="swatch mist">Pale Mist · #F3F1EA</div>
+        <div class="swatch white">White · #FFFFFF</div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

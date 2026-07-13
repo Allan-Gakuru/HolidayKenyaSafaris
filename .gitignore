@@ -20,6 +20,8 @@
 /coverage/
 /artifacts/
 *.log
+__pycache__/
+*.py[cod]
 
 # Operating-system and editor files
 .DS_Store

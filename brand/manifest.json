@@ -1,0 +1,324 @@
+{
+  "brand": "Holiday Kenya Safaris",
+  "identity": "The Wayfinder",
+  "generated_by": "tools/brand/build_logo.py",
+  "source_font": "Sora Version 2.000, SIL OFL 1.1",
+  "assets": [
+    {
+      "path": "brand/exports/apple-touch-icon-180.png",
+      "bytes": 14056,
+      "sha256": "b8b350c23eafe730e86371b1fb6ad5d85e7150754f357c9bda30e3255e099670",
+      "dimensions": [
+        180,
+        180
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "brand/exports/favicon-16.png",
+      "bytes": 574,
+      "sha256": "babe72722c3f73c4e4bcc567a2d25b0e3e1f779fd96cebad9e3bfde252d9b8ce",
+      "dimensions": [
+        16,
+        16
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "brand/exports/favicon-32.png",
+      "bytes": 1505,
+      "sha256": "a016edafc40f8317c4f5ea563c4fa843673c5ad60015cfcfdc5dec80a743085b",
+      "dimensions": [
+        32,
+        32
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "brand/exports/favicon-48.png",
+      "bytes": 2462,
+      "sha256": "b45d9ee6f335fa70b8c3906e8853ca6b4c63c2520f6d3468e4cda1beaaca9f7e",
+      "dimensions": [
+        48,
+        48
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "brand/exports/favicon.ico",
+      "bytes": 4595,
+      "sha256": "27ca526f9e951fd5f629f1e742c15d65d45d58982c66ad9c1cd0a64b6adf34e7",
+      "dimensions": [
+        48,
+        48
+      ],
+      "format": "ICO"
+    },
+    {
+      "path": "brand/exports/hks-wayfinder-horizontal-navy-1024.png",
+      "bytes": 71439,
+      "sha256": "f21fe79dd6d66d3516945eaba24f0ee5804acd6bcaa921bc7b47e7087839d1c6",
+      "dimensions": [
+        1024,
+        364
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "brand/exports/hks-wayfinder-horizontal-primary-1024.png",
+      "bytes": 75291,
+      "sha256": "225c43e988f0bc4726c5096d988cfbdeee0ca0d826d5f0702bdeb8f9601322de",
+      "dimensions": [
+        1024,
+        364
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "brand/exports/hks-wayfinder-horizontal-primary-512.png",
+      "bytes": 36289,
+      "sha256": "0eba7b238261b9ff66a983135855b3fc3de181cfb4719ca04d1676e40fc63a89",
+      "dimensions": [
+        512,
+        182
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "brand/exports/hks-wayfinder-horizontal-reversed-1024.png",
+      "bytes": 52409,
+      "sha256": "391842308bb6d6cf94d738b97774e348862e7c043ffb8716ba46061d7c4a5600",
+      "dimensions": [
+        1024,
+        364
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "brand/exports/hks-wayfinder-icon-navy-512.png",
+      "bytes": 43588,
+      "sha256": "7fa953ba216de1a81689a9b4af7067d305c21d12ff566972d0153ef692a61343",
+      "dimensions": [
+        512,
+        512
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "brand/exports/hks-wayfinder-icon-primary-180.png",
+      "bytes": 16136,
+      "sha256": "3b66e86844e82a2d2c7a16420c6725bf5aba33db8f7f6519c746ffb89cd379c4",
+      "dimensions": [
+        180,
+        180
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "brand/exports/hks-wayfinder-icon-primary-512.png",
+      "bytes": 45378,
+      "sha256": "427857ccbef64ad9658d101a8885225187bbfaa5fd3b0a283ced35a53d9b00e8",
+      "dimensions": [
+        512,
+        512
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "brand/exports/hks-wayfinder-icon-reversed-512.png",
+      "bytes": 35307,
+      "sha256": "8e7f40d29cf13f492dcfde4e4bb6654c16f81ce03c3c159319d128e4e01a71fe",
+      "dimensions": [
+        512,
+        512
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "brand/exports/hks-wayfinder-stacked-navy-1024.png",
+      "bytes": 111752,
+      "sha256": "22fe58afd67603235f13799089116ac71a9b9d394a960986bc9b15ec92cc31f0",
+      "dimensions": [
+        1024,
+        1067
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "brand/exports/hks-wayfinder-stacked-primary-1024.png",
+      "bytes": 116748,
+      "sha256": "bd9ed7354d5bb7c0a8eddb5490e5a99cd18f49c557ebfd313b1605ca738835a8",
+      "dimensions": [
+        1024,
+        1067
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "brand/exports/hks-wayfinder-stacked-reversed-1024.png",
+      "bytes": 84087,
+      "sha256": "a34d14926298efa43c4f56a0fb4b056ba7d9b879782c6a2c62cc76fc5e3e6e14",
+      "dimensions": [
+        1024,
+        1067
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "brand/exports/hks-wayfinder-vehicle-door-navy-1600.png",
+      "bytes": 114292,
+      "sha256": "dceca3295c82cd32dafeba94be7264afb8f725d063765422785c995c6dac2af6",
+      "dimensions": [
+        1600,
+        569
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "brand/exports/hks-wayfinder-vehicle-door-white-1600.png",
+      "bytes": 85076,
+      "sha256": "424e16aae28a93013375dbc254ae075d9f4eb4dbb8bef5bafaac0d4060394556",
+      "dimensions": [
+        1600,
+        569
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "brand/exports/social-avatar-512.png",
+      "bytes": 38122,
+      "sha256": "6447bcc37c2708a2a70ab22889ffd2085fd9c43a07a0514ac77ff006ad5531bd",
+      "dimensions": [
+        512,
+        512
+      ],
+      "format": "PNG"
+    },
+    {
+      "path": "brand/masters/hks-wayfinder-favicon.svg",
+      "bytes": 505,
+      "sha256": "a3a0d49a7996948cbb4a756bd841f2b7ac8ce7d5cf47e4ccc2311f82631f25eb",
+      "viewBox": "0 0 256 256",
+      "format": "SVG"
+    },
+    {
+      "path": "brand/masters/hks-wayfinder-horizontal-navy.svg",
+      "bytes": 17781,
+      "sha256": "aa0040172dab107fdddce50095d87069d4b315e5801008e164657dd052c90e34",
+      "viewBox": "0 0 720 256",
+      "format": "SVG"
+    },
+    {
+      "path": "brand/masters/hks-wayfinder-horizontal-primary.svg",
+      "bytes": 17781,
+      "sha256": "d09a683da0043a8024d62f1d701bfc5139c95d1c1fae5a223dc00f4ac09d5e15",
+      "viewBox": "0 0 720 256",
+      "format": "SVG"
+    },
+    {
+      "path": "brand/masters/hks-wayfinder-horizontal-reversed.svg",
+      "bytes": 17781,
+      "sha256": "d8dcb06761b0aff32e4b28fa214f5ef70fe8229fd23d4370aed575ed79b06b01",
+      "viewBox": "0 0 720 256",
+      "format": "SVG"
+    },
+    {
+      "path": "brand/masters/hks-wayfinder-horizontal-white.svg",
+      "bytes": 17781,
+      "sha256": "8f6f8fa8e276fd4115024699ee23a8046c7c4e33d1a012bd6ac29783ad6ee4fd",
+      "viewBox": "0 0 720 256",
+      "format": "SVG"
+    },
+    {
+      "path": "brand/masters/hks-wayfinder-icon-navy.svg",
+      "bytes": 2628,
+      "sha256": "b709ea5f685a3837b0f8e3d093896ca52a06c2c54c01b800f3da4ad9faf0154e",
+      "viewBox": "0 0 256 256",
+      "format": "SVG"
+    },
+    {
+      "path": "brand/masters/hks-wayfinder-icon-primary.svg",
+      "bytes": 2628,
+      "sha256": "34e659288006c47b04402db2c01e611ad5c0efa8bc4f8f92a7012c97765d64fe",
+      "viewBox": "0 0 256 256",
+      "format": "SVG"
+    },
+    {
+      "path": "brand/masters/hks-wayfinder-icon-reversed.svg",
+      "bytes": 2628,
+      "sha256": "0d59a3bd3de9236d2a755d99f58c3ce46f815fcf25fbffe8e7e837f57d8a252e",
+      "viewBox": "0 0 256 256",
+      "format": "SVG"
+    },
+    {
+      "path": "brand/masters/hks-wayfinder-icon-white.svg",
+      "bytes": 2628,
+      "sha256": "31d4a03a0b93eedf80273423f6ef5c3b31e442f1fab1e74dd03bce84ade1b09d",
+      "viewBox": "0 0 256 256",
+      "format": "SVG"
+    },
+    {
+      "path": "brand/masters/hks-wayfinder-stacked-navy.svg",
+      "bytes": 18499,
+      "sha256": "5848bfbe7662f835cbd5be76616a5d6de607dc9e0eccfb2f45037df229f85559",
+      "viewBox": "0 0 480 500",
+      "format": "SVG"
+    },
+    {
+      "path": "brand/masters/hks-wayfinder-stacked-primary.svg",
+      "bytes": 18499,
+      "sha256": "840f470afb3621a0a9f74fba5a38872fb3227e09af3107a117b38029897eb07f",
+      "viewBox": "0 0 480 500",
+      "format": "SVG"
+    },
+    {
+      "path": "brand/masters/hks-wayfinder-stacked-reversed.svg",
+      "bytes": 18499,
+      "sha256": "81b59f56fbafaaef1b3cdfb38f5d775f34c1135339c56050d9892822e0e657ca",
+      "viewBox": "0 0 480 500",
+      "format": "SVG"
+    },
+    {
+      "path": "brand/masters/hks-wayfinder-stacked-white.svg",
+      "bytes": 18499,
+      "sha256": "b0074679bcb3d2bdeaa11ada97ce4a7ef2feec7ed298c3e4eb3f7bec6a38f0a2",
+      "viewBox": "0 0 480 500",
+      "format": "SVG"
+    },
+    {
+      "path": "brand/masters/hks-wayfinder-vehicle-door-navy.svg",
+      "bytes": 17879,
+      "sha256": "0acee9ad46de198d0261dd9c7038b7a68b74e90c5a7485738a7b0262b59c3c5c",
+      "viewBox": "0 0 780 320",
+      "format": "SVG"
+    },
+    {
+      "path": "brand/masters/hks-wayfinder-vehicle-door-white.svg",
+      "bytes": 17879,
+      "sha256": "e196ec5d691d1efe19f7d8429d19366735165746dd12ab818d1e4d23a82b5eab",
+      "viewBox": "0 0 780 320",
+      "format": "SVG"
+    },
+    {
+      "path": "brand/masters/hks-wayfinder-wordmark-navy.svg",
+      "bytes": 14977,
+      "sha256": "d7a995c1cde89c13ab58378036e92448d2daa062e2a70c854e5c012b1fe6e5dd",
+      "viewBox": "0 0 430 150",
+      "format": "SVG"
+    },
+    {
+      "path": "brand/masters/hks-wayfinder-wordmark-primary.svg",
+      "bytes": 14977,
+      "sha256": "58c2005d265f7d257d0d210dc9fdea1af728f095807995814492846511b67d7c",
+      "viewBox": "0 0 430 150",
+      "format": "SVG"
+    },
+    {
+      "path": "brand/masters/hks-wayfinder-wordmark-white.svg",
+      "bytes": 14977,
+      "sha256": "4d609c3da93a06da74431ef1e788c9c003fd7b433003f68d02125ca05f6f391d",
+      "viewBox": "0 0 430 150",
+      "format": "SVG"
+    }
+  ]
+}

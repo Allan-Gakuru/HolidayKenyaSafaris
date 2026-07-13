@@ -4,7 +4,7 @@ Custom WordPress website for Holiday Kenya Safaris, a local-market travel brand 
 
 ## Start Here
 
-Read [AGENTS.md](AGENTS.md) and its 12 required documents before changing product, content, design, analytics, or deployment behavior. [PRODUCT.md](PRODUCT.md) captures the confirmed strategic design register. [docs/PHASE-0-BASELINE.md](docs/PHASE-0-BASELINE.md) records the audited repository state, local runtime, source status, blockers, and adjusted implementation order.
+Read [AGENTS.md](AGENTS.md) and its 12 required documents before changing product, content, design, analytics, or deployment behavior. [PRODUCT.md](PRODUCT.md) captures the confirmed strategic design register. [docs/PHASE-0-BASELINE.md](docs/PHASE-0-BASELINE.md) records the audited repository state, source status, blockers, and adjusted implementation order. [docs/PHASE-1-WAYFINDER-ASSETS.md](docs/PHASE-1-WAYFINDER-ASSETS.md) records the production identity build and verification.
 
 ## Architecture
 
@@ -33,6 +33,8 @@ The working delivery loop is:
 5. Verify the deployed site in the browser and, when access is supplied, in the WordPress dashboard.
 
 Node.js may be added later for theme asset tooling or automated browser tests, but it is not a prerequisite for a local WordPress instance.
+
+The production Wayfinder masters, exports, usage rules, and build tools live under `brand/` and `tools/brand/`.
 
 ## Repository Boundaries
 
