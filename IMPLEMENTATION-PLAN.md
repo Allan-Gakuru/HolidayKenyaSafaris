@@ -1,0 +1,219 @@
+# Implementation Plan
+
+## Principle
+
+Build backward from a qualified WhatsApp inquiry. Do not start by producing a generic homepage and then bolt on conversion later.
+
+## Phase 0: Repository and Environment Audit
+
+Actions:
+
+- Read this documentation package.
+- Inspect the current workspace and determine whether a WordPress project already exists.
+- Confirm local development, staging, production hosting, PHP, database, Node tooling, deployment, backups, and version control.
+- Check `CLIENT-CONFIRMATIONS.md` and separate launch blockers from safe placeholders.
+- Record the exact setup in the repository README.
+
+Deliverable:
+
+- Reproducible local environment and an implementation plan adjusted to the actual repository.
+
+## Phase 1: Production Wayfinder Identity
+
+Actions:
+
+- Redraw the selected mark as clean SVG geometry.
+- Correct HKS legibility, compass simplification, spacing, and small-size behavior.
+- Export required variants.
+- Test on Pale Mist, white, Midnight Navy, destination photography, and a classic safari Defender application.
+- Confirm Sora and Inter delivery.
+
+Acceptance:
+
+- Header and favicon use vector-derived assets, not a crop from the concept board.
+- One-color marks work at small sizes.
+- No app mockup or app-product language remains.
+
+## Phase 2: WordPress Foundation
+
+Recommended structure:
+
+```text
+wp-content/
+  plugins/
+    hks-core/
+      hks-core.php
+      src/
+      acf-json/
+      blocks/
+      assets/
+  themes/
+    hks-wayfinder/
+      style.css
+      functions.php
+      theme.json
+      templates/
+      parts/
+      patterns/
+      blocks/
+      assets/
+```
+
+Actions:
+
+- Create the custom block theme.
+- Create the `hks-core` site plugin.
+- Install and configure Secure Custom Fields.
+- Register content types and taxonomies with REST/block-editor support.
+- Add design tokens to `theme.json`.
+- Establish coding standards, linting, formatting, and test commands.
+
+Acceptance:
+
+- Theme can change without deleting the content model.
+- Field configuration is version controlled.
+- No heavy page builder is required.
+
+## Phase 3: Content Model and Editorial Experience
+
+Actions:
+
+- Implement Tour, Campaign, and optional Testimonial models.
+- Implement taxonomies and SCF groups from `CONTENT-MODEL.md`.
+- Add confirmation statuses, field guidance, and validation.
+- Lock critical templates while preserving practical editing regions.
+- Add preview behavior for Tours and Campaigns.
+
+Acceptance:
+
+- An editor can create one Tour and link several Campaign variants.
+- A placeholder price cannot be accidentally labeled confirmed.
+- Editors can record image provenance and choose the media assigned to each public template.
+
+## Phase 4: Conversion Component First
+
+Actions:
+
+- Build the reusable intake form and WhatsApp handoff.
+- Implement field validation, accessible dialog/sheet behavior, focus management, error handling, and mobile keyboard behavior.
+- Persist package and campaign attribution.
+- Implement the event contract with placeholder-disabled analytics configuration.
+- Test desktop WhatsApp Web and mobile WhatsApp behavior.
+
+Acceptance:
+
+- A visitor can submit required details and receive a readable prefilled message.
+- Nothing is described as sent before the visitor sends it.
+- No sensitive form values enter analytics.
+
+## Phase 5: Three Seed Tours
+
+Implement and verify:
+
+1. 3 Days / 2 Nights Maasai Mara Road Safari.
+2. Nairobi National Park Tours - 4 hours.
+3. 3 Days / 2 Nights Amboseli Safari Package.
+
+Actions:
+
+- Verify current Ashford facts.
+- Record source and checked date.
+- Import canonical facts.
+- Rewrite local-market copy.
+- Mark KSh prices provisional until confirmed.
+- Use approved imagery only.
+- Add representative Campaign variants for different audience angles.
+
+Acceptance:
+
+- Three end-to-end package funnels work before scaling the catalogue.
+
+## Phase 6: Templates and Pages
+
+Build in this order:
+
+1. Tour detail.
+2. Campaign landing page.
+3. Tour catalogue.
+4. Destination page.
+5. Homepage.
+6. About/trust.
+7. Group travel.
+8. Contact.
+9. Legal and policy templates.
+
+Why this order:
+
+- The conversion and product templates define the data and proof the homepage must surface.
+- Building the homepage first encourages generic content and one-off components.
+
+Acceptance:
+
+- Every template uses the shared design system and structured content.
+- Campaign pages inherit canonical Tour facts.
+- The current Maasai Mara prototype's strongest UX is preserved without carrying over its old identity.
+
+## Phase 7: Catalogue Migration
+
+Actions:
+
+- Review the 44 unique local candidate pages in controlled batches.
+- Prioritize credible, complete, locally relevant products.
+- Keep incomplete or questionable records in draft.
+- Add missing coast/staycation products only when supplied or confirmed.
+- Check internal linking and filter usefulness after each batch.
+
+Acceptance:
+
+- No product is live merely because it existed in the crawl.
+- Every live Tour has source, checked date, pricing status, and image-rights status.
+
+## Phase 8: Analytics, SEO, Security, and Performance
+
+Actions:
+
+- Request client analytics IDs.
+- Configure and test Meta, GA4, and optional GTM.
+- Implement consent according to the approved privacy approach.
+- Add metadata, canonical behavior, sitemap, robots, breadcrumbs, and accurate structured data.
+- Add security hardening, least-privilege roles, spam protection, update policy, backups, staging, and monitoring.
+- Optimize media, caching, fonts, and JavaScript.
+
+Acceptance:
+
+- Events fire once with correct parameters.
+- Campaign UTMs survive the journey to WhatsApp launch.
+- No fake reviews or inaccurate offer schema is published.
+- Backup and restore process is documented.
+
+## Phase 9: Quality Assurance
+
+Test:
+
+- Mobile, tablet, laptop, and wide desktop layouts.
+- Chrome, Edge, Firefox, and Safari where available.
+- Keyboard navigation and screen-reader semantics.
+- Long titles, large KSh values, missing optional fields, and empty states.
+- Form errors, WhatsApp cancellation, and back navigation.
+- Slow connections and image failures.
+- Template editing by a non-developer.
+- Source and rights statuses.
+- Core Web Vitals and layout shift.
+- Analytics debug modes.
+
+Capture desktop and mobile screenshots for the core templates before acceptance.
+
+## Phase 10: Launch and Learning
+
+Actions:
+
+- Complete all launch-blocking confirmations.
+- Freeze and back up staging.
+- Deploy through a documented process.
+- Verify SSL, forms, WhatsApp, analytics, indexing, redirects, and backups in production.
+- Launch initial Facebook campaign pages.
+- Review inquiry quality and consultant feedback weekly.
+
+Use evidence to add new campaign variants, not assumptions alone.
+
+Follow `DEPLOYMENT-PIPELINE.md` for the working-directory-to-GitHub-to-cPanel release process.

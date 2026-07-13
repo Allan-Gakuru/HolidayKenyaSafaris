@@ -1,0 +1,28 @@
+# Dependencies and package-manager state
+/node_modules/
+/.npm-cache/
+/vendor/
+
+# WordPress runtime data (code in wp-content/themes and wp-content/plugins is tracked)
+/wp-config.php
+/wp-content/uploads/
+/wp-content/cache/
+/wp-content/upgrade/
+/wp-content/debug.log
+
+# Secrets and machine-specific configuration
+/.env
+/.env.*
+!/.env.example
+*.local
+
+# Test and build output
+/coverage/
+/artifacts/
+*.log
+
+# Operating-system and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
