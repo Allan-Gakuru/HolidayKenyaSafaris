@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "hks-wayfinder/destination-intro",
+  "version": "0.2.0",
+  "title": "HKS Destination intro",
+  "category": "theme",
+  "icon": "location",
+  "description": "Audited destination guidance with a safe catalogue fallback.",
+  "textdomain": "hks-wayfinder",
+  "supports": { "html": false, "multiple": false }
+}

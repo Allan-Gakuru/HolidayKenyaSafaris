@@ -3,7 +3,7 @@ Theme Name: HKS Wayfinder
 Theme URI: https://github.com/Allan-Gakuru/HolidayKenyaSafaris
 Author: Holiday Kenya Safaris
 Description: Custom block theme for the Holiday Kenya Safaris Wayfinder website.
-Version: 0.1.0
+Version: 0.2.0
 Update URI: https://github.com/Allan-Gakuru/HolidayKenyaSafaris
 Requires at least: 6.6
 Requires PHP: 8.3
@@ -30,6 +30,23 @@ html {
 body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+.hks-skip-link {
+	background: var(--wp--preset--color--saffron);
+	border-radius: 0 0 8px 8px;
+	color: var(--wp--preset--color--midnight-navy);
+	font-weight: 700;
+	left: 1rem;
+	padding: 0.65rem 1rem;
+	position: fixed;
+	top: 0;
+	transform: translateY(-120%);
+	z-index: 1000;
+}
+
+.hks-skip-link:focus {
+	transform: translateY(0);
 }
 
 :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
@@ -61,6 +78,8 @@ body {
 
 .hks-site-header {
 	border-bottom: 1px solid rgb(24 43 58 / 16%);
+	position: relative;
+	z-index: var(--wp--custom--z-index--sticky, 200);
 }
 
 .wp-block-navigation__responsive-container-open,
@@ -91,9 +110,566 @@ body {
 	text-wrap: pretty;
 }
 
+.hks-kicker {
+	color: var(--wp--preset--color--lake-teal);
+	font-family: var(--wp--preset--font-family--sora);
+	font-size: var(--wp--preset--font-size--utility);
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	margin-block: 0 0.65rem;
+	text-transform: uppercase;
+}
+
+.hks-tour-page,
+.hks-catalogue-page,
+.hks-destination-page,
+.hks-home {
+	overflow: clip;
+}
+
+.hks-tour-hero {
+	background:
+		linear-gradient(135deg, rgb(44 122 120 / 16%), transparent 54%),
+		var(--wp--preset--color--midnight-navy);
+	color: var(--wp--preset--color--white);
+	display: grid;
+	gap: var(--wp--preset--spacing--50);
+	grid-template-columns: minmax(0, 1fr);
+	margin-inline: auto;
+	padding: clamp(3rem, 8vw, 6rem) max(1rem, calc((100vw - 1240px) / 2));
+}
+
+.hks-tour-hero--with-image {
+	grid-template-columns: minmax(0, 1.05fr) minmax(20rem, 0.95fr);
+}
+
+.hks-tour-hero__content {
+	align-self: center;
+	max-width: 46rem;
+}
+
+.hks-tour-hero .hks-kicker {
+	color: var(--wp--preset--color--saffron);
+}
+
+.hks-tour-hero h1 {
+	color: inherit;
+	font-family: var(--wp--preset--font-family--sora);
+	font-size: var(--wp--preset--font-size--display);
+	letter-spacing: -0.04em;
+	line-height: 1.06;
+	margin: 0;
+	max-width: 18ch;
+	text-wrap: balance;
+}
+
+.hks-tour-hero__intro {
+	font-size: var(--wp--preset--font-size--lead);
+	max-width: 62ch;
+}
+
+.hks-tour-hero__intro p {
+	margin-bottom: 0;
+}
+
+.hks-fast-facts {
+	border-block: 1px solid rgb(255 255 255 / 20%);
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	list-style: none;
+	margin: var(--wp--preset--spacing--40) 0 0;
+	padding: var(--wp--preset--spacing--30) 0;
+}
+
+.hks-fast-facts li {
+	display: grid;
+	gap: 0.2rem;
+	min-width: 0;
+	padding-right: 1rem;
+}
+
+.hks-fast-facts li + li {
+	border-left: 1px solid rgb(255 255 255 / 18%);
+	padding-left: 1rem;
+}
+
+.hks-fast-facts span {
+	color: rgb(255 255 255 / 70%);
+	font-size: var(--wp--preset--font-size--utility);
+	font-weight: 650;
+	text-transform: uppercase;
+}
+
+.hks-fast-facts strong {
+	font-size: var(--wp--preset--font-size--small);
+	overflow-wrap: anywhere;
+}
+
+.hks-hero-price-context {
+	color: rgb(255 255 255 / 76%);
+	font-size: var(--wp--preset--font-size--utility);
+	margin: 0.75rem 0 0;
+	max-width: 68ch;
+}
+
+.hks-tour-hero__media {
+	align-self: stretch;
+	margin: 0;
+	min-height: 26rem;
+	position: relative;
+}
+
+.hks-tour-hero__media img {
+	border-radius: var(--wp--custom--radius--medium, 12px);
+	height: 100%;
+	object-fit: cover;
+	width: 100%;
+}
+
+.hks-tour-hero__media figcaption,
+.hks-destination-intro figcaption {
+	background: rgb(24 43 58 / 88%);
+	bottom: 0.5rem;
+	color: white;
+	font-size: 0.75rem;
+	left: 0.5rem;
+	padding: 0.25rem 0.5rem;
+	position: absolute;
+}
+
+.hks-hero-cta {
+	background: var(--wp--preset--color--white);
+	border-bottom: 1px solid rgb(24 43 58 / 14%);
+	gap: 1rem;
+	margin: 0 auto;
+	max-width: none !important;
+	padding: 1rem max(1rem, calc((100vw - 1240px) / 2));
+}
+
+.hks-hero-cta p {
+	color: var(--wp--preset--color--midnight-navy);
+	font-weight: 650;
+	margin: 0;
+}
+
+.hks-tour-details {
+	margin-inline: auto;
+	max-width: 72rem;
+	padding: var(--wp--preset--spacing--70) max(1rem, 4vw);
+}
+
+.hks-tour-section,
+.hks-quote-process {
+	margin-inline: auto;
+	max-width: 64rem;
+	padding-block: var(--wp--preset--spacing--60);
+}
+
+.hks-tour-section + .hks-tour-section,
+.hks-price-panel + .hks-tour-section,
+.hks-tour-section + .hks-quote-process {
+	border-top: 1px solid rgb(24 43 58 / 16%);
+}
+
+.hks-tour-section h2,
+.hks-quote-process h2,
+.hks-price-panel h2 {
+	margin-top: 0;
+}
+
+.hks-prose {
+	font-size: var(--wp--preset--font-size--lead);
+	max-width: 46rem;
+}
+
+.hks-price-panel {
+	align-items: start;
+	background: var(--wp--preset--color--white);
+	border-left: 5px solid var(--wp--preset--color--saffron);
+	box-shadow: 0 14px 40px rgb(24 43 58 / 9%);
+	display: grid;
+	gap: 1rem 2rem;
+	grid-template-columns: minmax(14rem, 0.8fr) minmax(0, 1.2fr);
+	margin: var(--wp--preset--spacing--40) auto;
+	max-width: 64rem;
+	padding: var(--wp--preset--spacing--40);
+}
+
+.hks-price-panel p {
+	margin-block: 0;
+}
+
+.hks-price-panel__status,
+.hks-small-print {
+	color: rgb(22 27 31 / 72%);
+	font-size: var(--wp--preset--font-size--small);
+}
+
+.hks-itinerary {
+	list-style: none;
+	margin: var(--wp--preset--spacing--40) 0 0;
+	padding: 0;
+}
+
+.hks-itinerary > li {
+	display: grid;
+	gap: var(--wp--preset--spacing--30);
+	grid-template-columns: 3.5rem minmax(0, 1fr);
+	position: relative;
+}
+
+.hks-itinerary > li + li {
+	margin-top: var(--wp--preset--spacing--40);
+}
+
+.hks-itinerary > li:not(:last-child)::before {
+	background: rgb(44 122 120 / 28%);
+	content: "";
+	height: calc(100% + var(--wp--preset--spacing--40));
+	left: 1.45rem;
+	position: absolute;
+	top: 2.5rem;
+	width: 2px;
+}
+
+.hks-itinerary__marker {
+	align-items: center;
+	background: var(--wp--preset--color--lake-teal);
+	border-radius: 999px;
+	color: var(--wp--preset--color--white);
+	display: flex;
+	font-family: var(--wp--preset--font-family--sora);
+	font-size: 0.8rem;
+	font-weight: 700;
+	height: 3rem;
+	justify-content: center;
+	position: relative;
+	width: 3rem;
+	z-index: 1;
+}
+
+.hks-itinerary h3 {
+	margin: 0;
+}
+
+.hks-itinerary__facts {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem 1.5rem;
+	margin: 1rem 0 0;
+}
+
+.hks-itinerary__facts div {
+	max-width: 18rem;
+}
+
+.hks-itinerary__facts dt,
+.hks-practical-grid dt {
+	color: var(--wp--preset--color--lake-teal);
+	font-size: var(--wp--preset--font-size--utility);
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.hks-itinerary__facts dd,
+.hks-practical-grid dd {
+	margin: 0.2rem 0 0;
+}
+
+.hks-list-columns,
+.hks-practical-grid {
+	display: grid;
+	gap: var(--wp--preset--spacing--40);
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.hks-detail-list h3 {
+	border-bottom: 2px solid var(--wp--preset--color--lake-teal);
+	padding-bottom: 0.65rem;
+}
+
+.hks-detail-list--excluded h3 {
+	border-color: var(--wp--preset--color--saffron);
+}
+
+.hks-detail-list ul,
+.hks-detail-list > ul,
+.hks-quote-process ol {
+	padding-left: 1.25rem;
+}
+
+.hks-detail-list li + li {
+	margin-top: 0.85rem;
+}
+
+.hks-detail-list li span {
+	display: block;
+	font-size: var(--wp--preset--font-size--small);
+	margin-top: 0.15rem;
+}
+
+.hks-practical-grid {
+	margin: var(--wp--preset--spacing--40) 0 0;
+}
+
+.hks-practical-grid div {
+	border-top: 1px solid rgb(24 43 58 / 18%);
+	padding-top: 1rem;
+}
+
+.hks-faqs {
+	border-top: 1px solid rgb(24 43 58 / 18%);
+}
+
+.hks-faqs details {
+	border-bottom: 1px solid rgb(24 43 58 / 18%);
+	padding-block: 1rem;
+}
+
+.hks-faqs summary {
+	color: var(--wp--preset--color--midnight-navy);
+	cursor: pointer;
+	font-family: var(--wp--preset--font-family--sora);
+	font-weight: 650;
+}
+
+.hks-faqs details > div {
+	max-width: 46rem;
+	padding-top: 0.75rem;
+}
+
+.hks-quote-process {
+	background: rgb(44 122 120 / 9%);
+	border-radius: var(--wp--custom--radius--medium, 12px);
+	padding: var(--wp--preset--spacing--50);
+}
+
+.hks-final-quote {
+	padding: var(--wp--preset--spacing--60) max(1rem, calc((100vw - 1240px) / 2));
+}
+
+.hks-final-quote h2,
+.hks-final-quote p {
+	margin-block: 0;
+}
+
+.hks-catalogue-page,
+.hks-destination-page {
+	padding-block: var(--wp--preset--spacing--70);
+}
+
+.hks-archive-intro {
+	margin-bottom: var(--wp--preset--spacing--60);
+}
+
+.hks-archive-intro > * {
+	max-width: 48rem;
+}
+
+.hks-tour-grid {
+	gap: var(--wp--preset--spacing--40);
+}
+
+.hks-tour-grid > li {
+	border: 0 !important;
+	padding: 0 !important;
+}
+
+.hks-tour-card {
+	background: var(--wp--preset--color--white);
+	border: 1px solid rgb(24 43 58 / 14%);
+	border-radius: var(--wp--custom--radius--medium, 12px);
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	overflow: hidden;
+	transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.hks-tour-card:hover {
+	border-color: rgb(44 122 120 / 50%);
+	box-shadow: 0 14px 34px rgb(24 43 58 / 10%);
+	transform: translateY(-2px);
+}
+
+.hks-tour-card__media {
+	display: block;
+	height: 13rem;
+}
+
+.hks-tour-card__media img {
+	height: 100%;
+	object-fit: cover;
+	width: 100%;
+}
+
+.hks-tour-card__body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding: var(--wp--preset--spacing--30);
+}
+
+.hks-tour-card h2 {
+	font-size: var(--wp--preset--font-size--card-title);
+	margin: 0;
+}
+
+.hks-tour-card h2 a {
+	text-decoration: none;
+}
+
+.hks-tour-card__route {
+	color: var(--wp--preset--color--lake-teal);
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 650;
+}
+
+.hks-tour-card__footer {
+	align-items: end;
+	border-top: 1px solid rgb(24 43 58 / 14%);
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	justify-content: space-between;
+	margin-top: auto;
+	padding-top: 1rem;
+}
+
+.hks-tour-card__footer a {
+	font-weight: 650;
+}
+
+.hks-tour-card__price {
+	display: grid;
+	gap: 0.2rem;
+	max-width: 100%;
+}
+
+.hks-tour-card__price span {
+	color: rgb(22 27 31 / 70%);
+	font-size: 0.75rem;
+	line-height: 1.4;
+}
+
+.hks-destination-intro {
+	display: grid;
+	gap: var(--wp--preset--spacing--50);
+	margin-bottom: var(--wp--preset--spacing--60);
+}
+
+.hks-destination-intro--with-image {
+	grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.8fr);
+}
+
+.hks-destination-intro__lead {
+	font-size: var(--wp--preset--font-size--lead);
+	max-width: 48rem;
+}
+
+.hks-destination-intro figure {
+	margin: 0;
+	position: relative;
+}
+
+.hks-destination-intro img {
+	border-radius: var(--wp--custom--radius--medium, 12px);
+	height: 100%;
+	object-fit: cover;
+}
+
+.hks-home-hero,
+.hks-home-section {
+	padding: var(--wp--preset--spacing--80) max(1rem, calc((100vw - 1240px) / 2));
+}
+
+.hks-home-hero h1 {
+	max-width: 13ch;
+}
+
+.hks-home-hero p {
+	max-width: 48rem;
+}
+
+.hks-home-section--quiet {
+	border-block: 1px solid rgb(24 43 58 / 12%);
+}
+
+.hks-home-steps {
+	font-size: var(--wp--preset--font-size--lead);
+	max-width: 48rem;
+}
+
+.hks-home-steps li + li {
+	margin-top: 0.75rem;
+}
+
+.hks-campaign-navigation-campaign_minimal .hks-site-header .wp-block-navigation {
+	display: none;
+}
+
+@media (max-width: 56rem) {
+	.hks-tour-hero--with-image,
+	.hks-destination-intro--with-image {
+		grid-template-columns: 1fr;
+	}
+
+	.hks-tour-hero__media {
+		min-height: 20rem;
+	}
+
+	.hks-price-panel {
+		grid-template-columns: 1fr;
+	}
+}
+
 @media (max-width: 48rem) {
 	.hks-site-header .wp-block-group.is-layout-flex {
 		row-gap: var(--wp--preset--spacing--20);
+	}
+
+	.hks-fast-facts,
+	.hks-list-columns,
+	.hks-practical-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.hks-fast-facts li {
+		padding-block: 0.5rem;
+		padding-right: 0;
+	}
+
+	.hks-fast-facts li + li {
+		border-left: 0;
+		border-top: 1px solid rgb(255 255 255 / 18%);
+		padding-left: 0;
+	}
+
+	.hks-tour-details {
+		padding-block: var(--wp--preset--spacing--50);
+	}
+
+	.hks-tour-section,
+	.hks-quote-process {
+		padding-block: var(--wp--preset--spacing--50);
+	}
+
+	.hks-quote-process,
+	.hks-price-panel {
+		padding: var(--wp--preset--spacing--30);
+	}
+
+	.hks-tour-grid {
+		grid-template-columns: 1fr !important;
+	}
+
+	.hks-hero-cta {
+		align-items: stretch;
+		flex-direction: column;
+	}
+
+	.hks-hero-cta .hks-inquiry__trigger {
+		width: 100%;
 	}
 }
 

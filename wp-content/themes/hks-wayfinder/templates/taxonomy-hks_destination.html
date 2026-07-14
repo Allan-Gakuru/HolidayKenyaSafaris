@@ -1,0 +1,31 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","align":"full","className":"hks-destination-page","layout":{"type":"constrained"}} -->
+<main id="main-content" class="wp-block-group alignfull hks-destination-page"><!-- wp:hks-wayfinder/destination-intro /-->
+
+<!-- wp:heading {"align":"wide","fontSize":"section-title"} -->
+<h2 class="wp-block-heading alignwide has-section-title-font-size">Published tours for this destination</h2>
+<!-- /wp:heading -->
+
+<!-- wp:query {"queryId":11,"query":{"perPage":12,"pages":0,"offset":0,"postType":"hks_tour","order":"asc","orderBy":"title","author":"","search":"","exclude":[],"sticky":"","inherit":true},"align":"wide"} -->
+<div class="wp-block-query alignwide"><!-- wp:post-template {"className":"hks-tour-grid","layout":{"type":"grid","columnCount":3}} -->
+<!-- wp:hks-wayfinder/tour-card /-->
+<!-- /wp:post-template -->
+
+<!-- wp:query-pagination {"layout":{"type":"flex","justifyContent":"space-between"}} -->
+<!-- wp:query-pagination-previous /-->
+
+<!-- wp:query-pagination-numbers /-->
+
+<!-- wp:query-pagination-next /-->
+<!-- /wp:query-pagination -->
+
+<!-- wp:query-no-results -->
+<!-- wp:paragraph -->
+<p>No reviewed tour packages are published for this destination yet.</p>
+<!-- /wp:paragraph -->
+<!-- /wp:query-no-results --></div>
+<!-- /wp:query --></main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

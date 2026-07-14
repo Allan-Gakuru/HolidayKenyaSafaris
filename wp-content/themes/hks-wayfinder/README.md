@@ -21,8 +21,19 @@ Regenerate or verify the font package from the pinned upstream files with `tools
 ## First activation
 
 1. Activate **HKS Wayfinder** under Appearance → Themes.
-2. Open Appearance → Editor and configure the header and footer Navigation blocks.
+2. Confirm the built-in Home and Tours navigation links. Expand navigation only after the corresponding pages are approved and published.
 3. Configure the WordPress Site Icon when the final identity has client sign-off; until then, the theme fallback is used.
 4. Do not publish a photograph until its source and usage approval are recorded.
 
-The generic posts, search, index, page, single, and 404 templates are intentionally restrained fallbacks. Tour, Campaign, catalogue, destination, trust, contact, and conversion templates are implemented in later phases against structured content.
+Version `0.2.0` adds the public MVP templates for the homepage, Tour catalogue,
+Destination archives, canonical Tours, and focused Campaigns. Four dynamic theme
+blocks render the hero, canonical details, Tour cards, and audited Destination
+guidance. The HKS Core quote block supplies the saved inquiry and WhatsApp handoff.
+
+Public presentation is fail-closed:
+
+- incomplete or expired `From KSh` data falls back to `Request current KSh rate`;
+- policies and FAQs require acceptable status, source, checked date, and live validity;
+- Destination guidance requires a reviewed or client-confirmed source envelope; and
+- photographs require approved website scope, checked rights, unexpired permission,
+  descriptive alt text, and any required credit.

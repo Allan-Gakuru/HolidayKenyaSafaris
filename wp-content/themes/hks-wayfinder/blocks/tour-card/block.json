@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "hks-wayfinder/tour-card",
+  "version": "0.2.0",
+  "title": "HKS Tour card",
+  "category": "theme",
+  "icon": "location-alt",
+  "description": "Reusable source-governed Tour catalogue card.",
+  "textdomain": "hks-wayfinder",
+  "supports": { "html": false, "multiple": false }
+}

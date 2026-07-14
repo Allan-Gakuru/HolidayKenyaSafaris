@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "hks-wayfinder/tour-hero",
+  "version": "0.2.0",
+  "title": "HKS Tour hero",
+  "category": "theme",
+  "icon": "cover-image",
+  "description": "Fail-closed Tour or Campaign hero with canonical package facts.",
+  "textdomain": "hks-wayfinder",
+  "supports": { "html": false, "multiple": false }
+}

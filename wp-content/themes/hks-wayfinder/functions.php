@@ -9,6 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+require_once get_theme_file_path( 'inc/TourBlocks.php' );
+
 /**
  * Register theme supports and editor styles.
  *
@@ -69,3 +71,45 @@ function hks_wayfinder_favicon_fallback(): void {
 	<?php
 }
 add_action( 'wp_head', 'hks_wayfinder_favicon_fallback', 2 );
+
+add_action( 'init', array( \HKS_Wayfinder\TourBlocks::class, 'register' ), 20 );
+
+/**
+ * Respect Campaign noindex governance independently of SEO plugins.
+ *
+ * @param array<string, bool> $robots Existing directives.
+ * @return array<string, bool>
+ */
+function hks_wayfinder_campaign_robots( array $robots ): array {
+	if ( ! is_singular( 'hks_campaign' ) ) {
+		return $robots;
+	}
+
+	$post_id = get_queried_object_id();
+	$noindex = function_exists( 'get_field' ) ? get_field( 'hks_noindex', $post_id ) : get_post_meta( $post_id, 'hks_noindex', true );
+
+	if ( $noindex ) {
+		$robots['noindex']  = true;
+		$robots['nofollow'] = false;
+	}
+
+	return $robots;
+}
+add_filter( 'wp_robots', 'hks_wayfinder_campaign_robots' );
+
+/**
+ * Add Campaign navigation-mode classes for focused landing pages.
+ *
+ * @param string[] $classes Body classes.
+ * @return string[]
+ */
+function hks_wayfinder_campaign_body_class( array $classes ): array {
+	if ( is_singular( 'hks_campaign' ) ) {
+		$post_id = get_queried_object_id();
+		$mode    = function_exists( 'get_field' ) ? get_field( 'hks_navigation_mode', $post_id ) : get_post_meta( $post_id, 'hks_navigation_mode', true );
+		$classes[] = 'hks-campaign-navigation-' . sanitize_html_class( $mode ?: 'campaign_minimal' );
+	}
+
+	return $classes;
+}
+add_filter( 'body_class', 'hks_wayfinder_campaign_body_class' );

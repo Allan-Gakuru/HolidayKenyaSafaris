@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "hks-wayfinder/tour-details",
+  "version": "0.2.0",
+  "title": "HKS Tour details",
+  "category": "theme",
+  "icon": "list-view",
+  "description": "Canonical itinerary, price context, inclusions, logistics, policies, and FAQs.",
+  "textdomain": "hks-wayfinder",
+  "supports": { "html": false, "multiple": false }
+}

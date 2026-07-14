@@ -4,14 +4,14 @@ Custom WordPress website for Holiday Kenya Safaris, a local-market travel brand 
 
 ## Start Here
 
-Read [AGENTS.md](AGENTS.md) and its 12 required documents before changing product, content, design, analytics, or deployment behavior. [PRODUCT.md](PRODUCT.md) captures the confirmed strategic design register. [docs/PHASE-0-BASELINE.md](docs/PHASE-0-BASELINE.md) records the audited repository state, source status, blockers, and adjusted implementation order. [docs/PHASE-1-WAYFINDER-ASSETS.md](docs/PHASE-1-WAYFINDER-ASSETS.md) records the production identity build and verification. [docs/PHASE-2-WORDPRESS-FOUNDATION.md](docs/PHASE-2-WORDPRESS-FOUNDATION.md) records the deployable theme/plugin foundation and cPanel integration gate. [docs/PHASE-3-CONTENT-MODEL.md](docs/PHASE-3-CONTENT-MODEL.md) records the canonical content model and publication safeguards.
+Read [AGENTS.md](AGENTS.md) and its 12 required documents before changing product, content, design, analytics, or deployment behavior. [PRODUCT.md](PRODUCT.md) captures the confirmed strategic design register. The numbered phase documents in [docs](docs) record the baseline, identity, foundation, content model, three-package seed, saved inquiry handoff, and public MVP templates.
 
 ## Architecture
 
 - Custom block theme: `wp-content/themes/hks-wayfinder/`.
 - Site plugin: `wp-content/plugins/hks-core/`.
 - Secure Custom Fields with version-controlled field definitions.
-- Primary conversion: validated intake form to a visitor-reviewed WhatsApp message.
+- Primary conversion: explicitly saved private inquiry, visitor-reviewed WhatsApp message, and visitor-controlled send.
 
 ## Development and Verification
 
@@ -23,6 +23,9 @@ Before pushing PHP changes, syntax-check the complete theme and plugin PHP inven
 & .\tools\lint-php.ps1
 python -B tools\validate_scaffold.py
 python -B tools\validate_content_model.py
+python -B tools\validate_mvp_seed.py
+python -B tools\validate_conversion.py
+python -B tools\validate_public_templates.py
 ```
 
 The working delivery loop is:
