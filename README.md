@@ -6,6 +6,10 @@ Custom WordPress website for Holiday Kenya Safaris, a local-market travel brand 
 
 Read [AGENTS.md](AGENTS.md) and its 12 required documents before changing product, content, design, analytics, or deployment behavior. [PRODUCT.md](PRODUCT.md) captures the confirmed strategic design register. The numbered phase documents in [docs](docs) record the baseline, identity, foundation, content model, three-package seed, saved inquiry handoff, and public MVP templates.
 
+For WordPress administration, approvals, inquiries, media rights, releases,
+maintenance, troubleshooting, and launch checks, use the
+[complete site operations guide](docs/SITE-OPERATIONS-GUIDE.md).
+
 ## Architecture
 
 - Custom block theme: `wp-content/themes/hks-wayfinder/`.
