@@ -7,7 +7,10 @@
 
 namespace HolidayKenyaSafaris\Core;
 
+use HolidayKenyaSafaris\Core\Content\Module as ContentModule;
 use HolidayKenyaSafaris\Core\Contracts\Module;
+use HolidayKenyaSafaris\Core\Fields\FieldsModule;
+use HolidayKenyaSafaris\Core\Fields\PublicationGuard;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -38,6 +41,13 @@ final class Plugin {
 	private $booted = false;
 
 	/**
+	 * Whether this request has already attempted to boot the plugin.
+	 *
+	 * @var bool
+	 */
+	private $boot_attempted = false;
+
+	/**
 	 * Return the shared plugin instance.
 	 *
 	 * @return Plugin
@@ -56,7 +66,15 @@ final class Plugin {
 	 * @return void
 	 */
 	public function boot() {
-		if ( $this->booted ) {
+		if ( $this->booted || $this->boot_attempted ) {
+			return;
+		}
+
+		$this->boot_attempted = true;
+
+		$upgrade_result = Lifecycle::maybe_upgrade();
+
+		if ( is_wp_error( $upgrade_result ) ) {
 			return;
 		}
 
@@ -109,7 +127,14 @@ final class Plugin {
 		 *
 		 * @param string[] $module_classes Fully qualified module class names.
 		 */
-		$module_classes = apply_filters( 'hks_core_module_classes', array() );
+		$module_classes = apply_filters(
+			'hks_core_module_classes',
+			array(
+				ContentModule::class,
+				FieldsModule::class,
+				PublicationGuard::class,
+			)
+		);
 
 		if ( ! is_array( $module_classes ) ) {
 			return;

@@ -76,9 +76,20 @@ REQUIRED_PLUGIN_FILES = [
     "src/Requirements.php",
     "src/Contracts/Module.php",
     "src/Analytics/.gitkeep",
-    "src/Content/.gitkeep",
+    "src/Content/Module.php",
+    "src/Content/PostTypes/Campaign.php",
+    "src/Content/PostTypes/Faq.php",
+    "src/Content/PostTypes/Tour.php",
+    "src/Content/Taxonomies/Destination.php",
+    "src/Content/Taxonomies/Occasion.php",
+    "src/Content/Taxonomies/TourType.php",
+    "src/Content/Taxonomies/TravelStyle.php",
     "src/Conversion/.gitkeep",
-    "src/Fields/.gitkeep",
+    "src/Fields/Choices.php",
+    "src/Fields/FieldGroups.php",
+    "src/Fields/FieldsModule.php",
+    "src/Fields/PublicationGuard.php",
+    "src/Fields/PublicationRules.php",
 ]
 
 # Each deployable copy must remain byte-for-byte identical to its production
@@ -415,6 +426,8 @@ class ScaffoldValidator:
             constants = {
                 "HKS_CORE_MINIMUM_PHP_VERSION": PHP_VERSION,
                 "HKS_CORE_MINIMUM_WP_VERSION": WORDPRESS_VERSION,
+                "HKS_CORE_MINIMUM_SCF_VERSION": "6.9.1",
+                "HKS_CORE_SCF_BASENAME": "secure-custom-fields/secure-custom-fields.php",
             }
             for constant, expected_value in constants.items():
                 pattern = re.compile(

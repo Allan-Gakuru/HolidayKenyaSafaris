@@ -4,7 +4,7 @@ Custom WordPress website for Holiday Kenya Safaris, a local-market travel brand 
 
 ## Start Here
 
-Read [AGENTS.md](AGENTS.md) and its 12 required documents before changing product, content, design, analytics, or deployment behavior. [PRODUCT.md](PRODUCT.md) captures the confirmed strategic design register. [docs/PHASE-0-BASELINE.md](docs/PHASE-0-BASELINE.md) records the audited repository state, source status, blockers, and adjusted implementation order. [docs/PHASE-1-WAYFINDER-ASSETS.md](docs/PHASE-1-WAYFINDER-ASSETS.md) records the production identity build and verification. [docs/PHASE-2-WORDPRESS-FOUNDATION.md](docs/PHASE-2-WORDPRESS-FOUNDATION.md) records the deployable theme/plugin foundation and cPanel integration gate.
+Read [AGENTS.md](AGENTS.md) and its 12 required documents before changing product, content, design, analytics, or deployment behavior. [PRODUCT.md](PRODUCT.md) captures the confirmed strategic design register. [docs/PHASE-0-BASELINE.md](docs/PHASE-0-BASELINE.md) records the audited repository state, source status, blockers, and adjusted implementation order. [docs/PHASE-1-WAYFINDER-ASSETS.md](docs/PHASE-1-WAYFINDER-ASSETS.md) records the production identity build and verification. [docs/PHASE-2-WORDPRESS-FOUNDATION.md](docs/PHASE-2-WORDPRESS-FOUNDATION.md) records the deployable theme/plugin foundation and cPanel integration gate. [docs/PHASE-3-CONTENT-MODEL.md](docs/PHASE-3-CONTENT-MODEL.md) records the canonical content model and publication safeguards.
 
 ## Architecture
 
@@ -21,7 +21,8 @@ Before pushing PHP changes, syntax-check the complete theme and plugin PHP inven
 
 ```powershell
 & .\tools\lint-php.ps1
-python tools\validate_scaffold.py
+python -B tools\validate_scaffold.py
+python -B tools\validate_content_model.py
 ```
 
 The working delivery loop is:
@@ -46,5 +47,5 @@ Track custom theme/plugin code, field definitions, source assets, reviewed seed/
 - Selected identity: **The Wayfinder**.
 - Raster identity concepts are redraw references, not production masters.
 - Generated presentation visuals are not evidence of real trips or customers.
-- Public prices require client-confirmed KSh values and assumptions; otherwise use `Request current rate`.
+- Provisional KSh `From` prices must be explicitly labeled by status and include season, residency, group, transport, accommodation, inclusion, basis, and disclaimer assumptions; converted estimates and expired rates stay non-public.
 - Never publish invented or unverified rates, photographs, reviews, policies, memberships, licences, availability, or company claims.

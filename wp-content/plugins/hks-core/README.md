@@ -1,53 +1,65 @@
 # HKS Core
 
-`hks-core` owns durable Holiday Kenya Safaris site behavior. Theme presentation belongs in `hks-wayfinder`; catalogue structure and business rules stay here so changing themes does not remove the content model.
+`hks-core` owns durable Holiday Kenya Safaris catalogue structure, editorial governance, and conversion behavior. Presentation belongs in `hks-wayfinder`; changing themes must not remove Tours, Campaigns, source records, or inquiry rules.
 
 ## Current scope
 
-This initial scaffold provides:
+Version `0.2.0` provides:
 
-- a guarded, versioned plugin bootstrap;
-- a small namespace autoloader with no Composer/runtime dependency;
-- activation checks for WordPress 6.6+ and PHP 8.3+;
-- a WordPress plugin dependency declaration for Secure Custom Fields;
-- translation loading from `languages/`;
-- conservative activation/deactivation hooks; and
-- an explicit module contract and directories for later content, field, conversion, and analytics modules.
+- guarded WordPress 6.6+, PHP 8.3+, and Secure Custom Fields 6.9.1+ boot requirements;
+- versioned, retry-safe upgrades and soft rewrite refreshes;
+- canonical Tour, Campaign, and reusable FAQ post types;
+- Destination, Tour Type, Occasion/Audience, and Travel Style taxonomies;
+- code-owned SCF field groups with deterministic keys;
+- private source, price, policy, proof, rights, analytics, and global-setting records;
+- controlled public-field REST exposure; and
+- shared publication rules across SCF, REST, and programmatic saves.
 
-It intentionally does **not** register post types, taxonomies, SCF field groups, blocks, analytics, or WhatsApp conversion logic yet.
+Campaigns link to exactly one Tour and may change messaging or presentation, never itinerary, logistics, inclusions, policy, or price facts. Drafts remain saveable while incomplete. Public or scheduled records must pass the publication rules.
 
 ## Structure
 
 ```text
-hks-core.php          Plugin entry point and constants
-src/                  Namespaced PHP source
-  Contracts/          Shared module contracts
-  Content/            Future content types and taxonomies
-  Fields/             Future SCF integration and validation
-  Conversion/         Future intake and WhatsApp handoff logic
-  Analytics/          Future event-contract integration
-acf-json/             Version-controlled SCF Local JSON
+hks-core.php          Plugin entry point, dependency declaration, and versions
+src/Content/          Post types, taxonomies, and deferred rewrite handling
+src/Fields/           SCF definitions, controlled choices, and publication rules
+src/Conversion/       Intake and WhatsApp handoff logic (next phase)
+src/Analytics/        Event-contract integration (next phase)
+acf-json/             Reserved; current field groups are registered in code
 blocks/               Future server-rendered/custom blocks
-assets/               Future plugin-owned scripts and styles
+assets/               Plugin-owned scripts and styles
 languages/            Translation files
 ```
 
-New modules implement `HolidayKenyaSafaris\Core\Contracts\Module` and are added through the `hks_core_module_classes` filter. A module's `register()` method should attach WordPress hooks rather than execute request-time behavior immediately.
+Modules implement `HolidayKenyaSafaris\Core\Contracts\Module`. The default module list is registered in `Plugin.php` and remains filterable through `hks_core_module_classes`.
+
+## Editorial safety
+
+- Source and confirmation fields stay private.
+- Raw price records stay out of anonymous SCF REST responses.
+- A provisional KSh `From` price may publish only with a positive amount, explicit placeholder status, and complete assumptions and disclaimer.
+- Converted estimates and expired prices cannot be displayed as current `From` prices.
+- `CLIENT CONFIRMATION REQUIRED` is rejected anywhere in public candidate copy.
+- Campaigns cannot publish without one published Tour and a complete campaign brief.
+- Hiding or deleting a Tour returns its linked public Campaigns to Draft.
+- Media-rights metadata is an editorial/launch audit, not an automatic post rejection.
 
 ## Lifecycle policy
 
-- Activation fails with a readable administrator message on an unsupported PHP or WordPress version.
-- Compatible activation records only `hks_core_version`; no rewrite flush or catalogue mutation occurs in this scaffold.
-- Deactivation never deletes settings or future catalogue content.
-- Uninstall deletion is not implemented. Any future uninstall routine must require a separate, explicit data-retention decision.
+- Activation fails with a readable message when WordPress, PHP, or the official Secure Custom Fields dependency is unsupported.
+- Network activation requires Secure Custom Fields to be network active first.
+- Activation and version migrations schedule a soft rewrite refresh after content registration; no catalogue content is deleted.
+- Deactivation preserves settings and catalogue content.
+- Uninstall deletion is not implemented without a separate retention decision.
 
-The cPanel PHP and WordPress versions still require host confirmation. The baseline constants and plugin headers are kept together in `hks-core.php` so they can be revised deliberately after that confirmation.
+## Verification
 
-## Local verification
-
-No local WordPress runtime is required. Syntax-check every PHP file with the available PHP binary:
+No local WordPress runtime is required:
 
 ```powershell
-Get-ChildItem -Path wp-content\plugins\hks-core -Filter *.php -Recurse |
-  ForEach-Object { php -l $_.FullName }
+& .\tools\lint-php.ps1
+python -B tools\validate_scaffold.py
+python -B tools\validate_content_model.py
 ```
+
+Runtime behavior is verified after GitHub-to-cPanel deployment in the WordPress dashboard and browser.
