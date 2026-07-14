@@ -4,7 +4,7 @@
 
 ## Current scope
 
-Version `0.2.0` provides:
+Version `0.4.0` provides:
 
 - guarded WordPress 6.6+, PHP 8.3+, and Secure Custom Fields 6.9.1+ boot requirements;
 - versioned, retry-safe upgrades and soft rewrite refreshes;
@@ -13,7 +13,9 @@ Version `0.2.0` provides:
 - code-owned SCF field groups with deterministic keys;
 - private source, price, policy, proof, rights, analytics, and global-setting records;
 - controlled public-field REST exposure; and
-- shared publication rules across SCF, REST, and programmatic saves.
+- shared publication rules across SCF, REST, and programmatic saves;
+- an idempotent, administrator-triggered three-package MVP draft importer; and
+- an explicitly consented private inquiry record, visitor review, and WhatsApp handoff.
 
 Campaigns link to exactly one Tour and may change messaging or presentation, never itinerary, logistics, inclusions, policy, or price facts. Drafts remain saveable while incomplete. Public or scheduled records must pass the publication rules.
 
@@ -23,10 +25,10 @@ Campaigns link to exactly one Tour and may change messaging or presentation, nev
 hks-core.php          Plugin entry point, dependency declaration, and versions
 src/Content/          Post types, taxonomies, and deferred rewrite handling
 src/Fields/           SCF definitions, controlled choices, and publication rules
-src/Conversion/       Intake and WhatsApp handoff logic (next phase)
-src/Analytics/        Event-contract integration (next phase)
+src/Conversion/       Private inquiry capture, administration, analytics events, and WhatsApp handoff
+src/Analytics/        Reserved for configured vendor integrations
 acf-json/             Reserved; current field groups are registered in code
-blocks/               Future server-rendered/custom blocks
+blocks/               Server-rendered quote CTA and future constrained blocks
 assets/               Plugin-owned scripts and styles
 languages/            Translation files
 ```

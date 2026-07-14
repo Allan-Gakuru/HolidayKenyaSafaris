@@ -9,6 +9,7 @@ namespace HolidayKenyaSafaris\Core;
 
 use HolidayKenyaSafaris\Core\Content\Module as ContentModule;
 use HolidayKenyaSafaris\Core\Contracts\Module;
+use HolidayKenyaSafaris\Core\Conversion\Module as ConversionModule;
 use HolidayKenyaSafaris\Core\Fields\FieldsModule;
 use HolidayKenyaSafaris\Core\Fields\PublicationGuard;
 use HolidayKenyaSafaris\Core\Seed\Module as SeedModule;
@@ -135,6 +136,7 @@ final class Plugin {
 				FieldsModule::class,
 				PublicationGuard::class,
 				SeedModule::class,
+				ConversionModule::class,
 			)
 		);
 

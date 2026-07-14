@@ -15,6 +15,7 @@ Use this file as a live register. Do not convert an assumption into a fact witho
 | Default exclusions | Confirmed | International holidays, visas, transfers, and inbound-only products unless later approved |
 | Pricing presentation | Confirmed | Primarily KSh `From...` placeholders, updated after rate confirmation |
 | Required intake fields | Confirmed | Name, phone, package, preferred date/month, travelers |
+| Inquiry recovery storage | Confirmed | Save a private WordPress inquiry after explicit disclosure and contact consent, before showing the WhatsApp review step |
 | Site scope | Confirmed | Home, catalogue, destinations, Tour pages, trust/about, contact, campaign template |
 | CMS direction | Confirmed | WordPress with templates and structured content management |
 
@@ -30,6 +31,7 @@ Use this file as a live register. Do not convert an assumption into a fact witho
 | GA4 Measurement ID | CLIENT CONFIRMATION REQUIRED | Supply ID | GA4 tracking launch |
 | GTM container | CLIENT CONFIRMATION REQUIRED | Decide whether GTM is used and supply ID | Tag configuration |
 | Consent/privacy approach | CLIENT CONFIRMATION REQUIRED | Approve privacy and cookie behavior | Production tracking |
+| Inquiry retention and deletion | CLIENT CONFIRMATION REQUIRED | Approve retention period, deletion workflow, access roles, and final public privacy wording | Production inquiry storage |
 
 ## Contact and Company Information
 
@@ -121,4 +123,3 @@ When a confirmation arrives, record:
 - Date.
 - Source file, email, or URL.
 - Expiry or review date if applicable.
-

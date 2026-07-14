@@ -79,12 +79,18 @@ REQUIRED_PLUGIN_FILES = [
     "src/Content/Module.php",
     "src/Content/PostTypes/Campaign.php",
     "src/Content/PostTypes/Faq.php",
+    "src/Content/PostTypes/Inquiry.php",
     "src/Content/PostTypes/Tour.php",
     "src/Content/Taxonomies/Destination.php",
     "src/Content/Taxonomies/Occasion.php",
     "src/Content/Taxonomies/TourType.php",
     "src/Content/Taxonomies/TravelStyle.php",
     "src/Conversion/.gitkeep",
+    "src/Conversion/FormToken.php",
+    "src/Conversion/InquiryAdmin.php",
+    "src/Conversion/InquiryRepository.php",
+    "src/Conversion/Module.php",
+    "src/Conversion/QuoteBlock.php",
     "src/Fields/Choices.php",
     "src/Fields/FieldGroups.php",
     "src/Fields/FieldsModule.php",
@@ -93,6 +99,9 @@ REQUIRED_PLUGIN_FILES = [
     "data/mvp-seed.json",
     "src/Seed/Module.php",
     "src/Seed/MvpSeeder.php",
+    "assets/css/inquiry.css",
+    "assets/js/inquiry.js",
+    "blocks/quote-cta/block.json",
 ]
 
 # Each deployable copy must remain byte-for-byte identical to its production

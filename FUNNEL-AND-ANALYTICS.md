@@ -2,7 +2,7 @@
 
 ## Conversion Funnel
 
-`Facebook ad -> package or campaign page -> WhatsApp CTA -> intake form -> prefilled WhatsApp message -> consultant response -> quote -> follow-up -> booking`
+`Facebook ad -> package or campaign page -> WhatsApp CTA -> intake form -> private WordPress recovery record -> reviewed prefilled WhatsApp message -> consultant response -> quote -> follow-up -> booking`
 
 Other channels may enter the same system:
 
@@ -57,6 +57,9 @@ Please confirm availability, the current KSh price, what is included, and the ne
 
 Requirements:
 
+- Explain that selecting `Save & review WhatsApp message` stores the validated answers privately in WordPress for lead recovery.
+- Require contact consent before creating the recovery record.
+- Store inquiry records outside public queries, search, REST responses, and analytics, with administrator-only access.
 - Encode message text safely.
 - Validate fields before opening WhatsApp.
 - Let the user see that WhatsApp will open.
@@ -77,6 +80,7 @@ Use a stable event vocabulary for Meta and GA4.
 | `quote_form_start` | Visitor interacts with first field | tour ID, campaign ID |
 | `quote_form_error` | Validation prevents completion | field name, error type; never send sensitive values |
 | `quote_form_complete` | Valid form is used to construct message | tour ID, campaign ID, traveler-count bucket |
+| `quote_inquiry_saved` | A private recovery record is successfully created or refreshed | tour ID, campaign ID, non-sensitive request reference |
 | `whatsapp_launch` | Website opens the `wa.me` URL | tour ID, campaign ID, CTA location, UTMs |
 | `contact_click` | Visitor uses phone, email, or map contact | method, page type |
 
@@ -158,4 +162,3 @@ Use this feedback to revise ads, page order, FAQs, form questions, and follow-up
 - Escape and sanitize all form inputs.
 - Protect forms against spam and abusive automation.
 - Publish a client-approved privacy policy and cookie/consent behavior before production tracking.
-

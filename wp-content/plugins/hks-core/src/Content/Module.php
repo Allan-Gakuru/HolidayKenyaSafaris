@@ -9,6 +9,7 @@ namespace HolidayKenyaSafaris\Core\Content;
 
 use HolidayKenyaSafaris\Core\Content\PostTypes\Campaign;
 use HolidayKenyaSafaris\Core\Content\PostTypes\Faq;
+use HolidayKenyaSafaris\Core\Content\PostTypes\Inquiry;
 use HolidayKenyaSafaris\Core\Content\PostTypes\Tour;
 use HolidayKenyaSafaris\Core\Content\Taxonomies\Destination;
 use HolidayKenyaSafaris\Core\Content\Taxonomies\Occasion;
@@ -63,6 +64,7 @@ final class Module implements ModuleContract {
 		Tour::register();
 		Campaign::register();
 		Faq::register();
+		Inquiry::register();
 
 		Destination::register();
 		TourType::register();

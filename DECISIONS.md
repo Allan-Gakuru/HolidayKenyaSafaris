@@ -54,6 +54,8 @@ Exclude by default:
 - Every quote CTA opens an intake form before WhatsApp.
 - Required fields: name, phone, package, preferred travel date or month, and number of travelers.
 - The form constructs a prefilled WhatsApp message that the visitor chooses to send.
+- Selecting `Save & review WhatsApp message` stores the validated inquiry privately in WordPress before the review step, so the team can recover a lead when WhatsApp does not open or the visitor does not complete the handoff.
+- The form must disclose storage and require contact consent before saving. WordPress records `WhatsApp opened` only after the launch click and must never claim that the message was sent.
 - Campaign attribution and package context should be retained.
 
 ## Website Scope
@@ -97,4 +99,3 @@ Prepare integrations for:
 - Consent and privacy controls appropriate to the final tracking setup.
 
 Client IDs will be supplied later. Do not hard-code invented IDs.
-
