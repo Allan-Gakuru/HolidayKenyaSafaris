@@ -397,8 +397,8 @@ class Validator:
                 "Plugin bootstrap",
                 bootstrap,
                 (
-                    "Version:           0.2.0",
-                    "define( 'HKS_CORE_VERSION', '0.2.0' )",
+                    "Version:           0.3.0",
+                    "define( 'HKS_CORE_VERSION', '0.3.0' )",
                     "define( 'HKS_CORE_MINIMUM_SCF_VERSION', '6.9.1' )",
                     "define( 'HKS_CORE_SCF_BASENAME', 'secure-custom-fields/secure-custom-fields.php' )",
                 ),

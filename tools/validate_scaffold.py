@@ -90,6 +90,9 @@ REQUIRED_PLUGIN_FILES = [
     "src/Fields/FieldsModule.php",
     "src/Fields/PublicationGuard.php",
     "src/Fields/PublicationRules.php",
+    "data/mvp-seed.json",
+    "src/Seed/Module.php",
+    "src/Seed/MvpSeeder.php",
 ]
 
 # Each deployable copy must remain byte-for-byte identical to its production
@@ -113,6 +116,7 @@ EXPECTED_PLUGIN_DIRECTORIES = [
     "src/Contracts",
     "src/Conversion",
     "src/Fields",
+    "src/Seed",
 ]
 
 REQUIRED_FONT_PROVENANCE = {

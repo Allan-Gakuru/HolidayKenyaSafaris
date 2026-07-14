@@ -11,6 +11,7 @@ use HolidayKenyaSafaris\Core\Content\Module as ContentModule;
 use HolidayKenyaSafaris\Core\Contracts\Module;
 use HolidayKenyaSafaris\Core\Fields\FieldsModule;
 use HolidayKenyaSafaris\Core\Fields\PublicationGuard;
+use HolidayKenyaSafaris\Core\Seed\Module as SeedModule;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -133,6 +134,7 @@ final class Plugin {
 				ContentModule::class,
 				FieldsModule::class,
 				PublicationGuard::class,
+				SeedModule::class,
 			)
 		);
 

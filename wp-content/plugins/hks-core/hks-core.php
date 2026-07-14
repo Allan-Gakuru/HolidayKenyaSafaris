@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       HKS Core
  * Description:       Site functionality foundation for the Holiday Kenya Safaris catalogue, campaigns, and inquiry journey.
- * Version:           0.2.0
+ * Version:           0.3.0
  * Update URI:        https://github.com/Allan-Gakuru/HolidayKenyaSafaris
  * Requires at least: 6.6
  * Requires PHP:      8.3
@@ -19,7 +19,7 @@
 defined( 'ABSPATH' ) || exit;
 
 if ( ! defined( 'HKS_CORE_VERSION' ) ) {
-	define( 'HKS_CORE_VERSION', '0.2.0' );
+	define( 'HKS_CORE_VERSION', '0.3.0' );
 }
 
 if ( ! defined( 'HKS_CORE_MINIMUM_PHP_VERSION' ) ) {
