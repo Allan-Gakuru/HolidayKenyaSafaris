@@ -1,0 +1,29 @@
+{
+  "generated_by": "tools/theme/build_fonts.py",
+  "families": {
+    "Sora": {
+      "version": "2.000",
+      "weights": "100 800 (theme uses 600 and 700)",
+      "source_css": "https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap",
+      "latin_source": "https://fonts.gstatic.com/s/sora/v17/xMQbuFFYT72XzQUpDg.woff2",
+      "latin_source_sha256": "fa26406eeda9a3c6ec3d9ea8813c3045d6dc755e30c716d5c094e8ef43be5a7f",
+      "latin_output": "wp-content/themes/hks-wayfinder/assets/fonts/sora-latin-variable.woff2",
+      "latin_output_sha256": "fa26406eeda9a3c6ec3d9ea8813c3045d6dc755e30c716d5c094e8ef43be5a7f",
+      "latin_ext_source": "https://fonts.gstatic.com/s/sora/v17/xMQbuFFYT72XzQspDre2.woff2",
+      "latin_ext_source_sha256": "c163c536f68befd99a83d4f17e8b88030e7f54229688a45c44f70c7149db7385",
+      "latin_ext_output": "wp-content/themes/hks-wayfinder/assets/fonts/sora-latin-ext-variable.woff2",
+      "latin_ext_output_sha256": "c163c536f68befd99a83d4f17e8b88030e7f54229688a45c44f70c7149db7385",
+      "license": "wp-content/themes/hks-wayfinder/assets/fonts/licenses/Sora-OFL.txt"
+    },
+    "Inter": {
+      "version": "4.1",
+      "weights": "100 900 (theme uses 400, 500, and 600)",
+      "source": "https://github.com/rsms/inter/releases/download/v4.1/Inter-4.1.zip",
+      "archive_sha256": "9883fdd4a49d4fb66bd8177ba6625ef9a64aa45899767dde3d36aa425756b11e",
+      "archive_member": "web/InterVariable.woff2",
+      "output": "wp-content/themes/hks-wayfinder/assets/fonts/inter-variable.woff2",
+      "output_sha256": "693b77d4f32ee9b8bfc995589b5fad5e99adf2832738661f5402f9978429a8e3",
+      "license": "wp-content/themes/hks-wayfinder/assets/fonts/licenses/Inter-OFL.txt"
+    }
+  }
+}

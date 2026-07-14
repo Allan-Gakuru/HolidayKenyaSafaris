@@ -1,0 +1,418 @@
+{
+  "$schema": "https://schemas.wp.org/wp/6.6/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": false,
+    "useRootPaddingAwareAlignments": true,
+    "layout": {
+      "contentSize": "720px",
+      "wideSize": "1240px"
+    },
+    "color": {
+      "custom": false,
+      "customDuotone": false,
+      "customGradient": false,
+      "defaultDuotone": false,
+      "defaultGradients": false,
+      "defaultPalette": false,
+      "palette": [
+        {
+          "slug": "midnight-navy",
+          "name": "Midnight Navy",
+          "color": "#182B3A"
+        },
+        {
+          "slug": "lake-teal",
+          "name": "Lake Teal",
+          "color": "#2C7A78"
+        },
+        {
+          "slug": "saffron",
+          "name": "Wayfinder Saffron",
+          "color": "#E1A62B"
+        },
+        {
+          "slug": "pale-mist",
+          "name": "Pale Mist",
+          "color": "#F3F1EA"
+        },
+        {
+          "slug": "white",
+          "name": "White",
+          "color": "#FFFFFF"
+        },
+        {
+          "slug": "near-black",
+          "name": "Near Black",
+          "color": "#161B1F"
+        },
+        {
+          "slug": "whatsapp-green",
+          "name": "WhatsApp Green — conversion only",
+          "color": "#25D366"
+        }
+      ]
+    },
+    "spacing": {
+      "customSpacingSize": false,
+      "defaultSpacingSizes": false,
+      "spacingSizes": [
+        {
+          "slug": "10",
+          "name": "4",
+          "size": "0.25rem"
+        },
+        {
+          "slug": "20",
+          "name": "8",
+          "size": "0.5rem"
+        },
+        {
+          "slug": "25",
+          "name": "12",
+          "size": "0.75rem"
+        },
+        {
+          "slug": "30",
+          "name": "16",
+          "size": "1rem"
+        },
+        {
+          "slug": "40",
+          "name": "24",
+          "size": "1.5rem"
+        },
+        {
+          "slug": "50",
+          "name": "32",
+          "size": "2rem"
+        },
+        {
+          "slug": "60",
+          "name": "48",
+          "size": "3rem"
+        },
+        {
+          "slug": "70",
+          "name": "64",
+          "size": "4rem"
+        },
+        {
+          "slug": "80",
+          "name": "96",
+          "size": "6rem"
+        }
+      ],
+      "units": [
+        "px",
+        "rem",
+        "vw",
+        "%"
+      ]
+    },
+    "typography": {
+      "customFontSize": false,
+      "defaultFontSizes": false,
+      "dropCap": false,
+      "fluid": true,
+      "fontFamilies": [
+        {
+          "slug": "sora",
+          "name": "Sora",
+          "fontFamily": "Sora, 'Avenir Next', 'Segoe UI', sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "Sora",
+              "fontStyle": "normal",
+              "fontWeight": "100 800",
+              "fontDisplay": "swap",
+              "unicodeRange": "U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF",
+              "src": [
+                "file:./assets/fonts/sora-latin-ext-variable.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Sora",
+              "fontStyle": "normal",
+              "fontWeight": "100 800",
+              "fontDisplay": "swap",
+              "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+              "src": [
+                "file:./assets/fonts/sora-latin-variable.woff2"
+              ]
+            }
+          ]
+        },
+        {
+          "slug": "inter",
+          "name": "Inter",
+          "fontFamily": "Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "Inter",
+              "fontStyle": "normal",
+              "fontWeight": "100 900",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./assets/fonts/inter-variable.woff2"
+              ]
+            }
+          ]
+        }
+      ],
+      "fontSizes": [
+        {
+          "slug": "utility",
+          "name": "Utility",
+          "size": "0.8125rem",
+          "fluid": {
+            "min": "0.8125rem",
+            "max": "0.9375rem"
+          }
+        },
+        {
+          "slug": "small",
+          "name": "Small",
+          "size": "0.875rem",
+          "fluid": {
+            "min": "0.875rem",
+            "max": "1rem"
+          }
+        },
+        {
+          "slug": "body",
+          "name": "Body",
+          "size": "1rem",
+          "fluid": {
+            "min": "1rem",
+            "max": "1.125rem"
+          }
+        },
+        {
+          "slug": "lead",
+          "name": "Lead",
+          "size": "1.125rem",
+          "fluid": {
+            "min": "1.125rem",
+            "max": "1.3125rem"
+          }
+        },
+        {
+          "slug": "card-title",
+          "name": "Card title",
+          "size": "1.25rem",
+          "fluid": {
+            "min": "1.25rem",
+            "max": "1.625rem"
+          }
+        },
+        {
+          "slug": "section-title",
+          "name": "Section title",
+          "size": "1.75rem",
+          "fluid": {
+            "min": "1.75rem",
+            "max": "2.5rem"
+          }
+        },
+        {
+          "slug": "page-title",
+          "name": "Page title",
+          "size": "2.25rem",
+          "fluid": {
+            "min": "2.25rem",
+            "max": "3.5rem"
+          }
+        },
+        {
+          "slug": "display",
+          "name": "Display",
+          "size": "2.75rem",
+          "fluid": {
+            "min": "2.75rem",
+            "max": "4.5rem"
+          }
+        }
+      ]
+    },
+    "custom": {
+      "radius": {
+        "small": "8px",
+        "medium": "12px",
+        "large": "16px",
+        "pill": "999px"
+      },
+      "transition": {
+        "fast": "140ms",
+        "base": "200ms"
+      },
+      "z-index": {
+        "dropdown": "100",
+        "sticky": "200",
+        "modal-backdrop": "300",
+        "modal": "400",
+        "toast": "500",
+        "tooltip": "600"
+      }
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "var:preset|color|pale-mist",
+      "text": "var:preset|color|near-black"
+    },
+    "spacing": {
+      "blockGap": "var:preset|spacing|30",
+      "padding": {
+        "top": "0",
+        "right": "clamp(1rem, 4vw, 2rem)",
+        "bottom": "0",
+        "left": "clamp(1rem, 4vw, 2rem)"
+      }
+    },
+    "typography": {
+      "fontFamily": "var:preset|font-family|inter",
+      "fontSize": "var:preset|font-size|body",
+      "fontWeight": "400",
+      "lineHeight": "1.65"
+    },
+    "elements": {
+      "button": {
+        "border": {
+          "radius": "var:custom|radius|small",
+          "width": "0"
+        },
+        "color": {
+          "background": "var:preset|color|midnight-navy",
+          "text": "var:preset|color|white"
+        },
+        "spacing": {
+          "padding": {
+            "top": "0.75rem",
+            "right": "1.125rem",
+            "bottom": "0.75rem",
+            "left": "1.125rem"
+          }
+        },
+        "typography": {
+          "fontFamily": "var:preset|font-family|sora",
+          "fontSize": "var:preset|font-size|small",
+          "fontWeight": "600",
+          "lineHeight": "1.25",
+          "textDecoration": "none"
+        }
+      },
+      "caption": {
+        "color": {
+          "text": "var:preset|color|near-black"
+        },
+        "typography": {
+          "fontFamily": "var:preset|font-family|inter",
+          "fontSize": "var:preset|font-size|utility",
+          "lineHeight": "1.5"
+        }
+      },
+      "heading": {
+        "color": {
+          "text": "var:preset|color|midnight-navy"
+        },
+        "typography": {
+          "fontFamily": "var:preset|font-family|sora",
+          "fontWeight": "700",
+          "letterSpacing": "-0.025em",
+          "lineHeight": "1.12"
+        }
+      },
+      "h1": {
+        "typography": {
+          "fontSize": "var:preset|font-size|page-title"
+        }
+      },
+      "h2": {
+        "typography": {
+          "fontSize": "var:preset|font-size|section-title"
+        }
+      },
+      "h3": {
+        "typography": {
+          "fontSize": "var:preset|font-size|card-title",
+          "fontWeight": "600"
+        }
+      },
+      "h4": {
+        "typography": {
+          "fontWeight": "600"
+        }
+      },
+      "link": {
+        "color": {
+          "text": "var:preset|color|midnight-navy"
+        },
+        "typography": {
+          "textDecoration": "underline"
+        }
+      }
+    },
+    "blocks": {
+      "core/button": {
+        "typography": {
+          "fontFamily": "var:preset|font-family|sora",
+          "fontWeight": "600"
+        }
+      },
+      "core/navigation": {
+        "typography": {
+          "fontFamily": "var:preset|font-family|inter",
+          "fontSize": "var:preset|font-size|small",
+          "fontWeight": "600"
+        }
+      },
+      "core/post-date": {
+        "color": {
+          "text": "var:preset|color|midnight-navy"
+        },
+        "typography": {
+          "fontSize": "var:preset|font-size|utility",
+          "fontWeight": "500"
+        }
+      },
+      "core/post-excerpt": {
+        "typography": {
+          "fontSize": "var:preset|font-size|body"
+        }
+      },
+      "core/post-title": {
+        "typography": {
+          "fontFamily": "var:preset|font-family|sora",
+          "fontWeight": "700",
+          "letterSpacing": "-0.025em",
+          "lineHeight": "1.12"
+        }
+      },
+      "core/pullquote": {
+        "border": {
+          "color": "var:preset|color|midnight-navy",
+          "style": "solid",
+          "width": "1px"
+        }
+      },
+      "core/separator": {
+        "color": {
+          "background": "var:preset|color|midnight-navy"
+        }
+      }
+    }
+  },
+  "templateParts": [
+    {
+      "area": "header",
+      "name": "header",
+      "title": "Header"
+    },
+    {
+      "area": "footer",
+      "name": "footer",
+      "title": "Footer"
+    }
+  ]
+}

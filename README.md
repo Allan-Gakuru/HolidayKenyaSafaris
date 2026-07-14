@@ -4,12 +4,12 @@ Custom WordPress website for Holiday Kenya Safaris, a local-market travel brand 
 
 ## Start Here
 
-Read [AGENTS.md](AGENTS.md) and its 12 required documents before changing product, content, design, analytics, or deployment behavior. [PRODUCT.md](PRODUCT.md) captures the confirmed strategic design register. [docs/PHASE-0-BASELINE.md](docs/PHASE-0-BASELINE.md) records the audited repository state, source status, blockers, and adjusted implementation order. [docs/PHASE-1-WAYFINDER-ASSETS.md](docs/PHASE-1-WAYFINDER-ASSETS.md) records the production identity build and verification.
+Read [AGENTS.md](AGENTS.md) and its 12 required documents before changing product, content, design, analytics, or deployment behavior. [PRODUCT.md](PRODUCT.md) captures the confirmed strategic design register. [docs/PHASE-0-BASELINE.md](docs/PHASE-0-BASELINE.md) records the audited repository state, source status, blockers, and adjusted implementation order. [docs/PHASE-1-WAYFINDER-ASSETS.md](docs/PHASE-1-WAYFINDER-ASSETS.md) records the production identity build and verification. [docs/PHASE-2-WORDPRESS-FOUNDATION.md](docs/PHASE-2-WORDPRESS-FOUNDATION.md) records the deployable theme/plugin foundation and cPanel integration gate.
 
 ## Architecture
 
-- Custom block theme: `wp-content/themes/hks-wayfinder/` (Phase 2).
-- Site plugin: `wp-content/plugins/hks-core/` (Phase 2).
+- Custom block theme: `wp-content/themes/hks-wayfinder/`.
+- Site plugin: `wp-content/plugins/hks-core/`.
 - Secure Custom Fields with version-controlled field definitions.
 - Primary conversion: validated intake form to a visitor-reviewed WhatsApp message.
 
@@ -17,11 +17,11 @@ Read [AGENTS.md](AGENTS.md) and its 12 required documents before changing produc
 
 This repository contains the deployable custom theme and site plugin, not WordPress core or a local WordPress runtime.
 
-Before pushing PHP changes, syntax-check every changed PHP file with the installed PHP CLI:
+Before pushing PHP changes, syntax-check the complete theme and plugin PHP inventory with the installed PHP CLI:
 
 ```powershell
-php -l wp-content\plugins\hks-core\hks-core.php
-php -l wp-content\themes\hks-wayfinder\functions.php
+& .\tools\lint-php.ps1
+python tools\validate_scaffold.py
 ```
 
 The working delivery loop is:

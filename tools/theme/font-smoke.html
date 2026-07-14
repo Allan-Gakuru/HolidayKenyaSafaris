@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HKS theme font smoke test</title>
+  <style>
+    @font-face {
+      font-family: "Sora";
+      font-style: normal;
+      font-weight: 100 800;
+      font-display: swap;
+      src: url("../../wp-content/themes/hks-wayfinder/assets/fonts/sora-latin-variable.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url("../../wp-content/themes/hks-wayfinder/assets/fonts/inter-variable.woff2") format("woff2");
+    }
+    body {
+      margin: 3rem;
+      color: #182b3a;
+      background: #f3f1ea;
+      font: 400 18px/1.65 Inter, sans-serif;
+    }
+    h1 {
+      max-width: 18ch;
+      margin: 0 0 1rem;
+      font: 700 clamp(2.5rem, 8vw, 5rem)/1.03 Sora, sans-serif;
+      letter-spacing: -.035em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Find your way back to the wild.</h1>
+  <p>Holiday Kenya Safaris pairs calm planning with clear local tour details.</p>
+</body>
+</html>

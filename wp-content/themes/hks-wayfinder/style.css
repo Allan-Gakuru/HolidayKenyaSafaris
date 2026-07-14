@@ -1,0 +1,109 @@
+/*
+Theme Name: HKS Wayfinder
+Theme URI: https://github.com/Allan-Gakuru/HolidayKenyaSafaris
+Author: Holiday Kenya Safaris
+Description: Custom block theme for the Holiday Kenya Safaris Wayfinder website.
+Version: 0.1.0
+Update URI: https://github.com/Allan-Gakuru/HolidayKenyaSafaris
+Requires at least: 6.6
+Requires PHP: 8.3
+Text Domain: hks-wayfinder
+License: GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+/*
+ * Structural and interaction rules that theme.json cannot express cleanly.
+ * Visual tokens and block defaults belong in theme.json.
+ */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-padding-top: var(--wp--preset--spacing--30);
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+	outline: 3px solid var(--wp--preset--color--saffron);
+	outline-offset: 2px;
+	box-shadow: 0 0 0 5px var(--wp--preset--color--midnight-navy);
+}
+
+:where(a) {
+	text-underline-offset: 0.18em;
+	text-decoration-thickness: 0.08em;
+}
+
+:where(img, svg) {
+	max-width: 100%;
+}
+
+.hks-brand-link {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+}
+
+.hks-brand-link img {
+	display: block;
+	width: clamp(10rem, 22vw, 14rem);
+	height: auto;
+}
+
+.hks-site-header {
+	border-bottom: 1px solid rgb(24 43 58 / 16%);
+}
+
+.wp-block-navigation__responsive-container-open,
+.wp-block-navigation__responsive-container-close {
+	align-items: center;
+	justify-content: center;
+	min-width: 44px;
+	min-height: 44px;
+}
+
+.hks-site-footer a {
+	color: inherit;
+}
+
+.wp-block-post-template > li + li {
+	border-top: 1px solid rgb(24 43 58 / 16%);
+	padding-top: var(--wp--preset--spacing--50);
+}
+
+:where(h1, h2, h3),
+.wp-block-post-title,
+.wp-block-query-title {
+	overflow-wrap: anywhere;
+	text-wrap: balance;
+}
+
+.wp-block-post-content :where(p, li) {
+	text-wrap: pretty;
+}
+
+@media (max-width: 48rem) {
+	.hks-site-header .wp-block-group.is-layout-flex {
+		row-gap: var(--wp--preset--spacing--20);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		scroll-behavior: auto !important;
+		transition-duration: 0.01ms !important;
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+	}
+}
