@@ -53,6 +53,13 @@ If Git and shell access are unavailable, use an SFTP account scoped as narrowly 
 
 ## Initial cPanel Setup
 
+### Confirmed MVP pull-deployment path
+
+The confirmed cPanel account is `holidayk` and the WordPress document root is
+`/home/holidayk/public_html`. The repository-root `.cpanel.yml` copies only the
+`hks-wayfinder` theme and `hks-core` plugin into that installation. The recommended
+cPanel-managed clone path is `/home/holidayk/repositories/HolidayKenyaSafaris`.
+
 Create two independent environments:
 
 | Environment | Example | Requirements |
@@ -310,4 +317,3 @@ Do not place actual passwords or private keys in this documentation file.
 - GitHub deployment environments: `https://docs.github.com/en/actions/concepts/workflows-and-actions/deployment-environments`
 - GitHub deployment protection and secrets: `https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments`
 - GitHub secure use: `https://docs.github.com/en/actions/reference/security/secure-use`
-

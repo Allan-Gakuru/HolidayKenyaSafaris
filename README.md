@@ -26,6 +26,7 @@ python -B tools\validate_content_model.py
 python -B tools\validate_mvp_seed.py
 python -B tools\validate_conversion.py
 python -B tools\validate_public_templates.py
+python -B tools\validate_cpanel_deployment.py
 ```
 
 The working delivery loop is:

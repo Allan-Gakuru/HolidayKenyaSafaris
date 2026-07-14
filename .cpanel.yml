@@ -1,0 +1,8 @@
+---
+deployment:
+  tasks:
+    - export WP_ROOT=/home/holidayk/public_html
+    - /bin/mkdir -p $WP_ROOT/wp-content/themes
+    - /bin/mkdir -p $WP_ROOT/wp-content/plugins
+    - /bin/cp -R wp-content/themes/hks-wayfinder $WP_ROOT/wp-content/themes/
+    - /bin/cp -R wp-content/plugins/hks-core $WP_ROOT/wp-content/plugins/
