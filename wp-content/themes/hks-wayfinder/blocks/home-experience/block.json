@@ -6,7 +6,7 @@
   "title": "HKS homepage experience",
   "category": "theme",
   "icon": "admin-home",
-  "description": "Attic-inspired homepage assembled from approved catalogue content.",
+  "description": "Catalogue-led homepage assembled from approved content.",
   "textdomain": "hks-wayfinder",
   "supports": { "html": false, "multiple": false }
 }

@@ -54,16 +54,13 @@ The concept must be redrawn for production. Do not use the raster crop as the fi
 
 Reuse the page's Campaign-mode information architecture and intake-to-WhatsApp behavior. Replace its temporary identity, singular name, and unverified price handling. Do not use its immersive opening as the default canonical Tour template.
 
-### Attic-Inspired Website Structure
+### Catalogue Website Structure
 
-- Homepage: `https://attictravel.com/`
-- Kenya Road Safaris catalogue: `https://attictravel.com/trip-types/kenya-road-safaris/`
-- Reviewed Tour page: `https://attictravel.com/trip/5-days-tsavo-west-amboseli-national-park-kenya-safari/`
-- Local implementation contract: `UI-REFERENCE-ATTIC-TRAVEL.md`
+- Local implementation contract: `UI-REFERENCE-CATALOGUE.md`
 
-Reviewed on 2026-07-15. Use these pages as structural references for the utility bar, product-led navigation, mobile drawer, image-led homepage, catalogue grids, Tour title band, gallery mosaic, two-column Tour workspace, tabs, itinerary disclosures, and related Tours.
+Use the local contract for the utility bar, product-led navigation, mobile drawer, image-led homepage, catalogue grids, Tour title band, gallery mosaic, two-column Tour workspace, tabs, itinerary disclosures, and related Tours.
 
-Do not copy Attic Travel's brand, content, source code, fonts, plugins, permanent booking form, oversized carousel, missing price context, or observed UX defects. Replace the reference booking form with the HKS **Request quote on WhatsApp** intake and handoff.
+Keep the Wayfinder brand, HKS content, clear KSh price context, accessible interactions, and shared **Request quote on WhatsApp** intake and handoff.
 
 ### Supporting Visuals
 

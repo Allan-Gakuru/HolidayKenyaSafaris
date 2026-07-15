@@ -86,12 +86,12 @@ Exclude by default:
 
 ## UI and UX Structure
 
-- Attic Travel is the approved structural reference for the global navigation, image-led homepage, catalogue grids, and canonical Tour pages.
-- This is not permission to copy Attic Travel's branding, copy, source code, plugins, long booking form, oversized hero carousel, missing price context, or UX defects.
+- The approved catalogue contract governs the global navigation, image-led homepage, catalogue grids, and canonical Tour pages.
+- Catalogue-mode implementation must keep the Wayfinder identity, HKS copy, shared conversion service, compact media treatment, clear price context, and accessible interactions.
 - Standard website pages use light, browseable Catalogue mode.
 - Focused paid-ad pages use Campaign mode and may retain the immersive emotional structure of the existing Maasai Mara prototype.
 - Canonical Tour pages use a compact title and breadcrumb band, three-image gallery, destination line, approximately 68/32 desktop workspace, accessible tabs, mobile disclosures, itinerary timeline, sticky quote panel, related Tours, and final quote prompt.
-- The Attic-style booking sidebar is replaced by an HKS quote panel whose **Request quote on WhatsApp** button opens the approved intake, consent, private recovery, message-review, and WhatsApp-launch flow.
+- A conventional booking sidebar is replaced by an HKS quote panel whose **Request quote on WhatsApp** button opens the approved intake, consent, private recovery, message-review, and WhatsApp-launch flow.
 - Desktop navigation uses a utility bar plus product-led primary header. Mobile uses a full-height accessible navigation drawer.
 - Approved top-level navigation is Home, Safaris, Coast & Stays, Destinations, Group Travel, About, Contact, and Request quote on WhatsApp.
 - International holidays, visa services, air ticketing, transfers, and inbound-only routes remain excluded.

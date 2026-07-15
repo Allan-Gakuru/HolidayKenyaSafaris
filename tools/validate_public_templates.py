@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the Attic-inspired public frontend contract without WordPress."""
+"""Validate the catalogue-led public frontend contract without WordPress."""
 
 from __future__ import annotations
 
@@ -224,7 +224,7 @@ def main() -> int:
             print(f"- {error}")
         return 1
 
-    print("Public-template validation passed (Attic-inspired UI, lean public fields, shared quote conversion, responsive accessibility).")
+    print("Public-template validation passed (catalogue-led UI, lean public fields, shared quote conversion, responsive accessibility).")
     return 0
 
 

@@ -25,7 +25,7 @@ Regenerate or verify the font package from the pinned upstream files with `tools
 3. Configure the WordPress Site Icon when the final identity has client sign-off; until then, the theme fallback is used.
 4. Do not publish a photograph until its source and usage approval are recorded.
 
-Version `0.4.0` provides the Attic-inspired public catalogue: a product-led header,
+Version `0.4.0` provides the catalogue-led public experience: a product-led header,
 image-led homepage, filterable Tour archive, compact Destination pages, and the
 canonical Tour gallery/workspace with desktop tabs, mobile disclosures, a sticky
 quote panel, itinerary timeline, and related Tours. Focused Campaigns retain their

@@ -1,18 +1,12 @@
-# Attic-Inspired UI and UX Reference
+# Catalogue UI and UX Reference
 
 ## Status
 
-This document records the approved structural reference for the Holiday Kenya Safaris website. It is based on a review completed on 2026-07-15 of:
-
-- `https://attictravel.com/`
-- `https://attictravel.com/trip-types/kenya-road-safaris/`
-- `https://attictravel.com/trip/5-days-tsavo-west-amboseli-national-park-kenya-safari/`
-
-Attic Travel is a layout and interaction reference, not a brand, content, code, or plugin dependency. Holiday Kenya Safaris must use the Wayfinder identity, local-market scope, approved content model, KSh pricing rules, and qualified WhatsApp funnel.
+This document records the approved layout and interaction system for the Holiday Kenya Safaris website, consolidating review decisions made on 2026-07-15. Holiday Kenya Safaris must use the Wayfinder identity, local-market scope, approved content model, KSh pricing rules, and qualified WhatsApp funnel.
 
 ## Core Decision
 
-Use Attic Travel's catalogue grammar for the main website:
+Use this catalogue grammar for the main website:
 
 - a two-level desktop header;
 - product-led dropdown navigation;
@@ -21,7 +15,7 @@ Use Attic Travel's catalogue grammar for the main website:
 - three-column catalogue grids;
 - a canonical Tour page with a title band, image gallery, tabbed content, two-column desktop layout, related Tours, and a persistent conversion panel.
 
-Do not copy Attic Travel's long booking form. The right-hand conversion area must be a Holiday Kenya Safaris quote panel whose primary command is **Request quote on WhatsApp**. That command opens the approved intake form, saves a private recovery record only after consent, lets the visitor review the generated message, and then launches WhatsApp under the visitor's control.
+Do not use a permanent long booking form. The right-hand conversion area must be a Holiday Kenya Safaris quote panel whose primary command is **Request quote on WhatsApp**. That command opens the approved intake form, saves a private recovery record only after consent, lets the visitor review the generated message, and then launches WhatsApp under the visitor's control.
 
 ## Two Page Modes
 
@@ -106,7 +100,7 @@ The drawer must trap focus while open, close with Escape, return focus to the me
 
 ## Homepage Template
 
-The homepage should reproduce Attic Travel's broad, image-led catalogue impression without reproducing its excessive carousel or generic service clutter.
+The homepage should create a broad, image-led catalogue impression without an excessive carousel or generic service clutter.
 
 Default sequence:
 
@@ -152,7 +146,7 @@ Desktop filters may be horizontal or use a restrained sidebar. Mobile filters mu
 
 ## Canonical Tour Template
 
-The canonical Tour page should closely reproduce the information architecture and visual rhythm of the reviewed Attic Travel Tour page while correcting its conversion and content weaknesses.
+The canonical Tour page should follow the approved information architecture and visual rhythm while keeping HKS conversion and content requirements intact.
 
 ### Page order
 
@@ -205,7 +199,7 @@ The panel should contain:
 - A short explanation that the visitor will answer a few questions and review a prepared WhatsApp message.
 - Confirmed response or operator details only when available.
 
-Do not display Attic Travel's first name, last name, email, country, date selectors, adult count, child count, notes, and Submit Booking form permanently in the sidebar.
+Do not display first name, last name, email, country, date selectors, adult count, child count, notes, and a Submit Booking form permanently in the sidebar.
 
 The WhatsApp button opens the shared HKS intake dialog or mobile sheet. The required fields remain name, phone, package, preferred date or month, and number of travelers. Package-specific optional questions appear only when they improve quote accuracy.
 
@@ -224,7 +218,7 @@ On mobile, render the same sections as accessible stacked disclosures. Open Over
 
 ### Itinerary
 
-Use the reviewed Attic timeline as the interaction reference:
+Use the approved timeline interaction:
 
 - Day number and day title.
 - Origin and destination.
@@ -263,7 +257,7 @@ Never use `Book now`, `Submit Booking`, or language implying confirmed availabil
 
 ## Visual Translation to Wayfinder
 
-Reproduce structure, density, and interaction rather than Attic Travel's branding.
+Implement the documented structure, density, and interaction within the Wayfinder brand.
 
 - Use Midnight Navy for the utility bar, titles, and strong trust surfaces.
 - Use white as the main catalogue surface.
@@ -271,10 +265,10 @@ Reproduce structure, density, and interaction rather than Attic Travel's brandin
 - Use Lake Teal for links, selected states, route cues, and secondary controls.
 - Use Saffron sparingly for non-text directional accents and duration details.
 - Reserve WhatsApp Green for WhatsApp conversion controls.
-- Keep the Wayfinder typography and logo system; do not copy Attic's fonts or logo treatment.
+- Keep the Wayfinder typography and logo system; do not introduce mismatched fonts or logo treatment.
 - Use 8-12px radii for Tour cards, galleries, and quote panels.
 - Use borders or restrained short shadows, not both as decoration.
-- Do not copy Attic's abstract blue-to-maroon title gradient. Use a solid Wayfinder band or a sufficiently legible approved destination image.
+- Do not use an abstract blue-to-maroon title gradient. Use a solid Wayfinder band or a sufficiently legible approved destination image.
 
 ## Reference Behaviors to Avoid
 

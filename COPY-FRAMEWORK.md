@@ -89,7 +89,7 @@ Show the immediate future:
 
 ## Canonical Tour Copy Sequence
 
-Canonical Tour pages use the Attic-inspired catalogue structure rather than an avatar-specific campaign hero. Write for an interested local traveler who wants to understand and compare the real package.
+Canonical Tour pages use the catalogue-led structure rather than an avatar-specific campaign hero. Write for an interested local traveler who wants to understand and compare the real package.
 
 1. **Title band:** use the literal package name as the H1. Do not turn it into a vague emotional slogan or repeat it as a second full heading below the gallery.
 2. **Fast facts:** duration, departure, route, travel style, accommodation basis, transport, and the one public price line.

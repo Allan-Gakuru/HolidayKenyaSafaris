@@ -2,7 +2,7 @@
 
 ## Structural Reference
 
-The standard website uses the catalogue and canonical Tour structure documented in `UI-REFERENCE-ATTIC-TRAVEL.md`. Attic Travel is a UI and UX reference only. Holiday Kenya Safaris keeps the Wayfinder identity, local Kenyan scope, verified Ashford facts, KSh pricing rules, and qualified WhatsApp conversion flow.
+The standard website uses the catalogue and canonical Tour structure documented in `UI-REFERENCE-CATALOGUE.md`. Holiday Kenya Safaris keeps the Wayfinder identity, local Kenyan scope, verified Ashford facts, KSh pricing rules, and qualified WhatsApp conversion flow.
 
 The existing Maasai Mara prototype is retained as a Campaign landing-page reference. It is not the default canonical Tour template.
 
@@ -140,7 +140,7 @@ Never invent weather, park-fee, or access information. Date and source any chang
 
 ### Canonical Tour Detail Page
 
-Closely reproduce the reviewed Attic Travel Tour page structure, with the booking form replaced by the Holiday Kenya Safaris WhatsApp quote system.
+Implement the approved canonical Tour structure, with a Holiday Kenya Safaris WhatsApp quote panel instead of a permanent booking form.
 
 Default order:
 
@@ -310,11 +310,11 @@ Potential modules, only when verified:
 
 ## Visual Requirements
 
-- Follow `DESIGN.md`, `BRAND-WAYFINDER.md`, and `UI-REFERENCE-ATTIC-TRAVEL.md`.
+- Follow `DESIGN.md`, `BRAND-WAYFINDER.md`, and `UI-REFERENCE-CATALOGUE.md`.
 - Use the catalogue reference's structure and density, not its brand styling.
 - Use destination imagery deliberately selected by an authorized editor as the primary visual proof.
 - Keep the main catalogue surface white, with Pale Mist used for quiet section alternation.
-- Use Wayfinder colors and typography; do not copy Attic Travel's logo, fonts, maroon palette, or abstract title gradient.
+- Use Wayfinder colors and typography; avoid mismatched logos, fonts, maroon palettes, and abstract title gradients.
 - Cards use stable image ratios, restrained radii, and consistent content height.
 - No cards nested inside cards.
 - Do not let long Tour names, KSh prices, or CTA labels overflow.

@@ -22,7 +22,7 @@ Assured, restorative, locally fluent. Holiday Kenya Safaris should feel attainab
 - A cheap tourism poster crowded with discounts, wildlife collages, generic orange sunsets, and unqualified prices.
 - A distant luxury operator relying on vague prestige, fake exclusivity, or decorative excess instead of concrete proof.
 - A formal corporate procurement portal or car-dealership aesthetic.
-- A pixel-for-pixel clone of Attic Travel, including its brand, plugins, long booking form, oversized carousel, weak price context, or interaction defects.
+- A pixel-for-pixel clone of another travel website, including its brand, plugins, long booking form, oversized carousel, weak price context, or interaction defects.
 - The old Maasai Mara prototype's singular brand name, temporary red/gold/green palette, text-only logo, and unverified price presentation.
 - Interfaces made from oversized rounded cards, generic tourism copy, hidden exclusions, invented reviews, or imagery that does not reveal the actual destination and experience.
 
@@ -34,7 +34,7 @@ Assured, restorative, locally fluent. Holiday Kenya Safaris should feel attainab
 4. Show the real trip wherever proof matters; never let decoration stand in for approved destination, accommodation, vehicle, or experience evidence.
 5. Keep one canonical source of Tour facts and let Campaigns vary the headline, supporting copy, featured hero image, navigation mode, and schedule around it.
 6. Use two coherent presentation modes: a light, browseable Catalogue mode for the standard site and an emotionally focused Campaign mode for paid traffic.
-7. On canonical Tour pages, pair Attic-inspired gallery, tabs, itinerary, and related-Tour discovery with an HKS sticky quote panel rather than a permanent booking form.
+7. On canonical Tour pages, pair the approved gallery, tabs, itinerary, and related-Tour discovery with an HKS sticky quote panel rather than a permanent booking form.
 
 ## Accessibility & Inclusion
 

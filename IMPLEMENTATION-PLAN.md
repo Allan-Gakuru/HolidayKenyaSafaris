@@ -4,7 +4,7 @@
 
 Build backward from a qualified WhatsApp inquiry. Do not start by producing a generic homepage and then bolt on conversion later.
 
-The standard site must also feel like a complete travel catalogue. Follow `UI-REFERENCE-ATTIC-TRAVEL.md` for the global shell, homepage, archives, and canonical Tour pages. Use the existing Maasai Mara prototype only for Campaign-mode structure.
+The standard site must also feel like a complete travel catalogue. Follow `UI-REFERENCE-CATALOGUE.md` for the global shell, homepage, archives, and canonical Tour pages. Use the existing Maasai Mara prototype only for Campaign-mode structure.
 
 ## Phase 0: Repository and Environment Audit
 
@@ -165,7 +165,7 @@ Acceptance:
 
 - Every template uses the shared design system and structured content.
 - Campaign pages inherit canonical Tour facts.
-- The canonical Tour page reproduces the approved Attic-inspired title band, gallery, two-column workspace, tabs/disclosures, itinerary, quote panel, and related-Tour flow without copying Attic branding or defects.
+- The canonical Tour page implements the approved title band, gallery, two-column workspace, tabs/disclosures, itinerary, quote panel, and related-Tour flow within the Wayfinder system.
 - The permanent reference-site booking form is absent; every Tour quote action opens the approved HKS intake and WhatsApp handoff.
 - The current Maasai Mara prototype's strongest UX is preserved in Campaign mode without carrying over its old identity.
 
@@ -226,7 +226,7 @@ Test:
 
 Capture desktop and mobile screenshots for the core templates before acceptance.
 
-Compare the resulting header, homepage, catalogue, and canonical Tour page against the reviewed Attic reference at the same viewport sizes. Verify structural similarity and HKS-specific improvements rather than pixel-identical branding.
+Compare the resulting header, homepage, catalogue, and canonical Tour page against `UI-REFERENCE-CATALOGUE.md` at the same viewport sizes. Verify the documented structure, responsive behavior, and HKS-specific improvements.
 
 ## Phase 10: Launch and Learning
 

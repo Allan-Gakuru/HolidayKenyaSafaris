@@ -10,7 +10,7 @@ Before writing code, read these files in order:
 2. `PRODUCT.md`
 3. `BRAND-WAYFINDER.md`
 4. `DESIGN.md`
-5. `UI-REFERENCE-ATTIC-TRAVEL.md`
+5. `UI-REFERENCE-CATALOGUE.md`
 6. `AUDIENCES-AND-MESSAGING.md`
 7. `COPY-FRAMEWORK.md`
 8. `FUNNEL-AND-ANALYTICS.md`
@@ -33,7 +33,7 @@ This documentation package overrides older workspace material when there is a co
 
 Build an exquisite, fast, trustworthy WordPress website that turns Facebook-ad traffic and high-intent visitors into qualified WhatsApp inquiries for local Kenyan tours.
 
-The main website must feel like a complete, browseable travel catalogue. Its homepage, navigation, archives, and canonical Tour pages use the Attic-inspired structure in `UI-REFERENCE-ATTIC-TRAVEL.md`. Focused paid-ad Campaign pages retain a more emotionally concentrated conversion format.
+The main website must feel like a complete, browseable travel catalogue. Its homepage, navigation, archives, and canonical Tour pages use the catalogue-led structure in `UI-REFERENCE-CATALOGUE.md`. Focused paid-ad Campaign pages retain a more emotionally concentrated conversion format.
 
 Work backward from the conversion:
 
@@ -96,8 +96,8 @@ Adapt the process to page and ad copy:
 ## Design Rule
 
 - Use the Wayfinder palette, typography direction, and production logo described in `BRAND-WAYFINDER.md`.
-- Follow `DESIGN.md` and `UI-REFERENCE-ATTIC-TRAVEL.md` for the global header, homepage, catalogue, canonical Tour template, responsive behavior, and the distinction between Catalogue and Campaign modes.
-- Reproduce the reviewed Attic Travel Tour-page information architecture: title band, three-image gallery, destination line, two-column desktop workspace, tabs, itinerary disclosures, related Tours, and persistent quote panel.
+- Follow `DESIGN.md` and `UI-REFERENCE-CATALOGUE.md` for the global header, homepage, catalogue, canonical Tour template, responsive behavior, and the distinction between Catalogue and Campaign modes.
+- Use the approved canonical Tour information architecture: title band, three-image gallery, destination line, two-column desktop workspace, tabs, itinerary disclosures, related Tours, and persistent quote panel.
 - Replace the reference site's permanent booking form with the HKS **Request quote on WhatsApp** button and approved intake-to-WhatsApp flow.
 - Preserve the information clarity and conversion path of the existing Maasai Mara prototype for Campaign pages, not as the default canonical Tour layout.
 - Destination photography should reveal the actual place and experience.
@@ -135,7 +135,7 @@ Never treat a hypothesis as sales data or a converted USD rate as an approved KS
 5. Implement content models and SCF field groups before hard-coding package pages.
 6. Seed and validate the three priority packages.
 7. Build the intake-to-WhatsApp component and analytics event contract.
-8. Build and approve the Attic-inspired global header, Tour gallery, canonical Tour workspace, sticky quote panel, tabs/disclosures, and related-Tour pattern.
+8. Build and approve the catalogue-led global header, Tour gallery, canonical Tour workspace, sticky quote panel, tabs/disclosures, and related-Tour pattern.
 9. Build the catalogue, destination, homepage, and Campaign templates from the approved components.
 10. Add the remaining approved local catalogue in controlled batches.
 11. Configure and test the local-to-GitHub-to-cPanel staging and production pipeline.
@@ -160,4 +160,4 @@ The website is ready for launch only when:
 
 Use this prompt in a new Codex task opened at the workspace root:
 
-> Read `AGENTS.md` and every file it marks as required. Then inspect the repository, referenced source material, and existing implementation. Build or revise the Holiday Kenya Safaris WordPress website according to the documented architecture, including the Attic-inspired catalogue and canonical Tour UI and the HKS intake-to-WhatsApp conversion flow. Do not invent rates, policies, reviews, photographs, or company details. Start by reporting the repository state, blocking client confirmations, and the implementation plan; then proceed through the documented build sequence.
+> Read `AGENTS.md` and every file it marks as required. Then inspect the repository, referenced source material, and existing implementation. Build or revise the Holiday Kenya Safaris WordPress website according to the documented architecture, including the catalogue-led canonical Tour UI and the HKS intake-to-WhatsApp conversion flow. Do not invent rates, policies, reviews, photographs, or company details. Start by reporting the repository state, blocking client confirmations, and the implementation plan; then proceed through the documented build sequence.

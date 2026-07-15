@@ -91,7 +91,7 @@ Only use photographs whose rights the client has confirmed.
 - Attainable-premium, restorative, assured, and vivid.
 - Rich destination imagery balanced by very clear logistics.
 - Light, browseable Catalogue mode for the standard website; immersive Campaign mode for focused advertising pages.
-- Attic Travel is the approved structural reference for navigation, homepage package discovery, catalogue grids, and canonical Tour page composition. It is not a visual-identity or code reference.
+- The approved catalogue contract defines navigation, homepage package discovery, catalogue grids, and canonical Tour page composition. It is not a visual-identity or code dependency.
 - Strong hierarchy and generous but efficient spacing.
 - Cards only for repeated tours, reviews, or genuine tools. Do not put every section in a floating card.
 - WhatsApp green is reserved for the conversion action.
@@ -106,7 +106,7 @@ Translate the reference into Wayfinder:
 - Restrained Saffron directional accents.
 - WhatsApp Green only for WhatsApp conversion controls.
 
-Do not copy Attic Travel's maroon branding, abstract title gradient, fonts, logo treatment, permanent booking form, or oversized carousel.
+Do not introduce maroon branding, abstract title gradients, mismatched fonts, a permanent booking form, or an oversized carousel.
 
 ## Existing References
 
@@ -119,4 +119,4 @@ The existing page uses temporary non-Wayfinder colors and the singular brand nam
 
 Additional structural reference:
 
-- `UI-REFERENCE-ATTIC-TRAVEL.md`
+- `UI-REFERENCE-CATALOGUE.md`

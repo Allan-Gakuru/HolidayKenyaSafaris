@@ -17,7 +17,7 @@ The visual rhythm is:
 
 ### Catalogue mode
 
-The homepage, global navigation, catalogue, destination pages, and canonical Tour pages follow `UI-REFERENCE-ATTIC-TRAVEL.md`. Catalogue mode is light, image-led, browseable, and internally connected. It should communicate the breadth and operational confidence of an established travel company.
+The homepage, global navigation, catalogue, destination pages, and canonical Tour pages follow `UI-REFERENCE-CATALOGUE.md`. Catalogue mode is light, image-led, browseable, and internally connected. It should communicate the breadth and operational confidence of an established travel company.
 
 ### Campaign mode
 
@@ -112,11 +112,11 @@ The header must not resemble a software toolbar. Search is optional and should a
 
 Use one decisive hero image or no more than three curated slides. Keep the next section discoverable, and place verified featured Tours immediately after the hero. Tour grids use stable image ratios, consistent title space, and practical metadata rather than image-and-title-only cards.
 
-Catalogue and taxonomy pages use a compact title and breadcrumb band, useful filters, a responsive Tour grid, and clear no-results behavior. Do not copy Attic Travel's abstract gradient, empty metadata, or oversized media inventory.
+Catalogue and taxonomy pages use a compact title and breadcrumb band, useful filters, a responsive Tour grid, and clear no-results behavior. Avoid abstract gradients, empty metadata, and oversized media inventory.
 
 ### Canonical Tour shell
 
-Use the structure in `UI-REFERENCE-ATTIC-TRAVEL.md`:
+Use the structure in `UI-REFERENCE-CATALOGUE.md`:
 
 1. Compact title and breadcrumb band with the only H1.
 2. Three-image gallery mosaic.
