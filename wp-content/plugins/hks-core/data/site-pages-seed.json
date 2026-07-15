@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "publication_policy": "draft_only",
+  "source_checked_date": "2026-07-15",
+  "pages": [
+    {
+      "page_id": "HKS-PAGE-ABOUT",
+      "slug": "about",
+      "title": "About Holiday Kenya Safaris",
+      "excerpt": "How Holiday Kenya Safaris helps local travelers find and plan Kenya trips, and how Ashford Tours & Travel fits in.",
+      "content": "<!-- wp:paragraph {\"className\":\"hks-page-lead\"} -->\n<p class=\"hks-page-lead\">Holiday Kenya Safaris helps travelers in Kenya browse domestic safaris, local excursions, coast experiences and group trips with the useful package details kept close at hand.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:group {\"className\":\"hks-page-grid hks-page-grid--two\",\"layout\":{\"type\":\"default\"}} -->\n<div class=\"wp-block-group hks-page-grid hks-page-grid--two\"><!-- wp:group {\"className\":\"hks-page-panel\",\"layout\":{\"type\":\"constrained\"}} -->\n<div class=\"wp-block-group hks-page-panel\"><!-- wp:heading {\"level\":2} -->\n<h2 class=\"wp-block-heading\">A practical route into a Kenya trip</h2>\n<!-- /wp:heading -->\n\n<!-- wp:paragraph -->\n<p>Each Tour keeps its route, duration, itinerary and package notes in one place. You can compare the options first, then request a quote for your dates and group.</p>\n<!-- /wp:paragraph --></div>\n<!-- /wp:group -->\n\n<!-- wp:group {\"className\":\"hks-page-panel\",\"layout\":{\"type\":\"constrained\"}} -->\n<div class=\"wp-block-group hks-page-panel\"><!-- wp:heading {\"level\":2} -->\n<h2 class=\"wp-block-heading\">Operated by Ashford Tours &amp; Travel</h2>\n<!-- /wp:heading -->\n\n<!-- wp:paragraph -->\n<p>Holiday Kenya Safaris is operated by Ashford Tours &amp; Travel. The relationship keeps the browsing experience focused on local travelers while the source itinerary and operator context stay traceable.</p>\n<!-- /wp:paragraph --></div>\n<!-- /wp:group --></div>\n<!-- /wp:group -->\n\n<!-- wp:group {\"className\":\"hks-page-callout\",\"layout\":{\"type\":\"constrained\"}} -->\n<div class=\"wp-block-group hks-page-callout\"><!-- wp:heading {\"level\":2} -->\n<h2 class=\"wp-block-heading\">Start with the trip, not a blank message</h2>\n<!-- /wp:heading -->\n\n<!-- wp:paragraph -->\n<p>Browse the Tour catalogue, open the trip that suits you, and use its quote action so the conversation begins with the right package context.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:buttons -->\n<div class=\"wp-block-buttons\"><!-- wp:button {\"className\":\"hks-button\"} -->\n<div class=\"wp-block-button hks-button\"><a class=\"wp-block-button__link wp-element-button\" href=\"/tours/\">Browse all tours</a></div>\n<!-- /wp:button --></div>\n<!-- /wp:buttons --></div>\n<!-- /wp:group -->"
+    },
+    {
+      "page_id": "HKS-PAGE-GROUP-TRAVEL",
+      "slug": "group-travel",
+      "title": "Group Travel in Kenya",
+      "excerpt": "A clear starting point for family, friends, corporate, community and school trip organizers.",
+      "content": "<!-- wp:paragraph {\"className\":\"hks-page-lead\"} -->\n<p class=\"hks-page-lead\">Organizing for several people means balancing the route, dates, departure town, transport, accommodation and budget. Start with the group facts and a Tour you can point to.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading {\"level\":2} -->\n<h2 class=\"wp-block-heading\">Trips for different kinds of groups</h2>\n<!-- /wp:heading -->\n\n<!-- wp:group {\"className\":\"hks-page-grid hks-page-grid--four\",\"layout\":{\"type\":\"default\"}} -->\n<div class=\"wp-block-group hks-page-grid hks-page-grid--four\"><!-- wp:group {\"className\":\"hks-page-panel\",\"layout\":{\"type\":\"constrained\"}} -->\n<div class=\"wp-block-group hks-page-panel\"><!-- wp:heading {\"level\":3} -->\n<h3 class=\"wp-block-heading\">Work and corporate groups</h3>\n<!-- /wp:heading --><p>Share the purpose, headcount, preferred dates and departure town.</p></div>\n<!-- /wp:group -->\n\n<!-- wp:group {\"className\":\"hks-page-panel\",\"layout\":{\"type\":\"constrained\"}} -->\n<div class=\"wp-block-group hks-page-panel\"><!-- wp:heading {\"level\":3} -->\n<h3 class=\"wp-block-heading\">Chamas, churches and SACCOs</h3>\n<!-- /wp:heading --><p>Keep the trip option and group requirements visible for the people coordinating the decision.</p></div>\n<!-- /wp:group -->\n\n<!-- wp:group {\"className\":\"hks-page-panel\",\"layout\":{\"type\":\"constrained\"}} -->\n<div class=\"wp-block-group hks-page-panel\"><!-- wp:heading {\"level\":3} -->\n<h3 class=\"wp-block-heading\">Schools and youth groups</h3>\n<!-- /wp:heading --><p>Begin with the age group, headcount, dates, route and the practical information your organizer needs confirmed.</p></div>\n<!-- /wp:group -->\n\n<!-- wp:group {\"className\":\"hks-page-panel\",\"layout\":{\"type\":\"constrained\"}} -->\n<div class=\"wp-block-group hks-page-panel\"><!-- wp:heading {\"level\":3} -->\n<h3 class=\"wp-block-heading\">Family and friend groups</h3>\n<!-- /wp:heading --><p>Share who is traveling, the date or month, departure town and the comfort level the group has in mind.</p></div>\n<!-- /wp:group --></div>\n<!-- /wp:group -->\n\n<!-- wp:group {\"className\":\"hks-page-callout\",\"layout\":{\"type\":\"constrained\"}} -->\n<div class=\"wp-block-group hks-page-callout\"><!-- wp:heading {\"level\":2} -->\n<h2 class=\"wp-block-heading\">What to have ready</h2>\n<!-- /wp:heading -->\n\n<!-- wp:list -->\n<ul><li>The Tour or destination you are considering.</li><li>Your preferred date or month.</li><li>The number of adults and children.</li><li>Your departure town.</li><li>Any transport, accommodation or budget preference that should shape the quote.</li></ul>\n<!-- /wp:list -->\n\n<!-- wp:buttons -->\n<div class=\"wp-block-buttons\"><!-- wp:button {\"className\":\"hks-button\"} -->\n<div class=\"wp-block-button hks-button\"><a class=\"wp-block-button__link wp-element-button\" href=\"/tours/\">Choose a tour</a></div>\n<!-- /wp:button --></div>\n<!-- /wp:buttons --></div>\n<!-- /wp:group -->"
+    },
+    {
+      "page_id": "HKS-PAGE-CONTACT",
+      "slug": "contact",
+      "title": "Contact Holiday Kenya Safaris",
+      "excerpt": "Contact-page draft awaiting the final public phone, email, address and business hours.",
+      "content": "<!-- wp:paragraph {\"className\":\"hks-page-lead\"} -->\n<p class=\"hks-page-lead\">For a Tour quote, choose a trip first and use its request-quote action. That keeps the package, preferred date and group size together when the conversation begins.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:group {\"className\":\"hks-page-callout\",\"layout\":{\"type\":\"constrained\"}} -->\n<div class=\"wp-block-group hks-page-callout\"><!-- wp:heading {\"level\":2} -->\n<h2 class=\"wp-block-heading\">Choose the relevant Tour</h2>\n<!-- /wp:heading -->\n\n<!-- wp:paragraph -->\n<p>Open the catalogue, select the trip you are interested in, and share your details from that Tour page.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:buttons -->\n<div class=\"wp-block-buttons\"><!-- wp:button {\"className\":\"hks-button\"} -->\n<div class=\"wp-block-button hks-button\"><a class=\"wp-block-button__link wp-element-button\" href=\"/tours/\">Browse all tours</a></div>\n<!-- /wp:button --></div>\n<!-- /wp:buttons --></div>\n<!-- /wp:group -->"
+    },
+    {
+      "page_id": "HKS-PAGE-PRIVACY",
+      "slug": "privacy-policy",
+      "title": "Privacy Policy",
+      "excerpt": "Draft route reserved for client-approved privacy text.",
+      "content": ""
+    },
+    {
+      "page_id": "HKS-PAGE-WEBSITE-TERMS",
+      "slug": "website-terms",
+      "title": "Website Terms",
+      "excerpt": "Draft route reserved for client-approved website terms.",
+      "content": ""
+    },
+    {
+      "page_id": "HKS-PAGE-BOOKING-TERMS",
+      "slug": "booking-terms",
+      "title": "Booking Terms",
+      "excerpt": "Draft route reserved for client-approved booking terms.",
+      "content": ""
+    },
+    {
+      "page_id": "HKS-PAGE-CANCELLATION",
+      "slug": "cancellation-refund-policy",
+      "title": "Cancellation and Refund Policy",
+      "excerpt": "Draft route reserved for client-approved cancellation and refund terms.",
+      "content": ""
+    }
+  ],
+  "tours": [],
+  "campaigns": []
+}

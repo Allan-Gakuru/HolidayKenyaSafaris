@@ -126,3 +126,14 @@ Prepare integrations for:
 - Consent and privacy controls appropriate to the final tracking setup.
 
 Client IDs will be supplied later. Do not hard-code invented IDs.
+
+## Phase 6 and 7 Delivery Decisions
+
+- Standard WordPress Pages use the Wayfinder title band and editorial content system; no new page builder or duplicate content model is introduced.
+- About, Group Travel, Contact, and four legal routes are created through the existing guarded draft importer. Contact and legal records stay in Draft until their missing project-level information is supplied.
+- The 44 reviewed local Ashford candidates resolve to 40 Phase 7 draft imports: three already exist as MVP Tours and the generic `African-wildlife-safari` marketing page is excluded as non-quotable.
+- Phase 7 is split into four operator-triggered batches: Road Safaris, Flying Safaris and Mount Kenya, Nairobi Excursions, and Mombasa Excursions.
+- Catalogue migration preserves Ashford titles and source URLs, maps the four existing Tour taxonomies, and carries over source duration and route headings when available.
+- The migration assigns no price, media, policy, inclusion, exclusion, review, or availability data. An authorized editor completes and publishes each Tour deliberately.
+- Seeded records can be refreshed only while they remain Draft. Any record moved beyond Draft is protected from importer updates.
+- Inquiry submission and WhatsApp launch testing is deferred until the client controls the destination number.

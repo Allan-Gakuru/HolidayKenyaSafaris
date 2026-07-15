@@ -1,0 +1,14 @@
+{
+  "apiVersion": 3,
+  "name": "hks-wayfinder/page-title",
+  "version": "0.4.0",
+  "title": "HKS Page title",
+  "category": "theme",
+  "description": "Server-rendered title band and breadcrumb for standard Pages.",
+  "textdomain": "hks-wayfinder",
+  "supports": {
+    "html": false,
+    "inserter": false,
+    "multiple": false
+  }
+}

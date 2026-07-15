@@ -137,6 +137,8 @@ Acceptance:
 
 ## Phase 6: Templates and Pages
 
+Implementation status (2026-07-15): the global, Tour, Campaign, catalogue, Destination, homepage, and standard Page templates are implemented. About, Group Travel, Contact, and four legal routes are available as protected Page drafts. Contact details and legal text remain production blockers and are deliberately not invented.
+
 Build in this order:
 
 1. Utility bar, desktop header, dropdown navigation, mobile drawer, and footer.
@@ -168,6 +170,8 @@ Acceptance:
 - The current Maasai Mara prototype's strongest UX is preserved in Campaign mode without carrying over its old identity.
 
 ## Phase 7: Catalogue Migration
+
+Implementation status (2026-07-15): all 44 local candidates have been reviewed for migration. Forty eligible remaining records are packaged as protected drafts in four controlled batches; the three MVP Tours are not duplicated and the generic `African-wildlife-safari` marketing page is excluded. Deployment and an administrator-triggered batch import are required before the drafts appear in WordPress.
 
 Actions:
 

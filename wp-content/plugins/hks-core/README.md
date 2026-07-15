@@ -4,17 +4,17 @@
 
 ## Current scope
 
-Version `0.4.0` provides:
+Version `0.5.0` provides:
 
 - guarded WordPress 6.6+, PHP 8.3+, and Secure Custom Fields 6.9.1+ boot requirements;
 - versioned, retry-safe upgrades and soft rewrite refreshes;
 - canonical Tour, Campaign, and reusable FAQ post types;
 - Destination, Tour Type, Occasion/Audience, and Travel Style taxonomies;
 - code-owned SCF field groups with deterministic keys;
-- private source, price, policy, proof, rights, analytics, and global-setting records;
+- hidden source-audit metadata and lean public Tour fields;
 - controlled public-field REST exposure; and
 - shared publication rules across SCF, REST, and programmatic saves;
-- an idempotent, administrator-triggered three-package MVP draft importer; and
+- an idempotent administrator importer for the original MVP, seven standard site Page drafts, and 40 protected catalogue drafts in four controlled batches; and
 - an explicitly consented private inquiry record, visitor review, and WhatsApp handoff.
 
 Campaigns link to exactly one Tour and may change messaging or presentation, never itinerary, logistics, inclusions, policy, or price facts. Drafts remain saveable while incomplete. Public or scheduled records must pass the publication rules.
@@ -37,12 +37,12 @@ Modules implement `HolidayKenyaSafaris\Core\Contracts\Module`. The default modul
 
 ## Editorial safety
 
-- Source and confirmation fields stay private.
-- Raw price records stay out of anonymous SCF REST responses.
-- A provisional KSh `From` price may publish only with a positive amount, explicit placeholder status, and complete assumptions and disclaimer.
-- Converted estimates and expired prices cannot be displayed as current `From` prices.
+- Source-audit metadata stays private and out of the client Tour form.
+- A positive `From KSh` amount is the only Tour price field exposed to editors.
+- Phase 7 imports never assign prices, photographs, policies, inclusions, exclusions, or availability claims.
+- Every importer action creates or refreshes drafts only and protects records that an editor has moved beyond draft.
 - `CLIENT CONFIRMATION REQUIRED` is rejected anywhere in public candidate copy.
-- Campaigns cannot publish without one published Tour and a complete campaign brief.
+- Campaigns cannot publish without one published Tour and the public landing-page fields consumed by the template.
 - Hiding or deleting a Tour returns its linked public Campaigns to Draft.
 - Media-rights metadata is an editorial/launch audit, not an automatic post rejection.
 
@@ -62,6 +62,9 @@ No local WordPress runtime is required:
 & .\tools\lint-php.ps1
 python -B tools\validate_scaffold.py
 python -B tools\validate_content_model.py
+python -B tools\validate_mvp_seed.py
+python -B tools\validate_phase_6_7_seed.py
+python -B tools\validate_public_templates.py
 ```
 
 Runtime behavior is verified after GitHub-to-cPanel deployment in the WordPress dashboard and browser.

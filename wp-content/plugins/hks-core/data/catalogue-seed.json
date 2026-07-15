@@ -1,0 +1,2181 @@
+{
+  "schema_version": 1,
+  "publication_policy": "draft_only",
+  "source_checked_date": "2026-07-02",
+  "batch_labels": {
+    "1": "Road safaris",
+    "2": "Flying safaris and Mount Kenya",
+    "3": "Nairobi excursions",
+    "4": "Mombasa excursions"
+  },
+  "tours": [
+    {
+      "batch": 1,
+      "product_id": "HKS-ASHFORD-2-DAYS-1-NIGHT-LAKE-NAKURU-NATIONAL-PARK",
+      "slug": "2-days-1-night-lake-nakuru-national-park",
+      "title": "2 Days (1 Night): Lake Nakuru National Park",
+      "excerpt": "A 2 days (1 night) road safari covering Lake Nakuru National Park.",
+      "overview": "Explore Lake Nakuru National Park with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Lake Nakuru National Park → Nairobi. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/2-days-1-night-lake-nakuru-national-park/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Kenya Safaris",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Lake Nakuru National Park"
+        ],
+        "hks_tour_type": [
+          "Road Safari"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Short Break"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "2 Days (1 Night)",
+        "hks_start_location": "Nairobi",
+        "hks_end_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Lake Nakuru National Park → Nairobi",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi - Lake Nakuru National Park",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Lake Nakuru National Park- Nairobi",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 1,
+      "product_id": "HKS-ASHFORD-2-DAYS-1-NIGHT-AMBOSELI-NATIONAL-PARK-SAFARI",
+      "slug": "2-days-1-night-amboseli-national-park-safari",
+      "title": "2 Days 1 Night Amboseli National Park Safari",
+      "excerpt": "A 2 days 1 night road safari covering Amboseli National Park.",
+      "overview": "Explore Amboseli National Park Safari with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Amboseli National Park → Nairobi. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/2-days-1-night-amboseli-national-park-safari/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Kenya Safaris",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Amboseli National Park"
+        ],
+        "hks_tour_type": [
+          "Road Safari"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Short Break"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "2 Days 1 Night",
+        "hks_start_location": "Nairobi",
+        "hks_end_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Amboseli National Park → Nairobi",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi-Amboseli",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Amboseli - Nairobi",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 1,
+      "product_id": "HKS-ASHFORD-2-DAYS-1-NIGHT-MAASAI-MARA-GAME-RESERVE-SAFARI",
+      "slug": "2-days-1-night-maasai-mara-game-reserve-safari",
+      "title": "2 Days 1 Night Maasai Mara Game Reserve Safari",
+      "excerpt": "A 2 days 1 night road safari covering Maasai Mara.",
+      "overview": "Explore Maasai Mara Game Reserve Safari with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Maasai Mara → Nairobi. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/2-days-1-night-maasai-mara-game-reserve-safari/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Kenya Safaris",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Maasai Mara"
+        ],
+        "hks_tour_type": [
+          "Road Safari"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Short Break"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "2 Days 1 Night",
+        "hks_start_location": "Nairobi",
+        "hks_end_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Maasai Mara → Nairobi",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi - Masai Mara Game Reserve",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Masai Mara - Nairobi",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 1,
+      "product_id": "HKS-ASHFORD-2-DAYS-1-NIGHT-OL-PEJETA-CONSERVANCY",
+      "slug": "2-days-1-night-ol-pejeta-conservancy",
+      "title": "2 Days 1 Night Ol Pejeta Conservancy",
+      "excerpt": "A 2 days 1 night road safari covering Ol Pejeta Conservancy.",
+      "overview": "Explore Ol Pejeta Conservancy with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Ol Pejeta Conservancy → Nairobi. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/2-days-1-night-ol-pejeta-conservancy/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Kenya Safaris",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Ol Pejeta Conservancy"
+        ],
+        "hks_tour_type": [
+          "Road Safari"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Short Break"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "2 Days 1 Night",
+        "hks_start_location": "Nairobi",
+        "hks_end_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Ol Pejeta Conservancy → Nairobi",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi - Ol Pejeta Conservancy (Sweet Waters)",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Ol Pejeta Conservancy- Nairobi",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 1,
+      "product_id": "HKS-ASHFORD-3-DAYS-TSAVO-WEST-SAFARI",
+      "slug": "3-days-tsavo-west-safari",
+      "title": "3 Days Tsavo West Safari",
+      "excerpt": "A 3 days road safari covering Tsavo West National Park.",
+      "overview": "Explore Tsavo West Safari with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Tsavo West National Park. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/3-days-tsavo-west-safari/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Kenya Safaris",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Tsavo West National Park"
+        ],
+        "hks_tour_type": [
+          "Road Safari"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Short Break"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "3 Days",
+        "hks_start_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Tsavo West National Park",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi - Tsavo West",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Tsavo West Enjoy a game",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "3",
+            "day_title": "Tsavo West - Nairobi Enjoy an",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 1,
+      "product_id": "HKS-ASHFORD-4-DAYS-3-NIGHTS-ABERDARES-SAMBURU-LUXURY-SAFARI",
+      "slug": "4-days-3-nights-aberdares-samburu-luxury-safari",
+      "title": "4 Days 3 Nights Aberdares / Samburu Luxury Safari",
+      "excerpt": "A 4 days 3 nights road safari covering Aberdare National Park, Samburu National Reserve.",
+      "overview": "Explore Aberdares / Samburu Luxury Safari with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Aberdare National Park → Samburu National Reserve → Nairobi. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/4-days-3-nights-aberdares-samburu-luxury-safari/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Kenya Safaris",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Aberdare National Park",
+          "Samburu National Reserve"
+        ],
+        "hks_tour_type": [
+          "Road Safari"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Short Break"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "4 Days 3 Nights",
+        "hks_start_location": "Nairobi",
+        "hks_end_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Aberdare National Park → Samburu National Reserve → Nairobi",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi - Aberdares/Mt",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Forest Lodge - Samburu Game Reserve This",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "3",
+            "day_title": "Samburu Game Reserve Dawn breaks in golden bands as we start our day in the bush by scanning the river from",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "4",
+            "day_title": "Samburu - Nairobi",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 1,
+      "product_id": "HKS-ASHFORD-4-DAYS-3-NIGHTS-LAKE-NAKURU-MAASAI-MARA-LUXURY-SAFARI",
+      "slug": "4-days-3-nights-lake-nakuru-maasai-mara-luxury-safari",
+      "title": "4 Days 3 Nights Lake Nakuru / Maasai Mara - Luxury Safari",
+      "excerpt": "A 4 days 3 nights road safari covering Lake Nakuru National Park, Maasai Mara.",
+      "overview": "Explore Lake Nakuru / Maasai Mara - Luxury Safari with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Lake Nakuru National Park → Maasai Mara → Nairobi. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/4-days-3-nights-lake-nakuru-maasai-mara-luxury-safari/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Kenya Safaris",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Lake Nakuru National Park",
+          "Maasai Mara"
+        ],
+        "hks_tour_type": [
+          "Road Safari"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Short Break"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "4 Days 3 Nights",
+        "hks_start_location": "Nairobi",
+        "hks_end_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Lake Nakuru National Park → Maasai Mara → Nairobi",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi - Masai Mara Game Reserve Your safari driver guide will pick you up from Airport or your hotel",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Discover Masai Mara Game Reserve The search for great predators and perhaps even cubs continues",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "3",
+            "day_title": "Masai Mara - Lake Nakuru National Park",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "4",
+            "day_title": "Lake Nakuru - Nairobi",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 1,
+      "product_id": "HKS-ASHFORD-5-DAYS-4-NIGHTS-OL-PEJETA-SWEETWATERS-CONSERVANCY-NAKURU-NATIONAL-PARK-MASAI-MARA",
+      "slug": "5-days-4-nights-ol-pejeta-sweetwaters-conservancy-nakuru-national-park-masai-mara",
+      "title": "5 Days 4 Nights Ol Pejeta Sweetwaters Conservancy - Nakuru National Park - Masai Mara",
+      "excerpt": "A 5 days 4 nights road safari covering Ol Pejeta Conservancy, Lake Nakuru National Park, Maasai Mara.",
+      "overview": "Explore Ol Pejeta Sweetwaters Conservancy - Nakuru National Park - Masai Mara with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Ol Pejeta Conservancy → Lake Nakuru National Park → Maasai Mara. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/5-days-4-nights-ol-pejeta-sweetwaters-conservancy-nakuru-national-park-masai-mara/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Kenya Safaris",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Ol Pejeta Conservancy",
+          "Lake Nakuru National Park",
+          "Maasai Mara"
+        ],
+        "hks_tour_type": [
+          "Road Safari"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Multi-day Safari"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "5 Days 4 Nights",
+        "hks_start_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Ol Pejeta Conservancy → Lake Nakuru National Park → Maasai Mara",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi - Sweetwaters Game Sanctuary Your safari driver guide will either pick you up from the Airport or",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Sweetwater's/Ol Pejeta - Lake Nakuru National Park",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "3",
+            "day_title": "Lake Nakuru - Masai Mara Game Reserve",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "4",
+            "day_title": "Explore Masai Mara Game Reserve The Masai Mara is one of the greatest wildernesses of the world",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "5",
+            "day_title": "Masai Mara Game Reserve - Nairobi Begin",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 1,
+      "product_id": "HKS-ASHFORD-6-DAYS-5-NIGHT-AMBOSELI-LAKE-NAKURU-MASAI-MARA-LUXURY-SAFARI-PACKAGE",
+      "slug": "6-days-5-night-amboseli-lake-nakuru-masai-mara-luxury-safari-package",
+      "title": "6 Days 5 Night Amboseli/ Lake Nakuru / Masai Mara Luxury Safari Package",
+      "excerpt": "A 6 days 5 night road safari covering Amboseli National Park, Lake Nakuru National Park, Maasai Mara.",
+      "overview": "Explore Amboseli/ Lake Nakuru / Masai Mara Luxury Safari with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Amboseli National Park → Lake Nakuru National Park → Maasai Mara. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/6-days-5-night-amboseli-lake-nakuru-masai-mara-luxury-safari-package/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Kenya Safaris",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Amboseli National Park",
+          "Lake Nakuru National Park",
+          "Maasai Mara"
+        ],
+        "hks_tour_type": [
+          "Road Safari"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Multi-day Safari"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "6 Days 5 Night",
+        "hks_start_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Amboseli National Park → Lake Nakuru National Park → Maasai Mara",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi - Amboseli",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Amboseli Full day",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "3",
+            "day_title": "Amboseli - Nairobi - Nakuru",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "4",
+            "day_title": "Lake Nakuru - Masai Mara Game Reserve",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "5",
+            "day_title": "Explore Masai Mara Game Reserve The Masai Mara is one of the greatest wildernesses of the world",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "6",
+            "day_title": "Masai Mara Game Reserve - Nairobi Begin",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 1,
+      "product_id": "HKS-ASHFORD-7-DAYS-6-NIGHT-AMBOSELI-ABERDARES-LAKE-NAKURU-MASAI-MARA-LUXURY-SAFARI-PACKAGE",
+      "slug": "7-days-6-night-amboseli-aberdares-lake-nakuru-masai-mara-luxury-safari-package",
+      "title": "7 Days 6 Night Amboseli/ Aberdares / Lake Nakuru / Masai Mara Luxury Safari Package",
+      "excerpt": "A 7 days 6 night road safari covering Amboseli National Park, Aberdare National Park, Lake Nakuru National Park.",
+      "overview": "Explore Amboseli/ Aberdares / Lake Nakuru / Masai Mara Luxury Safari with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Amboseli National Park → Aberdare National Park → Lake Nakuru National Park → Maasai Mara. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/7-days-6-night-amboseli-aberdares-lake-nakuru-masai-mara-luxury-safari-package/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Kenya Safaris",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Amboseli National Park",
+          "Aberdare National Park",
+          "Lake Nakuru National Park",
+          "Maasai Mara"
+        ],
+        "hks_tour_type": [
+          "Road Safari"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Multi-day Safari"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "7 Days 6 Night",
+        "hks_start_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Amboseli National Park → Aberdare National Park → Lake Nakuru National Park → Maasai Mara",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi - Amboseli",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Amboseli Full day",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "3",
+            "day_title": "Amboseli National Park - Aberdare National Park (Forest Tree lodge)",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "4",
+            "day_title": "Aberdares (Forest Tree lodge) - Nakuru National Park Lake Nakuru National Park is the destination",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "5",
+            "day_title": "Lake Nakuru - Masai Mara Game Reserve",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "6",
+            "day_title": "Explore Masai Mara Game Reserve The Masai Mara is one of the greatest wildernesses of the world",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "7",
+            "day_title": "Masai Mara Game Reserve - Nairobi Begin",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 1,
+      "product_id": "HKS-ASHFORD-8-DAYS-7-NIGHTS-ABERDARES-SAMBURU-OLPAJETA-LAKE-NAKURU-MASAI-MARA-SAFARI-PACKAGE",
+      "slug": "8-days-7-nights-aberdares-samburu-olpajeta-lake-nakuru-masai-mara-safari-package",
+      "title": "8 Days (7 Nights) Aberdares, Samburu, Olpajeta, Lake Nakuru, Masai Mara Safari Package",
+      "excerpt": "A 8 days (7 nights) road safari covering Aberdare National Park, Samburu National Reserve, Ol Pejeta Conservancy.",
+      "overview": "Explore Aberdares, Samburu, Olpajeta, Lake Nakuru, Masai Mara Safari with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Aberdare National Park → Samburu National Reserve → Ol Pejeta Conservancy → Lake Nakuru National Park → Maasai Mara → Nairobi. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/8-days-7-nights-aberdares-samburu-olpajeta-lake-nakuru-masai-mara-safari-package/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Kenya Safaris",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Aberdare National Park",
+          "Samburu National Reserve",
+          "Ol Pejeta Conservancy",
+          "Lake Nakuru National Park",
+          "Maasai Mara"
+        ],
+        "hks_tour_type": [
+          "Road Safari"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Multi-day Safari"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "8 Days (7 Nights)",
+        "hks_start_location": "Nairobi",
+        "hks_end_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Aberdare National Park → Samburu National Reserve → Ol Pejeta Conservancy → Lake Nakuru National Park → Maasai Mara → Nairobi",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi - Aberdares National Park",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Aberdares National Park - Samburu Game Reserve Leave Aberdares and",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "3",
+            "day_title": "Samburu Game Reserve Spend a whole day in Samburu National Reserve with",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "4",
+            "day_title": "Samburu Game Reserve - Olpajeta Ranch, Sweet Water sanctuary",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "5",
+            "day_title": "Sweet Water - Lake Nakuru",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "6",
+            "day_title": "Lake Nakuru National Park - Maasai Mara Game Reserve",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "7",
+            "day_title": "Maasai Mara National Reserve Spend a whole day viewing wildlife in Masai Mara Game reserve with",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "8",
+            "day_title": "Masai Mara - Nairobi",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 1,
+      "product_id": "HKS-ASHFORD-9-DAYS-8-NIGHTS-TSAVO-EAST-TSAVO-WEST-AMBOSELI-MOUNT-KENYA-LAKE-NAKURU-MASAI-MARA-LUXURY-SAFARI-PACKAGE",
+      "slug": "9-days-8-nights-tsavo-east-tsavo-west-amboseli-mount-kenya-lake-nakuru-masai-mara-luxury-safari-package",
+      "title": "9 Days 8 Nights Tsavo East/Tsavo West/Amboseli/Mount Kenya/Lake Nakuru/Masai Mara Luxury Safari Package",
+      "excerpt": "A 9 days 8 nights road safari covering Tsavo East National Park, Tsavo West National Park, Amboseli National Park.",
+      "overview": "Explore Tsavo East/Tsavo West/Amboseli/Mount Kenya/Lake Nakuru/Masai Mara Luxury Safari with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Tsavo East National Park → Tsavo West National Park → Amboseli National Park → Mount Kenya → Lake Nakuru National Park → Maasai Mara. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/9-days-8-nights-tsavo-east-tsavo-west-amboseli-mount-kenya-lake-nakuru-masai-mara-luxury-safari-package/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Kenya Safaris",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Tsavo East National Park",
+          "Tsavo West National Park",
+          "Amboseli National Park",
+          "Mount Kenya",
+          "Lake Nakuru National Park",
+          "Maasai Mara"
+        ],
+        "hks_tour_type": [
+          "Road Safari"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Multi-day Safari"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "9 Days 8 Nights",
+        "hks_start_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Tsavo East National Park → Tsavo West National Park → Amboseli National Park → Mount Kenya → Lake Nakuru National Park → Maasai Mara",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi - Tsavo East National Park",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Tsavo East - Tsavo West National Park",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "3",
+            "day_title": "Tsavo West - Amboseli National Park",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "4",
+            "day_title": "Amboseli National Park",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "5",
+            "day_title": "Amboseli - Mount Kenya National Park",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "6",
+            "day_title": "Mount Kenya - Lake Nakuru National Park",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "7",
+            "day_title": "Lake Nakuru -Maasai Mara Game Reserve",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "8",
+            "day_title": "Maasai Mara Game Reserve",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 2,
+      "product_id": "HKS-ASHFORD-3-DAYS-2-NIGHTS-WINGS-OVER-AMBOSELI",
+      "slug": "3-days-2-nights-wings-over-amboseli",
+      "title": "3 Days 2 Nights Wings over Amboseli National Park",
+      "excerpt": "A 3 days 2 nights flying safari covering Amboseli National Park.",
+      "overview": "Explore Wings over Amboseli National Park with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Amboseli National Park. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/3-days-2-nights-wings-over-amboseli/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Kenya Flying Safaris",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Amboseli National Park"
+        ],
+        "hks_tour_type": [
+          "Flying Safari"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Flying Safari"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "3 Days 2 Nights",
+        "hks_start_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Amboseli National Park",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi - Amboseli National Park JAMBO - KARIBU KENYA!! Ashford Tours and Travel representatives will warmly",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Full day in Amboseli National Park Enjoy your scheduled",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "3",
+            "day_title": "Amboseli National Park - Nairobi This",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 2,
+      "product_id": "HKS-ASHFORD-3-DAYS-2-NIGHTS-WINGS-OVER-MARA",
+      "slug": "3-days-2-nights-wings-over-mara",
+      "title": "3 Days 2 Nights Wings over Mara",
+      "excerpt": "A 3 days 2 nights flying safari covering Maasai Mara.",
+      "overview": "Explore Wings over Mara with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Maasai Mara. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/3-days-2-nights-wings-over-mara/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Kenya Flying Safaris",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Maasai Mara"
+        ],
+        "hks_tour_type": [
+          "Flying Safari"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Flying Safari"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "3 Days 2 Nights",
+        "hks_start_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Maasai Mara",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi - Masai Mara Game Reserve JAMBO - KARIBU KENYA!! Ashford Tours representatives will warmly meet you",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Masai Mara Game Reserve Enjoy your scheduled",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "3",
+            "day_title": "Masai Mara Game Reserve - Nairobi This",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 2,
+      "product_id": "HKS-ASHFORD-3-DAYS-2-NIGHTS-WINGS-OVER-SAMBURU",
+      "slug": "3-days-2-nights-wings-over-samburu",
+      "title": "3 Days 2 Nights Wings over Samburu Game Reserve",
+      "excerpt": "A 3 days 2 nights flying safari covering Samburu National Reserve.",
+      "overview": "Explore Wings over Samburu Game Reserve with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Samburu National Reserve. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/3-days-2-nights-wings-over-samburu/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Kenya Flying Safaris",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Samburu National Reserve"
+        ],
+        "hks_tour_type": [
+          "Flying Safari"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Flying Safari"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "3 Days 2 Nights",
+        "hks_start_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Samburu National Reserve",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi - Samburu National Reserve JAMBO - KARIBU KENYA!! Ashford Tours representatives will warmly meet you",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Full day in Samburu National Reserve Enjoy your scheduled",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "3",
+            "day_title": "Samburu National Reserve - Nairobi This",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 2,
+      "product_id": "HKS-ASHFORD-5-DAYS-4-NIGHTS-WINGS-OVER-SAMBURU-AND-MASAI-MARA",
+      "slug": "5-days-4-nights-wings-over-samburu-and-masai-mara",
+      "title": "5 Days 4 Nights Wings over Samburu and Masai Mara",
+      "excerpt": "A 5 days 4 nights flying safari covering Samburu National Reserve, Maasai Mara.",
+      "overview": "Explore Wings over Samburu and Masai Mara with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Samburu National Reserve → Maasai Mara. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/5-days-4-nights-wings-over-samburu-and-masai-mara/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Kenya Flying Safaris",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Samburu National Reserve",
+          "Maasai Mara"
+        ],
+        "hks_tour_type": [
+          "Flying Safari"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Flying Safari"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "5 Days 4 Nights",
+        "hks_start_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Samburu National Reserve → Maasai Mara",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi - Samburu Game Reserves JAMBO - KARIBU KENYA!! Ashford Tours representatives will warmly meet you",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Samburu Game Reserves Enjoy",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "3",
+            "day_title": "Samburu Game Reserves - Masai Mara Game Reserve",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "4",
+            "day_title": "Masai Mara Game Reserve Enjoy",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "5",
+            "day_title": "Masai Mara Game Reserve - Nairobi This",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 2,
+      "product_id": "HKS-ASHFORD-7-DAYS-6-NIGHTS-WINGS-OVER-AMBOSELI-SAMBURU-AND-MAASAI-MARA",
+      "slug": "7-days-6-nights-wings-over-amboseli-samburu-and-maasai-mara",
+      "title": "7 Days 6 Nights Wings over Amboseli, Samburu and Maasai Mara",
+      "excerpt": "A 7 days 6 nights flying safari covering Amboseli National Park, Samburu National Reserve, Maasai Mara.",
+      "overview": "Explore Wings over Amboseli, Samburu and Maasai Mara with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Amboseli National Park → Samburu National Reserve → Maasai Mara. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/7-days-6-nights-wings-over-amboseli-samburu-and-maasai-mara/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Kenya Flying Safaris",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Amboseli National Park",
+          "Samburu National Reserve",
+          "Maasai Mara"
+        ],
+        "hks_tour_type": [
+          "Flying Safari"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Flying Safari"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "7 Days 6 Nights",
+        "hks_start_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Amboseli National Park → Samburu National Reserve → Maasai Mara",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi - Amboseli National Park JAMBO - KARIBU!! Ashford Tours representatives will warmly meet you",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Full day in Amboseli National Park Enjoy your scheduled",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "3",
+            "day_title": "Amboseli National Park - Samburu",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "4",
+            "day_title": "Samburu Game Reserves",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "5",
+            "day_title": "Samburu Game Reserves - Masai Mara Game Reserve",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "6",
+            "day_title": "Masai Mara Game Reserve Enjoy",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "7",
+            "day_title": "Masai Mara Game Reserve - Nairobi This",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 2,
+      "product_id": "HKS-ASHFORD-MOUNT-KENYA-CLIMBING-6-DAYS-LAND-OF-CONTRAST",
+      "slug": "mount-kenya-climbing-6-days-land-of-contrast",
+      "title": "Mount Kenya Climbing 6 Days Land of Contrast",
+      "excerpt": "A 6 days Mount Kenya trek covering Mount Kenya.",
+      "overview": "Explore Mount Kenya Climbing 6 Days Land of Contrast with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Mount Kenya. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/mount-kenya-climbing-6-days-land-of-contrast/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Mount Kenya",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Mount Kenya"
+        ],
+        "hks_tour_type": [
+          "Trekking & Adventure"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Trekking",
+          "Multi-day Adventure"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "6 Days",
+        "hks_start_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Mount Kenya",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi- Judmaiers Camp (3,300m)",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Judmaier Camp - Sirimon valley (3,940m)",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "3",
+            "day_title": "Sirimon valley - Hall Tarns (4,300m) An",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "4",
+            "day_title": "Excursion Day Descend to Lake Michaelson, in the depth of the Gorges Valley",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "5",
+            "day_title": "Hall Tarns - Pt",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 2,
+      "product_id": "HKS-ASHFORD-MT-KENYA-4-DAYS-TREKKING",
+      "slug": "mt-kenya-4-days-trekking",
+      "title": "Mt. Kenya 4 Days Trekking (Ascend Naromoru, descend Naromoro route)",
+      "excerpt": "A 4 days Mount Kenya trek covering Mount Kenya.",
+      "overview": "Explore Mt. Kenya 4 Days Trekking (Ascend Naromoru, descend Naromoro route) with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Mount Kenya. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/mt-kenya-4-days-trekking/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Mount Kenya",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Mount Kenya"
+        ],
+        "hks_tour_type": [
+          "Trekking & Adventure"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Trekking",
+          "Multi-day Adventure"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "4 Days",
+        "hks_start_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Mount Kenya",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi - Naromoru park gate - Met",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Mackinder's Camp - Pt",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 2,
+      "product_id": "HKS-ASHFORD-MT-KENYA-5-DAYS-CHOGORIA-NAROMORU-TREK",
+      "slug": "mt-kenya-5-days-chogoria-naromoru-trek",
+      "title": "Mt. Kenya 5 Days Chogoria - Naromoru trek",
+      "excerpt": "A 5 days Mount Kenya trek covering Mount Kenya.",
+      "overview": "Explore Mt. Kenya 5 Days Chogoria - Naromoru trek with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Mount Kenya. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/mt-kenya-5-days-chogoria-naromoru-trek/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Mount Kenya",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Mount Kenya"
+        ],
+        "hks_tour_type": [
+          "Trekking & Adventure"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Trekking",
+          "Multi-day Adventure"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "5 Days",
+        "hks_start_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Mount Kenya",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi - Mt Kenya Bandas (2,900m)",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Mt Kenya Bandas - Lake Ellis Campsite (3,600m)",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "3",
+            "day_title": "Lake Ellis - Minto`s Camp (4,200m)",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "4",
+            "day_title": "Minto`s - Pt",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 2,
+      "product_id": "HKS-ASHFORD-MT-KENYA-5-DAYS-SIRIMON-NAROMORU-TREK",
+      "slug": "mt-kenya-5-days-sirimon-naromoru-trek",
+      "title": "Mt. Kenya 5 Days Sirimon - Naromoru trek",
+      "excerpt": "A 5 days Mount Kenya trek covering Mount Kenya.",
+      "overview": "Explore Mt. Kenya 5 Days Sirimon - Naromoru trek with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Mount Kenya. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/mt-kenya-5-days-sirimon-naromoru-trek/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Mount Kenya",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Mount Kenya"
+        ],
+        "hks_tour_type": [
+          "Trekking & Adventure"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Trekking",
+          "Multi-day Adventure"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "5 Days",
+        "hks_start_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Mount Kenya",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi - Sirimon gate- Judmaier camp (3,300m)",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Judmaier camp - Liki North camp (3,990m)",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "3",
+            "day_title": "Liki North- Shiptons camp (4,300m)",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "4",
+            "day_title": "Shiptons camp - Pt",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 2,
+      "product_id": "HKS-ASHFORD-MT-KENYA-7-DAYS-CHOGORIA-TRAVERSE",
+      "slug": "mt-kenya-7-days-chogoria-traverse",
+      "title": "Mt. Kenya 7 Days Chogoria Traverse",
+      "excerpt": "A 7 days Mount Kenya trek covering Mount Kenya.",
+      "overview": "Explore Mt. Kenya 7 Days Chogoria Traverse with the source duration and route outline kept together in one Tour. The route is listed as Nairobi → Mount Kenya. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/mt-kenya-7-days-chogoria-traverse/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Mount Kenya",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Mount Kenya"
+        ],
+        "hks_tour_type": [
+          "Trekking & Adventure"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Trekking",
+          "Multi-day Adventure"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "7 Days",
+        "hks_start_location": "Nairobi",
+        "hks_route_summary": "Nairobi → Mount Kenya",
+        "hks_itinerary": [
+          {
+            "day_number": "1",
+            "day_title": "Nairobi- Meru Bandas (2,900m)",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "2",
+            "day_title": "Mt Kenya Bandas - Lake Ellis Campsite (3,600m)",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "3",
+            "day_title": "Lake Ellis- Minto`s Camp",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "4",
+            "day_title": "Minto`s camp - Acclimatization day",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "5",
+            "day_title": "Minto`s - Pt",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          },
+          {
+            "day_number": "6",
+            "day_title": "Shipton - Teleki Valley- Met",
+            "description": "",
+            "activities": "",
+            "accommodation": "",
+            "meals": ""
+          }
+        ]
+      }
+    },
+    {
+      "batch": 3,
+      "product_id": "HKS-ASHFORD-BOMAS-OF-KENYA-TOUR-3-HOURS",
+      "slug": "bomas-of-kenya-tour-3-hours",
+      "title": "Bomas Of Kenya Tour - 3 Hours",
+      "excerpt": "A 3 hours local excursion covering Nairobi.",
+      "overview": "Explore Bomas Of Kenya Tour - 3 Hours with the source duration and route outline kept together in one Tour. The route is listed as Nairobi. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/bomas-of-kenya-tour-3-hours/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Nairobi Excursions",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Nairobi"
+        ],
+        "hks_tour_type": [
+          "Day Excursion"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Half Day"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "3 hours",
+        "hks_start_location": "Nairobi",
+        "hks_end_location": "Nairobi",
+        "hks_route_summary": "Nairobi"
+      }
+    },
+    {
+      "batch": 3,
+      "product_id": "HKS-ASHFORD-CARNIVORE-RESTAURANT-NAIROBI-2-HOURS",
+      "slug": "carnivore-restaurant-nairobi-2-hours",
+      "title": "Carnivore Restaurant Nairobi - 2 Hours",
+      "excerpt": "A 2 hours local excursion covering Nairobi.",
+      "overview": "Explore Carnivore Restaurant Nairobi - 2 Hours with the source duration and route outline kept together in one Tour. The route is listed as Nairobi. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/carnivore-restaurant-nairobi-2-hours/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Nairobi Excursions",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Nairobi"
+        ],
+        "hks_tour_type": [
+          "Day Excursion"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Half Day"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "2 hours",
+        "hks_start_location": "Nairobi",
+        "hks_end_location": "Nairobi",
+        "hks_route_summary": "Nairobi"
+      }
+    },
+    {
+      "batch": 3,
+      "product_id": "HKS-ASHFORD-CRESCENT-ISLAND-GAME-CONSERVANCY-TOUR-NAIVASHA",
+      "slug": "crescent-island-game-conservancy-tour-naivasha",
+      "title": "Crescent Island Game Conservancy Tour Naivasha",
+      "excerpt": "A local excursion covering Lake Naivasha.",
+      "overview": "Explore Crescent Island Game Conservancy Tour Naivasha with the source duration and route outline kept together in one Tour. The route is listed as Lake Naivasha. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/crescent-island-game-conservancy-tour-naivasha/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Nairobi Excursions",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Lake Naivasha"
+        ],
+        "hks_tour_type": [
+          "Day Excursion"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Day Excursion"
+        ]
+      },
+      "fields": {
+        "hks_start_location": "Nairobi",
+        "hks_end_location": "Nairobi",
+        "hks_route_summary": "Lake Naivasha"
+      }
+    },
+    {
+      "batch": 3,
+      "product_id": "HKS-ASHFORD-NAIROBI-MAMBA-VILLAGE-CROCODILE",
+      "slug": "nairobi-mamba-village-crocodile",
+      "title": "Crocodile Farm Nairobi | Visit Nairobi Mamba Village Tour",
+      "excerpt": "A local excursion covering Nairobi.",
+      "overview": "Explore Crocodile Farm Nairobi | Visit Nairobi Mamba Village Tour with the source duration and route outline kept together in one Tour. The route is listed as Nairobi. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/nairobi-mamba-village-crocodile/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Nairobi Excursions",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Nairobi"
+        ],
+        "hks_tour_type": [
+          "Day Excursion"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Day Excursion"
+        ]
+      },
+      "fields": {
+        "hks_start_location": "Nairobi",
+        "hks_end_location": "Nairobi",
+        "hks_route_summary": "Nairobi"
+      }
+    },
+    {
+      "batch": 3,
+      "product_id": "HKS-ASHFORD-SHELDRICK-ELEPHANT-ORPHANAGE-KAREN-BLIXEN-AND-GIRAFFE-CENTRE-TOURS-5-HOURS",
+      "slug": "sheldrick-elephant-orphanage-karen-blixen-and-giraffe-centre-tours-5-hours",
+      "title": "David Sheldrick Elephant Orphanage, Giraffe centre and Karen Blixen tours - 5 hours",
+      "excerpt": "A 5 hours local excursion covering Nairobi.",
+      "overview": "Explore David Sheldrick Elephant Orphanage, Giraffe centre and Karen Blixen tours - 5 hours with the source duration and route outline kept together in one Tour. The route is listed as Nairobi. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/sheldrick-elephant-orphanage-karen-blixen-and-giraffe-centre-tours-5-hours/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Nairobi Excursions",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Nairobi"
+        ],
+        "hks_tour_type": [
+          "Day Excursion"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Half Day"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "5 hours",
+        "hks_start_location": "Nairobi",
+        "hks_end_location": "Nairobi",
+        "hks_route_summary": "Nairobi"
+      }
+    },
+    {
+      "batch": 3,
+      "product_id": "HKS-ASHFORD-FARM-TOURS-KENYA",
+      "slug": "farm-tours-kenya",
+      "title": "Farm Tours Kenya | Coffee, Tea & Agricultural Farm Experiences",
+      "excerpt": "A local excursion covering Nairobi.",
+      "overview": "Explore Farm Tours Kenya | Coffee, Tea & Agricultural Farm Experiences with the source duration and route outline kept together in one Tour. The route is listed as Nairobi. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/farm-tours-kenya/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Nairobi Excursions",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Nairobi"
+        ],
+        "hks_tour_type": [
+          "Day Excursion"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Day Excursion"
+        ]
+      },
+      "fields": {
+        "hks_start_location": "Nairobi",
+        "hks_end_location": "Nairobi",
+        "hks_route_summary": "Nairobi"
+      }
+    },
+    {
+      "batch": 3,
+      "product_id": "HKS-ASHFORD-HELLS-GATE-NATIONAL-PARK-TOUR",
+      "slug": "hells-gate-national-park-tour",
+      "title": "Hell's Gate National Park Tour",
+      "excerpt": "A local excursion covering Hell's Gate National Park.",
+      "overview": "Explore Hell's Gate National Park Tour with the source duration and route outline kept together in one Tour. The route is listed as Hell's Gate National Park. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/hells-gate-national-park-tour/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Nairobi Excursions",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Hell's Gate National Park"
+        ],
+        "hks_tour_type": [
+          "Day Excursion"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Day Excursion"
+        ]
+      },
+      "fields": {
+        "hks_start_location": "Nairobi",
+        "hks_end_location": "Nairobi",
+        "hks_route_summary": "Hell's Gate National Park"
+      }
+    },
+    {
+      "batch": 3,
+      "product_id": "HKS-ASHFORD-HOT-AIR-BALLOON-SAFARI",
+      "slug": "hot-air-balloon-safari",
+      "title": "Hot Air Balloon Safari",
+      "excerpt": "A local excursion covering Nairobi.",
+      "overview": "Explore Hot Air Balloon Safari with the source duration and route outline kept together in one Tour. The route is listed as Nairobi. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/hot-air-balloon-safari/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Nairobi Excursions",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Nairobi"
+        ],
+        "hks_tour_type": [
+          "Day Excursion"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Day Excursion"
+        ]
+      },
+      "fields": {
+        "hks_start_location": "Nairobi",
+        "hks_end_location": "Nairobi",
+        "hks_route_summary": "Nairobi"
+      }
+    },
+    {
+      "batch": 3,
+      "product_id": "HKS-ASHFORD-KAREN-BLIXEN-AND-GIRAFFE-CENTRE-4-HOURS",
+      "slug": "karen-blixen-and-giraffe-centre-4-hours",
+      "title": "Karen Blixen And Giraffe Centre - 4 Hours",
+      "excerpt": "A 4 hours local excursion covering Nairobi.",
+      "overview": "Explore Karen Blixen And Giraffe Centre - 4 Hours with the source duration and route outline kept together in one Tour. The route is listed as Nairobi. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/karen-blixen-and-giraffe-centre-4-hours/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Nairobi Excursions",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Nairobi"
+        ],
+        "hks_tour_type": [
+          "Day Excursion"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Half Day"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "4 hours",
+        "hks_start_location": "Nairobi",
+        "hks_end_location": "Nairobi",
+        "hks_route_summary": "Nairobi"
+      }
+    },
+    {
+      "batch": 3,
+      "product_id": "HKS-ASHFORD-KAZURI-BEADS-FACTORY-AND-POTTERY-CENTRE-KAREN-BLIXEN-AND-THE-GIRAFFE-CENTRE-TOUR",
+      "slug": "kazuri-beads-factory-and-pottery-centre-karen-blixen-and-the-giraffe-centre-tour",
+      "title": "Kazuri Beads Factory And Pottery Centre, Karen Blixen And The Giraffe Centre Tour",
+      "excerpt": "A local excursion covering Nairobi.",
+      "overview": "Explore Kazuri Beads Factory And Pottery Centre, Karen Blixen And The Giraffe Centre Tour with the source duration and route outline kept together in one Tour. The route is listed as Nairobi. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/kazuri-beads-factory-and-pottery-centre-karen-blixen-and-the-giraffe-centre-tour/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Nairobi Excursions",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Nairobi"
+        ],
+        "hks_tour_type": [
+          "Day Excursion"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Day Excursion"
+        ]
+      },
+      "fields": {
+        "hks_start_location": "Nairobi",
+        "hks_end_location": "Nairobi",
+        "hks_route_summary": "Nairobi"
+      }
+    },
+    {
+      "batch": 3,
+      "product_id": "HKS-ASHFORD-LAKE-NAKURU-DAY-TRIP",
+      "slug": "lake-nakuru-day-trip",
+      "title": "Lake Nakuru Day Trip",
+      "excerpt": "A 1 day local excursion covering Lake Nakuru National Park.",
+      "overview": "Explore Lake Nakuru Day Trip with the source duration and route outline kept together in one Tour. The route is listed as Lake Nakuru National Park. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/lake-nakuru-day-trip/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Nairobi Excursions",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Lake Nakuru National Park"
+        ],
+        "hks_tour_type": [
+          "Day Excursion"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Day Trip"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "1 day",
+        "hks_start_location": "Nairobi",
+        "hks_end_location": "Nairobi",
+        "hks_route_summary": "Lake Nakuru National Park"
+      }
+    },
+    {
+      "batch": 3,
+      "product_id": "HKS-ASHFORD-MOUNT-LONGONOT-DAY-TOURS",
+      "slug": "mount-longonot-day-tours",
+      "title": "Mount Longonot - Day Tour from Nairobi",
+      "excerpt": "A 1 day local excursion covering Mount Longonot.",
+      "overview": "Explore Mount Longonot - Day Tour from Nairobi with the source duration and route outline kept together in one Tour. The route is listed as Mount Longonot. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/mount-longonot-day-tours/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Nairobi Excursions",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Mount Longonot"
+        ],
+        "hks_tour_type": [
+          "Day Excursion"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Day Trip"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "1 day",
+        "hks_start_location": "Nairobi",
+        "hks_end_location": "Nairobi",
+        "hks_route_summary": "Mount Longonot"
+      }
+    },
+    {
+      "batch": 3,
+      "product_id": "HKS-ASHFORD-NAIROBI-ANIMAL-ORPANAGE-TOUR-4-HOURS",
+      "slug": "nairobi-animal-orpanage-tour-4-hours",
+      "title": "Nairobi Animal Orphanage Tour - 4 Hours",
+      "excerpt": "A 4 hours local excursion covering Nairobi.",
+      "overview": "Explore Nairobi Animal Orphanage Tour - 4 Hours with the source duration and route outline kept together in one Tour. The route is listed as Nairobi. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/nairobi-animal-orpanage-tour-4-hours/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Nairobi Excursions",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Nairobi"
+        ],
+        "hks_tour_type": [
+          "Day Excursion"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Half Day"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "4 hours",
+        "hks_start_location": "Nairobi",
+        "hks_end_location": "Nairobi",
+        "hks_route_summary": "Nairobi"
+      }
+    },
+    {
+      "batch": 3,
+      "product_id": "HKS-ASHFORD-NAIROBI-SAFARI-WALK-DAY-TOUR-2-HOURS",
+      "slug": "nairobi-safari-walk-day-tour-2-hours",
+      "title": "Nairobi Safari Walk Day Tour - 2 Hours",
+      "excerpt": "A 2 hours local excursion covering Nairobi.",
+      "overview": "Explore Nairobi Safari Walk Day Tour - 2 Hours with the source duration and route outline kept together in one Tour. The route is listed as Nairobi. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/nairobi-safari-walk-day-tour-2-hours/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Nairobi Excursions",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Nairobi"
+        ],
+        "hks_tour_type": [
+          "Day Excursion"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Half Day"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "2 hours",
+        "hks_start_location": "Nairobi",
+        "hks_end_location": "Nairobi",
+        "hks_route_summary": "Nairobi"
+      }
+    },
+    {
+      "batch": 4,
+      "product_id": "HKS-ASHFORD-DOLPHIN-SAFARIS-SNORKELING-SEAFOOD-LUNCH",
+      "slug": "dolphin-safaris-snorkeling-seafood-lunch",
+      "title": "Dolphin Safaris, Snorkeling, Seafood Lunch",
+      "excerpt": "A coast excursion covering Mombasa.",
+      "overview": "Explore Dolphin Safaris, Snorkeling, Seafood Lunch with the source duration and route outline kept together in one Tour. The route is listed as Mombasa. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/dolphin-safaris-snorkeling-seafood-lunch/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Mombasa Excursions",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Mombasa"
+        ],
+        "hks_tour_type": [
+          "Coast Experience"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Day Excursion"
+        ]
+      },
+      "fields": {
+        "hks_start_location": "Mombasa",
+        "hks_end_location": "Mombasa",
+        "hks_route_summary": "Mombasa"
+      }
+    },
+    {
+      "batch": 4,
+      "product_id": "HKS-ASHFORD-MORNING-HALF-DAY-CITY-TOUR-OF-MOMBASA",
+      "slug": "morning-half-day-city-tour-of-mombasa",
+      "title": "Morning half day city tour of Mombasa",
+      "excerpt": "A half day coast excursion covering Mombasa.",
+      "overview": "Explore Morning half day city tour of Mombasa with the source duration and route outline kept together in one Tour. The route is listed as Mombasa. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/morning-half-day-city-tour-of-mombasa/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Mombasa Excursions",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Mombasa"
+        ],
+        "hks_tour_type": [
+          "Coast Experience"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Day Excursion"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "Half day",
+        "hks_start_location": "Mombasa",
+        "hks_end_location": "Mombasa",
+        "hks_route_summary": "Mombasa"
+      }
+    },
+    {
+      "batch": 4,
+      "product_id": "HKS-ASHFORD-SHIMBA-HILLS-NATIONAL-PARK-DAY-TRIP",
+      "slug": "shimba-hills-national-park-day-trip",
+      "title": "Shimba Hills National Park Day Trip",
+      "excerpt": "A 1 day coast excursion covering Shimba Hills National Reserve.",
+      "overview": "Explore Shimba Hills National Park Day Trip with the source duration and route outline kept together in one Tour. The route is listed as Shimba Hills National Reserve. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/shimba-hills-national-park-day-trip/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Mombasa Excursions",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Shimba Hills National Reserve"
+        ],
+        "hks_tour_type": [
+          "Coast Experience"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Day Trip"
+        ]
+      },
+      "fields": {
+        "hks_duration_label": "1 day",
+        "hks_start_location": "Mombasa",
+        "hks_end_location": "Mombasa",
+        "hks_route_summary": "Shimba Hills National Reserve"
+      }
+    },
+    {
+      "batch": 4,
+      "product_id": "HKS-ASHFORD-TAMARIND-EVENING-DHOW-MOMBASA",
+      "slug": "tamarind-evening-dhow-mombasa",
+      "title": "Tamarind Evening Dhow - Mombasa",
+      "excerpt": "A coast excursion covering Mombasa.",
+      "overview": "Explore Tamarind Evening Dhow - Mombasa with the source duration and route outline kept together in one Tour. The route is listed as Mombasa. Your quote confirms the current KSh rate and final package details for your dates and group.",
+      "source": {
+        "url": "https://ashford-tours.com/product/tamarind-evening-dhow-mombasa/",
+        "reference": "Ashford public catalogue crawl",
+        "checked_date": "2026-07-02",
+        "category": "Mombasa Excursions",
+        "status": "draft_migration",
+        "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing."
+      },
+      "taxonomies": {
+        "hks_destination": [
+          "Mombasa"
+        ],
+        "hks_tour_type": [
+          "Coast Experience"
+        ],
+        "hks_occasion": [],
+        "hks_travel_style": [
+          "Day Excursion"
+        ]
+      },
+      "fields": {
+        "hks_start_location": "Mombasa",
+        "hks_end_location": "Mombasa",
+        "hks_route_summary": "Mombasa"
+      }
+    }
+  ],
+  "campaigns": []
+}

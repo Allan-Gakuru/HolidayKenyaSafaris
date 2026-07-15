@@ -32,6 +32,7 @@ final class TourBlocks {
 			'destination-intro'  => 'render_destination_intro',
 			'home-experience'    => 'render_home_experience',
 			'catalogue-controls' => 'render_catalogue_controls',
+			'page-title'         => 'render_page_title',
 		);
 
 		foreach ( $blocks as $directory => $callback ) {
@@ -40,6 +41,35 @@ final class TourBlocks {
 				array( 'render_callback' => array( self::class, $callback ) )
 			);
 		}
+	}
+
+	/**
+	 * Render a semantic title band for a standard WordPress Page.
+	 *
+	 * @return string
+	 */
+	public static function render_page_title(): string {
+		if ( ! is_singular( 'page' ) ) {
+			return '';
+		}
+
+		$title = self::public_text( get_the_title() );
+
+		if ( '' === $title ) {
+			return '';
+		}
+
+		ob_start();
+		?>
+		<div class="hks-title-band">
+			<div class="hks-shell">
+				<?php self::breadcrumbs( array( $title => '' ) ); ?>
+				<h1><?php echo esc_html( $title ); ?></h1>
+			</div>
+		</div>
+		<?php
+
+		return (string) ob_get_clean();
 	}
 
 	/**
@@ -346,6 +376,8 @@ final class TourBlocks {
 	 */
 	public static function render_home_experience(): string {
 		$tours_url   = get_post_type_archive_link( 'hks_tour' ) ?: home_url( '/tours/' );
+		$group_url   = function_exists( 'hks_wayfinder_published_page_url' ) ? hks_wayfinder_published_page_url( 'group-travel' ) : '';
+		$group_url   = $group_url ?: $tours_url;
 		$featured    = self::tour_query( 6, true );
 		$destinations = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_destination', 6 ) : array();
 		$types       = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_tour_type', 8 ) : array();
@@ -392,7 +424,7 @@ final class TourBlocks {
 
 			<section class="hks-home-section hks-shell" aria-labelledby="hks-quote-process-title"><div class="hks-section-heading"><div><p><?php esc_html_e( 'Request a quote on WhatsApp', 'hks-wayfinder' ); ?></p><h2 id="hks-quote-process-title"><?php esc_html_e( 'A short path from trip page to a useful conversation', 'hks-wayfinder' ); ?></h2></div></div><ol class="hks-process-grid"><li><span>1</span><h3><?php esc_html_e( 'Choose a Tour', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'Open the route, itinerary and current public price context.', 'hks-wayfinder' ); ?></p></li><li><span>2</span><h3><?php esc_html_e( 'Share the essentials', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'Add your preferred dates, group size and package-specific details.', 'hks-wayfinder' ); ?></p></li><li><span>3</span><h3><?php esc_html_e( 'Review before WhatsApp', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'Your request is saved privately. You review the message and decide whether to send it.', 'hks-wayfinder' ); ?></p></li></ol></section>
 
-			<section class="hks-group-route" id="group-travel"><div class="hks-shell hks-group-route__inner"><div><p><?php esc_html_e( 'Group travel', 'hks-wayfinder' ); ?></p><h2><?php esc_html_e( 'Planning for family, friends or colleagues?', 'hks-wayfinder' ); ?></h2><p><?php esc_html_e( 'Start with a Tour, then share the group size, dates and departure town so the quote conversation begins with useful context.', 'hks-wayfinder' ); ?></p></div><a class="hks-button" href="<?php echo esc_url( $tours_url ); ?>"><?php esc_html_e( 'Find a group trip', 'hks-wayfinder' ); ?></a></div></section>
+			<section class="hks-group-route" id="group-travel"><div class="hks-shell hks-group-route__inner"><div><p><?php esc_html_e( 'Group travel', 'hks-wayfinder' ); ?></p><h2><?php esc_html_e( 'Planning for family, friends or colleagues?', 'hks-wayfinder' ); ?></h2><p><?php esc_html_e( 'Start with a Tour, then share the group size, dates and departure town so the quote conversation begins with useful context.', 'hks-wayfinder' ); ?></p></div><a class="hks-button" href="<?php echo esc_url( $group_url ); ?>"><?php esc_html_e( 'Plan group travel', 'hks-wayfinder' ); ?></a></div></section>
 
 			<section class="hks-home-section hks-shell hks-proof-section" aria-labelledby="hks-proof-title"><div><p><?php esc_html_e( 'What you can check first', 'hks-wayfinder' ); ?></p><h2 id="hks-proof-title"><?php esc_html_e( 'Practical detail before the sales conversation', 'hks-wayfinder' ); ?></h2></div><ul><li><?php esc_html_e( 'Route, duration and departure context', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'Day-by-day itinerary where published', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'Included and excluded items where published', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'One clear KSh price line or request-rate fallback', 'hks-wayfinder' ); ?></li></ul></section>
 

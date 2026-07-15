@@ -20,6 +20,8 @@ $is_quote_context  = is_singular( array( 'hks_tour', 'hks_campaign' ) );
 $menu_id           = wp_unique_id( 'hks-mobile-menu-' );
 $about_url          = function_exists( 'hks_wayfinder_published_page_url' ) ? hks_wayfinder_published_page_url( 'about' ) : '';
 $contact_url        = function_exists( 'hks_wayfinder_published_page_url' ) ? hks_wayfinder_published_page_url( 'contact' ) : '';
+$group_url          = function_exists( 'hks_wayfinder_published_page_url' ) ? hks_wayfinder_published_page_url( 'group-travel' ) : '';
+$group_url          = $group_url ?: $home_url . '#group-travel';
 $safari_terms       = array();
 $coast_terms        = array();
 
@@ -108,7 +110,7 @@ $render_terms = static function ( array $terms ): void {
 					</details>
 				<?php endif; ?>
 
-				<a href="<?php echo esc_url( $home_url . '#group-travel' ); ?>"><?php esc_html_e( 'Group Travel', 'hks-wayfinder' ); ?></a>
+				<a href="<?php echo esc_url( $group_url ); ?>"><?php esc_html_e( 'Group Travel', 'hks-wayfinder' ); ?></a>
 				<?php if ( $about_url ) : ?><a href="<?php echo esc_url( $about_url ); ?>"><?php esc_html_e( 'About', 'hks-wayfinder' ); ?></a><?php endif; ?>
 				<?php if ( $contact_url ) : ?><a href="<?php echo esc_url( $contact_url ); ?>"><?php esc_html_e( 'Contact', 'hks-wayfinder' ); ?></a><?php endif; ?>
 			</nav>
@@ -145,7 +147,7 @@ $render_terms = static function ( array $terms ): void {
 			<?php if ( $destination_terms ) : ?>
 				<details><summary><?php esc_html_e( 'Destinations', 'hks-wayfinder' ); ?></summary><ul><?php $render_terms( $destination_terms ); ?></ul></details>
 			<?php endif; ?>
-			<a href="<?php echo esc_url( $home_url . '#group-travel' ); ?>"><?php esc_html_e( 'Group Travel', 'hks-wayfinder' ); ?><span aria-hidden="true">→</span></a>
+			<a href="<?php echo esc_url( $group_url ); ?>"><?php esc_html_e( 'Group Travel', 'hks-wayfinder' ); ?><span aria-hidden="true">→</span></a>
 			<?php if ( $about_url ) : ?><a href="<?php echo esc_url( $about_url ); ?>"><?php esc_html_e( 'About', 'hks-wayfinder' ); ?><span aria-hidden="true">→</span></a><?php endif; ?>
 			<?php if ( $contact_url ) : ?><a href="<?php echo esc_url( $contact_url ); ?>"><?php esc_html_e( 'Contact', 'hks-wayfinder' ); ?><span aria-hidden="true">→</span></a><?php endif; ?>
 		</nav>

@@ -1,6 +1,6 @@
 <?php
 /**
- * Idempotent importer for the three MVP Tour and Campaign drafts.
+ * Idempotent importer for version-controlled HKS draft records.
  *
  * @package HolidayKenyaSafaris\Core
  */
@@ -14,7 +14,7 @@ use HolidayKenyaSafaris\Core\Fields\FieldGroups;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Creates source-governed MVP records without publishing or replacing reviewed work.
+ * Creates source-governed records without publishing or replacing reviewed work.
  */
 final class MvpSeeder {
 
@@ -26,16 +26,25 @@ final class MvpSeeder {
 	private $seed_file;
 
 	/**
+	 * Optional catalogue batch number. Zero imports every record in the file.
+	 *
+	 * @var int
+	 */
+	private $batch;
+
+	/**
 	 * Create a seeder.
 	 *
 	 * @param string $seed_file Optional absolute JSON path.
+	 * @param int    $batch     Optional positive catalogue batch number.
 	 */
-	public function __construct( $seed_file = '' ) {
+	public function __construct( $seed_file = '', $batch = 0 ) {
 		$this->seed_file = $seed_file ? (string) $seed_file : HKS_CORE_PATH . 'data/mvp-seed.json';
+		$this->batch     = max( 0, (int) $batch );
 	}
 
 	/**
-	 * Import or refresh draft-only MVP records.
+	 * Import or refresh draft-only records.
 	 *
 	 * Existing records that are no longer drafts are protected from replacement.
 	 *
@@ -63,9 +72,24 @@ final class MvpSeeder {
 			return $result;
 		}
 
+		foreach ( $data['pages'] as $page ) {
+			$record = $this->upsert_page( $page );
+
+			if ( is_wp_error( $record ) ) {
+				$result['errors'][] = $record->get_error_message();
+				continue;
+			}
+
+			++$result[ $record['outcome'] ];
+		}
+
 		$tour_ids = array();
 
 		foreach ( $data['tours'] as $tour ) {
+			if ( $this->batch && $this->batch !== (int) ( $tour['batch'] ?? 0 ) ) {
+				continue;
+			}
+
 			$record = $this->upsert_tour( $tour );
 
 			if ( is_wp_error( $record ) ) {
@@ -109,27 +133,60 @@ final class MvpSeeder {
 	 */
 	private function load_data() {
 		if ( ! is_readable( $this->seed_file ) ) {
-			return new \WP_Error( 'hks_seed_missing', __( 'The MVP seed file is not readable.', 'hks-core' ) );
+			return new \WP_Error( 'hks_seed_missing', __( 'The draft seed file is not readable.', 'hks-core' ) );
 		}
 
 		$contents = file_get_contents( $this->seed_file ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 		$data     = json_decode( (string) $contents, true );
 
 		if ( ! is_array( $data ) || JSON_ERROR_NONE !== json_last_error() ) {
-			return new \WP_Error( 'hks_seed_json', __( 'The MVP seed file is not valid JSON.', 'hks-core' ) );
+			return new \WP_Error( 'hks_seed_json', __( 'The draft seed file is not valid JSON.', 'hks-core' ) );
 		}
 
-		if (
-			1 !== (int) ( $data['schema_version'] ?? 0 )
-			|| 'draft_only' !== ( $data['publication_policy'] ?? '' )
-			|| ! isset( $data['tours'], $data['campaigns'] )
-			|| ! is_array( $data['tours'] )
-			|| ! is_array( $data['campaigns'] )
-		) {
-			return new \WP_Error( 'hks_seed_schema', __( 'The MVP seed contract is incomplete or unsupported.', 'hks-core' ) );
+		if ( 1 !== (int) ( $data['schema_version'] ?? 0 ) || 'draft_only' !== ( $data['publication_policy'] ?? '' ) ) {
+			return new \WP_Error( 'hks_seed_schema', __( 'The draft seed contract is incomplete or unsupported.', 'hks-core' ) );
+		}
+
+		$data['pages']     = isset( $data['pages'] ) && is_array( $data['pages'] ) ? $data['pages'] : array();
+		$data['tours']     = isset( $data['tours'] ) && is_array( $data['tours'] ) ? $data['tours'] : array();
+		$data['campaigns'] = isset( $data['campaigns'] ) && is_array( $data['campaigns'] ) ? $data['campaigns'] : array();
+
+		if ( ! $data['pages'] && ! $data['tours'] && ! $data['campaigns'] ) {
+			return new \WP_Error( 'hks_seed_empty', __( 'The draft seed file does not contain any importable records.', 'hks-core' ) );
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Create or refresh one standard WordPress Page draft.
+	 *
+	 * @param array<string, mixed> $page Seed Page.
+	 * @return array<string, mixed>|\WP_Error
+	 */
+	private function upsert_page( $page ) {
+		if ( empty( $page['page_id'] ) || empty( $page['title'] ) || empty( $page['slug'] ) ) {
+			return new \WP_Error( 'hks_seed_page', __( 'A seed Page is missing its page ID, title, or slug.', 'hks-core' ) );
+		}
+
+		$existing = $this->find_post( 'page', 'hks_seed_page_id', $page['page_id'], $page['slug'] );
+		$post     = array(
+			'post_type'    => 'page',
+			'post_title'   => sanitize_text_field( $page['title'] ),
+			'post_name'    => sanitize_title( $page['slug'] ),
+			'post_excerpt' => sanitize_textarea_field( $page['excerpt'] ?? '' ),
+			'post_content' => wp_kses_post( (string) ( $page['content'] ?? '' ) ),
+		);
+
+		$record = $this->save_draft_post( $existing, $post, $page['page_id'] );
+
+		if ( is_wp_error( $record ) || 'protected' === ( $record['outcome'] ?? '' ) ) {
+			return $record;
+		}
+
+		update_post_meta( $record['post_id'], 'hks_seed_page_id', sanitize_text_field( $page['page_id'] ) );
+
+		return $record;
 	}
 
 	/**
@@ -143,7 +200,7 @@ final class MvpSeeder {
 			return new \WP_Error( 'hks_seed_tour', __( 'A seed Tour is missing its product ID, title, or source URL.', 'hks-core' ) );
 		}
 
-		$existing = $this->find_post( Tour::POST_TYPE, 'hks_internal_product_id', $tour['product_id'] );
+		$existing = $this->find_post( Tour::POST_TYPE, 'hks_internal_product_id', $tour['product_id'], $tour['slug'] ?? '' );
 		$post     = array(
 			'post_type'    => Tour::POST_TYPE,
 			'post_title'   => sanitize_text_field( $tour['title'] ),
@@ -160,6 +217,7 @@ final class MvpSeeder {
 
 		// Stable seed identity remains hidden system metadata, not an editor burden.
 		update_post_meta( $record['post_id'], 'hks_internal_product_id', sanitize_text_field( $tour['product_id'] ) );
+		$this->store_source_metadata( $record['post_id'], $tour['source'] );
 		$this->update_fields( Tour::POST_TYPE, $record['post_id'], $tour['fields'] );
 		$this->append_terms( $record['post_id'], $tour['taxonomies'] );
 
@@ -178,7 +236,7 @@ final class MvpSeeder {
 			return new \WP_Error( 'hks_seed_campaign', __( 'A seed Campaign is missing its internal label or title.', 'hks-core' ) );
 		}
 
-		$existing = $this->find_post( Campaign::POST_TYPE, 'hks_internal_label', $campaign['internal_label'] );
+		$existing = $this->find_post( Campaign::POST_TYPE, 'hks_internal_label', $campaign['internal_label'], $campaign['slug'] ?? '' );
 		$post     = array(
 			'post_type'  => Campaign::POST_TYPE,
 			'post_title' => sanitize_text_field( $campaign['title'] ),
@@ -206,9 +264,13 @@ final class MvpSeeder {
 	 * @param string $post_type Post type.
 	 * @param string $meta_key  Identity field name.
 	 * @param string $value     Identity value.
+	 * @param string $slug      Optional slug fallback for existing editor records.
+	 * A negative ID marks an existing slug that is not owned by this importer;
+	 * save_draft_post protects it even when it is still a draft.
+	 *
 	 * @return int|\WP_Error Zero when absent.
 	 */
-	private function find_post( $post_type, $meta_key, $value ) {
+	private function find_post( $post_type, $meta_key, $value, $slug = '' ) {
 		$posts = get_posts(
 			array(
 				'post_type'        => $post_type,
@@ -232,7 +294,48 @@ final class MvpSeeder {
 			);
 		}
 
-		return empty( $posts ) ? 0 : (int) $posts[0];
+		if ( $posts ) {
+			return (int) $posts[0];
+		}
+
+		if ( $slug ) {
+			$slug_match = get_page_by_path( sanitize_title( $slug ), OBJECT, $post_type );
+
+			if ( $slug_match instanceof \WP_Post ) {
+				return -1 * (int) $slug_match->ID;
+			}
+		}
+
+		return 0;
+	}
+
+	/**
+	 * Keep the external source trail as hidden audit metadata.
+	 *
+	 * @param int                  $post_id Post ID.
+	 * @param array<string, mixed> $source  Seed source record.
+	 * @return void
+	 */
+	private function store_source_metadata( $post_id, $source ) {
+		if ( ! is_array( $source ) ) {
+			return;
+		}
+
+		$mapping = array(
+			'url'          => 'hks_source_url',
+			'reference'    => 'hks_source_reference',
+			'checked_date' => 'hks_source_checked_date',
+			'category'     => 'hks_source_category',
+			'status'       => 'hks_source_status',
+			'notes'        => 'hks_source_notes',
+		);
+
+		foreach ( $mapping as $source_key => $meta_key ) {
+			if ( isset( $source[ $source_key ] ) && '' !== (string) $source[ $source_key ] ) {
+				$value = 'url' === $source_key ? esc_url_raw( $source[ $source_key ] ) : sanitize_textarea_field( $source[ $source_key ] );
+				update_post_meta( $post_id, $meta_key, $value );
+			}
+		}
 	}
 
 	/**
@@ -246,6 +349,13 @@ final class MvpSeeder {
 	private function save_draft_post( $existing, $post, $label ) {
 		if ( is_wp_error( $existing ) ) {
 			return $existing;
+		}
+
+		if ( is_int( $existing ) && $existing < 0 ) {
+			return array(
+				'post_id' => abs( $existing ),
+				'outcome' => 'protected',
+			);
 		}
 
 		if ( $existing ) {
