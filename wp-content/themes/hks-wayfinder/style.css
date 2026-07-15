@@ -3,7 +3,7 @@ Theme Name: HKS Wayfinder
 Theme URI: https://github.com/Allan-Gakuru/HolidayKenyaSafaris
 Author: Holiday Kenya Safaris
 Description: Custom block theme for the Holiday Kenya Safaris Wayfinder website.
-Version: 0.2.0
+Version: 0.3.0
 Update URI: https://github.com/Allan-Gakuru/HolidayKenyaSafaris
 Requires at least: 6.6
 Requires PHP: 8.3
@@ -12,11 +12,6 @@ License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 
-/*
- * Structural and interaction rules that theme.json cannot express cleanly.
- * Visual tokens and block defaults belong in theme.json.
- */
-
 *,
 *::before,
 *::after {
@@ -24,12 +19,102 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 }
 
 html {
-	scroll-padding-top: var(--wp--preset--spacing--30);
+	scroll-behavior: smooth;
+	scroll-padding-top: 8rem;
+}
+
+html.hks-menu-is-open {
+	overflow: hidden;
 }
 
 body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+:where(img, svg) {
+	display: block;
+	max-width: 100%;
+}
+
+:where(h1, h2, h3),
+.wp-block-post-title,
+.wp-block-query-title {
+	overflow-wrap: anywhere;
+	text-wrap: balance;
+}
+
+:where(p, li, dd) {
+	text-wrap: pretty;
+}
+
+:where(a) {
+	text-decoration-thickness: 0.08em;
+	text-underline-offset: 0.18em;
+}
+
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+	box-shadow: 0 0 0 3px var(--wp--preset--color--midnight-navy);
+	outline: 3px solid var(--wp--preset--color--saffron);
+	outline-offset: 2px;
+}
+
+button,
+select,
+input,
+textarea {
+	font: inherit;
+}
+
+button,
+summary {
+	-webkit-tap-highlight-color: transparent;
+}
+
+.hks-shell,
+.alignwide {
+	margin-inline: auto;
+	max-width: 1240px;
+	width: min(calc(100% - clamp(2rem, 6vw, 4rem)), 1240px);
+}
+
+.hks-button,
+.hks-catalogue-controls button,
+.hks-mobile-quote-bar button,
+.hks-final-quote button {
+	align-items: center;
+	background: var(--wp--preset--color--midnight-navy);
+	border: 0;
+	border-radius: 8px;
+	color: var(--wp--preset--color--white);
+	cursor: pointer;
+	display: inline-flex;
+	font-family: var(--wp--preset--font-family--sora);
+	font-size: 0.9rem;
+	font-weight: 650;
+	justify-content: center;
+	line-height: 1.2;
+	min-height: 46px;
+	padding: 0.75rem 1.1rem;
+	text-align: center;
+	text-decoration: none;
+	transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.hks-button:hover,
+.hks-catalogue-controls button:hover,
+.hks-final-quote button:hover {
+	background: var(--wp--preset--color--lake-teal);
+	color: var(--wp--preset--color--white);
+	transform: translateY(-1px);
+}
+
+.hks-kicker {
+	color: var(--wp--preset--color--lake-teal);
+	font-family: var(--wp--preset--font-family--sora);
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 700;
+	margin: 0 0 0.5rem;
 }
 
 .hks-skip-link {
@@ -49,189 +134,1442 @@ body {
 	transform: translateY(0);
 }
 
-:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
-	outline: 3px solid var(--wp--preset--color--saffron);
-	outline-offset: 2px;
-	box-shadow: 0 0 0 5px var(--wp--preset--color--midnight-navy);
-}
-
-:where(a) {
-	text-underline-offset: 0.18em;
-	text-decoration-thickness: 0.08em;
-}
-
-:where(img, svg) {
-	max-width: 100%;
-}
-
-.hks-brand-link {
-	display: inline-flex;
-	align-items: center;
-	min-height: 44px;
-}
-
-.hks-brand-link img {
-	display: block;
-	width: clamp(10rem, 22vw, 14rem);
-	height: auto;
-}
-
+/* Header */
 .hks-site-header {
-	border-bottom: 1px solid rgb(24 43 58 / 16%);
+	background: var(--wp--preset--color--white);
+	border-bottom: 1px solid rgb(24 43 58 / 14%);
 	position: relative;
 	z-index: var(--wp--custom--z-index--sticky, 200);
 }
 
-.wp-block-navigation__responsive-container-open,
-.wp-block-navigation__responsive-container-close {
+.hks-utility {
+	background: var(--wp--preset--color--midnight-navy);
+	color: var(--wp--preset--color--white);
+	font-size: 0.76rem;
+}
+
+.hks-utility__inner {
 	align-items: center;
-	justify-content: center;
-	min-width: 44px;
+	display: flex;
+	justify-content: space-between;
+	min-height: 34px;
+}
+
+.hks-utility a {
+	color: inherit;
+}
+
+.hks-primary-header__inner {
+	align-items: center;
+	display: flex;
+	gap: clamp(1rem, 3vw, 2.5rem);
+	justify-content: space-between;
+	min-height: 78px;
+}
+
+.hks-brand-link {
+	align-items: center;
+	display: inline-flex;
+	flex: 0 0 auto;
 	min-height: 44px;
 }
 
-.hks-site-footer a {
-	color: inherit;
+.hks-brand-link img {
+	height: auto;
+	width: clamp(10.5rem, 18vw, 13.5rem);
 }
 
-.wp-block-post-template > li + li {
-	border-top: 1px solid rgb(24 43 58 / 16%);
-	padding-top: var(--wp--preset--spacing--50);
+.hks-primary-nav {
+	align-items: stretch;
+	display: flex;
+	flex: 1;
+	gap: clamp(0.25rem, 1.1vw, 1rem);
+	height: 78px;
+	justify-content: center;
 }
 
-:where(h1, h2, h3),
-.wp-block-post-title,
-.wp-block-query-title {
-	overflow-wrap: anywhere;
-	text-wrap: balance;
-}
-
-.wp-block-post-content :where(p, li) {
-	text-wrap: pretty;
-}
-
-.hks-kicker {
-	color: var(--wp--preset--color--lake-teal);
-	font-family: var(--wp--preset--font-family--sora);
-	font-size: var(--wp--preset--font-size--utility);
-	font-weight: 700;
-	letter-spacing: 0.08em;
-	margin-block: 0 0.65rem;
-	text-transform: uppercase;
-}
-
-.hks-tour-page,
-.hks-catalogue-page,
-.hks-destination-page,
-.hks-home {
-	overflow: clip;
-}
-
-.hks-tour-hero {
-	background:
-		linear-gradient(135deg, rgb(44 122 120 / 16%), transparent 54%),
-		var(--wp--preset--color--midnight-navy);
-	color: var(--wp--preset--color--white);
-	display: grid;
-	gap: var(--wp--preset--spacing--50);
-	grid-template-columns: minmax(0, 1fr);
-	margin-inline: auto;
-	padding: clamp(3rem, 8vw, 6rem) max(1rem, calc((100vw - 1240px) / 2));
-}
-
-.hks-tour-hero--with-image {
-	grid-template-columns: minmax(0, 1.05fr) minmax(20rem, 0.95fr);
-}
-
-.hks-tour-hero__content {
-	align-self: center;
-	max-width: 46rem;
-}
-
-.hks-tour-hero .hks-kicker {
-	color: var(--wp--preset--color--saffron);
-}
-
-.hks-tour-hero h1 {
-	color: inherit;
-	font-family: var(--wp--preset--font-family--sora);
-	font-size: var(--wp--preset--font-size--display);
-	letter-spacing: -0.04em;
-	line-height: 1.06;
-	margin: 0;
-	max-width: 18ch;
-	text-wrap: balance;
-}
-
-.hks-tour-hero__intro {
-	font-size: var(--wp--preset--font-size--lead);
-	max-width: 62ch;
-}
-
-.hks-tour-hero__intro p {
-	margin-bottom: 0;
-}
-
-.hks-fast-facts {
-	border-block: 1px solid rgb(255 255 255 / 20%);
-	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
-	list-style: none;
-	margin: var(--wp--preset--spacing--40) 0 0;
-	padding: var(--wp--preset--spacing--30) 0;
-}
-
-.hks-fast-facts li {
-	display: grid;
-	gap: 0.2rem;
-	min-width: 0;
-	padding-right: 1rem;
-}
-
-.hks-fast-facts li + li {
-	border-left: 1px solid rgb(255 255 255 / 18%);
-	padding-left: 1rem;
-}
-
-.hks-fast-facts span {
-	color: rgb(255 255 255 / 70%);
-	font-size: var(--wp--preset--font-size--utility);
+.hks-primary-nav > a,
+.hks-nav-menu > summary {
+	align-items: center;
+	color: var(--wp--preset--color--midnight-navy);
+	cursor: pointer;
+	display: flex;
+	font-size: 0.88rem;
 	font-weight: 650;
-	text-transform: uppercase;
+	min-height: 44px;
+	padding: 0.6rem 0.45rem;
+	text-decoration: none;
 }
 
-.hks-fast-facts strong {
-	font-size: var(--wp--preset--font-size--small);
-	overflow-wrap: anywhere;
+.hks-primary-nav > a:hover,
+.hks-nav-menu > summary:hover,
+.hks-nav-menu[open] > summary {
+	color: var(--wp--preset--color--lake-teal);
 }
 
-.hks-hero-price-context {
-	color: rgb(255 255 255 / 76%);
-	font-size: var(--wp--preset--font-size--utility);
-	margin: 0.75rem 0 0;
-	max-width: 68ch;
-}
-
-.hks-tour-hero__media {
-	align-self: stretch;
-	margin: 0;
-	min-height: 26rem;
+.hks-nav-menu {
 	position: relative;
 }
 
-.hks-tour-hero__media img {
-	border-radius: var(--wp--custom--radius--medium, 12px);
+.hks-nav-menu > summary {
+	gap: 0.4rem;
+	list-style: none;
+}
+
+.hks-nav-menu > summary::-webkit-details-marker {
+	display: none;
+}
+
+.hks-nav-menu > summary::after {
+	border-bottom: 1.5px solid currentcolor;
+	border-right: 1.5px solid currentcolor;
+	content: "";
+	height: 0.42rem;
+	transform: rotate(45deg) translateY(-0.15rem);
+	transition: transform 160ms ease;
+	width: 0.42rem;
+}
+
+.hks-nav-menu[open] > summary::after {
+	transform: rotate(225deg) translate(-0.1rem, -0.1rem);
+}
+
+.hks-nav-menu__panel {
+	background: var(--wp--preset--color--white);
+	border: 1px solid rgb(24 43 58 / 14%);
+	box-shadow: 0 12px 28px rgb(24 43 58 / 12%);
+	left: 0;
+	min-width: 18rem;
+	padding: 1.25rem;
+	position: absolute;
+	top: calc(100% - 0.5rem);
+	z-index: var(--wp--custom--z-index--dropdown, 100);
+}
+
+.hks-nav-menu__panel--wide {
+	min-width: 22rem;
+}
+
+.hks-nav-menu__panel > p {
+	color: var(--wp--preset--color--lake-teal);
+	font-family: var(--wp--preset--font-family--sora);
+	font-size: 0.8rem;
+	font-weight: 700;
+	margin: 0 0 0.75rem;
+}
+
+.hks-nav-menu__panel ul {
+	display: grid;
+	gap: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.hks-nav-menu__panel li a {
+	align-items: center;
+	border-top: 1px solid rgb(24 43 58 / 10%);
+	color: var(--wp--preset--color--midnight-navy);
+	display: flex;
+	font-size: 0.9rem;
+	font-weight: 600;
+	justify-content: space-between;
+	padding: 0.55rem 0;
+	text-decoration: none;
+}
+
+.hks-nav-menu__panel li a span {
+	color: rgb(22 27 31 / 58%);
+	font-variant-numeric: tabular-nums;
+}
+
+.hks-nav-menu__all {
+	align-items: center;
+	color: var(--wp--preset--color--lake-teal);
+	display: flex;
+	font-size: 0.88rem;
+	font-weight: 700;
+	gap: 0.4rem;
+	margin-top: 0.85rem;
+}
+
+.hks-header-actions {
+	align-items: center;
+	display: flex;
+	flex: 0 0 auto;
+	gap: 0.75rem;
+}
+
+.hks-button--quote {
+	background: var(--wp--preset--color--saffron);
+	color: var(--wp--preset--color--midnight-navy);
+	max-width: 14rem;
+}
+
+.hks-button--quote:hover {
+	background: var(--wp--preset--color--midnight-navy);
+	color: var(--wp--preset--color--white);
+}
+
+.hks-menu-toggle {
+	align-items: center;
+	background: transparent;
+	border: 1px solid rgb(24 43 58 / 24%);
+	border-radius: 8px;
+	cursor: pointer;
+	display: none;
+	flex-direction: column;
+	gap: 4px;
+	height: 46px;
+	justify-content: center;
+	padding: 0;
+	width: 46px;
+}
+
+.hks-menu-toggle > span:not(.screen-reader-text) {
+	background: var(--wp--preset--color--midnight-navy);
+	height: 2px;
+	width: 19px;
+}
+
+.hks-mobile-menu {
+	background: var(--wp--preset--color--white);
+	border: 0;
+	height: 100dvh;
+	margin: 0 0 0 auto;
+	max-height: none;
+	max-width: 28rem;
+	padding: 0;
+	width: min(100%, 28rem);
+}
+
+.hks-mobile-menu::backdrop {
+	background: rgb(24 43 58 / 66%);
+}
+
+.hks-mobile-menu__header {
+	align-items: center;
+	border-bottom: 1px solid rgb(24 43 58 / 14%);
+	display: flex;
+	justify-content: space-between;
+	min-height: 78px;
+	padding: 0.75rem 1.25rem;
+}
+
+.hks-mobile-menu__header button {
+	background: transparent;
+	border: 0;
+	color: var(--wp--preset--color--midnight-navy);
+	cursor: pointer;
+	font-size: 2rem;
+	height: 46px;
+	width: 46px;
+}
+
+.hks-mobile-menu__nav {
+	display: grid;
+	max-height: calc(100dvh - 15rem);
+	overflow-y: auto;
+	padding: 1rem 1.25rem;
+}
+
+.hks-mobile-menu__nav > a,
+.hks-mobile-menu__nav > details {
+	border-bottom: 1px solid rgb(24 43 58 / 14%);
+}
+
+.hks-mobile-menu__nav > a,
+.hks-mobile-menu__nav summary {
+	align-items: center;
+	color: var(--wp--preset--color--midnight-navy);
+	cursor: pointer;
+	display: flex;
+	font-family: var(--wp--preset--font-family--sora);
+	font-size: 1rem;
+	font-weight: 650;
+	justify-content: space-between;
+	list-style: none;
+	min-height: 54px;
+	text-decoration: none;
+}
+
+.hks-mobile-menu__nav summary::-webkit-details-marker {
+	display: none;
+}
+
+.hks-mobile-menu__nav summary::after {
+	content: "+";
+	font-size: 1.3rem;
+	font-weight: 400;
+}
+
+.hks-mobile-menu__nav details[open] summary::after {
+	content: "−";
+}
+
+.hks-mobile-menu__nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0 0 0.75rem;
+}
+
+.hks-mobile-menu__nav li a {
+	align-items: center;
+	color: var(--wp--preset--color--midnight-navy);
+	display: flex;
+	font-size: 0.92rem;
+	justify-content: space-between;
+	padding: 0.45rem 0.25rem;
+}
+
+.hks-mobile-menu__footer {
+	background: var(--wp--preset--color--pale-mist);
+	bottom: 0;
+	display: grid;
+	gap: 0.75rem;
+	left: 0;
+	padding: 1rem 1.25rem;
+	position: absolute;
+	right: 0;
+}
+
+.hks-mobile-menu__footer .hks-button {
+	max-width: none;
+	width: 100%;
+}
+
+.hks-mobile-menu__footer > a:not(.hks-button) {
+	color: var(--wp--preset--color--midnight-navy);
+	font-size: 0.84rem;
+	text-align: center;
+}
+
+.hks-campaign-navigation-campaign_minimal .hks-utility,
+.hks-campaign-navigation-campaign_minimal .hks-primary-nav,
+.hks-campaign-navigation-campaign_minimal .hks-menu-toggle {
+	display: none;
+}
+
+/* Title bands and breadcrumbs */
+.hks-title-band {
+	background: var(--wp--preset--color--pale-mist);
+	border-bottom: 1px solid rgb(24 43 58 / 12%);
+	padding-block: clamp(2rem, 5vw, 3.75rem);
+}
+
+.hks-title-band h1 {
+	font-size: var(--wp--preset--font-size--page-title);
+	margin: 0;
+	max-width: 24ch;
+}
+
+.hks-title-band p {
+	font-size: var(--wp--preset--font-size--lead);
+	margin: 0.75rem 0 0;
+	max-width: 56rem;
+}
+
+.hks-breadcrumbs {
+	font-size: 0.8rem;
+	margin-bottom: 0.75rem;
+}
+
+.hks-breadcrumbs ol {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.3rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.hks-breadcrumbs li + li::before {
+	color: rgb(22 27 31 / 48%);
+	content: "/";
+	margin-right: 0.3rem;
+}
+
+.hks-breadcrumbs a,
+.hks-breadcrumbs span {
+	color: rgb(22 27 31 / 70%);
+}
+
+/* Homepage */
+.hks-home-page,
+.hks-tour-page,
+.hks-catalogue-page,
+.hks-destination-page {
+	overflow: clip;
+}
+
+.hks-home-hero {
+	background: var(--wp--preset--color--midnight-navy);
+	color: var(--wp--preset--color--white);
+	display: grid;
+	min-height: min(42rem, 76vh);
+	position: relative;
+}
+
+.hks-home-hero--with-image {
+	background: var(--wp--preset--color--pale-mist);
+	color: var(--wp--preset--color--near-black);
+	grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+}
+
+.hks-home-hero__media {
+	grid-column: 2;
+	grid-row: 1;
+	min-height: 32rem;
+}
+
+.hks-home-hero__media img {
 	height: 100%;
 	object-fit: cover;
 	width: 100%;
 }
 
-.hks-tour-hero__media figcaption,
+.hks-home-hero__content {
+	align-self: center;
+	grid-column: 1;
+	grid-row: 1;
+	margin-left: max(1rem, calc((100vw - 1240px) / 2));
+	padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem) clamp(3rem, 8vw, 6rem) 0;
+	width: auto;
+}
+
+.hks-home-hero:not(.hks-home-hero--with-image) .hks-home-hero__content {
+	margin-inline: auto;
+	max-width: 1240px;
+	padding-inline: max(1rem, calc((100vw - 1240px) / 2));
+	width: 100%;
+}
+
+.hks-home-hero__label,
+.hks-section-heading p,
+.hks-operator-section__grid > div > p:first-child,
+.hks-group-route__inner > div > p:first-child,
+.hks-proof-section > div > p:first-child {
+	color: var(--wp--preset--color--lake-teal);
+	font-family: var(--wp--preset--font-family--sora);
+	font-size: 0.88rem;
+	font-weight: 700;
+	margin: 0 0 0.65rem;
+}
+
+.hks-home-hero:not(.hks-home-hero--with-image) .hks-home-hero__label {
+	color: var(--wp--preset--color--saffron);
+}
+
+.hks-home-hero h1 {
+	color: inherit;
+	font-size: var(--wp--preset--font-size--display);
+	letter-spacing: -0.045em;
+	margin: 0;
+	max-width: 14ch;
+}
+
+.hks-home-hero__content > p:not(.hks-home-hero__label) {
+	font-size: var(--wp--preset--font-size--lead);
+	max-width: 42rem;
+}
+
+.hks-home-hero__actions {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem 1.5rem;
+	margin-top: 2rem;
+}
+
+.hks-home-hero__actions > a:not(.hks-button) {
+	color: inherit;
+	font-weight: 700;
+}
+
+.hks-home-hero--with-image .hks-button {
+	background: var(--wp--preset--color--midnight-navy);
+}
+
+.hks-home-section {
+	padding-block: clamp(4rem, 8vw, 6.5rem);
+}
+
+.hks-home-section--mist {
+	background: var(--wp--preset--color--pale-mist);
+	width: 100%;
+}
+
+.hks-section-heading {
+	align-items: end;
+	display: flex;
+	gap: 1.5rem;
+	justify-content: space-between;
+	margin-bottom: clamp(1.75rem, 4vw, 3rem);
+}
+
+.hks-section-heading h2 {
+	margin: 0;
+	max-width: 22ch;
+}
+
+.hks-section-heading > a {
+	color: var(--wp--preset--color--lake-teal);
+	font-weight: 700;
+}
+
+.hks-tour-grid {
+	display: grid !important;
+	gap: clamp(1.25rem, 3vw, 2rem);
+	grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.hks-tour-grid > li {
+	margin: 0;
+	padding: 0;
+}
+
+.hks-tour-card {
+	background: var(--wp--preset--color--white);
+	border: 1px solid rgb(24 43 58 / 16%);
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	overflow: hidden;
+	transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.hks-tour-card:hover {
+	border-color: rgb(44 122 120 / 60%);
+	transform: translateY(-2px);
+}
+
+.hks-tour-card--no-image {
+	border-top: 4px solid var(--wp--preset--color--lake-teal);
+}
+
+.hks-tour-card__media {
+	display: block;
+	height: clamp(12rem, 18vw, 14rem);
+	overflow: hidden;
+}
+
+.hks-tour-card__media img {
+	height: 100%;
+	object-fit: cover;
+	transition: transform 300ms ease;
+	width: 100%;
+}
+
+.hks-tour-card:hover .hks-tour-card__media img {
+	transform: scale(1.025);
+}
+
+.hks-tour-card__body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding: clamp(1.1rem, 2vw, 1.5rem);
+}
+
+.hks-tour-card__destination {
+	color: var(--wp--preset--color--lake-teal);
+	font-size: 0.82rem;
+	font-weight: 700;
+	margin: 0 0 0.45rem;
+}
+
+.hks-tour-card h3 {
+	font-size: var(--wp--preset--font-size--card-title);
+	margin: 0;
+}
+
+.hks-tour-card h3 a {
+	color: var(--wp--preset--color--midnight-navy);
+	text-decoration: none;
+}
+
+.hks-tour-card__facts {
+	display: flex;
+	flex-wrap: wrap;
+	font-size: 0.82rem;
+	gap: 0.35rem 1rem;
+	list-style: none;
+	margin: 0.75rem 0 0;
+	padding: 0;
+}
+
+.hks-tour-card__facts li + li::before {
+	color: rgb(22 27 31 / 36%);
+	content: "·";
+	margin-right: 1rem;
+}
+
+.hks-tour-card__route {
+	color: rgb(22 27 31 / 72%);
+	font-size: 0.88rem;
+	margin: 0.7rem 0 1.1rem;
+}
+
+.hks-tour-card__footer {
+	align-items: end;
+	border-top: 1px solid rgb(24 43 58 / 12%);
+	display: flex;
+	gap: 1rem;
+	justify-content: space-between;
+	margin-top: auto;
+	padding-top: 1rem;
+}
+
+.hks-tour-card__price {
+	display: grid;
+	gap: 0.15rem;
+	min-width: 0;
+}
+
+.hks-tour-card__price strong {
+	color: var(--wp--preset--color--midnight-navy);
+	font-variant-numeric: tabular-nums;
+}
+
+.hks-tour-card__price span {
+	color: rgb(22 27 31 / 62%);
+	display: -webkit-box;
+	font-size: 0.71rem;
+	line-height: 1.35;
+	overflow: hidden;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+}
+
+.hks-tour-card__link {
+	align-items: center;
+	color: var(--wp--preset--color--lake-teal);
+	display: inline-flex;
+	flex: 0 0 auto;
+	font-size: 0.88rem;
+	font-weight: 700;
+	gap: 0.35rem;
+}
+
+.hks-destination-grid {
+	display: grid;
+	gap: 1.25rem;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.hks-destination-card {
+	background: var(--wp--preset--color--midnight-navy);
+	border-radius: 10px;
+	color: var(--wp--preset--color--white);
+	display: grid;
+	min-height: 17rem;
+	overflow: hidden;
+	position: relative;
+	text-decoration: none;
+}
+
+.hks-destination-card__media,
+.hks-destination-card__media img {
+	height: 100%;
+	inset: 0;
+	object-fit: cover;
+	position: absolute;
+	width: 100%;
+}
+
+.hks-destination-card__media::after {
+	background: rgb(24 43 58 / 54%);
+	content: "";
+	inset: 0;
+	position: absolute;
+}
+
+.hks-destination-card__body {
+	align-self: end;
+	display: grid;
+	padding: 1.5rem;
+	position: relative;
+	z-index: 1;
+}
+
+.hks-destination-card__body strong {
+	color: inherit;
+	font-family: var(--wp--preset--font-family--sora);
+	font-size: 1.35rem;
+}
+
+.hks-destination-card__body span {
+	font-size: 0.82rem;
+}
+
+.hks-browse-groups {
+	display: grid;
+	gap: 3rem;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.hks-browse-groups h3 {
+	font-size: 1rem;
+	margin: 0 0 1rem;
+}
+
+.hks-term-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.6rem;
+}
+
+.hks-term-links a {
+	align-items: center;
+	background: var(--wp--preset--color--white);
+	border: 1px solid rgb(24 43 58 / 18%);
+	border-radius: 999px;
+	color: var(--wp--preset--color--midnight-navy);
+	display: inline-flex;
+	font-size: 0.9rem;
+	font-weight: 650;
+	gap: 0.6rem;
+	min-height: 42px;
+	padding: 0.5rem 0.85rem;
+	text-decoration: none;
+}
+
+.hks-term-links a:hover {
+	border-color: var(--wp--preset--color--lake-teal);
+}
+
+.hks-term-links span {
+	color: rgb(22 27 31 / 54%);
+	font-size: 0.75rem;
+	font-variant-numeric: tabular-nums;
+}
+
+.hks-operator-section {
+	background: var(--wp--preset--color--midnight-navy);
+	color: var(--wp--preset--color--white);
+	padding-block: clamp(4rem, 8vw, 6rem);
+}
+
+.hks-operator-section__grid {
+	display: grid;
+	gap: clamp(2rem, 6vw, 6rem);
+	grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+}
+
+.hks-operator-section h2 {
+	color: inherit;
+	margin: 0;
+}
+
+.hks-operator-section__grid > div > p:first-child {
+	color: var(--wp--preset--color--saffron);
+}
+
+.hks-operator-section a {
+	color: var(--wp--preset--color--white);
+	font-weight: 700;
+}
+
+.hks-process-grid {
+	counter-reset: process;
+	display: grid;
+	gap: 2rem;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.hks-process-grid li {
+	border-top: 2px solid var(--wp--preset--color--lake-teal);
+	padding-top: 1.25rem;
+}
+
+.hks-process-grid li > span {
+	color: var(--wp--preset--color--lake-teal);
+	font-family: var(--wp--preset--font-family--sora);
+	font-size: 0.8rem;
+	font-weight: 700;
+}
+
+.hks-process-grid h3 {
+	margin: 0.6rem 0;
+}
+
+.hks-process-grid p {
+	margin: 0;
+}
+
+.hks-group-route {
+	background: var(--wp--preset--color--saffron);
+	padding-block: clamp(3rem, 6vw, 5rem);
+}
+
+.hks-group-route__inner {
+	align-items: center;
+	display: flex;
+	gap: 2rem;
+	justify-content: space-between;
+}
+
+.hks-group-route h2 {
+	margin: 0;
+}
+
+.hks-group-route p:last-child {
+	max-width: 48rem;
+}
+
+.hks-proof-section {
+	display: grid;
+	gap: clamp(2rem, 6vw, 6rem);
+	grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+}
+
+.hks-proof-section h2 {
+	margin: 0;
+}
+
+.hks-proof-section ul {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.hks-proof-section li {
+	border-top: 1px solid rgb(24 43 58 / 20%);
+	font-weight: 650;
+	padding: 1rem 1rem 1rem 0;
+}
+
+.hks-final-cta,
+.hks-final-quote {
+	background: var(--wp--preset--color--midnight-navy);
+	color: var(--wp--preset--color--white);
+	padding-block: clamp(3.5rem, 7vw, 5.5rem);
+}
+
+.hks-final-cta .hks-shell {
+	max-width: 54rem;
+	text-align: center;
+}
+
+.hks-final-cta h2,
+.hks-final-quote h2 {
+	color: inherit;
+	margin: 0;
+}
+
+.hks-final-cta .hks-button,
+.hks-final-quote .hks-button {
+	background: var(--wp--preset--color--saffron);
+	color: var(--wp--preset--color--midnight-navy);
+	margin-top: 1rem;
+}
+
+/* Canonical Tour */
+.hks-tour-lead__route {
+	color: rgb(22 27 31 / 72%);
+	font-weight: 650;
+	margin: 0 0 1.5rem;
+}
+
+.hks-tour-gallery {
+	padding-block: clamp(1.25rem, 3vw, 2.25rem);
+	position: relative;
+}
+
+.hks-tour-gallery__grid {
+	display: grid;
+	gap: 0.65rem;
+	grid-template-columns: 2fr 1fr;
+	grid-template-rows: repeat(2, minmax(10rem, 15rem));
+}
+
+.hks-tour-gallery--1 .hks-tour-gallery__grid {
+	grid-template-columns: 1fr;
+	grid-template-rows: minmax(18rem, 34rem);
+}
+
+.hks-tour-gallery--2 .hks-tour-gallery__grid {
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: minmax(18rem, 30rem);
+}
+
+.hks-tour-gallery__item {
+	background: var(--wp--preset--color--midnight-navy);
+	border: 0;
+	border-radius: 8px;
+	cursor: zoom-in;
+	overflow: hidden;
+	padding: 0;
+}
+
+.hks-tour-gallery--3 .hks-tour-gallery__item:first-child {
+	grid-row: 1 / 3;
+}
+
+.hks-tour-gallery__item img {
+	height: 100%;
+	object-fit: cover;
+	transition: transform 240ms ease;
+	width: 100%;
+}
+
+.hks-tour-gallery__item:hover img {
+	transform: scale(1.02);
+}
+
+.hks-tour-gallery__view {
+	align-items: center;
+	background: var(--wp--preset--color--white);
+	border: 1px solid rgb(24 43 58 / 24%);
+	border-radius: 8px;
+	bottom: calc(clamp(1.25rem, 3vw, 2.25rem) + 0.8rem);
+	color: var(--wp--preset--color--midnight-navy);
+	cursor: pointer;
+	display: flex;
+	font-size: 0.84rem;
+	font-weight: 700;
+	gap: 0.5rem;
+	min-height: 44px;
+	padding: 0.6rem 0.8rem;
+	position: absolute;
+	right: 0.8rem;
+}
+
+.hks-tour-gallery__view span {
+	color: rgb(22 27 31 / 58%);
+	font-size: 0.74rem;
+}
+
+.hks-gallery-lightbox {
+	background: var(--wp--preset--color--midnight-navy);
+	border: 0;
+	color: var(--wp--preset--color--white);
+	height: 100dvh;
+	margin: 0;
+	max-height: none;
+	max-width: none;
+	padding: 0;
+	width: 100vw;
+}
+
+.hks-gallery-lightbox::backdrop {
+	background: rgb(24 43 58 / 92%);
+}
+
+.hks-gallery-lightbox__bar {
+	align-items: center;
+	display: flex;
+	font-variant-numeric: tabular-nums;
+	justify-content: space-between;
+	min-height: 64px;
+	padding: 0.75rem 1.25rem;
+}
+
+.hks-gallery-lightbox__bar button {
+	background: transparent;
+	border: 1px solid rgb(255 255 255 / 40%);
+	border-radius: 8px;
+	color: inherit;
+	cursor: pointer;
+	font-size: 1.7rem;
+	height: 44px;
+	width: 44px;
+}
+
+.hks-gallery-lightbox__slides {
+	height: calc(100dvh - 132px);
+	padding: 0 1rem;
+}
+
+.hks-gallery-lightbox__slides figure {
+	height: 100%;
+	margin: 0;
+	position: relative;
+}
+
+.hks-gallery-lightbox__slides figure[hidden] {
+	display: none;
+}
+
+.hks-gallery-lightbox__slides img {
+	height: 100%;
+	object-fit: contain;
+	width: 100%;
+}
+
+.hks-gallery-lightbox figcaption {
+	background: rgb(24 43 58 / 88%);
+	bottom: 0.5rem;
+	font-size: 0.75rem;
+	left: 50%;
+	padding: 0.3rem 0.55rem;
+	position: absolute;
+	transform: translateX(-50%);
+}
+
+.hks-gallery-lightbox__controls {
+	display: flex;
+	gap: 0.75rem;
+	justify-content: center;
+	min-height: 68px;
+	padding: 0.75rem;
+}
+
+.hks-gallery-lightbox__controls button {
+	background: transparent;
+	border: 1px solid rgb(255 255 255 / 36%);
+	border-radius: 8px;
+	color: inherit;
+	cursor: pointer;
+	min-height: 44px;
+	padding: 0.55rem 1rem;
+}
+
+.hks-tour-workspace {
+	display: grid;
+	gap: clamp(2rem, 4vw, 4rem);
+	grid-template-columns: minmax(0, 2.1fr) minmax(18rem, 0.9fr);
+	padding-block: clamp(2.5rem, 6vw, 5rem);
+}
+
+.hks-tour-facts {
+	border-block: 1px solid rgb(24 43 58 / 16%);
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	grid-column: 1;
+	grid-row: 1;
+	margin: 0;
+}
+
+.hks-tour-facts div {
+	min-width: 0;
+	padding: 1rem 1rem 1rem 0;
+}
+
+.hks-tour-facts div:nth-child(3n + 2),
+.hks-tour-facts div:nth-child(3n + 3) {
+	border-left: 1px solid rgb(24 43 58 / 12%);
+	padding-left: 1rem;
+}
+
+.hks-tour-facts dt,
+.hks-practical-grid dt,
+.hks-itinerary__facts dt,
+.hks-rate-assumptions dt {
+	color: var(--wp--preset--color--lake-teal);
+	font-size: 0.76rem;
+	font-weight: 700;
+}
+
+.hks-tour-facts dd,
+.hks-practical-grid dd,
+.hks-itinerary__facts dd,
+.hks-rate-assumptions dd {
+	font-size: 0.9rem;
+	font-weight: 600;
+	margin: 0.2rem 0 0;
+}
+
+.hks-tour-tabs {
+	border-bottom: 1px solid rgb(24 43 58 / 18%);
+	display: flex;
+	gap: 0.25rem;
+	overflow-x: auto;
+	padding: 0;
+}
+
+.hks-tour-sections {
+	grid-column: 1;
+	grid-row: 2;
+}
+
+.hks-tour-tabs:empty {
+	display: none;
+}
+
+.hks-tour-tabs button {
+	background: transparent;
+	border: 0;
+	border-bottom: 3px solid transparent;
+	color: rgb(22 27 31 / 68%);
+	cursor: pointer;
+	font-family: var(--wp--preset--font-family--sora);
+	font-size: 0.83rem;
+	font-weight: 650;
+	min-height: 50px;
+	padding: 0.65rem 0.8rem;
+	white-space: nowrap;
+}
+
+.hks-tour-tabs button[aria-selected="true"] {
+	border-color: var(--wp--preset--color--lake-teal);
+	color: var(--wp--preset--color--midnight-navy);
+}
+
+.hks-tour-section {
+	border-bottom: 1px solid rgb(24 43 58 / 16%);
+}
+
+.hks-tour-sections.is-tabbed .hks-tour-section {
+	border: 0;
+}
+
+.hks-tour-sections.is-tabbed .hks-tour-section > summary {
+	display: none;
+}
+
+.hks-tour-section > summary {
+	align-items: center;
+	color: var(--wp--preset--color--midnight-navy);
+	cursor: pointer;
+	display: flex;
+	font-family: var(--wp--preset--font-family--sora);
+	font-weight: 700;
+	justify-content: space-between;
+	list-style: none;
+	min-height: 58px;
+}
+
+.hks-tour-section > summary::-webkit-details-marker {
+	display: none;
+}
+
+.hks-tour-section > summary::after {
+	content: "+";
+	font-size: 1.4rem;
+	font-weight: 400;
+}
+
+.hks-tour-section[open] > summary::after {
+	content: "−";
+}
+
+.hks-tour-section__content {
+	padding: clamp(1.5rem, 4vw, 2.75rem) 0;
+}
+
+.hks-tour-section__content > h2:first-child {
+	margin-top: 0;
+}
+
+.hks-prose {
+	font-size: var(--wp--preset--font-size--lead);
+	max-width: 48rem;
+}
+
+.hks-prose > :first-child {
+	margin-top: 0;
+}
+
+.hks-practical-grid,
+.hks-rate-assumptions {
+	display: grid;
+	gap: 0;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	margin: 1.25rem 0 0;
+}
+
+.hks-practical-grid div,
+.hks-rate-assumptions div {
+	border-top: 1px solid rgb(24 43 58 / 14%);
+	padding: 1rem 1rem 1rem 0;
+}
+
+.hks-itinerary__controls {
+	display: flex;
+	gap: 1rem;
+	justify-content: end;
+	margin-bottom: 0.75rem;
+}
+
+.hks-itinerary__controls button {
+	background: transparent;
+	border: 0;
+	color: var(--wp--preset--color--lake-teal);
+	cursor: pointer;
+	font-size: 0.82rem;
+	font-weight: 700;
+	padding: 0.45rem;
+	text-decoration: underline;
+}
+
+.hks-itinerary__days {
+	border-top: 1px solid rgb(24 43 58 / 16%);
+}
+
+.hks-itinerary__days details {
+	border-bottom: 1px solid rgb(24 43 58 / 16%);
+}
+
+.hks-itinerary__days summary {
+	align-items: center;
+	cursor: pointer;
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: 2.75rem minmax(0, 1fr);
+	list-style: none;
+	min-height: 70px;
+	padding: 0.55rem 0;
+}
+
+.hks-itinerary__days summary::-webkit-details-marker {
+	display: none;
+}
+
+.hks-itinerary__marker {
+	align-items: center;
+	background: var(--wp--preset--color--lake-teal);
+	border-radius: 999px;
+	color: var(--wp--preset--color--white);
+	display: flex;
+	font-family: var(--wp--preset--font-family--sora);
+	font-size: 0.78rem;
+	font-weight: 700;
+	height: 2.35rem;
+	justify-content: center;
+	width: 2.35rem;
+}
+
+.hks-itinerary__content {
+	padding: 0 0 1.5rem 3.75rem;
+}
+
+.hks-itinerary__facts {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem 1.5rem;
+	margin: 1rem 0 0;
+}
+
+.hks-itinerary__facts div {
+	max-width: 18rem;
+}
+
+.hks-list-columns {
+	display: grid;
+	gap: 2rem;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.hks-detail-list h3 {
+	border-bottom: 2px solid var(--wp--preset--color--lake-teal);
+	padding-bottom: 0.6rem;
+}
+
+.hks-detail-list--excluded h3 {
+	border-color: var(--wp--preset--color--saffron);
+}
+
+.hks-detail-list ul,
+.hks-note-list {
+	padding-left: 1.2rem;
+}
+
+.hks-detail-list li + li,
+.hks-note-list li + li {
+	margin-top: 0.75rem;
+}
+
+.hks-detail-list li span {
+	display: block;
+	font-size: 0.86rem;
+	margin-top: 0.1rem;
+}
+
+.hks-rate-information__lead {
+	background: var(--wp--preset--color--pale-mist);
+	border: 1px solid rgb(24 43 58 / 12%);
+	border-radius: 8px;
+	padding: 1.25rem;
+}
+
+.hks-rate-information__lead > strong {
+	color: var(--wp--preset--color--midnight-navy);
+	font-family: var(--wp--preset--font-family--sora);
+	font-size: 1.4rem;
+	font-variant-numeric: tabular-nums;
+}
+
+.hks-rate-information__lead p:last-child {
+	margin-bottom: 0;
+}
+
+.hks-small-print {
+	color: rgb(22 27 31 / 68%);
+	font-size: 0.82rem;
+}
+
+.hks-faqs {
+	border-top: 1px solid rgb(24 43 58 / 16%);
+}
+
+.hks-faqs details {
+	border-bottom: 1px solid rgb(24 43 58 / 16%);
+	padding-block: 0.9rem;
+}
+
+.hks-faqs summary {
+	color: var(--wp--preset--color--midnight-navy);
+	cursor: pointer;
+	font-family: var(--wp--preset--font-family--sora);
+	font-weight: 650;
+}
+
+.hks-faqs details > div {
+	max-width: 46rem;
+	padding-top: 0.65rem;
+}
+
+.hks-tour-quote {
+	grid-column: 2;
+	grid-row: 1 / 3;
+	min-width: 0;
+}
+
+.hks-tour-quote__panel {
+	background: var(--wp--preset--color--white);
+	border: 1px solid rgb(24 43 58 / 16%);
+	border-radius: 10px;
+	padding: clamp(1.25rem, 3vw, 1.75rem);
+	position: sticky;
+	top: 1.5rem;
+}
+
+.hks-tour-quote__label {
+	color: var(--wp--preset--color--lake-teal);
+	font-size: 0.82rem;
+	font-weight: 700;
+	margin: 0 0 0.45rem;
+}
+
+.hks-tour-quote h2 {
+	font-size: 1.55rem;
+	font-variant-numeric: tabular-nums;
+	margin: 0;
+}
+
+.hks-tour-quote__panel > p:not(.hks-tour-quote__label) {
+	color: rgb(22 27 31 / 68%);
+	font-size: 0.84rem;
+}
+
+.hks-tour-quote .hks-inquiry__trigger {
+	width: 100%;
+}
+
+.hks-tour-quote__note {
+	margin-bottom: 0;
+}
+
+.hks-related-tours {
+	background: var(--wp--preset--color--pale-mist);
+	padding-block: clamp(3.5rem, 7vw, 5.5rem);
+}
+
+.hks-mobile-quote-bar {
+	display: none;
+}
+
+.hks-final-quote > .hks-shell {
+	align-items: center;
+	display: flex;
+	gap: 2rem;
+	justify-content: space-between;
+}
+
+.hks-final-quote p {
+	margin-bottom: 0;
+}
+
+/* Campaign mode */
+.hks-campaign-hero {
+	background: var(--wp--preset--color--midnight-navy);
+	color: var(--wp--preset--color--white);
+	display: grid;
+	gap: clamp(2rem, 5vw, 4rem);
+	grid-template-columns: minmax(0, 1fr);
+	padding: clamp(3rem, 8vw, 6rem) max(1rem, calc((100vw - 1240px) / 2));
+}
+
+.hks-campaign-hero--with-image {
+	grid-template-columns: minmax(0, 1.05fr) minmax(20rem, 0.95fr);
+}
+
+.hks-campaign-hero__content {
+	align-self: center;
+	max-width: 46rem;
+}
+
+.hks-campaign-hero .hks-kicker {
+	color: var(--wp--preset--color--saffron);
+}
+
+.hks-campaign-hero h1 {
+	color: inherit;
+	font-size: var(--wp--preset--font-size--display);
+	letter-spacing: -0.045em;
+	margin: 0;
+	max-width: 16ch;
+}
+
+.hks-campaign-hero__intro {
+	font-size: var(--wp--preset--font-size--lead);
+}
+
+.hks-fast-facts {
+	border-block: 1px solid rgb(255 255 255 / 22%);
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	list-style: none;
+	margin: 2rem 0 0;
+	padding: 1rem 0;
+}
+
+.hks-fast-facts li {
+	display: grid;
+	gap: 0.2rem;
+	padding-right: 1rem;
+}
+
+.hks-fast-facts li + li {
+	border-left: 1px solid rgb(255 255 255 / 20%);
+	padding-left: 1rem;
+}
+
+.hks-fast-facts span {
+	color: rgb(255 255 255 / 72%);
+	font-size: 0.72rem;
+	font-weight: 700;
+}
+
+.hks-campaign-hero__media {
+	margin: 0;
+	min-height: 26rem;
+	position: relative;
+}
+
+.hks-campaign-hero__media img {
+	border-radius: 10px;
+	height: 100%;
+	object-fit: cover;
+	width: 100%;
+}
+
+.hks-campaign-hero__media figcaption,
 .hks-destination-intro figcaption {
 	background: rgb(24 43 58 / 88%);
 	bottom: 0.5rem;
-	color: white;
-	font-size: 0.75rem;
+	color: var(--wp--preset--color--white);
+	font-size: 0.72rem;
 	left: 0.5rem;
 	padding: 0.25rem 0.5rem;
 	position: absolute;
@@ -247,420 +1585,399 @@ body {
 }
 
 .hks-hero-cta p {
-	color: var(--wp--preset--color--midnight-navy);
 	font-weight: 650;
 	margin: 0;
 }
 
-.hks-tour-details {
-	margin-inline: auto;
-	max-width: 72rem;
-	padding: var(--wp--preset--spacing--70) max(1rem, 4vw);
+.hks-campaign-details {
+	padding-block: clamp(3rem, 7vw, 5rem);
 }
 
-.hks-tour-section,
+.hks-campaign-section,
 .hks-quote-process {
 	margin-inline: auto;
 	max-width: 64rem;
-	padding-block: var(--wp--preset--spacing--60);
+	padding-block: 2.5rem;
 }
 
-.hks-tour-section + .hks-tour-section,
-.hks-price-panel + .hks-tour-section,
-.hks-tour-section + .hks-quote-process {
+.hks-campaign-section + .hks-campaign-section,
+.hks-price-panel + .hks-campaign-section {
 	border-top: 1px solid rgb(24 43 58 / 16%);
 }
 
-.hks-tour-section h2,
-.hks-quote-process h2,
-.hks-price-panel h2 {
-	margin-top: 0;
-}
-
-.hks-prose {
-	font-size: var(--wp--preset--font-size--lead);
-	max-width: 46rem;
+.hks-price-panel,
+.hks-quote-process {
+	background: var(--wp--preset--color--white);
+	border: 1px solid rgb(24 43 58 / 16%);
+	border-radius: 10px;
+	margin: 2rem auto;
+	max-width: 64rem;
+	padding: 1.5rem;
 }
 
 .hks-price-panel {
-	align-items: start;
-	background: var(--wp--preset--color--white);
-	border-left: 5px solid var(--wp--preset--color--saffron);
-	box-shadow: 0 14px 40px rgb(24 43 58 / 9%);
 	display: grid;
 	gap: 1rem 2rem;
 	grid-template-columns: minmax(14rem, 0.8fr) minmax(0, 1.2fr);
-	margin: var(--wp--preset--spacing--40) auto;
-	max-width: 64rem;
-	padding: var(--wp--preset--spacing--40);
 }
 
+.hks-price-panel h2,
 .hks-price-panel p {
 	margin-block: 0;
 }
 
-.hks-price-panel__status,
-.hks-small-print {
-	color: rgb(22 27 31 / 72%);
-	font-size: var(--wp--preset--font-size--small);
+/* Catalogue and Destination */
+.hks-catalogue-body,
+.hks-destination-results {
+	padding-block: clamp(2.5rem, 6vw, 5rem);
 }
 
-.hks-itinerary {
-	list-style: none;
-	margin: var(--wp--preset--spacing--40) 0 0;
-	padding: 0;
+.hks-catalogue-controls {
+	background: var(--wp--preset--color--white);
+	border: 1px solid rgb(24 43 58 / 16%);
+	border-radius: 10px;
+	margin-bottom: 2.5rem;
+	padding: 1rem;
 }
 
-.hks-itinerary > li {
+.hks-catalogue-controls__fields {
 	display: grid;
-	gap: var(--wp--preset--spacing--30);
-	grid-template-columns: 3.5rem minmax(0, 1fr);
-	position: relative;
+	gap: 0.75rem;
+	grid-template-columns: repeat(5, minmax(8rem, 1fr));
 }
 
-.hks-itinerary > li + li {
-	margin-top: var(--wp--preset--spacing--40);
-}
-
-.hks-itinerary > li:not(:last-child)::before {
-	background: rgb(44 122 120 / 28%);
-	content: "";
-	height: calc(100% + var(--wp--preset--spacing--40));
-	left: 1.45rem;
-	position: absolute;
-	top: 2.5rem;
-	width: 2px;
-}
-
-.hks-itinerary__marker {
-	align-items: center;
-	background: var(--wp--preset--color--lake-teal);
-	border-radius: 999px;
-	color: var(--wp--preset--color--white);
-	display: flex;
-	font-family: var(--wp--preset--font-family--sora);
-	font-size: 0.8rem;
+.hks-catalogue-controls label {
+	display: grid;
+	font-size: 0.76rem;
 	font-weight: 700;
-	height: 3rem;
-	justify-content: center;
-	position: relative;
-	width: 3rem;
-	z-index: 1;
+	gap: 0.3rem;
 }
 
-.hks-itinerary h3 {
+.hks-catalogue-controls select {
+	appearance: none;
+	background-color: var(--wp--preset--color--white);
+	border: 1px solid rgb(24 43 58 / 24%);
+	border-radius: 7px;
+	color: var(--wp--preset--color--near-black);
+	min-height: 44px;
+	padding: 0.55rem 2rem 0.55rem 0.65rem;
+}
+
+.hks-catalogue-controls__actions {
+	align-items: center;
+	display: flex;
+	gap: 1rem;
+	justify-content: end;
+	margin-top: 1rem;
+}
+
+.hks-catalogue-controls__actions a {
+	font-size: 0.86rem;
+	font-weight: 700;
+}
+
+.wp-block-query-pagination {
+	margin-top: 2.5rem;
+}
+
+.hks-catalogue-prompt {
+	background: var(--wp--preset--color--pale-mist);
+	border-top: 1px solid rgb(24 43 58 / 12%);
+	padding-block: 3rem;
+}
+
+.hks-catalogue-prompt h2 {
 	margin: 0;
 }
 
-.hks-itinerary__facts {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.75rem 1.5rem;
-	margin: 1rem 0 0;
-}
-
-.hks-itinerary__facts div {
-	max-width: 18rem;
-}
-
-.hks-itinerary__facts dt,
-.hks-practical-grid dt {
+.hks-catalogue-prompt a {
 	color: var(--wp--preset--color--lake-teal);
-	font-size: var(--wp--preset--font-size--utility);
 	font-weight: 700;
-	text-transform: uppercase;
 }
 
-.hks-itinerary__facts dd,
-.hks-practical-grid dd {
-	margin: 0.2rem 0 0;
-}
-
-.hks-list-columns,
-.hks-practical-grid {
+.hks-destination-intro__body {
 	display: grid;
-	gap: var(--wp--preset--spacing--40);
-	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 2.5rem;
+	grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.8fr);
+	padding-block: 2rem;
 }
 
-.hks-detail-list h3 {
-	border-bottom: 2px solid var(--wp--preset--color--lake-teal);
-	padding-bottom: 0.65rem;
+.hks-destination-intro__body figure {
+	margin: 0;
+	position: relative;
 }
 
-.hks-detail-list--excluded h3 {
-	border-color: var(--wp--preset--color--saffron);
-}
-
-.hks-detail-list ul,
-.hks-detail-list > ul,
-.hks-quote-process ol {
-	padding-left: 1.25rem;
-}
-
-.hks-detail-list li + li {
-	margin-top: 0.85rem;
-}
-
-.hks-detail-list li span {
-	display: block;
-	font-size: var(--wp--preset--font-size--small);
-	margin-top: 0.15rem;
-}
-
-.hks-practical-grid {
-	margin: var(--wp--preset--spacing--40) 0 0;
-}
-
-.hks-practical-grid div {
-	border-top: 1px solid rgb(24 43 58 / 18%);
-	padding-top: 1rem;
-}
-
-.hks-faqs {
-	border-top: 1px solid rgb(24 43 58 / 18%);
-}
-
-.hks-faqs details {
-	border-bottom: 1px solid rgb(24 43 58 / 18%);
-	padding-block: 1rem;
-}
-
-.hks-faqs summary {
-	color: var(--wp--preset--color--midnight-navy);
-	cursor: pointer;
-	font-family: var(--wp--preset--font-family--sora);
-	font-weight: 650;
-}
-
-.hks-faqs details > div {
-	max-width: 46rem;
-	padding-top: 0.75rem;
-}
-
-.hks-quote-process {
-	background: rgb(44 122 120 / 9%);
-	border-radius: var(--wp--custom--radius--medium, 12px);
-	padding: var(--wp--preset--spacing--50);
-}
-
-.hks-final-quote {
-	padding: var(--wp--preset--spacing--60) max(1rem, calc((100vw - 1240px) / 2));
-}
-
-.hks-final-quote h2,
-.hks-final-quote p {
-	margin-block: 0;
-}
-
-.hks-catalogue-page,
-.hks-destination-page {
-	padding-block: var(--wp--preset--spacing--70);
-}
-
-.hks-archive-intro {
-	margin-bottom: var(--wp--preset--spacing--60);
-}
-
-.hks-archive-intro > * {
-	max-width: 48rem;
-}
-
-.hks-tour-grid {
-	gap: var(--wp--preset--spacing--40);
-}
-
-.hks-tour-grid > li {
-	border: 0 !important;
-	padding: 0 !important;
-}
-
-.hks-tour-card {
-	background: var(--wp--preset--color--white);
-	border: 1px solid rgb(24 43 58 / 14%);
-	border-radius: var(--wp--custom--radius--medium, 12px);
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	overflow: hidden;
-	transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
-}
-
-.hks-tour-card:hover {
-	border-color: rgb(44 122 120 / 50%);
-	box-shadow: 0 14px 34px rgb(24 43 58 / 10%);
-	transform: translateY(-2px);
-}
-
-.hks-tour-card__media {
-	display: block;
-	height: 13rem;
-}
-
-.hks-tour-card__media img {
+.hks-destination-intro__body img {
+	border-radius: 10px;
 	height: 100%;
 	object-fit: cover;
 	width: 100%;
 }
 
-.hks-tour-card__body {
-	display: flex;
-	flex: 1;
-	flex-direction: column;
-	padding: var(--wp--preset--spacing--30);
+/* Footer */
+.hks-site-footer {
+	padding-block: clamp(3rem, 6vw, 5rem);
 }
 
-.hks-tour-card h2 {
-	font-size: var(--wp--preset--font-size--card-title);
-	margin: 0;
-}
-
-.hks-tour-card h2 a {
-	text-decoration: none;
-}
-
-.hks-tour-card__route {
-	color: var(--wp--preset--color--lake-teal);
-	font-size: var(--wp--preset--font-size--small);
-	font-weight: 650;
-}
-
-.hks-tour-card__footer {
-	align-items: end;
-	border-top: 1px solid rgb(24 43 58 / 14%);
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.75rem;
-	justify-content: space-between;
-	margin-top: auto;
-	padding-top: 1rem;
-}
-
-.hks-tour-card__footer a {
-	font-weight: 650;
-}
-
-.hks-tour-card__price {
+.hks-site-footer__grid {
 	display: grid;
-	gap: 0.2rem;
-	max-width: 100%;
+	gap: 2.5rem;
+	grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(10rem, 0.6fr));
 }
 
-.hks-tour-card__price span {
-	color: rgb(22 27 31 / 70%);
-	font-size: 0.75rem;
-	line-height: 1.4;
+.hks-site-footer h2 {
+	color: inherit;
+	font-size: 0.9rem !important;
+	margin-top: 0;
 }
 
-.hks-destination-intro {
+.hks-site-footer a {
+	color: inherit;
+}
+
+.hks-site-footer nav {
 	display: grid;
-	gap: var(--wp--preset--spacing--50);
-	margin-bottom: var(--wp--preset--spacing--60);
+	font-size: 0.9rem;
+	gap: 0.5rem;
 }
 
-.hks-destination-intro--with-image {
-	grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.8fr);
-}
+@media (max-width: 68rem) {
+	.hks-primary-nav {
+		display: none;
+	}
 
-.hks-destination-intro__lead {
-	font-size: var(--wp--preset--font-size--lead);
-	max-width: 48rem;
-}
+	.hks-menu-toggle {
+		display: flex;
+	}
 
-.hks-destination-intro figure {
-	margin: 0;
-	position: relative;
-}
+	.hks-tour-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+	}
 
-.hks-destination-intro img {
-	border-radius: var(--wp--custom--radius--medium, 12px);
-	height: 100%;
-	object-fit: cover;
-}
-
-.hks-home-hero,
-.hks-home-section {
-	padding: var(--wp--preset--spacing--80) max(1rem, calc((100vw - 1240px) / 2));
-}
-
-.hks-home-hero h1 {
-	max-width: 13ch;
-}
-
-.hks-home-hero p {
-	max-width: 48rem;
-}
-
-.hks-home-section--quiet {
-	border-block: 1px solid rgb(24 43 58 / 12%);
-}
-
-.hks-home-steps {
-	font-size: var(--wp--preset--font-size--lead);
-	max-width: 48rem;
-}
-
-.hks-home-steps li + li {
-	margin-top: 0.75rem;
-}
-
-.hks-campaign-navigation-campaign_minimal .hks-site-header .wp-block-navigation {
-	display: none;
+	.hks-catalogue-controls__fields {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
 }
 
 @media (max-width: 56rem) {
-	.hks-tour-hero--with-image,
-	.hks-destination-intro--with-image {
+	.hks-home-hero--with-image {
 		grid-template-columns: 1fr;
 	}
 
-	.hks-tour-hero__media {
-		min-height: 20rem;
+	.hks-home-hero__media {
+		grid-column: 1;
+		grid-row: 1;
+		min-height: 48vw;
 	}
 
-	.hks-price-panel {
+	.hks-home-hero__content {
+		grid-column: 1;
+		grid-row: 2;
+		margin: 0;
+		padding-inline: max(1rem, calc((100vw - 1240px) / 2));
+	}
+
+	.hks-tour-workspace {
 		grid-template-columns: 1fr;
+	}
+
+	.hks-tour-facts,
+	.hks-tour-quote,
+	.hks-tour-sections {
+		grid-column: 1;
+		grid-row: auto;
+	}
+
+	.hks-tour-quote__panel {
+		position: static;
+	}
+
+	.hks-campaign-hero--with-image,
+	.hks-operator-section__grid,
+	.hks-proof-section,
+	.hks-destination-intro__body {
+		grid-template-columns: 1fr;
+	}
+
+	.hks-destination-grid,
+	.hks-process-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.hks-site-footer__grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.hks-site-footer__grid > div:first-child {
+		grid-column: 1 / -1;
 	}
 }
 
 @media (max-width: 48rem) {
-	.hks-site-header .wp-block-group.is-layout-flex {
-		row-gap: var(--wp--preset--spacing--20);
+	html {
+		scroll-padding-top: 5rem;
 	}
 
-	.hks-fast-facts,
+	.hks-utility {
+		display: none;
+	}
+
+	.hks-primary-header__inner {
+		min-height: 68px;
+	}
+
+	.hks-primary-header__inner > .hks-brand-link img {
+		width: 10.5rem;
+	}
+
+	.hks-header-actions > .hks-button--quote {
+		display: none;
+	}
+
+	.hks-title-band {
+		padding-block: 1.75rem;
+	}
+
+	.hks-home-hero {
+		min-height: auto;
+	}
+
+	.hks-home-hero__media {
+		min-height: 15rem;
+	}
+
+	.hks-home-hero__content {
+		padding-block: 2.75rem;
+	}
+
+	.hks-home-hero h1 {
+		font-size: clamp(2.45rem, 11vw, 3.3rem);
+	}
+
+	.hks-home-section {
+		padding-block: 3.75rem;
+	}
+
+	.hks-section-heading {
+		align-items: start;
+		flex-direction: column;
+	}
+
+	.hks-tour-grid,
+	.hks-destination-grid,
+	.hks-process-grid,
+	.hks-browse-groups,
+	.hks-proof-section ul,
+	.hks-site-footer__grid,
+	.hks-catalogue-controls__fields,
 	.hks-list-columns,
-	.hks-practical-grid {
+	.hks-practical-grid,
+	.hks-rate-assumptions {
+		grid-template-columns: 1fr !important;
+	}
+
+	.hks-destination-card {
+		min-height: 14rem;
+	}
+
+	.hks-group-route__inner,
+	.hks-final-quote > .hks-shell {
+		align-items: stretch;
+		flex-direction: column;
+	}
+
+	.hks-tour-gallery__grid,
+	.hks-tour-gallery--2 .hks-tour-gallery__grid {
+		grid-template-columns: 2fr 1fr;
+		grid-template-rows: minmax(12rem, 55vw);
+	}
+
+	.hks-tour-gallery--1 .hks-tour-gallery__grid {
+		grid-template-columns: 1fr;
+	}
+
+	.hks-tour-gallery--3 .hks-tour-gallery__item:first-child {
+		grid-row: 1;
+	}
+
+	.hks-tour-gallery--3 .hks-tour-gallery__item:nth-child(3) {
+		display: none;
+	}
+
+	.hks-tour-facts {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.hks-tour-facts div:nth-child(n) {
+		border-left: 0;
+		border-top: 1px solid rgb(24 43 58 / 10%);
+		padding: 0.8rem 0;
+	}
+
+	.hks-tour-facts div:nth-child(even) {
+		padding-left: 1rem;
+	}
+
+	.hks-tour-tabs {
+		display: none;
+	}
+
+	.hks-tour-section__content {
+		padding-top: 0.75rem;
+	}
+
+	.hks-itinerary__content {
+		padding-left: 0;
+	}
+
+	.hks-catalogue-controls__actions {
+		justify-content: stretch;
+	}
+
+	.hks-catalogue-controls__actions button {
+		flex: 1;
+	}
+
+	.hks-mobile-quote-bar {
+		background: var(--wp--preset--color--white);
+		border-top: 1px solid rgb(24 43 58 / 16%);
+		bottom: 0;
+		display: block;
+		left: 0;
+		padding: 0.65rem max(1rem, env(safe-area-inset-left)) max(0.65rem, env(safe-area-inset-bottom));
+		position: fixed;
+		right: 0;
+		z-index: var(--wp--custom--z-index--sticky, 200);
+	}
+
+	.hks-mobile-quote-bar button {
+		background: var(--wp--preset--color--saffron);
+		color: var(--wp--preset--color--midnight-navy);
+		width: 100%;
+	}
+
+	.hks-tour-page + .hks-site-footer,
+	.single-hks_tour .hks-site-footer {
+		padding-bottom: 6rem;
+	}
+
+	.hks-fast-facts {
 		grid-template-columns: 1fr;
 	}
 
 	.hks-fast-facts li {
-		padding-block: 0.5rem;
+		padding-block: 0.55rem;
 		padding-right: 0;
 	}
 
 	.hks-fast-facts li + li {
 		border-left: 0;
-		border-top: 1px solid rgb(255 255 255 / 18%);
+		border-top: 1px solid rgb(255 255 255 / 20%);
 		padding-left: 0;
 	}
 
-	.hks-tour-details {
-		padding-block: var(--wp--preset--spacing--50);
-	}
-
-	.hks-tour-section,
-	.hks-quote-process {
-		padding-block: var(--wp--preset--spacing--50);
-	}
-
-	.hks-quote-process,
 	.hks-price-panel {
-		padding: var(--wp--preset--spacing--30);
-	}
-
-	.hks-tour-grid {
-		grid-template-columns: 1fr !important;
+		grid-template-columns: 1fr;
 	}
 
 	.hks-hero-cta {
@@ -677,9 +1994,9 @@ body {
 	*,
 	*::before,
 	*::after {
-		scroll-behavior: auto !important;
-		transition-duration: 0.01ms !important;
 		animation-duration: 0.01ms !important;
 		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+		transition-duration: 0.01ms !important;
 	}
 }

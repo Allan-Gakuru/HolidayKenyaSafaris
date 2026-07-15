@@ -61,6 +61,8 @@ REQUIRED_THEME_FILES = [
     "templates/taxonomy-hks_destination.html",
     "inc/TourBlocks.php",
     "blocks/destination-intro/block.json",
+    "blocks/catalogue-controls/block.json",
+    "blocks/home-experience/block.json",
     "blocks/tour-card/block.json",
     "blocks/tour-details/block.json",
     "blocks/tour-hero/block.json",
@@ -70,6 +72,8 @@ REQUIRED_THEME_FILES = [
     "assets/fonts/sora-latin-variable.woff2",
     "assets/fonts/licenses/Inter-OFL.txt",
     "assets/fonts/licenses/Sora-OFL.txt",
+    "assets/js/navigation.js",
+    "assets/js/tour-ui.js",
 ]
 
 REQUIRED_PLUGIN_FILES = [

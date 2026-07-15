@@ -12,6 +12,9 @@
     "location": {
       "type": "string",
       "default": "content"
+    },
+    "label": {
+      "type": "string"
     }
   },
   "supports": {

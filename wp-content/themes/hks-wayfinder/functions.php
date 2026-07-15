@@ -50,6 +50,38 @@ function hks_wayfinder_enqueue_styles(): void {
 add_action( 'wp_enqueue_scripts', 'hks_wayfinder_enqueue_styles' );
 
 /**
+ * Load the small interaction layer for the navigation and canonical Tour UI.
+ * All essential content remains server rendered when JavaScript is unavailable.
+ *
+ * @return void
+ */
+function hks_wayfinder_enqueue_scripts(): void {
+	$navigation_path = get_theme_file_path( 'assets/js/navigation.js' );
+	$navigation_uri  = get_theme_file_uri( 'assets/js/navigation.js' );
+
+	wp_enqueue_script(
+		'hks-wayfinder-navigation',
+		$navigation_uri,
+		array(),
+		is_readable( $navigation_path ) ? (string) filemtime( $navigation_path ) : wp_get_theme()->get( 'Version' ),
+		array( 'in_footer' => true, 'strategy' => 'defer' )
+	);
+
+	if ( is_singular( array( 'hks_tour', 'hks_campaign' ) ) ) {
+		$tour_ui_path = get_theme_file_path( 'assets/js/tour-ui.js' );
+
+		wp_enqueue_script(
+			'hks-wayfinder-tour-ui',
+			get_theme_file_uri( 'assets/js/tour-ui.js' ),
+			array(),
+			is_readable( $tour_ui_path ) ? (string) filemtime( $tour_ui_path ) : wp_get_theme()->get( 'Version' ),
+			array( 'in_footer' => true, 'strategy' => 'defer' )
+		);
+	}
+}
+add_action( 'wp_enqueue_scripts', 'hks_wayfinder_enqueue_scripts' );
+
+/**
  * Provide deployable favicon assets until an editor configures a Site Icon.
  *
  * WordPress owns the Site Icon when one has been selected in the dashboard, so
@@ -113,3 +145,104 @@ function hks_wayfinder_campaign_body_class( array $classes ): array {
 	return $classes;
 }
 add_filter( 'body_class', 'hks_wayfinder_campaign_body_class' );
+
+/**
+ * Return populated terms for public navigation and catalogue controls.
+ *
+ * @param string $taxonomy Taxonomy name.
+ * @param int    $limit    Maximum terms to return. Zero returns all.
+ * @return WP_Term[]
+ */
+function hks_wayfinder_populated_terms( string $taxonomy, int $limit = 0 ): array {
+	if ( ! taxonomy_exists( $taxonomy ) ) {
+		return array();
+	}
+
+	$terms = get_terms(
+		array(
+			'taxonomy'   => $taxonomy,
+			'hide_empty' => true,
+			'number'     => max( 0, $limit ),
+			'orderby'    => 'count',
+			'order'      => 'DESC',
+		)
+	);
+
+	return is_wp_error( $terms ) ? array() : $terms;
+}
+
+/**
+ * Build a usable catalogue URL for public and editor-only Tour taxonomies.
+ *
+ * @param WP_Term $term Term object.
+ * @return string
+ */
+function hks_wayfinder_term_url( WP_Term $term ): string {
+	if ( 'hks_destination' === $term->taxonomy ) {
+		$link = get_term_link( $term );
+
+		return is_wp_error( $link ) ? '' : $link;
+	}
+
+	$archive = get_post_type_archive_link( 'hks_tour' ) ?: home_url( '/tours/' );
+
+	return add_query_arg( $term->taxonomy, $term->slug, $archive );
+}
+
+/**
+ * Find a published page route without creating placeholder navigation.
+ *
+ * @param string $path Page path.
+ * @return string
+ */
+function hks_wayfinder_published_page_url( string $path ): string {
+	$page = get_page_by_path( $path, OBJECT, 'page' );
+
+	return $page && 'publish' === $page->post_status ? get_permalink( $page ) : '';
+}
+
+/**
+ * Apply allowlisted catalogue filters without changing dashboard queries.
+ *
+ * @param WP_Query $query Main query.
+ * @return void
+ */
+function hks_wayfinder_filter_tour_archive( WP_Query $query ): void {
+	if ( is_admin() || ! $query->is_main_query() || ! $query->is_post_type_archive( 'hks_tour' ) ) {
+		return;
+	}
+
+	$tax_query = array();
+	$filters   = array( 'hks_destination', 'hks_tour_type', 'hks_occasion', 'hks_travel_style' );
+
+	foreach ( $filters as $taxonomy ) {
+		$raw   = $_GET[ $taxonomy ] ?? '';
+		$value = is_string( $raw ) ? sanitize_title( wp_unslash( $raw ) ) : '';
+
+		if ( '' !== $value && term_exists( $value, $taxonomy ) ) {
+			$tax_query[] = array(
+				'taxonomy' => $taxonomy,
+				'field'    => 'slug',
+				'terms'    => $value,
+			);
+		}
+	}
+
+	if ( $tax_query ) {
+		$query->set( 'tax_query', $tax_query );
+	}
+
+	$raw_sort = $_GET['hks_sort'] ?? '';
+	$sort     = is_string( $raw_sort ) ? sanitize_key( wp_unslash( $raw_sort ) ) : 'recommended';
+
+	if ( 'title' === $sort ) {
+		$query->set( 'orderby', 'title' );
+		$query->set( 'order', 'ASC' );
+	} elseif ( 'newest' === $sort ) {
+		$query->set( 'orderby', 'date' );
+		$query->set( 'order', 'DESC' );
+	} else {
+		$query->set( 'orderby', array( 'menu_order' => 'ASC', 'date' => 'DESC' ) );
+	}
+}
+add_action( 'pre_get_posts', 'hks_wayfinder_filter_tour_archive' );

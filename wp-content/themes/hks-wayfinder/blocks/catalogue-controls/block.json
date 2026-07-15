@@ -1,12 +1,12 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "hks-wayfinder/tour-hero",
+  "name": "hks-wayfinder/catalogue-controls",
   "version": "0.3.0",
-  "title": "HKS Tour hero",
+  "title": "HKS Tour catalogue controls",
   "category": "theme",
-  "icon": "cover-image",
-  "description": "Canonical Tour title and gallery or focused Campaign hero, with approved media only.",
+  "icon": "filter",
+  "description": "Allowlisted Tour filters and sorting for populated catalogue terms.",
   "textdomain": "hks-wayfinder",
   "supports": { "html": false, "multiple": false }
 }

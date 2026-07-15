@@ -21,14 +21,16 @@ Regenerate or verify the font package from the pinned upstream files with `tools
 ## First activation
 
 1. Activate **HKS Wayfinder** under Appearance → Themes.
-2. Confirm the built-in Home and Tours navigation links. Expand navigation only after the corresponding pages are approved and published.
+2. Confirm the product-led desktop navigation and mobile drawer. Only populated catalogue terms and published routes appear.
 3. Configure the WordPress Site Icon when the final identity has client sign-off; until then, the theme fallback is used.
 4. Do not publish a photograph until its source and usage approval are recorded.
 
-Version `0.2.0` adds the public MVP templates for the homepage, Tour catalogue,
-Destination archives, canonical Tours, and focused Campaigns. Four dynamic theme
-blocks render the hero, canonical details, Tour cards, and audited Destination
-guidance. The HKS Core quote block supplies the saved inquiry and WhatsApp handoff.
+Version `0.3.0` adds the Attic-inspired public catalogue: a product-led header,
+image-led homepage, filterable Tour archive, compact Destination pages, and the
+canonical Tour gallery/workspace with desktop tabs, mobile disclosures, a sticky
+quote panel, itinerary timeline, and related Tours. Focused Campaigns retain their
+separate emotional conversion layout. The HKS Core quote block remains the single
+source of the saved inquiry, message review, and visitor-controlled WhatsApp handoff.
 
 Public presentation is fail-closed:
 

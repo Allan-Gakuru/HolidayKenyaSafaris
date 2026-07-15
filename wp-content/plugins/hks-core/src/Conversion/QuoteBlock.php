@@ -40,6 +40,11 @@ final class QuoteBlock {
 
 		$instance_id = wp_unique_id( 'hks-inquiry-' );
 		$location    = sanitize_key( $attributes['location'] ?? 'content' );
+		$label       = sanitize_text_field( $attributes['label'] ?? '' );
+
+		if ( '' !== $label ) {
+			$context['cta_label'] = $label;
+		}
 
 		ob_start();
 		?>
@@ -162,7 +167,7 @@ final class QuoteBlock {
 		}
 
 		if ( '' === $cta_label ) {
-			$cta_label = __( 'Request a WhatsApp quote', 'hks-core' );
+			$cta_label = __( 'Request quote on WhatsApp', 'hks-core' );
 		}
 
 		if ( '' === $package_label ) {
