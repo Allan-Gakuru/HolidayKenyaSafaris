@@ -4,6 +4,8 @@
 
 Build backward from a qualified WhatsApp inquiry. Do not start by producing a generic homepage and then bolt on conversion later.
 
+The standard site must also feel like a complete travel catalogue. Follow `UI-REFERENCE-ATTIC-TRAVEL.md` for the global shell, homepage, archives, and canonical Tour pages. Use the existing Maasai Mara prototype only for Campaign-mode structure.
+
 ## Phase 0: Repository and Environment Audit
 
 Actions:
@@ -83,6 +85,7 @@ Actions:
 - Add confirmation statuses, field guidance, and validation.
 - Lock critical templates while preserving practical editing regions.
 - Add preview behavior for Tours and Campaigns.
+- Add ordered gallery roles, curated related Tours, featured priority, highlights, and quote-panel copy fields required by the canonical Tour and catalogue templates.
 
 Acceptance:
 
@@ -99,6 +102,7 @@ Actions:
 - Persist package and campaign attribution.
 - Implement the event contract with placeholder-disabled analytics configuration.
 - Test desktop WhatsApp Web and mobile WhatsApp behavior.
+- Expose one reusable API and block/pattern contract so the desktop sticky quote panel, mobile sticky action, in-flow panels, header action, and Campaign pages all open the same intake flow.
 
 Acceptance:
 
@@ -132,15 +136,20 @@ Acceptance:
 
 Build in this order:
 
-1. Tour detail.
-2. Campaign landing page.
-3. Tour catalogue.
-4. Destination page.
-5. Homepage.
-6. About/trust.
-7. Group travel.
-8. Contact.
-9. Legal and policy templates.
+1. Utility bar, desktop header, dropdown navigation, mobile drawer, and footer.
+2. Canonical Tour title band and three-image gallery.
+3. Canonical Tour facts, accessible tabs, mobile disclosures, and itinerary timeline.
+4. Sticky desktop quote panel and mobile in-flow/sticky quote actions.
+5. Related-Tour cards and query/override behavior.
+6. Complete canonical Tour detail template.
+7. Campaign landing-page template based on the existing Maasai Mara conversion structure.
+8. Tour catalogue and taxonomy archives.
+9. Destination page.
+10. Homepage.
+11. About/trust.
+12. Group Travel.
+13. Contact.
+14. Legal and policy templates.
 
 Why this order:
 
@@ -151,7 +160,9 @@ Acceptance:
 
 - Every template uses the shared design system and structured content.
 - Campaign pages inherit canonical Tour facts.
-- The current Maasai Mara prototype's strongest UX is preserved without carrying over its old identity.
+- The canonical Tour page reproduces the approved Attic-inspired title band, gallery, two-column workspace, tabs/disclosures, itinerary, quote panel, and related-Tour flow without copying Attic branding or defects.
+- The permanent reference-site booking form is absent; every Tour quote action opens the approved HKS intake and WhatsApp handoff.
+- The current Maasai Mara prototype's strongest UX is preserved in Campaign mode without carrying over its old identity.
 
 ## Phase 7: Catalogue Migration
 
@@ -194,6 +205,9 @@ Test:
 - Chrome, Edge, Firefox, and Safari where available.
 - Keyboard navigation and screen-reader semantics.
 - Long titles, large KSh values, missing optional fields, and empty states.
+- Desktop dropdown navigation, mobile drawer focus behavior, gallery lightbox, tabs, disclosures, itinerary expand/collapse, and related-Tour navigation.
+- Canonical Tour layouts at 360, 390, 768, 1024, 1280, and 1440px.
+- Sticky quote-panel stopping behavior before the footer and mobile safe-area spacing.
 - Form errors, WhatsApp cancellation, and back navigation.
 - Slow connections and image failures.
 - Template editing by a non-developer.
@@ -202,6 +216,8 @@ Test:
 - Analytics debug modes.
 
 Capture desktop and mobile screenshots for the core templates before acceptance.
+
+Compare the resulting header, homepage, catalogue, and canonical Tour page against the reviewed Attic reference at the same viewport sizes. Verify structural similarity and HKS-specific improvements rather than pixel-identical branding.
 
 ## Phase 10: Launch and Learning
 

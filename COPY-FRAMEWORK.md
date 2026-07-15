@@ -87,19 +87,21 @@ Show the immediate future:
 - The quote arrives with options.
 - The buyer can decide without chasing five vague posters.
 
-## Page Copy Sequence
+## Canonical Tour Copy Sequence
 
-Use this as a default, then adapt it to the package:
+Canonical Tour pages use the Attic-inspired catalogue structure rather than an avatar-specific campaign hero. Write for an interested local traveler who wants to understand and compare the real package.
 
-1. **Hero outcome or pressure:** one strong headline, one supporting promise, duration, route, and price context.
-2. **Fast facts:** duration, departure, travel style, accommodation basis, ideal audience, current price status.
-3. **Why this trip:** translate itinerary into an emotional outcome.
-4. **Day-by-day itinerary:** remove uncertainty.
-5. **Trust and logistics:** vehicle, guide, accommodation, meals, pickup, operator relationship, and proof.
-6. **Included and excluded:** visible before the quote request.
-7. **Price assumptions:** season, residency, sharing basis, group size, and options.
-8. **FAQ:** answer the dominant objections for the page's audience.
-9. **WhatsApp intake:** explain the small next step and what happens afterward.
+1. **Title band:** use the literal package name as the H1. Do not turn it into a vague emotional slogan or repeat it as a second full heading below the gallery.
+2. **Fast facts:** duration, nights, departure, route, travel style, accommodation basis, transport, and price status.
+3. **Overview:** explain why the trip is worth considering in specific, natural language.
+4. **Itinerary:** remove uncertainty day by day.
+5. **Included/Excluded:** state the practical boundaries plainly.
+6. **Rates & Important Information:** expose season, residency, sharing basis, group size, vehicle, accommodation, supplements, and current status.
+7. **Trust and logistics:** vehicle, guide, accommodation, meals, pickup, operator relationship, and approved proof.
+8. **Quote panel:** name the next step, explain the short intake, and use **Request quote on WhatsApp**.
+9. **Related Tours:** use factual card titles and useful comparison details.
+
+The gallery and page structure provide visual aspiration. The copy should provide clarity, confidence, and a reason to request the quote.
 
 ## Campaign Landing Page Sequence
 
@@ -114,6 +116,8 @@ Campaign pages may be shorter and more focused:
 7. Intake form and WhatsApp handoff.
 
 Do not change factual tour data to fit an ad. Change emphasis, sequence, imagery, and persuasive framing.
+
+The current Maasai Mara prototype belongs to this Campaign mode. Its emotional opening is not the canonical Tour-page H1 pattern.
 
 ## Human Rewrite Pass
 
@@ -154,6 +158,7 @@ Stronger pressure-led campaign copy:
 
 Preferred:
 
+- Request quote on WhatsApp.
 - Request your WhatsApp quote.
 - Check dates and current KSh rate.
 - Plan this trip on WhatsApp.
@@ -166,6 +171,7 @@ Avoid:
 - Buy now, when there is no checkout.
 - Book instantly, when availability still requires confirmation.
 - Contact us, when the actual next step can be named.
+- Submit Booking, when the visitor is only requesting a quote.
 
 ## Copy Quality Gate
 
@@ -178,4 +184,3 @@ Before publishing, verify:
 - Is the main objection answered before the CTA?
 - Does the page sound like a competent person rather than generated brochure copy?
 - Is there one obvious next step?
-

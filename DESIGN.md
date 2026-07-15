@@ -4,7 +4,7 @@ This file turns the approved **Wayfinder** direction into implementation rules f
 
 ## Design intent
 
-Holiday Kenya Safaris should feel like a calm, capable local travel planner: specific enough to trust, warm enough to contact, and premium without becoming distant. The interface is editorial and place-led, not an app dashboard and not a discount-tour poster.
+Holiday Kenya Safaris should feel like a calm, capable local travel planner: specific enough to trust, warm enough to contact, and premium without becoming distant. The interface is place-led and catalogue-clear, not an app dashboard and not a discount-tour poster.
 
 The visual rhythm is:
 
@@ -12,6 +12,18 @@ The visual rhythm is:
 2. make the route, timing, accommodation, transport, inclusions, exclusions, and assumptions easy to scan;
 3. place a clear, informed quote action beside that proof;
 4. collect only the details needed to continue in WhatsApp.
+
+## Interface modes
+
+### Catalogue mode
+
+The homepage, global navigation, catalogue, destination pages, and canonical Tour pages follow `UI-REFERENCE-ATTIC-TRAVEL.md`. Catalogue mode is light, image-led, browseable, and internally connected. It should communicate the breadth and operational confidence of an established travel company.
+
+### Campaign mode
+
+Focused paid-ad pages may use the immersive, emotionally concentrated structure of the existing Maasai Mara prototype. Campaign mode can change the opening message, proof order, imagery, and navigation density while inheriting canonical Tour facts.
+
+Do not blend both modes into an indecisive hybrid on every page. Canonical Tour pages use the catalogue shell. Campaign pages earn the more dramatic opening.
 
 ## Identity
 
@@ -55,7 +67,7 @@ Never use colour alone to communicate price status, availability, validation, se
 - Both families must be self-hosted as WOFF2 files with their SIL Open Font License notices retained in the repository.
 - The logo wordmark remains outlined; never depend on a browser font to render the mark.
 
-Default type scale, adjusted responsively with `clamp()`:
+Default type scale, adjusted at deliberate responsive breakpoints rather than continuously scaled with viewport width:
 
 | Purpose | Target range | Weight |
 | --- | --- | --- |
@@ -90,19 +102,43 @@ Avoid generic orange sunsets, wildlife collages, fake luxury staging, aggressive
 
 ### Header
 
-Use the horizontal Wayfinder SVG on wide layouts and the compact HKS icon only when space requires it. The header should be calm, with one dominant quote action. It must remain keyboard navigable and must not resemble a software toolbar.
+Use a slim Midnight Navy utility bar and a white primary header on desktop. The utility bar contains only confirmed location, operator, contact, and social information. The primary header uses the horizontal Wayfinder SVG, product-led dropdown navigation, and one dominant **Request quote on WhatsApp** action.
+
+On mobile, use the Wayfinder mark and a familiar menu icon. The full-height navigation drawer uses accessible accordion groups, direct contact routes, and a quote action. It must trap focus, close with Escape, return focus to its trigger, and prevent background scrolling.
+
+The header must not resemble a software toolbar. Search is optional and should appear only when the catalogue is large enough for it to help.
+
+### Homepage and catalogue
+
+Use one decisive hero image or no more than three curated slides. Keep the next section discoverable, and place verified featured Tours immediately after the hero. Tour grids use stable image ratios, consistent title space, and practical metadata rather than image-and-title-only cards.
+
+Catalogue and taxonomy pages use a compact title and breadcrumb band, useful filters, a responsive Tour grid, and clear no-results behavior. Do not copy Attic Travel's abstract gradient, empty metadata, or oversized media inventory.
+
+### Canonical Tour shell
+
+Use the structure in `UI-REFERENCE-ATTIC-TRAVEL.md`:
+
+1. Compact title and breadcrumb band with the only H1.
+2. Three-image gallery mosaic.
+3. Destination or route line.
+4. Approximately 68/32 desktop workspace.
+5. Main Tour facts and accessible tabs.
+6. Sticky quote panel.
+7. Related Tours and final quote prompt.
+
+On mobile, the gallery simplifies, tabs become stacked disclosures, the quote panel returns to normal document flow, and a safe-area-aware sticky action remains available.
 
 ### Package summaries
 
-Show destination, duration, travel style, departure context, and price status before decorative metadata. A price is never presented without its assumptions. Unknown or unconfirmed numeric prices become **Request current rate** publicly.
+Show destination, duration, travel style, departure context, route, and price status before decorative metadata. A price is never presented without its assumptions. Unknown or unconfirmed numeric prices become **Request current rate** publicly. Every card has a clear View trip action; the whole card may be linked only when keyboard and assistive-technology behavior remains correct.
 
 ### Itinerary
 
-Use a readable day-by-day sequence with native headings or an accessible disclosure pattern. Do not hide the entire trip behind collapsed controls on mobile.
+Use a readable day-by-day timeline with native headings and accessible disclosures. Support individual expansion and, for longer itineraries, Expand all and Collapse all. Open useful initial content by default. Do not hide the entire trip behind collapsed controls on mobile.
 
 ### Quote actions
 
-Primary labels should describe the outcome, such as **Plan this trip** or **Request a WhatsApp quote**. Opening the action reveals the intake form first; it must never silently send visitor data. A mobile sticky action must respect safe areas and leave enough bottom padding that it cannot obscure content.
+The canonical primary label is **Request quote on WhatsApp**. Opening the action reveals the intake form first; it must never silently send visitor data. Canonical Tour pages use a sticky desktop quote panel containing price context, assumptions, the primary action, and a short explanation. They do not use a permanently visible long booking form. A mobile sticky action must respect safe areas and leave enough bottom padding that it cannot obscure content.
 
 ### Forms and dialogs
 

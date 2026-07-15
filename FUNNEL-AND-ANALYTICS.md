@@ -34,6 +34,24 @@ Where relevant, also collect:
 
 Do not require every optional field on every package. Form length should reflect the quoting complexity.
 
+## Canonical Tour Conversion Placement
+
+The canonical Tour page reproduces the reference site's two-column desktop workspace but replaces its permanent booking form with the HKS quote system.
+
+Desktop entry points:
+
+- Sticky right-column quote panel.
+- Final Tour quote prompt.
+- Header quote action when appropriate.
+
+Mobile entry points:
+
+- In-flow quote panel after the initial Tour facts.
+- Safe-area-aware sticky **Request quote on WhatsApp** action.
+- Final Tour quote prompt.
+
+Every entry point opens the same intake dialog or mobile sheet with Tour and campaign context already attached. Do not show a separate long form in the sidebar, silently launch WhatsApp, or describe the action as booking.
+
 ## WhatsApp Behavior
 
 Temporary destination:
@@ -76,6 +94,10 @@ Use a stable event vocabulary for Meta and GA4.
 | `view_tour` | Tour detail becomes viewable | tour ID, slug, destination, type, duration, price status |
 | `view_campaign` | Focused landing page becomes viewable | campaign ID, linked tour, avatar/angle, source |
 | `select_tour` | Visitor opens a tour from a listing | tour ID, list name, position |
+| `tour_gallery_open` | Visitor opens the Tour gallery | tour ID, image count, entry location |
+| `tour_section_open` | Visitor opens a Tour tab or mobile disclosure | tour ID, section name, device layout |
+| `itinerary_toggle` | Visitor opens a day or uses expand/collapse all | tour ID, day label or action; no personal values |
+| `related_tour_select` | Visitor opens a related Tour | source tour ID, selected tour ID, position |
 | `quote_cta_click` | Visitor opens the intake form | tour ID, campaign ID, CTA location |
 | `quote_form_start` | Visitor interacts with first field | tour ID, campaign ID |
 | `quote_form_error` | Validation prevents completion | field name, error type; never send sensitive values |
@@ -128,6 +150,7 @@ Diagnostic:
 - Ad CTR and CPC.
 - Landing-page engagement.
 - CTA click rate.
+- Gallery, Tour-section, and itinerary engagement where useful for diagnosing missing proof or unanswered questions.
 - Form abandonment and validation errors.
 - Performance by package, avatar angle, device, and placement.
 - Top objections recorded by consultants.

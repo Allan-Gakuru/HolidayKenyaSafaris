@@ -18,6 +18,7 @@ The canonical package record. One Tour must feed:
 - Catalogue cards.
 - Destination listings.
 - Related-tour modules.
+- Gallery, facts, tabs, itinerary disclosures, and quote panel on the canonical Tour template.
 - Campaign landing pages.
 - Structured data.
 - Analytics parameters.
@@ -126,6 +127,7 @@ Only expose filters that contain enough tours to be useful.
 | Original Ashford title | Text | Internal reference |
 | Short summary | Textarea | Factual listing summary |
 | Featured status | True/False | Curated, not automatically popularity data |
+| Featured priority | Number | Optional editorial order for homepage and curated lists |
 
 ### Core Package
 
@@ -144,6 +146,7 @@ Only expose filters that contain enough tours to be useful.
 | Resident basis | Select | Kenyan citizen, resident, non-resident, mixed, confirm |
 | Accommodation basis | Text | Named or tiered options |
 | Meals summary | Text | Avoid unexplained abbreviations publicly |
+| Trip highlights | Repeater | Short factual highlights used in Overview and cards where appropriate |
 
 ### Pricing
 
@@ -218,7 +221,8 @@ Policy fields remain unpublished or flagged until client-confirmed.
 ### Media and Rights
 
 - Hero image.
-- Gallery.
+- Ordered Tour gallery.
+- Gallery role per image: primary, supporting, accommodation, vehicle, activity, or general.
 - Vehicle image.
 - Accommodation images.
 - Route or map image.
@@ -232,9 +236,22 @@ Media metadata is informational and editorial. Do not implement automatic templa
 
 - CTA label override.
 - WhatsApp package label.
+- Quote-panel heading override.
+- Quote-panel supporting copy override.
 - Optional additional intake questions.
 - Consultant routing label, if later required.
 - Featured FAQ relationship.
+
+The default canonical CTA label is `Request quote on WhatsApp`. Overrides must describe the same quote action accurately and must not imply confirmed booking, payment, or availability.
+
+### Presentation and Relationships
+
+- Curated related Tours override.
+- Related-Tour fallback mode: destination, Tour type, duration, or automatic combined relevance.
+- Optional catalogue card summary override.
+- Optional catalogue card image override selected from approved media.
+
+The title band, gallery mosaic, desktop tabs, mobile disclosures, itinerary behavior, and sticky quote-panel structure are template-controlled. Do not expose unrestricted per-Tour layout builders for canonical facts.
 
 ## Campaign Fields
 
@@ -274,6 +291,8 @@ Use an options page or equivalent for:
 - Meta and GA IDs or integration settings.
 - Default logo assets.
 
+Use native WordPress Navigation for the approved primary structure in `WEBSITE-STRUCTURE.md`. Populate dropdown routes only when corresponding taxonomy archives or pages contain approved public content. Do not hard-code an empty menu item merely because it appears in the design reference.
+
 Each setting needs a confirmation status where the source is not yet final.
 
 ## Editorial Safeguards
@@ -284,6 +303,8 @@ Each setting needs a confirmation status where the source is not yet final.
 - Warn when a source checked date or confirmed price is stale.
 - Keep original Ashford source values for audit, even when public copy is rewritten.
 - Avoid free-form flexible content for canonical tour facts. Use it only for optional campaign storytelling modules.
+- Require at least one approved primary gallery image before a Tour can use the full gallery mosaic; otherwise render a deliberate single-image fallback without empty tiles.
+- Do not allow a permanent booking-form block in the canonical Tour quote-panel area.
 
 ## REST Readiness
 

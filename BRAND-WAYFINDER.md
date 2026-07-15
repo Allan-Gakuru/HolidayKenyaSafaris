@@ -90,10 +90,23 @@ Only use photographs whose rights the client has confirmed.
 
 - Attainable-premium, restorative, assured, and vivid.
 - Rich destination imagery balanced by very clear logistics.
+- Light, browseable Catalogue mode for the standard website; immersive Campaign mode for focused advertising pages.
+- Attic Travel is the approved structural reference for navigation, homepage package discovery, catalogue grids, and canonical Tour page composition. It is not a visual-identity or code reference.
 - Strong hierarchy and generous but efficient spacing.
 - Cards only for repeated tours, reviews, or genuine tools. Do not put every section in a floating card.
 - WhatsApp green is reserved for the conversion action.
 - Use Wayfinder route and compass details sparingly as navigational motifs.
+
+Translate the reference into Wayfinder:
+
+- Midnight Navy utility bar and trust surfaces.
+- White primary navigation and catalogue surfaces.
+- Pale Mist section alternation.
+- Lake Teal selected states and route cues.
+- Restrained Saffron directional accents.
+- WhatsApp Green only for WhatsApp conversion controls.
+
+Do not copy Attic Travel's maroon branding, abstract title gradient, fonts, logo treatment, permanent booking form, or oversized carousel.
 
 ## Existing References
 
@@ -102,5 +115,8 @@ Only use photographs whose rights the client has confirmed.
 - Brand concept presentation: `outputs/brand-identity/Holiday Kenya Safaris Brand Identity Concepts v2.pptx`
 - Existing Maasai Mara page whose structure and UX should be retained: `outputs/holiday-kenya-safari-maasai-mara.html`
 
-The existing page uses temporary non-Wayfinder colors and the singular brand name. Treat it as an information architecture and conversion reference, not a final visual identity.
+The existing page uses temporary non-Wayfinder colors and the singular brand name. Treat it as a Campaign information architecture and conversion reference, not the final visual identity or the default canonical Tour page.
 
+Additional structural reference:
+
+- `UI-REFERENCE-ATTIC-TRAVEL.md`

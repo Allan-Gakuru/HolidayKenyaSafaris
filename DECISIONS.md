@@ -57,6 +57,8 @@ Exclude by default:
 - Selecting `Save & review WhatsApp message` stores the validated inquiry privately in WordPress before the review step, so the team can recover a lead when WhatsApp does not open or the visitor does not complete the handoff.
 - The form must disclose storage and require contact consent before saving. WordPress records `WhatsApp opened` only after the launch click and must never claim that the message was sent.
 - Campaign attribution and package context should be retained.
+- The canonical public CTA label is **Request quote on WhatsApp**.
+- Canonical Tour pages use a persistent quote panel, not a permanently visible long booking form.
 
 ## Website Scope
 
@@ -68,6 +70,18 @@ Exclude by default:
 - Contact page.
 - Reusable focused landing-page template for advertising.
 - Future ability to add more campaign variations around the same tour.
+
+## UI and UX Structure
+
+- Attic Travel is the approved structural reference for the global navigation, image-led homepage, catalogue grids, and canonical Tour pages.
+- This is not permission to copy Attic Travel's branding, copy, source code, plugins, long booking form, oversized hero carousel, missing price context, or UX defects.
+- Standard website pages use light, browseable Catalogue mode.
+- Focused paid-ad pages use Campaign mode and may retain the immersive emotional structure of the existing Maasai Mara prototype.
+- Canonical Tour pages use a compact title and breadcrumb band, three-image gallery, destination line, approximately 68/32 desktop workspace, accessible tabs, mobile disclosures, itinerary timeline, sticky quote panel, related Tours, and final quote prompt.
+- The Attic-style booking sidebar is replaced by an HKS quote panel whose **Request quote on WhatsApp** button opens the approved intake, consent, private recovery, message-review, and WhatsApp-launch flow.
+- Desktop navigation uses a utility bar plus product-led primary header. Mobile uses a full-height accessible navigation drawer.
+- Approved top-level navigation is Home, Safaris, Coast & Stays, Destinations, Group Travel, About, Contact, and Request quote on WhatsApp.
+- International holidays, visa services, air ticketing, transfers, and inbound-only routes remain excluded.
 
 ## Brand
 

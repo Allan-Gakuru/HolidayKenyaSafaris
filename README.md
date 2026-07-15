@@ -4,7 +4,7 @@ Custom WordPress website for Holiday Kenya Safaris, a local-market travel brand 
 
 ## Start Here
 
-Read [AGENTS.md](AGENTS.md) and its 12 required documents before changing product, content, design, analytics, or deployment behavior. [PRODUCT.md](PRODUCT.md) captures the confirmed strategic design register. The numbered phase documents in [docs](docs) record the baseline, identity, foundation, content model, three-package seed, saved inquiry handoff, and public MVP templates.
+Read [AGENTS.md](AGENTS.md) and its 15 required documents before changing product, content, design, analytics, or deployment behavior. [PRODUCT.md](PRODUCT.md) captures the confirmed strategic design register. [UI-REFERENCE-ATTIC-TRAVEL.md](UI-REFERENCE-ATTIC-TRAVEL.md) defines the approved catalogue, navigation, homepage, and canonical Tour-page structure. The numbered phase documents in [docs](docs) record the baseline, identity, foundation, content model, three-package seed, saved inquiry handoff, and public MVP templates.
 
 For WordPress administration, approvals, inquiries, media rights, releases,
 maintenance, troubleshooting, and launch checks, use the
@@ -16,6 +16,13 @@ maintenance, troubleshooting, and launch checks, use the
 - Site plugin: `wp-content/plugins/hks-core/`.
 - Secure Custom Fields with version-controlled field definitions.
 - Primary conversion: explicitly saved private inquiry, visitor-reviewed WhatsApp message, and visitor-controlled send.
+
+## UI Architecture
+
+- Catalogue mode: Attic-inspired global header, image-led homepage, Tour grids, destinations, and canonical Tour pages, translated into the Wayfinder system.
+- Campaign mode: focused paid-ad pages using the existing Maasai Mara prototype's emotional conversion structure.
+- Canonical Tour conversion: sticky quote panel and **Request quote on WhatsApp** action, not a permanent booking form.
+- Source of truth: `UI-REFERENCE-ATTIC-TRAVEL.md`, `WEBSITE-STRUCTURE.md`, and `DESIGN.md`.
 
 ## Development and Verification
 
