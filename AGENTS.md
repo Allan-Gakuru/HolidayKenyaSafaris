@@ -56,12 +56,12 @@ The initial commercial endpoint is a qualified WhatsApp conversation, not online
 - Build for domestic safaris, excursions, coast trips, staycations, group packages, and relevant local special-interest travel.
 - Exclude international holidays, visa services, airport transfers, and inbound-only products unless the client later includes them.
 - Retain factual Ashford itinerary information, but rewrite marketing copy for local buyers.
-- Reuse only photographs the client has confirmed it may use.
-- Display prices primarily in KSh as provisional `From KSh...` values until confirmed.
-- Every price must expose its status and assumptions: season, residency, group size, transport, accommodation, and inclusions.
+- Treat an authorized editor's decision to upload or assign media and publish public content as client approval. Imports remain drafts until an authorized editor publishes them.
+- Give Tours one optional `From price per person (KSh)` field. When populated, render `From KSh... per person`; when blank, render `Request current KSh rate`.
+- Do not add Tour price status, validity-date, season, residency, group-size, transport, accommodation, inclusion, or other price-assumption fields. Editors update or remove the one price manually.
 - Never invent rates, reviews, memberships, policies, legal details, lodge availability, or operational claims.
 - The temporary WhatsApp destination is `+254 722 742 799` (`254722742799` in `wa.me` URLs).
-- Unknown information must be labeled `CLIENT CONFIRMATION REQUIRED` in source data and omitted or carefully marked on public pages.
+- Unknown public information stays blank or in draft and is omitted from public pages. `CLIENT-CONFIRMATIONS.md` remains the project-level register for unresolved legal, contact, analytics, and operational launch decisions; it is not a source of per-record approval fields.
 
 ## Conversion Rules
 
@@ -90,7 +90,7 @@ Adapt the process to page and ad copy:
 1. Identify the buyer, occasion, current pressure, desired outcome, trust barrier, and next step.
 2. Use the value equation to increase desired outcome and confidence while reducing delay and planning effort.
 3. Use survival, identity, and progress tension without fearmongering.
-4. Add concrete proof: itinerary, vehicle, accommodation, inclusions, price assumptions, policies, and operator relationship.
+4. Add concrete proof: itinerary, vehicle, accommodation, inclusions, exclusions, policies, and operator relationship.
 5. Run the human rewrite pass. Remove AI cadence, generic superlatives, repeated abstractions, and over-polished symmetry.
 
 ## Design Rule
@@ -116,6 +116,16 @@ When package information conflicts, use this order:
 
 Never treat a hypothesis as sales data or a converted USD rate as an approved KSh price.
 
+## Editorial Approval Rule
+
+- Publishing a Tour, Campaign, Destination, FAQ, policy note, or assigned media is the authorized editor's approval for public use.
+- Draft means not public. Blank means unavailable and must be omitted gracefully.
+- The client-facing editor exposes only fields that produce visible public output or visibly control discovery, such as taxonomy assignment or Featured Tour placement.
+- Required system identifiers and legacy audit metadata may remain stored for compatibility, but must be generated or hidden rather than requested from the client.
+- Start and end date fields belong only to Campaign planning and do not auto-publish or alter prices. Preferred travel date or month remains an inquiry answer, not Tour metadata.
+- Road safari, flying safari, coast experience, staycation, and similar product distinctions belong in Tour Type and related taxonomies, not in pricing assumptions.
+- Publishing does not authorize invented facts. Imported content stays draft until reviewed and published by an authorized editor.
+
 ## Build Sequence
 
 1. Audit the repository and read this documentation package.
@@ -140,11 +150,11 @@ The website is ready for launch only when:
 - Canonical Tour pages use the approved gallery, two-column workspace, tabs/disclosures, related Tours, and sticky quote panel at desktop and mobile breakpoints.
 - No canonical Tour page contains a permanent long booking form; every quote command opens the shared HKS intake and WhatsApp handoff.
 - WhatsApp inquiries include enough context for a consultant to quote.
-- Every published price, photograph, trust claim, and policy has an approved source.
+- Every published price, photograph, trust claim, and policy was deliberately entered, assigned, or published by an authorized editor.
 - Wayfinder assets are crisp at favicon, header, social, print, and vehicle sizes.
 - Meta and GA4 events have been tested with client IDs.
 - Core Web Vitals, mobile layouts, forms, keyboard interaction, and major browsers have been tested.
-- No placeholder marked `CLIENT CONFIRMATION REQUIRED` is exposed as a confirmed public fact.
+- No draft, blank, legacy-hidden, or imported-only value is exposed as a public fact.
 
 ## New Codex Task Prompt
 

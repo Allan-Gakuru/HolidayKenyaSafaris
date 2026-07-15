@@ -157,22 +157,32 @@ def main() -> int:
             "View trip",
             "private const SENTINEL",
             "price_summary",
-            "hks_price_valid_until",
+            "From KSh %s per person",
             "request_rate_fallback",
             "approved_policies",
             "approved_faqs",
             "media_allowed",
-            "hks_permission_status",
-            "hks_usage_scopes",
-            "'website'",
-            "hks_rights_checked_date",
             "_wp_attachment_image_alt",
-            "hks_credit_required",
-            "hks_source_status",
-            "operator_reviewed",
-            "gmdate( 'Y-m-d' )",
+            "wp_get_attachment_caption",
+            "Final price is confirmed for your dates, group and availability in the quote.",
             "Holiday Kenya Safaris is operated by Ashford Tours & Travel.",
             "data-hks-primary-quote",
+        ],
+    )
+    forbid(
+        errors,
+        "public renderer",
+        sources["renderer"],
+        [
+            "hks_price_status",
+            "hks_price_valid_until",
+            "hks_price_season_assumption",
+            "hks_source_status",
+            "hks_permission_status",
+            "hks_usage_scopes",
+            "hks_rights_checked_date",
+            "hks_credit_required",
+            "hks_confirmation_status",
         ],
     )
     if sources["renderer"].count("do_blocks( '<!-- wp:hks/quote-cta") != 1:
@@ -210,7 +220,7 @@ def main() -> int:
             print(f"- {error}")
         return 1
 
-    print("Public-template validation passed (Attic-inspired catalogue/Tour UI, governed content, shared quote conversion, responsive accessibility).")
+    print("Public-template validation passed (Attic-inspired UI, lean public fields, shared quote conversion, responsive accessibility).")
     return 0
 
 

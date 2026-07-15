@@ -23,38 +23,39 @@ REQUIRED_TOUR_FIELDS = {
     "hks_start_location",
     "hks_end_location",
     "hks_route_summary",
-    "hks_price_display_mode",
-    "hks_price_status",
     "hks_itinerary",
     "hks_best_for",
-    "hks_cta_label",
-    "hks_whatsapp_package_label",
-    "hks_intake_questions",
 }
 
 REQUIRED_CAMPAIGN_FIELDS = {
     "hks_hero_headline",
     "hks_supporting_copy",
-    "hks_cta_label",
     "hks_navigation_mode",
-    "hks_target_audience",
-    "hks_primary_desire",
-    "hks_primary_problem",
-    "hks_primary_objective",
-    "hks_primary_objection",
-    "hks_next_step",
-    "hks_campaign_status",
-    "hks_analytics_campaign_label",
-    "hks_noindex",
 }
 
 FORBIDDEN_TOUR_FIELDS = {
     "hks_from_price_ksh",
+    "hks_duration_days",
+    "hks_duration_nights",
+    "hks_min_group_size",
+    "hks_max_group_size",
+    "hks_price_display_mode",
+    "hks_price_status",
     "hks_seasonal_rates",
     "hks_mandatory_supplements",
     "hks_policies",
     "hks_gallery",
     "hks_card_image",
+    "hks_cta_label",
+    "hks_whatsapp_package_label",
+    "hks_intake_questions",
+}
+
+FORBIDDEN_CAMPAIGN_FIELDS = {
+    "hks_cta_label", "hks_target_audience", "hks_primary_desire",
+    "hks_primary_problem", "hks_primary_objective", "hks_primary_objection",
+    "hks_next_step", "hks_campaign_status", "hks_analytics_campaign_label",
+    "hks_noindex",
 }
 
 
@@ -120,12 +121,13 @@ def main() -> int:
         forbidden = FORBIDDEN_TOUR_FIELDS & fields.keys()
         if forbidden:
             errors.append(f"{label} contains launch-gated fields: {', '.join(sorted(forbidden))}")
-        if fields.get("hks_price_display_mode") != "request_current_rate":
-            errors.append(f"{label} must request the current rate")
-        if fields.get("hks_price_status") != "placeholder":
-            errors.append(f"{label} price status must remain placeholder")
         if not isinstance(fields.get("hks_itinerary"), list) or not fields.get("hks_itinerary"):
             errors.append(f"{label} needs at least one source-backed itinerary row")
+
+        for row_index, row in enumerate(fields.get("hks_itinerary", [])):
+            extra = set(row) - {"day_number", "day_title", "description", "activities", "accommodation", "meals"}
+            if extra:
+                errors.append(f"{label} itinerary[{row_index}] contains removed fields: {', '.join(sorted(extra))}")
 
         public_surface = {
             "title": tour.get("title"),
@@ -143,7 +145,6 @@ def main() -> int:
         errors.append("Tour product IDs must be the three unique MVP identities")
 
     campaign_labels: List[str] = []
-    analytics_labels: List[str] = []
     for index, campaign in enumerate(campaigns):
         label = f"campaign[{index}]"
         campaign_labels.append(campaign.get("internal_label"))
@@ -159,11 +160,11 @@ def main() -> int:
         missing = REQUIRED_CAMPAIGN_FIELDS - fields.keys()
         if missing:
             errors.append(f"{label} is missing fields: {', '.join(sorted(missing))}")
-        if any(not nonempty_text(fields.get(name)) for name in REQUIRED_CAMPAIGN_FIELDS if name not in {"hks_noindex"}):
+        if any(not nonempty_text(fields.get(name)) for name in REQUIRED_CAMPAIGN_FIELDS):
             errors.append(f"{label} has an empty required copy field")
-        if fields.get("hks_campaign_status") != "draft" or fields.get("hks_noindex") != 1:
-            errors.append(f"{label} must remain a noindex draft")
-        analytics_labels.append(fields.get("hks_analytics_campaign_label"))
+        forbidden = FORBIDDEN_CAMPAIGN_FIELDS & fields.keys()
+        if forbidden:
+            errors.append(f"{label} contains removed fields: {', '.join(sorted(forbidden))}")
 
         campaign_text = "\n".join(strings(fields)).lower()
         if "client confirmation required" in campaign_text:
@@ -173,16 +174,13 @@ def main() -> int:
 
     if len(campaign_labels) != len(set(campaign_labels)):
         errors.append("Campaign internal labels must be unique")
-    if len(analytics_labels) != len(set(analytics_labels)):
-        errors.append("Campaign analytics labels must be unique")
-
     if errors:
         print("MVP seed validation failed:")
         for error in errors:
             print(f"- {error}")
         return 1
 
-    print("MVP seed validation passed (3 draft Tours, 3 linked draft Campaigns).")
+    print("MVP seed validation passed (3 lean draft Tours, 3 linked lean draft Campaigns).")
     return 0
 
 

@@ -41,7 +41,7 @@ Catalogue mode is light, browseable, photography-led, and internally connected. 
 
 Use for focused Facebook and other paid-ad landing pages.
 
-Campaign mode may retain the immersive, emotionally focused structure of the existing Maasai Mara prototype. It may use reduced navigation, a specific avatar or occasion, a pressure-led headline, campaign-specific proof order, and repeated quote prompts. It must still inherit factual itinerary, pricing status, inclusions, exclusions, and logistics from the linked canonical Tour.
+Campaign mode may retain the immersive, emotionally focused structure of the existing Maasai Mara prototype. It may use reduced navigation, a pressure-led headline, supporting copy, a featured hero image, and template-controlled repeated quote prompts. It must still inherit the factual itinerary, single Tour price value, inclusions, exclusions, and logistics from the linked canonical Tour.
 
 The existing Maasai Mara prototype is a Campaign reference, not the default canonical Tour template.
 
@@ -134,8 +134,8 @@ Featured Tour rules:
 - Use three columns on desktop, two when appropriate on tablet, and one on mobile.
 - Begin with no more than six priority Tours on the homepage.
 - Preserve a stable image ratio and card height.
-- Show title, destination, duration, route or departure context, price status, and a clear View trip action.
-- Use `From KSh...` with assumptions or `Request current rate`; never omit price context merely to imitate the reference.
+- Show title, destination, duration, route or departure context, one price line, and a clear View trip action.
+- Use `From KSh... per person` when the Tour price field is populated or `Request current KSh rate` when it is blank; never omit price context merely to imitate the reference.
 
 ## Catalogue and Taxonomy Templates
 
@@ -179,7 +179,7 @@ Mobile:
 - A small supporting preview or horizontal gallery affordance.
 - No tiny image collage that makes the destination impossible to inspect.
 
-The gallery must use approved Tour media in editorial order. It should open an accessible lightbox or gallery dialog with keyboard navigation, image count, close control, and useful alt text.
+The gallery must use media deliberately assigned by an authorized editor to the published Tour, in editorial order. It should open an accessible lightbox or gallery dialog with keyboard navigation, image count, close control, and useful alt text.
 
 ### Desktop Tour workspace
 
@@ -198,8 +198,8 @@ The right column contains a sticky quote panel, not a long booking form.
 
 The panel should contain:
 
-- `From KSh...` or `Request current rate`.
-- Price basis and assumptions.
+- `From KSh... per person` or `Request current KSh rate`.
+- A standard note that the final quote depends on dates, group, availability, and the selected package.
 - A compact availability statement that does not invent availability.
 - The primary **Request quote on WhatsApp** button.
 - A short explanation that the visitor will answer a few questions and review a prepared WhatsApp message.
@@ -220,7 +220,7 @@ Desktop tabs:
 
 The content must remain present in the server-rendered document and crawlable. JavaScript enhances presentation rather than becoming the only source of essential Tour information.
 
-On mobile, render the same sections as accessible stacked disclosures. Open Overview by default. Keep section labels and current state obvious. Do not hide every practical fact or require visitors to open several controls before finding price assumptions.
+On mobile, render the same sections as accessible stacked disclosures. Open Overview by default. Keep section labels and current state obvious. Do not hide every practical fact or require visitors to open several controls before finding the price line.
 
 ### Itinerary
 
@@ -229,7 +229,7 @@ Use the reviewed Attic timeline as the interaction reference:
 - Day number and day title.
 - Origin and destination.
 - Description.
-- Activities, meals, accommodation, and confirmed timing.
+- Activities, meals, and accommodation.
 - Individual expand and collapse controls.
 - Expand all and Collapse all controls when there are more than three days.
 
@@ -322,4 +322,3 @@ Build reusable theme parts and blocks for:
 - Mobile disclosures must expose every canonical Tour fact available on desktop.
 - The intake form must retain entered values when the keyboard opens, validation fails, or the dialog is temporarily dismissed.
 - All essential interactions must work with a keyboard and reduced motion.
-

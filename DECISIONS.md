@@ -18,7 +18,7 @@ Include:
 - Domestic road and flying safaris.
 - Nairobi and regional excursions.
 - Coast trips and relevant Mombasa experiences.
-- Staycations when confirmed by the client.
+- Staycations.
 - Couple, family, friend-group, chama, church, SACCO, school, youth, corporate, and other group packages.
 - Mount Kenya, hiking, photography, conservation, and other suitable special-interest products.
 
@@ -35,18 +35,31 @@ Exclude by default:
 - Retain factual itinerary, route, inclusion, exclusion, duration, and accommodation information from approved Ashford sources.
 - Rewrite marketing copy around local identities, occasions, problems, desires, objections, and objectives.
 - Do not restrict the whole website to Mercy. Support avatar-specific campaign pages and tour-page variants.
-- Reuse Ashford photographs only where the client has confirmed usage rights.
+- Treat photographs uploaded or assigned by an authorized editor and used on published content as approved for the website.
 - Use clear Kenyan English and KSh pricing.
 - Any unavailable company information may be taken from Ashford's current website if relevant and verifiable; otherwise request it.
 
 ## Pricing
 
-- Public format: `From KSh X`.
-- Current KSh values are placeholders, not approved live rates.
-- Every price record must include pricing status and assumptions.
-- Required assumptions: season, Kenyan resident or citizen status, group size, sharing basis, transport, accommodation tier, and notable inclusions.
+- Each Tour has one optional field: `From price per person (KSh)`.
+- A positive value displays as `From KSh X per person` on cards, Tour pages, Campaign pages, and quote context.
+- A blank or zero value displays as `Request current KSh rate`.
+- Tour prices do not have statuses, assumptions, checked dates, validity dates, seasonal rows, supplements, or automatic expiry. An authorized editor updates or removes the value manually.
+- The number must honestly represent a per-person starting price. Leave it blank for per-vehicle, per-group, child-specific, single-supplement-dependent, or highly variable products that cannot be summarized truthfully by one figure.
 - Converted USD values must never be presented as approved KSh prices.
-- Unknown prices may display `Request current rate` rather than a fabricated figure.
+- Campaigns inherit the linked Tour price. Campaign start and end dates record the intended campaign window; they do not automatically change the Tour price or WordPress publication state.
+
+## Editorial Approval and Field Economy
+
+- Publishing is approval. An authorized editor's decision to publish public copy and assigned media is the client-confirmation signal.
+- Any WordPress user who already has permission to publish the relevant content is treated as an authorized editor. This change does not alter roles, capabilities, or admin ownership.
+- Draft content is not public. Blank optional fields are omitted with deliberate frontend fallbacks.
+- Client-facing content forms contain only fields that display publicly or visibly control public discovery and placement.
+- Tour date, source-audit, confirmation-status, rights-status, and price-assumption fields are removed from the client workflow.
+- Campaigns are the only content records with start and end date fields. These dates are the explicit exception to the visible-output rule and serve campaign operations only. The preferred travel date or month in the inquiry form remains visitor input.
+- Road safari, flying safari, coast experience, staycation, group package, and other product differences are expressed through Tour Type, Destination, Occasion, Travel Style, and the public itinerary—not pricing assumptions.
+- Internal import notes may remain in repository source files. Stable IDs and legacy metadata may remain stored for backward compatibility but are not editable requirements and do not gate publication.
+- Publishing does not permit invented prices, reviews, policies, availability, or operational claims. Imported records remain drafts until an authorized editor reviews and publishes them.
 
 ## Conversion
 

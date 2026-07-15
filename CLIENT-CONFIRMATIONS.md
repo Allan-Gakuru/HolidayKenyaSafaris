@@ -1,6 +1,6 @@
 # Client Confirmations Register
 
-Use this file as a live register. Do not convert an assumption into a fact without recording the confirmation.
+Use this file for project-level decisions such as contact details, legal wording, privacy, analytics, and commercial policy. It is not a per-Tour, per-image, FAQ, Destination, price, or source approval system. In WordPress, an authorized editor's decision to publish public content and assigned media is the approval signal.
 
 ## Confirmed
 
@@ -13,7 +13,9 @@ Use this file as a live register. Do not convert an assumption into a fact witho
 | Main conversion | Confirmed | WhatsApp quote inquiry |
 | Product scope | Confirmed | Domestic safaris, excursions, coast, staycations, groups, and relevant local special-interest products |
 | Default exclusions | Confirmed | International holidays, visas, transfers, and inbound-only products unless later approved |
-| Pricing presentation | Confirmed | Primarily KSh `From...` placeholders, updated after rate confirmation |
+| Pricing presentation | Confirmed | One optional `From price per person (KSh)` field per Tour; otherwise `Request current KSh rate` |
+| Editorial approval | Confirmed | Draft means private; publishing by an authorized editor approves public copy and assigned media without additional confirmation fields |
+| Content dates | Confirmed | Start and end dates exist only on Campaigns; Tour prices are updated manually and never auto-expire |
 | Required intake fields | Confirmed | Name, phone, package, preferred date/month, travelers |
 | Inquiry recovery storage | Confirmed | Save a private WordPress inquiry after explicit disclosure and contact consent, before showing the WhatsApp review step |
 | Site scope | Confirmed | Home, catalogue, destinations, Tour pages, trust/about, contact, campaign template |
@@ -24,8 +26,8 @@ Use this file as a live register. Do not convert an assumption into a fact witho
 | Item | Current status | Needed action | Blocking point |
 |---|---|---|---|
 | Production Wayfinder logo | Approved concept only | Redraw and approve SVG/PNG/favicons | Final header, favicon, brand launch |
-| Domain | CLIENT CONFIRMATION REQUIRED | Supply production domain and DNS access plan | Production configuration |
-| Hosting | CLIENT CONFIRMATION REQUIRED | Select managed WordPress hosting with staging, backups, caching, CDN, SSL | Deployment |
+| Domain | Confirmed | `holidaykenyasafaris.ke` | Production configuration |
+| Hosting | Confirmed | cPanel account `holidayk`; document root `/home/holidayk/public_html` | Deployment |
 | WordPress admin ownership | CLIENT CONFIRMATION REQUIRED | Name account owners and editorial roles | Production access |
 | Meta Pixel ID | CLIENT CONFIRMATION REQUIRED | Supply ID | Meta tracking launch |
 | GA4 Measurement ID | CLIENT CONFIRMATION REQUIRED | Supply ID | GA4 tracking launch |
@@ -68,37 +70,26 @@ All are `CLIENT CONFIRMATION REQUIRED`:
 
 Do not fill these with generic tour-industry terms.
 
+These are global commercial and legal decisions, not Tour-editor confirmation, assumption, or validity-date fields.
+
 ## Rates
 
-Every product requires confirmation of:
+Rates use the simplified editorial model:
 
-- Current KSh from price.
-- Season and validity dates.
-- Resident/citizen basis.
-- Per-person or per-group basis.
-- Sharing basis.
-- Minimum group size.
-- Vehicle basis.
-- Accommodation option.
-- Child rate.
-- Single supplement.
-- Mandatory holiday supplement.
-- Included park fees and exact residency basis.
-- Optional upgrades.
-
-Until confirmed, use `placeholder` or `request current rate` status.
+- The Tour editor has one optional positive whole-number field: `From price per person (KSh)`.
+- Entering a value and publishing the Tour approves `From KSh X per person` for cards, Tour pages, Campaigns, and quote context.
+- Leaving it blank shows `Request current KSh rate`.
+- There are no price status, source, checked-date, valid-until, season, residency, group-size, sharing, vehicle, accommodation, inclusion, supplement, adult, or child price fields.
+- Campaign start and end dates do not alter Tour prices.
+- The client updates or removes the Tour price manually.
+- Leave the price blank for per-vehicle, per-group, child-specific, single-supplement-dependent, or highly variable products that cannot truthfully use one per-person starting figure.
+- Never auto-convert or import a USD amount into the public KSh field.
 
 ## Media Rights
 
-For each image set, confirm:
+WordPress does not request owner, source, permission status, usage scope, license, evidence, checked date, or expiry fields. Media uploaded or deliberately assigned to published content by an authorized editor is treated as approved for website use. Use native alt text, and add a public caption only when a visible credit is required.
 
-- Owner or license source.
-- Permission for Holiday Kenya Safaris website, ads, and social media.
-- Credit requirement.
-- Expiry or territory restriction.
-- Whether identifiable customers consented to marketing use.
-
-Do not assume Ashford can reuse lodge, photographer, customer, or third-party images merely because they appear on its existing website.
+Imported or scraped media remains unassigned until the editor selects it. The generated Mara and Mercy images in this repository remain internal presentation references and are not approved for the live site.
 
 ## Operational Proof
 
@@ -115,7 +106,7 @@ Request and verify where the website needs it:
 
 ## Resolution Format
 
-When a confirmation arrives, record:
+When a remaining project-level confirmation arrives, record:
 
 - Item.
 - Approved value or wording.

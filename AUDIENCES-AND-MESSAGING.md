@@ -10,7 +10,7 @@ Mercy remains a strong representative of the premium Nairobi escape buyer, but t
 
 | Audience | Identity and belief | Main desire | Main fear or friction | Trust proof | Likely products |
 |---|---|---|---|---|---|
-| Nairobi weekend escapers, 22-35 | Professionals, entrepreneurs, creatives, couples, and friends who believe travel is a necessary reset | Escape routine, bond, create memories, return refreshed | Scam anxiety, hidden costs, coordination, too much planning | Clear price assumptions, actual vehicle/stay, short itinerary, deposit steps, Kenyan social proof | Nairobi excursions, Naivasha, Nakuru, Longonot, 2-3 day Mara or Amboseli |
+| Nairobi weekend escapers, 22-35 | Professionals, entrepreneurs, creatives, couples, and friends who believe travel is a necessary reset | Escape routine, bond, create memories, return refreshed | Scam anxiety, hidden costs, coordination, too much planning | Clear per-person starting price or request-rate label, actual vehicle/stay, short itinerary, deposit steps, Kenyan social proof | Nairobi excursions, Naivasha, Nakuru, Longonot, 2-3 day Mara or Amboseli |
 | Couples and milestone planners, 25-40 | Partners planning birthdays, anniversaries, proposals, and honeymoons; thoughtfulness and privacy matter | Romance, surprise, privacy, an experience that feels special | Generic group trip, disappointing room, rushed schedule, weak setup | Room and lodge details, private options, special add-ons, itinerary pacing | Mara, Amboseli, coast, Naivasha, premium stays |
 | Family holiday planners, 30-55 | Parents and guardians who believe children should experience Kenya | Safe bonding, learning, a worthwhile school-holiday memory | Child safety, unclear child rates, exhausting itinerary, meals, room sharing | Child policy, family rooms, safe transport, meal plan, medical access, exact inclusions | Nairobi day tours, Mara, Amboseli, Tsavo, Nakuru, coast, conservancies |
 | Corporate and MICE buyers, 28-55 | HR, admin, procurement, founders, NGOs, schools, and planners whose reputation depends on execution | Make the organizer look competent and reduce administrative work | Delays, weak paperwork, poor venue, budget embarrassment, supplier failure | Formal proposal, invoice, tax details, risk plan, transport plan, accountable coordinator | Retreats, team building, incentive trips, conference add-ons, executive escapes |
@@ -54,7 +54,7 @@ Follow immediately with proof:
 
 - Is this company trustworthy?
 - What is included and excluded?
-- Is the KSh price current and what assumptions does it use?
+- Is there a useful KSh starting price, and what will the final quote include?
 - Will the accommodation and vehicle match the photographs?
 - Can another operator do it cheaper?
 - What happens if dates, group size, or plans change?
@@ -67,7 +67,7 @@ Follow immediately with proof:
 2. Name the package and duration plainly.
 3. Show the actual route, accommodation basis, transport, meals, activities, and exclusions.
 4. Make the operator relationship and human support visible.
-5. Explain price assumptions without burying the visitor in fine print.
+5. Show one honest per-person starting price or say that the current KSh rate must be requested.
 6. Offer a small next step: request a tailored WhatsApp quote.
 
 ## Campaign Variation Examples
@@ -81,7 +81,7 @@ One Maasai Mara Tour may support separate campaign pages such as:
 - Give visiting relatives a Kenyan safari.
 - Professional friend-group long weekend.
 
-Each page may change hero copy, proof order, testimonials, imagery, FAQ emphasis, and CTA language. It must inherit canonical itinerary, price status, inclusions, exclusions, and operational facts from the linked Tour.
+Each page may change the hero headline, supporting copy, featured hero image, and navigation mode. It must inherit the canonical itinerary, one Tour price value, inclusions, exclusions, and operational facts from the linked Tour.
 
 ## Do Not
 
@@ -92,4 +92,3 @@ Each page may change hero copy, proof order, testimonials, imagery, FAQ emphasis
 - Claim luxury without naming the accommodation, vehicle, pacing, or service difference.
 - Hide major exclusions or place every important detail behind WhatsApp.
 - Invent Kenyan customer testimonials.
-

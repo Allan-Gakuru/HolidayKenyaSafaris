@@ -37,7 +37,7 @@ If the page is broad, write to the shared local desire for a clear, trustworthy,
 ### Increase perceived likelihood
 
 - Name the duration, route, vehicle, accommodation basis, meals, activities, guide, park fees, and exclusions.
-- Show approved photographs of what the buyer will actually experience.
+- Show photographs deliberately selected by an authorized editor for what the buyer will actually experience.
 - Explain that Holiday Kenya Safaris is operated by Ashford Tours & Travel.
 - Use real Kenyan reviews and operational proof only when supplied or verified.
 - Make the quote process and human follow-up clear.
@@ -45,7 +45,7 @@ If the page is broad, write to the shared local desire for a clear, trustworthy,
 ### Reduce time delay
 
 - Show the itinerary immediately.
-- Give a visible provisional `From KSh...` price or say that a current rate is required.
+- Show `From KSh... per person` when the Tour price is populated, or say `Request current KSh rate` when it is blank.
 - Tell visitors what happens after they submit the intake form.
 - Use clear availability and response expectations only when the client confirms them.
 
@@ -92,11 +92,11 @@ Show the immediate future:
 Canonical Tour pages use the Attic-inspired catalogue structure rather than an avatar-specific campaign hero. Write for an interested local traveler who wants to understand and compare the real package.
 
 1. **Title band:** use the literal package name as the H1. Do not turn it into a vague emotional slogan or repeat it as a second full heading below the gallery.
-2. **Fast facts:** duration, nights, departure, route, travel style, accommodation basis, transport, and price status.
+2. **Fast facts:** duration, departure, route, travel style, accommodation basis, transport, and the one public price line.
 3. **Overview:** explain why the trip is worth considering in specific, natural language.
 4. **Itinerary:** remove uncertainty day by day.
 5. **Included/Excluded:** state the practical boundaries plainly.
-6. **Rates & Important Information:** expose season, residency, sharing basis, group size, vehicle, accommodation, supplements, and current status.
+6. **Rates & Important Information:** repeat `From KSh... per person` or `Request current KSh rate`, then explain that the tailored quote confirms dates, group, availability, and selected package details.
 7. **Trust and logistics:** vehicle, guide, accommodation, meals, pickup, operator relationship, and approved proof.
 8. **Quote panel:** name the next step, explain the short intake, and use **Request quote on WhatsApp**.
 9. **Related Tours:** use factual card titles and useful comparison details.
@@ -111,11 +111,11 @@ Campaign pages may be shorter and more focused:
 2. Specific outcome and package.
 3. Three to five proof points.
 4. Condensed itinerary.
-5. Price basis and critical exclusions.
+5. The inherited Tour price line and critical exclusions.
 6. Trust proof.
 7. Intake form and WhatsApp handoff.
 
-Do not change factual tour data to fit an ad. Change emphasis, sequence, imagery, and persuasive framing.
+Do not change factual Tour data to fit an ad. Change the Campaign headline, supporting copy, featured hero image, and navigation treatment within the controlled template.
 
 The current Maasai Mara prototype belongs to this Campaign mode. Its emotional opening is not the canonical Tour-page H1 pattern.
 
@@ -148,7 +148,7 @@ Weak:
 
 Stronger broad package copy:
 
-> Three days in the Mara, planned from Nairobi and back. See the route, stay, meals, game drives, park-fee basis, and vehicle option before you request your quote.
+> Three days in the Mara, planned from Nairobi and back. See the route, stay, meals, game drives, inclusions, and transport before you request your quote.
 
 Stronger pressure-led campaign copy:
 
@@ -179,8 +179,8 @@ Before publishing, verify:
 
 - Does the headline identify a real outcome, pressure, or package?
 - Is the reader clear about the duration and route?
-- Are price assumptions visible?
-- Is every trust claim sourced?
+- Does the page show `From KSh... per person` or `Request current KSh rate` consistently?
+- Is every trust claim concrete, authorized, and free of invention?
 - Is the main objection answered before the CTA?
 - Does the page sound like a competent person rather than generated brochure copy?
 - Is there one obvious next step?

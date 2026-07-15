@@ -80,18 +80,21 @@ Acceptance:
 
 Actions:
 
-- Implement Tour, Campaign, and optional Testimonial models.
+- Implement Tour and Campaign models. Do not expose Testimonial fields until a public Testimonial component exists.
 - Implement taxonomies and SCF groups from `CONTENT-MODEL.md`.
-- Add confirmation statuses, field guidance, and validation.
+- Reduce the client editor to fields that render publicly or visibly control public discovery and placement.
+- Use native WordPress publication state as approval; remove client confirmation, source-audit, rights-status, and validity fields from content workflows.
+- Keep one optional `From price per person (KSh)` field and Campaign-only start/end dates.
 - Lock critical templates while preserving practical editing regions.
 - Add preview behavior for Tours and Campaigns.
-- Add ordered gallery roles, curated related Tours, featured priority, highlights, and quote-panel copy fields required by the canonical Tour and catalogue templates.
+- Keep the ordered public gallery, Featured Tour placement, visible package facts, itinerary, inclusions/exclusions, package notes, and FAQ relationship required by the current templates.
 
 Acceptance:
 
 - An editor can create one Tour and link several Campaign variants.
-- A placeholder price cannot be accidentally labeled confirmed.
-- Editors can record image provenance and choose the media assigned to each public template.
+- A Tour with a positive KSh value shows `From KSh X per person`; a blank value shows `Request current KSh rate` everywhere.
+- Editors can assign public media without completing a separate rights envelope.
+- Existing hidden or request-rate legacy amounts do not become public accidentally during migration.
 
 ## Phase 4: Conversion Component First
 
@@ -121,11 +124,11 @@ Implement and verify:
 Actions:
 
 - Verify current Ashford facts.
-- Record source and checked date.
+- Keep useful source references in the repository import manifest, not the client Tour form.
 - Import canonical facts.
 - Rewrite local-market copy.
-- Mark KSh prices provisional until confirmed.
-- Use approved imagery only.
+- Leave price blank until the client manually enters an honest KSh per-person starting value.
+- Import remote imagery unassigned; the editor's deliberate assignment to published content is approval.
 - Add representative Campaign variants for different audience angles.
 
 Acceptance:
@@ -171,13 +174,14 @@ Actions:
 - Review the 44 unique local candidate pages in controlled batches.
 - Prioritize credible, complete, locally relevant products.
 - Keep incomplete or questionable records in draft.
-- Add missing coast/staycation products only when supplied or confirmed.
+- Add missing coast/staycation products when supplied or deliberately published by an authorized editor.
 - Check internal linking and filter usefulness after each batch.
 
 Acceptance:
 
 - No product is live merely because it existed in the crawl.
-- Every live Tour has source, checked date, pricing status, and image-rights status.
+- Every live Tour was deliberately published by an authorized editor and contains only public values the current templates consume.
+- Legacy source, price-status, assumption, validity, and rights metadata remains non-destructively stored but is hidden and ignored.
 
 ## Phase 8: Analytics, SEO, Security, and Performance
 
@@ -211,7 +215,8 @@ Test:
 - Form errors, WhatsApp cancellation, and back navigation.
 - Slow connections and image failures.
 - Template editing by a non-developer.
-- Source and rights statuses.
+- Publish-as-approval behavior for Tours, Destinations, FAQs, public package notes, and assigned media.
+- Legacy price migration: old hidden/request-rate amounts stay hidden; deliberate positive from-prices display consistently.
 - Core Web Vitals and layout shift.
 - Analytics debug modes.
 

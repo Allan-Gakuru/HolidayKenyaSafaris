@@ -24,24 +24,17 @@
         "hks_travel_style": ["Short Break", "Private Quote"]
       },
       "fields": {
-        "hks_duration_days": 3,
-        "hks_duration_nights": 2,
         "hks_duration_label": "3 days / 2 nights",
         "hks_start_location": "Nairobi",
         "hks_end_location": "Nairobi",
         "hks_route_summary": "Nairobi → Maasai Mara → Nairobi",
         "hks_transport_types": ["safari_van", "land_cruiser"],
-        "hks_min_group_size": 2,
         "hks_accommodation_basis": "Source options: Mara Sopa Lodge or Sentrim Mara Camp. The final property, room basis and availability must be confirmed in the quote.",
         "hks_meals_summary": "Source itinerary: lunch and dinner on Day 1; breakfast, lunch and dinner on Day 2; breakfast on Day 3.",
-        "hks_price_display_mode": "request_current_rate",
-        "hks_price_status": "placeholder",
         "hks_itinerary": [
           {
             "day_number": "1",
             "day_title": "Nairobi to Maasai Mara",
-            "origin": "Nairobi",
-            "destination": "Maasai Mara",
             "description": "Drive from Nairobi through the Great Rift Valley to the Maasai Mara. The source itinerary schedules lunch after arrival and an afternoon game drive.",
             "activities": "Road transfer\nAfternoon game drive",
             "accommodation": "Mara Sopa Lodge or Sentrim Mara Camp, subject to quote",
@@ -50,8 +43,6 @@
           {
             "day_number": "2",
             "day_title": "Game drives in the Maasai Mara",
-            "origin": "Maasai Mara",
-            "destination": "Maasai Mara",
             "description": "Spend the day in the reserve with morning and evening game drives in the source itinerary. An optional Maasai village visit is mentioned by the source and is not included unless confirmed in the quote.",
             "activities": "Morning game drive\nEvening game drive",
             "accommodation": "Mara Sopa Lodge or Sentrim Mara Camp, subject to quote",
@@ -60,8 +51,6 @@
           {
             "day_number": "3",
             "day_title": "Maasai Mara to Nairobi",
-            "origin": "Maasai Mara",
-            "destination": "Nairobi",
             "description": "The source itinerary includes a morning game drive and breakfast before the road journey back to Nairobi.",
             "activities": "Morning game drive\nRoad transfer",
             "meals": "Breakfast"
@@ -83,10 +72,7 @@
           {"category": "personal", "item": "Personal expenses", "detail": "Laundry, calls and similar personal costs are excluded."},
           {"category": "optional", "item": "Optional activities", "detail": "A Maasai village visit or other add-ons are quoted separately when requested."}
         ],
-        "hks_best_for": "Travelers starting in Nairobi who want a two-night road safari and enough time for several game drives without taking a full week away.",
-        "hks_cta_label": "Get my Mara quote",
-        "hks_whatsapp_package_label": "3-day Maasai Mara road safari",
-        "hks_intake_questions": ["departure_town", "adults_children", "residency", "vehicle_preference", "accommodation_preference", "budget_range"]
+        "hks_best_for": "Travelers starting in Nairobi who want a two-night road safari and enough time for several game drives without taking a full week away."
       }
     },
     {
@@ -110,28 +96,19 @@
         "hks_travel_style": ["Half Day", "Private Quote"]
       },
       "fields": {
-        "hks_duration_days": 0,
-        "hks_duration_nights": 0,
         "hks_duration_label": "4 hours",
         "hks_start_location": "Nairobi",
         "hks_end_location": "Nairobi",
         "hks_route_summary": "Nairobi → Nairobi National Park → Nairobi",
-        "hks_price_display_mode": "request_current_rate",
-        "hks_price_status": "placeholder",
         "hks_itinerary": [
           {
             "day_number": "Half day",
             "day_title": "Nairobi National Park outing",
-            "origin": "Nairobi",
-            "destination": "Nairobi National Park",
             "description": "The source describes a four-hour park tour with morning and afternoon departure options. Exact pickup, timing and return point are confirmed in the quote.",
             "activities": "Park visit\nWildlife viewing"
           }
         ],
-        "hks_best_for": "Nairobi residents, families and hosts with visiting friends or relatives who want a short wildlife outing close to the city.",
-        "hks_cta_label": "Check a park tour date",
-        "hks_whatsapp_package_label": "4-hour Nairobi National Park tour",
-        "hks_intake_questions": ["departure_town", "adults_children", "residency", "budget_range"]
+        "hks_best_for": "Nairobi residents, families and hosts with visiting friends or relatives who want a short wildlife outing close to the city."
       }
     },
     {
@@ -155,24 +132,17 @@
         "hks_travel_style": ["Short Break", "Private Quote"]
       },
       "fields": {
-        "hks_duration_days": 3,
-        "hks_duration_nights": 2,
         "hks_duration_label": "3 days / 2 nights",
         "hks_start_location": "Nairobi",
         "hks_end_location": "Nairobi",
         "hks_route_summary": "Nairobi → Amboseli → Nairobi",
         "hks_transport_types": ["safari_van", "land_cruiser"],
-        "hks_min_group_size": 2,
         "hks_accommodation_basis": "Source options: Amboseli Serena Lodge or AA Lodge Amboseli. The final property, room basis and availability must be confirmed in the quote.",
         "hks_meals_summary": "Source itinerary lists two breakfasts, three lunches and two dinners.",
-        "hks_price_display_mode": "request_current_rate",
-        "hks_price_status": "placeholder",
         "hks_itinerary": [
           {
             "day_number": "1",
             "day_title": "Nairobi to Amboseli",
-            "origin": "Nairobi",
-            "destination": "Amboseli National Park",
             "description": "Leave Nairobi in the morning for Amboseli. The source itinerary schedules lunch after arrival and an afternoon game drive before dinner.",
             "activities": "Road transfer\nAfternoon game drive",
             "accommodation": "Amboseli Serena Lodge or AA Lodge Amboseli, subject to quote",
@@ -181,8 +151,6 @@
           {
             "day_number": "2",
             "day_title": "Game drives in Amboseli",
-            "origin": "Amboseli National Park",
-            "destination": "Amboseli National Park",
             "description": "The source itinerary includes morning and afternoon game drives with a rest around lunch. A Maasai village visit is optional and is not included unless confirmed in the quote.",
             "activities": "Morning game drive\nAfternoon game drive",
             "accommodation": "Amboseli Serena Lodge or AA Lodge Amboseli, subject to quote",
@@ -191,8 +159,6 @@
           {
             "day_number": "3",
             "day_title": "Amboseli to Nairobi",
-            "origin": "Amboseli National Park",
-            "destination": "Nairobi",
             "description": "The source itinerary schedules an early game drive and breakfast before the road journey back to Nairobi.",
             "activities": "Morning game drive\nRoad transfer",
             "meals": "Breakfast and lunch"
@@ -214,10 +180,7 @@
           {"category": "personal", "item": "Personal expenses", "detail": "Laundry, calls and similar personal costs are excluded."},
           {"category": "optional", "item": "Optional activities", "detail": "A Maasai village visit or other add-ons are quoted separately when requested."}
         ],
-        "hks_best_for": "Travelers starting in Nairobi who want a two-night safari with several game drives and a compact leave window.",
-        "hks_cta_label": "Get my Amboseli quote",
-        "hks_whatsapp_package_label": "3-day Amboseli safari",
-        "hks_intake_questions": ["departure_town", "adults_children", "residency", "vehicle_preference", "accommodation_preference", "budget_range"]
+        "hks_best_for": "Travelers starting in Nairobi who want a two-night safari with several game drives and a compact leave window."
       }
     }
   ],
@@ -230,17 +193,7 @@
       "fields": {
         "hks_hero_headline": "Trade one Nairobi weekend for two nights in the Mara.",
         "hks_supporting_copy": "The road, lodge and game-drive rhythm are already mapped. Tell us your month, group size and comfort preference; we’ll confirm the current KSh quote and what is included before you decide.",
-        "hks_cta_label": "Plan my Mara quote",
-        "hks_navigation_mode": "campaign_minimal",
-        "hks_target_audience": "Nairobi couples and friends planning a short domestic safari",
-        "hks_primary_desire": "A proper wildlife break without using a full week of leave.",
-        "hks_primary_problem": "The trip keeps slipping because the lodge, vehicle and real group cost are still unclear.",
-        "hks_primary_objective": "Turn a possible weekend into a clear, quotable Mara plan.",
-        "hks_primary_objection": "Concern that the advertised figure will hide transport, park fees or accommodation assumptions.",
-        "hks_next_step": "Review the package outline and request a visitor-reviewed WhatsApp quote.",
-        "hks_campaign_status": "draft",
-        "hks_analytics_campaign_label": "mvp_mara_weekend_reset",
-        "hks_noindex": 1
+        "hks_navigation_mode": "campaign_minimal"
       }
     },
     {
@@ -251,17 +204,7 @@
       "fields": {
         "hks_hero_headline": "A Nairobi safari that fits into half a day.",
         "hks_supporting_copy": "Choose a morning or afternoon window, then share your group size and pickup area. We’ll confirm the current park-fee basis, vehicle and KSh quote in WhatsApp before you commit.",
-        "hks_cta_label": "Check a park tour date",
-        "hks_navigation_mode": "campaign_minimal",
-        "hks_target_audience": "Nairobi families, residents and hosts with visiting friends or relatives",
-        "hks_primary_desire": "A real wildlife outing without a long drive or full weekend away.",
-        "hks_primary_problem": "Free time is short and the group still needs clear pickup, timing and cost details.",
-        "hks_primary_objective": "Get a confirmed half-day plan that fits the group’s available window.",
-        "hks_primary_objection": "Uncertainty about park fees, pickup coverage and whether the quoted price fits the whole group.",
-        "hks_next_step": "Choose a preferred date window and request a visitor-reviewed WhatsApp quote.",
-        "hks_campaign_status": "draft",
-        "hks_analytics_campaign_label": "mvp_nairobi_half_day",
-        "hks_noindex": 1
+        "hks_navigation_mode": "campaign_minimal"
       }
     },
     {
@@ -272,17 +215,7 @@
       "fields": {
         "hks_hero_headline": "Make Amboseli your next three-day reset.",
         "hks_supporting_copy": "The source itinerary covers two nights and several game drives at the foot of Mount Kilimanjaro; clear mountain views depend on weather. Tell us your dates, group and lodge preference for a current KSh quote.",
-        "hks_cta_label": "Plan my Amboseli quote",
-        "hks_navigation_mode": "campaign_minimal",
-        "hks_target_audience": "Couples, friends and families in Nairobi planning a compact scenic safari",
-        "hks_primary_desire": "A memorable three-day break with wildlife, open landscapes and time away from the city.",
-        "hks_primary_problem": "The idea is appealing, but the vehicle, lodge choice and real travel-date cost are unresolved.",
-        "hks_primary_objective": "Turn a short leave window into a clear Amboseli quote and itinerary.",
-        "hks_primary_objection": "Concern that mountain views, lodge availability or inclusions are being overpromised.",
-        "hks_next_step": "Review the source-backed itinerary and request a visitor-reviewed WhatsApp quote.",
-        "hks_campaign_status": "draft",
-        "hks_analytics_campaign_label": "mvp_amboseli_three_day",
-        "hks_noindex": 1
+        "hks_navigation_mode": "campaign_minimal"
       }
     }
   ]

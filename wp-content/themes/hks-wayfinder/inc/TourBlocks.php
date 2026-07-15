@@ -222,7 +222,7 @@ final class TourBlocks {
 						<summary><span><?php esc_html_e( 'Rates & Important Information', 'hks-wayfinder' ); ?></span></summary>
 						<div class="hks-tour-section__content">
 							<h2><?php esc_html_e( 'Rates and important information', 'hks-wayfinder' ); ?></h2>
-							<?php self::render_rate_information( $tour_id, $price, $policies, $faqs ); ?>
+							<?php self::render_rate_information( $price, $policies, $faqs ); ?>
 						</div>
 					</details>
 			</div>
@@ -308,7 +308,7 @@ final class TourBlocks {
 	}
 
 	/**
-	 * Render the audited Destination title band and optional approved media.
+	 * Render the Destination title band and optional public media.
 	 *
 	 * @return string
 	 */
@@ -319,13 +319,10 @@ final class TourBlocks {
 			return '';
 		}
 
-		$audit_allowed = in_array( self::field( 'hks_source_status', $term ), array( 'reviewed', 'client_confirmed' ), true )
-			&& self::public_text( self::field( 'hks_source_checked_date', $term ) )
-			&& ( self::public_text( self::field( 'hks_source_url', $term ) ) || self::public_text( self::field( 'hks_source_reference', $term ) ) );
-		$summary       = $audit_allowed ? self::public_text( self::field( 'hks_short_summary', $term ) ) : '';
-		$overview      = $audit_allowed ? self::public_html( self::field( 'hks_overview', $term ) ) : '';
-		$image_id      = $audit_allowed ? absint( self::field( 'hks_hero_image', $term ) ) : 0;
-		$tours_url     = get_post_type_archive_link( 'hks_tour' ) ?: home_url( '/tours/' );
+		$summary   = self::public_text( self::field( 'hks_short_summary', $term ) );
+		$overview  = self::public_html( self::field( 'hks_overview', $term ) );
+		$image_id  = absint( self::field( 'hks_hero_image', $term ) );
+		$tours_url = get_post_type_archive_link( 'hks_tour' ) ?: home_url( '/tours/' );
 
 		if ( ! self::media_allowed( $image_id ) ) {
 			$image_id = 0;
@@ -397,7 +394,7 @@ final class TourBlocks {
 
 			<section class="hks-group-route" id="group-travel"><div class="hks-shell hks-group-route__inner"><div><p><?php esc_html_e( 'Group travel', 'hks-wayfinder' ); ?></p><h2><?php esc_html_e( 'Planning for family, friends or colleagues?', 'hks-wayfinder' ); ?></h2><p><?php esc_html_e( 'Start with a Tour, then share the group size, dates and departure town so the quote conversation begins with useful context.', 'hks-wayfinder' ); ?></p></div><a class="hks-button" href="<?php echo esc_url( $tours_url ); ?>"><?php esc_html_e( 'Find a group trip', 'hks-wayfinder' ); ?></a></div></section>
 
-			<section class="hks-home-section hks-shell hks-proof-section" aria-labelledby="hks-proof-title"><div><p><?php esc_html_e( 'What you can check first', 'hks-wayfinder' ); ?></p><h2 id="hks-proof-title"><?php esc_html_e( 'Practical detail before the sales conversation', 'hks-wayfinder' ); ?></h2></div><ul><li><?php esc_html_e( 'Route, duration and departure context', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'Day-by-day itinerary where published', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'Included and excluded items where approved', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'Visible price status and assumptions', 'hks-wayfinder' ); ?></li></ul></section>
+			<section class="hks-home-section hks-shell hks-proof-section" aria-labelledby="hks-proof-title"><div><p><?php esc_html_e( 'What you can check first', 'hks-wayfinder' ); ?></p><h2 id="hks-proof-title"><?php esc_html_e( 'Practical detail before the sales conversation', 'hks-wayfinder' ); ?></h2></div><ul><li><?php esc_html_e( 'Route, duration and departure context', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'Day-by-day itinerary where published', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'Included and excluded items where published', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'One clear KSh price line or request-rate fallback', 'hks-wayfinder' ); ?></li></ul></section>
 
 			<section class="hks-final-cta"><div class="hks-shell"><h2><?php esc_html_e( 'Ready to narrow down the options?', 'hks-wayfinder' ); ?></h2><p><?php esc_html_e( 'Choose a Tour first. Its quote button will carry the package into the intake and WhatsApp message.', 'hks-wayfinder' ); ?></p><a class="hks-button" href="<?php echo esc_url( $tours_url ); ?>"><?php esc_html_e( 'Explore all tours', 'hks-wayfinder' ); ?></a></div></section>
 		</div>
@@ -521,48 +518,19 @@ final class TourBlocks {
 	}
 
 	/**
-	 * Render rate envelope, governed notes and approved FAQs.
+	 * Render the price line, package notes and published FAQs.
 	 *
-	 * @param int                                $tour_id  Tour ID.
-	 * @param array<string, string>|null          $price    Price summary.
-	 * @param string[]                           $policies Approved policies.
-	 * @param array<int, array<string, string>>  $faqs     Approved FAQs.
+	 * @param array<string, string>|null         $price    Price summary.
+	 * @param string[]                          $policies Public package notes.
+	 * @param array<int, array<string, string>> $faqs     Published FAQs.
 	 * @return void
 	 */
-	private static function render_rate_information( int $tour_id, ?array $price, array $policies, array $faqs ): void {
+	private static function render_rate_information( ?array $price, array $policies, array $faqs ): void {
 		$price = $price ?: self::request_rate_fallback();
 		?>
-		<div class="hks-rate-information"><div class="hks-rate-information__lead"><strong><?php echo esc_html( $price['label'] ); ?></strong><p><?php echo esc_html( $price['status'] ); ?></p><?php if ( $price['basis'] ) : ?><p><?php echo esc_html( $price['basis'] ); ?></p><?php endif; ?><?php if ( $price['disclaimer'] ) : ?><p class="hks-small-print"><?php echo esc_html( $price['disclaimer'] ); ?></p><?php endif; ?></div><?php if ( ! empty( $price['is_from'] ) ) { self::render_price_assumptions( $tour_id ); } ?></div>
-		<?php if ( $policies ) : ?><h3><?php esc_html_e( 'Confirmed package notes', 'hks-wayfinder' ); ?></h3><ul class="hks-note-list"><?php foreach ( $policies as $policy ) : ?><li><?php echo esc_html( $policy ); ?></li><?php endforeach; ?></ul><?php endif; ?>
+		<div class="hks-rate-information"><div class="hks-rate-information__lead"><strong><?php echo esc_html( $price['label'] ); ?></strong><p><?php echo esc_html( $price['status'] ); ?></p></div></div>
+		<?php if ( $policies ) : ?><h3><?php esc_html_e( 'Important package notes', 'hks-wayfinder' ); ?></h3><ul class="hks-note-list"><?php foreach ( $policies as $policy ) : ?><li><?php echo esc_html( $policy ); ?></li><?php endforeach; ?></ul><?php endif; ?>
 		<?php if ( $faqs ) : ?><h3><?php esc_html_e( 'Questions before you request a quote', 'hks-wayfinder' ); ?></h3><div class="hks-faqs"><?php foreach ( $faqs as $faq ) : ?><details><summary><?php echo esc_html( $faq['question'] ); ?></summary><div><?php echo wp_kses_post( $faq['answer'] ); ?></div></details><?php endforeach; ?></div><?php endif; ?>
-		<?php
-	}
-
-	/**
-	 * Render complete public from-price assumptions only.
-	 *
-	 * @param int $tour_id Tour ID.
-	 * @return void
-	 */
-	private static function render_price_assumptions( int $tour_id ): void {
-		if ( 'from_price' !== self::field( 'hks_price_display_mode', $tour_id ) ) {
-			return;
-		}
-
-		$items = array(
-			__( 'Season', 'hks-wayfinder' )       => self::public_text( self::field( 'hks_price_season_assumption', $tour_id ) ),
-			__( 'Residency', 'hks-wayfinder' )    => self::residency_label( self::field( 'hks_price_residency_assumption', $tour_id ) ),
-			__( 'Group basis', 'hks-wayfinder' )  => self::public_text( self::field( 'hks_price_group_size_assumption', $tour_id ) ),
-			__( 'Transport', 'hks-wayfinder' )    => self::public_text( self::field( 'hks_price_transport_assumption', $tour_id ) ),
-			__( 'Accommodation', 'hks-wayfinder' ) => self::public_text( self::field( 'hks_price_accommodation_assumption', $tour_id ) ),
-			__( 'Inclusions basis', 'hks-wayfinder' ) => self::public_text( self::field( 'hks_price_inclusions_assumption', $tour_id ) ),
-		);
-
-		if ( count( array_filter( $items ) ) !== count( $items ) ) {
-			return;
-		}
-		?>
-		<dl class="hks-rate-assumptions"><?php foreach ( $items as $label => $value ) : ?><div><dt><?php echo esc_html( $label ); ?></dt><dd><?php echo esc_html( $value ); ?></dd></div><?php endforeach; ?></dl>
 		<?php
 	}
 
@@ -732,74 +700,38 @@ final class TourBlocks {
 	}
 
 	/**
-	 * Build a fail-closed public price view.
+	 * Build the single public per-person price line or its fallback.
 	 *
 	 * @param int $tour_id Tour ID.
-	 * @return array<string, string>|null
+	 * @return array<string, string>
 	 */
-	private static function price_summary( int $tour_id ): ?array {
-		$mode = self::field( 'hks_price_display_mode', $tour_id );
+	private static function price_summary( int $tour_id ): array {
+		$amount = absint( self::field( 'hks_from_price_ksh', $tour_id ) );
 
-		if ( 'hidden' === $mode ) {
-			return null;
-		}
-
-		if ( 'from_price' !== $mode ) {
+		if ( ! $amount ) {
 			return self::request_rate_fallback();
 		}
 
-		$amount      = absint( self::field( 'hks_from_price_ksh', $tour_id ) );
-		$status      = self::field( 'hks_price_status', $tour_id );
-		$checked     = self::public_text( self::field( 'hks_price_checked_date', $tour_id ) );
-		$basis       = self::public_text( self::field( 'hks_price_basis_summary', $tour_id ) );
-		$disclaimer  = self::public_text( self::field( 'hks_price_disclaimer', $tour_id ) );
-		$valid_until = self::public_text( self::field( 'hks_price_valid_until', $tour_id ) );
-		$required    = array( 'hks_price_season_assumption', 'hks_price_residency_assumption', 'hks_price_group_size_assumption', 'hks_price_transport_assumption', 'hks_price_accommodation_assumption', 'hks_price_inclusions_assumption' );
-
-		foreach ( $required as $field ) {
-			if ( '' === self::public_text( self::field( $field, $tour_id ) ) ) {
-				return self::request_rate_fallback();
-			}
-		}
-
-		if ( ! $amount || ! in_array( $status, array( 'placeholder', 'operator_reviewed', 'client_confirmed' ), true ) || ! $checked || ! $basis || ! $disclaimer || ( $valid_until && $valid_until < gmdate( 'Y-m-d' ) ) ) {
-			return self::request_rate_fallback();
-		}
-
-		$status_label = 'placeholder' === $status ? __( 'Provisional from-price — confirm the current rate and assumptions in your quote.', 'hks-wayfinder' ) : __( 'Source-reviewed from-price — final availability and total are confirmed in your quote.', 'hks-wayfinder' );
-
-		return array( 'label' => sprintf( __( 'From KSh %s', 'hks-wayfinder' ), number_format_i18n( $amount, 0 ) ), 'status' => $status_label, 'basis' => $basis, 'disclaimer' => $disclaimer, 'is_from' => '1' );
+		return array(
+			'label'      => sprintf( __( 'From KSh %s per person', 'hks-wayfinder' ), number_format_i18n( $amount, 0 ) ),
+			'status'     => __( 'Final price is confirmed for your dates, group and availability in the quote.', 'hks-wayfinder' ),
+			'basis'      => '',
+			'disclaimer' => '',
+			'is_from'    => '1',
+		);
 	}
 
 	/**
-	 * Safe fallback when a nominal rate lacks a full approval envelope.
+	 * Safe fallback when no public starting price is entered.
 	 *
 	 * @return array<string, string>
 	 */
 	private static function request_rate_fallback(): array {
-		return array( 'label' => __( 'Request current KSh rate', 'hks-wayfinder' ), 'status' => __( 'Dates, group size, residency, transport and accommodation are confirmed in your quote.', 'hks-wayfinder' ), 'basis' => '', 'disclaimer' => '', 'is_from' => '' );
+		return array( 'label' => __( 'Request current KSh rate', 'hks-wayfinder' ), 'status' => __( 'Final price is confirmed for your dates, group and availability in the quote.', 'hks-wayfinder' ), 'basis' => '', 'disclaimer' => '', 'is_from' => '' );
 	}
 
 	/**
-	 * Convert the stored residency basis to a visitor label.
-	 *
-	 * @param mixed $value Residency value.
-	 * @return string
-	 */
-	private static function residency_label( $value ): string {
-		$labels = array(
-			'kenyan_citizen' => __( 'Kenyan citizen', 'hks-wayfinder' ),
-			'resident'        => __( 'Kenyan resident', 'hks-wayfinder' ),
-			'non_resident'    => __( 'Non-resident', 'hks-wayfinder' ),
-			'mixed'           => __( 'Mixed group', 'hks-wayfinder' ),
-			'not_sure'        => __( 'Confirm in quote', 'hks-wayfinder' ),
-		);
-
-		return isset( $labels[ $value ] ) ? $labels[ $value ] : self::public_text( $value );
-	}
-
-	/**
-	 * Filter policy rows by source, status, date and expiry.
+	 * Collect every entered public package note.
 	 *
 	 * @param int $tour_id Tour ID.
 	 * @return string[]
@@ -808,11 +740,7 @@ final class TourBlocks {
 		$approved = array();
 		foreach ( self::rows( self::field( 'hks_policies', $tour_id ) ) as $policy ) {
 			$summary = self::public_text( $policy['public_summary'] ?? '' );
-			$status  = $policy['confirmation_status'] ?? '';
-			$checked = self::public_text( $policy['checked_date'] ?? '' );
-			$source  = self::public_text( $policy['source_url'] ?? '' ) ?: self::public_text( $policy['source_reference'] ?? '' );
-			$expiry  = self::public_text( $policy['valid_until'] ?? '' );
-			if ( $summary && in_array( $status, array( 'operator_reviewed', 'client_confirmed' ), true ) && $checked && $source && ( ! $expiry || $expiry >= gmdate( 'Y-m-d' ) ) ) {
+			if ( $summary ) {
 				$approved[] = $summary;
 			}
 		}
@@ -820,7 +748,7 @@ final class TourBlocks {
 	}
 
 	/**
-	 * Filter FAQs by publication, source envelope and expiry.
+	 * Collect selected published FAQs with a question and answer.
 	 *
 	 * @param array<string, int> $context Tour context.
 	 * @return array<int, array<string, string>>
@@ -835,11 +763,7 @@ final class TourBlocks {
 			$faq_id   = absint( is_object( $faq_id ) ? $faq_id->ID : $faq_id );
 			$question = self::public_text( get_the_title( $faq_id ) );
 			$answer   = self::public_html( self::field( 'hks_faq_answer', $faq_id ) );
-			$status   = self::field( 'hks_confirmation_status', $faq_id );
-			$checked  = self::public_text( self::field( 'hks_checked_date', $faq_id ) );
-			$source   = self::public_text( self::field( 'hks_source_url', $faq_id ) ) ?: self::public_text( self::field( 'hks_source_reference', $faq_id ) );
-			$expiry   = self::public_text( self::field( 'hks_valid_until', $faq_id ) );
-			if ( 'hks_faq' === get_post_type( $faq_id ) && 'publish' === get_post_status( $faq_id ) && $question && $answer && in_array( $status, array( 'operator_reviewed', 'client_confirmed' ), true ) && $checked && $source && ( ! $expiry || $expiry >= gmdate( 'Y-m-d' ) ) ) {
+			if ( 'hks_faq' === get_post_type( $faq_id ) && 'publish' === get_post_status( $faq_id ) && $question && $answer ) {
 				$approved[] = array( 'question' => $question, 'answer' => $answer );
 			}
 		}
@@ -847,7 +771,7 @@ final class TourBlocks {
 	}
 
 	/**
-	 * Check image permission, scope, review date, expiry, alt and credit.
+	 * Check that an image exists and has useful native alt text.
 	 *
 	 * @param int $attachment_id Attachment ID.
 	 * @return bool
@@ -856,27 +780,21 @@ final class TourBlocks {
 		if ( ! $attachment_id || 'attachment' !== get_post_type( $attachment_id ) ) {
 			return false;
 		}
-		$status  = self::field( 'hks_permission_status', $attachment_id );
-		$scopes  = self::field( 'hks_usage_scopes', $attachment_id );
-		$checked = self::public_text( self::field( 'hks_rights_checked_date', $attachment_id ) );
-		$expiry  = self::public_text( self::field( 'hks_permission_expiry_date', $attachment_id ) );
-		$credit  = self::public_text( self::field( 'hks_credit_line', $attachment_id ) );
-		$alt     = self::public_text( get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) );
-		return in_array( $status, array( 'operator_reviewed', 'client_confirmed' ), true ) && is_array( $scopes ) && in_array( 'website', $scopes, true ) && $checked && $alt && ( ! $expiry || $expiry >= gmdate( 'Y-m-d' ) ) && ( ! self::field( 'hks_credit_required', $attachment_id ) || $credit );
+		$alt = self::public_text( get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) );
+
+		return '' !== $alt;
 	}
 
 	/**
-	 * Render a required image credit.
+	 * Render the native attachment caption when one was supplied.
 	 *
 	 * @param int $attachment_id Attachment ID.
 	 * @return void
 	 */
 	private static function render_credit( int $attachment_id ): void {
-		if ( self::field( 'hks_credit_required', $attachment_id ) ) {
-			$credit = self::public_text( self::field( 'hks_credit_line', $attachment_id ) );
-			if ( $credit ) {
-				echo '<figcaption>' . esc_html( $credit ) . '</figcaption>';
-			}
+		$credit = self::public_text( wp_get_attachment_caption( $attachment_id ) );
+		if ( $credit ) {
+			echo '<figcaption>' . esc_html( $credit ) . '</figcaption>';
 		}
 	}
 

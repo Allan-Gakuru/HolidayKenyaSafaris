@@ -158,18 +158,9 @@ final class MvpSeeder {
 			return $record;
 		}
 
-		$source_fields = array(
-			'hks_internal_product_id'    => $tour['product_id'],
-			'hks_original_ashford_title' => $tour['title'],
-			'hks_source_url'              => $tour['source']['url'],
-			'hks_source_reference'        => $tour['source']['reference'],
-			'hks_source_checked_date'     => $tour['source']['checked_date'],
-			'hks_source_status'           => $tour['source']['status'],
-			'hks_source_snapshot'         => $tour['source']['snapshot'],
-			'hks_source_internal_notes'   => $tour['source']['notes'],
-		);
-
-		$this->update_fields( Tour::POST_TYPE, $record['post_id'], array_merge( $source_fields, $tour['fields'] ) );
+		// Stable seed identity remains hidden system metadata, not an editor burden.
+		update_post_meta( $record['post_id'], 'hks_internal_product_id', sanitize_text_field( $tour['product_id'] ) );
+		$this->update_fields( Tour::POST_TYPE, $record['post_id'], $tour['fields'] );
 		$this->append_terms( $record['post_id'], $tour['taxonomies'] );
 
 		return $record;
@@ -200,13 +191,9 @@ final class MvpSeeder {
 			return $record;
 		}
 
-		$fields = array_merge(
-			array(
-				'hks_internal_label' => $campaign['internal_label'],
-				'hks_linked_tour'    => (int) $tour_id,
-			),
-			$campaign['fields']
-		);
+		// Stable seed identity remains hidden system metadata, not an editor burden.
+		update_post_meta( $record['post_id'], 'hks_internal_label', sanitize_text_field( $campaign['internal_label'] ) );
+		$fields = array_merge( array( 'hks_linked_tour' => (int) $tour_id ), $campaign['fields'] );
 
 		$this->update_fields( Campaign::POST_TYPE, $record['post_id'], $fields );
 

@@ -214,7 +214,7 @@ content/
   media-manifest.csv
 ```
 
-The manifest should record:
+The optional repository-side manifest may record the following for import traceability. These are not WordPress client-editor fields:
 
 - Tour or destination ID.
 - Source URL.
@@ -234,9 +234,9 @@ The pipeline should:
 4. Create a high-quality prepared file without destructive upscaling.
 5. Import through WP-CLI or WordPress Media Library.
 6. Let WordPress generate responsive sizes.
-7. Associate the attachment with the structured Tour or Destination fields.
+7. Leave imported remote media unassigned until an authorized editor selects it for a Tour or Destination.
 
-Media metadata does not automatically prevent template display. Editors decide which media is assigned and published.
+WordPress does not require source, rights-status, checked-date, or expiry fields. Editors decide which media is assigned and published, and that deliberate assignment is the website-usage approval signal.
 
 ## Workflow Files
 

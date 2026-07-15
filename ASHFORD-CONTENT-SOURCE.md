@@ -4,7 +4,7 @@
 
 Holiday Kenya Safaris is a local-market brand operated by Ashford Tours & Travel. Ashford's approved Kenya product information is the starting source for the catalogue.
 
-This relationship allows reuse only within the client's authorization. It does not remove the need to verify rates, availability, photographs, policies, and public wording.
+This relationship provides the factual starting point. Imported material remains draft. An authorized Holiday Kenya Safaris editor approves public copy, media, and the one manually entered KSh price by publishing the record; no extra confirmation fields are required.
 
 ## Workspace Catalogue
 
@@ -35,7 +35,7 @@ Candidate for Holiday Kenya Safaris:
 - Nairobi and nearby day excursions.
 - Mombasa and coast excursions.
 - Mount Kenya and suitable adventure products.
-- Confirmed coast packages and staycations supplied by the client.
+- Coast packages and staycations supplied or published by the client.
 - Group, family, couple, school, chama, church, SACCO, corporate, or special-interest variants based on real operational packages.
 
 Exclude by default:
@@ -81,15 +81,15 @@ For every candidate Tour:
 
 1. Open the current Ashford product page.
 2. Compare it with the workspace crawl.
-3. Record source URL and checked date.
-4. Extract factual duration, route, itinerary, accommodation, meals, inclusions, exclusions, transport, and published rates.
+3. Record the source URL in the repository import manifest when an audit trail is useful; do not add it to the client Tour form.
+4. Extract factual duration, route, itinerary, accommodation, meals, inclusions, exclusions, and transport. Do not import a public price automatically.
 5. Flag contradictions, malformed copy, missing days, mixed rates, and questionable values.
 6. Decide whether the product is relevant to local Kenyan buyers.
 7. Rewrite the title, summary, and persuasive copy without changing facts.
 8. Convert abbreviations such as `BB`, `L`, `D`, and `LB` into plain language for public display.
-9. Assign price and photograph verification statuses.
-10. Request client confirmation for unresolved operational information.
-11. Publish only when the required facts and rights are approved.
+9. Import the Tour as a draft with remote media unassigned.
+10. Leave unclear information blank and flag it in the import manifest or handoff notes.
+11. Let an authorized editor upload or assign the intended media, enter the optional KSh per-person starting price, and publish. Publication is approval.
 
 If the build starts materially after the crawl date, re-crawl or manually verify the included source pages. Do not assume the 2026-07-02 extraction is still current.
 
@@ -104,7 +104,6 @@ Retain as factual source material:
 - Meal basis.
 - Transport options.
 - Included and excluded items.
-- Published seasonal structure.
 - Operational contact and company information that remains current.
 
 Rewrite:
@@ -123,21 +122,17 @@ Do not copy navigation debris, SEO boilerplate, unrelated category text, or malf
 ## Pricing Rules
 
 - Show KSh primarily.
-- Current values are placeholders until client-confirmed.
+- Each Tour has one optional manually maintained `From price per person (KSh)` value.
 - Never silently convert USD and publish the result as a current operator rate.
-- A planning conversion may exist internally with `converted estimate` status.
-- Every displayed `From KSh...` value must expose its assumptions.
-- Where public prices are mixed, implausible, or incomplete, display `Request current rate` or keep the Tour in draft.
-- Store seasonal supplements and single/child rates separately.
+- Do not import Ashford USD or seasonal rates into the public price field. The client enters the KSh value directly.
+- A positive value renders as `From KSh X per person`; a blank value renders as `Request current KSh rate`.
+- Do not create status, season, residency, group-size, transport, accommodation, inclusion, validity, supplement, single, adult, or child price fields.
+- If a package cannot honestly be summarized by one per-person starting price, leave it blank and request the current rate.
+- Tour prices do not expire automatically. The client changes or removes them manually. Campaign dates never alter the linked Tour price.
 
 ## Photograph Rules
 
-Record the provenance and current usage decision for each image:
-
-- Client supplied and approved.
-- Ashford-owned and client-confirmed for Holiday Kenya Safaris use.
-- Properly licensed stock or commissioned work with recorded license.
-- Other source or usage notes supplied by the client.
+Do not add rights-status or source-audit fields to the media editor. Media uploaded or deliberately assigned to published content by an authorized editor is treated as approved for website use. Imported or scraped remote media must remain unassigned until the editor selects it. Require useful native alt text and use a native caption only when a public credit must display.
 
 AI-generated imagery may be used for clearly conceptual presentations, but live product pages should use approved real destination and product photographs wherever buyers need to inspect the actual experience.
 
@@ -156,12 +151,8 @@ Do not infer:
 - Refund terms.
 - Customer counts.
 
-Record the exact source and checked date for every trust claim.
+Keep supporting sources in repository research or handoff notes when useful; do not require source and checked-date fields in WordPress. Publishing a trust claim is the editor's approval, but it remains prohibited to invent one.
 
 ## No-Hallucination Rule
 
-When the source is unclear:
-
-- Mark the field `CLIENT CONFIRMATION REQUIRED`.
-- Keep the Tour in draft or omit that claim.
-- Do not fill the gap with a plausible-sounding industry standard.
+When the source is unclear, keep the Tour in draft or omit the claim and note the question outside the public editor. Do not fill the gap with a plausible-sounding industry standard. Publishing simplifies approval workflow; it does not weaken the no-hallucination rule.

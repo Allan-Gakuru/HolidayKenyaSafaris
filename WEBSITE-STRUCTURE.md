@@ -87,7 +87,7 @@ Featured Tour rules:
 
 - Show up to six priority Tours initially.
 - Use a three-column desktop grid, responsive tablet layout, and one-column mobile flow.
-- Cards must show image, title, destination, duration, route or departure context, price status, and a clear View trip action.
+- Cards must show image, title, destination, duration, route or departure context, one price line, and a clear View trip action.
 
 ### Tour Catalogue and Taxonomy Archives
 
@@ -108,20 +108,18 @@ Default order:
 Initial filters may include:
 
 - Destination.
-- Duration.
 - Tour type.
 - Travel style.
 - Occasion.
-- Price band only after enough confirmed prices exist.
 
 Tour cards show:
 
-- Approved destination image.
+- Editor-selected destination image.
 - Tour title.
 - Destination.
 - Duration.
 - Route or departure point.
-- `From KSh...` plus status-aware qualifier, or `Request current rate`.
+- `From KSh... per person`, or `Request current KSh rate` when the Tour price is blank.
 - One or two useful travel-style labels.
 - View trip action.
 
@@ -157,7 +155,7 @@ Default order:
 
 #### Gallery
 
-Desktop uses one dominant image and two stacked supporting images. Mobile uses one dominant image with a useful supporting preview or gallery control. The lightbox must be keyboard operable and show only approved Tour media.
+Desktop uses one dominant image and two stacked supporting images. Mobile uses one dominant image with a useful supporting preview or gallery control. The lightbox must be keyboard operable and show only media assigned by an authorized editor to the published Tour.
 
 #### Tour workspace
 
@@ -174,8 +172,8 @@ Main content includes:
 
 The right column contains a sticky quote panel with:
 
-- `From KSh...` or `Request current rate`.
-- Price basis and visible assumptions.
+- `From KSh... per person` or `Request current KSh rate`.
+- A standard note that the final quote depends on dates, group, availability, and the selected package.
 - Primary **Request quote on WhatsApp** button.
 - Short explanation of the intake and message-review step.
 - Confirmed operator or response details when available.
@@ -187,12 +185,10 @@ The quote panel must not contain a permanent long booking form. Clicking the but
 Use an expandable day-by-day timeline with:
 
 - Day number and title.
-- Origin and destination.
 - Description.
 - Activities.
 - Meals.
 - Accommodation.
-- Confirmed timing or drive details.
 - Individual disclosure controls.
 - Expand all and Collapse all controls when useful.
 
@@ -200,7 +196,7 @@ The first day may be open by default. On mobile, all Tour tabs become stacked ac
 
 #### Related Tours
 
-Show up to three relevant Tours chosen by destination, duration, Tour type, or curated override. Do not add a wishlist without a real saved-trip workflow.
+Show up to three relevant Tours from shared destinations, then use a catalogue fallback. Do not expose a curated-related-Tour field until the template consumes it, and do not add a wishlist without a real saved-trip workflow.
 
 #### Required conversion behavior
 
@@ -241,10 +237,10 @@ Features:
 
 - Linked Tour required.
 - Full, reduced, or minimal navigation.
-- Campaign-specific hero, proof order, FAQs, and CTA.
-- Canonical itinerary, inclusions, exclusions, logistics, and price status inherited.
+- Campaign-specific hero and navigation treatment.
+- Canonical itinerary, inclusions, exclusions, logistics, and the single Tour price inherited.
 - Attribution retained through inquiry save and WhatsApp launch.
-- Optional noindex for temporary or highly duplicative tests.
+- Start and end dates exist on Campaigns only; Campaign indexing defaults are template-controlled.
 
 Campaign pages are not constrained to Mercy. Add variants as evidence supports them.
 
@@ -300,23 +296,23 @@ Potential modules, only when verified:
 - Tour gallery mosaic and lightbox.
 - Duration and facts strip.
 - Accessible Tour tabs and mobile disclosures.
-- Price and assumptions quote panel.
+- Single-price quote panel with standard quote context.
 - Itinerary timeline.
 - Inclusion/exclusion lists.
-- Vehicle and accommodation proof strip.
+- Vehicle and accommodation evidence drawn from the public gallery and practical details, without duplicate media fields.
 - Trust module.
-- Testimonial module with verification status.
+- Testimonial module only after real public testimonial content and a rendered component are implemented.
 - Intake-to-WhatsApp dialog or sheet.
 - Sticky mobile WhatsApp action that does not obscure content.
 - Campaign attribution handler.
-- Related-Tour query and curated override.
+- Related-Tour query using shared destinations and a catalogue fallback.
 - Global footer.
 
 ## Visual Requirements
 
 - Follow `DESIGN.md`, `BRAND-WAYFINDER.md`, and `UI-REFERENCE-ATTIC-TRAVEL.md`.
 - Use the catalogue reference's structure and density, not its brand styling.
-- Use approved destination imagery as the primary visual proof.
+- Use destination imagery deliberately selected by an authorized editor as the primary visual proof.
 - Keep the main catalogue surface white, with Pale Mist used for quiet section alternation.
 - Use Wayfinder colors and typography; do not copy Attic Travel's logo, fonts, maroon palette, or abstract title gradient.
 - Cards use stable image ratios, restrained radii, and consistent content height.
@@ -365,4 +361,3 @@ Potential modules, only when verified:
 - Reduced-motion support.
 - No information communicated only through color.
 - Correct heading order and landmark structure.
-

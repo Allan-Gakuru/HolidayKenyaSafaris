@@ -118,7 +118,9 @@ function hks_wayfinder_campaign_robots( array $robots ): array {
 	}
 
 	$post_id = get_queried_object_id();
-	$noindex = function_exists( 'get_field' ) ? get_field( 'hks_noindex', $post_id ) : get_post_meta( $post_id, 'hks_noindex', true );
+	$noindex = metadata_exists( 'post', $post_id, 'hks_noindex' )
+		? (bool) get_post_meta( $post_id, 'hks_noindex', true )
+		: true;
 
 	if ( $noindex ) {
 		$robots['noindex']  = true;

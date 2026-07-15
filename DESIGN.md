@@ -9,7 +9,7 @@ Holiday Kenya Safaris should feel like a calm, capable local travel planner: spe
 The visual rhythm is:
 
 1. reveal the destination and the emotional payoff;
-2. make the route, timing, accommodation, transport, inclusions, exclusions, and assumptions easy to scan;
+2. make the route, timing, accommodation, transport, inclusions, exclusions, and starting-price context easy to scan;
 3. place a clear, informed quote action beside that proof;
 4. collect only the details needed to continue in WhatsApp.
 
@@ -21,7 +21,7 @@ The homepage, global navigation, catalogue, destination pages, and canonical Tou
 
 ### Campaign mode
 
-Focused paid-ad pages may use the immersive, emotionally concentrated structure of the existing Maasai Mara prototype. Campaign mode can change the opening message, proof order, imagery, and navigation density while inheriting canonical Tour facts.
+Focused paid-ad pages may use the immersive, emotionally concentrated structure of the existing Maasai Mara prototype. Campaign mode can change the opening headline, supporting copy, featured hero image, and navigation density while inheriting canonical Tour facts.
 
 Do not blend both modes into an indecisive hybrid on every page. Canonical Tour pages use the catalogue shell. Campaign pages earn the more dramatic opening.
 
@@ -58,7 +58,7 @@ Contrast pairings approved for ordinary text:
 
 Lake Teal on Pale Mist is approximately 4.46:1 and is therefore reserved for large text, non-text decoration, or controls whose complete treatment is verified. Saffron does not pass text contrast on White or Pale Mist; use it only as non-essential decoration there. On Midnight Navy, Saffron may be used for small high-visibility accents.
 
-Never use colour alone to communicate price status, availability, validation, selection, or errors.
+Never use colour alone to communicate price availability, validation, selection, or errors.
 
 ## Typography
 
@@ -94,9 +94,9 @@ Keep paragraph measure near 65 characters. Use sentence case. Avoid all-caps par
 
 ## Photography
 
-Destination photography must show the actual place, route, accommodation, vehicle, or experience being described. Use client-approved photographs only. Generated Mara and Mercy images in this repository are internal presentation references and must never be published.
+Destination photography must show the actual place, route, accommodation, vehicle, or experience being described. Media uploaded or assigned by an authorized editor and used on published content is treated as client-approved for the website. Generated Mara and Mercy images in this repository are internal presentation references and must never be published.
 
-Avoid generic orange sunsets, wildlife collages, fake luxury staging, aggressive colour grading, and images whose origin or usage rights are unconfirmed. Every public image must have a source and approval record.
+Avoid generic orange sunsets, wildlife collages, fake luxury staging, aggressive colour grading, and images an authorized editor has not deliberately selected for the public site. Every public image needs useful native WordPress alt text; add a public credit only when one must be displayed.
 
 ## Components
 
@@ -130,7 +130,7 @@ On mobile, the gallery simplifies, tabs become stacked disclosures, the quote pa
 
 ### Package summaries
 
-Show destination, duration, travel style, departure context, route, and price status before decorative metadata. A price is never presented without its assumptions. Unknown or unconfirmed numeric prices become **Request current rate** publicly. Every card has a clear View trip action; the whole card may be linked only when keyboard and assistive-technology behavior remains correct.
+Show destination, duration, travel style, departure context, route, and one price line before decorative metadata. A positive Tour value renders as **From KSh X per person**. A blank value renders as **Request current KSh rate**. Every card has a clear View trip action; the whole card may be linked only when keyboard and assistive-technology behavior remains correct.
 
 ### Itinerary
 
@@ -138,7 +138,7 @@ Use a readable day-by-day timeline with native headings and accessible disclosur
 
 ### Quote actions
 
-The canonical primary label is **Request quote on WhatsApp**. Opening the action reveals the intake form first; it must never silently send visitor data. Canonical Tour pages use a sticky desktop quote panel containing price context, assumptions, the primary action, and a short explanation. They do not use a permanently visible long booking form. A mobile sticky action must respect safe areas and leave enough bottom padding that it cannot obscure content.
+The canonical primary label is **Request quote on WhatsApp**. Opening the action reveals the intake form first; it must never silently send visitor data. Canonical Tour pages use a sticky desktop quote panel containing the one public price line, the primary action, and a short explanation that the final quote depends on dates, group, and availability. They do not use a permanently visible long booking form. A mobile sticky action must respect safe areas and leave enough bottom padding that it cannot obscure content.
 
 ### Forms and dialogs
 
@@ -146,7 +146,7 @@ Labels remain visible above their controls. Required fields are identified in te
 
 ### Trust and proof
 
-Prefer concrete facts—route, vehicle, accommodation, inclusions, exclusions, operator relationship, and sourced policy details—over badges, invented testimonials, or vague claims. Unknown trust details remain unpublished until confirmed.
+Prefer concrete facts—route, vehicle, accommodation, inclusions, exclusions, operator relationship, and deliberate public policy text—over badges, invented testimonials, or vague claims. Unknown trust details remain blank or in draft.
 
 ## Interaction and motion
 
@@ -156,17 +156,16 @@ Prefer concrete facts—route, vehicle, accommodation, inclusions, exclusions, o
 - Avoid scroll-jacking, autoplay, parallax, bouncing CTAs, and ornamental motion.
 - Under `prefers-reduced-motion: reduce`, remove non-essential movement and shorten necessary state changes.
 
-## Content integrity states
+## Editorial content state
 
-The editor experience must make these distinctions explicit:
+The editor uses native WordPress publication state as the approval model:
 
-- confirmed and publishable;
-- provisional with public assumptions;
-- `CLIENT CONFIRMATION REQUIRED` and therefore omitted from public output;
-- internal-only research or presentation material.
+- **Draft:** not approved for public output.
+- **Published:** deliberately approved by an authorized editor, including assigned media.
+- **Blank optional field:** unavailable and omitted with a deliberate fallback.
 
-No visual polish may make an unconfirmed fact appear approved.
+Do not expose separate confirmation, source-checked, rights-checked, price-status, or validity controls in the client-facing content forms. Internal import material and legacy metadata may remain stored, but they do not render and do not gate publication. No visual polish may make a draft, blank, or imported-only value appear public.
 
 ## Current approval boundary
 
-The production geometry in `brand/masters/` is the implementation baseline, rebuilt from the approved Wayfinder direction. Final client sign-off, public photography, legal/operator wording, policies, analytics identifiers, and confirmed prices remain separate launch gates tracked in `CLIENT-CONFIRMATIONS.md`.
+The production geometry in `brand/masters/` is the implementation baseline, rebuilt from the approved Wayfinder direction. Publishing is the per-record approval signal for public content and assigned media. Legal/operator wording, global policies, contact details, analytics identifiers, and other project-level launch decisions remain tracked in `CLIENT-CONFIRMATIONS.md`.
