@@ -9,7 +9,7 @@ Holiday Kenya Safaris should feel like a calm, capable local travel planner: spe
 The visual rhythm is:
 
 1. reveal the destination and the emotional payoff;
-2. make the route, timing, accommodation, transport, inclusions, exclusions, and starting-price context easy to scan;
+2. make the route, timing, accommodation, transport, inclusions, and exclusions easy to scan;
 3. place a clear, informed quote action beside that proof;
 4. collect only the details needed to continue in WhatsApp.
 
@@ -58,7 +58,7 @@ Contrast pairings approved for ordinary text:
 
 Lake Teal on Pale Mist is approximately 4.46:1 and is therefore reserved for large text, non-text decoration, or controls whose complete treatment is verified. Saffron does not pass text contrast on White or Pale Mist; use it only as non-essential decoration there. On Midnight Navy, Saffron may be used for small high-visibility accents.
 
-Never use colour alone to communicate price availability, validation, selection, or errors.
+Never use colour alone to communicate an optional Campaign price, validation, selection, or errors.
 
 ## Typography
 
@@ -130,7 +130,7 @@ On mobile, the gallery simplifies, tabs become stacked disclosures, the quote pa
 
 ### Package summaries
 
-Show destination, duration, travel style, departure context, route, and one price line before decorative metadata. A positive Tour value renders as **From KSh X per person**. A blank value renders as **Request current KSh rate**. Every card has a clear View trip action; the whole card may be linked only when keyboard and assistive-technology behavior remains correct.
+Show destination, duration, travel style, departure context, and route before decorative metadata. Tour summaries and cards never show price. Every card has a clear View trip action; the whole card may be linked only when keyboard and assistive-technology behavior remains correct.
 
 ### Itinerary
 
@@ -138,7 +138,7 @@ Use a readable day-by-day timeline with native headings and accessible disclosur
 
 ### Quote actions
 
-The canonical primary label is **Request quote on WhatsApp**. Opening the action reveals the intake form first; it must never silently send visitor data. Canonical Tour pages use a sticky desktop quote panel containing the one public price line, the primary action, and a short explanation that the final quote depends on dates, group, and availability. They do not use a permanently visible long booking form. A mobile sticky action must respect safe areas and leave enough bottom padding that it cannot obscure content.
+The canonical primary label is **Request quote on WhatsApp**. Opening the action reveals the intake form first; it must never silently send visitor data. Canonical Tour pages use a price-free sticky desktop quote panel containing the primary action and a short explanation of the tailored quote and message-review step. Campaign pages may show their own optional starting price when one is deliberately entered. They do not use a permanently visible long booking form. A mobile sticky action must respect safe areas and leave enough bottom padding that it cannot obscure content.
 
 ### Forms and dialogs
 

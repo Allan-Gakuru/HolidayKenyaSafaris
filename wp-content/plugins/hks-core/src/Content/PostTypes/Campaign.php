@@ -31,7 +31,7 @@ final class Campaign {
 			self::POST_TYPE,
 			array(
 				'labels'              => self::labels(),
-				'description'         => __( 'Focused landing-page messaging linked to a canonical Tour. Keep itinerary, inclusion, price, and other package facts on the linked Tour.', 'hks-core' ),
+			'description'         => __( 'Focused landing-page messaging linked to a canonical Tour. Keep itinerary, inclusions, and package facts on the linked Tour; use the optional Campaign price only when it is a selling point.', 'hks-core' ),
 				'public'              => false,
 				'hierarchical'        => false,
 				'exclude_from_search' => true,

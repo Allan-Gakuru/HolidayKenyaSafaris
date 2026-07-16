@@ -91,8 +91,8 @@ Use a stable event vocabulary for Meta and GA4.
 
 | Event | Trigger | Suggested parameters |
 |---|---|---|
-| `view_tour` | Tour detail becomes viewable | tour ID, slug, destination, type, duration, derived price display (`from_price` or `request_rate`) |
-| `view_campaign` | Focused landing page becomes viewable | campaign ID, linked tour, avatar/angle, source |
+| `view_tour` | Tour detail becomes viewable | tour ID, slug, destination, type, duration |
+| `view_campaign` | Focused landing page becomes viewable | campaign ID, linked tour, avatar/angle, source, optional Campaign price display (`from_price` or omitted) |
 | `select_tour` | Visitor opens a tour from a listing | tour ID, list name, position |
 | `tour_gallery_open` | Visitor opens the Tour gallery | tour ID, image count, entry location |
 | `tour_section_open` | Visitor opens a Tour tab or mobile disclosure | tour ID, section name, device layout |

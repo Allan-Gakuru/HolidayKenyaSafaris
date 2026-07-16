@@ -44,8 +44,8 @@ final class PublicationRules {
 	/**
 	 * Validate a canonical Tour candidate.
 	 *
-	 * A published Tour is treated as client-approved. Only the public title and the
-	 * optional single per-person price can block publication.
+	 * A published Tour is treated as client-approved. Only its public content can
+	 * block publication; legacy Tour prices are not loaded or validated.
 	 *
 	 * @param array<string, mixed> $values  Complete candidate SCF values.
 	 * @param int                  $post_id Current post ID. Retained for API compatibility.
@@ -61,16 +61,6 @@ final class PublicationRules {
 				'hks_tour_title_required',
 				'post_title',
 				__( 'Add the public Tour title before publishing.', 'hks-core' )
-			);
-		}
-
-		$price = self::value( $values, 'hks_from_price_ksh' );
-		if ( self::is_meaningful( $price ) && ! self::is_positive_whole_number( $price ) ) {
-			self::add_error(
-				$errors,
-				'hks_tour_from_price_invalid',
-				'hks_from_price_ksh',
-				__( 'The From price must be a positive whole KSh amount, or left blank.', 'hks-core' )
 			);
 		}
 
@@ -122,6 +112,16 @@ final class PublicationRules {
 				'hks_campaign_tour_not_public',
 				'hks_linked_tour',
 				__( 'The linked Tour must be published before this Campaign can be public.', 'hks-core' )
+			);
+		}
+
+		$price = self::value( $values, 'hks_campaign_from_price_ksh' );
+		if ( self::is_meaningful( $price ) && ! self::is_positive_whole_number( $price ) ) {
+			self::add_error(
+				$errors,
+				'hks_campaign_from_price_invalid',
+				'hks_campaign_from_price_ksh',
+				__( 'The Campaign From price must be a positive whole KSh amount, or left blank.', 'hks-core' )
 			);
 		}
 
@@ -191,7 +191,6 @@ final class PublicationRules {
 			'hks_transport_types',
 			'hks_accommodation_basis',
 			'hks_meals_summary',
-			'hks_from_price_ksh',
 			'hks_itinerary',
 			'hks_inclusions',
 			'hks_exclusions',
@@ -210,6 +209,7 @@ final class PublicationRules {
 			'hks_linked_tour',
 			'hks_hero_headline',
 			'hks_supporting_copy',
+			'hks_campaign_from_price_ksh',
 			'hks_navigation_mode',
 			'hks_campaign_start_date',
 			'hks_campaign_end_date',

@@ -30,7 +30,6 @@ final class FieldGroups {
 	public static function all() {
 		return array(
 			self::tour_package_group(),
-			self::tour_pricing_group(),
 			self::tour_itinerary_group(),
 			self::tour_inclusions_group(),
 			self::tour_suitability_group(),
@@ -74,37 +73,6 @@ final class FieldGroups {
 			true,
 			__( 'Only package facts consumed by the current public templates.', 'hks-core' ),
 			0
-		);
-	}
-
-	/**
-	 * The single optional Tour price.
-	 *
-	 * @return array<string, mixed>
-	 */
-	private static function tour_pricing_group() {
-		return self::group(
-			'tour_pricing',
-			__( 'Tour: Price', 'hks-core' ),
-			array(
-				self::field(
-					'tour_from_price_ksh',
-					__( 'From price per person (KSh)', 'hks-core' ),
-					'hks_from_price_ksh',
-					'number',
-					array(
-						'instructions' => __( 'Optional. Enter one positive whole KSh amount only when it is an honest per-person starting price. Leave blank to show “Request current KSh rate”.', 'hks-core' ),
-						'min'          => 1,
-						'step'         => 1,
-						'prepend'      => 'KSh',
-						'append'       => __( 'per person', 'hks-core' ),
-					)
-				),
-			),
-			self::location( 'post_type', Tour::POST_TYPE ),
-			true,
-			__( 'A blank value uses the request-rate fallback everywhere.', 'hks-core' ),
-			10
 		);
 	}
 
@@ -221,7 +189,7 @@ final class FieldGroups {
 					'hks_policies',
 					'repeater',
 					array(
-						'instructions' => __( 'Every entered note appears in Rates & Important Information.', 'hks-core' ),
+						'instructions' => __( 'Every entered note appears in Important Information.', 'hks-core' ),
 						'layout'       => 'table',
 						'button_label' => __( 'Add package note', 'hks-core' ),
 						'sub_fields'   => array(
@@ -268,15 +236,28 @@ final class FieldGroups {
 			'campaign_public',
 			__( 'Campaign: Landing page', 'hks-core' ),
 			array(
-				self::message( 'campaign_native_mappings', __( 'Campaign content', 'hks-core' ), __( 'Use the WordPress title as the Campaign name and the featured image as its hero. The linked Tour supplies the price, route, itinerary, inclusions, and exclusions.', 'hks-core' ) ),
+				self::message( 'campaign_native_mappings', __( 'Campaign content', 'hks-core' ), __( 'Use the WordPress title as the Campaign name and the featured image as its hero. The linked Tour supplies the route, itinerary, inclusions, and exclusions. The optional price belongs to this Campaign only.', 'hks-core' ) ),
 				self::tab( 'campaign_tab_content', __( 'Content', 'hks-core' ) ),
 				self::field( 'campaign_linked_tour', __( 'Linked Tour', 'hks-core' ), 'hks_linked_tour', 'post_object', array_merge( self::post_object_args( Tour::POST_TYPE, false ), array( 'required' => 1, 'multiple' => 0, 'allow_null' => 0 ) ) ),
 				self::field( 'campaign_hero_headline', __( 'Hero headline', 'hks-core' ), 'hks_hero_headline', 'text', array( 'instructions' => __( 'Displayed as the Campaign H1. Leave blank to use the Campaign title.', 'hks-core' ) ) ),
 				self::field( 'campaign_supporting_copy', __( 'Supporting copy', 'hks-core' ), 'hks_supporting_copy', 'textarea', array( 'instructions' => __( 'Displayed below the Campaign headline.', 'hks-core' ), 'rows' => 4, 'new_lines' => 'wpautop' ) ),
+				self::field(
+					'campaign_from_price_ksh',
+					__( 'From price per person (KSh)', 'hks-core' ),
+					'hks_campaign_from_price_ksh',
+					'number',
+					array(
+						'instructions' => __( 'Optional. Enter a positive whole KSh amount only when price is a selling point for this Campaign. Leave blank to omit price.', 'hks-core' ),
+						'min'          => 1,
+						'step'         => 1,
+						'prepend'      => 'KSh',
+						'append'       => __( 'per person', 'hks-core' ),
+					)
+				),
 				self::field( 'campaign_navigation_mode', __( 'Navigation mode', 'hks-core' ), 'hks_navigation_mode', 'select', array_merge( self::choice_args( Choices::navigation_mode(), false ), array( 'default_value' => 'campaign_minimal', 'required' => 1 ) ) ),
 
 				self::tab( 'campaign_tab_dates', __( 'Planning dates', 'hks-core' ) ),
-				self::message( 'campaign_dates_note', __( 'Campaign-only dates', 'hks-core' ), __( 'These dates record the intended campaign window. They do not publish, unpublish, expire, or change the linked Tour price.', 'hks-core' ) ),
+				self::message( 'campaign_dates_note', __( 'Campaign-only dates', 'hks-core' ), __( 'These dates record the intended campaign window. They do not publish, unpublish, expire, or change this Campaign’s optional price.', 'hks-core' ) ),
 				self::field( 'campaign_start_date', __( 'Start date', 'hks-core' ), 'hks_campaign_start_date', 'date_picker', self::date_args() ),
 				self::field( 'campaign_end_date', __( 'End date', 'hks-core' ), 'hks_campaign_end_date', 'date_picker', self::date_args() ),
 			),

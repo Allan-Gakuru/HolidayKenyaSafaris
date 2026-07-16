@@ -14,7 +14,6 @@ PLUGIN = ROOT / "wp-content" / "plugins" / "hks-core"
 
 EXPECTED_GROUPS = {
     "tour_package": True,
-    "tour_pricing": True,
     "tour_itinerary": True,
     "tour_inclusions": True,
     "tour_suitability": True,
@@ -29,11 +28,12 @@ EXPECTED_GROUPS = {
 REQUIRED_FIELDS = {
     "hks_featured", "hks_duration_label", "hks_start_location",
     "hks_end_location", "hks_route_summary", "hks_transport_types",
-    "hks_accommodation_basis", "hks_meals_summary", "hks_from_price_ksh",
+    "hks_accommodation_basis", "hks_meals_summary",
     "hks_itinerary", "hks_inclusions", "hks_exclusions", "hks_best_for",
     "hks_child_suitability", "hks_accessibility_notes", "hks_policies",
     "hks_gallery", "hks_featured_faqs", "hks_linked_tour",
-    "hks_hero_headline", "hks_supporting_copy", "hks_navigation_mode",
+    "hks_hero_headline", "hks_supporting_copy", "hks_campaign_from_price_ksh",
+    "hks_navigation_mode",
     "hks_campaign_start_date", "hks_campaign_end_date", "hks_faq_answer",
     "hks_short_summary", "hks_overview", "hks_hero_image",
 }
@@ -42,7 +42,8 @@ FORBIDDEN_EDITOR_FIELDS = {
     "hks_internal_product_id", "hks_original_ashford_title", "hks_source_url",
     "hks_source_reference", "hks_source_checked_date", "hks_source_status",
     "hks_duration_days", "hks_duration_nights", "hks_min_group_size",
-    "hks_max_group_size", "hks_residency_basis", "hks_price_display_mode",
+    "hks_max_group_size", "hks_residency_basis", "hks_from_price_ksh",
+    "hks_price_display_mode",
     "hks_price_unit", "hks_price_status", "hks_price_checked_date",
     "hks_price_valid_until", "hks_price_season_assumption",
     "hks_price_residency_assumption", "hks_price_group_size_assumption",
@@ -116,8 +117,8 @@ def main() -> int:
     if duplicates:
         errors.append(f"duplicate deterministic field slugs: {duplicates}")
 
-    require(errors, "price field", fields, ("From price per person (KSh)", "'min'          => 1", "'step'         => 1", "per person"))
-    require(errors, "campaign dates", fields, ("hks_campaign_start_date", "hks_campaign_end_date", "do not publish, unpublish, expire, or change the linked Tour price"))
+    require(errors, "Campaign price field", fields, ("hks_campaign_from_price_ksh", "From price per person (KSh)", "'min'          => 1", "'step'         => 1", "Leave blank to omit price"))
+    require(errors, "campaign dates", fields, ("hks_campaign_start_date", "hks_campaign_end_date", "do not publish, unpublish, expire, or change this Campaign"))
     require(errors, "settings compatibility", fields, ("public_setting", "'hks_settings_' . $slug", "Holiday Kenya Safaris", "254722742799"))
     require(errors, "fields module", files["src/Fields/FieldsModule.php"], ("acf_add_local_field_group", "acf_add_options_page", "hks-settings"))
 
@@ -126,12 +127,14 @@ def main() -> int:
         "publication rules",
         rules,
         (
-            "hks_tour_title_required", "hks_tour_from_price_invalid",
+            "hks_tour_title_required", "hks_campaign_from_price_invalid",
             "is_positive_whole_number", "hks_linked_tour",
             "hks_campaign_start_date", "hks_campaign_end_date",
             "CLIENT CONFIRMATION REQUIRED",
         ),
     )
+    if "hks_tour_from_price_invalid" in rules or "'hks_from_price_ksh'" in rules:
+        errors.append("publication rules still load or validate the retired Tour price")
     for old_gate in ("hks_price_status", "hks_source_status", "hks_analytics_campaign_label"):
         if old_gate in rules:
             errors.append(f"publication rules still gate on removed field: {old_gate}")
@@ -165,7 +168,7 @@ def main() -> int:
             print(f"- {error}", file=sys.stderr)
         return 1
 
-    print("Content-model validation passed (lean editor, one KSh price, Campaign-only dates, compatibility guards).")
+    print("Content-model validation passed (price-free Tours, optional Campaign price, Campaign-only dates, compatibility guards).")
     return 0
 
 

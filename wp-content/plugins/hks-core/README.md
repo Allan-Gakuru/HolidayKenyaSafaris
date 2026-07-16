@@ -4,7 +4,7 @@
 
 ## Current scope
 
-Version `0.5.0` provides:
+Version `0.6.0` provides:
 
 - guarded WordPress 6.6+, PHP 8.3+, and Secure Custom Fields 6.9.1+ boot requirements;
 - versioned, retry-safe upgrades and soft rewrite refreshes;
@@ -17,7 +17,7 @@ Version `0.5.0` provides:
 - an idempotent administrator importer for the original MVP, seven standard site Page drafts, and 40 protected catalogue drafts in four controlled batches; and
 - an explicitly consented private inquiry record, visitor review, and WhatsApp handoff.
 
-Campaigns link to exactly one Tour and may change messaging or presentation, never itinerary, logistics, inclusions, policy, or price facts. Drafts remain saveable while incomplete. Public or scheduled records must pass the publication rules.
+Campaigns link to exactly one Tour and may change messaging, presentation, and their own optional selling price, never the linked Tour itinerary, logistics, inclusions, or policy facts. Drafts remain saveable while incomplete. Public or scheduled records must pass the publication rules.
 
 ## Structure
 
@@ -38,7 +38,8 @@ Modules implement `HolidayKenyaSafaris\Core\Contracts\Module`. The default modul
 ## Editorial safety
 
 - Source-audit metadata stays private and out of the client Tour form.
-- A positive `From KSh` amount is the only Tour price field exposed to editors.
+- Tours have no active price field or public price output. Legacy Tour price metadata remains stored but hidden and ignored.
+- A positive whole `From KSh` amount is the only Campaign price field exposed to editors; blank Campaign prices render nothing.
 - Phase 7 imports never assign prices, photographs, policies, inclusions, exclusions, or availability claims.
 - Every importer action creates or refreshes drafts only and protects records that an editor has moved beyond draft.
 - `CLIENT CONFIRMATION REQUIRED` is rejected anywhere in public candidate copy.

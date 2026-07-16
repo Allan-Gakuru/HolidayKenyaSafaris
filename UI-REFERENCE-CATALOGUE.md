@@ -35,7 +35,7 @@ Catalogue mode is light, browseable, photography-led, and internally connected. 
 
 Use for focused Facebook and other paid-ad landing pages.
 
-Campaign mode may retain the immersive, emotionally focused structure of the existing Maasai Mara prototype. It may use reduced navigation, a pressure-led headline, supporting copy, a featured hero image, and template-controlled repeated quote prompts. It must still inherit the factual itinerary, single Tour price value, inclusions, exclusions, and logistics from the linked canonical Tour.
+Campaign mode may retain the immersive, emotionally focused structure of the existing Maasai Mara prototype. It may use reduced navigation, a pressure-led headline, supporting copy, a featured hero image, template-controlled repeated quote prompts, and one optional Campaign-specific starting price. It must still inherit the factual itinerary, inclusions, exclusions, and logistics from the linked canonical Tour.
 
 The existing Maasai Mara prototype is a Campaign reference, not the default canonical Tour template.
 
@@ -128,8 +128,8 @@ Featured Tour rules:
 - Use three columns on desktop, two when appropriate on tablet, and one on mobile.
 - Begin with no more than six priority Tours on the homepage.
 - Preserve a stable image ratio and card height.
-- Show title, destination, duration, route or departure context, one price line, and a clear View trip action.
-- Use `From KSh... per person` when the Tour price field is populated or `Request current KSh rate` when it is blank; never omit price context merely to imitate the reference.
+- Show title, destination, duration, route or departure context, and a clear View trip action.
+- Do not show a price or request-rate fallback on Tour cards.
 
 ## Catalogue and Taxonomy Templates
 
@@ -184,7 +184,7 @@ Main content begins with:
 - Tour title only when a shorter in-content label is useful; do not repeat the full H1 without purpose.
 - Duration badge.
 - Compact facts for nights, departure, route, travel style, accommodation basis, and transport.
-- Accessible tabs for Overview, Itinerary, Included/Excluded, and Rates & Important Information.
+- Accessible tabs for Overview, Itinerary, Included/Excluded, and Important Information.
 
 The right column contains a sticky quote panel, not a long booking form.
 
@@ -192,8 +192,8 @@ The right column contains a sticky quote panel, not a long booking form.
 
 The panel should contain:
 
-- `From KSh... per person` or `Request current KSh rate`.
-- A standard note that the final quote depends on dates, group, availability, and the selected package.
+- A clear tailored-quote heading without a Tour price or request-rate fallback.
+- A short note explaining that the visitor shares dates and group details, reviews the message, and chooses whether to send it in WhatsApp.
 - A compact availability statement that does not invent availability.
 - The primary **Request quote on WhatsApp** button.
 - A short explanation that the visitor will answer a few questions and review a prepared WhatsApp message.
@@ -210,11 +210,11 @@ Desktop tabs:
 - Overview.
 - Itinerary.
 - Included/Excluded.
-- Rates & Important Information.
+- Important Information.
 
 The content must remain present in the server-rendered document and crawlable. JavaScript enhances presentation rather than becoming the only source of essential Tour information.
 
-On mobile, render the same sections as accessible stacked disclosures. Open Overview by default. Keep section labels and current state obvious. Do not hide every practical fact or require visitors to open several controls before finding the price line.
+On mobile, render the same sections as accessible stacked disclosures. Open Overview by default. Keep section labels and current state obvious. Do not hide practical facts behind several controls.
 
 ### Itinerary
 
@@ -276,7 +276,7 @@ Do not reproduce:
 
 - The 21-slide homepage hero.
 - Generic copy repeated over unrelated hero images.
-- Tour cards without price, duration, route, or a useful action.
+- Tour cards without duration, route or departure context, or a useful action.
 - Duplicate full page titles.
 - Incorrect heading hierarchy.
 - Long permanent booking forms.
@@ -311,7 +311,7 @@ Build reusable theme parts and blocks for:
 - Test at 360, 390, 768, 1024, 1280, and 1440px widths.
 - The navigation must remain usable with long labels and keyboard input.
 - The gallery must not distort, collapse to zero height, or shift after load.
-- The title, facts, price, and quote action must remain discoverable without overlap.
+- The title, facts, and quote action must remain discoverable without overlap. An optional Campaign price must not shift or crowd those controls.
 - Sticky elements must stop before the footer and never cover page content.
 - Mobile disclosures must expose every canonical Tour fact available on desktop.
 - The intake form must retain entered values when the keyboard opens, validation fails, or the dialog is temporarily dismissed.

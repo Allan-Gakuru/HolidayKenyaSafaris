@@ -13,9 +13,9 @@ Use this file for project-level decisions such as contact details, legal wording
 | Main conversion | Confirmed | WhatsApp quote inquiry |
 | Product scope | Confirmed | Domestic safaris, excursions, coast, staycations, groups, and relevant local special-interest products |
 | Default exclusions | Confirmed | International holidays, visas, transfers, and inbound-only products unless later approved |
-| Pricing presentation | Confirmed | One optional `From price per person (KSh)` field per Tour; otherwise `Request current KSh rate` |
+| Pricing presentation | Confirmed | Tours are price-free. Campaigns have one optional `From price per person (KSh)` field, displayed only when populated; blank Campaign prices are omitted. |
 | Editorial approval | Confirmed | Draft means private; publishing by an authorized editor approves public copy and assigned media without additional confirmation fields |
-| Content dates | Confirmed | Start and end dates exist only on Campaigns; Tour prices are updated manually and never auto-expire |
+| Content dates | Confirmed | Start and end dates exist only on Campaigns and do not automatically alter the optional Campaign price |
 | Required intake fields | Confirmed | Name, phone, package, preferred date/month, travelers |
 | Inquiry recovery storage | Confirmed | Save a private WordPress inquiry after explicit disclosure and contact consent, before showing the WhatsApp review step |
 | Site scope | Confirmed | Home, catalogue, destinations, Tour pages, trust/about, contact, campaign template |
@@ -74,16 +74,17 @@ These are global commercial and legal decisions, not Tour-editor confirmation, a
 
 ## Rates
 
-Rates use the simplified editorial model:
+Rates use the simplified Campaign-only editorial model:
 
-- The Tour editor has one optional positive whole-number field: `From price per person (KSh)`.
-- Entering a value and publishing the Tour approves `From KSh X per person` for cards, Tour pages, Campaigns, and quote context.
-- Leaving it blank shows `Request current KSh rate`.
+- The Tour editor has no active price field. Tour cards, archives, Destination pages, related Tours, canonical Tour pages, and Tour quote panels show no price or request-rate fallback.
+- The Campaign editor has one optional positive whole-number field: `From price per person (KSh)`.
+- Entering a value and publishing the Campaign approves `From KSh X per person` for that Campaign only.
+- Leaving the Campaign field blank produces no public price output.
 - There are no price status, source, checked-date, valid-until, season, residency, group-size, sharing, vehicle, accommodation, inclusion, supplement, adult, or child price fields.
-- Campaign start and end dates do not alter Tour prices.
-- The client updates or removes the Tour price manually.
-- Leave the price blank for per-vehicle, per-group, child-specific, single-supplement-dependent, or highly variable products that cannot truthfully use one per-person starting figure.
-- Never auto-convert or import a USD amount into the public KSh field.
+- Campaign start and end dates do not alter the price. The client updates or removes it manually.
+- Leave the Campaign price blank when it is not a useful selling point or the offer cannot truthfully use one per-person starting figure.
+- Never auto-convert or import a USD amount, or copy a legacy Tour amount, into the Campaign field.
+- Preserve legacy Tour price metadata in the database but hide and ignore it.
 
 ## Media Rights
 

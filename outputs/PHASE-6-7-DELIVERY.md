@@ -50,9 +50,11 @@ exclusions, reviews, or availability.
 4. Keep Contact and all four legal pages in Draft until their missing client information is
    supplied.
 5. Import one catalogue batch at a time.
-6. Review each imported Tour, add its `From KSh` price and approved photographs, complete any
-   missing displayed fields, preview it, then publish it.
-7. Check catalogue filters and internal links after each published batch before importing the
+6. Review each imported Tour, add approved photographs, complete any missing displayed fields,
+   preview it, then publish it. Tours do not carry prices.
+7. Add an optional `From KSh` per-person price only to a focused Campaign where price is a
+   deliberate selling point.
+8. Check catalogue filters and internal links after each published batch before importing the
    next one.
 
 Re-running a batch is safe while its records remain drafts. As soon as an editor publishes,
@@ -62,5 +64,5 @@ that record and will not overwrite it.
 ## Deliberately Deferred
 
 - Contact details and legal text still require the client.
-- Imported catalogue media and prices require editor input.
+- Imported catalogue media requires editor input. Campaign prices remain blank until deliberately entered.
 - Inquiry submission and WhatsApp launch testing was explicitly skipped for this phase.

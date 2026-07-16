@@ -18,7 +18,7 @@ The client editor is a publishing interface, not an audit database. Native WordP
 - Blank optional fields are omitted with deliberate frontend fallbacks.
 - A client-facing field must either render publicly or visibly control public discovery or placement.
 - Necessary IDs, attribution values, migration markers, and other system metadata must be generated or hidden.
-- Only Campaigns have start and end dates. These are the explicit operational exception to the visible-output rule; Tour prices are updated manually and never expire automatically.
+- Only Campaigns have start and end dates. These are the explicit operational exception to the visible-output rule. Campaign prices are optional, updated manually, and never expire automatically.
 
 This rule does not permit invented facts. Imports remain drafts until an authorized editor reviews and publishes them.
 
@@ -49,7 +49,7 @@ It may override:
 - Featured hero image.
 - Navigation mode.
 
-Campaign start and end dates record the intended operating window. They do not auto-publish or unpublish content. Every Campaign inherits the linked Tour's canonical facts and one price value.
+Campaign start and end dates record the intended operating window. They do not auto-publish or unpublish content. Every Campaign inherits the linked Tour's canonical facts and may add one optional Campaign-specific starting price.
 
 ### Testimonial
 
@@ -155,19 +155,9 @@ Only expose filters that contain enough tours to be useful.
 
 ### Pricing
 
-| Field | Type | Notes |
-|---|---|---|
-| From price per person (KSh) | Number, optional | Reuse `hks_from_price_ksh`; positive whole numbers only |
+Tours have no active price field and no public price output. Tour cards, catalogue and taxonomy archives, Destination pages, canonical Tour pages, related-Tour modules, and Tour quote panels do not show either a value or a request-rate fallback.
 
-Rendering is automatic:
-
-- Positive value: `From KSh X per person`.
-- Blank or zero: `Request current KSh rate`.
-- A standard template note explains that the final quote depends on dates, group, availability, and the selected package.
-
-There is no Tour price display mode, unit, status, checked date, valid-until date, season, residency, group-size, sharing, transport, accommodation, inclusion, disclaimer, seasonal-rate, supplement, adult, or child price field. Tour prices never auto-expire. The editor changes or removes the one value manually.
-
-Use the field only when one figure can truthfully represent a per-person starting price. Leave it blank for per-vehicle, per-group, child-specific, single-supplement-dependent, or highly variable products. Never auto-convert or import a USD amount as a public KSh price.
+The legacy `hks_from_price_ksh` Tour meta key remains stored for backward compatibility but is hidden from editors and ignored by frontend templates, analytics, and structured data. Do not delete or migrate it automatically.
 
 ### Itinerary
 
@@ -245,10 +235,13 @@ The title band, gallery mosaic, desktop tabs, mobile disclosures, itinerary beha
 - Hero headline.
 - Supporting copy.
 - Featured image as the Campaign hero override.
+- From price per person (KSh), optional and stored as `hks_campaign_from_price_ksh`.
 - Navigation: full, reduced, or campaign-minimal.
 - Campaign start date and Campaign end date.
 
-Campaigns inherit the linked Tour price, facts, itinerary, inclusions, and exclusions. Campaign dates record the planned campaign window only; they do not auto-publish, unpublish, expire, or alter the Tour price. Campaign attribution and default indexing behavior are generated from the Campaign ID, slug, and template rather than requested as client fields.
+Campaigns inherit the linked Tour facts, itinerary, inclusions, and exclusions. A positive Campaign price renders as `From KSh X per person` on that Campaign only; blank or zero produces no price output. Campaign dates record the planned campaign window only; they do not auto-publish, unpublish, expire, or alter the Campaign price. Campaign attribution and default indexing behavior are generated from the Campaign ID, slug, and template rather than requested as client fields.
+
+Use the Campaign price only when one figure can truthfully represent a per-person starting price and price is a useful selling point for that focused offer. Never auto-convert a USD amount, copy a legacy Tour price, or seed an unconfirmed public price.
 
 ## Destination and FAQ Editors
 
@@ -285,14 +278,14 @@ Do not pair public settings with confirmation-status, source, or checked-date fi
 
 The simplified editor must not rename custom post types, taxonomies, existing SCF field keys that remain in use, inquiry records, or Campaign relationships.
 
-- Reuse `hks_from_price_ksh` as the single price field.
-- For legacy Tours, preserve an existing amount publicly only when the old display mode was `from_price` and the amount is positive. Old `hidden` or `request_current_rate` records must continue to show `Request current KSh rate` until an editor deliberately enters or resaves a public amount under the new model.
+- Keep legacy Tour price metadata, including `hks_from_price_ksh`, in the database but do not register it in the client editor or render it publicly.
+- Add `hks_campaign_from_price_ksh` as a separate Campaign field. Do not copy, inherit, or migrate a legacy Tour amount into it automatically.
 - Stop reading legacy price status, checked date, valid-until date, assumptions, seasonal rates, supplements, and disclaimer values on the frontend.
 - Keep legacy metadata in the database during the MVP migration; hide it from the editor and ignore it at render time. Do not delete it in a destructive upgrade.
 - Remove source/status/date gates from published Tours, Destinations, FAQs, package notes, and assigned media. Native publication state and deliberate assignment become the gates.
 - Existing published content may therefore reveal assigned media, FAQ answers, Destination copy, or package notes that older status gates suppressed. This is an intended consequence of the client's publish-as-approval decision.
-- Tour cards, Campaigns, quote panels, WhatsApp package context, and structured data all use the same derived price display. Structured data includes an Offer only when a positive public KSh price exists; otherwise it omits price rather than inventing one.
-- Analytics derives `price_display` as `from_price` or `request_rate`; it does not read or transmit a price-status field.
+- Tour cards, canonical Tour quote panels, Tour structured data, and Tour analytics omit price entirely. Campaign templates may render their own positive Campaign price; blank Campaign prices are omitted.
+- Campaign analytics may derive `price_display` as `from_price` when the Campaign field is populated; it does not read or transmit legacy Tour price metadata or a price-status field.
 - Campaign start and end dates remain intact. All Tour, price, source, media-rights, FAQ, and policy checked/validity dates become ignored legacy metadata.
 - Clear relevant WordPress and host caches after deployment so old gated output is not served.
 
@@ -300,7 +293,7 @@ The simplified editor must not rename custom post types, taxonomies, existing SC
 
 - Lock critical template structure but allow approved content regions.
 - Use short help text that explains exactly where each field appears publicly.
-- Validate the one price as a positive whole KSh amount when populated.
+- Validate the optional Campaign price as a positive whole KSh amount when populated.
 - Do not require source, confirmation, price-assumption, rights, or validity metadata to publish.
 - Keep original Ashford source values in repository import files when useful; do not require the client to maintain them in WordPress.
 - Avoid free-form flexible content for canonical tour facts. Use it only for optional campaign storytelling modules.

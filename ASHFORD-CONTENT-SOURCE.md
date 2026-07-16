@@ -4,7 +4,7 @@
 
 Holiday Kenya Safaris is a local-market brand operated by Ashford Tours & Travel. Ashford's approved Kenya product information is the starting source for the catalogue.
 
-This relationship provides the factual starting point. Imported material remains draft. An authorized Holiday Kenya Safaris editor approves public copy, media, and the one manually entered KSh price by publishing the record; no extra confirmation fields are required.
+This relationship provides the factual starting point. Imported material remains draft. An authorized Holiday Kenya Safaris editor approves public copy and media by publishing the record. A Campaign price is approved by deliberately entering it and publishing that Campaign; no extra confirmation fields are required.
 
 ## Workspace Catalogue
 
@@ -89,7 +89,7 @@ For every candidate Tour:
 8. Convert abbreviations such as `BB`, `L`, `D`, and `LB` into plain language for public display.
 9. Import the Tour as a draft with remote media unassigned.
 10. Leave unclear information blank and flag it in the import manifest or handoff notes.
-11. Let an authorized editor upload or assign the intended media, enter the optional KSh per-person starting price, and publish. Publication is approval.
+11. Let an authorized editor upload or assign the intended media and publish. If a focused Campaign will use price as a selling point, enter its optional KSh per-person starting price on the Campaign rather than the Tour.
 
 If the build starts materially after the crawl date, re-crawl or manually verify the included source pages. Do not assume the 2026-07-02 extraction is still current.
 
@@ -122,13 +122,15 @@ Do not copy navigation debris, SEO boilerplate, unrelated category text, or malf
 ## Pricing Rules
 
 - Show KSh primarily.
-- Each Tour has one optional manually maintained `From price per person (KSh)` value.
+- Tours and Tour discovery surfaces do not publish prices or request-rate fallbacks.
+- Each Campaign has one optional manually maintained `From price per person (KSh)` value.
 - Never silently convert USD and publish the result as a current operator rate.
-- Do not import Ashford USD or seasonal rates into the public price field. The client enters the KSh value directly.
-- A positive value renders as `From KSh X per person`; a blank value renders as `Request current KSh rate`.
+- Do not import Ashford USD or seasonal rates into the Campaign price field. The client enters the KSh value directly when it is a deliberate Campaign selling point.
+- A positive value renders as `From KSh X per person` on that Campaign only; a blank value renders nothing.
 - Do not create status, season, residency, group-size, transport, accommodation, inclusion, validity, supplement, single, adult, or child price fields.
-- If a package cannot honestly be summarized by one per-person starting price, leave it blank and request the current rate.
-- Tour prices do not expire automatically. The client changes or removes them manually. Campaign dates never alter the linked Tour price.
+- If a Campaign cannot honestly be summarized by one per-person starting price, leave it blank.
+- Campaign prices do not expire automatically. The client changes or removes them manually. Campaign dates never alter the price field.
+- Preserve legacy Tour price metadata non-destructively, but do not show it, inherit it, or migrate it automatically.
 
 ## Photograph Rules
 

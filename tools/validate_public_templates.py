@@ -76,7 +76,7 @@ def main() -> int:
             errors.append(f"missing {path.relative_to(ROOT)}: {error}")
             sources[label] = ""
 
-    require(errors, "theme metadata", sources["style"], ["Version: 0.4.0", ".hks-tour-workspace", ".hks-tour-gallery", ".hks-mobile-menu", ".hks-editorial-page", ":focus-visible", "prefers-reduced-motion"])
+    require(errors, "theme metadata", sources["style"], ["Version: 0.5.0", ".hks-tour-workspace", ".hks-tour-gallery", ".hks-mobile-menu", ".hks-editorial-page", ":focus-visible", "prefers-reduced-motion"])
     forbid(errors, "theme stylesheet", sources["style"], ["linear-gradient(", "radial-gradient("])
 
     require(
@@ -119,6 +119,7 @@ def main() -> int:
 
     require(errors, "home template", files["home"], ["hks-wayfinder/home-experience"])
     require(errors, "catalogue template", files["catalogue"], ["hks-title-band", "hks-wayfinder/catalogue-controls", "hks-wayfinder/tour-card", "postType\":\"hks_tour", "inherit\":true"])
+    forbid(errors, "catalogue template", files["catalogue"], ["KSh starting price", "Request current KSh rate"])
     require(errors, "Tour template", files["tour"], ["hks-wayfinder/tour-hero", "hks-wayfinder/tour-details", "data-hks-quote-proxy", "Request quote on WhatsApp"])
     forbid(errors, "Tour template", files["tour"], ["<!-- wp:hks/quote-cta"])
     require(errors, "Campaign template", files["campaign"], ["hks-wayfinder/tour-hero", "hks-wayfinder/tour-details", "hks/quote-cta", "campaign_hero"])
@@ -149,7 +150,7 @@ def main() -> int:
             "hks-tour-workspace",
             "data-hks-tour-tabs",
             "data-hks-tour-section",
-            "Rates & Important Information",
+            "Important Information",
             "data-hks-itinerary-day",
             "hks-tour-quote__panel",
             "tour_sidebar",
@@ -157,18 +158,18 @@ def main() -> int:
             "render_related_tours",
             "hks-mobile-quote-bar",
             "hks-tour-card__destination",
-            "hks-tour-card__price",
             "View trip",
             "private const SENTINEL",
-            "price_summary",
+            "campaign_price_summary",
+            "hks_campaign_from_price_ksh",
             "From KSh %s per person",
-            "request_rate_fallback",
             "approved_policies",
             "approved_faqs",
             "media_allowed",
             "_wp_attachment_image_alt",
             "wp_get_attachment_caption",
-            "Final price is confirmed for your dates, group and availability in the quote.",
+            "Request a tailored quote",
+            "Your quote confirms the final package for your dates and group.",
             "Holiday Kenya Safaris is operated by Ashford Tours & Travel.",
             "data-hks-primary-quote",
         ],
@@ -179,6 +180,12 @@ def main() -> int:
         sources["renderer"],
         [
             "hks_price_status",
+            "hks_from_price_ksh",
+            "hks_tour_from_price_invalid",
+            "Request current KSh rate",
+            "request_rate_fallback",
+            "hks-tour-card__price",
+            "hks-rate-information__lead",
             "hks_price_valid_until",
             "hks_price_season_assumption",
             "hks_source_status",
@@ -224,7 +231,7 @@ def main() -> int:
             print(f"- {error}")
         return 1
 
-    print("Public-template validation passed (catalogue-led UI, lean public fields, shared quote conversion, responsive accessibility).")
+    print("Public-template validation passed (price-free Tour UI, optional Campaign price, shared quote conversion, responsive accessibility).")
     return 0
 
 

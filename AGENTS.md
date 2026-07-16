@@ -57,8 +57,9 @@ The initial commercial endpoint is a qualified WhatsApp conversation, not online
 - Exclude international holidays, visa services, airport transfers, and inbound-only products unless the client later includes them.
 - Retain factual Ashford itinerary information, but rewrite marketing copy for local buyers.
 - Treat an authorized editor's decision to upload or assign media and publish public content as client approval. Imports remain drafts until an authorized editor publishes them.
-- Give Tours one optional `From price per person (KSh)` field. When populated, render `From KSh... per person`; when blank, render `Request current KSh rate`.
-- Do not add Tour price status, validity-date, season, residency, group-size, transport, accommodation, inclusion, or other price-assumption fields. Editors update or remove the one price manually.
+- Do not expose or render prices on Tours, Tour cards, catalogue pages, taxonomy archives, Destination pages, related-Tour modules, or canonical Tour quote panels.
+- Give Campaigns one optional `From price per person (KSh)` field. Render it only on that Campaign when populated; when blank, omit price output entirely. Do not inherit or copy a legacy Tour price automatically.
+- Do not add price status, validity-date, season, residency, group-size, transport, accommodation, inclusion, or other price-assumption fields. Editors update or remove a Campaign price manually.
 - Never invent rates, reviews, memberships, policies, legal details, lodge availability, or operational claims.
 - The temporary WhatsApp destination is `+254 722 742 799` (`254722742799` in `wa.me` URLs).
 - Unknown public information stays blank or in draft and is omitted from public pages. `CLIENT-CONFIRMATIONS.md` remains the project-level register for unresolved legal, contact, analytics, and operational launch decisions; it is not a source of per-record approval fields.
@@ -77,7 +78,7 @@ The initial commercial endpoint is a qualified WhatsApp conversation, not online
 
 Mercy is a useful first avatar, not the entire market. The canonical tour pages should speak clearly to interested local travelers. Campaign-page variants may target one avatar, occasion, desire, problem, or objection at a time.
 
-Do not force one message across all visitors. The system must support additional landing-page variants without duplicating canonical itinerary and price data.
+Do not force one message across all visitors. The system must support additional landing-page variants without duplicating canonical itinerary data. A Campaign may own its optional selling price without changing the linked Tour.
 
 ## Copy Rule
 
@@ -122,7 +123,7 @@ Never treat a hypothesis as sales data or a converted USD rate as an approved KS
 - Draft means not public. Blank means unavailable and must be omitted gracefully.
 - The client-facing editor exposes only fields that produce visible public output or visibly control discovery, such as taxonomy assignment or Featured Tour placement.
 - Required system identifiers and legacy audit metadata may remain stored for compatibility, but must be generated or hidden rather than requested from the client.
-- Start and end date fields belong only to Campaign planning and do not auto-publish or alter prices. Preferred travel date or month remains an inquiry answer, not Tour metadata.
+- Start and end date fields belong only to Campaign planning and do not auto-publish or alter the Campaign price. Preferred travel date or month remains an inquiry answer, not Tour metadata.
 - Road safari, flying safari, coast experience, staycation, and similar product distinctions belong in Tour Type and related taxonomies, not in pricing assumptions.
 - Publishing does not authorize invented facts. Imported content stays draft until reviewed and published by an authorized editor.
 
@@ -146,7 +147,7 @@ Never treat a hypothesis as sales data or a converted USD rate as an approved KS
 The website is ready for launch only when:
 
 - Editors can add a Tour once and publish it across catalogue, destination, and campaign templates.
-- Campaign variants can change messaging without duplicating factual itinerary and price data.
+- Campaign variants can change messaging and optionally present their own selling price without duplicating factual Tour itinerary data.
 - Canonical Tour pages use the approved gallery, two-column workspace, tabs/disclosures, related Tours, and sticky quote panel at desktop and mobile breakpoints.
 - No canonical Tour page contains a permanent long booking form; every quote command opens the shared HKS intake and WhatsApp handoff.
 - WhatsApp inquiries include enough context for a consultant to quote.

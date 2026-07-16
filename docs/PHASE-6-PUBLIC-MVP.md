@@ -1,6 +1,6 @@
 # Phase 6: Public MVP templates
 
-HKS Wayfinder 0.2.0 now provides reusable public templates for:
+HKS Wayfinder 0.5.0 now provides reusable public templates for:
 
 - the homepage;
 - the Tour catalogue at `/tours/`;
@@ -8,30 +8,26 @@ HKS Wayfinder 0.2.0 now provides reusable public templates for:
 - focused Campaign pages; and
 - Destination taxonomy archives.
 
-The homepage and catalogue use the same Tour-card block. A Campaign changes its
-headline, supporting copy, CTA, navigation treatment, and attribution label while
-inheriting the linked Tour's itinerary, price state, logistics, inclusions,
-policies, and FAQs.
+The homepage and catalogue use the same price-free Tour-card block. A Campaign
+changes its headline, supporting copy, hero, navigation treatment, and optional
+Campaign price while inheriting the linked Tour's itinerary, logistics,
+inclusions, policies, and FAQs.
 
 ## Public-data gates
 
 The dynamic theme renderer fails closed:
 
-- `From KSh` appears only with a positive amount, acceptable status, checked date,
-  live validity, full assumptions, public basis, and disclaimer. Otherwise the
-  page says `Request current KSh rate`.
-- Policies and FAQs require an acceptable confirmation state, source reference,
-  checked date, live validity, and sentinel-free public copy.
-- Destination guidance requires a reviewed or client-confirmed source, checked
-  date, and source URL or reference. An unaudited term shows only its name and
-  published Tour results.
-- Photographs render only with acceptable permission, `website` usage scope,
-  rights checked date, live permission, descriptive alt text, and any required
-  credit line.
+- Tours, Tour cards, archives, Destination results, related Tours, and canonical
+  Tour quote panels never render a price or request-rate fallback.
+- `From KSh` appears only on a Campaign with its own positive optional amount;
+  a blank Campaign price is omitted.
+- Policies, FAQs, and Destination guidance render only when their current public
+  fields are populated on published content.
+- Photographs render only when deliberately assigned and supplied with useful
+  native alt text.
 
-The first seeded records have no photographs or approved KSh amounts, so the
-initial pages intentionally use a quiet typographic hero and request-current-rate
-copy.
+The first seeded records have no photographs or Campaign prices, so the initial
+pages use deliberate no-image and no-price states.
 
 ## Template behavior
 
@@ -51,11 +47,11 @@ After deployment and activation:
 1. run the MVP importer and review/publish the three Tours;
 2. confirm the homepage shows the three published cards and no broken image area;
 3. confirm `/tours/`, each Tour, and each Destination term at mobile and desktop;
-4. publish one reviewed Campaign and confirm it inherits canonical facts and emits
-   `noindex` when selected;
+4. publish one reviewed Campaign and confirm it inherits canonical facts, omits a
+   blank price, renders its own populated price, and emits `noindex` when selected;
 5. test all quote CTAs, keyboard order, dialog focus, browser back behavior, and
    safe-area spacing; and
-6. inspect page source and REST output for private source, policy, price, rights,
-   and inquiry data.
+6. inspect page source and REST output to confirm legacy Tour price and private
+   inquiry data are absent.
 
 Run `python tools/validate_public_templates.py` before every template push.

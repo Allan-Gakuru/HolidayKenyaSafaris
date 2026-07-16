@@ -30,7 +30,7 @@ only after the operator completes its normal quotation and booking process.
 
 Never publish or imply any of the following without an approved source:
 
-- a current price;
+- a Campaign price;
 - lodge, room, vehicle, guide, or departure availability;
 - a policy or legal promise;
 - a review, membership, licence, award, or business credential;
@@ -38,8 +38,8 @@ Never publish or imply any of the following without an approved source:
 - a response-time promise;
 - a claim that a visitor sent a WhatsApp message merely because WhatsApp opened.
 
-Use only Kenyan shillings for public prices. Do not convert an Ashford USD rate
-and present the conversion as an approved KSh price.
+Use only Kenyan shillings for optional Campaign prices. Do not convert an Ashford
+USD rate and present the conversion as an approved KSh price.
 
 Any source value marked `CLIENT CONFIRMATION REQUIRED` is internal only. Remove
 the marker from public fields only after resolving the fact; never rewrite the
@@ -97,8 +97,8 @@ Use this order:
 1. Review and publish each canonical Tour.
 2. Verify each public Tour page and quote form.
 3. Review its linked Campaign.
-4. Set the Campaign lifecycle to **Testing** and publish it.
-5. Keep Campaign noindex enabled until an intentional SEO decision is made.
+4. Publish the Campaign when its focused message is ready.
+5. Campaigns remain `noindex` by default until an intentional SEO decision is implemented.
 
 ## 6. Tour workflow
 
@@ -112,39 +112,23 @@ for that.
 2. Select **Edit** on the Tour; do not use Quick Edit for factual approval.
 3. Review the WordPress title, excerpt, and overview.
 4. Review every visible package field: route, duration, logistics, itinerary,
-   inclusions, exclusions, suitability, CTA wording, and classifications.
+   inclusions, exclusions, suitability, gallery, FAQs, and classifications.
 5. Open the source URL and compare the public facts against the source and current
    operator knowledge.
-6. Find **Tour: Source and audit (internal)**.
-7. Confirm the source URL/reference and **Source checked date**.
-8. Change **Source status** only after the review:
+6. Leave unclear information blank and keep the record in Draft until the visible
+   facts and assigned media are ready.
+7. Preview the Tour, then select **Publish**.
 
-   | Status | Meaning and use |
-   |---|---|
-   | Imported - review required | The importer supplied the record; keep it as a draft |
-   | Operator reviewed | An authorized HKS/Ashford operator verified the public facts |
-   | Client confirmed | The client explicitly approved the facts and approval is traceable |
-   | Archived | Do not publish the source as current |
-
-9. Add a short internal review note identifying the reviewer, date, and any
-   unresolved facts.
-10. Select **Publish**.
-
-There is no separate approval button. The reviewed source status records the
-factual approval; the WordPress **Publish** action makes the Tour public.
+There is no separate approval button or source-status field. The WordPress
+**Publish** action is the authorized editor's approval for the visible copy and
+assigned media.
 
 ### 6.2 Minimum Tour publication gate
 
-The publication guard requires:
-
-- a title, excerpt, and overview;
-- a unique internal product ID;
-- at least one source URL or traceable source reference;
-- a valid source checked date;
-- Source status **Operator reviewed** or **Client confirmed**;
-- a valid price display mode;
-- internally consistent group, seasonal-rate, and supplement ranges;
-- no `CLIENT CONFIRMATION REQUIRED` marker in public fields.
+The publication guard requires a public Tour title and rejects the internal
+`CLIENT CONFIRMATION REQUIRED` marker anywhere in public candidate content.
+Other optional values may remain blank and are omitted or handled by the
+template's deliberate empty state.
 
 If a public save is unsafe, WordPress blocks it or returns the item to Draft and
 shows the exact reasons. Correct the listed fields; do not bypass the guard by
@@ -153,16 +137,11 @@ changing plugin code or inserting data directly into the database.
 ### 6.3 Creating a new Tour
 
 1. Select **Tours -> Add Tour**.
-2. Create a stable internal product ID. Never reuse an ID from another product.
-3. Add the public title, short excerpt, and concise overview.
-4. Record the primary source, reference, checked date, and internal source notes.
-5. Enter structured package facts rather than placing everything in the overview.
-6. Add Destinations, Tour Types, Occasions, and Travel Styles.
-7. Choose the correct price mode.
-8. Add the itinerary, inclusions, and exclusions.
-9. Configure the quote CTA and only the optional intake questions needed to quote
-   that package.
-10. Save as Draft, preview, review, approve the source, and publish.
+2. Add the public title, short excerpt, and concise overview.
+3. Enter structured package facts rather than placing everything in the overview.
+4. Add Destinations, Tour Types, Occasions, and Travel Styles.
+5. Add the itinerary, inclusions, exclusions, public notes, gallery, and selected FAQs where available.
+6. Save as Draft, preview, review the visible result, and publish.
 
 Use revisions to inspect or restore editorial changes. Preserve the source
 snapshot even when marketing copy is rewritten for local buyers.
@@ -179,79 +158,50 @@ or inquiries casually.
 
 ## 7. Pricing workflow
 
-### 7.1 Safe MVP mode
+### 7.1 Tours are price-free
 
-Until a complete KSh rate is ready, use:
+Do not enter prices on Tours. The Tour editor has no active price field, and Tour
+cards, archives, Destination pages, related Tours, canonical Tour pages, and Tour
+quote panels show neither a value nor a request-rate fallback. Old Tour price
+metadata may remain stored after deployment, but the site ignores it.
 
-- **Price display mode:** Request current rate
-- **Price status:** Placeholder - not approved
+### 7.2 Publishing an optional Campaign price
 
-The public page then says **Request current KSh rate** and asks the visitor for
-the facts needed to quote.
+Open the focused Campaign and use **From price per person (KSh)** only when price
+is a useful selling point for that Campaign. Enter one positive whole KSh amount
+that truthfully represents a per-person starting price, then preview and publish
+the Campaign. Leaving the field blank produces no price output.
 
-### 7.2 Publishing a From KSh price
-
-Before choosing **Show From KSh**, enter and verify all of the following:
-
-- a positive KSh amount;
-- price unit, such as per person, group, vehicle, or room;
-- price status;
-- checked date and, when applicable, valid-until date;
-- season/travel-window assumption;
-- citizenship or residency assumption;
-- traveler/group-size assumption;
-- transport basis;
-- accommodation, room, and meal basis;
-- major inclusions;
-- a short public basis summary;
-- a plain-language price disclaimer.
-
-The template falls back to **Request current KSh rate** if this envelope is
-incomplete or expired. Converted estimates and expired rates cannot be published
-as From prices.
-
-When a rate changes, update its amount, assumptions, checked date, validity, and
-approval status together. Never change only the visible number.
+Do not copy a legacy Tour amount or convert an Ashford USD amount automatically.
+Campaign dates do not change or remove the price. When the offer changes, update
+or clear the Campaign field manually.
 
 ## 8. Campaign workflow
 
 A Campaign is a focused landing-page message for one audience, occasion, desire,
-problem, or objection. It inherits the Tour's itinerary, logistics, price,
-inclusions, policies, and other canonical facts.
+problem, or objection. It inherits the Tour's itinerary, logistics, inclusions,
+policies, and other canonical facts, and may own one optional selling price.
 
 ### 8.1 Review and publish a Campaign
 
 1. Publish the linked Tour first.
 2. Open **Tours -> Campaigns** and edit the Campaign.
 3. Confirm **Linked Tour** points to exactly one correct published Tour.
-4. Review the hero headline, supporting copy, CTA label, and navigation mode.
-5. Review the internal audience brief: target audience, desire, pressure/problem,
-   objective, objection, and intended next step.
-6. Confirm the stable analytics campaign label contains no personal data.
-7. Set **Campaign lifecycle status**:
+4. Review the hero headline, supporting copy, optional Campaign price, and navigation mode.
+5. Review the optional planning start and end dates. They do not schedule publication or change price.
+6. Preview the Campaign, then select **Publish** and verify the landing page.
 
-   | Status | Use |
-   |---|---|
-   | Draft | Not ready for public access |
-   | Testing | Public for controlled QA or campaign testing |
-   | Active | Approved live campaign |
-   | Paused | Keep non-public until deliberately resumed |
-   | Archived | Historical campaign; keep non-public |
-
-8. Leave **Discourage search indexing** on for temporary and paid Campaigns.
-9. Select **Publish** and verify the landing page.
-
-Public Campaigns require lifecycle **Testing** or **Active**. A Campaign cannot
-publish if its linked Tour is not published or its required brief is incomplete.
+A Campaign cannot publish without exactly one published linked Tour. It is
+`noindex` by default through the template; there is no client-facing indexing or
+lifecycle-status field.
 
 ### 8.2 Campaign content rules
 
-- Keep factual itinerary and price changes on the linked Tour.
+- Keep factual itinerary changes on the linked Tour. Keep an optional selling price on the Campaign itself.
 - Do not imply guaranteed wildlife, weather, lodge availability, or savings.
 - Match the landing-page promise to the ad that sends traffic to it.
 - Keep one clear angle per Campaign.
-- Use Campaign-specific proof only when its source and confirmation status are
-  recorded.
+- Use Campaign-specific proof only when it is real, deliberately entered or assigned, and ready for publication.
 
 ## 9. Destinations and classifications
 
@@ -531,7 +481,7 @@ code, not a backup of live WordPress content or media.
 - Review qualified conversations by Tour and Campaign.
 - Record repeated questions, objections, and quote-loss reasons.
 - Check published pages for stale availability language.
-- Review soon-expiring prices, policies, and media permissions.
+- Review active Campaign prices and remove any that are no longer current.
 - Confirm backups are completing.
 
 ### Monthly
@@ -547,7 +497,7 @@ code, not a backup of live WordPress content or media.
 ### Content and commercial
 
 - Every public Tour has a reviewed traceable source.
-- Every displayed rate has a full KSh assumption envelope.
+- Every displayed price belongs to a Campaign and is a deliberate positive whole KSh per-person starting amount.
 - No unapproved policy, review, membership, or availability claim is public.
 - Campaigns match their ads and link to the correct Tour.
 - The remaining local catalogue is added only in reviewed batches.
@@ -592,10 +542,8 @@ code, not a backup of live WordPress content or media.
 
 ### A Tour will not publish
 
-Read the red publication notice. Typical causes are an imported source status,
-missing source/date, missing native excerpt or overview, a duplicate product ID,
-an invalid range, incomplete From-price assumptions, or a public confirmation
-marker. The post remains a Draft so it can be corrected safely.
+Read the red publication notice. Correct the listed public-content issue and save
+again. A legacy Tour price never blocks publication because Tours are price-free.
 
 ### A Campaign will not publish
 
@@ -603,11 +551,11 @@ Publish its linked Tour first. Then confirm exactly one linked Tour, lifecycle
 Testing/Active, the complete audience brief, headline/supporting copy, and
 analytics label.
 
-### A price falls back to Request current rate
+### A Campaign price does not appear
 
-The From-price envelope is incomplete, expired, missing a checked date, or has an
-unacceptable status. Complete every assumption rather than forcing the amount
-into template text.
+Confirm the amount is entered on the Campaign—not the linked Tour—and is a
+positive whole number. A blank Campaign field is intentionally omitted. Clear
+WordPress and host caches after deploying the updated code.
 
 ### An image does not appear
 
@@ -657,15 +605,15 @@ deployment. The following still require deliberate completion or verification:
 
 - browser/dashboard QA on the deployed host;
 - approved media and image-rights records;
-- confirmed KSh rates and commercial assumptions, if public rates are desired;
+- deliberate Campaign-specific KSh starting prices, if selected Campaigns will use price as a selling point;
 - approved legal/privacy/retention wording;
 - real analytics IDs and consent configuration, if tracking is enabled;
 - the remaining approved local catalogue;
 - staging, performance, accessibility, SEO, and cross-browser launch testing;
 - final contact, social, operational proof, and policy confirmations.
 
-Until those items are resolved, keep unsupported claims absent and use Request
-current rate plus direct human quoting.
+Until those items are resolved, keep unsupported claims and Campaign prices absent
+and use direct human quoting.
 
 ## 23. Source of truth
 

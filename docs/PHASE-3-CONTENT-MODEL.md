@@ -2,7 +2,7 @@
 
 ## Outcome
 
-The site plugin now owns a canonical, reproducible Tour catalogue and campaign-variant model. Editors can create one Tour, attach multiple focused Campaigns, and keep source, price, policy, proof, and rights records separate from public marketing copy.
+The site plugin now owns a canonical, reproducible Tour catalogue and Campaign-variant model. Editors can create one price-free Tour, attach multiple focused Campaigns, and optionally add a selling price to an individual Campaign.
 
 This phase contains source code only. Runtime checks will happen after deployment to cPanel; no local WordPress environment was created.
 
@@ -14,7 +14,7 @@ This phase contains source code only. Runtime checks will happen after deploymen
 - `hks_destination`: public geographic discovery taxonomy.
 - `hks_tour_type`, `hks_occasion`, and `hks_travel_style`: editor/filter taxonomies without thin public term archives.
 
-Campaigns contain the audience angle, headline, supporting copy, proof order, FAQ emphasis, CTA override, navigation mode, and attribution labels. They do not duplicate Tour duration, route, itinerary, inclusions, logistics, policies, or prices.
+Campaigns contain the public headline, supporting copy, hero override, navigation mode, planning dates, and one optional Campaign-specific per-person starting price. They do not duplicate Tour duration, route, itinerary, inclusions, logistics, or policies.
 
 ## Secure Custom Fields model
 
@@ -22,12 +22,11 @@ The plugin registers deterministic field groups in code on `acf/include_fields`.
 
 Field groups cover:
 
-- Tour provenance, package facts, pricing assumptions, seasonal rates, itinerary, inclusions, suitability, policies, media, and inquiry routing;
-- Campaign public presentation, conversion brief, source-governed proof, and lifecycle/analytics controls;
-- reusable FAQ answers and audit records;
-- Destination public guidance and private source audit;
-- attachment ownership, permission, usage scope, expiry, and credit records; and
-- confirmation-wrapped global identity, contact, legal, analytics, social, conversion, and brand settings.
+- lean Tour package facts, itinerary, inclusions, suitability, public notes, gallery, and FAQ relationships;
+- Campaign public presentation, optional price, navigation mode, and planning dates;
+- reusable FAQ answers;
+- Destination public guidance; and
+- global identity, contact, legal, analytics, social, conversion, and brand settings.
 
 Only three global values have safe defaults: `Holiday Kenya Safaris`, the Ashford operator disclosure, and temporary WhatsApp destination `254722742799`. Other unknown settings remain blank.
 
@@ -37,16 +36,14 @@ The same rules run through SCF validation, REST pre-insert checks, and a final `
 
 Key gates include:
 
-- unique Tour product ID, traceable source, checked date, and reviewed/client-confirmed source status;
-- nonempty native Tour title, listing summary, and overview;
-- internally consistent group/date ranges;
-- explicit price display mode and complete assumptions for a KSh `From` price;
-- provisional placeholder prices allowed only as visibly provisional, never as converted or expired rates;
+- a nonempty native Tour title;
+- a nonempty native Campaign title and exactly one published linked Tour;
+- a positive whole KSh Campaign price when the optional field is populated;
+- valid Campaign planning dates in chronological order;
 - no `CLIENT CONFIRMATION REQUIRED` marker anywhere in visible public candidate text;
-- exactly one published linked Tour plus a complete brief and analytics label for public Campaigns; and
 - linked public Campaigns return to Draft when their Tour is hidden or deleted.
 
-Raw price records and internal audit groups are excluded from anonymous SCF REST output. Media-rights metadata remains a launch audit rather than an automatic post rejection, as required by the content contract.
+Legacy Tour price and audit metadata remains stored for compatibility but is not registered in the client editor, rendered publicly, or used as a publication gate.
 
 ## Deferred MVP integration checks
 
@@ -55,7 +52,7 @@ The following are deliberately carried into the public-template step instead of 
 - FAQ rendering must accept only published, source-approved, sentinel-free FAQ records.
 - Destination templates must render custom guidance only through a fail-closed approval check; raw term meta must never be printed.
 - Campaign and Tour preview behavior, template output, and editor usability require dashboard/browser verification after cPanel deployment.
-- Public price templates must visibly render status and material assumptions rather than exposing raw field records.
+- Campaign templates must omit price when the Campaign field is blank and must never read a legacy Tour price.
 
 These are launch gates, not permission to expose unreviewed content.
 

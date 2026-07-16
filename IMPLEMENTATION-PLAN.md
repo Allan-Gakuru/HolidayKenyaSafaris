@@ -84,7 +84,7 @@ Actions:
 - Implement taxonomies and SCF groups from `CONTENT-MODEL.md`.
 - Reduce the client editor to fields that render publicly or visibly control public discovery and placement.
 - Use native WordPress publication state as approval; remove client confirmation, source-audit, rights-status, and validity fields from content workflows.
-- Keep one optional `From price per person (KSh)` field and Campaign-only start/end dates.
+- Keep Tours price-free. Add one optional Campaign-only `From price per person (KSh)` field and retain Campaign-only start/end dates.
 - Lock critical templates while preserving practical editing regions.
 - Add preview behavior for Tours and Campaigns.
 - Keep the ordered public gallery, Featured Tour placement, visible package facts, itinerary, inclusions/exclusions, package notes, and FAQ relationship required by the current templates.
@@ -92,9 +92,10 @@ Actions:
 Acceptance:
 
 - An editor can create one Tour and link several Campaign variants.
-- A Tour with a positive KSh value shows `From KSh X per person`; a blank value shows `Request current KSh rate` everywhere.
+- Tour cards, archives, canonical Tour pages, and Tour quote panels show no price or request-rate fallback.
+- A Campaign shows `From KSh X per person` only when its own optional positive KSh value is populated; blank Campaign prices are omitted.
 - Editors can assign public media without completing a separate rights envelope.
-- Existing hidden or request-rate legacy amounts do not become public accidentally during migration.
+- Existing legacy Tour amounts do not become public or migrate into Campaigns accidentally.
 
 ## Phase 4: Conversion Component First
 
@@ -127,7 +128,7 @@ Actions:
 - Keep useful source references in the repository import manifest, not the client Tour form.
 - Import canonical facts.
 - Rewrite local-market copy.
-- Leave price blank until the client manually enters an honest KSh per-person starting value.
+- Leave Tours price-free. Leave each Campaign price blank unless the client deliberately enters an honest KSh per-person starting value for that Campaign.
 - Import remote imagery unassigned; the editor's deliberate assignment to published content is approval.
 - Add representative Campaign variants for different audience angles.
 
@@ -220,7 +221,7 @@ Test:
 - Slow connections and image failures.
 - Template editing by a non-developer.
 - Publish-as-approval behavior for Tours, Destinations, FAQs, public package notes, and assigned media.
-- Legacy price migration: old hidden/request-rate amounts stay hidden; deliberate positive from-prices display consistently.
+- Legacy Tour price migration: every old Tour amount stays hidden; deliberate positive Campaign from-prices display only on their Campaigns.
 - Core Web Vitals and layout shift.
 - Analytics debug modes.
 

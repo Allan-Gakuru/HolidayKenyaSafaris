@@ -45,7 +45,7 @@ If the page is broad, write to the shared local desire for a clear, trustworthy,
 ### Reduce time delay
 
 - Show the itinerary immediately.
-- Show `From KSh... per person` when the Tour price is populated, or say `Request current KSh rate` when it is blank.
+- Make the tailored quote process easy to understand. Show `From KSh... per person` only on a focused Campaign where an editor has deliberately entered the optional Campaign price.
 - Tell visitors what happens after they submit the intake form.
 - Use clear availability and response expectations only when the client confirms them.
 
@@ -92,11 +92,11 @@ Show the immediate future:
 Canonical Tour pages use the catalogue-led structure rather than an avatar-specific campaign hero. Write for an interested local traveler who wants to understand and compare the real package.
 
 1. **Title band:** use the literal package name as the H1. Do not turn it into a vague emotional slogan or repeat it as a second full heading below the gallery.
-2. **Fast facts:** duration, departure, route, travel style, accommodation basis, transport, and the one public price line.
+2. **Fast facts:** duration, departure, route, travel style, accommodation basis, and transport.
 3. **Overview:** explain why the trip is worth considering in specific, natural language.
 4. **Itinerary:** remove uncertainty day by day.
 5. **Included/Excluded:** state the practical boundaries plainly.
-6. **Rates & Important Information:** repeat `From KSh... per person` or `Request current KSh rate`, then explain that the tailored quote confirms dates, group, availability, and selected package details.
+6. **Important Information:** show published package notes and FAQs, then explain that the tailored quote confirms dates, group, availability, and selected package details.
 7. **Trust and logistics:** vehicle, guide, accommodation, meals, pickup, operator relationship, and approved proof.
 8. **Quote panel:** name the next step, explain the short intake, and use **Request quote on WhatsApp**.
 9. **Related Tours:** use factual card titles and useful comparison details.
@@ -111,7 +111,7 @@ Campaign pages may be shorter and more focused:
 2. Specific outcome and package.
 3. Three to five proof points.
 4. Condensed itinerary.
-5. The inherited Tour price line and critical exclusions.
+5. Critical exclusions and, only when deliberately entered, the Campaign-specific starting price.
 6. Trust proof.
 7. Intake form and WhatsApp handoff.
 
@@ -179,7 +179,7 @@ Before publishing, verify:
 
 - Does the headline identify a real outcome, pressure, or package?
 - Is the reader clear about the duration and route?
-- Does the page show `From KSh... per person` or `Request current KSh rate` consistently?
+- Is every Tour surface price-free, and is an optional Campaign price shown only when deliberately entered?
 - Is every trust claim concrete, authorized, and free of invention?
 - Is the main objection answered before the CTA?
 - Does the page sound like a competent person rather than generated brochure copy?

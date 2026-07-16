@@ -2,7 +2,7 @@
 
 ## Structural Reference
 
-The standard website uses the catalogue and canonical Tour structure documented in `UI-REFERENCE-CATALOGUE.md`. Holiday Kenya Safaris keeps the Wayfinder identity, local Kenyan scope, verified Ashford facts, KSh pricing rules, and qualified WhatsApp conversion flow.
+The standard website uses the catalogue and canonical Tour structure documented in `UI-REFERENCE-CATALOGUE.md`. Holiday Kenya Safaris keeps the Wayfinder identity, local Kenyan scope, verified Ashford facts, Campaign-only optional pricing, and qualified WhatsApp conversion flow.
 
 The existing Maasai Mara prototype is retained as a Campaign landing-page reference. It is not the default canonical Tour template.
 
@@ -87,7 +87,7 @@ Featured Tour rules:
 
 - Show up to six priority Tours initially.
 - Use a three-column desktop grid, responsive tablet layout, and one-column mobile flow.
-- Cards must show image, title, destination, duration, route or departure context, one price line, and a clear View trip action.
+- Cards must show image, title, destination, duration, route or departure context, and a clear View trip action. They do not show price.
 
 ### Tour Catalogue and Taxonomy Archives
 
@@ -119,7 +119,6 @@ Tour cards show:
 - Destination.
 - Duration.
 - Route or departure point.
-- `From KSh... per person`, or `Request current KSh rate` when the Tour price is blank.
 - One or two useful travel-style labels.
 - View trip action.
 
@@ -168,12 +167,12 @@ Main content includes:
 - Overview tab.
 - Itinerary tab.
 - Included/Excluded tab.
-- Rates & Important Information tab.
+- Important Information tab.
 
 The right column contains a sticky quote panel with:
 
-- `From KSh... per person` or `Request current KSh rate`.
-- A standard note that the final quote depends on dates, group, availability, and the selected package.
+- A clear tailored-quote heading without a Tour price or request-rate fallback.
+- A short note explaining that the visitor shares dates and group details, reviews the message, and decides whether to send it in WhatsApp.
 - Primary **Request quote on WhatsApp** button.
 - Short explanation of the intake and message-review step.
 - Confirmed operator or response details when available.
@@ -217,7 +216,7 @@ Optional fields are package-specific and appear only when needed to quote accura
 Preserve from the existing Maasai Mara prototype:
 
 - Clear practical detail.
-- Visible price context.
+- Clear quote context.
 - Intake before WhatsApp.
 - Mobile CTA clarity.
 
@@ -238,7 +237,8 @@ Features:
 - Linked Tour required.
 - Full, reduced, or minimal navigation.
 - Campaign-specific hero and navigation treatment.
-- Canonical itinerary, inclusions, exclusions, logistics, and the single Tour price inherited.
+- Canonical itinerary, inclusions, exclusions, and logistics inherited from the linked Tour.
+- One optional Campaign-specific `From KSh... per person` value, displayed only when deliberately entered.
 - Attribution retained through inquiry save and WhatsApp launch.
 - Start and end dates exist on Campaigns only; Campaign indexing defaults are template-controlled.
 
@@ -296,7 +296,8 @@ Potential modules, only when verified:
 - Tour gallery mosaic and lightbox.
 - Duration and facts strip.
 - Accessible Tour tabs and mobile disclosures.
-- Single-price quote panel with standard quote context.
+- Price-free canonical Tour quote panel with standard quote context.
+- Optional Campaign price panel.
 - Itinerary timeline.
 - Inclusion/exclusion lists.
 - Vehicle and accommodation evidence drawn from the public gallery and practical details, without duplicate media fields.
@@ -317,7 +318,7 @@ Potential modules, only when verified:
 - Use Wayfinder colors and typography; avoid mismatched logos, fonts, maroon palettes, and abstract title gradients.
 - Cards use stable image ratios, restrained radii, and consistent content height.
 - No cards nested inside cards.
-- Do not let long Tour names, KSh prices, or CTA labels overflow.
+- Do not let long Tour names, optional Campaign prices, or CTA labels overflow.
 - Sticky controls must stop before the footer and never overlap content.
 
 ## Mobile Requirements
@@ -325,7 +326,7 @@ Potential modules, only when verified:
 - Design and test mobile first because Facebook traffic and WhatsApp conversion are mobile-heavy.
 - The mobile drawer, gallery, disclosures, intake sheet, and sticky quote action must be tested at 360 and 390px.
 - Mobile Tour pages expose the same factual information as desktop.
-- The initial Tour facts, price context, and quote action must be discoverable without navigating a long permanent form.
+- The initial Tour facts and quote action must be discoverable without navigating a long permanent form.
 - The intake form must support the on-screen keyboard and retain entered values.
 - WhatsApp launch must not occur before validation, consent, inquiry save, and message review.
 - Sticky actions respect safe areas and leave sufficient bottom padding.

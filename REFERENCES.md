@@ -60,7 +60,7 @@ Reuse the page's Campaign-mode information architecture and intake-to-WhatsApp b
 
 Use the local contract for the utility bar, product-led navigation, mobile drawer, image-led homepage, catalogue grids, Tour title band, gallery mosaic, two-column Tour workspace, tabs, itinerary disclosures, and related Tours.
 
-Keep the Wayfinder brand, HKS content, clear KSh price context, accessible interactions, and shared **Request quote on WhatsApp** intake and handoff.
+Keep the Wayfinder brand, HKS content, price-free Tour catalogue, optional Campaign-only price, accessible interactions, and shared **Request quote on WhatsApp** intake and handoff.
 
 ### Supporting Visuals
 

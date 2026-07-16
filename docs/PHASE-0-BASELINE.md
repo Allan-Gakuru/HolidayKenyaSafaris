@@ -72,11 +72,11 @@ The installed PHP 8.3 CLI is the local syntax checker. The cPanel PHP version, e
 - Approved operator/legal wording, privacy policy, cookie/consent approach, and commercial policies.
 - Meta Pixel and GA4 IDs, plus a GTM decision and ID if used.
 - Verified rights and consent for every public photograph.
-- Verified current source, price status, and media provenance for every live Tour.
+- Verified current facts and approved media for every live Tour; Tours remain price-free.
 
 ### Feature-specific blockers
 
-- Confirmed numeric KSh rates and their season, residency, group, sharing, transport, accommodation, and inclusion assumptions.
+- Confirmed Campaign-specific KSh starting prices only when price will be a deliberate selling point.
 - Deposit, payment, cancellation, refund, child-rate, supplement, group-size, insurance, and liability terms.
 - Fleet, guide, safety, school/youth, corporate, group-payment, and accommodation proof.
 - cPanel SSH/Git/SFTP capability before the deployment transport is chosen.
@@ -84,7 +84,7 @@ The installed PHP 8.3 CLI is the local syntax checker. The cPanel PHP version, e
 ### Safe working defaults
 
 - Use `254722742799` as the temporary WhatsApp destination.
-- Use `Request current rate` publicly when a KSh price is not client-confirmed.
+- Omit prices from Tours and omit a Campaign price when it has not been deliberately entered.
 - Keep analytics integrations disabled when IDs are empty; never use dummy IDs.
 - Omit unverified contact details, response promises, policies, reviews, memberships, and operational claims.
 - Keep Testimonial and Guide models optional and empty until approved evidence exists.

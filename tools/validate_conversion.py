@@ -46,7 +46,7 @@ def main() -> int:
             errors.append(f"missing {relative}: {error}")
             content[label] = ""
 
-    require(errors, "plugin bootstrap", content["bootstrap"], ["Version:           0.4.0", "define( 'HKS_CORE_VERSION', '0.4.0' )"])
+    require(errors, "plugin bootstrap", content["bootstrap"], ["Version:           0.6.0", "define( 'HKS_CORE_VERSION', '0.6.0' )"])
     require(errors, "plugin coordinator", content["plugin"], ["Conversion\\Module as ConversionModule", "ConversionModule::class"])
     require(errors, "content model", content["content"], ["PostTypes\\Inquiry", "Inquiry::register();"])
     require(

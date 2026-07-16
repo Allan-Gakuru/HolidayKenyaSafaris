@@ -228,7 +228,7 @@ def marketing_copy(title: str, duration: str, category: str, destinations: list[
     detail = f"Explore {subject} with the source duration and route outline kept together in one Tour."
     if route_summary:
         detail += f" The route is listed as {route_summary}."
-    detail += " Your quote confirms the current KSh rate and final package details for your dates and group."
+    detail += " Your quote confirms the final package details for your dates and group."
     return excerpt, detail
 
 
@@ -283,7 +283,7 @@ def build_tour(record: dict) -> dict:
             "checked_date": "2026-07-02",
             "category": category,
             "status": "draft_migration",
-            "notes": "Imported as a protected draft. Add the current KSh from-price, approved media, and any missing public details before publishing.",
+            "notes": "Imported as a protected draft. Add approved media and any missing public details before publishing. Add a price only to a focused Campaign when it is a deliberate selling point.",
         },
         "taxonomies": {
             "hks_destination": destinations,

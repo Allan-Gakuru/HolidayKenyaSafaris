@@ -111,7 +111,7 @@ final class Module implements ModuleContract {
 
 			<hr>
 			<h2><?php esc_html_e( 'Phase 7: Ashford catalogue migration', 'hks-core' ); ?></h2>
-			<p><?php esc_html_e( 'Imports the 40 remaining eligible local catalogue records in controlled draft batches. No price or media is assigned automatically.', 'hks-core' ); ?></p>
+			<p><?php esc_html_e( 'Imports the 40 remaining eligible local catalogue records in controlled draft batches. Tours remain price-free, and no media is assigned automatically.', 'hks-core' ); ?></p>
 			<?php foreach ( $this->catalogue_batches() as $batch => $details ) : ?>
 				<?php
 				$this->render_import_form(

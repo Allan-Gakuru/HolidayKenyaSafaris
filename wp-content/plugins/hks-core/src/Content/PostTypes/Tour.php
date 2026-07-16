@@ -52,7 +52,7 @@ final class Tour {
 					array(
 						'core/paragraph',
 						array(
-							'placeholder' => __( 'Write a concise, source-backed Tour overview for local Kenyan travelers. Keep itinerary, inclusions, logistics, and prices in their structured fields.', 'hks-core' ),
+				'placeholder' => __( 'Write a concise, source-backed Tour overview for local Kenyan travelers. Keep itinerary, inclusions, and logistics in their structured fields. Tours do not display prices.', 'hks-core' ),
 						),
 					),
 				),

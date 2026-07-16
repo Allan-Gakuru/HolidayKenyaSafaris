@@ -22,13 +22,13 @@ Assured, restorative, locally fluent. Holiday Kenya Safaris should feel attainab
 - A cheap tourism poster crowded with discounts, wildlife collages, generic orange sunsets, and unqualified prices.
 - A distant luxury operator relying on vague prestige, fake exclusivity, or decorative excess instead of concrete proof.
 - A formal corporate procurement portal or car-dealership aesthetic.
-- A pixel-for-pixel clone of another travel website, including its brand, plugins, long booking form, oversized carousel, weak price context, or interaction defects.
+- A pixel-for-pixel clone of another travel website, including its brand, plugins, long booking form, oversized carousel, or interaction defects.
 - The old Maasai Mara prototype's singular brand name, temporary red/gold/green palette, text-only logo, and unverified price presentation.
 - Interfaces made from oversized rounded cards, generic tourism copy, hidden exclusions, invented reviews, or imagery that does not reveal the actual destination and experience.
 
 ## Design Principles
 
-1. Lead with desire, then earn confidence with route, timing, accommodation, transport, inclusions, exclusions, and a clear `From KSh... per person` or `Request current KSh rate` price line.
+1. Lead with desire, then earn confidence with route, timing, accommodation, transport, inclusions, and exclusions. Use an optional Campaign price only when it materially strengthens that focused offer.
 2. Make the next step obvious and informed: every quote action opens a short intake before a visitor chooses to launch WhatsApp.
 3. Design for local mobile buying situations first, while supporting different audiences and campaign angles without reducing the whole market to one avatar.
 4. Show the real trip wherever proof matters; never let decoration stand in for approved destination, accommodation, vehicle, or experience evidence.
@@ -38,4 +38,4 @@ Assured, restorative, locally fluent. Holiday Kenya Safaris should feel attainab
 
 ## Accessibility & Inclusion
 
-Meet WCAG 2.2 AA expectations for contrast, keyboard access, focus visibility, labels, validation, dialogs, navigation, and non-color cues. Respect reduced-motion preferences. Support mobile keyboards, long names and prices, varying group compositions, and clear Kenyan English. Sticky WhatsApp actions must respect safe areas and never obscure page content.
+Meet WCAG 2.2 AA expectations for contrast, keyboard access, focus visibility, labels, validation, dialogs, navigation, and non-color cues. Respect reduced-motion preferences. Support mobile keyboards, long names and optional Campaign prices, varying group compositions, and clear Kenyan English. Sticky WhatsApp actions must respect safe areas and never obscure page content.

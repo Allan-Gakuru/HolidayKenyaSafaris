@@ -134,7 +134,7 @@ final class TourBlocks {
 		$introduction = self::public_html( self::field( 'hks_supporting_copy', $campaign_id ) ) ?: self::public_text( get_post_field( 'post_excerpt', $tour_id ) );
 		$duration     = self::public_text( self::field( 'hks_duration_label', $tour_id ) );
 		$route        = self::public_text( self::field( 'hks_route_summary', $tour_id ) );
-		$price        = self::price_summary( $tour_id );
+		$price        = self::campaign_price_summary( $campaign_id );
 		$image_id     = get_post_thumbnail_id( $campaign_id );
 
 		if ( ! self::media_allowed( $image_id ) ) {
@@ -192,10 +192,9 @@ final class TourBlocks {
 	 */
 	private static function render_canonical_details( int $tour_id ): string {
 		$overview   = get_post_field( 'post_content', $tour_id );
-		$itinerary  = self::rows( self::field( 'hks_itinerary', $tour_id ) );
-		$inclusions = self::rows( self::field( 'hks_inclusions', $tour_id ) );
-		$exclusions = self::rows( self::field( 'hks_exclusions', $tour_id ) );
-		$price      = self::price_summary( $tour_id );
+		$itinerary   = self::rows( self::field( 'hks_itinerary', $tour_id ) );
+		$inclusions  = self::rows( self::field( 'hks_inclusions', $tour_id ) );
+		$exclusions  = self::rows( self::field( 'hks_exclusions', $tour_id ) );
 		$policies   = self::approved_policies( $tour_id );
 		$faqs       = self::approved_faqs( array( 'tour_id' => $tour_id, 'campaign_id' => 0 ) );
 		$facts      = self::tour_facts( $tour_id );
@@ -213,8 +212,7 @@ final class TourBlocks {
 			<aside class="hks-tour-quote" aria-label="<?php esc_attr_e( 'Request a quote', 'hks-wayfinder' ); ?>">
 				<div class="hks-tour-quote__panel" data-hks-primary-quote>
 					<p class="hks-tour-quote__label"><?php esc_html_e( 'Plan this trip', 'hks-wayfinder' ); ?></p>
-					<h2><?php echo esc_html( $price ? $price['label'] : __( 'Request current KSh rate', 'hks-wayfinder' ) ); ?></h2>
-					<?php if ( $price ) : ?><p><?php echo esc_html( $price['status'] ); ?></p><?php endif; ?>
+					<h2><?php esc_html_e( 'Request a tailored quote', 'hks-wayfinder' ); ?></h2>
 					<?php echo $quote; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Trusted server-rendered block. ?>
 					<p class="hks-tour-quote__note"><?php esc_html_e( 'Share your dates and group size, review the message, then choose whether to send it in WhatsApp.', 'hks-wayfinder' ); ?></p>
 				</div>
@@ -248,11 +246,11 @@ final class TourBlocks {
 						</div>
 					</details>
 
-					<details class="hks-tour-section" id="hks-tour-rates" data-hks-tour-section data-hks-section="rates" data-hks-section-label="<?php echo esc_attr__( 'Rates & Important Information', 'hks-wayfinder' ); ?>">
-						<summary><span><?php esc_html_e( 'Rates & Important Information', 'hks-wayfinder' ); ?></span></summary>
+					<details class="hks-tour-section" id="hks-tour-rates" data-hks-tour-section data-hks-section="important" data-hks-section-label="<?php echo esc_attr__( 'Important Information', 'hks-wayfinder' ); ?>">
+						<summary><span><?php esc_html_e( 'Important Information', 'hks-wayfinder' ); ?></span></summary>
 						<div class="hks-tour-section__content">
-							<h2><?php esc_html_e( 'Rates and important information', 'hks-wayfinder' ); ?></h2>
-							<?php self::render_rate_information( $price, $policies, $faqs ); ?>
+							<h2><?php esc_html_e( 'Important information', 'hks-wayfinder' ); ?></h2>
+							<?php self::render_important_information( $policies, $faqs ); ?>
 						</div>
 					</details>
 			</div>
@@ -272,9 +270,10 @@ final class TourBlocks {
 	 * @return string
 	 */
 	private static function render_campaign_details( array $context ): string {
-		$tour_id    = $context['tour_id'];
-		$overview   = get_post_field( 'post_content', $tour_id );
-		$price      = self::price_summary( $tour_id );
+		$tour_id     = $context['tour_id'];
+		$campaign_id = $context['campaign_id'];
+		$overview    = get_post_field( 'post_content', $tour_id );
+		$price       = self::campaign_price_summary( $campaign_id );
 		$itinerary  = self::rows( self::field( 'hks_itinerary', $tour_id ) );
 		$inclusions = self::rows( self::field( 'hks_inclusions', $tour_id ) );
 		$exclusions = self::rows( self::field( 'hks_exclusions', $tour_id ) );
@@ -283,7 +282,7 @@ final class TourBlocks {
 		?>
 		<div class="hks-campaign-details hks-shell">
 			<?php if ( self::public_text( $overview ) ) : ?><section class="hks-campaign-section"><h2><?php esc_html_e( 'The trip at a glance', 'hks-wayfinder' ); ?></h2><div class="hks-prose"><?php echo wp_kses_post( do_blocks( $overview ) ); ?></div></section><?php endif; ?>
-			<?php if ( $price ) : ?><section class="hks-price-panel"><div><p class="hks-kicker"><?php esc_html_e( 'Price context', 'hks-wayfinder' ); ?></p><h2><?php echo esc_html( $price['label'] ); ?></h2><p><?php echo esc_html( $price['status'] ); ?></p></div><?php if ( $price['basis'] ) : ?><p><?php echo esc_html( $price['basis'] ); ?></p><?php endif; ?><?php if ( $price['disclaimer'] ) : ?><p class="hks-small-print"><?php echo esc_html( $price['disclaimer'] ); ?></p><?php endif; ?></section><?php endif; ?>
+			<?php if ( $price ) : ?><section class="hks-price-panel"><div><p class="hks-kicker"><?php esc_html_e( 'Campaign price', 'hks-wayfinder' ); ?></p><h2><?php echo esc_html( $price['label'] ); ?></h2><p><?php echo esc_html( $price['status'] ); ?></p></div></section><?php endif; ?>
 			<?php if ( $itinerary ) : ?><section class="hks-campaign-section"><h2><?php esc_html_e( 'Your itinerary', 'hks-wayfinder' ); ?></h2><?php self::render_itinerary( $itinerary ); ?></section><?php endif; ?>
 			<?php if ( $inclusions || $exclusions ) : ?><section class="hks-campaign-section"><h2><?php esc_html_e( 'Included and not included', 'hks-wayfinder' ); ?></h2><div class="hks-list-columns"><?php self::render_item_list( __( 'Included', 'hks-wayfinder' ), $inclusions, 'included' ); ?><?php self::render_item_list( __( 'Not included', 'hks-wayfinder' ), $exclusions, 'excluded' ); ?></div></section><?php endif; ?>
 			<section class="hks-quote-process"><h2><?php esc_html_e( 'Save the request, review it, then choose whether to send', 'hks-wayfinder' ); ?></h2><ol><li><?php esc_html_e( 'Share the dates, group size and useful package details.', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'The website saves your request privately and builds the WhatsApp message.', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'Review the message and send it when you are ready.', 'hks-wayfinder' ); ?></li></ol></section>
@@ -310,7 +309,6 @@ final class TourBlocks {
 		$duration    = self::public_text( self::field( 'hks_duration_label', $tour_id ) );
 		$route       = self::public_text( self::field( 'hks_route_summary', $tour_id ) );
 		$departure   = self::public_text( self::field( 'hks_start_location', $tour_id ) );
-		$price       = self::price_summary( $tour_id );
 		$destinations = self::term_names( $tour_id, 'hks_destination' );
 		$link        = get_permalink( $tour_id );
 
@@ -327,7 +325,6 @@ final class TourBlocks {
 				</ul>
 				<?php if ( $route ) : ?><p class="hks-tour-card__route"><?php echo esc_html( $route ); ?></p><?php endif; ?>
 				<div class="hks-tour-card__footer">
-					<div class="hks-tour-card__price"><?php if ( $price ) : ?><strong><?php echo esc_html( $price['label'] ); ?></strong><span><?php echo esc_html( $price['status'] ); ?></span><?php else : ?><strong><?php esc_html_e( 'Request current KSh rate', 'hks-wayfinder' ); ?></strong><?php endif; ?></div>
 					<a class="hks-tour-card__link" href="<?php echo esc_url( $link ); ?>"><?php esc_html_e( 'View trip', 'hks-wayfinder' ); ?><span aria-hidden="true">→</span></a>
 				</div>
 			</div>
@@ -422,11 +419,11 @@ final class TourBlocks {
 
 			<section class="hks-operator-section"><div class="hks-shell hks-operator-section__grid"><div><p><?php esc_html_e( 'A clear operator relationship', 'hks-wayfinder' ); ?></p><h2><?php esc_html_e( 'Holiday Kenya Safaris is operated by Ashford Tours & Travel.', 'hks-wayfinder' ); ?></h2></div><div><p><?php esc_html_e( 'The site is built for local Kenyan travellers. The operator relationship is stated plainly so you know who handles the human quote conversation.', 'hks-wayfinder' ); ?></p><a href="<?php echo esc_url( $tours_url ); ?>"><?php esc_html_e( 'Browse the catalogue', 'hks-wayfinder' ); ?><span aria-hidden="true">→</span></a></div></div></section>
 
-			<section class="hks-home-section hks-shell" aria-labelledby="hks-quote-process-title"><div class="hks-section-heading"><div><p><?php esc_html_e( 'Request a quote on WhatsApp', 'hks-wayfinder' ); ?></p><h2 id="hks-quote-process-title"><?php esc_html_e( 'A short path from trip page to a useful conversation', 'hks-wayfinder' ); ?></h2></div></div><ol class="hks-process-grid"><li><span>1</span><h3><?php esc_html_e( 'Choose a Tour', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'Open the route, itinerary and current public price context.', 'hks-wayfinder' ); ?></p></li><li><span>2</span><h3><?php esc_html_e( 'Share the essentials', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'Add your preferred dates, group size and package-specific details.', 'hks-wayfinder' ); ?></p></li><li><span>3</span><h3><?php esc_html_e( 'Review before WhatsApp', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'Your request is saved privately. You review the message and decide whether to send it.', 'hks-wayfinder' ); ?></p></li></ol></section>
+			<section class="hks-home-section hks-shell" aria-labelledby="hks-quote-process-title"><div class="hks-section-heading"><div><p><?php esc_html_e( 'Request a quote on WhatsApp', 'hks-wayfinder' ); ?></p><h2 id="hks-quote-process-title"><?php esc_html_e( 'A short path from trip page to a useful conversation', 'hks-wayfinder' ); ?></h2></div></div><ol class="hks-process-grid"><li><span>1</span><h3><?php esc_html_e( 'Choose a Tour', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'Open the route, itinerary and practical details.', 'hks-wayfinder' ); ?></p></li><li><span>2</span><h3><?php esc_html_e( 'Share the essentials', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'Add your preferred dates, group size and package-specific details.', 'hks-wayfinder' ); ?></p></li><li><span>3</span><h3><?php esc_html_e( 'Review before WhatsApp', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'Your request is saved privately. You review the message and decide whether to send it.', 'hks-wayfinder' ); ?></p></li></ol></section>
 
 			<section class="hks-group-route" id="group-travel"><div class="hks-shell hks-group-route__inner"><div><p><?php esc_html_e( 'Group travel', 'hks-wayfinder' ); ?></p><h2><?php esc_html_e( 'Planning for family, friends or colleagues?', 'hks-wayfinder' ); ?></h2><p><?php esc_html_e( 'Start with a Tour, then share the group size, dates and departure town so the quote conversation begins with useful context.', 'hks-wayfinder' ); ?></p></div><a class="hks-button" href="<?php echo esc_url( $group_url ); ?>"><?php esc_html_e( 'Plan group travel', 'hks-wayfinder' ); ?></a></div></section>
 
-			<section class="hks-home-section hks-shell hks-proof-section" aria-labelledby="hks-proof-title"><div><p><?php esc_html_e( 'What you can check first', 'hks-wayfinder' ); ?></p><h2 id="hks-proof-title"><?php esc_html_e( 'Practical detail before the sales conversation', 'hks-wayfinder' ); ?></h2></div><ul><li><?php esc_html_e( 'Route, duration and departure context', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'Day-by-day itinerary where published', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'Included and excluded items where published', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'One clear KSh price line or request-rate fallback', 'hks-wayfinder' ); ?></li></ul></section>
+			<section class="hks-home-section hks-shell hks-proof-section" aria-labelledby="hks-proof-title"><div><p><?php esc_html_e( 'What you can check first', 'hks-wayfinder' ); ?></p><h2 id="hks-proof-title"><?php esc_html_e( 'Practical detail before the sales conversation', 'hks-wayfinder' ); ?></h2></div><ul><li><?php esc_html_e( 'Route, duration and departure context', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'Day-by-day itinerary where published', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'Included and excluded items where published', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'Accommodation and transport context where published', 'hks-wayfinder' ); ?></li></ul></section>
 
 			<section class="hks-final-cta"><div class="hks-shell"><h2><?php esc_html_e( 'Ready to narrow down the options?', 'hks-wayfinder' ); ?></h2><p><?php esc_html_e( 'Choose a Tour first. Its quote button will carry the package into the intake and WhatsApp message.', 'hks-wayfinder' ); ?></p><a class="hks-button" href="<?php echo esc_url( $tours_url ); ?>"><?php esc_html_e( 'Explore all tours', 'hks-wayfinder' ); ?></a></div></section>
 		</div>
@@ -550,17 +547,18 @@ final class TourBlocks {
 	}
 
 	/**
-	 * Render the price line, package notes and published FAQs.
+	 * Render public package notes and published FAQs.
 	 *
-	 * @param array<string, string>|null         $price    Price summary.
 	 * @param string[]                          $policies Public package notes.
 	 * @param array<int, array<string, string>> $faqs     Published FAQs.
 	 * @return void
 	 */
-	private static function render_rate_information( ?array $price, array $policies, array $faqs ): void {
-		$price = $price ?: self::request_rate_fallback();
+	private static function render_important_information( array $policies, array $faqs ): void {
+		if ( ! $policies && ! $faqs ) {
+			echo '<p>' . esc_html__( 'No additional public package notes or questions are available for this Tour yet. Ask for the current package details in your quote.', 'hks-wayfinder' ) . '</p>';
+			return;
+		}
 		?>
-		<div class="hks-rate-information"><div class="hks-rate-information__lead"><strong><?php echo esc_html( $price['label'] ); ?></strong><p><?php echo esc_html( $price['status'] ); ?></p></div></div>
 		<?php if ( $policies ) : ?><h3><?php esc_html_e( 'Important package notes', 'hks-wayfinder' ); ?></h3><ul class="hks-note-list"><?php foreach ( $policies as $policy ) : ?><li><?php echo esc_html( $policy ); ?></li><?php endforeach; ?></ul><?php endif; ?>
 		<?php if ( $faqs ) : ?><h3><?php esc_html_e( 'Questions before you request a quote', 'hks-wayfinder' ); ?></h3><div class="hks-faqs"><?php foreach ( $faqs as $faq ) : ?><details><summary><?php echo esc_html( $faq['question'] ); ?></summary><div><?php echo wp_kses_post( $faq['answer'] ); ?></div></details><?php endforeach; ?></div><?php endif; ?>
 		<?php
@@ -732,34 +730,22 @@ final class TourBlocks {
 	}
 
 	/**
-	 * Build the single public per-person price line or its fallback.
+	 * Build the optional Campaign-only per-person price line.
 	 *
-	 * @param int $tour_id Tour ID.
+	 * @param int $campaign_id Campaign ID.
 	 * @return array<string, string>
 	 */
-	private static function price_summary( int $tour_id ): array {
-		$amount = absint( self::field( 'hks_from_price_ksh', $tour_id ) );
+	private static function campaign_price_summary( int $campaign_id ): array {
+		$amount = absint( self::field( 'hks_campaign_from_price_ksh', $campaign_id ) );
 
 		if ( ! $amount ) {
-			return self::request_rate_fallback();
+			return array();
 		}
 
 		return array(
-			'label'      => sprintf( __( 'From KSh %s per person', 'hks-wayfinder' ), number_format_i18n( $amount, 0 ) ),
-			'status'     => __( 'Final price is confirmed for your dates, group and availability in the quote.', 'hks-wayfinder' ),
-			'basis'      => '',
-			'disclaimer' => '',
-			'is_from'    => '1',
+			'label'  => sprintf( __( 'From KSh %s per person', 'hks-wayfinder' ), number_format_i18n( $amount, 0 ) ),
+			'status' => __( 'Your quote confirms the final package for your dates and group.', 'hks-wayfinder' ),
 		);
-	}
-
-	/**
-	 * Safe fallback when no public starting price is entered.
-	 *
-	 * @return array<string, string>
-	 */
-	private static function request_rate_fallback(): array {
-		return array( 'label' => __( 'Request current KSh rate', 'hks-wayfinder' ), 'status' => __( 'Final price is confirmed for your dates, group and availability in the quote.', 'hks-wayfinder' ), 'basis' => '', 'disclaimer' => '', 'is_from' => '' );
 	}
 
 	/**

@@ -3,7 +3,7 @@ Theme Name: HKS Wayfinder
 Theme URI: https://github.com/Allan-Gakuru/HolidayKenyaSafaris
 Author: Holiday Kenya Safaris
 Description: Custom block theme for the Holiday Kenya Safaris Wayfinder website.
-Version: 0.4.0
+Version: 0.5.0
 Update URI: https://github.com/Allan-Gakuru/HolidayKenyaSafaris
 Requires at least: 6.6
 Requires PHP: 8.3
@@ -719,30 +719,9 @@ summary {
 	border-top: 1px solid rgb(24 43 58 / 12%);
 	display: flex;
 	gap: 1rem;
-	justify-content: space-between;
+	justify-content: flex-end;
 	margin-top: auto;
 	padding-top: 1rem;
-}
-
-.hks-tour-card__price {
-	display: grid;
-	gap: 0.15rem;
-	min-width: 0;
-}
-
-.hks-tour-card__price strong {
-	color: var(--wp--preset--color--midnight-navy);
-	font-variant-numeric: tabular-nums;
-}
-
-.hks-tour-card__price span {
-	color: rgb(22 27 31 / 62%);
-	display: -webkit-box;
-	font-size: 0.71rem;
-	line-height: 1.35;
-	overflow: hidden;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 2;
 }
 
 .hks-tour-card__link {
@@ -1385,24 +1364,6 @@ summary {
 	margin-top: 0.1rem;
 }
 
-.hks-rate-information__lead {
-	background: var(--wp--preset--color--pale-mist);
-	border: 1px solid rgb(24 43 58 / 12%);
-	border-radius: 8px;
-	padding: 1.25rem;
-}
-
-.hks-rate-information__lead > strong {
-	color: var(--wp--preset--color--midnight-navy);
-	font-family: var(--wp--preset--font-family--sora);
-	font-size: 1.4rem;
-	font-variant-numeric: tabular-nums;
-}
-
-.hks-rate-information__lead p:last-child {
-	margin-bottom: 0;
-}
-
 .hks-small-print {
 	color: rgb(22 27 31 / 68%);
 	font-size: 0.82rem;
@@ -1617,8 +1578,8 @@ summary {
 
 .hks-price-panel {
 	display: grid;
-	gap: 1rem 2rem;
-	grid-template-columns: minmax(14rem, 0.8fr) minmax(0, 1.2fr);
+	gap: 0.35rem;
+	grid-template-columns: 1fr;
 }
 
 .hks-price-panel h2,

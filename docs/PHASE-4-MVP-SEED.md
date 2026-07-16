@@ -6,7 +6,7 @@ The first Holiday Kenya Safaris content batch is stored in
 - three canonical Tour drafts: Maasai Mara, Nairobi National Park, and Amboseli;
 - one focused Campaign draft linked to each Tour;
 - source URLs, audit notes, source-backed itinerary facts, and local-buyer copy;
-- `Request current rate` pricing with no converted or invented KSh amount; and
+- no Tour prices and no seeded Campaign price; and
 - no photographs or policy claims.
 
 ## Import on the deployed WordPress site
@@ -22,9 +22,9 @@ records that are still drafts, appends seed taxonomies without deleting editor
 terms, and protects records moved to any other WordPress status. It never runs on
 plugin activation.
 
-Before a Tour may be published, an operator must review the current KSh rate,
-residency and group assumptions, vehicle, accommodation, inclusions, and media
-rights. Rates, photographs, and policy text remain absent until approved.
+Before a Tour may be published, an operator must review its route, vehicle,
+accommodation, inclusions, and assigned media. Tours remain price-free. A Campaign
+price remains absent until an editor deliberately enters and publishes it.
 
 ## Source validation
 
@@ -36,4 +36,4 @@ python tools/validate_mvp_seed.py
 
 The validator checks the exact three identities and sources, required fields,
 draft/noindex campaign governance, relationship integrity, and the absence of
-public USD prices, approval sentinels, media, policies, and invented KSh rates.
+public USD prices, approval sentinels, media, policies, and invented Campaign prices.

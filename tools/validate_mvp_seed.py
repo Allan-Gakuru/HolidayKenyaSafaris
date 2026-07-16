@@ -52,6 +52,7 @@ FORBIDDEN_TOUR_FIELDS = {
 }
 
 FORBIDDEN_CAMPAIGN_FIELDS = {
+    "hks_campaign_from_price_ksh",
     "hks_cta_label", "hks_target_audience", "hks_primary_desire",
     "hks_primary_problem", "hks_primary_objective", "hks_primary_objection",
     "hks_next_step", "hks_campaign_status", "hks_analytics_campaign_label",

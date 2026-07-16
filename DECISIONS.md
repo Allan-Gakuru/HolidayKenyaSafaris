@@ -41,13 +41,13 @@ Exclude by default:
 
 ## Pricing
 
-- Each Tour has one optional field: `From price per person (KSh)`.
-- A positive value displays as `From KSh X per person` on cards, Tour pages, Campaign pages, and quote context.
-- A blank or zero value displays as `Request current KSh rate`.
-- Tour prices do not have statuses, assumptions, checked dates, validity dates, seasonal rows, supplements, or automatic expiry. An authorized editor updates or removes the value manually.
-- The number must honestly represent a per-person starting price. Leave it blank for per-vehicle, per-group, child-specific, single-supplement-dependent, or highly variable products that cannot be summarized truthfully by one figure.
+- Tours and all Tour discovery surfaces are price-free. They do not show a value or a request-rate fallback.
+- Each Campaign has one optional field: `From price per person (KSh)`.
+- A positive value displays as `From KSh X per person` only on that Campaign. A blank or zero value produces no price output.
+- Campaign prices do not have statuses, assumptions, checked dates, validity dates, seasonal rows, supplements, or automatic expiry. An authorized editor updates or removes the value manually.
+- The number must honestly represent a per-person starting price and should be entered only when price is a useful selling point for that Campaign.
 - Converted USD values must never be presented as approved KSh prices.
-- Campaigns inherit the linked Tour price. Campaign start and end dates record the intended campaign window; they do not automatically change the Tour price or WordPress publication state.
+- Campaigns do not inherit legacy Tour prices. Campaign start and end dates record the intended campaign window; they do not automatically change the Campaign price or WordPress publication state.
 
 ## Editorial Approval and Field Economy
 
@@ -87,7 +87,7 @@ Exclude by default:
 ## UI and UX Structure
 
 - The approved catalogue contract governs the global navigation, image-led homepage, catalogue grids, and canonical Tour pages.
-- Catalogue-mode implementation must keep the Wayfinder identity, HKS copy, shared conversion service, compact media treatment, clear price context, and accessible interactions.
+- Catalogue-mode implementation must keep the Wayfinder identity, HKS copy, shared conversion service, compact media treatment, clear package context, and accessible interactions.
 - Standard website pages use light, browseable Catalogue mode.
 - Focused paid-ad pages use Campaign mode and may retain the immersive emotional structure of the existing Maasai Mara prototype.
 - Canonical Tour pages use a compact title and breadcrumb band, three-image gallery, destination line, approximately 68/32 desktop workspace, accessible tabs, mobile disclosures, itinerary timeline, sticky quote panel, related Tours, and final quote prompt.

@@ -25,7 +25,7 @@ Regenerate or verify the font package from the pinned upstream files with `tools
 3. Configure the WordPress Site Icon when the final identity has client sign-off; until then, the theme fallback is used.
 4. Do not publish a photograph until its source and usage approval are recorded.
 
-Version `0.4.0` provides the catalogue-led public experience: a product-led header,
+Version `0.5.0` provides the catalogue-led public experience: a product-led header,
 image-led homepage, filterable Tour archive, compact Destination pages, and the
 canonical Tour gallery/workspace with desktop tabs, mobile disclosures, a sticky
 quote panel, itinerary timeline, and related Tours. Focused Campaigns retain their
@@ -39,7 +39,8 @@ the corresponding Page has been published.
 
 Public presentation is fail-closed:
 
-- a missing or non-positive `From KSh` amount falls back to `Request current KSh rate`;
+- Tour cards, archives, canonical Tour pages, related Tours, and Tour quote panels never render price;
+- a Campaign renders `From KSh… per person` only when its own optional positive amount is populated;
 - optional policies and FAQs render only when their public fields are populated;
 - Destination guidance renders only when the editor has supplied it; and
 - Tour photographs render only when the attachment has useful native alt text.
