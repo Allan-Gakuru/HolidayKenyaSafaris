@@ -39,8 +39,8 @@ Use this file for project-level decisions such as contact details, legal wording
 
 | Item | Current status | Rule |
 |---|---|---|
-| WhatsApp | Temporary: `+254 722 742 799` | Retain until client replaces it |
-| Main phone | CLIENT CONFIRMATION REQUIRED | Use verified Ashford contact only if approved for this brand |
+| WhatsApp | Confirmed: `+254 712 965 131` | Official Holiday Kenya Safaris WhatsApp destination |
+| Main phone | Confirmed: `+254 712 965 131` | Official Holiday Kenya Safaris mobile number |
 | Email | CLIENT CONFIRMATION REQUIRED | Prefer dedicated Holiday Kenya Safaris address |
 | Address | CLIENT CONFIRMATION REQUIRED | Verify against current Ashford source and client approval |
 | Business hours | CLIENT CONFIRMATION REQUIRED | Do not infer |

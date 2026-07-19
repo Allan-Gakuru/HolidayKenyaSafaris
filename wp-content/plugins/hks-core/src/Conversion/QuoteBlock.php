@@ -18,9 +18,9 @@ defined( 'ABSPATH' ) || exit;
 final class QuoteBlock {
 
 	/**
-	 * Temporary approved WhatsApp destination.
+	 * Official Holiday Kenya Safaris WhatsApp destination.
 	 */
-	private const WHATSAPP_NUMBER = '254722742799';
+	private const WHATSAPP_NUMBER = '254712965131';
 
 	/**
 	 * Render a context-aware quote CTA.

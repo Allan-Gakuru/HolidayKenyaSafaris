@@ -83,7 +83,7 @@ The installed PHP 8.3 CLI is the local syntax checker. The cPanel PHP version, e
 
 ### Safe working defaults
 
-- Use `254722742799` as the temporary WhatsApp destination.
+- Use `254712965131` as the official Holiday Kenya Safaris mobile and WhatsApp destination.
 - Omit prices from Tours and omit a Campaign price when it has not been deliberately entered.
 - Keep analytics integrations disabled when IDs are empty; never use dummy IDs.
 - Omit unverified contact details, response promises, policies, reviews, memberships, and operational claims.

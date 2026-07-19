@@ -28,7 +28,7 @@ Field groups cover:
 - Destination public guidance; and
 - global identity, contact, legal, analytics, social, conversion, and brand settings.
 
-Only three global values have safe defaults: `Holiday Kenya Safaris`, the Ashford operator disclosure, and temporary WhatsApp destination `254722742799`. Other unknown settings remain blank.
+Only three global values have safe defaults: `Holiday Kenya Safaris`, the Ashford operator disclosure, and official mobile and WhatsApp destination `254712965131`. Other unknown settings remain blank.
 
 ## Publication rules
 

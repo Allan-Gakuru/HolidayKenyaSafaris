@@ -122,7 +122,7 @@ def main() -> int:
 
     require(errors, "Campaign price field", fields, ("hks_campaign_from_price_ksh", "From price per person (KSh)", "'min'          => 1", "'step'         => 1", "Leave blank to omit price"))
     require(errors, "campaign dates", fields, ("hks_campaign_start_date", "hks_campaign_end_date", "do not publish, unpublish, expire, or change this Campaign"))
-    require(errors, "settings compatibility", fields, ("public_setting", "'hks_settings_' . $slug", "Holiday Kenya Safaris", "254722742799"))
+    require(errors, "settings compatibility", fields, ("public_setting", "'hks_settings_' . $slug", "Holiday Kenya Safaris", "254712965131"))
     require(errors, "fields module", files["src/Fields/FieldsModule.php"], ("acf_add_local_field_group", "acf_add_options_page", "hks-settings"))
 
     require(

@@ -91,7 +91,7 @@ def main() -> int:
         "quote renderer",
         content["renderer"],
         [
-            "254722742799",
+            "254712965131",
             "Save & review WhatsApp message",
             "we save these details privately in WordPress",
             "you still choose whether to send it",

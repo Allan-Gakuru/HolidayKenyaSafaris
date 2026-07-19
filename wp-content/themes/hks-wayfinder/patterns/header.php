@@ -63,7 +63,7 @@ $render_terms = static function ( array $terms ): void {
 	<div class="hks-utility">
 		<div class="hks-shell hks-utility__inner">
 			<span><?php esc_html_e( 'Operated by Ashford Tours & Travel', 'hks-wayfinder' ); ?></span>
-			<span><?php esc_html_e( 'WhatsApp +254 722 742 799', 'hks-wayfinder' ); ?></span>
+			<a href="tel:+254712965131"><?php esc_html_e( 'Call or WhatsApp +254 712 965 131', 'hks-wayfinder' ); ?></a>
 		</div>
 	</div>
 
@@ -157,7 +157,7 @@ $render_terms = static function ( array $terms ): void {
 			<?php else : ?>
 				<a class="hks-button hks-button--quote" href="<?php echo esc_url( $tours_url ); ?>"><?php esc_html_e( 'Request quote on WhatsApp', 'hks-wayfinder' ); ?></a>
 			<?php endif; ?>
-			<span><?php esc_html_e( 'WhatsApp +254 722 742 799', 'hks-wayfinder' ); ?></span>
+			<a href="tel:+254712965131"><?php esc_html_e( 'Call or WhatsApp +254 712 965 131', 'hks-wayfinder' ); ?></a>
 		</div>
 	</dialog>
 </div>

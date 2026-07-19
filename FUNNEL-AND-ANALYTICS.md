@@ -54,9 +54,9 @@ Every entry point opens the same intake dialog or mobile sheet with Tour and cam
 
 ## WhatsApp Behavior
 
-Temporary destination:
+Official Holiday Kenya Safaris destination:
 
-`https://wa.me/254722742799`
+`https://wa.me/254712965131`
 
 Default generated message:
 

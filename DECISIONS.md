@@ -63,7 +63,7 @@ Exclude by default:
 
 ## Conversion
 
-- Temporary WhatsApp number: `+254 722 742 799`.
+- Official Holiday Kenya Safaris mobile and WhatsApp number: `+254 712 965 131`.
 - Every quote CTA opens an intake form before WhatsApp.
 - Required fields: name, phone, package, preferred travel date or month, and number of travelers.
 - The form constructs a prefilled WhatsApp message that the visitor chooses to send.

@@ -2,7 +2,7 @@
 
 The MVP conversion component is the dynamic `hks/quote-cta` block. On a published
 Tour or Campaign it resolves the canonical Tour, selected intake questions, CTA
-copy, Campaign label, and approved temporary WhatsApp destination.
+copy, Campaign label, and official Holiday Kenya Safaris WhatsApp destination.
 
 ## Visitor journey
 
@@ -14,7 +14,7 @@ copy, Campaign label, and approved temporary WhatsApp destination.
 4. Selecting **Save & review WhatsApp message** validates the form and creates or
    refreshes an idempotent private inquiry.
 5. The visitor reviews the exact message and request reference.
-6. **Open WhatsApp to send** opens `wa.me/254722742799`; the visitor still sends the
+6. **Open WhatsApp to send** opens `wa.me/254712965131`; the visitor still sends the
    message inside WhatsApp.
 
 The website records `WhatsApp opened`, never `message sent`.

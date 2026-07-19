@@ -293,9 +293,9 @@ The only safe defaults are:
 
 - company name: `Holiday Kenya Safaris`;
 - operator disclosure: `Holiday Kenya Safaris is operated by Ashford Tours & Travel.`;
-- temporary WhatsApp destination: `254722742799`.
+- official Holiday Kenya Safaris mobile and WhatsApp destination: `254712965131`.
 
-Other settings remain blank until confirmed, including phone, email, address,
+Other settings remain blank until confirmed, including email, address,
 map, hours, response expectation, social profiles, legal pages, analytics IDs,
 and default sharing imagery.
 
