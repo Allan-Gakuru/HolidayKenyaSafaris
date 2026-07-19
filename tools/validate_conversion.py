@@ -46,7 +46,7 @@ def main() -> int:
             errors.append(f"missing {relative}: {error}")
             content[label] = ""
 
-    require(errors, "plugin bootstrap", content["bootstrap"], ["Version:           0.6.0", "define( 'HKS_CORE_VERSION', '0.6.0' )"])
+    require(errors, "plugin bootstrap", content["bootstrap"], ["Version:           0.8.0", "define( 'HKS_CORE_VERSION', '0.8.0' )"])
     require(errors, "plugin coordinator", content["plugin"], ["Conversion\\Module as ConversionModule", "ConversionModule::class"])
     require(errors, "content model", content["content"], ["PostTypes\\Inquiry", "Inquiry::register();"])
     require(
@@ -79,6 +79,8 @@ def main() -> int:
             "_hks_inquiry_phone",
             "_hks_inquiry_preferred_date",
             "_hks_inquiry_travelers",
+            "_hks_inquiry_destination",
+            "_hks_inquiry_route",
             "_hks_inquiry_consent_version",
             "_hks_whatsapp_opened_at",
             "'contact_consent'",
@@ -97,6 +99,10 @@ def main() -> int:
             "you still choose whether to send it",
             "InquiryRepository::CONSENT_VERSION",
             "FormToken::issue",
+            "group_context",
+            "destination_selection",
+            "tour_selection",
+            "data-hks-inquiry-inline",
         ],
     )
 
@@ -122,7 +128,7 @@ def main() -> int:
         errors,
         "browser privacy and handoff",
         content["script"],
-        ["window.dataLayer.push(payload)", "sessionStorage", "encodeURIComponent(reviewedMessage)", "keepalive: true", "sourceAttribution"],
+        ["window.dataLayer.push(payload)", "sessionStorage", "encodeURIComponent(reviewedMessage)", "keepalive: true", "sourceAttribution", "destination_id", "inquiry_route", "group_travel"],
     )
 
     for line_number, line in enumerate(content["script"].splitlines(), 1):

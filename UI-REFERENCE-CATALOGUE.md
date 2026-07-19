@@ -258,6 +258,14 @@ Mobile quote entry points:
 
 Never use `Book now`, `Submit Booking`, or language implying confirmed availability or payment when the action only requests a quote.
 
+### Group Travel route
+
+The direct Group Travel navigation route resolves to `/group-travel/`, not a homepage anchor. Its inline planner is the shared quote conversion in a Group Travel presentation mode:
+
+`Destination -> matching published Tour -> dates/month -> traveler count -> contact and consent -> private recovery record -> message review -> visitor launches WhatsApp`
+
+Only published Tours with assigned Destination terms appear. Changing Destination filters the Tour choices without duplicating Tour data. Keep the selected Tour as the canonical package context used by validation, storage, analytics, and the generated WhatsApp message.
+
 ## Visual Translation to Wayfinder
 
 Implement the documented structure, density, and interaction within the Wayfinder brand.

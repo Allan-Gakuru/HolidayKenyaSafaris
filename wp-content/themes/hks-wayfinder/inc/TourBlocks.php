@@ -34,6 +34,7 @@ final class TourBlocks {
 			'home-experience'    => 'render_home_experience',
 			'catalogue-controls' => 'render_catalogue_controls',
 			'page-title'         => 'render_page_title',
+			'group-travel-page'  => 'render_group_travel_page',
 		);
 
 		foreach ( $blocks as $directory => $callback ) {
@@ -67,6 +68,116 @@ final class TourBlocks {
 				<?php self::breadcrumbs( array( $title => '' ) ); ?>
 				<h1><?php echo esc_html( $title ); ?></h1>
 			</div>
+		</div>
+		<?php
+
+		return (string) ob_get_clean();
+	}
+
+	/**
+	 * Render the Group Travel planner from published catalogue data.
+	 *
+	 * @return string
+	 */
+	public static function render_group_travel_page(): string {
+		if ( ! is_page( 'group-travel' ) ) {
+			return '';
+		}
+
+		$visuals   = array();
+		$image_ids = array();
+
+		foreach ( self::tour_query( 18, true ) as $tour ) {
+			$images = self::tour_images( $tour->ID );
+
+			if ( ! $images || in_array( $images[0], $image_ids, true ) ) {
+				continue;
+			}
+
+			$image_ids[] = $images[0];
+			$visuals[]   = array(
+				'image_id'    => $images[0],
+				'title'       => self::public_text( get_the_title( $tour ) ),
+				'destination' => implode( ', ', self::term_names( $tour->ID, 'hks_destination' ) ),
+			);
+
+			if ( 3 === count( $visuals ) ) {
+				break;
+			}
+		}
+
+		$planner   = do_blocks( '<!-- wp:hks/quote-cta {"location":"group_travel_page","mode":"group_travel"} /-->' );
+		$tours_url = get_post_type_archive_link( 'hks_tour' ) ?: home_url( '/tours/' );
+
+		ob_start();
+		?>
+		<div class="hks-group-travel">
+			<section class="hks-group-travel-lead" aria-labelledby="hks-group-travel-lead-title">
+				<div class="hks-shell hks-group-travel-lead__inner">
+					<div class="hks-group-travel-lead__copy">
+						<p class="hks-group-travel__eyebrow"><?php esc_html_e( 'Plan together', 'hks-wayfinder' ); ?></p>
+						<h2 id="hks-group-travel-lead-title"><?php esc_html_e( 'Put the whole group on one clear plan.', 'hks-wayfinder' ); ?></h2>
+						<p><?php esc_html_e( 'Choose a destination and a published Tour, add the dates and headcount, then review one useful WhatsApp request instead of starting with a blank message.', 'hks-wayfinder' ); ?></p>
+						<a class="hks-button" href="#group-travel-planner"><?php esc_html_e( 'Build your group request', 'hks-wayfinder' ); ?></a>
+					</div>
+					<?php if ( $visuals ) : ?>
+						<div class="hks-group-travel-visuals hks-group-travel-visuals--<?php echo esc_attr( (string) count( $visuals ) ); ?>" aria-label="<?php esc_attr_e( 'Published Tour highlights', 'hks-wayfinder' ); ?>">
+							<?php foreach ( $visuals as $index => $visual ) : ?>
+								<figure>
+									<?php
+									echo wp_kses_post(
+										wp_get_attachment_image(
+											$visual['image_id'],
+											'large',
+											false,
+											array(
+												'loading'       => 0 === $index ? 'eager' : 'lazy',
+												'fetchpriority' => 0 === $index ? 'high' : 'auto',
+												'sizes'         => '(min-width: 1024px) 24vw, (min-width: 768px) 30vw, 78vw',
+											)
+										)
+									);
+									?>
+									<figcaption><strong><?php echo esc_html( $visual['title'] ); ?></strong><?php if ( $visual['destination'] ) : ?><span><?php echo esc_html( $visual['destination'] ); ?></span><?php endif; ?></figcaption>
+								</figure>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
+				</div>
+			</section>
+
+			<section class="hks-group-travel-planner" id="group-travel-planner" aria-labelledby="hks-group-travel-planner-title">
+				<div class="hks-shell hks-group-travel-planner__inner">
+					<div class="hks-group-travel-planner__heading">
+						<p class="hks-group-travel__eyebrow"><?php esc_html_e( 'Your starting point', 'hks-wayfinder' ); ?></p>
+						<h2 id="hks-group-travel-planner-title"><?php esc_html_e( 'Start with the trip you can point everyone to.', 'hks-wayfinder' ); ?></h2>
+						<p><?php esc_html_e( 'Only published Destinations and Tours appear here. Select the destination first and the matching Tour choices will follow.', 'hks-wayfinder' ); ?></p>
+					</div>
+					<div class="hks-group-travel-planner__form">
+						<?php if ( $planner ) : ?>
+							<?php echo $planner; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Rendered by the registered HKS block. ?>
+						<?php else : ?>
+							<p><?php esc_html_e( 'There are no published Tours available in the planner yet.', 'hks-wayfinder' ); ?></p>
+							<a class="hks-button" href="<?php echo esc_url( $tours_url ); ?>"><?php esc_html_e( 'Browse all tours', 'hks-wayfinder' ); ?></a>
+						<?php endif; ?>
+					</div>
+				</div>
+			</section>
+
+			<section class="hks-group-travel-process" aria-labelledby="hks-group-travel-process-title">
+				<div class="hks-shell">
+					<div class="hks-group-travel-process__heading">
+						<p class="hks-group-travel__eyebrow"><?php esc_html_e( 'What happens next', 'hks-wayfinder' ); ?></p>
+						<h2 id="hks-group-travel-process-title"><?php esc_html_e( 'One request, then a human quote conversation.', 'hks-wayfinder' ); ?></h2>
+					</div>
+					<ol>
+						<li><span>1</span><div><h3><?php esc_html_e( 'Choose the trip', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'Select a Destination and one of its published Tours.', 'hks-wayfinder' ); ?></p></div></li>
+						<li><span>2</span><div><h3><?php esc_html_e( 'Share the essentials', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'Add the proposed dates, number of travelers and contact details.', 'hks-wayfinder' ); ?></p></div></li>
+						<li><span>3</span><div><h3><?php esc_html_e( 'Review before WhatsApp', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'The request is saved privately. You review the prepared message and choose whether to send it.', 'hks-wayfinder' ); ?></p></div></li>
+					</ol>
+					<p class="hks-group-travel-process__operator"><?php esc_html_e( 'Holiday Kenya Safaris is operated by Ashford Tours & Travel.', 'hks-wayfinder' ); ?></p>
+				</div>
+			</section>
 		</div>
 		<?php
 
@@ -425,7 +536,7 @@ final class TourBlocks {
 	public static function render_home_experience(): string {
 		$tours_url      = get_post_type_archive_link( 'hks_tour' ) ?: home_url( '/tours/' );
 		$group_url      = function_exists( 'hks_wayfinder_published_page_url' ) ? hks_wayfinder_published_page_url( 'group-travel' ) : '';
-		$group_url      = $group_url ?: $tours_url;
+		$group_url      = $group_url ?: home_url( '/group-travel/' );
 		$priority_tours = self::tour_query( 18, true );
 		$featured       = array_slice( $priority_tours, 0, 6 );
 		$destinations  = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_destination', 6 ) : array();

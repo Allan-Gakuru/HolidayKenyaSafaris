@@ -75,6 +75,8 @@ Exclude by default:
 - Campaign attribution and package context should be retained.
 - The canonical public CTA label is **Request quote on WhatsApp**.
 - Canonical Tour pages use a persistent quote panel, not a permanently visible long booking form.
+- The published Group Travel page uses the same intake, consent, private recovery record, message review, and visitor-controlled WhatsApp launch. It adds linked Destination and Tour choices, then uses the standard date/month and traveler-count fields.
+- Group Travel Destination and Tour choices come from published catalogue records. The selected Destination is derived from the chosen Tour when the inquiry is stored; no duplicate client-maintained Group Travel fields are added.
 
 ## Website Scope
 
@@ -133,7 +135,7 @@ Client IDs will be supplied later. Do not hard-code invented IDs.
 ## Phase 6 and 7 Delivery Decisions
 
 - Standard WordPress Pages use the Wayfinder title band and editorial content system; no new page builder or duplicate content model is introduced.
-- About, Group Travel, Contact, and four legal routes are created through the existing guarded draft importer. Contact and legal records stay in Draft until their missing project-level information is supplied.
+- About, Contact, Group Travel, and four legal routes were created through the existing guarded importer. Group Travel is published with a catalogue-driven quote planner; Contact and legal records stay in Draft until their missing project-level information is supplied.
 - The 44 reviewed local Ashford candidates resolve to 40 Phase 7 draft imports: three already exist as MVP Tours and the generic `African-wildlife-safari` marketing page is excluded as non-quotable.
 - Phase 7 is split into four operator-triggered batches: Road Safaris, Flying Safaris and Mount Kenya, Nairobi Excursions, and Mombasa Excursions.
 - Catalogue migration preserves Ashford titles and source URLs, maps the four existing Tour taxonomies, and carries over source duration and route headings when available.

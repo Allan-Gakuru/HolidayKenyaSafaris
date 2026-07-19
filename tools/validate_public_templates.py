@@ -24,6 +24,7 @@ TEMPLATES = {
     "occasion": "templates/taxonomy-hks_occasion.html",
     "travel style": "templates/taxonomy-hks_travel_style.html",
     "page": "templates/page.html",
+    "group travel": "templates/page-group-travel.html",
 }
 
 BLOCKS = {
@@ -35,6 +36,7 @@ BLOCKS = {
     "blocks/home-experience/block.json": "hks-wayfinder/home-experience",
     "blocks/catalogue-controls/block.json": "hks-wayfinder/catalogue-controls",
     "blocks/page-title/block.json": "hks-wayfinder/page-title",
+    "blocks/group-travel-page/block.json": "hks-wayfinder/group-travel-page",
 }
 
 
@@ -73,6 +75,10 @@ def main() -> int:
         "home_gallery": THEME / "assets" / "js" / "home-gallery.js",
         "tour_ui": THEME / "assets" / "js" / "tour-ui.js",
         "quote": PLUGIN / "src" / "Conversion" / "QuoteBlock.php",
+        "inquiry_repository": PLUGIN / "src" / "Conversion" / "InquiryRepository.php",
+        "inquiry_admin": PLUGIN / "src" / "Conversion" / "InquiryAdmin.php",
+        "inquiry_script": PLUGIN / "assets" / "js" / "inquiry.js",
+        "inquiry_style": PLUGIN / "assets" / "css" / "inquiry.css",
     }
     for label, path in source_paths.items():
         try:
@@ -81,7 +87,7 @@ def main() -> int:
             errors.append(f"missing {path.relative_to(ROOT)}: {error}")
             sources[label] = ""
 
-    require(errors, "theme metadata", sources["style"], ["Version: 0.6.0", ".hks-home-gallery__viewport", "--hks-deck-scale", "aspect-ratio: 3 / 4", ".hks-tour-workspace", ".hks-tour-gallery", ".hks-mobile-menu", ".hks-editorial-page", ":focus-visible", "prefers-reduced-motion"])
+    require(errors, "theme metadata", sources["style"], ["Version: 0.6.0", ".hks-home-gallery__viewport", "--hks-deck-scale", "aspect-ratio: 3 / 4", ".hks-tour-workspace", ".hks-tour-gallery", ".hks-mobile-menu", ".hks-editorial-page", ".hks-group-travel-planner", ".hks-group-travel-visuals", ":focus-visible", "prefers-reduced-motion"])
     forbid(errors, "theme stylesheet", sources["style"], ["linear-gradient(", "radial-gradient("])
 
     require(
@@ -128,7 +134,7 @@ def main() -> int:
     utility_whatsapp = re.search(r'<a class="hks-utility__contact hks-utility__whatsapp"(.*?)</a>', sources["header"], re.DOTALL)
     if not utility_whatsapp or "data-hks-quote-proxy" in utility_whatsapp.group(1):
         errors.append("utility WhatsApp contact must be a direct link, not a quote-form proxy")
-    require(errors, "footer", sources["footer"], ["operated by Ashford Tours &amp; Travel", "href=\"/tours/\""])
+    require(errors, "footer", sources["footer"], ["operated by Ashford Tours &amp; Travel", "href=\"/tours/\"", "href=\"/group-travel/\""])
 
     require(errors, "home template", files["home"], ["hks-wayfinder/home-experience"])
     require(errors, "catalogue template", files["catalogue"], ["hks-title-band", "hks-wayfinder/catalogue-controls", "hks-wayfinder/tour-card", "postType\":\"hks_tour", "inherit\":true"])
@@ -140,6 +146,7 @@ def main() -> int:
     for label in ("tour type", "occasion", "travel style"):
         require(errors, f"{label.title()} template", files[label], ["hks-wayfinder/taxonomy-intro", "hks-wayfinder/tour-card", "inherit\":true", "hks-catalogue-prompt"])
     require(errors, "standard Page template", files["page"], ["hks-standard-page", "hks-wayfinder/page-title", "hks-editorial-page", "wp:post-content"])
+    require(errors, "Group Travel template", files["group travel"], ["hks-group-travel-page", "hks-wayfinder/page-title", "hks-wayfinder/group-travel-page", "hks-group-travel-page__support", "wp:post-content"])
 
     for label, template in files.items():
         if 'id="main-content"' not in template:
@@ -197,6 +204,9 @@ def main() -> int:
             "data-hks-tour-count",
             "hks-home-gallery__caption",
             "Explore destination",
+            "render_group_travel_page",
+            "hks-group-travel-planner",
+            "group_travel_page",
         ],
     )
     forbid(
@@ -221,8 +231,8 @@ def main() -> int:
             "hks_confirmation_status",
         ],
     )
-    if sources["renderer"].count("do_blocks( '<!-- wp:hks/quote-cta") != 1:
-        errors.append("canonical renderer must create exactly one shared quote block instance")
+    if sources["renderer"].count("do_blocks( '<!-- wp:hks/quote-cta") != 2:
+        errors.append("public renderer must create one canonical and one Group Travel shared quote block instance")
 
     require(errors, "navigation script", sources["navigation"], ["showModal", "aria-expanded", "Escape", "data-hks-quote-proxy", "data-hks-inquiry-open"])
     require(errors, "utility contact strip", sources["header"], ["info@holidaykenyasafaris.ke", "instagram.com/holidaykenyasafaris", "facebook.com/people/Holiday-Kenya-Safaris/61591508593846", "hks-utility__social", "hks-utility__whatsapp"])
@@ -232,7 +242,11 @@ def main() -> int:
     if pointer_capture < drag_threshold:
         errors.append("homepage gallery must capture the pointer only after a real drag begins")
     require(errors, "Tour UI script", sources["tour_ui"], ["role', 'tablist", "ArrowRight", "matchMedia('(min-width: 769px)", "tour_gallery_open", "tour_section_open", "itinerary_toggle", "related_tour_select"])
-    require(errors, "quote block", sources["quote"], ["$attributes['label']", "Request quote on WhatsApp", "InquiryRepository::REST_NAMESPACE", "data-hks-inquiry-form", "data-hks-whatsapp-launch"])
+    require(errors, "quote block", sources["quote"], ["$attributes['label']", "$attributes['mode']", "Request quote on WhatsApp", "InquiryRepository::REST_NAMESPACE", "data-hks-inquiry-form", "data-hks-whatsapp-launch", "group_context", "group_fields", "data-hks-inquiry-inline", "destination_selection", "tour_selection", "data-form-token"])
+    require(errors, "Group Travel inquiry script", sources["inquiry_script"], ["destination_selection", "tour_selection", "syncGroupTour", "filterGroupTours", "destination_id", "inquiry_route", "group_travel"])
+    require(errors, "Group Travel inquiry storage", sources["inquiry_repository"], ["_hks_inquiry_destination", "_hks_inquiry_route", "destination_label", "group_travel"])
+    require(errors, "Group Travel inquiry administration", sources["inquiry_admin"], ["Inquiry route", "Destination", "Group Travel page"])
+    require(errors, "Group Travel inquiry styling", sources["inquiry_style"], [".hks-inquiry--inline", ".hks-inquiry__group-choice"])
 
     if re.search(r"border-left:\s*[2-9]", sources["style"]):
         errors.append("theme stylesheet contains a decorative side stripe wider than 1px")
@@ -255,6 +269,8 @@ def main() -> int:
     else:
         if quote_block.get("attributes", {}).get("label", {}).get("type") != "string":
             errors.append("HKS quote block must expose the optional presentation-only label attribute")
+        if quote_block.get("attributes", {}).get("mode", {}).get("type") != "string":
+            errors.append("HKS quote block must expose the presentation mode attribute")
 
     if errors:
         print("Public-template validation failed:")

@@ -138,7 +138,7 @@ Acceptance:
 
 ## Phase 6: Templates and Pages
 
-Implementation status (2026-07-19): the global, Tour, Campaign, catalogue, all four Tour taxonomy archive families, Destination, homepage, and standard Page templates are implemented. About, Group Travel, Contact, and four legal routes are available as protected Page drafts. Contact details and legal text remain production blockers and are deliberately not invented.
+Implementation status (2026-07-19): the global, Tour, Campaign, catalogue, all four Tour taxonomy archive families, Destination, homepage, and standard Page templates are implemented. Group Travel now has a dedicated catalogue-driven planner on its published Page and reuses the shared inquiry recovery and WhatsApp flow. About is available; Contact and four legal routes remain protected drafts until their missing project-level information is supplied.
 
 Build in this order:
 
@@ -169,6 +169,7 @@ Acceptance:
 - The canonical Tour page implements the approved title band, gallery, two-column workspace, tabs/disclosures, itinerary, quote panel, and related-Tour flow within the Wayfinder system.
 - The permanent reference-site booking form is absent; every Tour quote action opens the approved HKS intake and WhatsApp handoff.
 - The current Maasai Mara prototype's strongest UX is preserved in Campaign mode without carrying over its old identity.
+- Group Travel navigation resolves to one canonical Page whose published Destination and Tour choices feed the same private inquiry and WhatsApp review service as Tour and Campaign pages.
 
 ## Phase 7: Catalogue Migration
 

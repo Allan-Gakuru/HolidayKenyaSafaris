@@ -67,6 +67,8 @@ final class InquiryAdmin {
 		$fields = array(
 			__( 'Name', 'hks-core' )                     => $this->meta( $post->ID, 'name' ),
 			__( 'Phone', 'hks-core' )                    => $this->meta( $post->ID, 'phone' ),
+			__( 'Inquiry route', 'hks-core' )            => $this->route_label( $this->meta( $post->ID, 'route' ) ),
+			__( 'Destination', 'hks-core' )              => $this->meta( $post->ID, 'destination' ),
 			__( 'Package', 'hks-core' )                  => $this->meta( $post->ID, 'package_label' ),
 			__( 'Preferred date or month', 'hks-core' )  => $this->meta( $post->ID, 'preferred_date' ),
 			__( 'Travelers', 'hks-core' )                => $this->meta( $post->ID, 'travelers' ),
@@ -146,6 +148,10 @@ final class InquiryAdmin {
 				break;
 			case 'hks_package':
 				echo esc_html( $this->meta( $post_id, 'package_label' ) );
+				$destination = $this->meta( $post_id, 'destination' );
+				if ( $destination ) {
+					echo '<br><span class="description">' . esc_html( $destination ) . '</span>';
+				}
 				break;
 			case 'hks_travel':
 				echo esc_html( $this->meta( $post_id, 'preferred_date' ) );
@@ -209,5 +215,21 @@ final class InquiryAdmin {
 		$key = '_hks_' . ( $direct ? $name : 'inquiry_' . $name );
 
 		return (string) get_post_meta( $post_id, $key, true );
+	}
+
+	/**
+	 * Return a readable source label for the inquiry route.
+	 *
+	 * @param string $route Stored route key.
+	 * @return string
+	 */
+	private function route_label( $route ) {
+		$labels = array(
+			'group_travel' => __( 'Group Travel page', 'hks-core' ),
+			'campaign'     => __( 'Campaign page', 'hks-core' ),
+			'tour'         => __( 'Tour page', 'hks-core' ),
+		);
+
+		return $labels[ $route ] ?? '';
 	}
 }

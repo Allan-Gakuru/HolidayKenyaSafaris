@@ -12,6 +12,10 @@ Other channels may enter the same system:
 - TikTok or YouTube awareness.
 - Email and retargeting.
 
+The Group Travel route enters the same system through an inline planner:
+
+`Group Travel page -> Destination -> matching Tour -> dates and group size -> consent and private recovery record -> reviewed WhatsApp message -> consultant response`
+
 ## Qualified Inquiry
 
 At minimum, a qualified website inquiry contains:
@@ -109,6 +113,8 @@ Use a stable event vocabulary for Meta and GA4.
 | `contact_click` | Visitor uses phone, email, or map contact | method, page type |
 
 Do not treat `whatsapp_launch` as a confirmed lead or booking. Reconcile website events with WhatsApp conversations and sales records.
+
+For the Group Travel planner, use `page_type: group_travel` and `cta_location: group_travel_page`. The selected Tour ID and slug become the standard Tour context before completion events fire. Do not place the visitor's name, phone, dates, Destination label, or exact traveler count in analytics; the inquiry record may store the derived Destination privately for operational triage.
 
 ## Required IDs
 

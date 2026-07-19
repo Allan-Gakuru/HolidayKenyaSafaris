@@ -143,6 +143,13 @@
 	grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.hks-inquiry__group-choice {
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	margin-top: 1.5rem;
+}
+
 .hks-inquiry__field {
 	display: grid;
 	gap: 0.4rem;
@@ -174,6 +181,12 @@
 	background-repeat: no-repeat;
 	background-size: 5px 5px, 5px 5px;
 	padding-right: 2.5rem;
+}
+
+.hks-inquiry__field select:disabled {
+	background-color: var(--hks-mist);
+	cursor: not-allowed;
+	opacity: 0.68;
 }
 
 .hks-inquiry__field input:focus,
@@ -249,6 +262,33 @@
 .hks-inquiry__submit:disabled {
 	cursor: wait;
 	opacity: 0.7;
+}
+
+.hks-inquiry--inline .hks-inquiry__panel {
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	max-height: none;
+	overflow: visible;
+	padding: 0;
+}
+
+.hks-inquiry--inline .hks-inquiry__eyebrow {
+	margin-right: 0;
+}
+
+.hks-inquiry--inline .hks-inquiry__panel h2 {
+	font-size: clamp(1.65rem, 3vw, 2.35rem);
+	margin-right: 0;
+}
+
+.hks-inquiry--inline .hks-inquiry__submit {
+	background: var(--hks-whatsapp);
+	color: var(--hks-navy);
+}
+
+.hks-inquiry--inline .hks-inquiry__submit:hover {
+	background: #2ee073;
 }
 
 .hks-inquiry__reference {
@@ -328,6 +368,10 @@
 	}
 
 	.hks-inquiry__grid {
+		grid-template-columns: 1fr;
+	}
+
+	.hks-inquiry__group-choice {
 		grid-template-columns: 1fr;
 	}
 

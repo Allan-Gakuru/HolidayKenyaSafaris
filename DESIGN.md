@@ -140,6 +140,12 @@ Use a readable day-by-day timeline with native headings and accessible disclosur
 
 The canonical primary label is **Request quote on WhatsApp**. Opening the action reveals the intake form first; it must never silently send visitor data. Canonical Tour pages use a price-free sticky desktop quote panel containing the primary action and a short explanation of the tailored quote and message-review step. Campaign pages may show their own optional starting price when one is deliberately entered. They do not use a permanently visible long booking form. A mobile sticky action must respect safe areas and leave enough bottom padding that it cannot obscure content.
 
+### Group Travel planner
+
+The canonical `/group-travel/` Page uses Catalogue mode and keeps one H1 in the standard title band. Follow it with a concise image-led introduction using media already assigned to published Tours, an inline planner, a three-step explanation, and the Page's editable supporting content.
+
+The planner reuses the shared HKS inquiry component rather than opening a second form. Destination and Tour are linked required selects; name, phone, preferred date or month, traveler count, consent, private recovery, message review, and visitor-controlled WhatsApp launch retain the global conversion behavior. The form must remain legible as one column on mobile and must not promise group capabilities that have not been confirmed.
+
 ### Forms and dialogs
 
 Labels remain visible above their controls. Required fields are identified in text, not only by colour or an asterisk. Validation is inline, specific, focus-managed, and announced to assistive technology. The visitor reviews the generated message before choosing to launch WhatsApp.

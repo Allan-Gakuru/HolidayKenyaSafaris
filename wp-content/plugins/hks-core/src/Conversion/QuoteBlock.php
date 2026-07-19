@@ -29,7 +29,9 @@ final class QuoteBlock {
 	 * @return string
 	 */
 	public static function render( $attributes ) {
-		$context = self::context();
+		$mode             = sanitize_key( $attributes['mode'] ?? 'quote' );
+		$is_group_context = 'group_travel' === $mode;
+		$context          = $is_group_context ? self::group_context() : self::context();
 
 		if ( ! $context ) {
 			return '';
@@ -49,8 +51,12 @@ final class QuoteBlock {
 		ob_start();
 		?>
 		<div
-			class="hks-inquiry"
+			class="hks-inquiry<?php echo $is_group_context ? ' hks-inquiry--inline' : ''; ?>"
 			data-hks-inquiry
+			<?php if ( $is_group_context ) : ?>
+				data-hks-inquiry-inline
+				data-hks-group-travel
+			<?php endif; ?>
 			data-capture-endpoint="<?php echo esc_url( rest_url( InquiryRepository::REST_NAMESPACE . '/inquiries' ) ); ?>"
 			data-launch-endpoint="<?php echo esc_url( rest_url( InquiryRepository::REST_NAMESPACE . '/inquiries/' ) ); ?>"
 			data-whatsapp-number="<?php echo esc_attr( self::WHATSAPP_NUMBER ); ?>"
@@ -61,25 +67,35 @@ final class QuoteBlock {
 			data-page-type="<?php echo esc_attr( $context['page_type'] ); ?>"
 			data-cta-location="<?php echo esc_attr( $location ); ?>"
 		>
-			<button class="hks-inquiry__trigger" type="button" data-hks-inquiry-open>
-				<?php echo esc_html( $context['cta_label'] ); ?>
-			</button>
+			<?php if ( ! $is_group_context ) : ?>
+				<button class="hks-inquiry__trigger" type="button" data-hks-inquiry-open>
+					<?php echo esc_html( $context['cta_label'] ); ?>
+				</button>
 
-			<dialog class="hks-inquiry__dialog" data-hks-inquiry-dialog aria-labelledby="<?php echo esc_attr( $instance_id ); ?>-title">
+				<dialog class="hks-inquiry__dialog" data-hks-inquiry-dialog aria-labelledby="<?php echo esc_attr( $instance_id ); ?>-title">
+			<?php endif; ?>
 				<div class="hks-inquiry__panel">
-					<button class="hks-inquiry__close" type="button" data-hks-inquiry-close aria-label="<?php esc_attr_e( 'Close quote form', 'hks-core' ); ?>">
-						<span aria-hidden="true">&times;</span>
-					</button>
+					<?php if ( ! $is_group_context ) : ?>
+						<button class="hks-inquiry__close" type="button" data-hks-inquiry-close aria-label="<?php esc_attr_e( 'Close quote form', 'hks-core' ); ?>">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					<?php endif; ?>
 
 					<div data-hks-form-step>
+						<?php if ( $is_group_context ) : ?>
+							<p class="hks-inquiry__eyebrow"><?php esc_html_e( 'Your group trip', 'hks-core' ); ?></p>
+							<h2 id="<?php echo esc_attr( $instance_id ); ?>-title"><?php esc_html_e( 'Build one useful request', 'hks-core' ); ?></h2>
+							<p class="hks-inquiry__intro"><?php esc_html_e( 'Choose the destination and Tour, then add the dates and headcount your group is considering.', 'hks-core' ); ?></p>
+						<?php else : ?>
 						<p class="hks-inquiry__eyebrow"><?php esc_html_e( 'Step 1 of 2 · Your trip', 'hks-core' ); ?></p>
 						<h2 id="<?php echo esc_attr( $instance_id ); ?>-title"><?php esc_html_e( 'Tell us what to quote', 'hks-core' ); ?></h2>
 						<p class="hks-inquiry__intro"><?php esc_html_e( 'Share the essentials now. You will review the full message before WhatsApp opens.', 'hks-core' ); ?></p>
+						<?php endif; ?>
 
 						<form class="hks-inquiry__form" data-hks-inquiry-form novalidate>
 							<input type="hidden" name="tour_id" value="<?php echo esc_attr( $context['tour_id'] ); ?>">
 							<input type="hidden" name="campaign_id" value="<?php echo esc_attr( $context['campaign_id'] ); ?>">
-							<input type="hidden" name="form_token" value="<?php echo esc_attr( FormToken::issue( $context['tour_id'], $context['campaign_id'] ) ); ?>">
+							<input type="hidden" name="form_token" value="<?php echo esc_attr( $is_group_context ? '' : FormToken::issue( $context['tour_id'], $context['campaign_id'] ) ); ?>">
 							<input type="hidden" name="request_key" value="">
 							<input type="hidden" name="started_at" value="">
 							<input type="hidden" name="consent_version" value="<?php echo esc_attr( InquiryRepository::CONSENT_VERSION ); ?>">
@@ -89,8 +105,12 @@ final class QuoteBlock {
 								<input id="<?php echo esc_attr( $instance_id ); ?>-website" type="text" name="website" tabindex="-1" autocomplete="off">
 							</div>
 
+							<?php if ( $is_group_context ) : ?>
+								<?php self::group_fields( $instance_id, $context['destinations'], $context['tours'] ); ?>
+							<?php endif; ?>
+
 							<div class="hks-inquiry__package" aria-label="<?php esc_attr_e( 'Selected package', 'hks-core' ); ?>">
-								<span><?php esc_html_e( 'Package', 'hks-core' ); ?></span>
+								<span><?php echo esc_html( $is_group_context ? __( 'Selected Tour', 'hks-core' ) : __( 'Package', 'hks-core' ) ); ?></span>
 								<strong data-hks-package-label><?php echo esc_html( $context['package_label'] ); ?></strong>
 							</div>
 
@@ -98,7 +118,7 @@ final class QuoteBlock {
 								<?php self::text_input( $instance_id, 'name', __( 'Your name', 'hks-core' ), 'text', 'name', true ); ?>
 								<?php self::text_input( $instance_id, 'phone', __( 'Phone number', 'hks-core' ), 'tel', 'tel', true, __( 'e.g. 0722 000 000', 'hks-core' ) ); ?>
 								<?php self::text_input( $instance_id, 'preferred_date', __( 'Preferred date or month', 'hks-core' ), 'text', 'off', true, __( 'e.g. August 2026', 'hks-core' ) ); ?>
-								<?php self::text_input( $instance_id, 'travelers', __( 'Number of travelers', 'hks-core' ), 'number', 'off', true, '', '1', '99' ); ?>
+								<?php self::text_input( $instance_id, 'travelers', __( 'Number of travelers', 'hks-core' ), 'number', 'off', true, '', '1', $is_group_context ? '999' : '99' ); ?>
 							</div>
 
 							<?php self::optional_fields( $instance_id, $context['optional_questions'] ); ?>
@@ -110,7 +130,7 @@ final class QuoteBlock {
 
 							<p class="hks-inquiry__save-note"><?php esc_html_e( 'When you continue, we save these details privately in WordPress so the team can recover your request if WhatsApp does not open. Nothing is marked as sent until you send it in WhatsApp.', 'hks-core' ); ?></p>
 							<p class="hks-inquiry__status" data-hks-inquiry-status role="status" aria-live="polite"></p>
-							<button class="hks-inquiry__submit" type="submit"><?php esc_html_e( 'Save & review WhatsApp message', 'hks-core' ); ?></button>
+							<button class="hks-inquiry__submit" type="submit"><?php echo esc_html( $is_group_context ? __( 'Request group quote on WhatsApp', 'hks-core' ) : __( 'Save & review WhatsApp message', 'hks-core' ) ); ?></button>
 						</form>
 					</div>
 
@@ -127,11 +147,134 @@ final class QuoteBlock {
 						<p class="hks-inquiry__send-note"><?php esc_html_e( 'Opening WhatsApp is not confirmation that the message was sent.', 'hks-core' ); ?></p>
 					</div>
 				</div>
-			</dialog>
+			<?php if ( ! $is_group_context ) : ?>
+				</dialog>
+			<?php endif; ?>
 		</div>
 		<?php
 
 		return (string) ob_get_clean();
+	}
+
+	/**
+	 * Build the selectable published-Tour context for the Group Travel page.
+	 *
+	 * @return array<string, mixed>|null
+	 */
+	private static function group_context() {
+		$tour_ids     = get_posts(
+			array(
+				'post_type'              => Tour::POST_TYPE,
+				'post_status'            => 'publish',
+				'posts_per_page'         => -1,
+				'orderby'                => 'title',
+				'order'                  => 'ASC',
+				'fields'                 => 'ids',
+				'no_found_rows'          => true,
+				'update_post_meta_cache' => false,
+			)
+		);
+		$destinations = array();
+		$tours        = array();
+
+		foreach ( $tour_ids as $tour_id ) {
+			$terms = get_the_terms( $tour_id, 'hks_destination' );
+			$title = sanitize_text_field( get_the_title( $tour_id ) );
+
+			if ( '' === $title || ! is_array( $terms ) || ! $terms ) {
+				continue;
+			}
+
+			$destination_ids = array();
+			foreach ( $terms as $term ) {
+				$term_id = absint( $term->term_id );
+				$name    = sanitize_text_field( $term->name );
+
+				if ( ! $term_id || '' === $name ) {
+					continue;
+				}
+
+				$destination_ids[]            = $term_id;
+				$destinations[ $term_id ]     = array(
+					'id'   => $term_id,
+					'name' => $name,
+				);
+			}
+
+			if ( ! $destination_ids ) {
+				continue;
+			}
+
+			$tours[] = array(
+				'id'           => absint( $tour_id ),
+				'label'        => $title,
+				'slug'         => sanitize_title( get_post_field( 'post_name', $tour_id ) ),
+				'destinations' => array_values( array_unique( $destination_ids ) ),
+				'form_token'   => FormToken::issue( $tour_id, 0 ),
+			);
+		}
+
+		if ( ! $tours ) {
+			return null;
+		}
+
+		uasort(
+			$destinations,
+			static function ( $left, $right ) {
+				return strnatcasecmp( $left['name'], $right['name'] );
+			}
+		);
+
+		return array(
+			'tour_id'            => 0,
+			'tour_slug'          => '',
+			'campaign_id'        => 0,
+			'campaign_label'     => '',
+			'page_type'          => 'group_travel',
+			'package_label'      => __( 'Choose a Tour to continue', 'hks-core' ),
+			'cta_label'          => __( 'Request group quote on WhatsApp', 'hks-core' ),
+			'optional_questions' => array(),
+			'destinations'       => array_values( $destinations ),
+			'tours'              => $tours,
+		);
+	}
+
+	/**
+	 * Render linked Destination and Tour selectors for Group Travel.
+	 *
+	 * @param string                          $instance_id Unique block ID.
+	 * @param array<int, array<string,mixed>> $destinations Published Destination options.
+	 * @param array<int, array<string,mixed>> $tours        Published Tour options.
+	 * @return void
+	 */
+	private static function group_fields( $instance_id, $destinations, $tours ) {
+		?>
+		<div class="hks-inquiry__group-choice">
+			<div class="hks-inquiry__field">
+				<label for="<?php echo esc_attr( $instance_id ); ?>-destination"><?php esc_html_e( 'Destination (required)', 'hks-core' ); ?></label>
+				<select id="<?php echo esc_attr( $instance_id ); ?>-destination" name="destination_selection" required>
+					<option value=""><?php esc_html_e( 'Choose a destination', 'hks-core' ); ?></option>
+					<?php foreach ( $destinations as $destination ) : ?>
+						<option value="<?php echo esc_attr( $destination['id'] ); ?>"><?php echo esc_html( $destination['name'] ); ?></option>
+					<?php endforeach; ?>
+				</select>
+			</div>
+			<div class="hks-inquiry__field">
+				<label for="<?php echo esc_attr( $instance_id ); ?>-tour"><?php esc_html_e( 'Tour (required)', 'hks-core' ); ?></label>
+				<select id="<?php echo esc_attr( $instance_id ); ?>-tour" name="tour_selection" required disabled>
+					<option value=""><?php esc_html_e( 'Choose a destination first', 'hks-core' ); ?></option>
+					<?php foreach ( $tours as $tour ) : ?>
+						<option
+							value="<?php echo esc_attr( $tour['id'] ); ?>"
+							data-form-token="<?php echo esc_attr( $tour['form_token'] ); ?>"
+							data-tour-slug="<?php echo esc_attr( $tour['slug'] ); ?>"
+							data-destinations="<?php echo esc_attr( implode( ',', $tour['destinations'] ) ); ?>"
+						><?php echo esc_html( $tour['label'] ); ?></option>
+					<?php endforeach; ?>
+				</select>
+			</div>
+		</div>
+		<?php
 	}
 
 	/**

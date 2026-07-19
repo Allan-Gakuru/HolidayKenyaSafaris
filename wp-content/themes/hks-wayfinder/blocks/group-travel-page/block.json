@@ -1,0 +1,14 @@
+{
+  "apiVersion": 3,
+  "name": "hks-wayfinder/group-travel-page",
+  "version": "0.6.0",
+  "title": "HKS Group Travel page",
+  "category": "theme",
+  "description": "Server-rendered Group Travel planner using published Tours and the shared inquiry flow.",
+  "textdomain": "hks-wayfinder",
+  "supports": {
+    "html": false,
+    "inserter": false,
+    "multiple": false
+  }
+}

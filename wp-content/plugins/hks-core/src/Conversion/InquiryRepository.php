@@ -143,7 +143,7 @@ final class InquiryRepository {
 			);
 		}
 
-		$values = $this->validate_values( $payload, $context['allowed_questions'] );
+		$values = $this->validate_values( $payload, $context );
 
 		if ( is_wp_error( $values ) ) {
 			return $values;
@@ -262,11 +262,14 @@ final class InquiryRepository {
 		}
 
 		$allowed_questions = $this->field( 'hks_intake_questions', $tour_id );
+		$destination_names = wp_get_post_terms( $tour_id, 'hks_destination', array( 'fields' => 'names' ) );
+		$destination_label = is_wp_error( $destination_names ) ? '' : implode( ', ', array_map( 'sanitize_text_field', $destination_names ) );
 
 		return array(
 			'tour_id'           => $tour_id,
 			'campaign_id'       => $campaign_id,
 			'package_label'     => $package_label,
+			'destination_label' => $destination_label,
 			'allowed_questions' => is_array( $allowed_questions ) ? $allowed_questions : array(),
 		);
 	}
@@ -274,12 +277,13 @@ final class InquiryRepository {
 	/**
 	 * Validate required, optional, consent, and attribution values.
 	 *
-	 * @param array<string, mixed> $payload           Request payload.
-	 * @param string[]             $allowed_questions Enabled Tour questions.
+	 * @param array<string, mixed> $payload Request payload.
+	 * @param array<string, mixed> $context Validated Tour and Campaign context.
 	 * @return array<string, mixed>|\WP_Error
 	 */
-	private function validate_values( $payload, $allowed_questions ) {
-		$name = $this->text( $payload['name'] ?? '', 100 );
+	private function validate_values( $payload, $context ) {
+		$allowed_questions = $context['allowed_questions'];
+		$name              = $this->text( $payload['name'] ?? '', 100 );
 
 		if ( strlen( $name ) < 2 ) {
 			return $this->error( 'name', __( 'Enter your name.', 'hks-core' ) );
@@ -297,22 +301,54 @@ final class InquiryRepository {
 			return $this->error( 'preferred_date', __( 'Enter a preferred date or travel month.', 'hks-core' ) );
 		}
 
-		$travelers = absint( $payload['travelers'] ?? 0 );
+		$requested_route = sanitize_key( $payload['inquiry_route'] ?? '' );
+		$inquiry_route   = 'group_travel' === $requested_route && ! $context['campaign_id']
+			? 'group_travel'
+			: ( $context['campaign_id'] ? 'campaign' : 'tour' );
+		$traveler_limit  = 'group_travel' === $inquiry_route ? 999 : 99;
+		$travelers       = absint( $payload['travelers'] ?? 0 );
 
-		if ( $travelers < 1 || $travelers > 99 ) {
-			return $this->error( 'travelers', __( 'Enter the number of travelers, from 1 to 99.', 'hks-core' ) );
+		if ( $travelers < 1 || $travelers > $traveler_limit ) {
+			return $this->error(
+				'travelers',
+				sprintf(
+					/* translators: %d: maximum traveler count accepted by this form. */
+					__( 'Enter the number of travelers, from 1 to %d.', 'hks-core' ),
+					$traveler_limit
+				)
+			);
 		}
 
 		if ( true !== ( $payload['contact_consent'] ?? false ) || self::CONSENT_VERSION !== ( $payload['consent_version'] ?? '' ) ) {
 			return $this->error( 'contact_consent', __( 'Confirm that we may use these details to respond to this quote request.', 'hks-core' ) );
 		}
 
+		$destination_label = $context['destination_label'];
+
+		if ( 'group_travel' === $inquiry_route ) {
+			$destination_id      = absint( $payload['destination_id'] ?? 0 );
+			$tour_destination_ids = wp_get_post_terms( $context['tour_id'], 'hks_destination', array( 'fields' => 'ids' ) );
+
+			if ( is_wp_error( $tour_destination_ids ) || ! in_array( $destination_id, array_map( 'absint', $tour_destination_ids ), true ) ) {
+				return $this->error( 'destination_selection', __( 'Choose a Destination assigned to the selected Tour.', 'hks-core' ) );
+			}
+
+			$destination = get_term( $destination_id, 'hks_destination' );
+			if ( ! $destination instanceof \WP_Term ) {
+				return $this->error( 'destination_selection', __( 'Choose a valid Destination.', 'hks-core' ) );
+			}
+
+			$destination_label = sanitize_text_field( $destination->name );
+		}
+
 		$values = array(
-			'name'           => $name,
-			'phone'          => $phone,
-			'preferred_date' => $travel_date,
-			'travelers'      => $travelers,
-			'attribution'    => $this->attribution( $payload['attribution'] ?? array() ),
+			'name'              => $name,
+			'phone'             => $phone,
+			'preferred_date'    => $travel_date,
+			'travelers'         => $travelers,
+			'destination_label' => $destination_label,
+			'inquiry_route'     => $inquiry_route,
+			'attribution'       => $this->attribution( $payload['attribution'] ?? array() ),
 		);
 
 		foreach ( self::OPTIONAL_FIELDS as $field ) {
@@ -370,6 +406,8 @@ final class InquiryRepository {
 			'_hks_inquiry_tour_id'         => $context['tour_id'],
 			'_hks_inquiry_campaign_id'     => $context['campaign_id'],
 			'_hks_inquiry_package_label'   => $context['package_label'],
+			'_hks_inquiry_destination'     => $values['destination_label'],
+			'_hks_inquiry_route'           => $values['inquiry_route'],
 			'_hks_inquiry_attribution'     => wp_json_encode( $values['attribution'] ),
 			'_hks_inquiry_consent_version' => self::CONSENT_VERSION,
 			'_hks_inquiry_consent_at'      => current_time( 'mysql', true ),

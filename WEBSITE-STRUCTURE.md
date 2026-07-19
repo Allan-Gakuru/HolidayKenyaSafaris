@@ -247,7 +247,19 @@ Campaign pages are not constrained to Mercy. Add variants as evidence supports t
 
 ### Group Travel
 
-Provide routes for:
+The primary navigation, mobile drawer, homepage Group Travel section, and footer all link to the canonical `/group-travel/` Page.
+
+The opening experience contains:
+
+1. Standard Page title and breadcrumb band with the only H1.
+2. Image-led introduction using media assigned to published Tours.
+3. An inline shared inquiry planner.
+4. A concise explanation of storage, message review, and visitor-controlled WhatsApp launch.
+5. Existing editable Page content for audience-specific supporting information.
+
+The planner lets a visitor choose a populated Destination, choose a matching published Tour, enter a proposed date or month and traveler count, provide contact details and consent, then request a group quote on WhatsApp. It reuses the existing private inquiry record and WhatsApp review flow. It must not build a parallel form or store a client-maintained duplicate of Destination or Tour facts.
+
+Supporting content may provide routes for:
 
 - Corporate and MICE.
 - Chamas, churches, and SACCOs.

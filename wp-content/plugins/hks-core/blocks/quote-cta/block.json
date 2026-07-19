@@ -15,6 +15,10 @@
     },
     "label": {
       "type": "string"
+    },
+    "mode": {
+      "type": "string",
+      "default": "quote"
     }
   },
   "supports": {

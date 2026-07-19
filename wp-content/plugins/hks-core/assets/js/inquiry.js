@@ -95,6 +95,7 @@
 
 	function buildMessage(form, packageLabel, reference, source) {
 		const data = new FormData(form);
+		const destination = selectedLabel(form, 'destination_selection');
 		const lines = [
 			'Hi Holiday Kenya Safaris, my name is ' + safeText(data.get('name'), 100) + '.',
 			'',
@@ -103,6 +104,7 @@
 			'Travelers: ' + safeText(data.get('travelers'), 3) + '.',
 			'Phone: ' + safeText(data.get('phone'), 30) + '.'
 		];
+		if (destination) lines.splice(3, 0, 'Destination: ' + destination + '.');
 
 		const optionalLabels = {
 			departure_town: 'Departure town',
@@ -126,7 +128,11 @@
 		if (campaign) lines.push('Campaign: ' + campaign + '.');
 		if (sourceParts.length) lines.push('Source: ' + sourceParts.join(' / ') + '.');
 
-		lines.push('', 'Please confirm availability, the current KSh price, what is included, and the next booking step.');
+		if (safeText(source.pageType, 30) === 'group_travel') {
+			lines.push('', 'Please confirm availability and send a tailored KSh quote for this group, including what is included and the next booking step.');
+		} else {
+			lines.push('', 'Please confirm availability, the current KSh price, what is included, and the next booking step.');
+		}
 		return lines.join('\n');
 	}
 
@@ -145,6 +151,8 @@
 			phone: safeText(data.get('phone'), 30),
 			preferred_date: safeText(data.get('preferred_date'), 80),
 			travelers: Number(data.get('travelers')),
+			destination_id: Number(data.get('destination_selection') || 0),
+			inquiry_route: safeText(root.dataset.pageType, 30),
 			attribution: sourceAttribution
 		};
 
@@ -159,6 +167,7 @@
 	}
 
 	function init(root) {
+		const inline = root.hasAttribute('data-hks-inquiry-inline');
 		const trigger = root.querySelector('[data-hks-inquiry-open]');
 		const dialog = root.querySelector('[data-hks-inquiry-dialog]');
 		const close = root.querySelector('[data-hks-inquiry-close]');
@@ -170,22 +179,67 @@
 		const launch = root.querySelector('[data-hks-whatsapp-launch]');
 		const message = root.querySelector('[data-hks-message]');
 		const reference = root.querySelector('[data-hks-reference]');
+
+		if (!form || !status || !formStep || !reviewStep || !back || !launch || !message || !reference) return;
+		if (!inline && (!trigger || !dialog || !close)) return;
+
 		const requestKey = form.elements.request_key;
 		const startedAt = form.elements.started_at;
+		const destination = form.elements.destination_selection;
+		const tour = form.elements.tour_selection;
+		const packageLabel = root.querySelector('[data-hks-package-label]');
 		const sourceAttribution = attribution();
 		let formStarted = false;
 
-		if (!trigger || !dialog || !form) return;
+		function ensureRequestContext() {
+			if (!requestKey.value) requestKey.value = uuid();
+			if (!startedAt.value) startedAt.value = String(Date.now());
+		}
+
+		function syncGroupTour() {
+			if (!tour) return;
+			const selected = tour.value ? tour.selectedOptions[0] : null;
+			form.elements.tour_id.value = selected ? selected.value : '';
+			form.elements.form_token.value = selected ? safeText(selected.dataset.formToken, 500) : '';
+			root.dataset.tourId = selected ? selected.value : '0';
+			root.dataset.tourSlug = selected ? safeText(selected.dataset.tourSlug, 100) : '';
+			if (packageLabel) packageLabel.textContent = selected ? safeText(selected.textContent, 160) : 'Choose a Tour to continue';
+		}
+
+		function filterGroupTours() {
+			if (!destination || !tour) return;
+			const destinationId = destination.value;
+			let available = 0;
+
+			Array.from(tour.options).forEach(function (option) {
+				if (!option.value) return;
+				const matches = destinationId && (option.dataset.destinations || '').split(',').includes(destinationId);
+				option.hidden = !matches;
+				option.disabled = !matches;
+				if (matches) available += 1;
+			});
+
+			tour.disabled = !destinationId || available === 0;
+			tour.options[0].textContent = destinationId ? 'Choose a Tour' : 'Choose a destination first';
+			if (tour.selectedOptions[0] && tour.selectedOptions[0].disabled) tour.value = '';
+			syncGroupTour();
+		}
+
+		if (destination && tour) {
+			destination.addEventListener('change', filterGroupTours);
+			tour.addEventListener('change', syncGroupTour);
+			filterGroupTours();
+		}
 
 		const viewKey = root.dataset.pageType + ':' + root.dataset.campaignId + ':' + root.dataset.tourId;
 		if (!viewedContexts.has(viewKey)) {
 			viewedContexts.add(viewKey);
-			track(root, root.dataset.pageType === 'campaign' ? 'view_campaign' : 'view_tour');
+			const pageType = root.dataset.pageType;
+			track(root, pageType === 'campaign' ? 'view_campaign' : (pageType === 'tour' ? 'view_tour' : 'page_view'));
 		}
 
 		function openDialog() {
-			if (!requestKey.value) requestKey.value = uuid();
-			if (!startedAt.value) startedAt.value = String(Date.now());
+			ensureRequestContext();
 			status.textContent = '';
 			if (typeof dialog.showModal === 'function') dialog.showModal();
 			else dialog.setAttribute('open', '');
@@ -202,16 +256,21 @@
 			trigger.focus();
 		}
 
-		trigger.addEventListener('click', openDialog);
-		close.addEventListener('click', closeDialog);
-		dialog.addEventListener('click', function (event) {
-			if (event.target === dialog) closeDialog();
-		});
-		dialog.addEventListener('close', function () {
-			trigger.focus();
-		});
+		if (!inline) {
+			trigger.addEventListener('click', openDialog);
+			close.addEventListener('click', closeDialog);
+			dialog.addEventListener('click', function (event) {
+				if (event.target === dialog) closeDialog();
+			});
+			dialog.addEventListener('close', function () {
+				trigger.focus();
+			});
+		}
+
+		form.addEventListener('focusin', ensureRequestContext, { once: true });
 
 		form.addEventListener('input', function () {
+			ensureRequestContext();
 			if (!formStarted) {
 				formStarted = true;
 				track(root, 'quote_form_start');
@@ -221,6 +280,7 @@
 		form.addEventListener('submit', async function (event) {
 			event.preventDefault();
 			status.textContent = '';
+			ensureRequestContext();
 
 			if (!form.checkValidity()) {
 				const invalid = form.querySelector(':invalid');
@@ -231,6 +291,7 @@
 			}
 
 			const submit = form.querySelector('button[type="submit"]');
+			if (inline) track(root, 'quote_cta_click');
 			submit.disabled = true;
 			status.textContent = 'Saving your request…';
 
@@ -252,6 +313,7 @@
 
 				const reviewedMessage = buildMessage(form, safeText(result.package_label, 160), safeText(result.reference, 30), {
 					campaignLabel: root.dataset.campaignLabel,
+					pageType: root.dataset.pageType,
 					attribution: sourceAttribution
 				});
 				message.textContent = reviewedMessage;
@@ -277,7 +339,8 @@
 		back.addEventListener('click', function () {
 			reviewStep.hidden = true;
 			formStep.hidden = false;
-			form.elements.name.focus();
+			const firstField = destination || form.elements.name;
+			if (firstField) firstField.focus();
 		});
 
 		launch.addEventListener('click', function () {

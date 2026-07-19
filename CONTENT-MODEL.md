@@ -222,6 +222,8 @@ Exclusion fields may cover:
 
 The Tour title supplies the WhatsApp package label. The canonical CTA, quote-panel heading, supporting copy, and intake behavior are template-controlled. Do not expose Tour-level overrides until a public template actually consumes them.
 
+The Group Travel planner adds no Tour editor fields. It queries published Tours and their existing Destination assignments, uses the chosen Tour as the signed package context, and derives the private inquiry Destination from that Tour. Inquiry records may store `_hks_inquiry_route` and `_hks_inquiry_destination` for administrator triage; neither value is public or editor-maintained Tour data.
+
 ### Presentation and Relationships
 
 - Related Tours are derived automatically from shared destinations, with a catalogue fallback.

@@ -318,13 +318,21 @@ API secrets, private keys, or customer details in HKS Settings.
 6. **Open WhatsApp to send** launches WhatsApp.
 7. The visitor must still select Send inside WhatsApp.
 
+On `/group-travel/`, the same form is shown inline. The visitor first selects a
+Destination and then one of its published Tours. The standard name, phone,
+date/month, traveler-count, consent, recovery, review, and WhatsApp steps remain
+unchanged. Destination and Tour choices update automatically when catalogue
+records are published or their Destination assignments change.
+
 ### 13.2 Handling inquiries in WordPress
 
 1. Sign in as an Administrator.
 2. Open **Tours -> Quote inquiries**.
-3. Review the reference, name, phone, package, travel plan, capture time, and
-   WhatsApp state.
-4. Open the record for optional answers and campaign attribution.
+3. Review the reference, name, phone, package, Destination where available,
+   travel plan, capture time, and WhatsApp state.
+4. Open the record for the inquiry route, optional answers, and campaign
+   attribution. **Group Travel page** identifies requests made through the
+   dedicated planner.
 5. Follow up through the operator's approved phone/WhatsApp process when a valid
    inquiry has not appeared in the consultant's WhatsApp conversation.
 
