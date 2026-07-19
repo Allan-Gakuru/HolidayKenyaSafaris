@@ -10,6 +10,7 @@
 		const announcer = gallery.querySelector('[data-hks-home-gallery-announcer]');
 		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 		const wideLayout = window.matchMedia('(min-width: 48rem)');
+		const desktopLayout = window.matchMedia('(min-width: 64rem)');
 		const precisePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
 		const interval = Math.max(3000, Number(gallery.dataset.hksGalleryInterval) || 3000);
 		const pauseReasons = new Set();
@@ -32,6 +33,15 @@
 			return position;
 		}
 
+		function deckPosition(index) {
+			if (desktopLayout.matches && 4 === slides.length) {
+				const desktopSlots = [-0.5, 0.5, 1.5, -1.5];
+				return desktopSlots[(index - active + slides.length) % slides.length];
+			}
+
+			return circularPosition(index);
+		}
+
 		function updateStatus(announce = false) {
 			const selected = slides[active];
 			const destination = selected.dataset.hksDestinationName || `Destination ${active + 1}`;
@@ -45,17 +55,17 @@
 
 		function render(announce = false) {
 			slides.forEach((slide, index) => {
-				const position = circularPosition(index);
+				const position = deckPosition(index);
 				const hidden = !wideLayout.matches && Math.abs(position) > 1;
 				const link = slide.querySelector('a');
 
 				slide.dataset.hksPosition = String(position);
-				slide.classList.toggle('is-active', 0 === position);
+				slide.classList.toggle('is-active', index === active);
 				slide.setAttribute('aria-hidden', hidden ? 'true' : 'false');
 
 				if (link) {
 					link.tabIndex = hidden ? -1 : 0;
-					if (0 === position) link.setAttribute('aria-current', 'true');
+					if (index === active) link.setAttribute('aria-current', 'true');
 					else link.removeAttribute('aria-current');
 				}
 			});
@@ -76,6 +86,7 @@
 
 		function canAutoAdvance() {
 			return !reducedMotion.matches
+				&& !desktopLayout.matches
 				&& !pauseReasons.size
 				&& isInView
 				&& document.visibilityState === 'visible'
@@ -137,14 +148,12 @@
 		gallery.addEventListener('mouseenter', () => pause('hover'));
 		gallery.addEventListener('mouseleave', () => {
 			slides.forEach((slide) => slide.classList.remove('is-hovered'));
-			gallery.classList.remove('is-interacting');
 			resume('hover');
 		});
 		gallery.addEventListener('focusin', () => pause('focus'));
 		gallery.addEventListener('focusout', (event) => {
 			if (!gallery.contains(event.relatedTarget)) {
 				slides.forEach((slide) => slide.classList.remove('is-hovered'));
-				gallery.classList.remove('is-interacting');
 				resume('focus');
 			}
 		});
@@ -153,23 +162,19 @@
 			slide.addEventListener('pointerenter', () => {
 				if (!precisePointer.matches) return;
 				slide.classList.add('is-hovered');
-				gallery.classList.add('is-interacting');
 			});
 
 			slide.addEventListener('pointerleave', () => {
 				slide.classList.remove('is-hovered');
-				gallery.classList.remove('is-interacting');
 			});
 
 			slide.addEventListener('focusin', () => {
 				slide.classList.add('is-hovered');
-				gallery.classList.add('is-interacting');
 			});
 
 			slide.addEventListener('focusout', (event) => {
 				if (!slide.contains(event.relatedTarget)) {
 					slide.classList.remove('is-hovered');
-					gallery.classList.remove('is-interacting');
 				}
 			});
 		});
@@ -243,6 +248,10 @@
 
 		reducedMotion.addEventListener?.('change', scheduleAuto);
 		wideLayout.addEventListener?.('change', () => render());
+		desktopLayout.addEventListener?.('change', () => {
+			render();
+			scheduleAuto();
+		});
 
 		if ('IntersectionObserver' in window) {
 			const observer = new IntersectionObserver((entries) => {

@@ -467,7 +467,7 @@ final class TourBlocks {
 			<section class="hks-home-hero<?php echo $hero_destinations ? ' hks-home-hero--with-gallery' : ''; ?>" aria-labelledby="hks-home-title">
 				<div class="hks-shell hks-home-hero__content">
 					<p class="hks-home-hero__label"><?php esc_html_e( 'Kenya trips for local travellers', 'hks-wayfinder' ); ?></p>
-					<h1 id="hks-home-title"><?php esc_html_e( 'Find a Kenya trip that fits the people you are bringing.', 'hks-wayfinder' ); ?></h1>
+					<h1 id="hks-home-title"><?php esc_html_e( 'Find a Kenya trip that fits you.', 'hks-wayfinder' ); ?></h1>
 				</div>
 
 				<?php if ( $hero_destinations ) : ?>

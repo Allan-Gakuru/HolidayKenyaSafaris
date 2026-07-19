@@ -847,13 +847,6 @@ summary {
 		z-index: 8;
 	}
 
-	.hks-home-gallery.is-ready.is-interacting .hks-home-gallery__slide[data-hks-position="-1"] {
-		--hks-deck-x: -62%;
-	}
-
-	.hks-home-gallery.is-ready.is-interacting .hks-home-gallery__slide[data-hks-position="1"] {
-		--hks-deck-x: 62%;
-	}
 }
 
 @media (min-width: 48rem) {
@@ -901,31 +894,57 @@ summary {
 
 }
 
-@media (min-width: 48rem) and (hover: hover) and (pointer: fine) {
-	.hks-home-gallery.is-ready.is-interacting .hks-home-gallery__slide[data-hks-position="-1"] {
-		--hks-deck-x: -90%;
-	}
-
-	.hks-home-gallery.is-ready.is-interacting .hks-home-gallery__slide[data-hks-position="1"] {
-		--hks-deck-x: 90%;
-	}
-
-	.hks-home-gallery.is-ready.is-interacting .hks-home-gallery__slide[data-hks-position="-2"] {
-		--hks-deck-x: -150%;
-	}
-
-	.hks-home-gallery.is-ready.is-interacting .hks-home-gallery__slide[data-hks-position="2"] {
-		--hks-deck-x: 150%;
-	}
-}
-
 @media (min-width: 64rem) {
 	.hks-home-gallery.is-ready .hks-home-gallery__viewport {
-		height: clamp(27rem, 37vw, 31rem);
+		height: clamp(29rem, 39vw, 34rem);
 	}
 
 	.hks-home-gallery.is-ready .hks-home-gallery__slide {
-		width: clamp(14rem, 18vw, 17rem);
+		width: clamp(16rem, 21vw, 18.5rem);
+	}
+
+	.hks-home-gallery.is-ready .hks-home-gallery__slide[data-hks-position="-1.5"] {
+		--hks-deck-rotate: -10deg;
+		--hks-deck-scale: 0.94;
+		--hks-deck-x: -123%;
+		--hks-deck-y: 2.25rem;
+
+		opacity: 0.9;
+		pointer-events: auto;
+		z-index: 1;
+	}
+
+	.hks-home-gallery.is-ready .hks-home-gallery__slide[data-hks-position="-0.5"] {
+		--hks-deck-rotate: -3deg;
+		--hks-deck-scale: 1;
+		--hks-deck-x: -41%;
+		--hks-deck-y: 0.5rem;
+
+		opacity: 1;
+		pointer-events: auto;
+		z-index: 3;
+	}
+
+	.hks-home-gallery.is-ready .hks-home-gallery__slide[data-hks-position="0.5"] {
+		--hks-deck-rotate: 3deg;
+		--hks-deck-scale: 1;
+		--hks-deck-x: 41%;
+		--hks-deck-y: 0.5rem;
+
+		opacity: 1;
+		pointer-events: auto;
+		z-index: 3;
+	}
+
+	.hks-home-gallery.is-ready .hks-home-gallery__slide[data-hks-position="1.5"] {
+		--hks-deck-rotate: 10deg;
+		--hks-deck-scale: 0.94;
+		--hks-deck-x: 123%;
+		--hks-deck-y: 2.25rem;
+
+		opacity: 0.9;
+		pointer-events: auto;
+		z-index: 1;
 	}
 }
 
