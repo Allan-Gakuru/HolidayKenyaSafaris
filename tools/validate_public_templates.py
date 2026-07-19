@@ -70,6 +70,7 @@ def main() -> int:
         "header": THEME / "patterns" / "header.php",
         "footer": THEME / "parts" / "footer.html",
         "navigation": THEME / "assets" / "js" / "navigation.js",
+        "home_gallery": THEME / "assets" / "js" / "home-gallery.js",
         "tour_ui": THEME / "assets" / "js" / "tour-ui.js",
         "quote": PLUGIN / "src" / "Conversion" / "QuoteBlock.php",
     }
@@ -80,7 +81,7 @@ def main() -> int:
             errors.append(f"missing {path.relative_to(ROOT)}: {error}")
             sources[label] = ""
 
-    require(errors, "theme metadata", sources["style"], ["Version: 0.6.0", ".hks-tour-workspace", ".hks-tour-gallery", ".hks-mobile-menu", ".hks-editorial-page", ":focus-visible", "prefers-reduced-motion"])
+    require(errors, "theme metadata", sources["style"], ["Version: 0.6.0", ".hks-home-gallery__viewport", "--hks-gallery-visible: 3", ".hks-tour-workspace", ".hks-tour-gallery", ".hks-mobile-menu", ".hks-editorial-page", ":focus-visible", "prefers-reduced-motion"])
     forbid(errors, "theme stylesheet", sources["style"], ["linear-gradient(", "radial-gradient("])
 
     require(
@@ -90,6 +91,7 @@ def main() -> int:
         [
             "inc/TourBlocks.php",
             "assets/js/navigation.js",
+            "assets/js/home-gallery.js",
             "assets/js/tour-ui.js",
             "hks_wayfinder_filter_tour_archive",
             "is_admin()",
@@ -178,6 +180,10 @@ def main() -> int:
             "Your quote confirms the final package for your dates and group.",
             "Holiday Kenya Safaris is operated by Ashford Tours & Travel.",
             "data-hks-primary-quote",
+            "data-hks-home-gallery",
+            "data-hks-gallery-interval=\"3000\"",
+            "data-hks-home-gallery-slide",
+            "hks-home-gallery__caption",
         ],
     )
     forbid(
@@ -206,6 +212,7 @@ def main() -> int:
         errors.append("canonical renderer must create exactly one shared quote block instance")
 
     require(errors, "navigation script", sources["navigation"], ["showModal", "aria-expanded", "Escape", "data-hks-quote-proxy", "data-hks-inquiry-open"])
+    require(errors, "homepage gallery script", sources["home_gallery"], ["3000", "prefers-reduced-motion", "IntersectionObserver", "ResizeObserver", "pointermove", "ArrowLeft", "ArrowRight", "scrollTo", "is-dragging"])
     require(errors, "Tour UI script", sources["tour_ui"], ["role', 'tablist", "ArrowRight", "matchMedia('(min-width: 769px)", "tour_gallery_open", "tour_section_open", "itinerary_toggle", "related_tour_select"])
     require(errors, "quote block", sources["quote"], ["$attributes['label']", "Request quote on WhatsApp", "InquiryRepository::REST_NAMESPACE", "data-hks-inquiry-form", "data-hks-whatsapp-launch"])
 

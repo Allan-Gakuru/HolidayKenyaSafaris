@@ -67,6 +67,18 @@ function hks_wayfinder_enqueue_scripts(): void {
 		array( 'in_footer' => true, 'strategy' => 'defer' )
 	);
 
+	if ( is_front_page() ) {
+		$home_gallery_path = get_theme_file_path( 'assets/js/home-gallery.js' );
+
+		wp_enqueue_script(
+			'hks-wayfinder-home-gallery',
+			get_theme_file_uri( 'assets/js/home-gallery.js' ),
+			array(),
+			is_readable( $home_gallery_path ) ? (string) filemtime( $home_gallery_path ) : wp_get_theme()->get( 'Version' ),
+			array( 'in_footer' => true, 'strategy' => 'defer' )
+		);
+	}
+
 	if ( is_singular( array( 'hks_tour', 'hks_campaign' ) ) ) {
 		$tour_ui_path = get_theme_file_path( 'assets/js/tour-ui.js' );
 
