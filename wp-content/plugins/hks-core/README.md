@@ -4,12 +4,12 @@
 
 ## Current scope
 
-Version `0.6.0` provides:
+Version `0.7.0` provides:
 
 - guarded WordPress 6.6+, PHP 8.3+, and Secure Custom Fields 6.9.1+ boot requirements;
 - versioned, retry-safe upgrades and soft rewrite refreshes;
 - canonical Tour, Campaign, and reusable FAQ post types;
-- Destination, Tour Type, Occasion/Audience, and Travel Style taxonomies;
+- public Destination, Tour Type, Occasion/Audience, and Travel Style taxonomies with canonical term archives;
 - code-owned SCF field groups with deterministic keys;
 - hidden source-audit metadata and lean public Tour fields;
 - controlled public-field REST exposure; and

@@ -36,19 +36,23 @@ final class Occasion {
 			array(
 				'labels'             => self::labels(),
 				'description'        => __( 'Flexible occasion or audience groupings for trip discovery and campaign organization. These labels are not rigid customer identities.', 'hks-core' ),
-				'public'             => false,
-				'publicly_queryable' => false,
+				'public'             => true,
+				'publicly_queryable' => true,
 				'hierarchical'       => true,
 				'show_ui'            => true,
 				'show_admin_column'  => true,
-				'show_in_nav_menus'  => false,
+				'show_in_nav_menus'  => true,
 				'show_tagcloud'      => false,
 				'show_in_quick_edit' => true,
 				'show_in_rest'       => true,
 				'rest_base'          => 'occasions',
 				'rest_namespace'     => 'wp/v2',
-				'query_var'          => false,
-				'rewrite'            => false,
+				'query_var'          => true,
+				'rewrite'            => array(
+					'slug'         => 'occasions',
+					'with_front'   => false,
+					'hierarchical' => true,
+				),
 			)
 		);
 	}

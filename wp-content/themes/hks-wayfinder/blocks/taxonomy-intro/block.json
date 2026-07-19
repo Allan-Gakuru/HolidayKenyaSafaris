@@ -1,0 +1,16 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "hks-wayfinder/taxonomy-intro",
+  "version": "0.6.0",
+  "title": "HKS Tour taxonomy intro",
+  "category": "theme",
+  "icon": "category",
+  "description": "Server-rendered title band for Tour Type, Occasion and Travel Style archives.",
+  "textdomain": "hks-wayfinder",
+  "supports": {
+    "html": false,
+    "inserter": false,
+    "multiple": false
+  }
+}

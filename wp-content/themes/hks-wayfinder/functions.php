@@ -174,13 +174,15 @@ function hks_wayfinder_populated_terms( string $taxonomy, int $limit = 0 ): arra
 }
 
 /**
- * Build a usable catalogue URL for public and editor-only Tour taxonomies.
+ * Build a usable catalogue URL for Tour taxonomy terms.
  *
  * @param WP_Term $term Term object.
  * @return string
  */
 function hks_wayfinder_term_url( WP_Term $term ): string {
-	if ( 'hks_destination' === $term->taxonomy ) {
+	$public_taxonomies = array( 'hks_destination', 'hks_tour_type', 'hks_occasion', 'hks_travel_style' );
+
+	if ( in_array( $term->taxonomy, $public_taxonomies, true ) ) {
 		$link = get_term_link( $term );
 
 		return is_wp_error( $link ) ? '' : $link;
@@ -210,7 +212,23 @@ function hks_wayfinder_published_page_url( string $path ): string {
  * @return void
  */
 function hks_wayfinder_filter_tour_archive( WP_Query $query ): void {
-	if ( is_admin() || ! $query->is_main_query() || ! $query->is_post_type_archive( 'hks_tour' ) ) {
+	if ( is_admin() || ! $query->is_main_query() ) {
+		return;
+	}
+
+	$public_taxonomies = array( 'hks_destination', 'hks_tour_type', 'hks_occasion', 'hks_travel_style' );
+	$is_tour_archive   = $query->is_post_type_archive( 'hks_tour' );
+
+	if ( ! $is_tour_archive && $query->is_tax( $public_taxonomies ) ) {
+		// Occasion is also assigned to Campaigns; public taxonomy archives are Tour catalogue routes.
+		$query->set( 'post_type', 'hks_tour' );
+		$query->set( 'post_status', 'publish' );
+		$query->set( 'posts_per_page', 12 );
+		$query->set( 'orderby', array( 'menu_order' => 'ASC', 'date' => 'DESC' ) );
+		return;
+	}
+
+	if ( ! $is_tour_archive ) {
 		return;
 	}
 

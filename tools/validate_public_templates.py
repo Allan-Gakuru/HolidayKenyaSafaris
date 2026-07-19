@@ -20,6 +20,9 @@ TEMPLATES = {
     "tour": "templates/single-hks_tour.html",
     "campaign": "templates/single-hks_campaign.html",
     "destination": "templates/taxonomy-hks_destination.html",
+    "tour type": "templates/taxonomy-hks_tour_type.html",
+    "occasion": "templates/taxonomy-hks_occasion.html",
+    "travel style": "templates/taxonomy-hks_travel_style.html",
     "page": "templates/page.html",
 }
 
@@ -28,6 +31,7 @@ BLOCKS = {
     "blocks/tour-details/block.json": "hks-wayfinder/tour-details",
     "blocks/tour-card/block.json": "hks-wayfinder/tour-card",
     "blocks/destination-intro/block.json": "hks-wayfinder/destination-intro",
+    "blocks/taxonomy-intro/block.json": "hks-wayfinder/taxonomy-intro",
     "blocks/home-experience/block.json": "hks-wayfinder/home-experience",
     "blocks/catalogue-controls/block.json": "hks-wayfinder/catalogue-controls",
     "blocks/page-title/block.json": "hks-wayfinder/page-title",
@@ -76,7 +80,7 @@ def main() -> int:
             errors.append(f"missing {path.relative_to(ROOT)}: {error}")
             sources[label] = ""
 
-    require(errors, "theme metadata", sources["style"], ["Version: 0.5.0", ".hks-tour-workspace", ".hks-tour-gallery", ".hks-mobile-menu", ".hks-editorial-page", ":focus-visible", "prefers-reduced-motion"])
+    require(errors, "theme metadata", sources["style"], ["Version: 0.6.0", ".hks-tour-workspace", ".hks-tour-gallery", ".hks-mobile-menu", ".hks-editorial-page", ":focus-visible", "prefers-reduced-motion"])
     forbid(errors, "theme stylesheet", sources["style"], ["linear-gradient(", "radial-gradient("])
 
     require(
@@ -124,6 +128,8 @@ def main() -> int:
     forbid(errors, "Tour template", files["tour"], ["<!-- wp:hks/quote-cta"])
     require(errors, "Campaign template", files["campaign"], ["hks-wayfinder/tour-hero", "hks-wayfinder/tour-details", "hks/quote-cta", "campaign_hero"])
     require(errors, "Destination template", files["destination"], ["hks-wayfinder/destination-intro", "hks-wayfinder/tour-card", "inherit\":true", "hks-catalogue-prompt"])
+    for label in ("tour type", "occasion", "travel style"):
+        require(errors, f"{label.title()} template", files[label], ["hks-wayfinder/taxonomy-intro", "hks-wayfinder/tour-card", "inherit\":true", "hks-catalogue-prompt"])
     require(errors, "standard Page template", files["page"], ["hks-standard-page", "hks-wayfinder/page-title", "hks-editorial-page", "wp:post-content"])
 
     for label, template in files.items():

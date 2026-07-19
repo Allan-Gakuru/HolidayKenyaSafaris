@@ -138,7 +138,7 @@ Acceptance:
 
 ## Phase 6: Templates and Pages
 
-Implementation status (2026-07-15): the global, Tour, Campaign, catalogue, Destination, homepage, and standard Page templates are implemented. About, Group Travel, Contact, and four legal routes are available as protected Page drafts. Contact details and legal text remain production blockers and are deliberately not invented.
+Implementation status (2026-07-19): the global, Tour, Campaign, catalogue, all four Tour taxonomy archive families, Destination, homepage, and standard Page templates are implemented. About, Group Travel, Contact, and four legal routes are available as protected Page drafts. Contact details and legal text remain production blockers and are deliberately not invented.
 
 Build in this order:
 
@@ -172,7 +172,7 @@ Acceptance:
 
 ## Phase 7: Catalogue Migration
 
-Implementation status (2026-07-15): all 44 local candidates have been reviewed for migration. Forty eligible remaining records are packaged as protected drafts in four controlled batches; the three MVP Tours are not duplicated and the generic `African-wildlife-safari` marketing page is excluded. Deployment and an administrator-triggered batch import are required before the drafts appear in WordPress.
+Implementation status (2026-07-19): all 44 local candidates were reviewed for migration. Forty eligible records were imported in four controlled batches, the three MVP Tours were retained without duplication, and the generic `African-wildlife-safari` marketing page was excluded. An authorized editor has published all 43 retained Tours. The catalogue audit is recorded in `TOUR-CATALOGUE-AUDIT-2026-07-19.md`; incomplete optional facts remain explicit editorial follow-up rather than invented data.
 
 Actions:
 

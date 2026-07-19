@@ -30,6 +30,7 @@ final class TourBlocks {
 			'tour-details'       => 'render_tour_details',
 			'tour-card'          => 'render_tour_card',
 			'destination-intro'  => 'render_destination_intro',
+			'taxonomy-intro'     => 'render_taxonomy_intro',
 			'home-experience'    => 'render_home_experience',
 			'catalogue-controls' => 'render_catalogue_controls',
 			'page-title'         => 'render_page_title',
@@ -360,6 +361,56 @@ final class TourBlocks {
 		<section class="hks-destination-intro<?php echo $image_id ? ' hks-destination-intro--with-image' : ''; ?>">
 			<div class="hks-title-band"><div class="hks-shell"><?php self::breadcrumbs( array( __( 'Tours', 'hks-wayfinder' ) => $tours_url, $term->name => '' ) ); ?><h1><?php echo esc_html( self::public_text( $term->name ) ); ?></h1><p><?php echo esc_html( $summary ?: __( 'Browse the currently published tours for this destination.', 'hks-wayfinder' ) ); ?></p></div></div>
 			<?php if ( $image_id || $overview ) : ?><div class="hks-shell hks-destination-intro__body"><?php if ( $overview ) : ?><div class="hks-prose"><?php echo wp_kses_post( $overview ); ?></div><?php endif; ?><?php if ( $image_id ) : ?><figure><?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'large', false, array( 'loading' => 'eager' ) ) ); ?><?php self::render_credit( $image_id ); ?></figure><?php endif; ?></div><?php endif; ?>
+		</section>
+		<?php
+
+		return (string) ob_get_clean();
+	}
+
+	/**
+	 * Render the title band for a public Tour classification archive.
+	 *
+	 * @return string
+	 */
+	public static function render_taxonomy_intro(): string {
+		$term = get_queried_object();
+		$labels = array(
+			'hks_tour_type'    => __( 'Tour type', 'hks-wayfinder' ),
+			'hks_occasion'     => __( 'Occasion or audience', 'hks-wayfinder' ),
+			'hks_travel_style' => __( 'Travel style', 'hks-wayfinder' ),
+		);
+
+		if ( ! $term instanceof \WP_Term || ! isset( $labels[ $term->taxonomy ] ) ) {
+			return '';
+		}
+
+		$title       = self::public_text( $term->name );
+		$description = self::public_text( $term->description );
+		$tours_url   = get_post_type_archive_link( 'hks_tour' ) ?: home_url( '/tours/' );
+
+		if ( '' === $title ) {
+			return '';
+		}
+
+		if ( '' === $description ) {
+			$description = sprintf(
+				/* translators: %s: Lowercase taxonomy label, for example "tour type". */
+				__( 'Browse the currently published Tours for this %s.', 'hks-wayfinder' ),
+				strtolower( $labels[ $term->taxonomy ] )
+			);
+		}
+
+		ob_start();
+		?>
+		<section class="hks-taxonomy-intro">
+			<div class="hks-title-band">
+				<div class="hks-shell">
+					<?php self::breadcrumbs( array( __( 'Tours', 'hks-wayfinder' ) => $tours_url, $title => '' ) ); ?>
+					<p class="hks-taxonomy-intro__label"><?php echo esc_html( $labels[ $term->taxonomy ] ); ?></p>
+					<h1><?php echo esc_html( $title ); ?></h1>
+					<p><?php echo esc_html( $description ); ?></p>
+				</div>
+			</div>
 		</section>
 		<?php
 

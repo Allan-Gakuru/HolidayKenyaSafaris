@@ -396,6 +396,9 @@ final class Lifecycle {
 			'0.2.0' => array(
 				'site' => array( self::class, 'schedule_rewrite_flush' ),
 			),
+			'0.7.0' => array(
+				'site' => array( self::class, 'schedule_rewrite_flush' ),
+			),
 		);
 	}
 

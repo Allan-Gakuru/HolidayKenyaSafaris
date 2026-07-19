@@ -65,6 +65,9 @@ REQUIRED_FILES = (
     "hks-core.php", "src/Plugin.php", "src/Content/Module.php",
     "src/Content/PostTypes/Tour.php", "src/Content/PostTypes/Campaign.php",
     "src/Content/PostTypes/Faq.php", "src/Fields/FieldGroups.php",
+    "src/Content/Taxonomies/TourType.php",
+    "src/Content/Taxonomies/Occasion.php",
+    "src/Content/Taxonomies/TravelStyle.php",
     "src/Fields/FieldsModule.php", "src/Fields/PublicationRules.php",
     "src/Fields/PublicationGuard.php",
 )
@@ -152,6 +155,9 @@ def main() -> int:
 
     require(errors, "Tour type", files["src/Content/PostTypes/Tour.php"], ("'hks_tour'", "'show_in_rest'        => true"))
     require(errors, "Campaign type", files["src/Content/PostTypes/Campaign.php"], ("'hks_campaign'", "'publicly_queryable'  => true"))
+    require(errors, "Tour Type archive", files["src/Content/Taxonomies/TourType.php"], ("'public'             => true", "'publicly_queryable' => true", "'slug'         => 'tour-types'"))
+    require(errors, "Occasion archive", files["src/Content/Taxonomies/Occasion.php"], ("'public'             => true", "'publicly_queryable' => true", "'slug'         => 'occasions'"))
+    require(errors, "Travel Style archive", files["src/Content/Taxonomies/TravelStyle.php"], ("'public'             => true", "'publicly_queryable' => true", "'slug'         => 'travel-styles'"))
 
     source_text = "\n".join(
         path.read_text(encoding="utf-8-sig")

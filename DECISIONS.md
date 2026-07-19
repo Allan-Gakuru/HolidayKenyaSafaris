@@ -136,4 +136,6 @@ Client IDs will be supplied later. Do not hard-code invented IDs.
 - Catalogue migration preserves Ashford titles and source URLs, maps the four existing Tour taxonomies, and carries over source duration and route headings when available.
 - The migration assigns no price, media, policy, inclusion, exclusion, review, or availability data. An authorized editor completes and publishes each Tour deliberately.
 - Seeded records can be refreshed only while they remain Draft. Any record moved beyond Draft is protected from importer updates.
+- Tour Type, Occasion/Audience, and Travel Style are public catalogue taxonomies, alongside Destination. Their canonical term routes use `/tour-types/`, `/occasions/`, and `/travel-styles/` respectively.
+- Public taxonomy queries are constrained to published Tours. This is especially important for Occasion/Audience because Campaigns may share those terms without appearing in catalogue archives.
 - Inquiry submission and WhatsApp launch testing is deferred until the client controls the destination number.

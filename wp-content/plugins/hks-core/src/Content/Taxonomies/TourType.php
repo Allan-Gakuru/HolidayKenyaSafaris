@@ -35,19 +35,23 @@ final class TourType {
 			array(
 				'labels'             => self::labels(),
 				'description'        => __( 'The package format, such as road safari, day excursion, staycation, or group package. Describe what the trip is, not whom a campaign targets.', 'hks-core' ),
-				'public'             => false,
-				'publicly_queryable' => false,
+				'public'             => true,
+				'publicly_queryable' => true,
 				'hierarchical'       => true,
 				'show_ui'            => true,
 				'show_admin_column'  => true,
-				'show_in_nav_menus'  => false,
+				'show_in_nav_menus'  => true,
 				'show_tagcloud'      => false,
 				'show_in_quick_edit' => true,
 				'show_in_rest'       => true,
 				'rest_base'          => 'tour-types',
 				'rest_namespace'     => 'wp/v2',
-				'query_var'          => false,
-				'rewrite'            => false,
+				'query_var'          => true,
+				'rewrite'            => array(
+					'slug'         => 'tour-types',
+					'with_front'   => false,
+					'hierarchical' => true,
+				),
 			)
 		);
 	}

@@ -121,6 +121,8 @@ Use for discovery and internal campaign organization, not as a rigid identity sy
 
 Only expose filters that contain enough tours to be useful.
 
+Destination, Tour Type, Occasion/Audience, and Travel Style have canonical public term archives. Empty terms remain absent from public browse controls. Occasion/Audience archives list published Tours only even though Campaigns may also use the taxonomy internally.
+
 ## Tour Field Groups
 
 ### Native WordPress Tour Fields

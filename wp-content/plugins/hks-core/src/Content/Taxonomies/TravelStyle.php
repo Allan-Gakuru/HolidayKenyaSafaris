@@ -35,19 +35,23 @@ final class TravelStyle {
 			array(
 				'labels'             => self::labels(),
 				'description'        => __( 'Practical ways to experience a tour, such as private, group joining, resident package, family friendly, short break, or active.', 'hks-core' ),
-				'public'             => false,
-				'publicly_queryable' => false,
+				'public'             => true,
+				'publicly_queryable' => true,
 				'hierarchical'       => true,
 				'show_ui'            => true,
 				'show_admin_column'  => true,
-				'show_in_nav_menus'  => false,
+				'show_in_nav_menus'  => true,
 				'show_tagcloud'      => false,
 				'show_in_quick_edit' => true,
 				'show_in_rest'       => true,
 				'rest_base'          => 'travel-styles',
 				'rest_namespace'     => 'wp/v2',
-				'query_var'          => false,
-				'rewrite'            => false,
+				'query_var'          => true,
+				'rewrite'            => array(
+					'slug'         => 'travel-styles',
+					'with_front'   => false,
+					'hierarchical' => true,
+				),
 			)
 		);
 	}

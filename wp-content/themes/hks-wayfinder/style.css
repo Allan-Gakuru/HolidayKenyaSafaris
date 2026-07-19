@@ -3,7 +3,7 @@ Theme Name: HKS Wayfinder
 Theme URI: https://github.com/Allan-Gakuru/HolidayKenyaSafaris
 Author: Holiday Kenya Safaris
 Description: Custom block theme for the Holiday Kenya Safaris Wayfinder website.
-Version: 0.5.0
+Version: 0.6.0
 Update URI: https://github.com/Allan-Gakuru/HolidayKenyaSafaris
 Requires at least: 6.6
 Requires PHP: 8.3
@@ -498,7 +498,8 @@ summary {
 .hks-home-page,
 .hks-tour-page,
 .hks-catalogue-page,
-.hks-destination-page {
+.hks-destination-page,
+.hks-taxonomy-page {
 	overflow: clip;
 }
 
@@ -1589,8 +1590,18 @@ summary {
 
 /* Catalogue and Destination */
 .hks-catalogue-body,
-.hks-destination-results {
+.hks-destination-results,
+.hks-taxonomy-results {
 	padding-block: clamp(2.5rem, 6vw, 5rem);
+}
+
+.hks-title-band .hks-taxonomy-intro__label {
+	color: var(--wp--preset--color--lake-teal);
+	font-size: 0.75rem;
+	font-weight: 800;
+	letter-spacing: 0.09em;
+	margin: 0 0 0.55rem;
+	text-transform: uppercase;
 }
 
 .hks-catalogue-controls {
