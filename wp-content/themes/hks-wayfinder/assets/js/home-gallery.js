@@ -189,8 +189,8 @@
 				startY: event.clientY,
 				distance: 0,
 				moved: false,
+				captured: false,
 			};
-			track.setPointerCapture(event.pointerId);
 		});
 
 		track.addEventListener('pointermove', (event) => {
@@ -199,9 +199,11 @@
 			const distanceX = event.clientX - drag.startX;
 			const distanceY = event.clientY - drag.startY;
 
-			if (!drag.moved && Math.abs(distanceX) > 8 && Math.abs(distanceX) > Math.abs(distanceY)) {
+			if (!drag.moved && Math.abs(distanceX) > 12 && Math.abs(distanceX) > Math.abs(distanceY)) {
 				drag.moved = true;
 				track.classList.add('is-dragging');
+				track.setPointerCapture(event.pointerId);
+				drag.captured = true;
 			}
 
 			if (drag.moved) {
@@ -222,7 +224,7 @@
 			suppressClick = completedDrag;
 			track.classList.remove('is-dragging');
 			track.style.removeProperty('--hks-drag-offset');
-			if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
+			if (drag.captured && track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
 			drag = null;
 
 			if ('pointercancel' !== event.type && Math.abs(distance) >= 36) {
