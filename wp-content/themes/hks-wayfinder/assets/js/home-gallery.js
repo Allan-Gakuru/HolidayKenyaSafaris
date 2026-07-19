@@ -9,76 +9,64 @@
 		const status = gallery.querySelector('[data-hks-home-gallery-status]');
 		const announcer = gallery.querySelector('[data-hks-home-gallery-announcer]');
 		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+		const wideLayout = window.matchMedia('(min-width: 48rem)');
+		const precisePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
 		const interval = Math.max(3000, Number(gallery.dataset.hksGalleryInterval) || 3000);
 		const pauseReasons = new Set();
 		let active = 0;
 		let autoTimer = 0;
 		let isInView = true;
-		let scrollTimer = 0;
 		let drag = null;
 		let suppressClick = false;
 
 		if (!track || !slides.length) return;
 
-		function visibleCount() {
-			const value = parseInt(window.getComputedStyle(track).getPropertyValue('--hks-gallery-visible'), 10);
-			return Math.max(1, Math.min(slides.length, Number.isFinite(value) ? value : 1));
-		}
+		function circularPosition(index) {
+			let position = (index - active + slides.length) % slides.length;
+			if (position > slides.length / 2) position -= slides.length;
 
-		function maximumIndex() {
-			return Math.max(0, slides.length - visibleCount());
-		}
-
-		function slideLeft(index) {
-			return slides[index].offsetLeft - slides[0].offsetLeft;
-		}
-
-		function nearestIndex() {
-			let nearest = 0;
-			let distance = Number.POSITIVE_INFINITY;
-
-			for (let index = 0; index <= maximumIndex(); index += 1) {
-				const nextDistance = Math.abs(track.scrollLeft - slideLeft(index));
-				if (nextDistance < distance) {
-					nearest = index;
-					distance = nextDistance;
-				}
+			if (0 === slides.length % 2 && position === slides.length / 2) {
+				position = 0 === active % 2 ? position : -position;
 			}
 
-			return nearest;
+			return position;
 		}
 
 		function updateStatus(announce = false) {
-			const first = active + 1;
-			const last = Math.min(slides.length, active + visibleCount());
-			const range = first === last ? String(first) : `${first}\u2013${last}`;
+			const selected = slides[active];
+			const destination = selected.dataset.hksDestinationName || `Destination ${active + 1}`;
+			const tourCount = selected.dataset.hksTourCount || '';
 
-			if (status) status.textContent = `${range} / ${slides.length}`;
+			if (status) status.textContent = `${active + 1} / ${slides.length}`;
 			if (announce && announcer) {
-				announcer.textContent = first === last
-					? `Showing Featured Tour ${first} of ${slides.length}.`
-					: `Showing Featured Tours ${first} through ${last} of ${slides.length}.`;
+				announcer.textContent = `Showing ${destination}${tourCount ? `, ${tourCount}` : ''}; destination ${active + 1} of ${slides.length}.`;
 			}
 		}
 
-		function updateStaticState() {
-			gallery.classList.toggle('is-static', slides.length <= visibleCount());
-			active = Math.min(active, maximumIndex());
-			updateStatus();
+		function render(announce = false) {
+			slides.forEach((slide, index) => {
+				const position = circularPosition(index);
+				const hidden = !wideLayout.matches && Math.abs(position) > 1;
+				const link = slide.querySelector('a');
+
+				slide.dataset.hksPosition = String(position);
+				slide.classList.toggle('is-active', 0 === position);
+				slide.setAttribute('aria-hidden', hidden ? 'true' : 'false');
+
+				if (link) {
+					link.tabIndex = hidden ? -1 : 0;
+					if (0 === position) link.setAttribute('aria-current', 'true');
+					else link.removeAttribute('aria-current');
+				}
+			});
+
+			gallery.classList.toggle('is-static', slides.length < 2);
+			updateStatus(announce);
 		}
 
-		function goTo(index, announce = false, behavior = 'smooth') {
-			const maximum = maximumIndex();
-			let target = index;
-
-			if (target > maximum) target = 0;
-			if (target < 0) target = maximum;
-			active = target;
-			track.scrollTo({
-				left: slideLeft(active),
-				behavior: reducedMotion.matches ? 'auto' : behavior,
-			});
-			updateStatus(announce);
+		function goTo(index, announce = false) {
+			active = (index + slides.length) % slides.length;
+			render(announce);
 		}
 
 		function clearAuto() {
@@ -91,7 +79,7 @@
 				&& !pauseReasons.size
 				&& isInView
 				&& document.visibilityState === 'visible'
-				&& maximumIndex() > 0;
+				&& slides.length > 1;
 		}
 
 		function scheduleAuto() {
@@ -142,33 +130,59 @@
 			}
 			if (event.key === 'End') {
 				event.preventDefault();
-				goTo(maximumIndex(), true);
+				goTo(slides.length - 1, true);
 			}
 		});
 
-		track.addEventListener('scroll', () => {
-			window.clearTimeout(scrollTimer);
-			scrollTimer = window.setTimeout(() => {
-				active = nearestIndex();
-				updateStatus();
-			}, 80);
-		}, { passive: true });
-
 		gallery.addEventListener('mouseenter', () => pause('hover'));
-		gallery.addEventListener('mouseleave', () => resume('hover'));
+		gallery.addEventListener('mouseleave', () => {
+			slides.forEach((slide) => slide.classList.remove('is-hovered'));
+			gallery.classList.remove('is-interacting');
+			resume('hover');
+		});
 		gallery.addEventListener('focusin', () => pause('focus'));
 		gallery.addEventListener('focusout', (event) => {
-			if (!gallery.contains(event.relatedTarget)) resume('focus');
+			if (!gallery.contains(event.relatedTarget)) {
+				slides.forEach((slide) => slide.classList.remove('is-hovered'));
+				gallery.classList.remove('is-interacting');
+				resume('focus');
+			}
+		});
+
+		slides.forEach((slide) => {
+			slide.addEventListener('pointerenter', () => {
+				if (!precisePointer.matches) return;
+				slide.classList.add('is-hovered');
+				gallery.classList.add('is-interacting');
+			});
+
+			slide.addEventListener('pointerleave', () => {
+				slide.classList.remove('is-hovered');
+				gallery.classList.remove('is-interacting');
+			});
+
+			slide.addEventListener('focusin', () => {
+				slide.classList.add('is-hovered');
+				gallery.classList.add('is-interacting');
+			});
+
+			slide.addEventListener('focusout', (event) => {
+				if (!slide.contains(event.relatedTarget)) {
+					slide.classList.remove('is-hovered');
+					gallery.classList.remove('is-interacting');
+				}
+			});
 		});
 
 		track.addEventListener('pointerdown', (event) => {
-			pause('pointer');
-			if ('mouse' !== event.pointerType || 0 !== event.button) return;
+			if ('mouse' === event.pointerType && 0 !== event.button) return;
 
+			pause('pointer');
 			drag = {
 				id: event.pointerId,
 				startX: event.clientX,
-				startScroll: track.scrollLeft,
+				startY: event.clientY,
+				distance: 0,
 				moved: false,
 			};
 			track.setPointerCapture(event.pointerId);
@@ -176,27 +190,41 @@
 
 		track.addEventListener('pointermove', (event) => {
 			if (!drag || drag.id !== event.pointerId) return;
-			const movement = event.clientX - drag.startX;
 
-			if (Math.abs(movement) > 5) {
+			const distanceX = event.clientX - drag.startX;
+			const distanceY = event.clientY - drag.startY;
+
+			if (!drag.moved && Math.abs(distanceX) > 8 && Math.abs(distanceX) > Math.abs(distanceY)) {
 				drag.moved = true;
 				track.classList.add('is-dragging');
-				event.preventDefault();
 			}
 
-			if (drag.moved) track.scrollLeft = drag.startScroll - movement;
+			if (drag.moved) {
+				drag.distance = distanceX;
+				track.style.setProperty('--hks-drag-offset', `${Math.max(-42, Math.min(42, distanceX * 0.22))}px`);
+				event.preventDefault();
+			}
 		});
 
 		function endPointer(event) {
-			if (drag && drag.id === event.pointerId) {
-				suppressClick = drag.moved;
-				track.classList.remove('is-dragging');
-				if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
-				drag = null;
-				active = nearestIndex();
-				goTo(active);
-				window.setTimeout(() => { suppressClick = false; }, 0);
+			if (!drag || drag.id !== event.pointerId) {
+				resume('pointer');
+				return;
 			}
+
+			const completedDrag = drag.moved;
+			const distance = drag.distance;
+			suppressClick = completedDrag;
+			track.classList.remove('is-dragging');
+			track.style.removeProperty('--hks-drag-offset');
+			if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
+			drag = null;
+
+			if ('pointercancel' !== event.type && Math.abs(distance) >= 36) {
+				goTo(distance < 0 ? active + 1 : active - 1, true);
+			}
+
+			window.setTimeout(() => { suppressClick = false; }, 0);
 			resume('pointer');
 		}
 
@@ -214,6 +242,7 @@
 		});
 
 		reducedMotion.addEventListener?.('change', scheduleAuto);
+		wideLayout.addEventListener?.('change', () => render());
 
 		if ('IntersectionObserver' in window) {
 			const observer = new IntersectionObserver((entries) => {
@@ -223,23 +252,8 @@
 			observer.observe(gallery);
 		}
 
-		if ('ResizeObserver' in window) {
-			const resizeObserver = new ResizeObserver(() => {
-				updateStaticState();
-				goTo(active, false, 'auto');
-				scheduleAuto();
-			});
-			resizeObserver.observe(track);
-		} else {
-			window.addEventListener('resize', () => {
-				updateStaticState();
-				goTo(active, false, 'auto');
-				scheduleAuto();
-			});
-		}
-
 		gallery.classList.add('is-ready');
-		updateStaticState();
+		render();
 		scheduleAuto();
 	});
 }());

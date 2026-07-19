@@ -81,7 +81,7 @@ def main() -> int:
             errors.append(f"missing {path.relative_to(ROOT)}: {error}")
             sources[label] = ""
 
-    require(errors, "theme metadata", sources["style"], ["Version: 0.6.0", ".hks-home-gallery__viewport", "--hks-gallery-visible: 3", ".hks-tour-workspace", ".hks-tour-gallery", ".hks-mobile-menu", ".hks-editorial-page", ":focus-visible", "prefers-reduced-motion"])
+    require(errors, "theme metadata", sources["style"], ["Version: 0.6.0", ".hks-home-gallery__viewport", "--hks-deck-scale", "aspect-ratio: 3 / 4", ".hks-tour-workspace", ".hks-tour-gallery", ".hks-mobile-menu", ".hks-editorial-page", ":focus-visible", "prefers-reduced-motion"])
     forbid(errors, "theme stylesheet", sources["style"], ["linear-gradient(", "radial-gradient("])
 
     require(
@@ -183,7 +183,13 @@ def main() -> int:
             "data-hks-home-gallery",
             "data-hks-gallery-interval=\"3000\"",
             "data-hks-home-gallery-slide",
+            "hero_destination_specs",
+            "maasai-mara",
+            "lake-nakuru-national-park",
+            "amboseli-national-park",
+            "data-hks-tour-count",
             "hks-home-gallery__caption",
+            "Explore destination",
         ],
     )
     forbid(
@@ -212,7 +218,7 @@ def main() -> int:
         errors.append("canonical renderer must create exactly one shared quote block instance")
 
     require(errors, "navigation script", sources["navigation"], ["showModal", "aria-expanded", "Escape", "data-hks-quote-proxy", "data-hks-inquiry-open"])
-    require(errors, "homepage gallery script", sources["home_gallery"], ["3000", "prefers-reduced-motion", "IntersectionObserver", "ResizeObserver", "pointermove", "ArrowLeft", "ArrowRight", "scrollTo", "is-dragging"])
+    require(errors, "homepage gallery script", sources["home_gallery"], ["3000", "prefers-reduced-motion", "IntersectionObserver", "pointermove", "ArrowLeft", "ArrowRight", "dataset.hksPosition", "aria-hidden", "is-dragging", "is-interacting"])
     require(errors, "Tour UI script", sources["tour_ui"], ["role', 'tablist", "ArrowRight", "matchMedia('(min-width: 769px)", "tour_gallery_open", "tour_section_open", "itinerary_toggle", "related_tour_select"])
     require(errors, "quote block", sources["quote"], ["$attributes['label']", "Request quote on WhatsApp", "InquiryRepository::REST_NAMESPACE", "data-hks-inquiry-form", "data-hks-whatsapp-launch"])
 
