@@ -52,6 +52,8 @@ Use a slim Midnight Navy utility bar above the primary header. It may contain on
 
 Keep it compact. It is a trust and contact surface, not a second full navigation menu.
 
+The WhatsApp icon and number are one direct contact link to the confirmed HKS number. Prefill a concise general reach-out message, adding the current title and URL on Tour and Campaign pages. This lightweight utility contact is distinct from page-level quote actions, which continue to open the intake, consent, recovery, and message-review flow.
+
 ### Desktop primary header
 
 Use a white header with the horizontal Wayfinder logo and product-led navigation. Keep the compact WhatsApp contact in the utility bar; do not repeat it as a large primary-header button.

@@ -25,8 +25,25 @@ $group_url          = $group_url ?: $home_url . '#group-travel';
 $public_email       = 'info@holidaykenyasafaris.ke';
 $instagram_url      = 'https://www.instagram.com/holidaykenyasafaris/';
 $facebook_url       = 'https://www.facebook.com/people/Holiday-Kenya-Safaris/61591508593846/';
+$whatsapp_number    = '254712965131';
+$whatsapp_message   = __( "Hi Holiday Kenya Safaris, I'd like help choosing and planning a Kenya trip.", 'hks-wayfinder' );
 $safari_terms       = array();
 $coast_terms        = array();
+
+if ( $is_quote_context ) {
+	$whatsapp_message = sprintf(
+		/* translators: 1: Tour or Campaign title, 2: canonical page URL. */
+		__( "Hi Holiday Kenya Safaris, I'm interested in %1\$s. Please help me plan this trip: %2\$s", 'hks-wayfinder' ),
+		wp_strip_all_tags( get_the_title() ),
+		get_permalink()
+	);
+}
+
+$whatsapp_url = sprintf(
+	'https://wa.me/%1$s?text=%2$s',
+	rawurlencode( $whatsapp_number ),
+	rawurlencode( $whatsapp_message )
+);
 
 foreach ( $tour_type_terms as $term ) {
 	if ( preg_match( '/coast|stay|beach|diani|mombasa|watamu|malindi|lamu|kilifi/i', $term->name . ' ' . $term->slug ) ) {
@@ -74,17 +91,10 @@ $render_terms = static function ( array $terms ): void {
 					<svg class="hks-utility__icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"></rect><path d="m4 7 8 6 8-6"></path></svg>
 					<span class="hks-utility__contact-text"><?php echo esc_html( $public_email ); ?></span>
 				</a>
-				<?php if ( $is_quote_context ) : ?>
-					<button class="hks-utility__contact hks-utility__whatsapp" type="button" data-hks-quote-proxy aria-label="<?php echo esc_attr__( 'Request a quote on WhatsApp at +254 712 965 131', 'hks-wayfinder' ); ?>">
-						<svg class="hks-utility__icon hks-utility__icon--whatsapp" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-1.76-.88-2.91-1.57-4.07-3.56-.31-.53.31-.49.88-1.63.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49 1.88.81 2.62.88 3.56.74.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35ZM12.05 21.8h-.01a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26C2.16 6.45 6.6 2 12.06 2a9.83 9.83 0 0 1 9.89 9.9c0 5.45-4.44 9.9-9.9 9.9Zm8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.9 11.9 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.23-6.16-3.48-8.41Z"></path></svg>
-						<span class="hks-utility__contact-text">+254 712 965 131</span>
-					</button>
-				<?php else : ?>
-					<a class="hks-utility__contact hks-utility__whatsapp" href="<?php echo esc_url( $tours_url ); ?>" aria-label="<?php echo esc_attr__( 'Choose a Tour and request a quote on WhatsApp at +254 712 965 131', 'hks-wayfinder' ); ?>">
-						<svg class="hks-utility__icon hks-utility__icon--whatsapp" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-1.76-.88-2.91-1.57-4.07-3.56-.31-.53.31-.49.88-1.63.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49 1.88.81 2.62.88 3.56.74.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35ZM12.05 21.8h-.01a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26C2.16 6.45 6.6 2 12.06 2a9.83 9.83 0 0 1 9.89 9.9c0 5.45-4.44 9.9-9.9 9.9Zm8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.9 11.9 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.23-6.16-3.48-8.41Z"></path></svg>
-						<span class="hks-utility__contact-text">+254 712 965 131</span>
-					</a>
-				<?php endif; ?>
+				<a class="hks-utility__contact hks-utility__whatsapp" href="<?php echo esc_url( $whatsapp_url ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr__( 'Open a WhatsApp chat with Holiday Kenya Safaris at +254 712 965 131', 'hks-wayfinder' ); ?>">
+					<svg class="hks-utility__icon hks-utility__icon--whatsapp" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-1.76-.88-2.91-1.57-4.07-3.56-.31-.53.31-.49.88-1.63.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49 1.88.81 2.62.88 3.56.74.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35ZM12.05 21.8h-.01a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26C2.16 6.45 6.6 2 12.06 2a9.83 9.83 0 0 1 9.89 9.9c0 5.45-4.44 9.9-9.9 9.9Zm8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.9 11.9 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.23-6.16-3.48-8.41Z"></path></svg>
+					<span class="hks-utility__contact-text">+254 712 965 131</span>
+				</a>
 			</div>
 			<div class="hks-utility__social" aria-label="<?php echo esc_attr__( 'Follow Holiday Kenya Safaris', 'hks-wayfinder' ); ?>">
 				<span class="hks-utility__social-label"><?php esc_html_e( 'Follow us:', 'hks-wayfinder' ); ?></span>

@@ -27,7 +27,7 @@ Use a compact trust and contact strip containing only confirmed information:
 - About.
 - Contact.
 
-The utility bar carries the compact WhatsApp contact. Do not repeat it as a large button in the desktop primary header.
+The utility bar carries a compact direct WhatsApp contact with a prefilled, page-aware reach-out message. Do not repeat it as a large button in the desktop primary header. Page-level quote actions retain the structured intake and recovery flow.
 
 Suggested dropdown structure:
 

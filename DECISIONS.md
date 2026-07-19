@@ -95,7 +95,7 @@ Exclude by default:
 - Focused paid-ad pages use Campaign mode and may retain the immersive emotional structure of the existing Maasai Mara prototype.
 - Canonical Tour pages use a compact title and breadcrumb band, three-image gallery, destination line, approximately 68/32 desktop workspace, accessible tabs, mobile disclosures, itinerary timeline, sticky quote panel, related Tours, and final quote prompt.
 - A conventional booking sidebar is replaced by an HKS quote panel whose **Request quote on WhatsApp** button opens the approved intake, consent, private recovery, message-review, and WhatsApp-launch flow.
-- Desktop navigation uses a utility bar plus product-led primary header. The utility bar carries the compact WhatsApp contact; the primary header does not repeat it as a large button. Mobile uses a full-height accessible navigation drawer.
+- Desktop navigation uses a utility bar plus product-led primary header. The utility bar carries a direct WhatsApp link with a prefilled, page-aware reach-out message; the primary header does not repeat it as a large button. Page-level quote actions still open the approved intake and recovery flow. Mobile uses a full-height accessible navigation drawer.
 - Approved top-level navigation is Home, Safaris, Coast & Stays, Destinations, Group Travel, About, and Contact. The mobile drawer retains a clear Request quote on WhatsApp action.
 - International holidays, visa services, air ticketing, transfers, and inbound-only routes remain excluded.
 

@@ -124,7 +124,10 @@ def main() -> int:
     header_actions = re.search(r'<div class="hks-header-actions">(.*?)</div>', sources["header"], re.DOTALL)
     if not header_actions or "hks-button--quote" in header_actions.group(1):
         errors.append("desktop primary header must not contain the large quote button")
-    forbid(errors, "header", sources["header"], ["wa.me/"])
+    require(errors, "utility WhatsApp link", sources["header"], ["https://wa.me/", "254712965131", "$whatsapp_message", "get_permalink()", "target=\"_blank\""])
+    utility_whatsapp = re.search(r'<a class="hks-utility__contact hks-utility__whatsapp"(.*?)</a>', sources["header"], re.DOTALL)
+    if not utility_whatsapp or "data-hks-quote-proxy" in utility_whatsapp.group(1):
+        errors.append("utility WhatsApp contact must be a direct link, not a quote-form proxy")
     require(errors, "footer", sources["footer"], ["operated by Ashford Tours &amp; Travel", "href=\"/tours/\""])
 
     require(errors, "home template", files["home"], ["hks-wayfinder/home-experience"])

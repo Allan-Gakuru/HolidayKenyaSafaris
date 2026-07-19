@@ -58,6 +58,8 @@ Official Holiday Kenya Safaris destination:
 
 `https://wa.me/254712965131`
 
+The compact utility-bar WhatsApp contact is a lightweight direct-chat route. It opens this number with a concise prefilled reach-out message and, on a Tour or Campaign, includes the current title and URL. It does not replace the structured intake path used by page-level quote actions and must not create an inquiry recovery record.
+
 Default generated message:
 
 ```text
