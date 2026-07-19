@@ -839,14 +839,6 @@ summary {
 		transform: translateX(0.25rem);
 	}
 
-	.hks-home-gallery.is-ready .hks-home-gallery__slide.is-hovered {
-		--hks-deck-focus-scale: 1.09;
-		--hks-deck-lift: -1rem;
-
-		opacity: 1;
-		z-index: 8;
-	}
-
 }
 
 @media (min-width: 48rem) {
@@ -946,6 +938,14 @@ summary {
 		pointer-events: auto;
 		z-index: 1;
 	}
+}
+
+.hks-home-gallery.is-ready .hks-home-gallery__slide.is-hovered {
+	--hks-deck-focus-scale: 1.09;
+	--hks-deck-lift: -1rem;
+
+	opacity: 1;
+	z-index: 8;
 }
 
 .hks-home-section {
