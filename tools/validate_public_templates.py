@@ -118,8 +118,12 @@ def main() -> int:
             "group-travel",
             "Request quote on WhatsApp",
             "data-hks-quote-proxy",
+            "hks-mobile-menu__social",
         ],
     )
+    header_actions = re.search(r'<div class="hks-header-actions">(.*?)</div>', sources["header"], re.DOTALL)
+    if not header_actions or "hks-button--quote" in header_actions.group(1):
+        errors.append("desktop primary header must not contain the large quote button")
     forbid(errors, "header", sources["header"], ["wa.me/"])
     require(errors, "footer", sources["footer"], ["operated by Ashford Tours &amp; Travel", "href=\"/tours/\""])
 

@@ -76,12 +76,12 @@ $render_terms = static function ( array $terms ): void {
 				</a>
 				<?php if ( $is_quote_context ) : ?>
 					<button class="hks-utility__contact hks-utility__whatsapp" type="button" data-hks-quote-proxy aria-label="<?php echo esc_attr__( 'Request a quote on WhatsApp at +254 712 965 131', 'hks-wayfinder' ); ?>">
-						<svg class="hks-utility__icon hks-utility__icon--whatsapp" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5 5 16.3A8.5 8.5 0 1 1 20.5 11.7Z"></path><path d="M8.4 7.7c.2-.4.4-.4.7-.4h.5c.2 0 .3.1.4.4l.8 1.9c.1.3 0 .5-.2.7l-.6.7c-.2.2-.1.4 0 .6.7 1.3 1.7 2.3 3 3 .2.1.4.2.6 0l.8-1c.2-.2.4-.3.7-.2l1.9.9c.3.1.4.3.4.5 0 .4-.2 1.3-.6 1.8-.5.6-1.4.9-2.3.7-1.3-.3-3.1-1-4.7-2.5-1.3-1.2-2.2-2.7-2.6-3.8-.5-1.2.2-2.7.2-3.3Z"></path></svg>
+						<svg class="hks-utility__icon hks-utility__icon--whatsapp" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-1.76-.88-2.91-1.57-4.07-3.56-.31-.53.31-.49.88-1.63.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49 1.88.81 2.62.88 3.56.74.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35ZM12.05 21.8h-.01a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26C2.16 6.45 6.6 2 12.06 2a9.83 9.83 0 0 1 9.89 9.9c0 5.45-4.44 9.9-9.9 9.9Zm8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.9 11.9 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.23-6.16-3.48-8.41Z"></path></svg>
 						<span class="hks-utility__contact-text">+254 712 965 131</span>
 					</button>
 				<?php else : ?>
 					<a class="hks-utility__contact hks-utility__whatsapp" href="<?php echo esc_url( $tours_url ); ?>" aria-label="<?php echo esc_attr__( 'Choose a Tour and request a quote on WhatsApp at +254 712 965 131', 'hks-wayfinder' ); ?>">
-						<svg class="hks-utility__icon hks-utility__icon--whatsapp" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5 5 16.3A8.5 8.5 0 1 1 20.5 11.7Z"></path><path d="M8.4 7.7c.2-.4.4-.4.7-.4h.5c.2 0 .3.1.4.4l.8 1.9c.1.3 0 .5-.2.7l-.6.7c-.2.2-.1.4 0 .6.7 1.3 1.7 2.3 3 3 .2.1.4.2.6 0l.8-1c.2-.2.4-.3.7-.2l1.9.9c.3.1.4.3.4.5 0 .4-.2 1.3-.6 1.8-.5.6-1.4.9-2.3.7-1.3-.3-3.1-1-4.7-2.5-1.3-1.2-2.2-2.7-2.6-3.8-.5-1.2.2-2.7.2-3.3Z"></path></svg>
+						<svg class="hks-utility__icon hks-utility__icon--whatsapp" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-1.76-.88-2.91-1.57-4.07-3.56-.31-.53.31-.49.88-1.63.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49 1.88.81 2.62.88 3.56.74.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35ZM12.05 21.8h-.01a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26C2.16 6.45 6.6 2 12.06 2a9.83 9.83 0 0 1 9.89 9.9c0 5.45-4.44 9.9-9.9 9.9Zm8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.9 11.9 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.23-6.16-3.48-8.41Z"></path></svg>
 						<span class="hks-utility__contact-text">+254 712 965 131</span>
 					</a>
 				<?php endif; ?>
@@ -147,11 +147,6 @@ $render_terms = static function ( array $terms ): void {
 			</nav>
 
 			<div class="hks-header-actions">
-				<?php if ( $is_quote_context ) : ?>
-					<button class="hks-button hks-button--quote" type="button" data-hks-quote-proxy><?php esc_html_e( 'Request quote on WhatsApp', 'hks-wayfinder' ); ?></button>
-				<?php else : ?>
-					<a class="hks-button hks-button--quote" href="<?php echo esc_url( $tours_url ); ?>"><?php esc_html_e( 'Request quote on WhatsApp', 'hks-wayfinder' ); ?></a>
-				<?php endif; ?>
 				<button class="hks-menu-toggle" type="button" data-hks-menu-open aria-controls="<?php echo esc_attr( $menu_id ); ?>" aria-expanded="false">
 					<span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
 					<span class="screen-reader-text"><?php esc_html_e( 'Open menu', 'hks-wayfinder' ); ?></span>
@@ -188,6 +183,16 @@ $render_terms = static function ( array $terms ): void {
 			<?php else : ?>
 				<a class="hks-button hks-button--quote" href="<?php echo esc_url( $tours_url ); ?>"><?php esc_html_e( 'Request quote on WhatsApp', 'hks-wayfinder' ); ?></a>
 			<?php endif; ?>
+			<nav class="hks-mobile-menu__social" aria-label="<?php echo esc_attr__( 'Follow Holiday Kenya Safaris', 'hks-wayfinder' ); ?>">
+				<a href="<?php echo esc_url( $facebook_url ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr__( 'Holiday Kenya Safaris on Facebook', 'hks-wayfinder' ); ?>">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4.5c-.5-.1-2.2-.2-3.4-.2-3.4 0-5.7 2.1-5.7 6v3.3H4v3.9h3.9V24h4.8v-6.5h3.6l.6-3.9h-4.2v-2.9C12.7 9.6 13 8 14 8Z"></path></svg>
+					<span><?php esc_html_e( 'Facebook', 'hks-wayfinder' ); ?></span>
+				</a>
+				<a href="<?php echo esc_url( $instagram_url ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr__( 'Holiday Kenya Safaris on Instagram', 'hks-wayfinder' ); ?>">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.4" cy="6.6" r="1"></circle></svg>
+					<span><?php esc_html_e( 'Instagram', 'hks-wayfinder' ); ?></span>
+				</a>
+			</nav>
 			<a href="tel:+254712965131"><?php esc_html_e( 'Call or WhatsApp +254 712 965 131', 'hks-wayfinder' ); ?></a>
 		</div>
 	</dialog>

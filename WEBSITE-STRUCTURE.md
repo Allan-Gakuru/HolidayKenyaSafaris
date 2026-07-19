@@ -26,7 +26,8 @@ Use a compact trust and contact strip containing only confirmed information:
 - Group Travel.
 - About.
 - Contact.
-- Request quote on WhatsApp.
+
+The utility bar carries the compact WhatsApp contact. Do not repeat it as a large button in the desktop primary header.
 
 Suggested dropdown structure:
 

@@ -228,7 +228,8 @@ summary {
 }
 
 .hks-utility__icon--whatsapp {
-	fill: none;
+	fill: currentcolor;
+	stroke: none;
 }
 
 .hks-utility__social {
@@ -480,7 +481,7 @@ summary {
 
 .hks-mobile-menu__nav {
 	display: grid;
-	max-height: calc(100dvh - 15rem);
+	max-height: calc(100dvh - 18.5rem);
 	overflow-y: auto;
 	padding: 1rem 1.25rem;
 }
@@ -548,6 +549,44 @@ summary {
 .hks-mobile-menu__footer .hks-button {
 	max-width: none;
 	width: 100%;
+}
+
+.hks-mobile-menu__social {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0.5rem;
+}
+
+.hks-mobile-menu__social a {
+	align-items: center;
+	color: var(--wp--preset--color--midnight-navy);
+	display: inline-flex;
+	font-size: 0.84rem;
+	font-weight: 650;
+	gap: 0.45rem;
+	justify-content: center;
+	min-height: 44px;
+	text-decoration: none;
+}
+
+.hks-mobile-menu__social a:hover,
+.hks-mobile-menu__social a:focus-visible {
+	color: var(--wp--preset--color--lake-teal);
+}
+
+.hks-mobile-menu__social svg {
+	fill: currentcolor;
+	height: 1rem;
+	stroke: none;
+	width: 1rem;
+}
+
+.hks-mobile-menu__social a:last-child svg {
+	fill: none;
+	stroke: currentcolor;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-width: 1.8;
 }
 
 .hks-mobile-menu__footer > a:not(.hks-button) {
@@ -2238,10 +2277,6 @@ summary {
 
 	.hks-primary-header__inner > .hks-brand-link img {
 		width: 10.5rem;
-	}
-
-	.hks-header-actions > .hks-button--quote {
-		display: none;
 	}
 
 	.hks-title-band {

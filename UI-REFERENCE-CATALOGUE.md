@@ -54,7 +54,7 @@ Keep it compact. It is a trust and contact surface, not a second full navigation
 
 ### Desktop primary header
 
-Use a white header with the horizontal Wayfinder logo, product-led navigation, and one clearly separated WhatsApp quote action.
+Use a white header with the horizontal Wayfinder logo and product-led navigation. Keep the compact WhatsApp contact in the utility bar; do not repeat it as a large primary-header button.
 
 Approved primary structure:
 
@@ -65,7 +65,8 @@ Approved primary structure:
 5. Group Travel.
 6. About.
 7. Contact.
-8. Request quote on WhatsApp.
+
+The mobile drawer and page-level conversion surfaces retain the **Request quote on WhatsApp** action.
 
 `Safaris` may expose only populated, approved routes such as:
 

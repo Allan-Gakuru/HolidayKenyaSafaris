@@ -102,7 +102,7 @@ Avoid generic orange sunsets, wildlife collages, fake luxury staging, aggressive
 
 ### Header
 
-Use a slim Midnight Navy utility bar and a white primary header on desktop. The utility bar contains only confirmed location, operator, contact, and social information. The primary header uses the horizontal Wayfinder SVG, product-led dropdown navigation, and one dominant **Request quote on WhatsApp** action.
+Use a slim Midnight Navy utility bar and a white primary header on desktop. The utility bar contains only confirmed operator, contact, and social information, including one clean WhatsApp icon rather than a separate phone glyph. The primary header uses the horizontal Wayfinder SVG and product-led dropdown navigation without repeating the utility contact as a large quote button.
 
 On mobile, use the Wayfinder mark and a familiar menu icon. The full-height navigation drawer uses accessible accordion groups, direct contact routes, and a quote action. It must trap focus, close with Escape, return focus to its trigger, and prevent background scrolling.
 
