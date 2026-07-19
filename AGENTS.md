@@ -62,6 +62,7 @@ The initial commercial endpoint is a qualified WhatsApp conversation, not online
 - Do not add price status, validity-date, season, residency, group-size, transport, accommodation, inclusion, or other price-assumption fields. Editors update or remove a Campaign price manually.
 - Never invent rates, reviews, memberships, policies, legal details, lodge availability, or operational claims.
 - The official Holiday Kenya Safaris mobile and WhatsApp number is `+254 712 965 131` (`254712965131` in `wa.me` URLs).
+- The official public email is `info@holidaykenyasafaris.ke`; the official Instagram and Facebook profiles are the URLs recorded in `CLIENT-CONFIRMATIONS.md`.
 - Unknown public information stays blank or in draft and is omitted from public pages. `CLIENT-CONFIRMATIONS.md` remains the project-level register for unresolved legal, contact, analytics, and operational launch decisions; it is not a source of per-record approval fields.
 
 ## Conversion Rules

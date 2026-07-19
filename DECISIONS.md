@@ -64,6 +64,9 @@ Exclude by default:
 ## Conversion
 
 - Official Holiday Kenya Safaris mobile and WhatsApp number: `+254 712 965 131`.
+- Official public email: `info@holidaykenyasafaris.ke`.
+- Official Instagram: `https://www.instagram.com/holidaykenyasafaris/`.
+- Official Facebook: `https://www.facebook.com/people/Holiday-Kenya-Safaris/61591508593846/`.
 - Every quote CTA opens an intake form before WhatsApp.
 - Required fields: name, phone, package, preferred travel date or month, and number of travelers.
 - The form constructs a prefilled WhatsApp message that the visitor chooses to send.

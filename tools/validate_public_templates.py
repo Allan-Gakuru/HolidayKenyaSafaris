@@ -218,6 +218,7 @@ def main() -> int:
         errors.append("canonical renderer must create exactly one shared quote block instance")
 
     require(errors, "navigation script", sources["navigation"], ["showModal", "aria-expanded", "Escape", "data-hks-quote-proxy", "data-hks-inquiry-open"])
+    require(errors, "utility contact strip", sources["header"], ["info@holidaykenyasafaris.ke", "instagram.com/holidaykenyasafaris", "facebook.com/people/Holiday-Kenya-Safaris/61591508593846", "hks-utility__social", "hks-utility__whatsapp"])
     require(errors, "homepage gallery script", sources["home_gallery"], ["3000", "prefers-reduced-motion", "IntersectionObserver", "pointermove", "ArrowLeft", "ArrowRight", "desktopLayout.matches", "desktopSlots", "dataset.hksPosition", "aria-hidden", "is-dragging", "is-hovered", "drag.captured", "track.setPointerCapture"])
     pointer_capture = sources["home_gallery"].find("track.setPointerCapture")
     drag_threshold = sources["home_gallery"].find("drag.moved = true")

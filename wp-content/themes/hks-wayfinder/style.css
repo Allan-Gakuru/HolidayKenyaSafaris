@@ -158,18 +158,116 @@ summary {
 .hks-utility {
 	background: var(--wp--preset--color--midnight-navy);
 	color: var(--wp--preset--color--white);
-	font-size: 0.76rem;
+	font-size: 0.78rem;
 }
 
 .hks-utility__inner {
 	align-items: center;
 	display: flex;
-	justify-content: space-between;
-	min-height: 34px;
+	gap: clamp(0.75rem, 2vw, 1.5rem);
+	min-height: 40px;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
-.hks-utility a {
+.hks-utility a,
+.hks-utility button {
 	color: inherit;
+}
+
+.hks-utility__operator,
+.hks-utility__contact,
+.hks-utility__social {
+	align-items: center;
+	display: inline-flex;
+}
+
+.hks-utility__operator {
+	flex: 0 0 auto;
+	font-weight: 600;
+	gap: 0.5rem;
+}
+
+.hks-utility__contacts {
+	align-items: center;
+	display: flex;
+	gap: clamp(0.5rem, 1.6vw, 1.25rem);
+	margin-left: auto;
+}
+
+.hks-utility__contact {
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+	font: inherit;
+	font-weight: 500;
+	gap: 0.45rem;
+	min-height: 34px;
+	padding: 0 0.15rem;
+	text-decoration: none;
+	transition: color var(--wp--custom--transition--fast, 140ms) cubic-bezier(0.22, 1, 0.36, 1), opacity var(--wp--custom--transition--fast, 140ms) ease-out;
+}
+
+.hks-utility__contact:hover,
+.hks-utility__contact:focus-visible,
+.hks-utility__social a:hover,
+.hks-utility__social a:focus-visible {
+	color: var(--wp--preset--color--saffron);
+	opacity: 1;
+}
+
+.hks-utility__icon {
+	fill: none;
+	flex: 0 0 auto;
+	height: 1rem;
+	stroke: currentcolor;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-width: 1.8;
+	width: 1rem;
+}
+
+.hks-utility__icon--whatsapp {
+	fill: none;
+}
+
+.hks-utility__social {
+	border-left: 1px solid rgb(255 255 255 / 22%);
+	flex: 0 0 auto;
+	gap: 0.2rem;
+	padding-left: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+.hks-utility__social-label {
+	font-weight: 600;
+	margin-right: 0.25rem;
+}
+
+.hks-utility__social a {
+	align-items: center;
+	display: inline-flex;
+	justify-content: center;
+	min-height: 34px;
+	min-width: 34px;
+	text-decoration: none;
+	transition: color var(--wp--custom--transition--fast, 140ms) cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hks-utility__social a:first-of-type .hks-utility__icon {
+	fill: currentcolor;
+	stroke: none;
+}
+
+@media (min-width: 48.0625rem) and (max-width: 70rem) {
+	.hks-utility__contact-text,
+	.hks-utility__social-label {
+		display: none;
+	}
+
+	.hks-utility__contact {
+		justify-content: center;
+		min-width: 34px;
+	}
 }
 
 .hks-primary-header__inner {

@@ -41,7 +41,9 @@ Use this file for project-level decisions such as contact details, legal wording
 |---|---|---|
 | WhatsApp | Confirmed: `+254 712 965 131` | Official Holiday Kenya Safaris WhatsApp destination |
 | Main phone | Confirmed: `+254 712 965 131` | Official Holiday Kenya Safaris mobile number |
-| Email | CLIENT CONFIRMATION REQUIRED | Prefer dedicated Holiday Kenya Safaris address |
+| Email | Confirmed: `info@holidaykenyasafaris.ke` | Official Holiday Kenya Safaris public email |
+| Instagram | Confirmed | `https://www.instagram.com/holidaykenyasafaris/` |
+| Facebook | Confirmed | `https://www.facebook.com/people/Holiday-Kenya-Safaris/61591508593846/` |
 | Address | CLIENT CONFIRMATION REQUIRED | Verify against current Ashford source and client approval |
 | Business hours | CLIENT CONFIRMATION REQUIRED | Do not infer |
 | Quote response expectation | CLIENT CONFIRMATION REQUIRED | Do not promise a response time without operations approval |
