@@ -213,6 +213,7 @@ summary {
 
 .hks-nav-menu > summary {
 	gap: 0.4rem;
+	height: 100%;
 	list-style: none;
 }
 
