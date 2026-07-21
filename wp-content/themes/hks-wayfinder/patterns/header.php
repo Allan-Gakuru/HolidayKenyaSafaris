@@ -12,7 +12,7 @@
 defined( 'ABSPATH' ) || exit;
 
 $home_url         = home_url( '/' );
-$logo_url         = get_theme_file_uri( 'assets/images/brand/hks-wayfinder-horizontal-primary.svg' );
+$logo_url         = get_theme_file_uri( 'assets/images/brand/holiday-kenya-safaris-logo.svg' );
 $tours_url        = get_post_type_archive_link( 'hks_tour' ) ?: home_url( '/tours/' );
 $destination_terms = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_destination', 8 ) : array();
 $tour_type_terms   = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_tour_type', 8 ) : array();
@@ -111,7 +111,7 @@ $render_terms = static function ( array $terms ): void {
 	<div class="hks-primary-header">
 		<div class="hks-shell hks-primary-header__inner">
 			<a class="hks-brand-link" href="<?php echo esc_url( $home_url ); ?>" aria-label="<?php echo esc_attr__( 'Holiday Kenya Safaris home', 'hks-wayfinder' ); ?>">
-				<img src="<?php echo esc_url( $logo_url ); ?>" width="720" height="256" alt="<?php echo esc_attr__( 'Holiday Kenya Safaris', 'hks-wayfinder' ); ?>">
+				<img src="<?php echo esc_url( $logo_url ); ?>" width="895" height="342" alt="<?php echo esc_attr__( 'Holiday Kenya Safaris', 'hks-wayfinder' ); ?>">
 			</a>
 
 			<nav class="hks-primary-nav" aria-label="<?php echo esc_attr__( 'Primary navigation', 'hks-wayfinder' ); ?>">
@@ -167,7 +167,7 @@ $render_terms = static function ( array $terms ): void {
 
 	<dialog class="hks-mobile-menu" id="<?php echo esc_attr( $menu_id ); ?>" data-hks-mobile-menu aria-label="<?php echo esc_attr__( 'Mobile navigation', 'hks-wayfinder' ); ?>">
 		<div class="hks-mobile-menu__header">
-			<a class="hks-brand-link" href="<?php echo esc_url( $home_url ); ?>"><img src="<?php echo esc_url( $logo_url ); ?>" width="720" height="256" alt="<?php echo esc_attr__( 'Holiday Kenya Safaris', 'hks-wayfinder' ); ?>"></a>
+			<a class="hks-brand-link" href="<?php echo esc_url( $home_url ); ?>"><img src="<?php echo esc_url( $logo_url ); ?>" width="895" height="342" alt="<?php echo esc_attr__( 'Holiday Kenya Safaris', 'hks-wayfinder' ); ?>"></a>
 			<button type="button" data-hks-menu-close aria-label="<?php echo esc_attr__( 'Close menu', 'hks-wayfinder' ); ?>"><span aria-hidden="true">×</span></button>
 		</div>
 		<nav class="hks-mobile-menu__nav" aria-label="<?php echo esc_attr__( 'Mobile primary navigation', 'hks-wayfinder' ); ?>">

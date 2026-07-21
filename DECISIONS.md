@@ -67,6 +67,7 @@ Exclude by default:
 - Official public email: `info@holidaykenyasafaris.ke`.
 - Official Instagram: `https://www.instagram.com/holidaykenyasafaris/`.
 - Official Facebook: `https://www.facebook.com/people/Holiday-Kenya-Safaris/61591508593846/`.
+- A global floating **Chat on WhatsApp** control opens the official number with one fixed general reach-out message. It does not collect answers, customize the message, or create a WordPress inquiry record; structured quote actions continue to use the intake, consent, recovery, review, and visitor-controlled launch flow.
 - Every quote CTA opens an intake form before WhatsApp.
 - Required fields: name, phone, package, preferred travel date or month, and number of travelers.
 - The form constructs a prefilled WhatsApp message that the visitor chooses to send.
@@ -104,8 +105,8 @@ Exclude by default:
 ## Brand
 
 - Selected direction: The Wayfinder.
-- Current Wayfinder concept is an approved direction, not a final production master.
-- Create a clean production SVG, horizontal logo, stacked logo, icon-only mark, one-color marks, reversed marks, PNG exports, and favicon before building the final header.
+- The website header and mobile navigation drawer use the same production lockup: `wp-content/themes/hks-wayfinder/assets/images/brand/holiday-kenya-safaris-logo.svg`.
+- This lockup is approved for website header use. Complete the remaining stacked, icon-only, one-color, reversed, print, social, and favicon variants as a separate identity-production task.
 - Use the classic raised-roof safari Defender mockup as an application reference, not as the main logo symbol.
 - The brand does not need app-specific identity assets.
 

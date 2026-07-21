@@ -5,6 +5,7 @@ This directory contains the Phase 1 production redraw of **The Wayfinder**, the 
 ## Status and authority
 
 - **Approved direction:** The Wayfinder is the selected identity. Midnight Navy, Lake Teal, Saffron, Pale Mist, Sora, and Inter are the specified visual direction in `BRAND-WAYFINDER.md`.
+- **Current website lockup:** `../wp-content/themes/hks-wayfinder/assets/images/brand/holiday-kenya-safaris-logo.svg` is confirmed for the desktop header and mobile navigation drawer. Its approval for website navigation does not automatically approve it for permanent signage or print.
 - **Production artwork status:** the files in `brand/masters/` are the vector production candidates created from that direction. They are not evidence of final client approval by themselves. Record client acceptance before releasing them for permanent signage, a large print run, or a public launch.
 - **Concept artwork:** the concept board and extracted concept logo under `outputs/brand-identity/` remain references only. Do not publish or trace those raster files as masters.
 - **Asset integrity:** `brand/manifest.json` is the inventory of generated files, dimensions, and SHA-256 hashes. Treat it as the verification record for this asset set.
@@ -17,7 +18,7 @@ Use an SVG master whenever the destination supports SVG. The PNG and ICO files i
 
 | Context | Preferred file | Notes |
 |---|---|---|
-| Website header on White or Pale Mist | `masters/hks-wayfinder-horizontal-primary.svg` | Default complete mark. |
+| Website header and mobile drawer | `../wp-content/themes/hks-wayfinder/assets/images/brand/holiday-kenya-safaris-logo.svg` | Current confirmed website lockup; use the same file in both navigation surfaces. |
 | Website header on Midnight Navy or a suitably dark image | `masters/hks-wayfinder-horizontal-reversed.svg` | White artwork with the Saffron eastward cue. |
 | Single-color mark on a light surface | `masters/hks-wayfinder-horizontal-navy.svg` | Use when color reproduction is restricted. |
 | Single-color mark on a dark surface | `masters/hks-wayfinder-horizontal-white.svg` | Pure white; no accent color. |

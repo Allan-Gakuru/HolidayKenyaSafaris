@@ -29,6 +29,8 @@ Use a compact trust and contact strip containing only confirmed information:
 
 The utility bar carries a compact direct WhatsApp contact with a prefilled, page-aware reach-out message. Do not repeat it as a large button in the desktop primary header. Page-level quote actions retain the structured intake and recovery flow.
 
+The desktop header and mobile drawer use the same production `holiday-kenya-safaris-logo.svg` lockup. A separate global floating **Chat on WhatsApp** control opens the official number with one fixed general message; it does not create an inquiry record or replace the structured page-level quote actions.
+
 Suggested dropdown structure:
 
 | Menu | Approved routes when populated |
@@ -318,6 +320,7 @@ Potential modules, only when verified:
 - Testimonial module only after real public testimonial content and a rendered component are implemented.
 - Intake-to-WhatsApp dialog or sheet.
 - Sticky mobile WhatsApp action that does not obscure content.
+- Global bottom-right Chat on WhatsApp contact that uses a fixed message, respects safe areas, and sits above Tour or Campaign mobile quote actions.
 - Campaign attribution handler.
 - Related-Tour query using shared destinations and a catalogue fallback.
 - Global footer.

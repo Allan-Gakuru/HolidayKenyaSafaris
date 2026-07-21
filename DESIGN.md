@@ -102,7 +102,7 @@ Avoid generic orange sunsets, wildlife collages, fake luxury staging, aggressive
 
 ### Header
 
-Use a slim Midnight Navy utility bar and a white primary header on desktop. The utility bar contains only confirmed operator, contact, and social information, including one clean WhatsApp icon rather than a separate phone glyph. The WhatsApp icon and number open a direct chat with a concise prefilled message; on Tour and Campaign pages that message includes the current title and URL. The primary header uses the horizontal Wayfinder SVG and product-led dropdown navigation without repeating the utility contact as a large quote button.
+Use a slim Midnight Navy utility bar and a white primary header on desktop. The utility bar contains only confirmed operator, contact, and social information, including one clean WhatsApp icon rather than a separate phone glyph. The WhatsApp icon and number open a direct chat with a concise prefilled message; on Tour and Campaign pages that message includes the current title and URL. The primary header and mobile navigation drawer both use `assets/images/brand/holiday-kenya-safaris-logo.svg`, with product-led dropdown navigation and without repeating the utility contact as a large quote button.
 
 On mobile, use the Wayfinder mark and a familiar menu icon. The full-height navigation drawer uses accessible accordion groups, direct contact routes, and a quote action. It must trap focus, close with Escape, return focus to its trigger, and prevent background scrolling.
 
@@ -139,6 +139,8 @@ Use a readable day-by-day timeline with native headings and accessible disclosur
 ### Quote actions
 
 The canonical primary label is **Request quote on WhatsApp**. Opening the action reveals the intake form first; it must never silently send visitor data. Canonical Tour pages use a price-free sticky desktop quote panel containing the primary action and a short explanation of the tailored quote and message-review step. Campaign pages may show their own optional starting price when one is deliberately entered. They do not use a permanently visible long booking form. A mobile sticky action must respect safe areas and leave enough bottom padding that it cannot obscure content.
+
+The global floating **Chat on WhatsApp** control is a separate lightweight contact route. It stays at the bottom right, uses one fixed general prefilled message, opens the official number in a new tab, and does not create an inquiry record. It must rise above the Tour and Campaign mobile quote bar, respect device safe areas, and never replace or visually compete with the structured page-level quote action.
 
 ### Group Travel planner
 

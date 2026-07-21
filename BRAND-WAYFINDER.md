@@ -51,6 +51,8 @@ Both families are working recommendations. Confirm font licensing and delivery d
 
 ## Production Logo Requirements
 
+The current website lockup is `wp-content/themes/hks-wayfinder/assets/images/brand/holiday-kenya-safaris-logo.svg`. Use this same asset in the desktop primary header and the mobile navigation drawer so the brand does not change when the menu opens. The approved PNG supplied with it remains a reference/export, not the runtime header asset.
+
 Create and test:
 
 - Primary horizontal mark.

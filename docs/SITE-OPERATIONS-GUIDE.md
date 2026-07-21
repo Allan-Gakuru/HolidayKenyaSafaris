@@ -324,6 +324,12 @@ date/month, traveler-count, consent, recovery, review, and WhatsApp steps remain
 unchanged. Destination and Tour choices update automatically when catalogue
 records are published or their Destination assignments change.
 
+The utility-bar WhatsApp link and floating **Chat on WhatsApp** button are direct
+contact shortcuts, not quote submissions. The floating button always uses one
+fixed general message and does not collect answers or create a recovery record.
+Use **Tours -> Quote inquiries** only for requests completed through the structured
+quote form or Group Travel planner.
+
 ### 13.2 Handling inquiries in WordPress
 
 1. Sign in as an Administrator.
@@ -392,9 +398,13 @@ homepage, Tour catalogue, Tour pages, Campaign pages, and Destination archives.
 - Do not turn every section into a card or use generic tourism-poster layouts.
 - Reserve WhatsApp green for WhatsApp actions.
 - Test keyboard focus, mobile layouts, and reduced motion after template changes.
+- Keep `assets/images/brand/holiday-kenya-safaris-logo.svg` as the shared desktop
+  header and mobile-menu logo. Do not edit one navigation logo independently.
+- Keep the floating Chat on WhatsApp button clear of the Tour/Campaign mobile quote
+  bar, form controls, footer links, and device safe areas.
 
-The MVP header intentionally contains only Home and Tours until additional public
-pages and their content are approved.
+The header exposes catalogue routes and automatically includes optional Page routes
+only when their content is published.
 
 ## 16. Deployment from GitHub to cPanel
 

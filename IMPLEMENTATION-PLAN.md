@@ -138,7 +138,7 @@ Acceptance:
 
 ## Phase 6: Templates and Pages
 
-Implementation status (2026-07-19): the global, Tour, Campaign, catalogue, all four Tour taxonomy archive families, Destination, homepage, and standard Page templates are implemented. Group Travel now has a dedicated catalogue-driven planner on its published Page and reuses the shared inquiry recovery and WhatsApp flow. About is available; Contact and four legal routes remain protected drafts until their missing project-level information is supplied.
+Implementation status (2026-07-21): the global, Tour, Campaign, catalogue, all four Tour taxonomy archive families, Destination, homepage, and standard Page templates are implemented. Group Travel has a dedicated catalogue-driven planner on its published Page and reuses the shared inquiry recovery and WhatsApp flow. The global floating Chat on WhatsApp contact uses a fixed general message and remains separate from the saved-inquiry quote flow. The desktop header and mobile drawer share the production `holiday-kenya-safaris-logo.svg` lockup. About is available; Contact and four legal routes remain protected drafts until their missing project-level information is supplied.
 
 Build in this order:
 

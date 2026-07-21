@@ -25,7 +25,7 @@ Use this file for project-level decisions such as contact details, legal wording
 
 | Item | Current status | Needed action | Blocking point |
 |---|---|---|---|
-| Production Wayfinder logo | Approved concept only | Redraw and approve SVG/PNG/favicons | Final header, favicon, brand launch |
+| Production Wayfinder logo | Confirmed for website header use | Use `holiday-kenya-safaris-logo.svg` consistently in the desktop header and mobile drawer; retain the supplied approved PNG as a reference/export | Header and mobile navigation |
 | Domain | Confirmed | `holidaykenyasafaris.ke` | Production configuration |
 | Hosting | Confirmed | cPanel account `holidayk`; document root `/home/holidayk/public_html` | Deployment |
 | WordPress admin ownership | CLIENT CONFIRMATION REQUIRED | Name account owners and editorial roles | Production access |

@@ -10,7 +10,7 @@ This is the custom block-theme foundation for Holiday Kenya Safaris. WordPress c
 
 ## Theme assets
 
-The deployed theme carries vector-derived Wayfinder header and favicon files in `assets/images/brand/`. They are copied from the production candidates in the repository-level `brand/` package; do not edit the copies independently.
+The deployed theme carries vector-derived Wayfinder header and favicon files in `assets/images/brand/`. The desktop header and mobile drawer both use `holiday-kenya-safaris-logo.svg`; do not give the two navigation surfaces different logo assets.
 
 The header pattern references the full horizontal SVG directly from the theme, so enabling SVG uploads is neither necessary nor recommended. If WordPress has no configured Site Icon, `functions.php` provides SVG, 32px PNG, 512px PNG, and Apple touch icon fallbacks. A Site Icon selected in the dashboard takes precedence automatically; `site-icon-512.png` is also the controlled square source for that dashboard setting.
 
@@ -31,6 +31,9 @@ canonical Tour gallery/workspace with desktop tabs, mobile disclosures, a sticky
 quote panel, itinerary timeline, and related Tours. Focused Campaigns retain their
 separate emotional conversion layout. The HKS Core quote block remains the single
 source of the saved inquiry, message review, and visitor-controlled WhatsApp handoff.
+The footer also supplies a global floating Chat on WhatsApp contact with one fixed
+general message. It opens the official number directly and does not create a private
+inquiry record or replace the structured quote actions.
 
 Standard WordPress Pages now use the same compact title band and a responsive editorial
 content system for About, Group Travel, Contact, and client-approved legal content. The

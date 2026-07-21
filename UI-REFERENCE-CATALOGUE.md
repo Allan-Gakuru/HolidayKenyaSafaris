@@ -56,7 +56,7 @@ The WhatsApp icon and number are one direct contact link to the confirmed HKS nu
 
 ### Desktop primary header
 
-Use a white header with the horizontal Wayfinder logo and product-led navigation. Keep the compact WhatsApp contact in the utility bar; do not repeat it as a large primary-header button.
+Use a white header with the production `holiday-kenya-safaris-logo.svg` lockup and product-led navigation. Keep the compact WhatsApp contact in the utility bar; do not repeat it as a large primary-header button.
 
 Approved primary structure:
 
@@ -92,7 +92,7 @@ Do not include international holidays, visa services, air ticketing, transfers, 
 
 Use a compact white header with the Wayfinder mark and a familiar menu icon. Opening it reveals a full-height drawer with:
 
-- Logo and accessible Close button.
+- The same `holiday-kenya-safaris-logo.svg` lockup used by the primary header, plus an accessible Close button.
 - Search only when the catalogue is large enough for search to be useful.
 - Accordion navigation for Safaris, Coast & Stays, and Destinations.
 - Direct Group Travel, About, and Contact links.
@@ -257,6 +257,8 @@ Mobile quote entry points:
 - Final Tour prompt.
 
 Never use `Book now`, `Submit Booking`, or language implying confirmed availability or payment when the action only requests a quote.
+
+The separate global **Chat on WhatsApp** control uses one fixed general message and opens the official number directly. It does not open the intake, save an inquiry, or replace any **Request quote on WhatsApp** entry point. Keep it at the bottom right, above any mobile quote bar and outside form controls or footer content.
 
 ### Group Travel route
 

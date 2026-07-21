@@ -62,7 +62,7 @@ Official Holiday Kenya Safaris destination:
 
 `https://wa.me/254712965131`
 
-The compact utility-bar WhatsApp contact is a lightweight direct-chat route. It opens this number with a concise prefilled reach-out message and, on a Tour or Campaign, includes the current title and URL. It does not replace the structured intake path used by page-level quote actions and must not create an inquiry recovery record.
+The compact utility-bar WhatsApp contact and global floating **Chat on WhatsApp** control are lightweight direct-chat routes. The utility contact uses a concise page-aware message and includes the current title and URL on a Tour or Campaign. The floating control uses one fixed general message with no visitor customization. Neither route replaces the structured intake path used by page-level quote actions or creates an inquiry recovery record.
 
 Default generated message:
 
@@ -110,7 +110,7 @@ Use a stable event vocabulary for Meta and GA4.
 | `quote_form_complete` | Valid form is used to construct message | tour ID, campaign ID, traveler-count bucket |
 | `quote_inquiry_saved` | A private recovery record is successfully created or refreshed | tour ID, campaign ID, non-sensitive request reference |
 | `whatsapp_launch` | Website opens the `wa.me` URL | tour ID, campaign ID, CTA location, UTMs |
-| `contact_click` | Visitor uses phone, email, or map contact | method, page type |
+| `contact_click` | Visitor uses phone, email, utility WhatsApp, floating WhatsApp, or map contact | method, page type, contact location |
 
 Do not treat `whatsapp_launch` as a confirmed lead or booking. Reconcile website events with WhatsApp conversations and sales records.
 

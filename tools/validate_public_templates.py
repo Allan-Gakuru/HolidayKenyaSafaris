@@ -115,7 +115,7 @@ def main() -> int:
             "data-hks-nav-menu",
             "data-hks-mobile-menu",
             "<dialog",
-            "hks-wayfinder-horizontal-primary.svg",
+            "holiday-kenya-safaris-logo.svg",
             "Home",
             "Safaris",
             "Coast & Stays",
