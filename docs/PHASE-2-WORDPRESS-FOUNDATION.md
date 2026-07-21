@@ -48,7 +48,7 @@ The custom block theme includes:
 - production horizontal-logo and favicon assets copied into the deployable theme;
 - a PHP-registered header pattern so template HTML does not hard-code an installation path;
 - Site Icon-aware SVG/PNG/Apple touch icon fallbacks;
-- self-hosted Sora and Inter WOFF2 files with system fallbacks, licenses, upstream URLs, and SHA-256 records;
+- self-hosted Montserrat variable WOFF2 subsets with system fallbacks, license, upstream URLs, and SHA-256 records;
 - restrained index, page, single, 404, header, and footer fallbacks.
 
 The generic templates are a foundation, not the finished public site. Tour, Campaign, catalogue, destination, homepage, trust, contact, and conversion templates follow after the structured models and conversion component exist.
@@ -72,9 +72,8 @@ The scaffold intentionally does not yet register post types, taxonomies, fields,
 
 The theme carries:
 
-- Google Fonts Sora v17 variable WOFF2 subsets for Latin and Latin Extended, used at weights 600 and 700;
-- upstream Inter 4.1 `InterVariable.woff2`, used at weights 400, 500, and 600;
-- separate SIL OFL 1.1 notices;
+- Google Fonts Montserrat v31 variable WOFF2 subsets for Latin and Latin Extended, used site-wide at weights 400–800;
+- the Montserrat SIL OFL 1.1 notice;
 - `assets/fonts/SOURCES.json` with source URLs and hashes.
 
 `tools/theme/build_fonts.py` verifies the pinned upstream inputs and reproduces the deployable font package. The public theme does not make runtime requests to Google Fonts or another font CDN.
@@ -97,7 +96,7 @@ python tools\validate_scaffold.py
 
 Brand assets retain their repository-source hashes, font files retain their recorded hashes, JSON parses, block-template structure is checked, and no generated Mara or Mercy image is included in the deployable code.
 
-The internal `tools/theme/font-smoke.html` test loaded the self-hosted Sora 700 and Inter 500 faces in the Codex in-app browser. Both `document.fonts.check()` assertions passed, the page had no horizontal overflow, and the browser recorded no warnings or errors.
+The internal `tools/theme/font-smoke.html` surface now uses the self-hosted Montserrat variable face for both display and body roles. Repository validation checks its WOFF2 signature, declared local paths, provenance URLs, output hashes, and SIL Open Font License.
 
 ## First cPanel integration check
 

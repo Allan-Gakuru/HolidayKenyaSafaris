@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the self-hosted theme font package from verified upstream sources."""
+"""Build the self-hosted Montserrat theme font package from verified sources."""
 
 from __future__ import annotations
 
@@ -8,10 +8,8 @@ import hashlib
 import json
 import shutil
 from pathlib import Path
-from zipfile import ZipFile
 
 ROOT = Path(__file__).resolve().parents[2]
-SORA_LICENSE = ROOT / "brand" / "source-fonts" / "Sora-OFL.txt"
 FONT_DIR = (
     ROOT
     / "wp-content"
@@ -23,11 +21,30 @@ FONT_DIR = (
 LICENSE_DIR = FONT_DIR / "licenses"
 SOURCE_MANIFEST = FONT_DIR / "SOURCES.json"
 
-SORA_LATIN_SHA256 = "fa26406eeda9a3c6ec3d9ea8813c3045d6dc755e30c716d5c094e8ef43be5a7f"
-SORA_LATIN_EXT_SHA256 = "c163c536f68befd99a83d4f17e8b88030e7f54229688a45c44f70c7149db7385"
-INTER_ARCHIVE_SHA256 = "9883fdd4a49d4fb66bd8177ba6625ef9a64aa45899767dde3d36aa425756b11e"
-INTER_FONT_MEMBER = "web/InterVariable.woff2"
-INTER_LICENSE_MEMBER = "LICENSE.txt"
+MONTSERRAT_CSS_URL = (
+    "https://fonts.googleapis.com/css2?"
+    "family=Montserrat:wght@100..900&display=swap"
+)
+MONTSERRAT_LATIN_URL = (
+    "https://fonts.gstatic.com/s/montserrat/v31/"
+    "JTUSjIg1_i6t8kCHKm459Wlhyw.woff2"
+)
+MONTSERRAT_LATIN_EXT_URL = (
+    "https://fonts.gstatic.com/s/montserrat/v31/"
+    "JTUSjIg1_i6t8kCHKm459Wdhyzbi.woff2"
+)
+MONTSERRAT_LICENSE_URL = (
+    "https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/OFL.txt"
+)
+MONTSERRAT_LATIN_SHA256 = (
+    "06b16db7a969135d48d38c49183be7fb88d4452e2a3011957c7851941f4e4879"
+)
+MONTSERRAT_LATIN_EXT_SHA256 = (
+    "54d9a78b7ff60b689ad9f3017ffac8547b5d871afec733f6c1c3ae36577ee504"
+)
+MONTSERRAT_LICENSE_SHA256 = (
+    "8b7141c03fa4f8d44e6345d5d4931709290f0f67875e452e95ac1fd3a027802e"
+)
 
 
 def sha256(path: Path) -> str:
@@ -46,75 +63,70 @@ def require_hash(path: Path, expected: str, label: str) -> None:
         )
 
 
-def build_sora(latin_source: Path, latin_ext_source: Path) -> tuple[Path, Path]:
-    require_hash(latin_source, SORA_LATIN_SHA256, "Sora v17 Latin WOFF2")
-    require_hash(
-        latin_ext_source, SORA_LATIN_EXT_SHA256, "Sora v17 Latin Extended WOFF2"
-    )
-    latin_output = FONT_DIR / "sora-latin-variable.woff2"
-    latin_ext_output = FONT_DIR / "sora-latin-ext-variable.woff2"
-    shutil.copyfile(latin_source, latin_output)
-    shutil.copyfile(latin_ext_source, latin_ext_output)
-    shutil.copyfile(SORA_LICENSE, LICENSE_DIR / "Sora-OFL.txt")
-    return latin_output, latin_ext_output
-
-
-def extract_inter(archive_path: Path) -> tuple[Path, Path]:
-    require_hash(archive_path, INTER_ARCHIVE_SHA256, "Inter 4.1 archive")
-    output = FONT_DIR / "inter-variable.woff2"
-    license_output = LICENSE_DIR / "Inter-OFL.txt"
-
-    with ZipFile(archive_path) as archive:
-        members = set(archive.namelist())
-        required = {INTER_FONT_MEMBER, INTER_LICENSE_MEMBER}
-        missing = required - members
-        if missing:
-            raise SystemExit(f"Inter archive is missing: {sorted(missing)}")
-        output.write_bytes(archive.read(INTER_FONT_MEMBER))
-        license_output.write_bytes(archive.read(INTER_LICENSE_MEMBER))
-
-    return output, license_output
-
-
 def inspect_woff2(path: Path) -> None:
     if path.stat().st_size < 1024 or path.read_bytes()[:4] != b"wOF2":
         raise SystemExit(f"Expected a valid WOFF2 container: {path}")
 
 
+def build_montserrat(
+    latin_source: Path,
+    latin_ext_source: Path,
+    license_source: Path,
+) -> tuple[Path, Path, Path]:
+    require_hash(
+        latin_source,
+        MONTSERRAT_LATIN_SHA256,
+        "Montserrat Google Fonts v31 Latin WOFF2",
+    )
+    require_hash(
+        latin_ext_source,
+        MONTSERRAT_LATIN_EXT_SHA256,
+        "Montserrat Google Fonts v31 Latin Extended WOFF2",
+    )
+    require_hash(
+        license_source,
+        MONTSERRAT_LICENSE_SHA256,
+        "Montserrat OFL",
+    )
+
+    latin_output = FONT_DIR / "montserrat-latin-variable.woff2"
+    latin_ext_output = FONT_DIR / "montserrat-latin-ext-variable.woff2"
+    license_output = LICENSE_DIR / "Montserrat-OFL.txt"
+    shutil.copyfile(latin_source, latin_output)
+    shutil.copyfile(latin_ext_source, latin_ext_output)
+    license_text = license_source.read_text(encoding="utf-8")
+    normalized_license = "\n".join(
+        line.rstrip() for line in license_text.splitlines()
+    ) + "\n"
+    license_output.write_text(normalized_license, encoding="utf-8", newline="\n")
+    return latin_output, latin_ext_output, license_output
+
+
 def write_manifest(
-    inter_archive: Path,
-    sora_latin_output: Path,
-    sora_latin_ext_output: Path,
-    inter_output: Path,
-    inter_license: Path,
+    latin_output: Path,
+    latin_ext_output: Path,
+    license_output: Path,
 ) -> None:
     payload = {
         "generated_by": "tools/theme/build_fonts.py",
         "families": {
-            "Sora": {
-                "version": "2.000",
-                "weights": "100 800 (theme uses 600 and 700)",
-                "source_css": "https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap",
-                "latin_source": "https://fonts.gstatic.com/s/sora/v17/xMQbuFFYT72XzQUpDg.woff2",
-                "latin_source_sha256": SORA_LATIN_SHA256,
-                "latin_output": sora_latin_output.relative_to(ROOT).as_posix(),
-                "latin_output_sha256": sha256(sora_latin_output),
-                "latin_ext_source": "https://fonts.gstatic.com/s/sora/v17/xMQbuFFYT72XzQspDre2.woff2",
-                "latin_ext_source_sha256": SORA_LATIN_EXT_SHA256,
-                "latin_ext_output": sora_latin_ext_output.relative_to(ROOT).as_posix(),
-                "latin_ext_output_sha256": sha256(sora_latin_ext_output),
-                "license": (LICENSE_DIR / "Sora-OFL.txt").relative_to(ROOT).as_posix(),
-            },
-            "Inter": {
-                "version": "4.1",
-                "weights": "100 900 (theme uses 400, 500, and 600)",
-                "source": "https://github.com/rsms/inter/releases/download/v4.1/Inter-4.1.zip",
-                "archive_sha256": sha256(inter_archive),
-                "archive_member": INTER_FONT_MEMBER,
-                "output": inter_output.relative_to(ROOT).as_posix(),
-                "output_sha256": sha256(inter_output),
-                "license": inter_license.relative_to(ROOT).as_posix(),
-            },
+            "Montserrat": {
+                "version": "Google Fonts API v31",
+                "weights": "100 900 (theme uses the 400-800 range)",
+                "source_css": MONTSERRAT_CSS_URL,
+                "latin_source": MONTSERRAT_LATIN_URL,
+                "latin_source_sha256": MONTSERRAT_LATIN_SHA256,
+                "latin_output": latin_output.relative_to(ROOT).as_posix(),
+                "latin_output_sha256": sha256(latin_output),
+                "latin_ext_source": MONTSERRAT_LATIN_EXT_URL,
+                "latin_ext_source_sha256": MONTSERRAT_LATIN_EXT_SHA256,
+                "latin_ext_output": latin_ext_output.relative_to(ROOT).as_posix(),
+                "latin_ext_output_sha256": sha256(latin_ext_output),
+                "license_source": MONTSERRAT_LICENSE_URL,
+                "license_source_sha256": MONTSERRAT_LICENSE_SHA256,
+                "license": license_output.relative_to(ROOT).as_posix(),
+                "license_output_sha256": sha256(license_output),
+            }
         },
     }
     SOURCE_MANIFEST.write_text(
@@ -125,56 +137,47 @@ def write_manifest(
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--inter-archive",
+        "--montserrat-latin",
         required=True,
         type=Path,
-        help="Path to the official Inter-4.1.zip release archive.",
+        help="Path to the official Google Fonts Montserrat v31 Latin WOFF2.",
     )
     parser.add_argument(
-        "--sora-latin",
+        "--montserrat-latin-ext",
         required=True,
         type=Path,
-        help="Path to the official Google Fonts Sora v17 Latin WOFF2.",
+        help="Path to the official Google Fonts Montserrat v31 Latin Extended WOFF2.",
     )
     parser.add_argument(
-        "--sora-latin-ext",
+        "--montserrat-license",
         required=True,
         type=Path,
-        help="Path to the official Google Fonts Sora v17 Latin Extended WOFF2.",
+        help="Path to the official Montserrat OFL text.",
     )
     arguments = parser.parse_args()
-    inter_archive = arguments.inter_archive.resolve()
-    sora_latin = arguments.sora_latin.resolve()
-    sora_latin_ext = arguments.sora_latin_ext.resolve()
 
-    for label, path in (
-        ("Inter archive", inter_archive),
-        ("Sora Latin WOFF2", sora_latin),
-        ("Sora Latin Extended WOFF2", sora_latin_ext),
-    ):
+    sources = (
+        ("Montserrat Latin WOFF2", arguments.montserrat_latin.resolve()),
+        ("Montserrat Latin Extended WOFF2", arguments.montserrat_latin_ext.resolve()),
+        ("Montserrat OFL", arguments.montserrat_license.resolve()),
+    )
+    for label, path in sources:
         if not path.is_file():
             raise SystemExit(f"{label} does not exist: {path}")
 
     FONT_DIR.mkdir(parents=True, exist_ok=True)
     LICENSE_DIR.mkdir(parents=True, exist_ok=True)
 
-    sora_latin_output, sora_latin_ext_output = build_sora(
-        sora_latin, sora_latin_ext
+    latin_output, latin_ext_output, license_output = build_montserrat(
+        sources[0][1], sources[1][1], sources[2][1]
     )
-    inter_output, inter_license = extract_inter(inter_archive)
-    for output in (sora_latin_output, sora_latin_ext_output, inter_output):
+    for output in (latin_output, latin_ext_output):
         inspect_woff2(output)
-    write_manifest(
-        inter_archive,
-        sora_latin_output,
-        sora_latin_ext_output,
-        inter_output,
-        inter_license,
-    )
+    write_manifest(latin_output, latin_ext_output, license_output)
 
-    print(f"Copied {sora_latin_output.relative_to(ROOT)}")
-    print(f"Copied {sora_latin_ext_output.relative_to(ROOT)}")
-    print(f"Extracted {inter_output.relative_to(ROOT)}")
+    print(f"Copied {latin_output.relative_to(ROOT)}")
+    print(f"Copied {latin_ext_output.relative_to(ROOT)}")
+    print(f"Copied {license_output.relative_to(ROOT)}")
     print(f"Recorded {SOURCE_MANIFEST.relative_to(ROOT)}")
 
 

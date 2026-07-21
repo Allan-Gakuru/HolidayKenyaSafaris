@@ -42,12 +42,12 @@ Use solid colors rather than gradients. Maintain WCAG AA contrast.
 
 ## Typography Direction
 
-- Display and wordmark direction: Sora SemiBold/Bold.
-- Body, UI, captions, and forms: Inter Regular/Medium/SemiBold.
+- Website headings, body copy, navigation, captions, forms, and controls: Montserrat Regular/Medium/SemiBold/Bold.
+- The production logo is outlined SVG artwork and does not inherit or require the website font.
 - Use tabular numerals for prices, dates, durations, and comparison data.
 - Keep letter spacing at normal values. Do not create artificial luxury with wide tracking everywhere.
 
-Both families are working recommendations. Confirm font licensing and delivery during implementation.
+Self-host the Montserrat Latin and Latin Extended variable WOFF2 subsets and retain the SIL Open Font License in the theme.
 
 ## Production Logo Requirements
 

@@ -62,22 +62,22 @@ Never use colour alone to communicate an optional Campaign price, validation, se
 
 ## Typography
 
-- **Sora**: logo source, headings, important labels, and compact numerical emphasis. Use 600 and 700 in the theme.
-- **Inter**: paragraphs, navigation, forms, tables, captions, itinerary details, and utility copy. Use 400, 500, and 600.
-- Both families must be self-hosted as WOFF2 files with their SIL Open Font License notices retained in the repository.
-- The logo wordmark remains outlined; never depend on a browser font to render the mark.
+- **Montserrat** is the single website type family for headings, paragraphs, navigation, forms, tables, captions, itinerary details, utility copy, and numerical emphasis.
+- Use 400 for body copy, 500 for compact metadata, 600 for controls and secondary headings, and 700–800 for primary headings where the hierarchy requires it.
+- Self-host the Latin and Latin Extended variable WOFF2 subsets with the SIL Open Font License retained in the repository.
+- The logo wordmark remains outlined; changing the website font must never alter or recreate the logo artwork.
 
 Default type scale, adjusted at deliberate responsive breakpoints rather than continuously scaled with viewport width:
 
 | Purpose | Target range | Weight |
 | --- | --- | --- |
-| Display | 44–72px | Sora 700 |
-| Page title | 36–56px | Sora 700 |
-| Section title | 28–40px | Sora 600–700 |
-| Card/title | 20–26px | Sora 600 |
-| Body lead | 18–21px | Inter 400 |
-| Body | 16–18px | Inter 400 |
-| Utility | 13–15px | Inter 500–600 |
+| Display | 44–72px | Montserrat 700–800 |
+| Page title | 36–56px | Montserrat 700 |
+| Section title | 28–40px | Montserrat 600–700 |
+| Card/title | 20–26px | Montserrat 600 |
+| Body lead | 18–21px | Montserrat 400 |
+| Body | 16–18px | Montserrat 400 |
+| Utility | 13–15px | Montserrat 500–600 |
 
 Keep paragraph measure near 65 characters. Use sentence case. Avoid all-caps paragraphs and wide letter spacing in body copy.
 

@@ -97,9 +97,7 @@ The 400 mm minimum is a working lower bound, not a promise that every vehicle pa
 
 The SVG logo artwork is outlined. No live font should be substituted for its wordmark.
 
-If a printer receives editable companion copy set in Sora, include the applicable Sora file and `source-fonts/Sora-OFL.txt`. Sora Version 2.000 is licensed under SIL OFL 1.1; it may be bundled and embedded subject to that license, and it may not be sold by itself.
-
-Inter is the interface/body direction but no Inter font file or license is included in this Phase 1 identity directory. Outline short companion text when appropriate or package a separately sourced, licensed Inter file. Never send an unlicensed font because its name appears in the brand direction.
+If a printer receives editable companion copy set in Montserrat, package an official Montserrat source together with its SIL Open Font License, or outline short companion text when appropriate. The website's license record is `wp-content/themes/hks-wayfinder/assets/fonts/licenses/Montserrat-OFL.txt`. Never send an unlicensed font because its name appears in the brand direction.
 
 ## Photography in print
 

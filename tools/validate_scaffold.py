@@ -67,11 +67,9 @@ REQUIRED_THEME_FILES = [
     "blocks/tour-details/block.json",
     "blocks/tour-hero/block.json",
     "assets/fonts/SOURCES.json",
-    "assets/fonts/inter-variable.woff2",
-    "assets/fonts/sora-latin-ext-variable.woff2",
-    "assets/fonts/sora-latin-variable.woff2",
-    "assets/fonts/licenses/Inter-OFL.txt",
-    "assets/fonts/licenses/Sora-OFL.txt",
+    "assets/fonts/montserrat-latin-ext-variable.woff2",
+    "assets/fonts/montserrat-latin-variable.woff2",
+    "assets/fonts/licenses/Montserrat-OFL.txt",
     "assets/js/navigation.js",
     "assets/js/tour-ui.js",
 ]
@@ -128,6 +126,13 @@ BRAND_COPIES = {
     "assets/images/brand/site-icon-512.png": "brand/exports/social-avatar-512.png",
 }
 
+# Client-supplied website lockup assets are registered directly in the theme.
+# They are not claimed as byte copies of the earlier Phase 1 brand masters.
+REGISTERED_THEME_BRAND_ASSETS = {
+    "assets/images/brand/Holiday-Kenya-Safaris-Logo-Approved.png",
+    "assets/images/brand/holiday-kenya-safaris-logo.svg",
+}
+
 EXPECTED_PLUGIN_DIRECTORIES = [
     "acf-json",
     "assets",
@@ -143,15 +148,20 @@ EXPECTED_PLUGIN_DIRECTORIES = [
 ]
 
 REQUIRED_FONT_PROVENANCE = {
-    "Sora": {
-        "urls": ("source_css", "latin_source", "latin_ext_source"),
-        "hashes": ("latin_source_sha256", "latin_ext_source_sha256"),
+    "Montserrat": {
+        "urls": (
+            "source_css",
+            "latin_source",
+            "latin_ext_source",
+            "license_source",
+        ),
+        "hashes": (
+            "latin_source_sha256",
+            "latin_ext_source_sha256",
+            "license_source_sha256",
+            "license_output_sha256",
+        ),
         "text": (),
-    },
-    "Inter": {
-        "urls": ("source",),
-        "hashes": ("archive_sha256",),
-        "text": ("archive_member",),
     },
 }
 
@@ -668,18 +678,19 @@ class ScaffoldValidator:
                             f"Font manifest {family_name}.{key} must be declared"
                         )
 
-            sora_record = families.get("Sora")
-            if isinstance(sora_record, dict):
+            montserrat_record = families.get("Montserrat")
+            if isinstance(montserrat_record, dict):
                 for prefix in ("latin", "latin_ext"):
-                    source_hash = sora_record.get(f"{prefix}_source_sha256")
-                    output_hash = sora_record.get(f"{prefix}_output_sha256")
+                    source_hash = montserrat_record.get(f"{prefix}_source_sha256")
+                    output_hash = montserrat_record.get(f"{prefix}_output_sha256")
                     if (
                         self.valid_sha256(source_hash)
                         and self.valid_sha256(output_hash)
                         and str(source_hash).lower() != str(output_hash).lower()
                     ):
                         self.error(
-                            f"Direct Sora source/output hashes differ for {prefix}"
+                            "Direct Montserrat source/output hashes differ for "
+                            f"{prefix}"
                         )
 
             for family_name, record in families.items():
@@ -694,7 +705,20 @@ class ScaffoldValidator:
                 else:
                     license_path = self.resolve_within(ROOT, license_value, "Font license")
                     if license_path is not None:
-                        self.require_file(license_path)
+                        if self.require_file(license_path):
+                            expected_license_hash = record.get(
+                                "license_output_sha256"
+                            )
+                            actual_license_hash = self.sha256(license_path)
+                            if (
+                                self.valid_sha256(expected_license_hash)
+                                and actual_license_hash.lower()
+                                != str(expected_license_hash).lower()
+                            ):
+                                self.error(
+                                    "Font license hash mismatch for "
+                                    f"{self.relative(license_path)}"
+                                )
 
                 for key, value in record.items():
                     if key.endswith("sha256") and not self.valid_sha256(value):
@@ -759,6 +783,9 @@ class ScaffoldValidator:
         self.require_directory(theme_brand_dir)
 
         expected_deploy_paths = {THEME / relative for relative in BRAND_COPIES}
+        expected_deploy_paths.update(
+            THEME / relative for relative in REGISTERED_THEME_BRAND_ASSETS
+        )
         if theme_brand_dir.is_dir():
             actual_deploy_paths = {path for path in theme_brand_dir.iterdir() if path.is_file()}
             for unexpected in sorted(actual_deploy_paths - expected_deploy_paths, key=str):
@@ -766,6 +793,9 @@ class ScaffoldValidator:
                     "Theme brand directory contains an unregistered copy: "
                     f"{self.relative(unexpected)}"
                 )
+
+        for relative in REGISTERED_THEME_BRAND_ASSETS:
+            self.require_file(THEME / relative)
 
         for deploy_relative, source_relative in BRAND_COPIES.items():
             deploy_path = THEME / deploy_relative

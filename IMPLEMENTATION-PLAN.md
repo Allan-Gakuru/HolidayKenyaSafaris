@@ -28,7 +28,7 @@ Actions:
 - Correct HKS legibility, compass simplification, spacing, and small-size behavior.
 - Export required variants.
 - Test on Pale Mist, white, Midnight Navy, destination photography, and a classic safari Defender application.
-- Confirm Sora and Inter delivery.
+- Confirm self-hosted Montserrat variable-font delivery and licensing.
 
 Acceptance:
 

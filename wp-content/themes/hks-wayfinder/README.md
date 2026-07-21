@@ -14,9 +14,9 @@ The deployed theme carries vector-derived Wayfinder header and favicon files in 
 
 The header pattern references the full horizontal SVG directly from the theme, so enabling SVG uploads is neither necessary nor recommended. If WordPress has no configured Site Icon, `functions.php` provides SVG, 32px PNG, 512px PNG, and Apple touch icon fallbacks. A Site Icon selected in the dashboard takes precedence automatically; `site-icon-512.png` is also the controlled square source for that dashboard setting.
 
-The Sora and Inter family tokens are declared in `theme.json` with safe system fallbacks and self-hosted WOFF2 sources. Sora is delivered as official Google Fonts v17 Latin and Latin Extended variable files; Inter is the official 4.1 variable webfont. The theme uses Sora at 600/700 and Inter at 400/500/600. Source URLs, upstream hashes, output hashes, and license paths are recorded in `assets/fonts/SOURCES.json`.
+Montserrat is the single website family declared in `theme.json`, with safe system fallbacks and self-hosted Google Fonts v31 Latin and Latin Extended variable WOFF2 subsets. The theme uses weights 400–800 across body, navigation, controls, and headings. Source URLs, upstream hashes, output hashes, and the SIL Open Font License path are recorded in `assets/fonts/SOURCES.json`. Compatibility aliases keep block content saved with the former `sora` or `inter` slugs on Montserrat.
 
-Regenerate or verify the font package from the pinned upstream files with `tools/theme/build_fonts.py`. Do not replace the fonts from an unrecorded download or load them from a third-party CDN at runtime.
+Regenerate or verify the font package from the pinned Montserrat WOFF2 and OFL files with `tools/theme/build_fonts.py`. Do not replace the fonts from an unrecorded download or load them from a third-party CDN at runtime.
 
 ## First activation
 

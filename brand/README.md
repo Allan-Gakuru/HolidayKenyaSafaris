@@ -4,7 +4,7 @@ This directory contains the Phase 1 production redraw of **The Wayfinder**, the 
 
 ## Status and authority
 
-- **Approved direction:** The Wayfinder is the selected identity. Midnight Navy, Lake Teal, Saffron, Pale Mist, Sora, and Inter are the specified visual direction in `BRAND-WAYFINDER.md`.
+- **Approved direction:** The Wayfinder is the selected identity. Midnight Navy, Lake Teal, Saffron, Pale Mist, and Montserrat are the current website direction in `BRAND-WAYFINDER.md`.
 - **Current website lockup:** `../wp-content/themes/hks-wayfinder/assets/images/brand/holiday-kenya-safaris-logo.svg` is confirmed for the desktop header and mobile navigation drawer. Its approval for website navigation does not automatically approve it for permanent signage or print.
 - **Production artwork status:** the files in `brand/masters/` are the vector production candidates created from that direction. They are not evidence of final client approval by themselves. Record client acceptance before releasing them for permanent signage, a large print run, or a public launch.
 - **Concept artwork:** the concept board and extracted concept logo under `outputs/brand-identity/` remain references only. Do not publish or trace those raster files as masters.
@@ -77,14 +77,13 @@ Use the primary mark on White or Pale Mist. Use the reversed or white mark on Mi
 
 ## Typography and font licensing
 
-- Display headings and the brand direction use **Sora SemiBold/Bold**.
-- Body copy, interface labels, captions, and forms use **Inter Regular/Medium/SemiBold**.
+- Website headings, body copy, interface labels, captions, and forms use **Montserrat Regular/Medium/SemiBold/Bold**.
 - Use tabular numerals for prices, dates, durations, and comparisons.
 - Keep normal letter spacing. Do not add wide tracking to simulate luxury.
 
-The logo masters contain outlined paths, so displaying or printing the logo does not require a live font file. `source-fonts/Sora-wght.ttf` is the Sora Version 2.000 source used to build the outlined artwork. It is distributed under the SIL Open Font License 1.1 in `source-fonts/Sora-OFL.txt`; keep that license with any redistributed font software and do not sell the font by itself.
+The logo masters contain outlined paths, so displaying or printing the logo does not require a live font file. `source-fonts/Sora-wght.ttf` remains the historical build source for the outlined legacy master geometry; it is not a runtime website font. Keep its SIL Open Font License with any redistributed source font.
 
-Inter is the confirmed interface direction but is not part of this Phase 1 brand asset package. Before self-hosting it in the WordPress theme, add the approved webfont files together with their own license and source record. Do not infer a font license from the logo exports.
+The active Montserrat WOFF2 subsets, upstream URLs, SHA-256 hashes, and license are recorded under `wp-content/themes/hks-wayfinder/assets/fonts/`. Do not infer a font license from the logo exports.
 
 ## Photography restriction
 

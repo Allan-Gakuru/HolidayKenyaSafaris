@@ -117,44 +117,28 @@
       "fluid": true,
       "fontFamilies": [
         {
-          "slug": "sora",
-          "name": "Sora",
-          "fontFamily": "Sora, 'Avenir Next', 'Segoe UI', sans-serif",
+          "slug": "montserrat",
+          "name": "Montserrat",
+          "fontFamily": "Montserrat, 'Avenir Next', 'Segoe UI', sans-serif",
           "fontFace": [
             {
-              "fontFamily": "Sora",
-              "fontStyle": "normal",
-              "fontWeight": "100 800",
-              "fontDisplay": "swap",
-              "unicodeRange": "U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF",
-              "src": [
-                "file:./assets/fonts/sora-latin-ext-variable.woff2"
-              ]
-            },
-            {
-              "fontFamily": "Sora",
-              "fontStyle": "normal",
-              "fontWeight": "100 800",
-              "fontDisplay": "swap",
-              "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
-              "src": [
-                "file:./assets/fonts/sora-latin-variable.woff2"
-              ]
-            }
-          ]
-        },
-        {
-          "slug": "inter",
-          "name": "Inter",
-          "fontFamily": "Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-          "fontFace": [
-            {
-              "fontFamily": "Inter",
+              "fontFamily": "Montserrat",
               "fontStyle": "normal",
               "fontWeight": "100 900",
               "fontDisplay": "swap",
+              "unicodeRange": "U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF",
               "src": [
-                "file:./assets/fonts/inter-variable.woff2"
+                "file:./assets/fonts/montserrat-latin-ext-variable.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Montserrat",
+              "fontStyle": "normal",
+              "fontWeight": "100 900",
+              "fontDisplay": "swap",
+              "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+              "src": [
+                "file:./assets/fonts/montserrat-latin-variable.woff2"
               ]
             }
           ]
@@ -271,7 +255,7 @@
       }
     },
     "typography": {
-      "fontFamily": "var:preset|font-family|inter",
+      "fontFamily": "var:preset|font-family|montserrat",
       "fontSize": "var:preset|font-size|body",
       "fontWeight": "400",
       "lineHeight": "1.65"
@@ -295,7 +279,7 @@
           }
         },
         "typography": {
-          "fontFamily": "var:preset|font-family|sora",
+          "fontFamily": "var:preset|font-family|montserrat",
           "fontSize": "var:preset|font-size|small",
           "fontWeight": "600",
           "lineHeight": "1.25",
@@ -307,7 +291,7 @@
           "text": "var:preset|color|near-black"
         },
         "typography": {
-          "fontFamily": "var:preset|font-family|inter",
+          "fontFamily": "var:preset|font-family|montserrat",
           "fontSize": "var:preset|font-size|utility",
           "lineHeight": "1.5"
         }
@@ -317,7 +301,7 @@
           "text": "var:preset|color|midnight-navy"
         },
         "typography": {
-          "fontFamily": "var:preset|font-family|sora",
+          "fontFamily": "var:preset|font-family|montserrat",
           "fontWeight": "700",
           "letterSpacing": "-0.025em",
           "lineHeight": "1.12"
@@ -356,13 +340,13 @@
     "blocks": {
       "core/button": {
         "typography": {
-          "fontFamily": "var:preset|font-family|sora",
+          "fontFamily": "var:preset|font-family|montserrat",
           "fontWeight": "600"
         }
       },
       "core/navigation": {
         "typography": {
-          "fontFamily": "var:preset|font-family|inter",
+          "fontFamily": "var:preset|font-family|montserrat",
           "fontSize": "var:preset|font-size|small",
           "fontWeight": "600"
         }
@@ -383,7 +367,7 @@
       },
       "core/post-title": {
         "typography": {
-          "fontFamily": "var:preset|font-family|sora",
+          "fontFamily": "var:preset|font-family|montserrat",
           "fontWeight": "700",
           "letterSpacing": "-0.025em",
           "lineHeight": "1.12"

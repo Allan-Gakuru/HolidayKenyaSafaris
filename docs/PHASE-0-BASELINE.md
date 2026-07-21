@@ -41,7 +41,7 @@ The installed PHP 8.3 CLI is the local syntax checker. The cPanel PHP version, e
 
 ### Reusable direction
 
-- Wayfinder palette and Sora/Inter typography direction.
+- Wayfinder palette and the original Sora/Inter typography direction, superseded for the website by the site-wide Montserrat decision recorded in `BRAND-WAYFINDER.md` and `DESIGN.md`.
 - The concept's planning, movement, and guidance idea.
 - The prototype's sequence from emotional hero to practical facts, itinerary, inclusions/exclusions, quote explanation, intake form, and WhatsApp handoff.
 - The 65-record Ashford crawl as dated migration input.

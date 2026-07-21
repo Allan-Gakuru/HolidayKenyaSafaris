@@ -105,6 +105,7 @@ Exclude by default:
 ## Brand
 
 - Selected direction: The Wayfinder.
+- Montserrat is the single website font for headings, body copy, navigation, forms, and controls; the outlined logo artwork remains unchanged.
 - The website header and mobile navigation drawer use the same production lockup: `wp-content/themes/hks-wayfinder/assets/images/brand/holiday-kenya-safaris-logo.svg`.
 - This lockup is approved for website header use. Complete the remaining stacked, icon-only, one-color, reversed, print, social, and favicon variants as a separate identity-production task.
 - Use the classic raised-roof safari Defender mockup as an application reference, not as the main logo symbol.
