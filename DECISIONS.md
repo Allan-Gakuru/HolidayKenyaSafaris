@@ -71,7 +71,7 @@ Exclude by default:
 - Every quote CTA opens an intake form before WhatsApp.
 - Required fields: name, phone, package, preferred travel date or month, and number of travelers.
 - The form constructs a prefilled WhatsApp message that the visitor chooses to send.
-- Selecting `Save & review WhatsApp message` stores the validated inquiry privately in WordPress before the review step, so the team can recover a lead when WhatsApp does not open or the visitor does not complete the handoff.
+- Selecting `Review WhatsApp message` stores the validated inquiry privately in WordPress before the review step, so the team can recover a lead when WhatsApp does not open or the visitor does not complete the handoff.
 - The form must disclose storage and require contact consent before saving. WordPress records `WhatsApp opened` only after the launch click and must never claim that the message was sent.
 - Campaign attribution and package context should be retained.
 - The canonical public CTA label is **Request quote on WhatsApp**.
@@ -136,6 +136,7 @@ Client IDs will be supplied later. Do not hard-code invented IDs.
 
 ## Phase 6 and 7 Delivery Decisions
 
+- HKS Core `0.9.0` includes an idempotent, exact-match copy cleanup for previously seeded public Pages, Tours, and Campaign fields. It replaces only known implementation-facing seed phrases and does not overwrite independently edited wording or change publication status.
 - Standard WordPress Pages use the Wayfinder title band and editorial content system; no new page builder or duplicate content model is introduced.
 - About, Contact, Group Travel, and four legal routes were created through the existing guarded importer. Group Travel is published with a catalogue-driven quote planner; Contact and legal records stay in Draft until their missing project-level information is supplied.
 - The 44 reviewed local Ashford candidates resolve to 40 Phase 7 draft imports: three already exist as MVP Tours and the generic `African-wildlife-safari` marketing page is excluded as non-quotable.

@@ -140,6 +140,14 @@ Add:
 - One direct CTA.
 - A reason to believe the promise.
 
+## Public Guidance Language
+
+- Write to the traveller and help them choose the next action. Do not describe the website implementation, publishing workflow, content model, archive query, funnel, or internal recovery mechanism in promotional copy.
+- Avoid public phrases such as `published Tour`, `package context`, `intake`, `recovery record`, `stored in WordPress`, or `sales conversation`. Use direct guidance such as `choose a tour`, `add your dates`, `check your message`, and `request a tailored quote`.
+- Keep the inquiry privacy disclosure accurate and plain: the details are kept private so the team can respond if WhatsApp does not open, and the visitor sends the message only when they choose to do so in WhatsApp.
+- Every taxonomy archive H1 and introduction must identify both the taxonomy and the current term. For example: `Tours in Maasai Mara`, `Road Safari tours in Kenya`, `Kenya tours for Couples`, or `Short Break Kenya tours`.
+- Empty states should help the traveller continue. Never expose editorial statuses or assignment mechanics in public no-results messages.
+
 ## Maasai Mara Example
 
 Weak:

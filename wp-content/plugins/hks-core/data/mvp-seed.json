@@ -7,8 +7,8 @@
       "product_id": "HKS-MVP-MARA-3D2N",
       "slug": "3-days-2-nights-maasai-mara-road-safari",
       "title": "3 Days / 2 Nights Maasai Mara Road Safari",
-      "excerpt": "A compact road safari from Nairobi with two nights in the Maasai Mara and a source itinerary built around game drives.",
-      "overview": "Take the road from Nairobi to the Maasai Mara for two nights in the reserve. The source itinerary pairs afternoon, morning and evening game drives with a final morning drive before the return to Nairobi. Your quote will confirm the vehicle, accommodation, residency basis, travel dates and current KSh rate.",
+      "excerpt": "A compact road safari from Nairobi with two nights in the Maasai Mara and a schedule built around game drives.",
+      "overview": "Take the road from Nairobi to the Maasai Mara for two nights in the reserve. The itinerary pairs afternoon, morning and evening game drives with a final morning drive before the return to Nairobi. Your quote will confirm the vehicle, accommodation, residency basis, travel dates and current KSh rate.",
       "source": {
         "url": "https://ashford-tours.com/product/3-days-2-nights-maasai-mara-road-safari/",
         "reference": "Current Ashford product page and workspace crawl",
@@ -29,13 +29,13 @@
         "hks_end_location": "Nairobi",
         "hks_route_summary": "Nairobi → Maasai Mara → Nairobi",
         "hks_transport_types": ["safari_van", "land_cruiser"],
-        "hks_accommodation_basis": "Source options: Mara Sopa Lodge or Sentrim Mara Camp. The final property, room basis and availability must be confirmed in the quote.",
-        "hks_meals_summary": "Source itinerary: lunch and dinner on Day 1; breakfast, lunch and dinner on Day 2; breakfast on Day 3.",
+        "hks_accommodation_basis": "Mara Sopa Lodge or Sentrim Mara Camp. Your quote confirms the final property, room basis and availability.",
+        "hks_meals_summary": "Lunch and dinner on Day 1; breakfast, lunch and dinner on Day 2; breakfast on Day 3.",
         "hks_itinerary": [
           {
             "day_number": "1",
             "day_title": "Nairobi to Maasai Mara",
-            "description": "Drive from Nairobi through the Great Rift Valley to the Maasai Mara. The source itinerary schedules lunch after arrival and an afternoon game drive.",
+            "description": "Drive from Nairobi through the Great Rift Valley to the Maasai Mara. Have lunch after arrival, then head out for an afternoon game drive.",
             "activities": "Road transfer\nAfternoon game drive",
             "accommodation": "Mara Sopa Lodge or Sentrim Mara Camp, subject to quote",
             "meals": "Lunch and dinner"
@@ -43,7 +43,7 @@
           {
             "day_number": "2",
             "day_title": "Game drives in the Maasai Mara",
-            "description": "Spend the day in the reserve with morning and evening game drives in the source itinerary. An optional Maasai village visit is mentioned by the source and is not included unless confirmed in the quote.",
+            "description": "Spend the day in the reserve with morning and evening game drives. A Maasai village visit is optional and is included only when confirmed in your quote.",
             "activities": "Morning game drive\nEvening game drive",
             "accommodation": "Mara Sopa Lodge or Sentrim Mara Camp, subject to quote",
             "meals": "Breakfast, lunch and dinner"
@@ -51,23 +51,23 @@
           {
             "day_number": "3",
             "day_title": "Maasai Mara to Nairobi",
-            "description": "The source itinerary includes a morning game drive and breakfast before the road journey back to Nairobi.",
+            "description": "Start with a morning game drive and breakfast before the road journey back to Nairobi.",
             "activities": "Morning game drive\nRoad transfer",
             "meals": "Breakfast"
           }
         ],
         "hks_inclusions": [
           {"category": "transport", "item": "Road transport", "detail": "Safari van or Land Cruiser from Nairobi and back; final vehicle confirmed in the quote."},
-          {"category": "fees", "item": "Park entrance fees", "detail": "Listed by the source; residency basis and current fee treatment require review."},
-          {"category": "accommodation", "item": "Two nights’ accommodation", "detail": "Source lodge/camp options; final property and room basis confirmed in the quote."},
-          {"category": "meals", "item": "Meals in the source itinerary", "detail": "Two breakfasts, two lunches and two dinners are listed."},
-          {"category": "guide", "item": "Safari guide/driver", "detail": "Professional guide/driver listed by the source."},
-          {"category": "activities", "item": "Game drives", "detail": "Game drives stated in the source itinerary."},
-          {"category": "water", "item": "Bottled drinking water in the safari vehicle", "detail": "Listed by the source."}
+          {"category": "fees", "item": "Park entrance fees", "detail": "Your quote confirms the applicable park-fee basis for your group."},
+          {"category": "accommodation", "item": "Two nights’ accommodation", "detail": "Mara Sopa Lodge or Sentrim Mara Camp; your quote confirms the final property and room basis."},
+          {"category": "meals", "item": "Listed meals", "detail": "Two breakfasts, two lunches and two dinners."},
+          {"category": "guide", "item": "Safari guide/driver", "detail": "Professional safari guide/driver."},
+          {"category": "activities", "item": "Game drives", "detail": "Game drives listed in the itinerary."},
+          {"category": "water", "item": "Bottled drinking water in the safari vehicle", "detail": "Provided during the safari journey."}
         ],
         "hks_exclusions": [
           {"category": "accommodation", "item": "Nairobi accommodation before or after the safari", "detail": "Not included unless added to the quote."},
-          {"category": "drinks", "item": "Drinks not stated in the meal plan", "detail": "Soft drinks and alcoholic drinks are listed as excluded by the source."},
+          {"category": "drinks", "item": "Drinks not stated in the meal plan", "detail": "Soft drinks and alcoholic drinks are not included."},
           {"category": "tips", "item": "Tips and gratuities", "detail": "Not included."},
           {"category": "personal", "item": "Personal expenses", "detail": "Laundry, calls and similar personal costs are excluded."},
           {"category": "optional", "item": "Optional activities", "detail": "A Maasai village visit or other add-ons are quoted separately when requested."}
@@ -80,7 +80,7 @@
       "slug": "nairobi-national-park-tour-4-hours",
       "title": "Nairobi National Park Tour — 4 Hours",
       "excerpt": "A short morning or afternoon Nairobi National Park outing for people who want wildlife time without leaving the city for a full day.",
-      "overview": "Set aside four hours for a Nairobi National Park visit close to the city. The source lists morning and afternoon departures; your quote will confirm pickup, vehicle, park-fee basis, availability and the current KSh rate for your group.",
+      "overview": "Set aside four hours for a Nairobi National Park visit close to the city. Choose a morning or afternoon departure; your quote will confirm pickup, vehicle, park-fee basis, availability and the current KSh rate for your group.",
       "source": {
         "url": "https://ashford-tours.com/product/nairobi-national-park-tours-4-hours/",
         "reference": "Current Ashford excursion listing and workspace crawl",
@@ -104,7 +104,7 @@
           {
             "day_number": "Half day",
             "day_title": "Nairobi National Park outing",
-            "description": "The source describes a four-hour park tour with morning and afternoon departure options. Exact pickup, timing and return point are confirmed in the quote.",
+            "description": "Choose a morning or afternoon departure for a four-hour park visit. Your quote confirms the pickup point, timing and return point.",
             "activities": "Park visit\nWildlife viewing"
           }
         ],
@@ -116,7 +116,7 @@
       "slug": "3-days-2-nights-amboseli-safari",
       "title": "3 Days / 2 Nights Amboseli Safari",
       "excerpt": "A three-day road safari from Nairobi with two nights in Amboseli and game drives in the landscape below Mount Kilimanjaro.",
-      "overview": "Travel from Nairobi to Amboseli for two nights and a source itinerary built around afternoon, morning and evening game drives. Clear Mount Kilimanjaro views depend on weather. Your quote will confirm the vehicle, lodge, residency basis, dates and current KSh rate.",
+      "overview": "Travel from Nairobi to Amboseli for two nights, with afternoon, morning and evening game drives. Clear Mount Kilimanjaro views depend on the weather. Your quote will confirm the vehicle, lodge, residency basis, dates and current KSh rate.",
       "source": {
         "url": "https://ashford-tours.com/product/3-days-2-night-amboseli-safari-package/",
         "reference": "Current Ashford product page and workspace crawl",
@@ -137,13 +137,13 @@
         "hks_end_location": "Nairobi",
         "hks_route_summary": "Nairobi → Amboseli → Nairobi",
         "hks_transport_types": ["safari_van", "land_cruiser"],
-        "hks_accommodation_basis": "Source options: Amboseli Serena Lodge or AA Lodge Amboseli. The final property, room basis and availability must be confirmed in the quote.",
-        "hks_meals_summary": "Source itinerary lists two breakfasts, three lunches and two dinners.",
+        "hks_accommodation_basis": "Amboseli Serena Lodge or AA Lodge Amboseli. Your quote confirms the final property, room basis and availability.",
+        "hks_meals_summary": "Two breakfasts, three lunches and two dinners.",
         "hks_itinerary": [
           {
             "day_number": "1",
             "day_title": "Nairobi to Amboseli",
-            "description": "Leave Nairobi in the morning for Amboseli. The source itinerary schedules lunch after arrival and an afternoon game drive before dinner.",
+            "description": "Leave Nairobi in the morning for Amboseli. Have lunch after arrival, then take an afternoon game drive before dinner.",
             "activities": "Road transfer\nAfternoon game drive",
             "accommodation": "Amboseli Serena Lodge or AA Lodge Amboseli, subject to quote",
             "meals": "Lunch and dinner"
@@ -151,7 +151,7 @@
           {
             "day_number": "2",
             "day_title": "Game drives in Amboseli",
-            "description": "The source itinerary includes morning and afternoon game drives with a rest around lunch. A Maasai village visit is optional and is not included unless confirmed in the quote.",
+            "description": "Take morning and afternoon game drives with a rest around lunch. A Maasai village visit is optional and is included only when confirmed in your quote.",
             "activities": "Morning game drive\nAfternoon game drive",
             "accommodation": "Amboseli Serena Lodge or AA Lodge Amboseli, subject to quote",
             "meals": "Breakfast, lunch and dinner"
@@ -159,23 +159,23 @@
           {
             "day_number": "3",
             "day_title": "Amboseli to Nairobi",
-            "description": "The source itinerary schedules an early game drive and breakfast before the road journey back to Nairobi.",
+            "description": "Start with an early game drive and breakfast before the road journey back to Nairobi.",
             "activities": "Morning game drive\nRoad transfer",
             "meals": "Breakfast and lunch"
           }
         ],
         "hks_inclusions": [
           {"category": "transport", "item": "Road transport", "detail": "Safari van or Land Cruiser from Nairobi and back; final vehicle confirmed in the quote."},
-          {"category": "fees", "item": "Park entrance fees", "detail": "Listed by the source; residency basis and current fee treatment require review."},
-          {"category": "accommodation", "item": "Two nights’ accommodation", "detail": "Source lodge options; final property and room basis confirmed in the quote."},
-          {"category": "meals", "item": "Meals in the source itinerary", "detail": "Two breakfasts, three lunches and two dinners are listed."},
-          {"category": "guide", "item": "Safari guide/driver", "detail": "Professional guide/driver listed by the source."},
-          {"category": "activities", "item": "Game drives", "detail": "Game drives stated in the source itinerary."},
-          {"category": "water", "item": "Bottled drinking water in the safari vehicle", "detail": "Listed by the source."}
+          {"category": "fees", "item": "Park entrance fees", "detail": "Your quote confirms the applicable park-fee basis for your group."},
+          {"category": "accommodation", "item": "Two nights’ accommodation", "detail": "Amboseli Serena Lodge or AA Lodge Amboseli; your quote confirms the final property and room basis."},
+          {"category": "meals", "item": "Listed meals", "detail": "Two breakfasts, three lunches and two dinners."},
+          {"category": "guide", "item": "Safari guide/driver", "detail": "Professional safari guide/driver."},
+          {"category": "activities", "item": "Game drives", "detail": "Game drives listed in the itinerary."},
+          {"category": "water", "item": "Bottled drinking water in the safari vehicle", "detail": "Provided during the safari journey."}
         ],
         "hks_exclusions": [
           {"category": "accommodation", "item": "Nairobi accommodation before or after the safari", "detail": "Not included unless added to the quote."},
-          {"category": "drinks", "item": "Drinks not stated in the meal plan", "detail": "Soft drinks and alcoholic drinks are listed as excluded by the source."},
+          {"category": "drinks", "item": "Drinks not stated in the meal plan", "detail": "Soft drinks and alcoholic drinks are not included."},
           {"category": "tips", "item": "Tips and gratuities", "detail": "Not included."},
           {"category": "personal", "item": "Personal expenses", "detail": "Laundry, calls and similar personal costs are excluded."},
           {"category": "optional", "item": "Optional activities", "detail": "A Maasai village visit or other add-ons are quoted separately when requested."}
@@ -214,7 +214,7 @@
       "title": "Amboseli Three-Day Reset",
       "fields": {
         "hks_hero_headline": "Make Amboseli your next three-day reset.",
-        "hks_supporting_copy": "The source itinerary covers two nights and several game drives at the foot of Mount Kilimanjaro; clear mountain views depend on weather. Tell us your dates, group and lodge preference for a current KSh quote.",
+        "hks_supporting_copy": "Spend two nights in Amboseli with several game drives at the foot of Mount Kilimanjaro; clear mountain views depend on the weather. Tell us your dates, group and lodge preference for a current KSh quote.",
         "hks_navigation_mode": "campaign_minimal"
       }
     }

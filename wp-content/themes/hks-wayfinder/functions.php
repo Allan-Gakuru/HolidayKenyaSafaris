@@ -206,6 +206,101 @@ function hks_wayfinder_term_url( WP_Term $term ): string {
 }
 
 /**
+ * Build a traveller-facing archive title that names the current taxonomy term.
+ *
+ * @param WP_Term $term Current archive term.
+ * @return string
+ */
+function hks_wayfinder_taxonomy_archive_title( WP_Term $term ): string {
+	switch ( $term->taxonomy ) {
+		case 'hks_destination':
+			return sprintf(
+				/* translators: %s: Destination name. */
+				__( 'Tours in %s', 'hks-wayfinder' ),
+				$term->name
+			);
+		case 'hks_tour_type':
+			return sprintf(
+				/* translators: %s: Tour type name. */
+				__( '%s tours in Kenya', 'hks-wayfinder' ),
+				$term->name
+			);
+		case 'hks_occasion':
+			return sprintf(
+				/* translators: %s: Occasion name. */
+				__( 'Kenya tours for %s', 'hks-wayfinder' ),
+				$term->name
+			);
+		case 'hks_travel_style':
+			return sprintf(
+				/* translators: %s: Travel style name. */
+				__( '%s Kenya tours', 'hks-wayfinder' ),
+				$term->name
+			);
+		default:
+			return $term->name;
+	}
+}
+
+/**
+ * Build a traveller-facing archive introduction that names the taxonomy and term.
+ *
+ * @param WP_Term $term Current archive term.
+ * @return string
+ */
+function hks_wayfinder_taxonomy_archive_description( WP_Term $term ): string {
+	switch ( $term->taxonomy ) {
+		case 'hks_destination':
+			return sprintf(
+				/* translators: %s: Destination name. */
+				__( 'Explore tours in the %s destination. Compare routes, durations and trip details, then request a tailored quote for your dates and group.', 'hks-wayfinder' ),
+				$term->name
+			);
+		case 'hks_tour_type':
+			return sprintf(
+				/* translators: %s: Tour type name. */
+				__( 'Explore the %s tour type. Compare destinations, routes and durations to find the trip that suits you.', 'hks-wayfinder' ),
+				$term->name
+			);
+		case 'hks_occasion':
+			return sprintf(
+				/* translators: %s: Occasion name. */
+				__( 'Explore Kenya tours selected for the %s occasion. Compare destinations and trip details before you request a quote.', 'hks-wayfinder' ),
+				$term->name
+			);
+		case 'hks_travel_style':
+			return sprintf(
+				/* translators: %s: Travel style name. */
+				__( 'Explore the %s travel style. Compare destinations, routes and durations to choose the right Kenya trip.', 'hks-wayfinder' ),
+				$term->name
+			);
+		default:
+			return '';
+	}
+}
+
+/**
+ * Keep taxonomy document titles as useful as their visible archive headings.
+ *
+ * @param array<string,string> $parts Document title parts.
+ * @return array<string,string>
+ */
+function hks_wayfinder_taxonomy_document_title( array $parts ): array {
+	if ( ! is_tax( array( 'hks_destination', 'hks_tour_type', 'hks_occasion', 'hks_travel_style' ) ) ) {
+		return $parts;
+	}
+
+	$term = get_queried_object();
+
+	if ( $term instanceof WP_Term ) {
+		$parts['title'] = hks_wayfinder_taxonomy_archive_title( $term );
+	}
+
+	return $parts;
+}
+add_filter( 'document_title_parts', 'hks_wayfinder_taxonomy_document_title' );
+
+/**
  * Find a published page route without creating placeholder navigation.
  *
  * @param string $path Page path.

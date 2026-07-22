@@ -102,6 +102,13 @@ def main() -> int:
             "hks_wayfinder_filter_tour_archive",
             "is_admin()",
             "hks_wayfinder_campaign_robots",
+            "hks_wayfinder_taxonomy_archive_title",
+            "hks_wayfinder_taxonomy_archive_description",
+            "document_title_parts",
+            "Tours in %s",
+            "%s tours in Kenya",
+            "Kenya tours for %s",
+            "%s Kenya tours",
             "hks_noindex",
         ],
     )
@@ -229,6 +236,32 @@ def main() -> int:
             "hks_rights_checked_date",
             "hks_credit_required",
             "hks_confirmation_status",
+        ],
+    )
+    public_copy = "\n".join(
+        [
+            sources["renderer"],
+            sources["quote"],
+            sources["footer"],
+            files["catalogue"],
+            files["destination"],
+            files["tour type"],
+            files["occasion"],
+            files["travel style"],
+        ]
+    )
+    forbid(
+        errors,
+        "traveller-facing copy",
+        public_copy,
+        [
+            "published Tour",
+            "published tours",
+            "stored in WordPress",
+            "package context",
+            "sales conversation",
+            "source itinerary",
+            "assigned to this",
         ],
     )
     if sources["renderer"].count("do_blocks( '<!-- wp:hks/quote-cta") != 2:

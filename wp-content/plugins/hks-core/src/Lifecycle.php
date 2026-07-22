@@ -399,6 +399,9 @@ final class Lifecycle {
 			'0.7.0' => array(
 				'site' => array( self::class, 'schedule_rewrite_flush' ),
 			),
+			'0.9.0' => array(
+				'site' => array( self::class, 'make_public_copy_client_ready' ),
+			),
 		);
 	}
 
@@ -484,6 +487,127 @@ final class Lifecycle {
 		update_option( self::FLUSH_REWRITE_OPTION, '1', false );
 
 		return (bool) get_option( self::FLUSH_REWRITE_OPTION, false );
+	}
+
+	/**
+	 * Replace exact implementation-facing seed phrases without overwriting edits.
+	 *
+	 * This migration is deliberately narrow: it changes only known strings that
+	 * shipped in HKS seed content. Any copy edited by a client or administrator is
+	 * left untouched.
+	 *
+	 * @param string $from_version      Existing stored version.
+	 * @param string $migration_version Migration target version.
+	 * @param string $scope             Current storage scope.
+	 * @return true|\WP_Error True on success, otherwise an update error.
+	 */
+	public static function make_public_copy_client_ready( $from_version, $migration_version, $scope ) {
+		unset( $from_version, $migration_version, $scope );
+
+		$replacements = array(
+			' with the source duration and route outline kept together in one Tour. The route is listed as ' => ' on a route from ',
+			'A compact road safari from Nairobi with two nights in the Maasai Mara and a source itinerary built around game drives.' => 'A compact road safari from Nairobi with two nights in the Maasai Mara and a schedule built around game drives.',
+			'The source itinerary pairs afternoon, morning and evening game drives with a final morning drive before the return to Nairobi.' => 'The itinerary pairs afternoon, morning and evening game drives with a final morning drive before the return to Nairobi.',
+			'Travel from Nairobi to Amboseli for two nights and a source itinerary built around afternoon, morning and evening game drives.' => 'Travel from Nairobi to Amboseli for two nights, with afternoon, morning and evening game drives.',
+			'The source lists morning and afternoon departures;' => 'Choose a morning or afternoon departure;',
+			'How Holiday Kenya Safaris helps local travelers find and plan Kenya trips, and how Ashford Tours & Travel fits in.' => 'How Holiday Kenya Safaris helps local travellers choose Kenya trips, with support from Ashford Tours & Travel.',
+			'Holiday Kenya Safaris helps travelers in Kenya browse domestic safaris, local excursions, coast experiences and group trips with the useful package details kept close at hand.' => 'Holiday Kenya Safaris helps travellers in Kenya explore domestic safaris, local excursions, coast experiences and group trips with the details they need to choose well.',
+			'Each Tour keeps its route, duration, itinerary and package notes in one place. You can compare the options first, then request a quote for your dates and group.' => 'Each tour keeps its route, duration, itinerary and trip notes in one place. Compare the options, then request a quote for your dates and group.',
+			'The relationship keeps the browsing experience focused on local travelers while the source itinerary and operator context stay traceable.' => 'Choose your trip here, then speak with the Ashford team about your dates, group and quote.',
+			'Start with the trip, not a blank message' => 'Choose a trip before you request a quote',
+			'Browse the Tour catalogue, open the trip that suits you, and use its quote action so the conversation begins with the right package context.' => 'Browse the tours, open the trip that suits you, and use its WhatsApp quote button to share your dates and group size.',
+			'Organizing for several people means balancing the route, dates, departure town, transport, accommodation and budget. Start with the group facts and a Tour you can point to.' => 'Planning for several people means balancing the route, dates, departure town, transport, accommodation and budget. Choose a destination and tour, then add your group details below.',
+			'The Tour or destination you are considering.' => 'The tour or destination you are considering.',
+			'Contact-page draft awaiting the final public phone, email, address and business hours.' => 'Choose a tour or use the official Holiday Kenya Safaris contact details to start a conversation.',
+			'For a Tour quote, choose a trip first and use its request-quote action. That keeps the package, preferred date and group size together when the conversation begins.' => 'For a tour quote, choose a trip first and use its WhatsApp quote button. You can then share your preferred dates and group size.',
+			'Choose the relevant Tour' => 'Choose your tour',
+			'Open the catalogue, select the trip you are interested in, and share your details from that Tour page.' => 'Explore the tours, select the trip you are interested in, and request a tailored quote from that tour page.',
+			'Source options: Mara Sopa Lodge or Sentrim Mara Camp. The final property, room basis and availability must be confirmed in the quote.' => 'Mara Sopa Lodge or Sentrim Mara Camp. Your quote confirms the final property, room basis and availability.',
+			'Source options: Amboseli Serena Lodge or AA Lodge Amboseli. The final property, room basis and availability must be confirmed in the quote.' => 'Amboseli Serena Lodge or AA Lodge Amboseli. Your quote confirms the final property, room basis and availability.',
+			'Source itinerary: lunch and dinner on Day 1; breakfast, lunch and dinner on Day 2; breakfast on Day 3.' => 'Lunch and dinner on Day 1; breakfast, lunch and dinner on Day 2; breakfast on Day 3.',
+			'Source itinerary lists two breakfasts, three lunches and two dinners.' => 'Two breakfasts, three lunches and two dinners.',
+			'Drive from Nairobi through the Great Rift Valley to the Maasai Mara. The source itinerary schedules lunch after arrival and an afternoon game drive.' => 'Drive from Nairobi through the Great Rift Valley to the Maasai Mara. Have lunch after arrival, then head out for an afternoon game drive.',
+			'Spend the day in the reserve with morning and evening game drives in the source itinerary. An optional Maasai village visit is mentioned by the source and is not included unless confirmed in the quote.' => 'Spend the day in the reserve with morning and evening game drives. A Maasai village visit is optional and is included only when confirmed in your quote.',
+			'The source itinerary includes a morning game drive and breakfast before the road journey back to Nairobi.' => 'Start with a morning game drive and breakfast before the road journey back to Nairobi.',
+			'Leave Nairobi in the morning for Amboseli. The source itinerary schedules lunch after arrival and an afternoon game drive before dinner.' => 'Leave Nairobi in the morning for Amboseli. Have lunch after arrival, then take an afternoon game drive before dinner.',
+			'The source itinerary includes morning and afternoon game drives with a rest around lunch. A Maasai village visit is optional and is not included unless confirmed in the quote.' => 'Take morning and afternoon game drives with a rest around lunch. A Maasai village visit is optional and is included only when confirmed in your quote.',
+			'The source itinerary schedules an early game drive and breakfast before the road journey back to Nairobi.' => 'Start with an early game drive and breakfast before the road journey back to Nairobi.',
+			'The source describes a four-hour park tour with morning and afternoon departure options. Exact pickup, timing and return point are confirmed in the quote.' => 'Choose a morning or afternoon departure for a four-hour park visit. Your quote confirms the pickup point, timing and return point.',
+			'Meals in the source itinerary' => 'Listed meals',
+			'Game drives stated in the source itinerary.' => 'Game drives listed in the itinerary.',
+			'Listed by the source; residency basis and current fee treatment require review.' => 'Your quote confirms the applicable park-fee basis for your group.',
+			'Source lodge/camp options; final property and room basis confirmed in the quote.' => 'Mara Sopa Lodge or Sentrim Mara Camp; your quote confirms the final property and room basis.',
+			'Source lodge options; final property and room basis confirmed in the quote.' => 'Amboseli Serena Lodge or AA Lodge Amboseli; your quote confirms the final property and room basis.',
+			'Professional guide/driver listed by the source.' => 'Professional safari guide/driver.',
+			'Soft drinks and alcoholic drinks are listed as excluded by the source.' => 'Soft drinks and alcoholic drinks are not included.',
+			'The source itinerary covers two nights and several game drives at the foot of Mount Kilimanjaro;' => 'Spend two nights in Amboseli with several game drives at the foot of Mount Kilimanjaro;',
+		);
+
+		$post_ids = get_posts(
+			array(
+				'post_type'      => array( 'hks_tour', 'hks_campaign', 'page' ),
+				'post_status'    => 'any',
+				'posts_per_page' => -1,
+				'fields'         => 'ids',
+				'orderby'        => 'ID',
+				'order'          => 'ASC',
+			)
+		);
+
+		foreach ( $post_ids as $post_id ) {
+			$post = get_post( $post_id );
+
+			if ( ! $post instanceof \WP_Post ) {
+				continue;
+			}
+
+			$content = strtr( $post->post_content, $replacements );
+			$excerpt = strtr( $post->post_excerpt, $replacements );
+
+			if ( $content !== $post->post_content || $excerpt !== $post->post_excerpt ) {
+				$result = wp_update_post(
+					array(
+						'ID'           => $post_id,
+						'post_content' => $content,
+						'post_excerpt' => $excerpt,
+					),
+					true
+				);
+
+				if ( is_wp_error( $result ) ) {
+					return $result;
+				}
+			}
+
+			if ( ! in_array( $post->post_type, array( 'hks_tour', 'hks_campaign' ), true ) ) {
+				continue;
+			}
+
+			$public_meta = get_post_meta( $post_id );
+
+			foreach ( $public_meta as $meta_key => $values ) {
+				$is_simple_field = in_array( $meta_key, array( 'hks_accommodation_basis', 'hks_meals_summary', 'hks_supporting_copy' ), true );
+				$is_repeater_row = 1 === preg_match( '/^hks_(?:itinerary|inclusions|exclusions)_\d+_(?:description|item|detail)$/', $meta_key );
+
+				if ( ! $is_simple_field && ! $is_repeater_row ) {
+					continue;
+				}
+
+				foreach ( $values as $value ) {
+					if ( ! is_string( $value ) ) {
+						continue;
+					}
+
+					$updated_value = strtr( $value, $replacements );
+
+					if ( $updated_value !== $value ) {
+						update_post_meta( $post_id, $meta_key, $updated_value, $value );
+					}
+				}
+			}
+		}
+
+		return true;
 	}
 
 	/**

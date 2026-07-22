@@ -14,6 +14,7 @@ PLUGIN = ROOT / "wp-content" / "plugins" / "hks-core"
 
 FILES = {
     "bootstrap": "hks-core.php",
+    "lifecycle": "src/Lifecycle.php",
     "plugin": "src/Plugin.php",
     "content": "src/Content/Module.php",
     "post_type": "src/Content/PostTypes/Inquiry.php",
@@ -46,7 +47,18 @@ def main() -> int:
             errors.append(f"missing {relative}: {error}")
             content[label] = ""
 
-    require(errors, "plugin bootstrap", content["bootstrap"], ["Version:           0.8.0", "define( 'HKS_CORE_VERSION', '0.8.0' )"])
+    require(errors, "plugin bootstrap", content["bootstrap"], ["Version:           0.9.0", "define( 'HKS_CORE_VERSION', '0.9.0' )"])
+    require(
+        errors,
+        "client-ready copy migration",
+        content["lifecycle"],
+        [
+            "'0.9.0'",
+            "make_public_copy_client_ready",
+            "source duration and route outline",
+            "is_repeater_row",
+        ],
+    )
     require(errors, "plugin coordinator", content["plugin"], ["Conversion\\Module as ConversionModule", "ConversionModule::class"])
     require(errors, "content model", content["content"], ["PostTypes\\Inquiry", "Inquiry::register();"])
     require(
@@ -94,9 +106,9 @@ def main() -> int:
         content["renderer"],
         [
             "254712965131",
-            "Save & review WhatsApp message",
-            "we save these details privately in WordPress",
-            "you still choose whether to send it",
+            "Review WhatsApp message",
+            "We keep these details private",
+            "open WhatsApp when you are ready to send it",
             "InquiryRepository::CONSENT_VERSION",
             "FormToken::issue",
             "group_context",
