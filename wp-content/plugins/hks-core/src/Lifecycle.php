@@ -561,8 +561,13 @@ final class Lifecycle {
 				continue;
 			}
 
-			$content = strtr( $post->post_content, $replacements );
-			$excerpt = strtr( $post->post_excerpt, $replacements );
+			$is_seeded_contact = 'page' === $post->post_type && false !== strpos( $post->post_content, 'For a Tour quote, choose a trip first and use its request-quote action.' );
+			$content           = strtr( $post->post_content, $replacements );
+			$excerpt           = strtr( $post->post_excerpt, $replacements );
+
+			if ( $is_seeded_contact && false === strpos( $content, 'info@holidaykenyasafaris.ke' ) ) {
+				$content .= "\n\n<!-- wp:group {\"className\":\"hks-page-panel\",\"layout\":{\"type\":\"constrained\"}} -->\n<div class=\"wp-block-group hks-page-panel\"><!-- wp:heading {\"level\":2} -->\n<h2 class=\"wp-block-heading\">Contact Holiday Kenya Safaris</h2>\n<!-- /wp:heading -->\n\n<!-- wp:paragraph -->\n<p>WhatsApp <a href=\"https://wa.me/254712965131?text=Hi%20Holiday%20Kenya%20Safaris%2C%20I%20would%20like%20help%20planning%20a%20Kenya%20trip.\">+254 712 965 131</a>, or email <a href=\"mailto:info@holidaykenyasafaris.ke\">info@holidaykenyasafaris.ke</a>.</p>\n<!-- /wp:paragraph --></div>\n<!-- /wp:group -->";
+			}
 
 			if ( $content !== $post->post_content || $excerpt !== $post->post_excerpt ) {
 				$result = wp_update_post(
