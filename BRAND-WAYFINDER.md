@@ -92,7 +92,7 @@ Only use photographs whose rights the client has confirmed.
 
 - Attainable-premium, restorative, assured, and vivid.
 - Rich destination imagery balanced by very clear logistics.
-- Light, browseable Catalogue mode for the standard website; immersive Campaign mode for focused advertising pages.
+- Light, browseable Catalogue mode for Kenya and international Tours; immersive Campaign mode for focused advertising pages.
 - The approved catalogue contract defines navigation, homepage package discovery, catalogue grids, and canonical Tour page composition. It is not a visual-identity or code dependency.
 - Strong hierarchy and generous but efficient spacing.
 - Cards only for repeated tours, reviews, or genuine tools. Do not put every section in a floating card.

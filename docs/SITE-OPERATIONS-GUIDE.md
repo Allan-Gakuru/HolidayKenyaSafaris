@@ -5,8 +5,9 @@ website. It covers the current MVP, the content approval workflow, inquiry
 handling, deployment, maintenance, and the remaining launch gates.
 
 The exact brand name is **Holiday Kenya Safaris**. The selected identity is
-**The Wayfinder**. Holiday Kenya Safaris serves the Kenyan domestic market and
-is operated by Ashford Tours & Travel.
+**The Wayfinder**. Holiday Kenya Safaris primarily serves the Kenyan domestic
+market, also offers approved international Tours, and is operated by Ashford
+Tours & Travel.
 
 ## 1. What the website is designed to do
 
@@ -38,8 +39,9 @@ Never publish or imply any of the following without an approved source:
 - a response-time promise;
 - a claim that a visitor sent a WhatsApp message merely because WhatsApp opened.
 
-Use only Kenyan shillings for optional Campaign prices. Do not convert an Ashford
-USD rate and present the conversion as an approved KSh price.
+Use only Kenyan shillings for public starting prices. Outside the recorded
+24 July 2026 authorized Ashford migration, do not convert a foreign-currency
+source rate and present it as an approved KSh price.
 
 Any source value marked `CLIENT CONFIRMATION REQUIRED` is internal only. Remove
 the marker from public fields only after resolving the fact; never rewrite the
@@ -70,6 +72,7 @@ deactivate HKS Core while the site is serving Tours or collecting inquiries.
 | **Tours -> Campaigns** | Focused landing pages linked to one Tour |
 | **Tours -> FAQs** | Reusable, source-approved questions and answers |
 | **Tours -> Destinations** | Public destination terms and approved guidance |
+| **Tours -> Tour Scopes** | Kenya Tours / International Tours catalogue separation |
 | **Tours -> Tour Types** | Package classification |
 | **Tours -> Occasions** | Audience or occasion classification |
 | **Tours -> Travel Styles** | Travel-style classification |
@@ -82,7 +85,17 @@ deactivate HKS Core while the site is serving Tours or collecting inquiries.
 Only trusted Administrators should access **Quote inquiries** and **HKS
 Settings**. Inquiry access requires the WordPress `manage_options` capability.
 
-## 5. Immediate steps after importing the MVP drafts
+## 5. Import workflows
+
+The original MVP, site-page, and local-catalogue actions are draft-only. The
+separately labelled **Authorized 24 July 2026 catalogue expansion** first updates
+existing Tours with Tour Scope and audited prices, then imports international
+Tours in three batches. Complete international records receive their source image
+and publish directly; records without a defensible source price remain drafts.
+These expansion actions are bound to the dated client authorization and are not a
+general-purpose future publishing shortcut.
+
+### 5.1 Immediate steps after importing the MVP drafts
 
 The importer creates three Tour drafts and three linked Campaign drafts. It does
 not publish content, import photographs, invent prices, or create policies.
@@ -139,7 +152,7 @@ changing plugin code or inserting data directly into the database.
 1. Select **Tours -> Add Tour**.
 2. Add the public title, short excerpt, and concise overview.
 3. Enter structured package facts rather than placing everything in the overview.
-4. Add Destinations, Tour Types, Occasions, and Travel Styles.
+4. Add one Tour Scope, plus Destinations, Tour Types, Occasions, and Travel Styles.
 5. Add the itinerary, inclusions, exclusions, public notes, gallery, and selected FAQs where available.
 6. Save as Draft, preview, review the visible result, and publish.
 
@@ -158,12 +171,13 @@ or inquiries casually.
 
 ## 7. Pricing workflow
 
-### 7.1 Tours are price-free
+### 7.1 Tour starting prices
 
-Do not enter prices on Tours. The Tour editor has no active price field, and Tour
-cards, archives, Destination pages, related Tours, canonical Tour pages, and Tour
-quote panels show neither a value nor a request-rate fallback. Old Tour price
-metadata may remain stored after deployment, but the site ignores it.
+Use **From price per person (KSh)** when one positive whole-number amount truthfully
+represents the Tour's current per-person starting price. It appears as
+**From KSh X per person** on catalogue cards, taxonomy archives, related Tours,
+canonical Tour pages, and quote panels. Leave it blank to omit price everywhere.
+Update the value manually whenever the commercial starting price changes.
 
 ### 7.2 Publishing an optional Campaign price
 
@@ -172,9 +186,10 @@ is a useful selling point for that Campaign. Enter one positive whole KSh amount
 that truthfully represents a per-person starting price, then preview and publish
 the Campaign. Leaving the field blank produces no price output.
 
-Do not copy a legacy Tour amount or convert an Ashford USD amount automatically.
-Campaign dates do not change or remove the price. When the offer changes, update
-or clear the Campaign field manually.
+A populated Campaign price overrides the linked Tour price on that Campaign.
+When the Campaign field is blank, the linked Tour's starting price may appear.
+Campaign dates do not change or remove either value. When an offer changes,
+update or clear the relevant field manually.
 
 ## 8. Campaign workflow
 
@@ -205,18 +220,15 @@ lifecycle-status field.
 
 ## 9. Destinations and classifications
 
-Assign at least one relevant Destination to each Tour. Use Tour Type, Occasion,
-and Travel Style to organize content; expose a public filter only when enough
-Tours exist to make it useful.
+Assign exactly one primary Tour Scope—**Kenya Tours** or **International Tours**—
+and at least one relevant Destination to each Tour. Destination is the geographic
+axis inside either scope; Tour Type, Occasion, and Travel Style provide additional
+classification and filtering.
 
 Destination archive pages always show the term name and published Tours.
-Additional overview, travel-time, best-time, weather, or access guidance appears
-only when the Destination has:
-
-- a source URL or reference;
-- a valid checked date;
-- Source status **Operator reviewed** or **Client confirmed**;
-- public text without unresolved confirmation markers.
+Optional summary, overview, and hero-image fields render when populated. Saving
+those values on a public Destination is the editor's approval; do not enter
+unresolved confirmation markers or unsupported guidance.
 
 Avoid duplicate terms such as `Mara`, `Maasai Mara`, and `Masai Mara` for the same
 destination. Choose one canonical spelling and merge mistakes before the
@@ -233,18 +245,14 @@ catalogue grows.
 4. Publish the FAQ.
 5. Select it in a Tour or Campaign's **Featured FAQs** field.
 
-The public template renders only published, sourced, checked, unexpired FAQs with
-**Operator reviewed** or **Client confirmed** status.
+The public template renders only published FAQs with a question and answer that
+have been selected on the Tour. Publishing the FAQ is the approval signal.
 
 ### 10.2 Policies
 
-Package policies live on the canonical Tour. Every displayed policy needs:
-
-- a clear public summary;
-- a traceable source;
-- a checked date;
-- **Operator reviewed** or **Client confirmed** status;
-- a valid expiry/review date when one applies.
+Important package notes live on the canonical Tour. Every entered note is public
+when the Tour is published, so add only clear, current wording supported by the
+operator or an approved source.
 
 Do not fill policy gaps with generic travel-industry language. Deposit,
 cancellation, refund, no-show, child, insurance, liability, documents, and quote
@@ -252,37 +260,24 @@ validity wording must come from the client/operator.
 
 ## 11. Media and image-rights workflow
 
-The site intentionally works without photographs until approved media exists.
+The site works without photographs until suitable media exists.
 
 For every image:
 
 1. Upload it through **Media -> Add New**.
 2. Open the attachment details.
 3. Add descriptive native **Alt Text** for the image's purpose.
-4. Complete **Media rights and provenance (internal)**:
-   - asset owner;
-   - photographer/creator where known;
-   - source URL or reference;
-   - permission status;
-   - approved usage scopes;
-   - licence or permission basis;
-   - permission evidence where available;
-   - permission and rights-checked dates;
-   - expiry and restrictions;
-   - required credit line.
-5. Select **Website** in Approved usage scopes.
-6. Use **Operator reviewed** or **Client confirmed** only when permission is
-   genuinely verified.
-7. Assign the image as a Tour/Campaign featured image or structured gallery image.
-8. Verify the public page and any required credit.
+4. Add a caption only when a credit line is required.
+5. Assign the image as a Tour/Campaign featured image or structured gallery image.
+6. Verify the public page, crop, alt text, and any required credit.
 
-An image is hidden by the public Tour templates unless it has an acceptable
-permission status, Website scope, rights checked date, alt text, live permission,
-and a credit line when credit is required.
+Assigning media to published content is the editor's approval for website use.
+The public Tour templates require a real attachment and useful native alt text.
 
 Do not assume that an image on an Ashford, lodge, park, photographer, or social
-media page can be reused. Do not use identifiable customer photographs without
-the required marketing consent.
+media page can be reused. The 24 July 2026 Ashford migration is the documented
+exception authorized by the client. Do not use other identifiable customer
+photographs without the required marketing consent.
 
 ## 12. HKS global settings
 
@@ -564,7 +559,8 @@ code, not a backup of live WordPress content or media.
 ### A Tour will not publish
 
 Read the red publication notice. Correct the listed public-content issue and save
-again. A legacy Tour price never blocks publication because Tours are price-free.
+again. If a Tour price is present, it must be a positive whole KSh amount; otherwise
+leave the field blank.
 
 ### A Campaign will not publish
 
@@ -574,15 +570,15 @@ analytics label.
 
 ### A Campaign price does not appear
 
-Confirm the amount is entered on the Campaign—not the linked Tour—and is a
-positive whole number. A blank Campaign field is intentionally omitted. Clear
-WordPress and host caches after deploying the updated code.
+Confirm the Campaign override or linked Tour amount is a positive whole number.
+If both fields are blank, omission is intentional. Clear WordPress and host caches
+after deploying the updated code.
 
 ### An image does not appear
 
-Open the Media attachment and check permission status, Website usage scope,
-rights checked date, expiry, alt text, and required credit line. Then confirm the
-correct image is assigned to the Tour, Campaign, or Destination.
+Open the Media attachment and confirm it has useful native alt text. Then confirm
+the correct image is assigned to the Tour, Campaign, or Destination and add a
+caption when visible credit is required.
 
 ### Quote inquiries are not visible
 

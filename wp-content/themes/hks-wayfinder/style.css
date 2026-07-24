@@ -1225,9 +1225,16 @@ summary {
 	border-top: 1px solid rgb(24 43 58 / 12%);
 	display: flex;
 	gap: 1rem;
-	justify-content: flex-end;
+	justify-content: space-between;
 	margin-top: auto;
 	padding-top: 1rem;
+}
+
+.hks-tour-card__price {
+	color: var(--wp--preset--color--midnight-navy);
+	font-size: 0.9rem;
+	font-variant-numeric: tabular-nums;
+	line-height: 1.25;
 }
 
 .hks-tour-card__link {
@@ -1922,6 +1929,19 @@ summary {
 	font-size: 1.55rem;
 	font-variant-numeric: tabular-nums;
 	margin: 0;
+}
+
+.hks-tour-quote__price {
+	color: var(--wp--preset--color--midnight-navy) !important;
+	font-size: clamp(1.05rem, 2vw, 1.25rem) !important;
+	font-variant-numeric: tabular-nums;
+	font-weight: 700;
+	line-height: 1.25;
+	margin: 0.9rem 0 0.2rem;
+}
+
+.hks-tour-quote__price-note {
+	margin: 0 0 1rem;
 }
 
 .hks-tour-quote__panel > p:not(.hks-tour-quote__label) {

@@ -2,7 +2,7 @@
 
 ## Audience Principle
 
-Holiday Kenya Safaris serves multiple local buying situations. Build one canonical factual Tour page, then create campaign variants for particular avatars, occasions, desires, problems, or objections.
+Holiday Kenya Safaris serves multiple local buying situations for Kenya and international trips. Build one canonical factual Tour page, then create campaign variants for particular avatars, occasions, desires, problems, or objections.
 
 Mercy remains a strong representative of the premium Nairobi escape buyer, but the website must not assume every visitor is Mercy.
 
@@ -67,7 +67,7 @@ Follow immediately with proof:
 2. Name the package and duration plainly.
 3. Show the actual route, accommodation basis, transport, meals, activities, and exclusions.
 4. Make the operator relationship and human support visible.
-5. Explain the tailored quote step. On focused Campaigns only, show one honest per-person starting price when it is a deliberate selling point.
+5. Show the honest editable KSh per-person starting price when available, then explain that the tailored quote confirms the final package for the visitor's dates and group. Campaigns may override the linked Tour amount.
 6. Offer a small next step: request a tailored WhatsApp quote.
 
 ## Campaign Variation Examples

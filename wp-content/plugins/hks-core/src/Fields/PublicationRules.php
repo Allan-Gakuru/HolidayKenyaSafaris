@@ -44,8 +44,8 @@ final class PublicationRules {
 	/**
 	 * Validate a canonical Tour candidate.
 	 *
-	 * A published Tour is treated as client-approved. Only its public content can
-	 * block publication; legacy Tour prices are not loaded or validated.
+	 * A published Tour is treated as client-approved. Only its public content and
+	 * the format of an optional starting price can block publication.
 	 *
 	 * @param array<string, mixed> $values  Complete candidate SCF values.
 	 * @param int                  $post_id Current post ID. Retained for API compatibility.
@@ -61,6 +61,16 @@ final class PublicationRules {
 				'hks_tour_title_required',
 				'post_title',
 				__( 'Add the public Tour title before publishing.', 'hks-core' )
+			);
+		}
+
+		$price = self::value( $values, 'hks_from_price_ksh' );
+		if ( self::is_meaningful( $price ) && ! self::is_positive_whole_number( $price ) ) {
+			self::add_error(
+				$errors,
+				'hks_tour_from_price_invalid',
+				'hks_from_price_ksh',
+				__( 'The Tour From price must be a positive whole KSh amount, or left blank.', 'hks-core' )
 			);
 		}
 
@@ -184,6 +194,7 @@ final class PublicationRules {
 	private static function tour_public_field_names() {
 		return array(
 			'hks_featured',
+			'hks_from_price_ksh',
 			'hks_duration_label',
 			'hks_start_location',
 			'hks_end_location',

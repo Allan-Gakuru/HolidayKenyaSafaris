@@ -2,9 +2,9 @@
 
 ## Relationship
 
-Holiday Kenya Safaris is a local-market brand operated by Ashford Tours & Travel. Ashford's approved Kenya product information is the starting source for the catalogue.
+Holiday Kenya Safaris is a local-market brand operated by Ashford Tours & Travel. Ashford's Kenya and international product information is the starting source for the expanded catalogue.
 
-This relationship provides the factual starting point. Imported material remains draft. An authorized Holiday Kenya Safaris editor approves public copy and media by publishing the record. A Campaign price is approved by deliberately entering it and publishing that Campaign; no extra confirmation fields are required.
+This relationship provides the factual starting point. The client has explicitly authorized the current remaining-Ashford-catalogue migration to reuse Ashford images and itinerary copy, assign the converted Tour starting price, and publish directly. That authorization is limited to this migration; unclear, contradictory, or unpriceable records remain draft.
 
 ## Workspace Catalogue
 
@@ -24,7 +24,7 @@ The crawl contains 65 records. There are 45 local-category assignments and 44 un
 - 5 Mount Kenya products.
 - One excursion appears in both Nairobi and Mombasa categories.
 
-These are candidates, not an automatic publish queue.
+These records and the current live Ashford international catalogue are candidates for the authorized expansion. Re-check the live source before import.
 
 ## Included Product Policy
 
@@ -37,16 +37,14 @@ Candidate for Holiday Kenya Safaris:
 - Mount Kenya and suitable adventure products.
 - Coast packages and staycations supplied or published by the client.
 - Group, family, couple, school, chama, church, SACCO, corporate, or special-interest variants based on real operational packages.
+- International holidays currently published by Ashford that contain a usable itinerary, source images, and a low-season per-person price.
 
 Exclude by default:
 
-- Tanzania-only products.
-- Kenya and Tanzania combinations aimed primarily at inbound international visitors, unless the client approves a local-market version.
-- International holidays.
 - Visa services.
 - Standalone transfers.
 - Hotel listings that are not packaged as a relevant local experience.
-- Products with clearly implausible or incomplete public pricing until reviewed.
+- Products with contradictory or unusable public pricing until reviewed.
 
 ## Initial Seed Priority
 
@@ -82,14 +80,14 @@ For every candidate Tour:
 1. Open the current Ashford product page.
 2. Compare it with the workspace crawl.
 3. Record the source URL in the repository import manifest when an audit trail is useful; do not add it to the client Tour form.
-4. Extract factual duration, route, itinerary, accommodation, meals, inclusions, exclusions, and transport. Do not import a public price automatically.
-5. Flag contradictions, malformed copy, missing days, mixed rates, and questionable values.
+4. Extract factual duration, route, itinerary, accommodation, meals, inclusions, exclusions, transport, and the source low-season per-person price.
+5. Flag contradictions, malformed copy, missing days, mixed rates, and questionable values. Reject placeholder or deposit-like WooCommerce values that are not credible per-person Tour prices.
 6. Decide whether the product is relevant to local Kenyan buyers.
-7. Rewrite the title, summary, and persuasive copy without changing facts.
+7. Preserve the Ashford title and itinerary wording as literally as makes sense. Remove only source-site debris, malformed fragments, contradictions, or wording that would mislead an HKS visitor.
 8. Convert abbreviations such as `BB`, `L`, `D`, and `LB` into plain language for public display.
-9. Import the Tour as a draft with remote media unassigned.
-10. Leave unclear information blank and flag it in the import manifest or handoff notes.
-11. Let an authorized editor upload or assign the intended media and publish. If a focused Campaign will use price as a selling point, enter its optional KSh per-person starting price on the Campaign rather than the Tour.
+9. Assign the Tour Scope and Destination terms. Reuse and assign the corresponding Ashford images with useful native alt text.
+10. Convert the source low-season per-person amount—or a clearly published per-person starting amount where no seasonal table exists—using the live USD/KSh rate on the import date, round upward to the next KSh 500, store the result in `hks_from_price_ksh`, and record the conversion evidence in the repository import manifest.
+11. Publish directly under the client's authorization when the source is coherent. Leave unclear or contradictory information blank; keep the affected Tour draft when the uncertainty changes the product or price materially.
 
 If the build starts materially after the crawl date, re-crawl or manually verify the included source pages. Do not assume the 2026-07-02 extraction is still current.
 
@@ -106,7 +104,7 @@ Retain as factual source material:
 - Included and excluded items.
 - Operational contact and company information that remains current.
 
-Rewrite:
+Rewrite only where required for an accurate HKS presentation:
 
 - Product title when needed for clarity.
 - Hero headline.
@@ -122,19 +120,18 @@ Do not copy navigation debris, SEO boilerplate, unrelated category text, or malf
 ## Pricing Rules
 
 - Show KSh primarily.
-- Tours and Tour discovery surfaces do not publish prices or request-rate fallbacks.
-- Each Campaign has one optional manually maintained `From price per person (KSh)` value.
-- Never silently convert USD and publish the result as a current operator rate.
-- Do not import Ashford USD or seasonal rates into the Campaign price field. The client enters the KSh value directly when it is a deliberate Campaign selling point.
-- A positive value renders as `From KSh X per person` on that Campaign only; a blank value renders nothing.
-- Do not create status, season, residency, group-size, transport, accommodation, inclusion, validity, supplement, single, adult, or child price fields.
-- If a Campaign cannot honestly be summarized by one per-person starting price, leave it blank.
-- Campaign prices do not expire automatically. The client changes or removes them manually. Campaign dates never alter the price field.
-- Preserve legacy Tour price metadata non-destructively, but do not show it, inherit it, or migrate it automatically.
+- Tours have one editable `From price per person (KSh)` field.
+- For this authorized migration, use the source low-season per-person amount, or a clearly credible published starting amount where no seasonal table exists, and the live USD/KSh rate checked on the import date.
+- Always round the converted amount upward to the next KSh 500: `ceil(converted / 500) * 500`.
+- Record the source URL, source currency, source amount, low-season basis, exchange-rate source, rate, conversion date, unrounded result, and rounded KSh result in the repository manifest.
+- A positive Tour value renders as `From KSh X per person` across Tour discovery and detail surfaces; blank or zero renders nothing.
+- Do not create client-facing status, season, residency, group-size, transport, accommodation, inclusion, validity, supplement, single, adult, or child price fields.
+- Campaigns retain a separate optional override. A blank Campaign value may inherit the Tour starting price.
+- Prices do not expire automatically. The client changes or removes them manually. Campaign dates never alter either price field.
 
 ## Photograph Rules
 
-Do not add rights-status or source-audit fields to the media editor. Media uploaded or deliberately assigned to published content by an authorized editor is treated as approved for website use. Imported or scraped remote media must remain unassigned until the editor selects it. Require useful native alt text and use a native caption only when a public credit must display.
+Do not add rights-status or source-audit fields to the media editor. Media uploaded or deliberately assigned to published content by an authorized editor is treated as approved for website use. For the current client-authorized Ashford expansion, corresponding Ashford media may be downloaded, imported, assigned, and published directly. This exception does not authorize unrelated third-party media or future unattended imports. Require useful native alt text and use a native caption only when a public credit must display.
 
 AI-generated imagery may be used for clearly conceptual presentations, but live product pages should use approved real destination and product photographs wherever buyers need to inspect the actual experience.
 

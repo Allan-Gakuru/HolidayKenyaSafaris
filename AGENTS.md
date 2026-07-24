@@ -26,12 +26,12 @@ This documentation package overrides older workspace material when there is a co
 
 - The exact brand name is **Holiday Kenya Safaris**.
 - The selected identity is **The Wayfinder**, not Open Horizon or Safari Window.
-- Holiday Kenya Safaris serves the local Kenyan market and is operated by Ashford Tours & Travel.
+- Holiday Kenya Safaris primarily serves the local Kenyan market, offers both Kenya and international trips, and is operated by Ashford Tours & Travel.
 - The website is not an app and should not look or speak like a technology product.
 
 ## Objective
 
-Build an exquisite, fast, trustworthy WordPress website that turns Facebook-ad traffic and high-intent visitors into qualified WhatsApp inquiries for local Kenyan tours.
+Build an exquisite, fast, trustworthy WordPress website that turns Facebook-ad traffic and high-intent visitors into qualified WhatsApp inquiries for Kenya and international tours.
 
 The main website must feel like a complete, browseable travel catalogue. Its homepage, navigation, archives, and canonical Tour pages use the catalogue-led structure in `UI-REFERENCE-CATALOGUE.md`. Focused paid-ad Campaign pages retain a more emotionally concentrated conversion format.
 
@@ -53,12 +53,13 @@ The initial commercial endpoint is a qualified WhatsApp conversation, not online
 
 ## Non-Negotiable Product Rules
 
-- Build for domestic safaris, excursions, coast trips, staycations, group packages, and relevant local special-interest travel.
-- Exclude international holidays, visa services, airport transfers, and inbound-only products unless the client later includes them.
-- Retain factual Ashford itinerary information, but rewrite marketing copy for local buyers.
-- Treat an authorized editor's decision to upload or assign media and publish public content as client approval. Imports remain drafts until an authorized editor publishes them.
-- Do not expose or render prices on Tours, Tour cards, catalogue pages, taxonomy archives, Destination pages, related-Tour modules, or canonical Tour quote panels.
-- Give Campaigns one optional `From price per person (KSh)` field. Render it only on that Campaign when populated; when blank, omit price output entirely. Do not inherit or copy a legacy Tour price automatically.
+- Build for domestic safaris, excursions, coast trips, staycations, group packages, relevant local special-interest travel, and approved international holidays.
+- Exclude visa services, standalone airport or hotel transfers, and products that cannot be represented accurately as a Tour.
+- Retain Ashford itinerary copy and factual product information as literally as makes sense, removing only navigation debris, malformed fragments, contradictions, and wording that would mislead an HKS visitor.
+- Treat an authorized editor's decision to upload or assign media and publish public content as client approval. The client has authorized the current Ashford catalogue expansion to be imported and published directly; later unattended imports require a new explicit authorization.
+- Give Tours one editable `From price per person (KSh)` field stored as `hks_from_price_ksh`. A positive value renders as `From KSh X per person` on Tour cards, catalogue and taxonomy archives, Destination pages, related-Tour modules, canonical Tour pages, and Tour quote panels. Blank or zero omits the price cleanly.
+- For the authorized Ashford catalogue expansion, convert the source low-season per-person price, or a clearly credible published starting price where no seasonal table exists, using the live USD/KSh rate checked on the import date and round upward to the next KSh 500. Reject placeholder/deposit-like values. Record the source amount, exchange-rate source, rate, and conversion date in the repository import manifest, not as extra client editor fields.
+- Keep the separate optional Campaign `From price per person (KSh)` field. A populated Campaign price overrides the linked Tour price on that Campaign; when blank, the Campaign may inherit the linked Tour starting price.
 - Do not add price status, validity-date, season, residency, group-size, transport, accommodation, inclusion, or other price-assumption fields. Editors update or remove a Campaign price manually.
 - Never invent rates, reviews, memberships, policies, legal details, lodge availability, or operational claims.
 - The official Holiday Kenya Safaris mobile and WhatsApp number is `+254 712 965 131` (`254712965131` in `wa.me` URLs).
@@ -113,10 +114,11 @@ When package information conflicts, use this order:
 
 1. Client-confirmed Holiday Kenya Safaris information.
 2. Current Ashford product page and client-confirmed Ashford operational details.
-3. The local catalogue files in this workspace.
-4. Internal hypotheses and research documents, clearly labeled as hypotheses.
+3. The approved exchange-rate source recorded in the import manifest for a client-authorized conversion.
+4. The local catalogue files in this workspace.
+5. Internal hypotheses and research documents, clearly labeled as hypotheses.
 
-Never treat a hypothesis as sales data or a converted USD rate as an approved KSh price.
+Never treat a hypothesis as sales data. A converted USD rate becomes an approved HKS starting price only under the explicit conversion rule above; editors may change it later.
 
 ## Editorial Approval Rule
 
@@ -126,7 +128,7 @@ Never treat a hypothesis as sales data or a converted USD rate as an approved KS
 - Required system identifiers and legacy audit metadata may remain stored for compatibility, but must be generated or hidden rather than requested from the client.
 - Start and end date fields belong only to Campaign planning and do not auto-publish or alter the Campaign price. Preferred travel date or month remains an inquiry answer, not Tour metadata.
 - Road safari, flying safari, coast experience, staycation, and similar product distinctions belong in Tour Type and related taxonomies, not in pricing assumptions.
-- Publishing does not authorize invented facts. Imported content stays draft until reviewed and published by an authorized editor.
+- Publishing does not authorize invented facts. The current Ashford catalogue expansion is explicitly authorized for direct publication; unclear or contradictory products remain draft until resolved.
 
 ## Build Sequence
 
@@ -139,7 +141,7 @@ Never treat a hypothesis as sales data or a converted USD rate as an approved KS
 7. Build the intake-to-WhatsApp component and analytics event contract.
 8. Build and approve the catalogue-led global header, Tour gallery, canonical Tour workspace, sticky quote panel, tabs/disclosures, and related-Tour pattern.
 9. Build the catalogue, destination, homepage, and Campaign templates from the approved components.
-10. Add the remaining approved local catalogue in controlled batches.
+10. Add the remaining approved Kenya and international Ashford catalogue in controlled batches.
 11. Configure and test the local-to-GitHub-to-cPanel staging and production pipeline.
 12. Test responsive behavior, accessibility, performance, SEO, tracking, and editorial usability.
 
@@ -152,7 +154,7 @@ The website is ready for launch only when:
 - Canonical Tour pages use the approved gallery, two-column workspace, tabs/disclosures, related Tours, and sticky quote panel at desktop and mobile breakpoints.
 - No canonical Tour page contains a permanent long booking form; every quote command opens the shared HKS intake and WhatsApp handoff.
 - WhatsApp inquiries include enough context for a consultant to quote.
-- Every published price, photograph, trust claim, and policy was deliberately entered, assigned, or published by an authorized editor.
+- Every published price, photograph, trust claim, and policy was deliberately entered, assigned, imported under the current client authorization, or published by an authorized editor.
 - Wayfinder assets are crisp at favicon, header, social, print, and vehicle sizes.
 - Meta and GA4 events have been tested with client IDs.
 - Core Web Vitals, mobile layouts, forms, keyboard interaction, and major browsers have been tested.

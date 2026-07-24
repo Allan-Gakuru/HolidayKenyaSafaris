@@ -21,13 +21,12 @@ Include:
 - Staycations.
 - Couple, family, friend-group, chama, church, SACCO, school, youth, corporate, and other group packages.
 - Mount Kenya, hiking, photography, conservation, and other suitable special-interest products.
+- International holidays published by Ashford Tours & Travel that can be accurately offered to HKS customers.
 
 Exclude by default:
 
-- International holidays.
 - Visa services.
 - Standalone airport or hotel transfers.
-- Tanzania-only and clearly inbound-only products.
 - Any product with implausible or unverified public information until reviewed.
 
 ## Content
@@ -41,13 +40,13 @@ Exclude by default:
 
 ## Pricing
 
-- Tours and all Tour discovery surfaces are price-free. They do not show a value or a request-rate fallback.
-- Each Campaign has one optional field: `From price per person (KSh)`.
-- A positive value displays as `From KSh X per person` only on that Campaign. A blank or zero value produces no price output.
-- Campaign prices do not have statuses, assumptions, checked dates, validity dates, seasonal rows, supplements, or automatic expiry. An authorized editor updates or removes the value manually.
-- The number must honestly represent a per-person starting price and should be entered only when price is a useful selling point for that Campaign.
-- Converted USD values must never be presented as approved KSh prices.
-- Campaigns do not inherit legacy Tour prices. Campaign start and end dates record the intended campaign window; they do not automatically change the Campaign price or WordPress publication state.
+- Each Tour has one editable `From price per person (KSh)` field stored as `hks_from_price_ksh`.
+- A positive Tour value displays as `From KSh X per person` on the Tour, its cards, catalogue and taxonomy archives, Destination pages, and related-Tour modules. Blank or zero produces no price output.
+- For the client-authorized Ashford catalogue expansion, use the source low-season per-person amount, or a clearly credible published starting amount where no seasonal table exists, convert it with the live USD/KSh rate on the import date, and always round upward to the next KSh 500. Reject placeholder/deposit-like values.
+- The repository import manifest records the original currency and amount, exchange-rate source, rate, conversion date, unrounded result, and published rounded KSh amount. These audit values do not become client editor fields.
+- Campaigns retain their separate optional `From price per person (KSh)` field. A positive Campaign value overrides the linked Tour price on that Campaign; a blank Campaign value may inherit the linked Tour price.
+- Prices do not have client-facing statuses, assumptions, checked dates, validity dates, seasonal rows, supplements, or automatic expiry. An authorized editor updates or removes the editable value manually.
+- Campaign start and end dates do not automatically change the Campaign or Tour price or WordPress publication state.
 
 ## Editorial Approval and Field Economy
 
@@ -59,7 +58,7 @@ Exclude by default:
 - Campaigns are the only content records with start and end date fields. These dates are the explicit exception to the visible-output rule and serve campaign operations only. The preferred travel date or month in the inquiry form remains visitor input.
 - Road safari, flying safari, coast experience, staycation, group package, and other product differences are expressed through Tour Type, Destination, Occasion, Travel Style, and the public itinerary—not pricing assumptions.
 - Internal import notes may remain in repository source files. Stable IDs and legacy metadata may remain stored for backward compatibility but are not editable requirements and do not gate publication.
-- Publishing does not permit invented prices, reviews, policies, availability, or operational claims. Imported records remain drafts until an authorized editor reviews and publishes them.
+- Publishing does not permit invented prices, reviews, policies, availability, or operational claims. Imports normally remain drafts until an authorized editor reviews and publishes them; the dated Ashford expansion is the explicit client-authorized direct-publication exception, with unclear or unpriceable records retained as drafts.
 
 ## Conversion
 
@@ -100,7 +99,8 @@ Exclude by default:
 - A conventional booking sidebar is replaced by an HKS quote panel whose **Request quote on WhatsApp** button opens the approved intake, consent, private recovery, message-review, and WhatsApp-launch flow.
 - Desktop navigation uses a utility bar plus product-led primary header. The utility bar carries a direct WhatsApp link with a prefilled, page-aware reach-out message; the primary header does not repeat it as a large button. Page-level quote actions still open the approved intake and recovery flow. Mobile uses a full-height accessible navigation drawer.
 - Approved top-level navigation is Home, Safaris, Coast & Stays, Destinations, Group Travel, About, and Contact. The mobile drawer retains a clear Request quote on WhatsApp action.
-- International holidays, visa services, air ticketing, transfers, and inbound-only routes remain excluded.
+- Kenya and international Tours are separated by the public Tour Scope taxonomy. Destination remains the geographic taxonomy used beneath either scope.
+- Visa services, standalone transfers, and non-Tour service pages remain excluded.
 
 ## Brand
 
@@ -142,7 +142,8 @@ Client IDs will be supplied later. Do not hard-code invented IDs.
 - The 44 reviewed local Ashford candidates resolve to 40 Phase 7 draft imports: three already exist as MVP Tours and the generic `African-wildlife-safari` marketing page is excluded as non-quotable.
 - Phase 7 is split into four operator-triggered batches: Road Safaris, Flying Safaris and Mount Kenya, Nairobi Excursions, and Mombasa Excursions.
 - Catalogue migration preserves Ashford titles and source URLs, maps the four existing Tour taxonomies, and carries over source duration and route headings when available.
-- The migration assigns no price, media, policy, inclusion, exclusion, review, or availability data. An authorized editor completes and publishes each Tour deliberately.
+- The completed local migration assigned no automatic price. The new client-authorized Ashford expansion may assign source images, literal itinerary content, a converted low-season starting price, Tour Scope, Destinations, and other supported public Tour fields, then publish directly.
+- Direct publication is limited to this client-authorized expansion. Contradictory, incomplete, or unpriceable products remain draft and are reported.
 - Seeded records can be refreshed only while they remain Draft. Any record moved beyond Draft is protected from importer updates.
 - Tour Type, Occasion/Audience, and Travel Style are public catalogue taxonomies, alongside Destination. Their canonical term routes use `/tour-types/`, `/occasions/`, and `/travel-styles/` respectively.
 - Public taxonomy queries are constrained to published Tours. This is especially important for Occasion/Audience because Campaigns may share those terms without appearing in catalogue archives.

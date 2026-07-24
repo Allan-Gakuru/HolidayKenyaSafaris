@@ -59,6 +59,19 @@ final class FieldGroups {
 				),
 				self::tab( 'tour_tab_summary', __( 'Summary', 'hks-core' ) ),
 				self::field( 'tour_featured', __( 'Feature on the homepage', 'hks-core' ), 'hks_featured', 'true_false', array( 'instructions' => __( 'Moves this Tour ahead of non-featured Tours in the homepage selection.', 'hks-core' ), 'ui' => 1, 'default_value' => 0 ) ),
+				self::field(
+					'tour_from_price_ksh',
+					__( 'From price per person (KSh)', 'hks-core' ),
+					'hks_from_price_ksh',
+					'number',
+					array(
+						'instructions' => __( 'Optional. This starting price appears on the Tour and catalogue cards. Leave blank to omit it.', 'hks-core' ),
+						'min'          => 1,
+						'step'         => 1,
+						'prepend'      => 'KSh',
+						'append'       => __( 'per person', 'hks-core' ),
+					)
+				),
 				self::field( 'tour_duration_label', __( 'Duration', 'hks-core' ), 'hks_duration_label', 'text', array( 'instructions' => __( 'Displayed publicly, for example “3 days / 2 nights” or “4 hours”.', 'hks-core' ) ) ),
 				self::field( 'tour_start_location', __( 'Starts in', 'hks-core' ), 'hks_start_location', 'text', array( 'instructions' => __( 'Displayed in Tour facts and catalogue context.', 'hks-core' ) ) ),
 				self::field( 'tour_end_location', __( 'Ends in', 'hks-core' ), 'hks_end_location', 'text', array( 'instructions' => __( 'Displayed in the Tour facts when entered.', 'hks-core' ) ) ),

@@ -6,7 +6,7 @@ The first Holiday Kenya Safaris content batch is stored in
 - three canonical Tour drafts: Maasai Mara, Nairobi National Park, and Amboseli;
 - one focused Campaign draft linked to each Tour;
 - source URLs, audit notes, source-backed itinerary facts, and local-buyer copy;
-- no Tour prices and no seeded Campaign price; and
+- no prices in this original three-record seed (prices may be added later through the editor or an authorized audited migration); and
 - no photographs or policy claims.
 
 ## Import on the deployed WordPress site
@@ -23,8 +23,8 @@ terms, and protects records moved to any other WordPress status. It never runs o
 plugin activation.
 
 Before a Tour may be published, an operator must review its route, vehicle,
-accommodation, inclusions, and assigned media. Tours remain price-free. A Campaign
-price remains absent until an editor deliberately enters and publishes it.
+accommodation, inclusions, assigned media, and any starting price. A Campaign
+price remains absent until an editor deliberately enters and publishes it or allows the linked Tour price to appear.
 
 ## Source validation
 

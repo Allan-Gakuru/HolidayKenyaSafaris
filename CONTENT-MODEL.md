@@ -18,7 +18,7 @@ The client editor is a publishing interface, not an audit database. Native WordP
 - Blank optional fields are omitted with deliberate frontend fallbacks.
 - A client-facing field must either render publicly or visibly control public discovery or placement.
 - Necessary IDs, attribution values, migration markers, and other system metadata must be generated or hidden.
-- Only Campaigns have start and end dates. These are the explicit operational exception to the visible-output rule. Campaign prices are optional, updated manually, and never expire automatically.
+- Only Campaigns have start and end dates. These are the explicit operational exception to the visible-output rule. Tour and Campaign starting prices are editable manually and never expire automatically.
 
 This rule does not permit invented facts. Imports remain drafts until an authorized editor reviews and publishes them.
 
@@ -64,6 +64,13 @@ Do not seed invented testimonials.
 Optional later content type for verified guide and staff profiles. It is not required for the first build unless the client supplies approved information.
 
 ## Taxonomies
+
+### Tour Scope
+
+- Kenya Tours.
+- International Tours.
+
+Tour Scope is a public, hierarchical discovery taxonomy stored as `hks_tour_scope`. It separates the two catalogue families without duplicating geographic terms. Destination remains the geographic taxonomy beneath either scope. A Tour normally has exactly one scope; filters, navigation, archives, related Tours, and Group Travel may combine Tour Scope with Destination.
 
 ### Destination
 
@@ -157,9 +164,11 @@ Destination, Tour Type, Occasion/Audience, and Travel Style have canonical publi
 
 ### Pricing
 
-Tours have no active price field and no public price output. Tour cards, catalogue and taxonomy archives, Destination pages, canonical Tour pages, related-Tour modules, and Tour quote panels do not show either a value or a request-rate fallback.
+Tours have one active optional whole-number field: `From price per person (KSh)`, stored as `hks_from_price_ksh`.
 
-The legacy `hks_from_price_ksh` Tour meta key remains stored for backward compatibility but is hidden from editors and ignored by frontend templates, analytics, and structured data. Do not delete or migrate it automatically.
+A positive amount renders as `From KSh X per person` on Tour cards, catalogue and taxonomy archives, Destination pages, canonical Tour pages, related-Tour modules, and the canonical quote panel. Blank or zero produces no price output or fallback.
+
+For the client-authorized Ashford catalogue expansion, the importer reads the source low-season per-person amount, or a clearly credible published starting amount where no seasonal table exists, converts it using the live USD/KSh rate recorded on the import date, and rounds upward to the next KSh 500. Placeholder/deposit-like values are rejected. Original currency, source amount, rate source, rate, conversion date, unrounded result, and rounded result belong in the repository import manifest, not in the client editor.
 
 ### Itinerary
 
@@ -243,9 +252,9 @@ The title band, gallery mosaic, desktop tabs, mobile disclosures, itinerary beha
 - Navigation: full, reduced, or campaign-minimal.
 - Campaign start date and Campaign end date.
 
-Campaigns inherit the linked Tour facts, itinerary, inclusions, and exclusions. A positive Campaign price renders as `From KSh X per person` on that Campaign only; blank or zero produces no price output. Campaign dates record the planned campaign window only; they do not auto-publish, unpublish, expire, or alter the Campaign price. Campaign attribution and default indexing behavior are generated from the Campaign ID, slug, and template rather than requested as client fields.
+Campaigns inherit the linked Tour facts, itinerary, inclusions, exclusions, and default starting price. A positive Campaign price renders as `From KSh X per person` and overrides the Tour amount on that Campaign; blank or zero falls back to the linked Tour price when it is populated. Campaign dates record the planned campaign window only; they do not auto-publish, unpublish, expire, or alter either price. Campaign attribution and default indexing behavior are generated from the Campaign ID, slug, and template rather than requested as client fields.
 
-Use the Campaign price only when one figure can truthfully represent a per-person starting price and price is a useful selling point for that focused offer. Never auto-convert a USD amount, copy a legacy Tour price, or seed an unconfirmed public price.
+Use the Campaign price only when one figure can truthfully represent a per-person starting price and price is a useful selling point for that focused offer. Outside the explicitly authorized 24 July 2026 Ashford migration, never auto-convert a USD amount, copy a legacy Tour price, or seed an unconfirmed public price.
 
 ## Destination and FAQ Editors
 
@@ -282,14 +291,14 @@ Do not pair public settings with confirmation-status, source, or checked-date fi
 
 The simplified editor must not rename custom post types, taxonomies, existing SCF field keys that remain in use, inquiry records, or Campaign relationships.
 
-- Keep legacy Tour price metadata, including `hks_from_price_ksh`, in the database but do not register it in the client editor or render it publicly.
-- Add `hks_campaign_from_price_ksh` as a separate Campaign field. Do not copy, inherit, or migrate a legacy Tour amount into it automatically.
+- Reactivate the existing `hks_from_price_ksh` key as the one editable Tour starting-price field. Existing values remain non-destructive and become public only when they are positive whole KSh amounts.
+- Keep `hks_campaign_from_price_ksh` as a separate Campaign override. A blank Campaign amount may inherit the linked Tour price at render time without copying the value into Campaign metadata.
 - Stop reading legacy price status, checked date, valid-until date, assumptions, seasonal rates, supplements, and disclaimer values on the frontend.
 - Keep legacy metadata in the database during the MVP migration; hide it from the editor and ignore it at render time. Do not delete it in a destructive upgrade.
 - Remove source/status/date gates from published Tours, Destinations, FAQs, package notes, and assigned media. Native publication state and deliberate assignment become the gates.
 - Existing published content may therefore reveal assigned media, FAQ answers, Destination copy, or package notes that older status gates suppressed. This is an intended consequence of the client's publish-as-approval decision.
-- Tour cards, canonical Tour quote panels, Tour structured data, and Tour analytics omit price entirely. Campaign templates may render their own positive Campaign price; blank Campaign prices are omitted.
-- Campaign analytics may derive `price_display` as `from_price` when the Campaign field is populated; it does not read or transmit legacy Tour price metadata or a price-status field.
+- Tour cards, canonical Tour quote panels, and accurate offer structured data may render the positive Tour starting price. Analytics may report only non-sensitive price-display state unless a specific value parameter is deliberately approved.
+- Campaign analytics may derive `price_display` as `from_price` when either the Campaign override or inherited Tour price is displayed; it does not transmit obsolete price-status metadata.
 - Campaign start and end dates remain intact. All Tour, price, source, media-rights, FAQ, and policy checked/validity dates become ignored legacy metadata.
 - Clear relevant WordPress and host caches after deployment so old gated output is not served.
 
@@ -297,7 +306,7 @@ The simplified editor must not rename custom post types, taxonomies, existing SC
 
 - Lock critical template structure but allow approved content regions.
 - Use short help text that explains exactly where each field appears publicly.
-- Validate the optional Campaign price as a positive whole KSh amount when populated.
+- Validate both optional Tour and Campaign prices as positive whole KSh amounts when populated.
 - Do not require source, confirmation, price-assumption, rights, or validity metadata to publish.
 - Keep original Ashford source values in repository import files when useful; do not require the client to maintain them in WordPress.
 - Avoid free-form flexible content for canonical tour facts. Use it only for optional campaign storytelling modules.

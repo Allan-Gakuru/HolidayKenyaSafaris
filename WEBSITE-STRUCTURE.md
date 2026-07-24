@@ -2,7 +2,7 @@
 
 ## Structural Reference
 
-The standard website uses the catalogue and canonical Tour structure documented in `UI-REFERENCE-CATALOGUE.md`. Holiday Kenya Safaris keeps the Wayfinder identity, local Kenyan scope, verified Ashford facts, Campaign-only optional pricing, and qualified WhatsApp conversion flow.
+The standard website uses the catalogue and canonical Tour structure documented in `UI-REFERENCE-CATALOGUE.md`. Holiday Kenya Safaris keeps the Wayfinder identity, a local-market focus with Kenya and international Tours, verified Ashford facts, editable KSh starting prices, and the qualified WhatsApp conversion flow.
 
 The existing Maasai Mara prototype is retained as a Campaign landing-page reference. It is not the default canonical Tour template.
 
@@ -35,11 +35,12 @@ Suggested dropdown structure:
 
 | Menu | Approved routes when populated |
 |---|---|
-| Safaris | Road Safaris, Day Excursions, Weekend and Short Breaks, Flying Safaris, Trekking and Special Interest |
+| Kenya Tours | Kenya destinations, Road Safaris, Day Excursions, Weekend and Short Breaks, Flying Safaris, Trekking and Special Interest |
+| International Tours | Populated international destinations and useful trip types |
 | Coast & Stays | Coast Trips, Staycations, Bush and Beach |
 | Destinations | Priority populated destinations followed by View all destinations |
 
-Do not expose empty categories. Do not include international holidays, visa services, air ticketing, standalone transfers, or inbound-only products.
+Do not expose empty categories. Do not include visa services, standalone transfers, or unrelated service pages.
 
 ### Mobile navigation
 
@@ -90,7 +91,7 @@ Featured Tour rules:
 
 - Show up to six priority Tours initially.
 - Use a three-column desktop grid, responsive tablet layout, and one-column mobile flow.
-- Cards must show image, title, destination, duration, route or departure context, and a clear View trip action. They do not show price.
+- Cards must show image, title, destination, duration, route or departure context, an optional `From KSh X per person` value, and a clear View trip action.
 
 ### Tour Catalogue and Taxonomy Archives
 
@@ -111,6 +112,7 @@ Default order:
 Initial filters may include:
 
 - Destination.
+- Tour scope.
 - Tour type.
 - Travel style.
 - Occasion.
@@ -120,9 +122,11 @@ Tour cards show:
 - Editor-selected destination image.
 - Tour title.
 - Destination.
+- Tour scope when it helps distinguish the catalogue family.
 - Duration.
 - Route or departure point.
 - One or two useful travel-style labels.
+- `From KSh X per person` when a positive Tour price exists.
 - View trip action.
 
 Do not display meaningless default metadata such as `1 person`. Mobile filters use an accessible drawer or dialog.
@@ -180,7 +184,7 @@ The right column contains a sticky quote panel with:
 - Short explanation of the intake and message-review step.
 - Confirmed operator or response details when available.
 
-The quote panel must not contain a permanent long booking form. Clicking the button opens the shared intake dialog or mobile sheet.
+The quote panel may show the Tour's positive `From KSh X per person` starting price, followed by a short reminder that the final quote depends on dates and group details. It must not contain a permanent long booking form. Clicking the button opens the shared intake dialog or mobile sheet.
 
 #### Itinerary
 
@@ -241,7 +245,7 @@ Features:
 - Full, reduced, or minimal navigation.
 - Campaign-specific hero and navigation treatment.
 - Canonical itinerary, inclusions, exclusions, and logistics inherited from the linked Tour.
-- One optional Campaign-specific `From KSh... per person` value, displayed only when deliberately entered.
+- One optional Campaign-specific `From KSh... per person` override. When blank, the linked Tour starting price may display.
 - Attribution retained through inquiry save and WhatsApp launch.
 - Start and end dates exist on Campaigns only; Campaign indexing defaults are template-controlled.
 
@@ -311,7 +315,7 @@ Potential modules, only when verified:
 - Tour gallery mosaic and lightbox.
 - Duration and facts strip.
 - Accessible Tour tabs and mobile disclosures.
-- Price-free canonical Tour quote panel with standard quote context.
+- Canonical Tour quote panel with optional starting price and standard quote context.
 - Optional Campaign price panel.
 - Itinerary timeline.
 - Inclusion/exclusion lists.

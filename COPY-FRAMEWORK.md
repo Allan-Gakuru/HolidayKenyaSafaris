@@ -45,7 +45,7 @@ If the page is broad, write to the shared local desire for a clear, trustworthy,
 ### Reduce time delay
 
 - Show the itinerary immediately.
-- Make the tailored quote process easy to understand. Show `From KSh... per person` only on a focused Campaign where an editor has deliberately entered the optional Campaign price.
+- Make the tailored quote process easy to understand. Show `From KSh... per person` when the Tour has a positive starting amount; a focused Campaign may override it with its own optional price.
 - Tell visitors what happens after they submit the intake form.
 - Use clear availability and response expectations only when the client confirms them.
 
@@ -111,7 +111,7 @@ Campaign pages may be shorter and more focused:
 2. Specific outcome and package.
 3. Three to five proof points.
 4. Condensed itinerary.
-5. Critical exclusions and, only when deliberately entered, the Campaign-specific starting price.
+5. Critical exclusions and the available Tour starting price or deliberately entered Campaign override.
 6. Trust proof.
 7. Intake form and WhatsApp handoff.
 
@@ -187,7 +187,7 @@ Before publishing, verify:
 
 - Does the headline identify a real outcome, pressure, or package?
 - Is the reader clear about the duration and route?
-- Is every Tour surface price-free, and is an optional Campaign price shown only when deliberately entered?
+- Is every displayed Tour price a positive editable KSh per-person starting amount, and does any Campaign override behave correctly?
 - Is every trust claim concrete, authorized, and free of invention?
 - Is the main objection answered before the CTA?
 - Does the page sound like a competent person rather than generated brochure copy?

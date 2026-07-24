@@ -2,7 +2,7 @@
 
 ## Status
 
-This document records the approved layout and interaction system for the Holiday Kenya Safaris website, consolidating review decisions made on 2026-07-15. Holiday Kenya Safaris must use the Wayfinder identity, local-market scope, approved content model, KSh pricing rules, and qualified WhatsApp funnel.
+This document records the approved layout and interaction system for the Holiday Kenya Safaris website, consolidating review decisions made on 2026-07-15 and the catalogue expansion approved on 2026-07-24. Holiday Kenya Safaris must use the Wayfinder identity, local-market focus, Kenya and international Tour scopes, approved content model, KSh pricing rules, and qualified WhatsApp funnel.
 
 ## Core Decision
 
@@ -86,7 +86,7 @@ The mobile drawer and page-level conversion surfaces retain the **Request quote 
 
 `Destinations` should contain a concise set of populated priority terms, followed by a route to view all destinations. Do not place every taxonomy term in the header.
 
-Do not include international holidays, visa services, air ticketing, transfers, or inbound-only categories.
+Expose populated Kenya Tours and International Tours routes. Do not include visa services, standalone transfers, or unrelated service categories.
 
 ### Mobile navigation
 
@@ -131,8 +131,8 @@ Featured Tour rules:
 - Use three columns on desktop, two when appropriate on tablet, and one on mobile.
 - Begin with no more than six priority Tours on the homepage.
 - Preserve a stable image ratio and card height.
-- Show title, destination, duration, route or departure context, and a clear View trip action.
-- Do not show a price or request-rate fallback on Tour cards.
+- Show title, destination, duration, route or departure context, optional `From KSh X per person`, and a clear View trip action.
+- Omit the price cleanly when the Tour has no positive starting amount.
 
 ## Catalogue and Taxonomy Templates
 
@@ -195,7 +195,8 @@ The right column contains a sticky quote panel, not a long booking form.
 
 The panel should contain:
 
-- A clear tailored-quote heading without a Tour price or request-rate fallback.
+- A clear tailored-quote heading.
+- The Tour's `From KSh X per person` starting price when populated, plus a concise reminder that the final quote depends on dates and group details.
 - A short note explaining that the visitor shares dates and group details, reviews the message, and chooses whether to send it in WhatsApp.
 - A compact availability statement that does not invent availability.
 - The primary **Request quote on WhatsApp** button.
@@ -324,7 +325,7 @@ Build reusable theme parts and blocks for:
 - Test at 360, 390, 768, 1024, 1280, and 1440px widths.
 - The navigation must remain usable with long labels and keyboard input.
 - The gallery must not distort, collapse to zero height, or shift after load.
-- The title, facts, and quote action must remain discoverable without overlap. An optional Campaign price must not shift or crowd those controls.
+- The title, facts, starting price, and quote action must remain discoverable without overlap. A long KSh value or optional Campaign override must not shift or crowd those controls.
 - Sticky elements must stop before the footer and never cover page content.
 - Mobile disclosures must expose every canonical Tour fact available on desktop.
 - The intake form must retain entered values when the keyboard opens, validation fails, or the dialog is temporarily dismissed.

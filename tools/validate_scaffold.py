@@ -59,6 +59,7 @@ REQUIRED_THEME_FILES = [
     "templates/single-hks_campaign.html",
     "templates/single-hks_tour.html",
     "templates/taxonomy-hks_destination.html",
+    "templates/taxonomy-hks_tour_scope.html",
     "inc/TourBlocks.php",
     "blocks/destination-intro/block.json",
     "blocks/catalogue-controls/block.json",
@@ -94,6 +95,7 @@ REQUIRED_PLUGIN_FILES = [
     "src/Content/PostTypes/Inquiry.php",
     "src/Content/PostTypes/Tour.php",
     "src/Content/Taxonomies/Destination.php",
+    "src/Content/Taxonomies/TourScope.php",
     "src/Content/Taxonomies/Occasion.php",
     "src/Content/Taxonomies/TourType.php",
     "src/Content/Taxonomies/TravelStyle.php",
@@ -111,6 +113,8 @@ REQUIRED_PLUGIN_FILES = [
     "data/mvp-seed.json",
     "src/Seed/Module.php",
     "src/Seed/MvpSeeder.php",
+    "src/Seed/AshfordExpansionSeeder.php",
+    "data/ashford-expansion-seed.json",
     "assets/css/inquiry.css",
     "assets/js/inquiry.js",
     "blocks/quote-cta/block.json",
@@ -314,7 +318,14 @@ class ScaffoldValidator:
             allowed_children = {"plugins", "themes"}
             unexpected = sorted(actual_children - allowed_children)
             for child in unexpected:
-                self.error(f"Unexpected deploy boundary under wp-content/: {child}")
+                child_path = wp_content / child
+                ignored = subprocess.run(
+                    ["git", "check-ignore", "--quiet", str(child_path)],
+                    cwd=ROOT,
+                    check=False,
+                ).returncode == 0
+                if not ignored:
+                    self.error(f"Unexpected deploy boundary under wp-content/: {child}")
 
         deploy_roots = {
             ROOT / "wp-content" / "themes": {"hks-wayfinder"},

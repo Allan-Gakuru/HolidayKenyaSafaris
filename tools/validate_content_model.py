@@ -32,6 +32,7 @@ REQUIRED_FIELDS = {
     "hks_itinerary", "hks_inclusions", "hks_exclusions", "hks_best_for",
     "hks_child_suitability", "hks_accessibility_notes", "hks_policies",
     "hks_gallery", "hks_featured_faqs", "hks_linked_tour",
+    "hks_from_price_ksh",
     "hks_hero_headline", "hks_supporting_copy", "hks_campaign_from_price_ksh",
     "hks_navigation_mode",
     "hks_campaign_start_date", "hks_campaign_end_date", "hks_faq_answer",
@@ -42,7 +43,7 @@ FORBIDDEN_EDITOR_FIELDS = {
     "hks_internal_product_id", "hks_original_ashford_title", "hks_source_url",
     "hks_source_reference", "hks_source_checked_date", "hks_source_status",
     "hks_duration_days", "hks_duration_nights", "hks_min_group_size",
-    "hks_max_group_size", "hks_residency_basis", "hks_from_price_ksh",
+    "hks_max_group_size", "hks_residency_basis",
     "hks_price_display_mode",
     "hks_price_unit", "hks_price_status", "hks_price_checked_date",
     "hks_price_valid_until", "hks_price_season_assumption",
@@ -66,6 +67,7 @@ REQUIRED_FILES = (
     "src/Content/PostTypes/Tour.php", "src/Content/PostTypes/Campaign.php",
     "src/Content/PostTypes/Faq.php", "src/Fields/FieldGroups.php",
     "src/Content/Taxonomies/TourType.php",
+    "src/Content/Taxonomies/TourScope.php",
     "src/Content/Taxonomies/Occasion.php",
     "src/Content/Taxonomies/TravelStyle.php",
     "src/Fields/FieldsModule.php", "src/Fields/PublicationRules.php",
@@ -120,6 +122,7 @@ def main() -> int:
     if duplicates:
         errors.append(f"duplicate deterministic field slugs: {duplicates}")
 
+    require(errors, "Tour price field", fields, ("hks_from_price_ksh", "From price per person (KSh)", "'min'          => 1", "'step'         => 1"))
     require(errors, "Campaign price field", fields, ("hks_campaign_from_price_ksh", "From price per person (KSh)", "'min'          => 1", "'step'         => 1", "Leave blank to omit price"))
     require(errors, "campaign dates", fields, ("hks_campaign_start_date", "hks_campaign_end_date", "do not publish, unpublish, expire, or change this Campaign"))
     require(errors, "settings compatibility", fields, ("public_setting", "'hks_settings_' . $slug", "Holiday Kenya Safaris", "254712965131", "info@holidaykenyasafaris.ke"))
@@ -136,8 +139,8 @@ def main() -> int:
             "CLIENT CONFIRMATION REQUIRED",
         ),
     )
-    if "hks_tour_from_price_invalid" in rules or "'hks_from_price_ksh'" in rules:
-        errors.append("publication rules still load or validate the retired Tour price")
+    if "hks_tour_from_price_invalid" not in rules or "'hks_from_price_ksh'" not in rules:
+        errors.append("publication rules do not validate the optional Tour price")
     for old_gate in ("hks_price_status", "hks_source_status", "hks_analytics_campaign_label"):
         if old_gate in rules:
             errors.append(f"publication rules still gate on removed field: {old_gate}")
@@ -156,6 +159,7 @@ def main() -> int:
     require(errors, "Tour type", files["src/Content/PostTypes/Tour.php"], ("'hks_tour'", "'show_in_rest'        => true"))
     require(errors, "Campaign type", files["src/Content/PostTypes/Campaign.php"], ("'hks_campaign'", "'publicly_queryable'  => true"))
     require(errors, "Tour Type archive", files["src/Content/Taxonomies/TourType.php"], ("'public'             => true", "'publicly_queryable' => true", "'slug'         => 'tour-types'"))
+    require(errors, "Tour Scope archive", files["src/Content/Taxonomies/TourScope.php"], ("'hks_tour_scope'", "'public'             => true", "'publicly_queryable' => true", "'slug'         => 'tour-scope'"))
     require(errors, "Occasion archive", files["src/Content/Taxonomies/Occasion.php"], ("'public'             => true", "'publicly_queryable' => true", "'slug'         => 'occasions'"))
     require(errors, "Travel Style archive", files["src/Content/Taxonomies/TravelStyle.php"], ("'public'             => true", "'publicly_queryable' => true", "'slug'         => 'travel-styles'"))
 
@@ -174,7 +178,7 @@ def main() -> int:
             print(f"- {error}", file=sys.stderr)
         return 1
 
-    print("Content-model validation passed (price-free Tours, optional Campaign price, Campaign-only dates, compatibility guards).")
+    print("Content-model validation passed (optional Tour and Campaign prices, public Tour Scope, Campaign-only dates, compatibility guards).")
     return 0
 
 

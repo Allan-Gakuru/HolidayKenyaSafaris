@@ -36,6 +36,8 @@ final class Module implements ModuleContract {
 		add_action( 'admin_post_hks_seed_mvp', array( $this, 'handle_import' ) );
 		add_action( 'admin_post_hks_seed_site_pages', array( $this, 'handle_site_pages_import' ) );
 		add_action( 'admin_post_hks_seed_catalogue', array( $this, 'handle_catalogue_import' ) );
+		add_action( 'admin_post_hks_seed_ashford_existing', array( $this, 'handle_ashford_existing_import' ) );
+		add_action( 'admin_post_hks_seed_ashford_expansion', array( $this, 'handle_ashford_expansion_import' ) );
 	}
 
 	/**
@@ -73,8 +75,8 @@ final class Module implements ModuleContract {
 		?>
 		<div class="wrap">
 			<h1><?php esc_html_e( 'Holiday Kenya Safaris draft importer', 'hks-core' ); ?></h1>
-			<p><?php esc_html_e( 'Each action creates or refreshes only draft records from a version-controlled seed file.', 'hks-core' ); ?></p>
-			<p><?php esc_html_e( 'The importer never publishes records, imports photographs, converts USD rates, or replaces records that are no longer drafts.', 'hks-core' ); ?></p>
+			<p><?php esc_html_e( 'The original site-page and local-catalogue actions remain draft-only. The separately labelled 24 July 2026 Ashford expansion actions use the client-authorized publication and price-conversion manifest.', 'hks-core' ); ?></p>
+			<p><?php esc_html_e( 'No importer replaces a published Tour that it does not own. The expansion importer also protects its own Tours after they have been published and edited.', 'hks-core' ); ?></p>
 
 			<?php if ( is_array( $result ) ) : ?>
 				<div class="notice <?php echo empty( $result['errors'] ) ? 'notice-success' : 'notice-warning'; ?> is-dismissible">
@@ -94,6 +96,21 @@ final class Module implements ModuleContract {
 						);
 						?>
 					</p>
+					<?php if ( isset( $result['published'], $result['drafted'], $result['media'] ) ) : ?>
+						<p>
+							<?php
+							echo esc_html(
+								sprintf(
+									/* translators: 1: published, 2: retained drafts, 3: imported images. */
+									__( 'Published: %1$d. Retained as drafts: %2$d. Images imported: %3$d.', 'hks-core' ),
+									(int) $result['published'],
+									(int) $result['drafted'],
+									(int) $result['media']
+								)
+							);
+							?>
+						</p>
+					<?php endif; ?>
 					<?php if ( ! empty( $result['errors'] ) ) : ?>
 						<ul>
 							<?php foreach ( $result['errors'] as $error ) : ?>
@@ -111,7 +128,7 @@ final class Module implements ModuleContract {
 
 			<hr>
 			<h2><?php esc_html_e( 'Phase 7: Ashford catalogue migration', 'hks-core' ); ?></h2>
-			<p><?php esc_html_e( 'Imports the 40 remaining eligible local catalogue records in controlled draft batches. Tours remain price-free, and no media is assigned automatically.', 'hks-core' ); ?></p>
+			<p><?php esc_html_e( 'Imports the original local catalogue records in controlled draft batches. This legacy action remains draft-only and does not assign media or prices.', 'hks-core' ); ?></p>
 			<?php foreach ( $this->catalogue_batches() as $batch => $details ) : ?>
 				<?php
 				$this->render_import_form(
@@ -124,6 +141,27 @@ final class Module implements ModuleContract {
 						$details['count']
 					),
 					'secondary',
+					array( 'batch' => $batch )
+				);
+				?>
+			<?php endforeach; ?>
+
+			<hr>
+			<h2><?php esc_html_e( 'Authorized 24 July 2026 catalogue expansion', 'hks-core' ); ?></h2>
+			<p><?php esc_html_e( 'First apply Tour Scope and the audited KSh prices to existing Tours. Then import the international batches. Complete records are published with their Ashford featured image; records without a defensible source price remain drafts.', 'hks-core' ); ?></p>
+			<?php $this->render_import_form( 'hks_seed_ashford_existing', __( 'Apply scope and prices to existing Tours', 'hks-core' ), 'secondary' ); ?>
+			<?php foreach ( $this->ashford_expansion_batches() as $batch => $details ) : ?>
+				<?php
+				$this->render_import_form(
+					'hks_seed_ashford_expansion',
+					sprintf(
+						/* translators: 1: batch number, 2: batch label, 3: Tour count. */
+						__( 'Import authorized batch %1$d: %2$s (%3$d Tours)', 'hks-core' ),
+						$batch,
+						$details['label'],
+						$details['count']
+					),
+					'primary',
 					array( 'batch' => $batch )
 				);
 				?>
@@ -203,6 +241,48 @@ final class Module implements ModuleContract {
 	}
 
 	/**
+	 * Read authorized international batch labels and counts.
+	 *
+	 * @return array<int, array{label: string, count: int}>
+	 */
+	private function ashford_expansion_batches() {
+		$file = HKS_CORE_PATH . 'data/ashford-expansion-seed.json';
+
+		if ( ! is_readable( $file ) ) {
+			return array();
+		}
+
+		$data = json_decode( (string) file_get_contents( $file ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+
+		if ( ! is_array( $data ) || ! is_array( $data['new_tours'] ?? null ) ) {
+			return array();
+		}
+
+		$batches = array();
+
+		foreach ( $data['new_tours'] as $tour ) {
+			$batch = (int) ( $tour['batch'] ?? 0 );
+
+			if ( $batch < 1 ) {
+				continue;
+			}
+
+			if ( ! isset( $batches[ $batch ] ) ) {
+				$batches[ $batch ] = array(
+					'label' => sanitize_text_field( $data['batch_labels'][ (string) $batch ] ?? sprintf( __( 'Batch %d', 'hks-core' ), $batch ) ),
+					'count' => 0,
+				);
+			}
+
+			++$batches[ $batch ]['count'];
+		}
+
+		ksort( $batches );
+
+		return $batches;
+	}
+
+	/**
 	 * Validate the admin request and run the importer.
 	 *
 	 * @return void
@@ -257,6 +337,45 @@ final class Module implements ModuleContract {
 	}
 
 	/**
+	 * Apply the authorized scope and price manifest to existing Tours.
+	 *
+	 * @return void
+	 */
+	public function handle_ashford_existing_import() {
+		$this->authorize( 'hks_seed_ashford_existing' );
+		$this->run_import(
+			new AshfordExpansionSeeder( 0 ),
+			__( 'Authorized existing Tour scope and price update', 'hks-core' )
+		);
+	}
+
+	/**
+	 * Import one authorized international Tour batch.
+	 *
+	 * @return void
+	 */
+	public function handle_ashford_expansion_import() {
+		$this->authorize( 'hks_seed_ashford_expansion' );
+
+		$batch   = isset( $_POST['batch'] ) ? absint( wp_unslash( $_POST['batch'] ) ) : 0;
+		$batches = $this->ashford_expansion_batches();
+
+		if ( ! isset( $batches[ $batch ] ) ) {
+			wp_die( esc_html__( 'Select a valid authorized Ashford expansion batch.', 'hks-core' ) );
+		}
+
+		$this->run_import(
+			new AshfordExpansionSeeder( $batch ),
+			sprintf(
+				/* translators: 1: batch number, 2: batch label. */
+				__( 'Authorized expansion batch %1$d: %2$s', 'hks-core' ),
+				$batch,
+				$batches[ $batch ]['label']
+			)
+		);
+	}
+
+	/**
 	 * Validate an importer request.
 	 *
 	 * @param string $action Nonce action.
@@ -273,11 +392,11 @@ final class Module implements ModuleContract {
 	/**
 	 * Run a configured draft seeder and return to the importer screen.
 	 *
-	 * @param MvpSeeder $seeder Configured seeder.
-	 * @param string    $label  Result label.
+	 * @param MvpSeeder|AshfordExpansionSeeder $seeder Configured seeder.
+	 * @param string                             $label  Result label.
 	 * @return void
 	 */
-	private function run_import( MvpSeeder $seeder, $label ) {
+	private function run_import( $seeder, $label ) {
 		$result          = $seeder->run();
 		$result['label'] = $label;
 

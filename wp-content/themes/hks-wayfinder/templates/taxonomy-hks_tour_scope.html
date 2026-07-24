@@ -1,0 +1,35 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","align":"full","className":"hks-taxonomy-page","layout":{"type":"default"}} -->
+<main id="main-content" class="wp-block-group alignfull hks-taxonomy-page"><!-- wp:hks-wayfinder/taxonomy-intro /-->
+
+<!-- wp:group {"align":"wide","className":"hks-taxonomy-results","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignwide hks-taxonomy-results"><!-- wp:heading {"fontSize":"section-title"} -->
+<h2 class="wp-block-heading has-section-title-font-size">Tours in this collection</h2>
+<!-- /wp:heading -->
+
+<!-- wp:query {"queryId":15,"query":{"perPage":12,"pages":0,"offset":0,"postType":"hks_tour","order":"asc","orderBy":"title","author":"","search":"","exclude":[],"sticky":"","inherit":true},"align":"wide"} -->
+<div class="wp-block-query alignwide"><!-- wp:post-template {"className":"hks-tour-grid","layout":{"type":"grid","columnCount":3}} -->
+<!-- wp:hks-wayfinder/tour-card /-->
+<!-- /wp:post-template -->
+
+<!-- wp:query-pagination {"layout":{"type":"flex","justifyContent":"space-between"}} -->
+<!-- wp:query-pagination-previous /-->
+<!-- wp:query-pagination-numbers /-->
+<!-- wp:query-pagination-next /-->
+<!-- /wp:query-pagination -->
+
+<!-- wp:query-no-results -->
+<!-- wp:paragraph -->
+<p>No tours are available in this collection yet. Explore the full tour catalogue for more options.</p>
+<!-- /wp:paragraph -->
+<!-- /wp:query-no-results --></div>
+<!-- /wp:query --></div>
+<!-- /wp:group -->
+
+<!-- wp:html -->
+<section class="hks-catalogue-prompt"><div class="hks-shell"><h2>Explore more tours</h2><p>Compare other destinations, trip types, occasions and travel styles.</p><a href="/tours/">View all tours <span aria-hidden="true">&rarr;</span></a></div></section>
+<!-- /wp:html --></main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

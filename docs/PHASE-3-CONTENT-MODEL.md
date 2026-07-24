@@ -2,7 +2,7 @@
 
 ## Outcome
 
-The site plugin now owns a canonical, reproducible Tour catalogue and Campaign-variant model. Editors can create one price-free Tour, attach multiple focused Campaigns, and optionally add a selling price to an individual Campaign.
+The site plugin owns a canonical, reproducible Tour catalogue and Campaign-variant model. Editors can create a Tour with one optional editable KSh starting price, attach multiple focused Campaigns, and optionally override that price on an individual Campaign.
 
 This phase contains source code only. Runtime checks will happen after deployment to cPanel; no local WordPress environment was created.
 
@@ -12,6 +12,7 @@ This phase contains source code only. Runtime checks will happen after deploymen
 - `hks_campaign`: directly accessible landing-page variant, excluded from search, navigation, archives, and automatic public post-type discovery.
 - `hks_faq`: private reusable FAQ record; not anonymously enumerable through the REST API.
 - `hks_destination`: public geographic discovery taxonomy.
+- `hks_tour_scope`: public Kenya Tours / International Tours discovery taxonomy.
 - `hks_tour_type`, `hks_occasion`, and `hks_travel_style`: editor/filter taxonomies without thin public term archives.
 
 Campaigns contain the public headline, supporting copy, hero override, navigation mode, planning dates, and one optional Campaign-specific per-person starting price. They do not duplicate Tour duration, route, itinerary, inclusions, logistics, or policies.
@@ -38,12 +39,12 @@ Key gates include:
 
 - a nonempty native Tour title;
 - a nonempty native Campaign title and exactly one published linked Tour;
-- a positive whole KSh Campaign price when the optional field is populated;
+- a positive whole KSh Tour or Campaign price when its optional field is populated;
 - valid Campaign planning dates in chronological order;
 - no `CLIENT CONFIRMATION REQUIRED` marker anywhere in visible public candidate text;
 - linked public Campaigns return to Draft when their Tour is hidden or deleted.
 
-Legacy Tour price and audit metadata remains stored for compatibility but is not registered in the client editor, rendered publicly, or used as a publication gate.
+The single `hks_from_price_ksh` Tour field is registered in the client editor and rendered when populated. Legacy price-assumption and audit fields remain hidden compatibility metadata.
 
 ## Deferred MVP integration checks
 
@@ -52,7 +53,7 @@ The following are deliberately carried into the public-template step instead of 
 - FAQ rendering must accept only published, source-approved, sentinel-free FAQ records.
 - Destination templates must render custom guidance only through a fail-closed approval check; raw term meta must never be printed.
 - Campaign and Tour preview behavior, template output, and editor usability require dashboard/browser verification after cPanel deployment.
-- Campaign templates must omit price when the Campaign field is blank and must never read a legacy Tour price.
+- Campaign templates use their own populated price as an override; otherwise they may inherit the linked Tour's current starting price.
 
 These are launch gates, not permission to expose unreviewed content.
 

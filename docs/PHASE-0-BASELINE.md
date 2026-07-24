@@ -72,11 +72,11 @@ The installed PHP 8.3 CLI is the local syntax checker. The cPanel PHP version, e
 - Approved operator/legal wording, privacy policy, cookie/consent approach, and commercial policies.
 - Meta Pixel and GA4 IDs, plus a GTM decision and ID if used.
 - Verified rights and consent for every public photograph.
-- Verified current facts and approved media for every live Tour; Tours remain price-free.
+- Verified current facts, approved media, and a defensible editable KSh starting price for every priced live Tour. Blank prices are omitted.
 
 ### Feature-specific blockers
 
-- Confirmed Campaign-specific KSh starting prices only when price will be a deliberate selling point.
+- Confirmed Tour or Campaign-specific KSh starting prices only when the source supports a truthful per-person starting amount.
 - Deposit, payment, cancellation, refund, child-rate, supplement, group-size, insurance, and liability terms.
 - Fleet, guide, safety, school/youth, corporate, group-payment, and accommodation proof.
 - cPanel SSH/Git/SFTP capability before the deployment transport is chosen.

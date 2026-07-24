@@ -186,13 +186,61 @@ function hks_wayfinder_populated_terms( string $taxonomy, int $limit = 0 ): arra
 }
 
 /**
+ * Return populated Destinations used by published Tours in one Tour Scope.
+ *
+ * @param WP_Term $scope Tour Scope term.
+ * @param int     $limit Maximum Destinations.
+ * @return WP_Term[]
+ */
+function hks_wayfinder_destinations_for_scope( WP_Term $scope, int $limit = 8 ): array {
+	if ( 'hks_tour_scope' !== $scope->taxonomy || ! taxonomy_exists( 'hks_destination' ) ) {
+		return array();
+	}
+
+	$tour_ids = get_posts(
+		array(
+			'post_type'      => 'hks_tour',
+			'post_status'    => 'publish',
+			'posts_per_page' => -1,
+			'fields'         => 'ids',
+			'tax_query'      => array(
+				array(
+					'taxonomy' => 'hks_tour_scope',
+					'field'    => 'term_id',
+					'terms'    => $scope->term_id,
+				),
+			),
+		)
+	);
+
+	if ( ! $tour_ids ) {
+		return array();
+	}
+
+	$terms = wp_get_object_terms(
+		$tour_ids,
+		'hks_destination',
+		array(
+			'orderby' => 'count',
+			'order'   => 'DESC',
+		)
+	);
+
+	if ( is_wp_error( $terms ) ) {
+		return array();
+	}
+
+	return array_slice( $terms, 0, max( 0, $limit ) );
+}
+
+/**
  * Build a usable catalogue URL for Tour taxonomy terms.
  *
  * @param WP_Term $term Term object.
  * @return string
  */
 function hks_wayfinder_term_url( WP_Term $term ): string {
-	$public_taxonomies = array( 'hks_destination', 'hks_tour_type', 'hks_occasion', 'hks_travel_style' );
+	$public_taxonomies = array( 'hks_tour_scope', 'hks_destination', 'hks_tour_type', 'hks_occasion', 'hks_travel_style' );
 
 	if ( in_array( $term->taxonomy, $public_taxonomies, true ) ) {
 		$link = get_term_link( $term );
@@ -213,6 +261,8 @@ function hks_wayfinder_term_url( WP_Term $term ): string {
  */
 function hks_wayfinder_taxonomy_archive_title( WP_Term $term ): string {
 	switch ( $term->taxonomy ) {
+		case 'hks_tour_scope':
+			return $term->name;
 		case 'hks_destination':
 			return sprintf(
 				/* translators: %s: Destination name. */
@@ -222,19 +272,19 @@ function hks_wayfinder_taxonomy_archive_title( WP_Term $term ): string {
 		case 'hks_tour_type':
 			return sprintf(
 				/* translators: %s: Tour type name. */
-				__( '%s tours in Kenya', 'hks-wayfinder' ),
+				__( '%s tours', 'hks-wayfinder' ),
 				$term->name
 			);
 		case 'hks_occasion':
 			return sprintf(
 				/* translators: %s: Occasion name. */
-				__( 'Kenya tours for %s', 'hks-wayfinder' ),
+				__( 'Tours for %s', 'hks-wayfinder' ),
 				$term->name
 			);
 		case 'hks_travel_style':
 			return sprintf(
 				/* translators: %s: Travel style name. */
-				__( '%s Kenya tours', 'hks-wayfinder' ),
+				__( '%s tours', 'hks-wayfinder' ),
 				$term->name
 			);
 		default:
@@ -250,6 +300,12 @@ function hks_wayfinder_taxonomy_archive_title( WP_Term $term ): string {
  */
 function hks_wayfinder_taxonomy_archive_description( WP_Term $term ): string {
 	switch ( $term->taxonomy ) {
+		case 'hks_tour_scope':
+			return sprintf(
+				/* translators: %s: Tour Scope name. */
+				__( 'Explore %s by destination, trip type and duration, then request a tailored quote for your dates and group.', 'hks-wayfinder' ),
+				$term->name
+			);
 		case 'hks_destination':
 			return sprintf(
 				/* translators: %s: Destination name. */
@@ -265,13 +321,13 @@ function hks_wayfinder_taxonomy_archive_description( WP_Term $term ): string {
 		case 'hks_occasion':
 			return sprintf(
 				/* translators: %s: Occasion name. */
-				__( 'Explore Kenya tours selected for the %s occasion. Compare destinations and trip details before you request a quote.', 'hks-wayfinder' ),
+				__( 'Explore tours selected for the %s occasion. Compare destinations and trip details before you request a quote.', 'hks-wayfinder' ),
 				$term->name
 			);
 		case 'hks_travel_style':
 			return sprintf(
 				/* translators: %s: Travel style name. */
-				__( 'Explore the %s travel style. Compare destinations, routes and durations to choose the right Kenya trip.', 'hks-wayfinder' ),
+				__( 'Explore the %s travel style. Compare destinations, routes and durations to choose the right trip.', 'hks-wayfinder' ),
 				$term->name
 			);
 		default:
@@ -286,7 +342,7 @@ function hks_wayfinder_taxonomy_archive_description( WP_Term $term ): string {
  * @return array<string,string>
  */
 function hks_wayfinder_taxonomy_document_title( array $parts ): array {
-	if ( ! is_tax( array( 'hks_destination', 'hks_tour_type', 'hks_occasion', 'hks_travel_style' ) ) ) {
+	if ( ! is_tax( array( 'hks_tour_scope', 'hks_destination', 'hks_tour_type', 'hks_occasion', 'hks_travel_style' ) ) ) {
 		return $parts;
 	}
 
@@ -323,7 +379,7 @@ function hks_wayfinder_filter_tour_archive( WP_Query $query ): void {
 		return;
 	}
 
-	$public_taxonomies = array( 'hks_destination', 'hks_tour_type', 'hks_occasion', 'hks_travel_style' );
+	$public_taxonomies = array( 'hks_tour_scope', 'hks_destination', 'hks_tour_type', 'hks_occasion', 'hks_travel_style' );
 	$is_tour_archive   = $query->is_post_type_archive( 'hks_tour' );
 
 	if ( ! $is_tour_archive && $query->is_tax( $public_taxonomies ) ) {
@@ -340,7 +396,7 @@ function hks_wayfinder_filter_tour_archive( WP_Query $query ): void {
 	}
 
 	$tax_query = array();
-	$filters   = array( 'hks_destination', 'hks_tour_type', 'hks_occasion', 'hks_travel_style' );
+	$filters   = array( 'hks_tour_scope', 'hks_destination', 'hks_tour_type', 'hks_occasion', 'hks_travel_style' );
 
 	foreach ( $filters as $taxonomy ) {
 		$raw   = $_GET[ $taxonomy ] ?? '';

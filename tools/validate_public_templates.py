@@ -23,6 +23,7 @@ TEMPLATES = {
     "tour type": "templates/taxonomy-hks_tour_type.html",
     "occasion": "templates/taxonomy-hks_occasion.html",
     "travel style": "templates/taxonomy-hks_travel_style.html",
+    "tour scope": "templates/taxonomy-hks_tour_scope.html",
     "page": "templates/page.html",
     "group travel": "templates/page-group-travel.html",
 }
@@ -106,9 +107,8 @@ def main() -> int:
             "hks_wayfinder_taxonomy_archive_description",
             "document_title_parts",
             "Tours in %s",
-            "%s tours in Kenya",
-            "Kenya tours for %s",
-            "%s Kenya tours",
+            "%s tours",
+            "Tours for %s",
             "hks_noindex",
         ],
     )
@@ -190,6 +190,8 @@ def main() -> int:
             "View trip",
             "private const SENTINEL",
             "campaign_price_summary",
+            "tour_price_summary",
+            "hks_from_price_ksh",
             "hks_campaign_from_price_ksh",
             "From KSh %s per person",
             "approved_policies",
@@ -222,11 +224,9 @@ def main() -> int:
         sources["renderer"],
         [
             "hks_price_status",
-            "hks_from_price_ksh",
             "hks_tour_from_price_invalid",
             "Request current KSh rate",
             "request_rate_fallback",
-            "hks-tour-card__price",
             "hks-rate-information__lead",
             "hks_price_valid_until",
             "hks_price_season_assumption",
@@ -311,7 +311,7 @@ def main() -> int:
             print(f"- {error}")
         return 1
 
-    print("Public-template validation passed (price-free Tour UI, optional Campaign price, shared quote conversion, responsive accessibility).")
+    print("Public-template validation passed (optional Tour and Campaign prices, shared quote conversion, responsive accessibility).")
     return 0
 
 

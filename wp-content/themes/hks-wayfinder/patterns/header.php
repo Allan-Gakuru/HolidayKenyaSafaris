@@ -16,6 +16,7 @@ $logo_url         = get_theme_file_uri( 'assets/images/brand/holiday-kenya-safar
 $tours_url        = get_post_type_archive_link( 'hks_tour' ) ?: home_url( '/tours/' );
 $destination_terms = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_destination', 8 ) : array();
 $tour_type_terms   = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_tour_type', 8 ) : array();
+$scope_terms       = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_tour_scope', 4 ) : array();
 $is_quote_context  = is_singular( array( 'hks_tour', 'hks_campaign' ) );
 $menu_id           = wp_unique_id( 'hks-mobile-menu-' );
 $about_url          = function_exists( 'hks_wayfinder_published_page_url' ) ? hks_wayfinder_published_page_url( 'about' ) : '';
@@ -26,9 +27,29 @@ $public_email       = 'info@holidaykenyasafaris.ke';
 $instagram_url      = 'https://www.instagram.com/holidaykenyasafaris/';
 $facebook_url       = 'https://www.facebook.com/people/Holiday-Kenya-Safaris/61591508593846/';
 $whatsapp_number    = '254712965131';
-$whatsapp_message   = __( "Hi Holiday Kenya Safaris, I'd like help choosing and planning a Kenya trip.", 'hks-wayfinder' );
+$whatsapp_message   = __( "Hi Holiday Kenya Safaris, I'd like help choosing and planning a trip.", 'hks-wayfinder' );
 $safari_terms       = array();
 $coast_terms        = array();
+$kenya_scope        = null;
+$international_scope = null;
+$kenya_destinations = array();
+$international_destinations = array();
+
+foreach ( $scope_terms as $scope_term ) {
+	if ( 'kenya-tours' === $scope_term->slug ) {
+		$kenya_scope = $scope_term;
+	} elseif ( 'international-tours' === $scope_term->slug ) {
+		$international_scope = $scope_term;
+	}
+}
+
+if ( $kenya_scope instanceof WP_Term && function_exists( 'hks_wayfinder_destinations_for_scope' ) ) {
+	$kenya_destinations = hks_wayfinder_destinations_for_scope( $kenya_scope, 8 );
+}
+
+if ( $international_scope instanceof WP_Term && function_exists( 'hks_wayfinder_destinations_for_scope' ) ) {
+	$international_destinations = hks_wayfinder_destinations_for_scope( $international_scope, 8 );
+}
 
 if ( $is_quote_context ) {
 	$whatsapp_message = sprintf(
@@ -117,7 +138,16 @@ $render_terms = static function ( array $terms ): void {
 			<nav class="hks-primary-nav" aria-label="<?php echo esc_attr__( 'Primary navigation', 'hks-wayfinder' ); ?>">
 				<a href="<?php echo esc_url( $home_url ); ?>"><?php esc_html_e( 'Home', 'hks-wayfinder' ); ?></a>
 
-				<?php if ( $safari_terms ) : ?>
+				<?php if ( $kenya_scope instanceof WP_Term ) : ?>
+					<details class="hks-nav-menu" data-hks-nav-menu>
+						<summary><?php esc_html_e( 'Kenya Tours', 'hks-wayfinder' ); ?></summary>
+						<div class="hks-nav-menu__panel">
+							<p><?php esc_html_e( 'Explore Kenya by destination', 'hks-wayfinder' ); ?></p>
+							<ul><?php $render_terms( $kenya_destinations ?: $safari_terms ); ?></ul>
+							<a class="hks-nav-menu__all" href="<?php echo esc_url( hks_wayfinder_term_url( $kenya_scope ) ); ?>"><?php esc_html_e( 'See all Kenya tours', 'hks-wayfinder' ); ?><span aria-hidden="true">&rarr;</span></a>
+						</div>
+					</details>
+				<?php elseif ( $safari_terms ) : ?>
 					<details class="hks-nav-menu" data-hks-nav-menu>
 						<summary><?php esc_html_e( 'Safaris', 'hks-wayfinder' ); ?></summary>
 						<div class="hks-nav-menu__panel">
@@ -130,7 +160,18 @@ $render_terms = static function ( array $terms ): void {
 					<a href="<?php echo esc_url( $tours_url ); ?>"><?php esc_html_e( 'Tours', 'hks-wayfinder' ); ?></a>
 				<?php endif; ?>
 
-				<?php if ( $coast_terms ) : ?>
+				<?php if ( $international_scope instanceof WP_Term ) : ?>
+					<details class="hks-nav-menu" data-hks-nav-menu>
+						<summary><?php esc_html_e( 'International Tours', 'hks-wayfinder' ); ?></summary>
+						<div class="hks-nav-menu__panel">
+							<p><?php esc_html_e( 'Explore international destinations', 'hks-wayfinder' ); ?></p>
+							<ul><?php $render_terms( $international_destinations ); ?></ul>
+							<a class="hks-nav-menu__all" href="<?php echo esc_url( hks_wayfinder_term_url( $international_scope ) ); ?>"><?php esc_html_e( 'See all international tours', 'hks-wayfinder' ); ?><span aria-hidden="true">&rarr;</span></a>
+						</div>
+					</details>
+				<?php endif; ?>
+
+				<?php if ( $coast_terms && ! ( $kenya_scope instanceof WP_Term ) ) : ?>
 					<details class="hks-nav-menu" data-hks-nav-menu>
 						<summary><?php esc_html_e( 'Coast & Stays', 'hks-wayfinder' ); ?></summary>
 						<div class="hks-nav-menu__panel">
@@ -140,7 +181,7 @@ $render_terms = static function ( array $terms ): void {
 					</details>
 				<?php endif; ?>
 
-				<?php if ( $destination_terms ) : ?>
+				<?php if ( $destination_terms && ! ( $kenya_scope instanceof WP_Term ) && ! ( $international_scope instanceof WP_Term ) ) : ?>
 					<details class="hks-nav-menu" data-hks-nav-menu>
 						<summary><?php esc_html_e( 'Destinations', 'hks-wayfinder' ); ?></summary>
 						<div class="hks-nav-menu__panel hks-nav-menu__panel--wide">
@@ -172,15 +213,20 @@ $render_terms = static function ( array $terms ): void {
 		</div>
 		<nav class="hks-mobile-menu__nav" aria-label="<?php echo esc_attr__( 'Mobile primary navigation', 'hks-wayfinder' ); ?>">
 			<a href="<?php echo esc_url( $home_url ); ?>"><?php esc_html_e( 'Home', 'hks-wayfinder' ); ?><span aria-hidden="true">→</span></a>
-			<?php if ( $safari_terms ) : ?>
+			<?php if ( $kenya_scope instanceof WP_Term ) : ?>
+				<details><summary><?php esc_html_e( 'Kenya Tours', 'hks-wayfinder' ); ?></summary><ul><?php $render_terms( $kenya_destinations ?: $safari_terms ); ?><li><a href="<?php echo esc_url( hks_wayfinder_term_url( $kenya_scope ) ); ?>"><?php esc_html_e( 'All Kenya tours', 'hks-wayfinder' ); ?><span aria-hidden="true">&rarr;</span></a></li></ul></details>
+			<?php elseif ( $safari_terms ) : ?>
 				<details><summary><?php esc_html_e( 'Safaris', 'hks-wayfinder' ); ?></summary><ul><?php $render_terms( $safari_terms ); ?><li><a href="<?php echo esc_url( $tours_url ); ?>"><?php esc_html_e( 'All tours', 'hks-wayfinder' ); ?><span aria-hidden="true">→</span></a></li></ul></details>
 			<?php else : ?>
 				<a href="<?php echo esc_url( $tours_url ); ?>"><?php esc_html_e( 'Tours', 'hks-wayfinder' ); ?><span aria-hidden="true">→</span></a>
 			<?php endif; ?>
-			<?php if ( $coast_terms ) : ?>
+			<?php if ( $international_scope instanceof WP_Term ) : ?>
+				<details><summary><?php esc_html_e( 'International Tours', 'hks-wayfinder' ); ?></summary><ul><?php $render_terms( $international_destinations ); ?><li><a href="<?php echo esc_url( hks_wayfinder_term_url( $international_scope ) ); ?>"><?php esc_html_e( 'All international tours', 'hks-wayfinder' ); ?><span aria-hidden="true">&rarr;</span></a></li></ul></details>
+			<?php endif; ?>
+			<?php if ( $coast_terms && ! ( $kenya_scope instanceof WP_Term ) ) : ?>
 				<details><summary><?php esc_html_e( 'Coast & Stays', 'hks-wayfinder' ); ?></summary><ul><?php $render_terms( $coast_terms ); ?></ul></details>
 			<?php endif; ?>
-			<?php if ( $destination_terms ) : ?>
+			<?php if ( $destination_terms && ! ( $kenya_scope instanceof WP_Term ) && ! ( $international_scope instanceof WP_Term ) ) : ?>
 				<details><summary><?php esc_html_e( 'Destinations', 'hks-wayfinder' ); ?></summary><ul><?php $render_terms( $destination_terms ); ?></ul></details>
 			<?php endif; ?>
 			<a href="<?php echo esc_url( $group_url ); ?>"><?php esc_html_e( 'Group Travel', 'hks-wayfinder' ); ?><span aria-hidden="true">→</span></a>

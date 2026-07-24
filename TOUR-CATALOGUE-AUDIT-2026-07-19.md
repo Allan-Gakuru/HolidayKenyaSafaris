@@ -1,5 +1,7 @@
 # Tour Catalogue Audit — 19 July 2026
 
+> Historical note (24 July 2026): the earlier price-free scope recorded below has been superseded by the client-authorized Kenya and international catalogue expansion. Tours may now carry one editable `From price per person (KSh)` value, and the audited Ashford conversion manifest governs the initial migration.
+
 ## Scope and method
 
 This audit covers the 43 Tours published on `holidaykenyasafaris.ke` after the controlled Phase 7 import and editor publication. It compares public WordPress REST output with the reviewed `mvp-seed.json` and `catalogue-seed.json` manifests, checks current Ashford source availability, measures visible field and taxonomy coverage, and reviews the assigned local media manifest.
@@ -88,7 +90,7 @@ The public archive implementation exposes only populated terms through existing 
 
 - No Tour has an empty excerpt or overview.
 - The catalogue copy scan found no repeated generic-superlative or tourism-poster cliché pattern.
-- The 40 controlled catalogue imports are one editorial sentence behind the current local seed: live overview copy says the quote confirms the “current KSh rate and final package details,” while the current seed removes the rate reference. This is not a numeric price leak, but it is stale copy under the price-free Tour policy and should be updated through an authorized content edit.
+- Historical finding: the 40 controlled catalogue imports were one editorial sentence behind the then-current local seed. The 24 July 2026 pricing and international-expansion decision supersedes the former price-free policy; current public wording should still avoid implying that a displayed starting price is a final quote.
 - The protected importer correctly does not overwrite those published Tours.
 
 ## Media findings

@@ -130,7 +130,7 @@ On mobile, the gallery simplifies, tabs become stacked disclosures, the quote pa
 
 ### Package summaries
 
-Show destination, duration, travel style, departure context, and route before decorative metadata. Tour summaries and cards never show price. Every card has a clear View trip action; the whole card may be linked only when keyboard and assistive-technology behavior remains correct.
+Show destination, duration, travel style, departure context, and route before decorative metadata. Tour summaries and cards show `From KSh X per person` only when the Tour has a positive starting price. Every card has a clear View trip action; the whole card may be linked only when keyboard and assistive-technology behavior remains correct.
 
 ### Itinerary
 
@@ -138,7 +138,7 @@ Use a readable day-by-day timeline with native headings and accessible disclosur
 
 ### Quote actions
 
-The canonical primary label is **Request quote on WhatsApp**. Opening the action reveals the intake form first; it must never silently send visitor data. Canonical Tour pages use a price-free sticky desktop quote panel containing the primary action and a short explanation of the tailored quote and message-review step. Campaign pages may show their own optional starting price when one is deliberately entered. They do not use a permanently visible long booking form. A mobile sticky action must respect safe areas and leave enough bottom padding that it cannot obscure content.
+The canonical primary label is **Request quote on WhatsApp**. Opening the action reveals the intake form first; it must never silently send visitor data. Canonical Tour pages use a sticky desktop quote panel containing the optional Tour starting price, the primary action, and a short explanation of the tailored quote and message-review step. Campaign pages may override the linked Tour amount with their own optional starting price. They do not use a permanently visible long booking form. A mobile sticky action must respect safe areas and leave enough bottom padding that it cannot obscure content.
 
 The global floating **Chat on WhatsApp** control is a separate lightweight contact route. It stays at the bottom right, uses one fixed general prefilled message, opens the official number in a new tab, and does not create an inquiry record. It must rise above the Tour and Campaign mobile quote bar, respect device safe areas, and never replace or visually compete with the structured page-level quote action.
 

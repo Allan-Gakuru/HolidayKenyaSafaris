@@ -10,6 +10,14 @@
 /wp-content/upgrade/
 /wp-content/debug.log
 
+# Client-authorized source photographs kept locally and never deployed from Git
+/images/
+/wp-content/images/
+
+# Client-authorized source photographs kept locally and never deployed from Git
+/images/
+/wp-content/images/
+
 # Secrets and machine-specific configuration
 /.env
 /.env.*

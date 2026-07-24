@@ -11,9 +11,12 @@ Use this file for project-level decisions such as contact details, legal wording
 | Operator relationship | Confirmed | Disclose operation by Ashford Tours & Travel |
 | Identity direction | Confirmed | The Wayfinder |
 | Main conversion | Confirmed | WhatsApp quote inquiry |
-| Product scope | Confirmed | Domestic safaris, excursions, coast, staycations, groups, and relevant local special-interest products |
-| Default exclusions | Confirmed | International holidays, visas, transfers, and inbound-only products unless later approved |
-| Pricing presentation | Confirmed | Tours are price-free. Campaigns have one optional `From price per person (KSh)` field, displayed only when populated; blank Campaign prices are omitted. |
+| Product scope | Confirmed | Domestic safaris, excursions, coast, staycations, groups, relevant local special-interest products, and international holidays sourced from Ashford |
+| Default exclusions | Confirmed | Visa services, standalone transfers, and products that cannot be represented accurately as Tours |
+| Catalogue separation | Confirmed | Public Tour Scope taxonomy with `Kenya Tours` and `International Tours`; Destination remains the geographic taxonomy |
+| Pricing presentation | Confirmed | Tours have one editable `From price per person (KSh)` field. Campaigns retain a separate optional override and may inherit the Tour amount when blank. |
+| Ashford conversion rule | Confirmed | Use the source low-season per-person amount, or a clearly credible published starting amount where no seasonal table exists, the live USD/KSh rate on the import date, and always round upward to the next KSh 500; reject placeholder/deposit-like values and record conversion evidence in the repository manifest. |
+| Ashford migration publication | Confirmed | The current remaining-Ashford-catalogue import may reuse Ashford images and itinerary copy and publish directly; unresolved or contradictory products remain draft. |
 | Editorial approval | Confirmed | Draft means private; publishing by an authorized editor approves public copy and assigned media without additional confirmation fields |
 | Content dates | Confirmed | Start and end dates exist only on Campaigns and do not automatically alter the optional Campaign price |
 | Required intake fields | Confirmed | Name, phone, package, preferred date/month, travelers |
@@ -76,17 +79,18 @@ These are global commercial and legal decisions, not Tour-editor confirmation, a
 
 ## Rates
 
-Rates use the simplified Campaign-only editorial model:
+Rates use one editable starting-price field per Tour and an optional Campaign override:
 
-- The Tour editor has no active price field. Tour cards, archives, Destination pages, related Tours, canonical Tour pages, and Tour quote panels show no price or request-rate fallback.
+- The Tour editor exposes one positive whole-number field: `From price per person (KSh)`.
+- A populated Tour price renders on cards, archives, Destination pages, related Tours, canonical Tour pages, and Tour quote panels as `From KSh X per person`; blank or zero is omitted.
 - The Campaign editor has one optional positive whole-number field: `From price per person (KSh)`.
-- Entering a value and publishing the Campaign approves `From KSh X per person` for that Campaign only.
-- Leaving the Campaign field blank produces no public price output.
+- Entering a Campaign value overrides the linked Tour price on that Campaign.
+- Leaving the Campaign field blank may display the linked Tour starting price.
 - There are no price status, source, checked-date, valid-until, season, residency, group-size, sharing, vehicle, accommodation, inclusion, supplement, adult, or child price fields.
 - Campaign start and end dates do not alter the price. The client updates or removes it manually.
 - Leave the Campaign price blank when it is not a useful selling point or the offer cannot truthfully use one per-person starting figure.
-- Never auto-convert or import a USD amount, or copy a legacy Tour amount, into the Campaign field.
-- Preserve legacy Tour price metadata in the database but hide and ignore it.
+- For the current authorized Ashford expansion, convert the source low-season per-person value, or a clearly credible published starting amount where no seasonal table exists, using the documented live rate and upward KSh 500 rounding rule, then import it into the Tour field.
+- Preserve the separate Campaign field; do not copy a Tour amount into Campaign metadata merely to achieve inheritance.
 
 ## Media Rights
 

@@ -14,6 +14,7 @@ use HolidayKenyaSafaris\Core\Content\PostTypes\Tour;
 use HolidayKenyaSafaris\Core\Content\Taxonomies\Destination;
 use HolidayKenyaSafaris\Core\Content\Taxonomies\Occasion;
 use HolidayKenyaSafaris\Core\Content\Taxonomies\TourType;
+use HolidayKenyaSafaris\Core\Content\Taxonomies\TourScope;
 use HolidayKenyaSafaris\Core\Content\Taxonomies\TravelStyle;
 use HolidayKenyaSafaris\Core\Contracts\Module as ModuleContract;
 
@@ -67,6 +68,7 @@ final class Module implements ModuleContract {
 		Inquiry::register();
 
 		Destination::register();
+		TourScope::register();
 		TourType::register();
 		Occasion::register();
 		TravelStyle::register();

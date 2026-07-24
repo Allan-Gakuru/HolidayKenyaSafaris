@@ -47,7 +47,7 @@ def main() -> int:
             errors.append(f"missing {relative}: {error}")
             content[label] = ""
 
-    require(errors, "plugin bootstrap", content["bootstrap"], ["Version:           0.9.0", "define( 'HKS_CORE_VERSION', '0.9.0' )"])
+    require(errors, "plugin bootstrap", content["bootstrap"], ["Version:           0.10.0", "define( 'HKS_CORE_VERSION', '0.10.0' )"])
     require(
         errors,
         "client-ready copy migration",

@@ -84,7 +84,8 @@ Actions:
 - Implement taxonomies and SCF groups from `CONTENT-MODEL.md`.
 - Reduce the client editor to fields that render publicly or visibly control public discovery and placement.
 - Use native WordPress publication state as approval; remove client confirmation, source-audit, rights-status, and validity fields from content workflows.
-- Keep Tours price-free. Add one optional Campaign-only `From price per person (KSh)` field and retain Campaign-only start/end dates.
+- Expose one editable Tour `From price per person (KSh)` field. Retain the separate optional Campaign override and Campaign-only start/end dates.
+- Add the public Tour Scope taxonomy with `Kenya Tours` and `International Tours`; keep Destination as the geographic taxonomy.
 - Lock critical templates while preserving practical editing regions.
 - Add preview behavior for Tours and Campaigns.
 - Keep the ordered public gallery, Featured Tour placement, visible package facts, itinerary, inclusions/exclusions, package notes, and FAQ relationship required by the current templates.
@@ -92,10 +93,10 @@ Actions:
 Acceptance:
 
 - An editor can create one Tour and link several Campaign variants.
-- Tour cards, archives, canonical Tour pages, and Tour quote panels show no price or request-rate fallback.
-- A Campaign shows `From KSh X per person` only when its own optional positive KSh value is populated; blank Campaign prices are omitted.
+- Tour cards, archives, canonical Tour pages, and Tour quote panels show `From KSh X per person` when the Tour has a positive amount; blank prices are omitted.
+- A Campaign shows its own positive override or inherits the linked Tour starting price when its field is blank.
 - Editors can assign public media without completing a separate rights envelope.
-- Existing legacy Tour amounts do not become public or migrate into Campaigns accidentally.
+- Existing Tour amounts are validated before display and never copied into Campaign metadata merely to support inheritance.
 
 ## Phase 4: Conversion Component First
 
@@ -128,8 +129,8 @@ Actions:
 - Keep useful source references in the repository import manifest, not the client Tour form.
 - Import canonical facts.
 - Rewrite local-market copy.
-- Leave Tours price-free. Leave each Campaign price blank unless the client deliberately enters an honest KSh per-person starting value for that Campaign.
-- Import remote imagery unassigned; the editor's deliberate assignment to published content is approval.
+- Populate the editable Tour starting price when a source low-season amount or clearly credible published starting amount exists and the authorized conversion rule can be applied. Reject placeholder/deposit-like values. Leave Campaign overrides blank unless a focused offer needs a different honest amount.
+- For the dated client-authorized Ashford expansion, import the corresponding source image as the featured image before direct publication. Future migrations revert to the normal authorization rule.
 - Add representative Campaign variants for different audience angles.
 
 Acceptance:
@@ -173,21 +174,23 @@ Acceptance:
 
 ## Phase 7: Catalogue Migration
 
-Implementation status (2026-07-19): all 44 local candidates were reviewed for migration. Forty eligible records were imported in four controlled batches, the three MVP Tours were retained without duplication, and the generic `African-wildlife-safari` marketing page was excluded. An authorized editor has published all 43 retained Tours. The catalogue audit is recorded in `TOUR-CATALOGUE-AUDIT-2026-07-19.md`; incomplete optional facts remain explicit editorial follow-up rather than invented data.
+Implementation status (2026-07-19): all 44 local candidates were reviewed for migration. Forty eligible records were imported in four controlled batches, the three MVP Tours were retained without duplication, and the generic `African-wildlife-safari` marketing page was excluded. An authorized editor published all 43 retained Tours. On 2026-07-24 the client expanded this phase to the remaining Ashford Kenya and international catalogue, authorized direct publication, and approved live USD/KSh low-season conversion rounded upward to KSh 500.
 
 Actions:
 
-- Review the 44 unique local candidate pages in controlled batches.
-- Prioritize credible, complete, locally relevant products.
-- Keep incomplete or questionable records in draft.
+- Audit the current live Ashford catalogue against existing HKS Tours and import only missing products.
+- Classify every Tour under Kenya Tours or International Tours and assign supported Destination terms.
+- Reuse corresponding Ashford images and itinerary copy as literally as makes sense.
+- Convert the source low-season per-person price, or a clearly credible published starting amount where no seasonal table exists, using the recorded live rate and upward KSh 500 rounding rule.
+- Publish coherent records directly under the client's authorization; keep incomplete, contradictory, or unpriceable records draft.
 - Add missing coast/staycation products when supplied or deliberately published by an authorized editor.
 - Check internal linking and filter usefulness after each batch.
 
 Acceptance:
 
-- No product is live merely because it existed in the crawl.
-- Every live Tour was deliberately published by an authorized editor and contains only public values the current templates consume.
-- Legacy source, price-status, assumption, validity, and rights metadata remains non-destructively stored but is hidden and ignored.
+- No duplicate product is created merely because it appears in more than one Ashford category.
+- Every live imported Tour is covered by the client's direct-publication authorization and contains only public values the current templates consume.
+- The import manifest makes every converted starting price reproducible.
 
 ## Phase 8: Analytics, SEO, Security, and Performance
 
@@ -222,7 +225,7 @@ Test:
 - Slow connections and image failures.
 - Template editing by a non-developer.
 - Publish-as-approval behavior for Tours, Destinations, FAQs, public package notes, and assigned media.
-- Legacy Tour price migration: every old Tour amount stays hidden; deliberate positive Campaign from-prices display only on their Campaigns.
+- Tour price rendering: positive Tour amounts display consistently across cards, archives, details, related Tours, and quote panels; blank amounts disappear cleanly; Campaign overrides and inheritance behave correctly.
 - Core Web Vitals and layout shift.
 - Analytics debug modes.
 

@@ -402,6 +402,9 @@ final class Lifecycle {
 			'0.9.0' => array(
 				'site' => array( self::class, 'make_public_copy_client_ready' ),
 			),
+			'0.10.0' => array(
+				'site' => array( self::class, 'schedule_rewrite_flush' ),
+			),
 		);
 	}
 
