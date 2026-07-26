@@ -201,20 +201,11 @@
 			render(announce);
 		}
 
-		function clipPathForSource(sourceRect, targetRect) {
-			const top = Math.max(0, sourceRect.top - targetRect.top);
-			const right = Math.max(0, targetRect.right - sourceRect.right);
-			const bottom = Math.max(0, targetRect.bottom - sourceRect.bottom);
-			const left = Math.max(0, sourceRect.left - targetRect.left);
-
-			return `inset(${top}px ${right}px ${bottom}px ${left}px round 12px)`;
-		}
-
-		function animateDesktopSelection(selected, selectedImage, nextIndex, announce) {
+		function animateStageSelection(selected, selectedImage, nextIndex, announce) {
 			const token = ++transitionToken;
 			const clone = document.createElement('div');
 			const cloneImage = selectedImage.cloneNode(true);
-			clone.className = 'hks-home-gallery__transition-image hks-home-gallery__transition-image--desktop';
+			clone.className = 'hks-home-gallery__transition-image';
 			clone.setAttribute('aria-hidden', 'true');
 			clone.style.opacity = '0';
 			copyImageAttributes(selectedImage, cloneImage);
@@ -278,70 +269,7 @@
 			}
 
 			cleanupTransition();
-			if (window.matchMedia('(min-width: 64rem)').matches) {
-				animateDesktopSelection(selected, selectedImage, nextIndex, announce);
-				return;
-			}
-
-			const token = ++transitionToken;
-			const sourceRect = selected.getBoundingClientRect();
-			const targetRect = stage.getBoundingClientRect();
-
-			if (!sourceRect.width || !sourceRect.height || !targetRect.width || !targetRect.height) {
-				commitSelection(selected, nextIndex, announce);
-				return;
-			}
-
-			const clone = document.createElement('div');
-			const cloneImage = selectedImage.cloneNode(true);
-			clone.className = 'hks-home-gallery__transition-image';
-			clone.setAttribute('aria-hidden', 'true');
-			clone.style.left = `${targetRect.left}px`;
-			clone.style.top = `${targetRect.top}px`;
-			clone.style.width = `${targetRect.width}px`;
-			clone.style.height = `${targetRect.height}px`;
-			cloneImage.removeAttribute('loading');
-			cloneImage.setAttribute('alt', '');
-			clone.appendChild(cloneImage);
-			document.body.appendChild(clone);
-
-			activeClone = clone;
-			pendingIndex = nextIndex;
-			isAnimating = true;
-			gallery.classList.add('is-changing');
-
-			const initialClip = clipPathForSource(sourceRect, targetRect);
-			activeAnimation = clone.animate(
-				[
-					{ clipPath: initialClip, opacity: 0.15 },
-					{ clipPath: initialClip, opacity: 1, offset: 0.08 },
-					{ clipPath: 'inset(0px 0px 0px 0px round 0px)', opacity: 1, offset: 0.82 },
-					{ clipPath: 'inset(0px 0px 0px 0px round 0px)', opacity: 0 },
-				],
-				{ duration: 650, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'forwards' }
-			);
-
-			let committed = false;
-			const commit = () => {
-				if (committed || token !== transitionToken) return;
-				committed = true;
-				commitSelection(selected, nextIndex, announce);
-			};
-
-			transitionSwapTimer = window.setTimeout(commit, 455);
-			activeAnimation.finished
-				.catch(() => {})
-				.finally(() => {
-					if (token !== transitionToken) return;
-					commit();
-					window.clearTimeout(transitionSwapTimer);
-					transitionSwapTimer = 0;
-					activeAnimation = null;
-					activeClone?.remove();
-					activeClone = null;
-					isAnimating = false;
-					gallery.classList.remove('is-changing');
-				});
+			animateStageSelection(selected, selectedImage, nextIndex, announce);
 		}
 
 		function goTo(index, announce = false) {
