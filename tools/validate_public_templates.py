@@ -220,7 +220,6 @@ def main() -> int:
             "data-hks-home-gallery-price",
             "data-hks-home-gallery-route",
             "data-hks-home-gallery-included",
-            "data-hks-tour-long-title",
             "data-hks-tour-price",
             "data-hks-tour-route",
             "data-hks-tour-included",

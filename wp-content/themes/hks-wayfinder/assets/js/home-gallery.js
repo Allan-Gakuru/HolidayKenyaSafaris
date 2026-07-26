@@ -178,7 +178,6 @@
 			if (eyebrow) eyebrow.textContent = selected.dataset.hksTourEyebrow || 'Featured tour';
 			title.textContent = selected.dataset.hksTourTitle || '';
 			link.href = selected.dataset.hksTourUrl || '#';
-			copy.classList.toggle('has-long-title', 'true' === selected.dataset.hksTourLongTitle);
 			updateDetail(price, selected.dataset.hksTourPrice || '');
 			updateDetail(route, selected.dataset.hksTourRoute || '');
 			updateDetail(included, selected.dataset.hksTourIncluded || '');

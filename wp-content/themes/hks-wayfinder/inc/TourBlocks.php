@@ -547,9 +547,6 @@ final class TourBlocks {
 		$occasions      = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_occasion', 8 ) : array();
 		$hero_tours     = self::home_featured_tours( 5 );
 		$active_tour    = $hero_tours[0] ?? null;
-		$active_title_length = $active_tour
-			? ( function_exists( 'mb_strlen' ) ? mb_strlen( $active_tour['caption'] ) : strlen( $active_tour['caption'] ) )
-			: 0;
 
 		ob_start();
 		?>
@@ -581,7 +578,7 @@ final class TourBlocks {
 						<div class="hks-home-gallery__wash" aria-hidden="true"></div>
 						<span class="hks-home-gallery__progress" data-hks-home-gallery-progress aria-hidden="true"></span>
 						<div class="hks-shell hks-home-gallery__inner">
-							<div class="hks-home-gallery__copy<?php echo $active_title_length > 28 ? ' has-long-title' : ''; ?>" data-hks-home-gallery-copy>
+							<div class="hks-home-gallery__copy" data-hks-home-gallery-copy>
 								<p class="hks-home-gallery__eyebrow" data-hks-home-gallery-eyebrow><?php echo esc_html( $active_tour['eyebrow'] ); ?></p>
 								<h1 id="hks-home-title" data-hks-home-gallery-title><?php echo esc_html( $active_tour['caption'] ); ?></h1>
 								<dl class="hks-home-gallery__details" data-hks-home-gallery-details aria-label="<?php esc_attr_e( 'Active tour details', 'hks-wayfinder' ); ?>" <?php echo array_filter( array( $active_tour['price'], $active_tour['route'], $active_tour['included'] ) ) ? '' : 'hidden'; ?>>
@@ -616,7 +613,6 @@ final class TourBlocks {
 											data-hks-tour-price="<?php echo esc_attr( $hero_tour['price'] ); ?>"
 											data-hks-tour-route="<?php echo esc_attr( $hero_tour['route'] ); ?>"
 											data-hks-tour-included="<?php echo esc_attr( $hero_tour['included'] ); ?>"
-											data-hks-tour-long-title="<?php echo esc_attr( $hero_tour['long_title'] ); ?>"
 											aria-label="<?php echo esc_attr( sprintf( __( 'Show %s', 'hks-wayfinder' ), $hero_tour['title'] ) ); ?>"
 										>
 											<span class="hks-home-gallery__media">
@@ -959,7 +955,6 @@ final class TourBlocks {
 			$duration      = self::public_text( self::field( 'hks_duration_label', $tour->ID ) );
 			$caption_parts = array_filter( array( $destination_names[0] ?? '', $duration ) );
 			$caption       = $caption_parts ? implode( ' · ', $caption_parts ) : $title;
-			$title_length  = function_exists( 'mb_strlen' ) ? mb_strlen( $title ) : strlen( $title );
 			$price         = self::tour_price_summary( $tour->ID );
 			$route         = self::public_text( self::field( 'hks_route_summary', $tour->ID ) );
 			$included      = self::hero_inclusions_summary( $tour->ID );
@@ -974,7 +969,6 @@ final class TourBlocks {
 				'price'      => $price['label'] ?? '',
 				'route'      => $route,
 				'included'   => $included,
-				'long_title' => $title_length > 28 ? 'true' : 'false',
 			);
 
 			if ( count( $tours ) >= $limit ) {

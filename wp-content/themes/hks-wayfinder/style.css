@@ -2964,11 +2964,6 @@ body.home .hks-site-header .hks-utility {
 	text-wrap: balance;
 }
 
-.hks-home-hero--featured .hks-home-gallery__copy.has-long-title h1 {
-	font-size: clamp(1.075rem, 4vw, 1.825rem);
-	max-width: 16ch;
-}
-
 .hks-home-gallery__details {
 	display: grid;
 	gap: 0.35rem;
@@ -3336,10 +3331,6 @@ body.home .hks-site-header .hks-utility {
 
 	.hks-home-hero--featured .hks-home-gallery__copy h1 {
 		font-size: clamp(1.75rem, 2.7vw, 2.875rem);
-	}
-
-	.hks-home-hero--featured .hks-home-gallery__copy.has-long-title h1 {
-		font-size: clamp(1.4rem, 2.15vw, 2.2rem);
 	}
 
 	.hks-home-hero--featured .hks-home-gallery.is-ready .hks-home-gallery__viewport {
