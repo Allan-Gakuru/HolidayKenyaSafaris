@@ -168,6 +168,7 @@
 			pendingIndex = null;
 			isAnimating = false;
 			gallery.classList.remove('is-changing');
+			gallery.classList.remove('is-copy-ready');
 		}
 
 		function updateActiveContent(selected) {
@@ -209,6 +210,65 @@
 			return `inset(${top}px ${right}px ${bottom}px ${left}px round 12px)`;
 		}
 
+		function animateDesktopSelection(selected, selectedImage, nextIndex, announce) {
+			const token = ++transitionToken;
+			const clone = document.createElement('div');
+			const cloneImage = selectedImage.cloneNode(true);
+			clone.className = 'hks-home-gallery__transition-image hks-home-gallery__transition-image--desktop';
+			clone.setAttribute('aria-hidden', 'true');
+			clone.style.opacity = '0';
+			copyImageAttributes(selectedImage, cloneImage);
+			clone.appendChild(cloneImage);
+			gallery.appendChild(clone);
+
+			activeClone = clone;
+			pendingIndex = nextIndex;
+			isAnimating = true;
+
+			const start = () => {
+				if (token !== transitionToken || clone !== activeClone) return;
+
+				gallery.classList.add('is-changing');
+				activeAnimation = clone.animate(
+					[
+						{ opacity: 0, transform: 'scale(1.025)' },
+						{ opacity: 1, transform: 'scale(1)' },
+					],
+					{ duration: 420, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'both' }
+				);
+
+				let committed = false;
+				const commit = () => {
+					if (committed || token !== transitionToken) return;
+					committed = true;
+					commitSelection(selected, nextIndex, announce);
+					window.requestAnimationFrame(() => {
+						if (token === transitionToken) gallery.classList.add('is-copy-ready');
+					});
+				};
+
+				transitionSwapTimer = window.setTimeout(commit, 180);
+				activeAnimation.finished
+					.catch(() => {})
+					.finally(() => {
+						if (token !== transitionToken) return;
+						commit();
+						window.clearTimeout(transitionSwapTimer);
+						transitionSwapTimer = 0;
+						activeAnimation = null;
+						activeClone?.remove();
+						activeClone = null;
+						isAnimating = false;
+						gallery.classList.remove('is-changing');
+						gallery.classList.remove('is-copy-ready');
+					});
+			};
+
+			const decodePromise = cloneImage.decode?.();
+			if (decodePromise) decodePromise.catch(() => {}).then(start);
+			else start();
+		}
+
 		function animateSelection(selected, nextIndex, announce) {
 			const selectedImage = selected.querySelector('img');
 			if (reducedMotion.matches || !selectedImage || typeof selectedImage.animate !== 'function') {
@@ -218,6 +278,11 @@
 			}
 
 			cleanupTransition();
+			if (window.matchMedia('(min-width: 64rem)').matches) {
+				animateDesktopSelection(selected, selectedImage, nextIndex, announce);
+				return;
+			}
+
 			const token = ++transitionToken;
 			const sourceRect = selected.getBoundingClientRect();
 			const targetRect = stage.getBoundingClientRect();

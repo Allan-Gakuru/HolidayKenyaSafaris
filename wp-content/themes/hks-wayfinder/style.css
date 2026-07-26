@@ -3312,10 +3312,24 @@ body.home .hks-site-header .hks-utility {
 		align-self: start;
 		grid-column: 1;
 		grid-row: 1;
+		transition: opacity 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 220ms cubic-bezier(0.23, 1, 0.32, 1);
 	}
 
 	.hks-home-hero--featured .hks-home-gallery__copy h1 {
 		font-size: clamp(1.75rem, 2.7vw, 2.875rem);
+	}
+
+	.hks-home-hero--featured .hks-home-gallery.is-changing:not(.is-copy-ready) .hks-home-gallery__copy {
+		opacity: 0;
+		transform: translateY(-0.375rem);
+	}
+
+	.hks-home-hero--featured .hks-home-gallery__transition-image--desktop {
+		inset: 0;
+		position: absolute;
+		transform-origin: center;
+		will-change: opacity, transform;
+		z-index: -2;
 	}
 
 	.hks-home-hero--featured .hks-home-gallery.is-ready .hks-home-gallery__viewport {
