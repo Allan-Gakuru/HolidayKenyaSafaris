@@ -170,7 +170,7 @@ body.home .hks-site-header {
 	background: transparent;
 	border-bottom: 0;
 	inset: 0 0 auto;
-	position: absolute;
+	position: fixed;
 	width: 100%;
 }
 
@@ -181,6 +181,7 @@ body.admin-bar.home .hks-site-header {
 body.home .hks-site-header .hks-primary-header {
 	background: rgb(243 241 234 / 14%);
 	border-bottom: 1px solid rgb(255 255 255 / 24%);
+	transition: background-color 180ms ease-out, border-color 180ms ease-out;
 }
 
 body.home .hks-site-header .hks-utility {
@@ -202,6 +203,13 @@ body.home .hks-site-header .hks-utility {
 		background: var(--wp--preset--color--pale-mist);
 		border-bottom-color: rgb(24 43 58 / 42%);
 	}
+}
+
+body.home .hks-site-header.is-scrolled .hks-primary-header {
+	-webkit-backdrop-filter: none;
+	backdrop-filter: none;
+	background: var(--wp--preset--color--white);
+	border-bottom-color: rgb(24 43 58 / 14%);
 }
 
 @media (max-width: 782px) {

@@ -4,6 +4,24 @@
 	const header = document.querySelector('[data-hks-site-header]');
 	if (!header) return;
 
+	if (document.body.classList.contains('home')) {
+		let scrollFrame = 0;
+
+		const updateHeaderSurface = () => {
+			scrollFrame = 0;
+			header.classList.toggle('is-scrolled', window.scrollY > 8);
+		};
+
+		const requestHeaderSurfaceUpdate = () => {
+			if (scrollFrame) return;
+			scrollFrame = window.requestAnimationFrame(updateHeaderSurface);
+		};
+
+		updateHeaderSurface();
+		window.addEventListener('scroll', requestHeaderSurfaceUpdate, { passive: true });
+		window.addEventListener('pageshow', updateHeaderSurface);
+	}
+
 	const menu = header.querySelector('[data-hks-mobile-menu]');
 	const openButton = header.querySelector('[data-hks-menu-open]');
 	const closeButton = header.querySelector('[data-hks-menu-close]');

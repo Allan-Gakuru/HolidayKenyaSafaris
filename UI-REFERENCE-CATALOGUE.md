@@ -58,7 +58,7 @@ The WhatsApp icon and number are one direct contact link to the confirmed HKS nu
 
 Use a white header with the production `holiday-kenya-safaris-logo.svg` lockup and product-led navigation. Keep the compact WhatsApp contact in the utility bar; do not repeat it as a large primary-header button.
 
-On the homepage only, omit the utility bar and place the same logo and primary navigation in an almost-clear, lightly blurred Pale Mist surface over the Featured Tour hero. The photograph should remain visually continuous through the header. It scrolls away with the hero rather than becoming sticky. Preserve an opaque accessible treatment for reduced-transparency or increased-contrast preferences, solid-white dropdown panels, and the normal opaque mobile drawer. All internal pages keep the two-level header.
+On the homepage only, omit the utility bar and place the same logo and primary navigation in an almost-clear, lightly blurred Pale Mist surface over the Featured Tour hero. The photograph should remain visually continuous through the header. Keep this header fixed at the top and transition its surface to solid white once the page begins scrolling. Preserve an opaque accessible treatment for reduced-transparency or increased-contrast preferences, solid-white dropdown panels, and the normal opaque mobile drawer. All internal pages keep the two-level header.
 
 Approved primary structure:
 

@@ -88,7 +88,7 @@ def main() -> int:
             errors.append(f"missing {path.relative_to(ROOT)}: {error}")
             sources[label] = ""
 
-    require(errors, "theme metadata", sources["style"], ["Version: 0.6.0", "body.home .hks-site-header", ".hks-home-hero--featured", ".hks-home-gallery__viewport", ".hks-home-gallery__progress", "--hks-card-width", ".hks-home-gallery__transition-image", "clip-path", "aspect-ratio: 3 / 4", ".hks-tour-workspace", ".hks-tour-gallery", ".hks-mobile-menu", ".hks-editorial-page", ".hks-group-travel-planner", ".hks-group-travel-visuals", ":focus-visible", "prefers-reduced-motion", "prefers-reduced-transparency"])
+    require(errors, "theme metadata", sources["style"], ["Version: 0.6.0", "body.home .hks-site-header", "body.home .hks-site-header.is-scrolled", "position: fixed", ".hks-home-hero--featured", ".hks-home-gallery__viewport", ".hks-home-gallery__progress", "--hks-card-width", ".hks-home-gallery__transition-image", "clip-path", "aspect-ratio: 3 / 4", ".hks-tour-workspace", ".hks-tour-gallery", ".hks-mobile-menu", ".hks-editorial-page", ".hks-group-travel-planner", ".hks-group-travel-visuals", ":focus-visible", "prefers-reduced-motion", "prefers-reduced-transparency"])
     forbid(errors, "theme stylesheet", sources["style"], ["linear-gradient(", "radial-gradient(", ".hks-site-header--home-overlay"])
 
     require(
@@ -293,7 +293,7 @@ def main() -> int:
     if sources["renderer"].count("do_blocks( '<!-- wp:hks/quote-cta") != 2:
         errors.append("public renderer must create one canonical and one Group Travel shared quote block instance")
 
-    require(errors, "navigation script", sources["navigation"], ["showModal", "aria-expanded", "Escape", "data-hks-quote-proxy", "data-hks-inquiry-open"])
+    require(errors, "navigation script", sources["navigation"], ["showModal", "aria-expanded", "Escape", "data-hks-quote-proxy", "data-hks-inquiry-open", "is-scrolled", "window.scrollY", "requestAnimationFrame", "{ passive: true }"])
     require(errors, "utility contact strip", sources["header"], ["info@holidaykenyasafaris.ke", "instagram.com/holidaykenyasafaris", "facebook.com/people/Holiday-Kenya-Safaris/61591508593846", "hks-utility__social", "hks-utility__whatsapp"])
     require(errors, "homepage gallery script", sources["home_gallery"], ["5000", "prefers-reduced-motion", "IntersectionObserver", "pointermove", "ArrowLeft", "ArrowRight", "dataset.hksPosition", "aria-hidden", "is-dragging", "drag.captured", "track.setPointerCapture", "data-hks-home-gallery-pause", "data-hks-home-gallery-progress", "data-hks-home-gallery-details", "data-hks-home-gallery-price", "data-hks-home-gallery-route", "data-hks-home-gallery-included", "dataset.hksTourPrice", "dataset.hksTourRoute", "dataset.hksTourIncluded", "activeIndex", "userPaused", "activeAnimation", "transitionSwapTimer", "animateStageSelection", "cloneImage.decode", "scale(1.025)", "is-copy-ready", "clone.animate", "preload.decode", "visibilitychange"])
     forbid(errors, "homepage gallery timing", sources["home_gallery"], ["2500", "3000"])
