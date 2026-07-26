@@ -8,7 +8,7 @@ This document records the approved layout and interaction system for the Holiday
 
 Use this catalogue grammar for the main website:
 
-- a two-level desktop header;
+- a two-level desktop header on internal pages and a homepage-only translucent logo-and-menu overlay;
 - product-led dropdown navigation;
 - a full mobile navigation drawer;
 - an image-led homepage with prominent package discovery;
@@ -57,6 +57,8 @@ The WhatsApp icon and number are one direct contact link to the confirmed HKS nu
 ### Desktop primary header
 
 Use a white header with the production `holiday-kenya-safaris-logo.svg` lockup and product-led navigation. Keep the compact WhatsApp contact in the utility bar; do not repeat it as a large primary-header button.
+
+On the homepage only, omit the utility bar and place the same logo and primary navigation in a light Pale Mist translucent surface over the Featured Tour hero. It scrolls away with the hero rather than becoming sticky. Maintain a near-opaque fallback without backdrop-filter, solid-white dropdown panels, and the normal opaque mobile drawer. All internal pages keep the two-level header.
 
 Approved primary structure:
 
@@ -107,10 +109,10 @@ The homepage should create a broad, image-led catalogue impression without an ex
 
 Default sequence:
 
-1. Utility bar and primary header.
-2. Image-led hero with one literal H1, supporting copy, and a package or catalogue action.
-3. Featured Tours grid.
-4. Browse by destination.
+1. Homepage logo-and-menu overlay.
+2. Featured Tour hero whose active Tour title is the single H1.
+3. Browse by destination.
+4. Featured Tours grid.
 5. Browse by trip type or occasion.
 6. Why Holiday Kenya Safaris and the Ashford operator relationship.
 7. How the WhatsApp quote process works.
@@ -120,11 +122,13 @@ Default sequence:
 
 Hero rules:
 
-- Prefer one decisive destination image.
-- A curated slider may contain no more than three verified slides.
-- Each slide needs its own meaningful destination or package action.
-- Do not auto-rotate rapidly, use 21 slides, or keep identical generic copy over unrelated images.
-- The next section should remain visually discoverable on common desktop and mobile viewports.
+- Use up to five published Tours explicitly marked Featured and carrying valid featured images with useful alt text.
+- The active Tour supplies the full-bleed image, destination or scope label, single H1, and `Click here to book tour` link to its canonical Tour.
+- Use portrait queue cards and one shared-element expansion as the homepage's signature motion.
+- Cycle every 2.5 seconds on all normal viewports. Provide minimal previous/next controls, direct card selection, touch drag or swipe, keyboard commands, and an accessible pause/resume control.
+- Pause while the hero is outside the viewport, the document is hidden, or the visitor is interacting. Disable autoplay and large movement under reduced motion.
+- One eligible Tour renders statically without controls. No eligible Tours render a compact catalogue fallback.
+- The next Browse by destination section should remain discoverable on common desktop and mobile viewports.
 
 Featured Tour rules:
 
@@ -288,7 +292,7 @@ Implement the documented structure, density, and interaction within the Wayfinde
 
 Do not reproduce:
 
-- The 21-slide homepage hero.
+- An unbounded or editorially uncontrolled homepage carousel.
 - Generic copy repeated over unrelated hero images.
 - Tour cards without duration, route or departure context, or a useful action.
 - Duplicate full page titles.

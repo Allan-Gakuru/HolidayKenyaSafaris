@@ -88,7 +88,7 @@ def main() -> int:
             errors.append(f"missing {path.relative_to(ROOT)}: {error}")
             sources[label] = ""
 
-    require(errors, "theme metadata", sources["style"], ["Version: 0.6.0", ".hks-home-gallery__viewport", "--hks-deck-scale", "aspect-ratio: 3 / 4", ".hks-tour-workspace", ".hks-tour-gallery", ".hks-mobile-menu", ".hks-editorial-page", ".hks-group-travel-planner", ".hks-group-travel-visuals", ":focus-visible", "prefers-reduced-motion"])
+    require(errors, "theme metadata", sources["style"], ["Version: 0.6.0", ".hks-site-header--home-overlay", ".hks-home-hero--featured", ".hks-home-gallery__viewport", "--hks-card-width", ".hks-home-gallery__transition-image", "aspect-ratio: 3 / 4", ".hks-tour-workspace", ".hks-tour-gallery", ".hks-mobile-menu", ".hks-editorial-page", ".hks-group-travel-planner", ".hks-group-travel-visuals", ":focus-visible", "prefers-reduced-motion", "prefers-reduced-transparency"])
     forbid(errors, "theme stylesheet", sources["style"], ["linear-gradient(", "radial-gradient("])
 
     require(
@@ -118,6 +118,8 @@ def main() -> int:
         sources["header"],
         [
             "hks-utility",
+            "hks-site-header--home-overlay",
+            "is_front_page()",
             "hks-primary-nav",
             "data-hks-nav-menu",
             "data-hks-mobile-menu",
@@ -204,15 +206,20 @@ def main() -> int:
             "Holiday Kenya Safaris is operated by Ashford Tours & Travel.",
             "data-hks-primary-quote",
             "data-hks-home-gallery",
-            "data-hks-gallery-interval=\"3000\"",
+            "data-hks-gallery-interval=\"2500\"",
             "data-hks-home-gallery-slide",
-            "hero_destination_specs",
-            "maasai-mara",
-            "lake-nakuru-national-park",
-            "amboseli-national-park",
-            "data-hks-tour-count",
+            "home_featured_tours",
+            "hks_featured",
+            "data-hks-home-gallery-active-image",
+            "data-hks-home-gallery-title",
+            "data-hks-home-gallery-eyebrow",
+            "data-hks-home-gallery-link",
+            "data-hks-home-gallery-pause",
+            "data-hks-tour-title",
+            "data-hks-tour-eyebrow",
+            "data-hks-tour-url",
             "hks-home-gallery__caption",
-            "Explore destination",
+            "Click here to book tour",
             "render_group_travel_page",
             "hks-group-travel-planner",
             "group_travel_page",
@@ -236,6 +243,10 @@ def main() -> int:
             "hks_rights_checked_date",
             "hks_credit_required",
             "hks_confirmation_status",
+            "hero_destination_specs",
+            "data-hks-gallery-interval=\"3000\"",
+            "Explore destination",
+            "Find a Kenya trip that fits you.",
         ],
     )
     public_copy = "\n".join(
@@ -269,7 +280,7 @@ def main() -> int:
 
     require(errors, "navigation script", sources["navigation"], ["showModal", "aria-expanded", "Escape", "data-hks-quote-proxy", "data-hks-inquiry-open"])
     require(errors, "utility contact strip", sources["header"], ["info@holidaykenyasafaris.ke", "instagram.com/holidaykenyasafaris", "facebook.com/people/Holiday-Kenya-Safaris/61591508593846", "hks-utility__social", "hks-utility__whatsapp"])
-    require(errors, "homepage gallery script", sources["home_gallery"], ["3000", "prefers-reduced-motion", "IntersectionObserver", "pointermove", "ArrowLeft", "ArrowRight", "desktopLayout.matches", "desktopSlots", "dataset.hksPosition", "aria-hidden", "is-dragging", "is-hovered", "drag.captured", "track.setPointerCapture"])
+    require(errors, "homepage gallery script", sources["home_gallery"], ["2500", "prefers-reduced-motion", "IntersectionObserver", "pointermove", "ArrowLeft", "ArrowRight", "dataset.hksPosition", "aria-hidden", "is-dragging", "drag.captured", "track.setPointerCapture", "data-hks-home-gallery-pause", "activeIndex", "userPaused", "activeAnimation", "clone.animate", "preload.decode", "visibilitychange"])
     pointer_capture = sources["home_gallery"].find("track.setPointerCapture")
     drag_threshold = sources["home_gallery"].find("drag.moved = true")
     if pointer_capture < drag_threshold:

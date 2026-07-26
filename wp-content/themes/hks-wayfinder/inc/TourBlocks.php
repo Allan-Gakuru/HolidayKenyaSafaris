@@ -542,103 +542,106 @@ final class TourBlocks {
 		$group_url      = $group_url ?: home_url( '/group-travel/' );
 		$priority_tours = self::tour_query( 18, true );
 		$featured       = array_slice( $priority_tours, 0, 6 );
-		$destinations  = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_destination', 6 ) : array();
-		$types         = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_tour_type', 8 ) : array();
-		$occasions     = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_occasion', 8 ) : array();
-		$hero_destinations     = array();
-		$hero_destination_specs = array(
-			'maasai-mara'               => __( 'Maasai Mara', 'hks-wayfinder' ),
-			'lake-nakuru-national-park' => __( 'Lake Nakuru', 'hks-wayfinder' ),
-			'amboseli-national-park'    => __( 'Amboseli', 'hks-wayfinder' ),
-			'nairobi'                   => __( 'Nairobi', 'hks-wayfinder' ),
-		);
-
-		foreach ( $hero_destination_specs as $slug => $label ) {
-			$term = get_term_by( 'slug', $slug, 'hks_destination' );
-
-			if ( ! $term instanceof \WP_Term || $term->count < 1 ) {
-				continue;
-			}
-
-			$image_id = self::destination_image( $term );
-			$url      = function_exists( 'hks_wayfinder_term_url' ) ? hks_wayfinder_term_url( $term ) : get_term_link( $term );
-
-			if ( ! $image_id || is_wp_error( $url ) || ! $url ) {
-				continue;
-			}
-
-			$hero_destinations[] = array(
-				'term'     => $term,
-				'label'    => $label,
-				'image_id' => $image_id,
-				'url'      => $url,
-			);
-		}
+		$destinations   = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_destination', 6 ) : array();
+		$types          = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_tour_type', 8 ) : array();
+		$occasions      = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_occasion', 8 ) : array();
+		$hero_tours     = self::home_featured_tours( 5 );
 
 		ob_start();
 		?>
 		<div class="hks-home">
-			<section class="hks-home-hero<?php echo $hero_destinations ? ' hks-home-hero--with-gallery' : ''; ?>" aria-labelledby="hks-home-title">
-				<div class="hks-shell hks-home-hero__content">
-					<p class="hks-home-hero__label"><?php esc_html_e( 'Kenya trips for local travellers', 'hks-wayfinder' ); ?></p>
-					<h1 id="hks-home-title"><?php esc_html_e( 'Find a Kenya trip that fits you.', 'hks-wayfinder' ); ?></h1>
-				</div>
-
-				<?php if ( $hero_destinations ) : ?>
-					<div class="hks-shell hks-home-gallery" data-hks-home-gallery data-hks-gallery-interval="3000" role="region" aria-roledescription="carousel" aria-labelledby="hks-home-title" aria-describedby="hks-home-gallery-instructions">
-						<p class="hks-sr-only" id="hks-home-gallery-instructions"><?php esc_html_e( 'Featured destinations. Swipe or drag the image cards, use the previous and next buttons, or use the left and right arrow keys while the gallery is focused.', 'hks-wayfinder' ); ?></p>
-						<div class="hks-home-gallery__viewport" data-hks-home-gallery-track tabindex="0" id="hks-home-gallery-track">
+			<?php if ( $hero_tours ) : $active_tour = $hero_tours[0]; ?>
+				<section class="hks-home-hero hks-home-hero--featured" aria-labelledby="hks-home-title">
+					<div class="hks-home-gallery<?php echo count( $hero_tours ) < 2 ? ' is-static' : ''; ?>" data-hks-home-gallery data-hks-gallery-interval="2500" role="region" aria-roledescription="carousel" aria-labelledby="hks-home-title" aria-describedby="hks-home-gallery-instructions">
+						<p class="hks-sr-only" id="hks-home-gallery-instructions"><?php esc_html_e( 'Featured tours. Select a preview, swipe or drag the card queue, use the previous and next buttons, or use the left and right arrow keys while the gallery is focused.', 'hks-wayfinder' ); ?></p>
+						<figure class="hks-home-gallery__stage" data-hks-home-gallery-stage>
 							<?php
-							foreach ( $hero_destinations as $index => $hero_destination ) :
-								$term             = $hero_destination['term'];
-								$destination_name = $hero_destination['label'];
-								$image_id         = $hero_destination['image_id'];
-								$tour_count       = sprintf( _n( '%s tour', '%s tours', $term->count, 'hks-wayfinder' ), number_format_i18n( $term->count ) );
-								$image_attributes = array(
-									'loading'   => 0 === $index ? 'eager' : 'lazy',
-									'sizes'     => '(min-width: 1024px) 17rem, (min-width: 768px) 15rem, 58vw',
-									'draggable' => 'false',
-								);
-								if ( 0 === $index ) {
-									$image_attributes['fetchpriority'] = 'high';
-								}
-								?>
-								<article class="hks-home-gallery__slide" data-hks-home-gallery-slide data-hks-destination-name="<?php echo esc_attr( $destination_name ); ?>" data-hks-tour-count="<?php echo esc_attr( $tour_count ); ?>" role="group" aria-roledescription="slide" aria-label="<?php echo esc_attr( sprintf( __( '%1$s of %2$s: %3$s', 'hks-wayfinder' ), $index + 1, count( $hero_destinations ), $destination_name ) ); ?>">
-									<a class="hks-home-gallery__link" href="<?php echo esc_url( $hero_destination['url'] ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Explore %1$s, %2$s', 'hks-wayfinder' ), $destination_name, $tour_count ) ); ?>">
-										<span class="hks-home-gallery__media"><?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'large', false, $image_attributes ) ); ?></span>
-										<span class="hks-home-gallery__caption">
-											<strong><?php echo esc_html( $destination_name ); ?></strong>
-											<span class="hks-home-gallery__meta"><?php echo esc_html( $tour_count ); ?></span>
-											<span class="hks-home-gallery__action"><?php esc_html_e( 'Explore destination', 'hks-wayfinder' ); ?><span aria-hidden="true">&rarr;</span></span>
-										</span>
-									</a>
-								</article>
-							<?php endforeach; ?>
-						</div>
-						<p class="hks-home-hero__support"><?php esc_html_e( 'Choose a destination, compare the tours, then request a tailored quote for your dates and group on WhatsApp.', 'hks-wayfinder' ); ?></p>
-						<div class="hks-home-gallery__footer">
-							<div class="hks-home-gallery__controls" aria-label="<?php esc_attr_e( 'Destination gallery controls', 'hks-wayfinder' ); ?>">
-								<button type="button" data-hks-home-gallery-prev aria-controls="hks-home-gallery-track" aria-label="<?php esc_attr_e( 'Show previous destination', 'hks-wayfinder' ); ?>"><span aria-hidden="true">&larr;</span></button>
-								<span class="hks-home-gallery__status" data-hks-home-gallery-status></span>
-								<button type="button" data-hks-home-gallery-next aria-controls="hks-home-gallery-track" aria-label="<?php esc_attr_e( 'Show next destination', 'hks-wayfinder' ); ?>"><span aria-hidden="true">&rarr;</span></button>
-								<span class="hks-sr-only" aria-live="polite" aria-atomic="true" data-hks-home-gallery-announcer></span>
+							echo wp_kses_post(
+								wp_get_attachment_image(
+									$active_tour['image_id'],
+									'full',
+									false,
+									array(
+										'loading'       => 'eager',
+										'fetchpriority' => 'high',
+										'decoding'      => 'async',
+										'sizes'         => '100vw',
+										'draggable'     => 'false',
+										'data-hks-home-gallery-active-image' => '',
+									)
+								)
+							);
+							?>
+						</figure>
+						<div class="hks-home-gallery__wash" aria-hidden="true"></div>
+						<div class="hks-shell hks-home-gallery__inner">
+							<div class="hks-home-gallery__copy" data-hks-home-gallery-copy>
+								<p class="hks-home-gallery__eyebrow" data-hks-home-gallery-eyebrow><?php echo esc_html( $active_tour['eyebrow'] ); ?></p>
+								<h1 id="hks-home-title" data-hks-home-gallery-title><?php echo esc_html( $active_tour['title'] ); ?></h1>
+								<a class="hks-home-gallery__cta" href="<?php echo esc_url( $active_tour['url'] ); ?>" data-hks-home-gallery-link><?php esc_html_e( 'Click here to book tour', 'hks-wayfinder' ); ?></a>
 							</div>
-							<div class="hks-home-hero__actions"><a class="hks-button" href="<?php echo esc_url( $tours_url ); ?>"><?php esc_html_e( 'Explore all tours', 'hks-wayfinder' ); ?></a><?php if ( $destinations ) : ?><a href="#destinations"><?php esc_html_e( 'Browse destinations', 'hks-wayfinder' ); ?><span aria-hidden="true">&rarr;</span></a><?php endif; ?></div>
+
+							<div class="hks-home-gallery__queue" aria-label="<?php esc_attr_e( 'Choose a featured tour', 'hks-wayfinder' ); ?>">
+								<button class="hks-home-gallery__arrow hks-home-gallery__arrow--previous" type="button" data-hks-home-gallery-prev aria-controls="hks-home-gallery-track" aria-label="<?php esc_attr_e( 'Show previous featured tour', 'hks-wayfinder' ); ?>"><span aria-hidden="true">&larr;</span></button>
+								<div class="hks-home-gallery__viewport" data-hks-home-gallery-track tabindex="0" id="hks-home-gallery-track">
+									<?php foreach ( $hero_tours as $index => $hero_tour ) : ?>
+										<button
+											class="hks-home-gallery__slide<?php echo 0 === $index ? ' is-active' : ''; ?>"
+											type="button"
+											data-hks-home-gallery-slide
+											data-hks-tour-title="<?php echo esc_attr( $hero_tour['title'] ); ?>"
+											data-hks-tour-eyebrow="<?php echo esc_attr( $hero_tour['eyebrow'] ); ?>"
+											data-hks-tour-url="<?php echo esc_url( $hero_tour['url'] ); ?>"
+											aria-label="<?php echo esc_attr( sprintf( __( 'Show %s', 'hks-wayfinder' ), $hero_tour['title'] ) ); ?>"
+										>
+											<span class="hks-home-gallery__media">
+												<?php
+												echo wp_kses_post(
+													wp_get_attachment_image(
+														$hero_tour['image_id'],
+														'full',
+														false,
+														array(
+															'loading'   => $index < 2 ? 'eager' : 'lazy',
+															'decoding'  => 'async',
+															'sizes'     => '(min-width: 1280px) 11rem, (min-width: 768px) 10rem, 52vw',
+															'draggable' => 'false',
+														)
+													)
+												);
+												?>
+											</span>
+											<span class="hks-home-gallery__caption"><?php echo esc_html( $hero_tour['title'] ); ?></span>
+										</button>
+									<?php endforeach; ?>
+								</div>
+								<button class="hks-home-gallery__arrow hks-home-gallery__arrow--next" type="button" data-hks-home-gallery-next aria-controls="hks-home-gallery-track" aria-label="<?php esc_attr_e( 'Show next featured tour', 'hks-wayfinder' ); ?>"><span aria-hidden="true">&rarr;</span></button>
+								<div class="hks-home-gallery__controls">
+									<span class="hks-home-gallery__status" data-hks-home-gallery-status></span>
+									<button class="hks-home-gallery__pause" type="button" data-hks-home-gallery-pause aria-label="<?php esc_attr_e( 'Pause featured tour rotation', 'hks-wayfinder' ); ?>"><span data-hks-home-gallery-pause-icon aria-hidden="true">&#8545;</span></button>
+									<span class="hks-sr-only" aria-live="polite" aria-atomic="true" data-hks-home-gallery-announcer></span>
+								</div>
+							</div>
 						</div>
 					</div>
-				<?php else : ?>
-					<div class="hks-shell hks-home-hero__actions"><a class="hks-button" href="<?php echo esc_url( $tours_url ); ?>"><?php esc_html_e( 'Explore all tours', 'hks-wayfinder' ); ?></a></div>
-				<?php endif; ?>
-			</section>
+				</section>
+			<?php else : ?>
+				<section class="hks-home-hero hks-home-hero--fallback" aria-labelledby="hks-home-title">
+					<div class="hks-shell hks-home-hero__content">
+						<h1 id="hks-home-title"><?php esc_html_e( 'Plan your next trip with Holiday Kenya Safaris.', 'hks-wayfinder' ); ?></h1>
+						<a class="hks-button" href="<?php echo esc_url( $tours_url ); ?>"><?php esc_html_e( 'Explore all tours', 'hks-wayfinder' ); ?></a>
+					</div>
+				</section>
+			<?php endif; ?>
+
+			<?php if ( $destinations ) : ?>
+				<section class="hks-home-section hks-home-section--mist" id="destinations" aria-labelledby="hks-destinations-title"><div class="hks-shell"><div class="hks-section-heading"><div><p><?php esc_html_e( 'Browse by destination', 'hks-wayfinder' ); ?></p><h2 id="hks-destinations-title"><?php esc_html_e( 'Choose the place first', 'hks-wayfinder' ); ?></h2></div></div><div class="hks-destination-grid"><?php foreach ( $destinations as $term ) : $url = hks_wayfinder_term_url( $term ); $image = self::destination_image( $term ); ?><a class="hks-destination-card<?php echo $image ? '' : ' hks-destination-card--no-image'; ?>" href="<?php echo esc_url( $url ); ?>"><?php if ( $image ) : ?><span class="hks-destination-card__media"><?php echo wp_kses_post( wp_get_attachment_image( $image, 'medium_large', false, array( 'loading' => 'lazy' ) ) ); ?></span><?php endif; ?><span class="hks-destination-card__body"><strong><?php echo esc_html( $term->name ); ?></strong><span><?php echo esc_html( sprintf( _n( '%s tour', '%s tours', $term->count, 'hks-wayfinder' ), number_format_i18n( $term->count ) ) ); ?></span></span></a><?php endforeach; ?></div></div></section>
+			<?php endif; ?>
 
 			<section class="hks-home-section hks-shell" aria-labelledby="hks-featured-title">
 				<div class="hks-section-heading"><div><p><?php esc_html_e( 'Featured tours', 'hks-wayfinder' ); ?></p><h2 id="hks-featured-title"><?php esc_html_e( 'Start with a trip worth opening', 'hks-wayfinder' ); ?></h2></div><a href="<?php echo esc_url( $tours_url ); ?>"><?php esc_html_e( 'View all tours', 'hks-wayfinder' ); ?><span aria-hidden="true">→</span></a></div>
 				<?php if ( $featured ) : ?><div class="hks-tour-grid"><?php foreach ( $featured as $tour_post ) : $GLOBALS['post'] = $tour_post; setup_postdata( $tour_post ); echo self::render_tour_card(); endforeach; wp_reset_postdata(); ?></div><?php else : ?><p><?php esc_html_e( 'Featured tours are coming soon. Explore all tours to keep browsing.', 'hks-wayfinder' ); ?></p><?php endif; ?>
 			</section>
-
-			<?php if ( $destinations ) : ?>
-				<section class="hks-home-section hks-home-section--mist" id="destinations" aria-labelledby="hks-destinations-title"><div class="hks-shell"><div class="hks-section-heading"><div><p><?php esc_html_e( 'Browse by destination', 'hks-wayfinder' ); ?></p><h2 id="hks-destinations-title"><?php esc_html_e( 'Choose the place first', 'hks-wayfinder' ); ?></h2></div></div><div class="hks-destination-grid"><?php foreach ( $destinations as $term ) : $url = hks_wayfinder_term_url( $term ); $image = self::destination_image( $term ); ?><a class="hks-destination-card<?php echo $image ? '' : ' hks-destination-card--no-image'; ?>" href="<?php echo esc_url( $url ); ?>"><?php if ( $image ) : ?><span class="hks-destination-card__media"><?php echo wp_kses_post( wp_get_attachment_image( $image, 'medium_large', false, array( 'loading' => 'lazy' ) ) ); ?></span><?php endif; ?><span class="hks-destination-card__body"><strong><?php echo esc_html( $term->name ); ?></strong><span><?php echo esc_html( sprintf( _n( '%s tour', '%s tours', $term->count, 'hks-wayfinder' ), number_format_i18n( $term->count ) ) ); ?></span></span></a><?php endforeach; ?></div></div></section>
-			<?php endif; ?>
 
 			<?php if ( $types || $occasions ) : ?>
 				<section class="hks-home-section hks-shell" aria-labelledby="hks-trip-type-title"><div class="hks-section-heading"><div><p><?php esc_html_e( 'Browse your way', 'hks-wayfinder' ); ?></p><h2 id="hks-trip-type-title"><?php esc_html_e( 'Start with the trip type or the occasion', 'hks-wayfinder' ); ?></h2></div></div><div class="hks-browse-groups"><?php if ( $types ) : ?><div><h3><?php esc_html_e( 'Trip type', 'hks-wayfinder' ); ?></h3><div class="hks-term-links"><?php self::render_term_links( $types ); ?></div></div><?php endif; ?><?php if ( $occasions ) : ?><div><h3><?php esc_html_e( 'Occasion', 'hks-wayfinder' ); ?></h3><div class="hks-term-links"><?php self::render_term_links( $occasions ); ?></div></div><?php endif; ?></div></section>
@@ -882,6 +885,64 @@ final class TourBlocks {
 		}
 
 		return 0;
+	}
+
+	/**
+	 * Build the exact Featured Tour set used by the homepage hero.
+	 *
+	 * @param int $limit Maximum Tours.
+	 * @return array<int, array<string, int|string>>
+	 */
+	private static function home_featured_tours( int $limit = 5 ): array {
+		$posts = get_posts(
+			array(
+				'post_type'      => 'hks_tour',
+				'post_status'    => 'publish',
+				'posts_per_page' => 50,
+				'orderby'        => array(
+					'menu_order' => 'ASC',
+					'date'       => 'DESC',
+				),
+				'meta_query'     => array(
+					array(
+						'key'     => 'hks_featured',
+						'value'   => '1',
+						'compare' => '=',
+					),
+				),
+			)
+		);
+		$tours = array();
+
+		foreach ( $posts as $tour ) {
+			$title    = self::public_text( get_the_title( $tour ) );
+			$url      = get_permalink( $tour );
+			$image_id = absint( get_post_thumbnail_id( $tour ) );
+
+			if ( '' === $title || ! is_string( $url ) || '' === $url || ! self::media_allowed( $image_id ) ) {
+				continue;
+			}
+
+			$eyebrow = implode( ', ', self::term_names( $tour->ID, 'hks_destination' ) );
+
+			if ( '' === $eyebrow ) {
+				$eyebrow = implode( ', ', self::term_names( $tour->ID, 'hks_tour_scope' ) );
+			}
+
+			$tours[] = array(
+				'id'       => $tour->ID,
+				'title'    => $title,
+				'url'      => $url,
+				'image_id' => $image_id,
+				'eyebrow'  => $eyebrow ?: __( 'Featured tour', 'hks-wayfinder' ),
+			);
+
+			if ( count( $tours ) >= $limit ) {
+				break;
+			}
+		}
+
+		return $tours;
 	}
 
 	/**

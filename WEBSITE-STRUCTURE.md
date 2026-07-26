@@ -17,6 +17,8 @@ Use a compact trust and contact strip containing only confirmed information:
 - Phone and email.
 - Social links.
 
+The homepage intentionally omits this strip. Its logo-and-menu header overlays the Featured Tour hero on a light translucent Pale Mist surface and scrolls away naturally. Internal pages retain the utility bar and white primary header.
+
 ### Primary navigation
 
 - Home.
@@ -68,10 +70,10 @@ Purpose:
 
 Default order:
 
-1. Utility bar and primary header.
-2. Image-led hero with one literal H1, supporting copy, and clear action.
-3. Featured verified Tours.
-4. Browse by destination.
+1. Homepage logo-and-menu overlay.
+2. Featured Tour hero whose active Tour title is the single H1.
+3. Browse by destination.
+4. Featured verified Tours.
 5. Browse by trip type or occasion.
 6. Why Holiday Kenya Safaris and the Ashford operator relationship.
 7. How the WhatsApp quote process works.
@@ -81,11 +83,12 @@ Default order:
 
 Hero rules:
 
-- Prefer one decisive approved destination image.
-- A slider may contain no more than three curated slides.
-- Each slide needs its own useful package or destination action.
-- Do not use rapid autoplay, generic repeated copy, or a large media carousel.
-- Keep a hint of the next section visible on normal desktop and mobile viewports.
+- Query up to five published Tours explicitly marked Featured and require a valid featured image with useful alt text.
+- Use the active Tour's destination or scope, literal title, full-bleed image, and `Click here to book tour` canonical link.
+- Use portrait preview cards with a 2.5-second cycle, minimal previous/next controls, card selection, swipe or drag, keyboard commands, and a compact pause/resume control.
+- Pause while hidden, outside the viewport, or under direct interaction. Reduced motion disables autoplay and shared-element travel.
+- One eligible Tour renders as a static hero; zero eligible Tours render a generic catalogue fallback.
+- Keep Browse by destination visually discoverable after the hero.
 
 Featured Tour rules:
 
@@ -369,7 +372,7 @@ Potential modules, only when verified:
 - Responsive images and modern formats.
 - Set gallery and card dimensions to prevent layout shift.
 - Lazy-load below-the-fold media, but not the primary hero or first gallery image.
-- Avoid autoplay video and large multi-slide hero payloads.
+- Avoid autoplay video and preload only the active and next Featured Tour images; remaining queue media loads responsively and lazily.
 - Keep JavaScript limited to navigation, gallery, tabs/disclosures, filters, quote flow, analytics, and necessary blocks.
 - Use caching, compression, CDN, backups, and staging at the hosting layer.
 

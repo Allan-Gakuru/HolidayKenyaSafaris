@@ -58,7 +58,7 @@ final class FieldGroups {
 					__( 'Use the WordPress title for the Tour name, the excerpt for the catalogue summary, the editor for the overview, and the featured image for the main Tour image.', 'hks-core' )
 				),
 				self::tab( 'tour_tab_summary', __( 'Summary', 'hks-core' ) ),
-				self::field( 'tour_featured', __( 'Feature on the homepage', 'hks-core' ), 'hks_featured', 'true_false', array( 'instructions' => __( 'Moves this Tour ahead of non-featured Tours in the homepage selection.', 'hks-core' ), 'ui' => 1, 'default_value' => 0 ) ),
+				self::field( 'tour_featured', __( 'Feature on the homepage', 'hks-core' ), 'hks_featured', 'true_false', array( 'instructions' => __( 'Includes this Tour in the homepage hero and moves it ahead of non-featured Tours in the Featured Tours grid.', 'hks-core' ), 'ui' => 1, 'default_value' => 0 ) ),
 				self::field(
 					'tour_from_price_ksh',
 					__( 'From price per person (KSh)', 'hks-core' ),

@@ -28,6 +28,7 @@ $instagram_url      = 'https://www.instagram.com/holidaykenyasafaris/';
 $facebook_url       = 'https://www.facebook.com/people/Holiday-Kenya-Safaris/61591508593846/';
 $whatsapp_number    = '254712965131';
 $whatsapp_message   = __( "Hi Holiday Kenya Safaris, I'd like help choosing and planning a trip.", 'hks-wayfinder' );
+$is_front_page      = is_front_page();
 $safari_terms       = array();
 $coast_terms        = array();
 $kenya_scope        = null;
@@ -100,7 +101,8 @@ $render_terms = static function ( array $terms ): void {
 ?>
 <!-- wp:html -->
 <a class="hks-skip-link" href="#main-content"><?php echo esc_html__( 'Skip to content', 'hks-wayfinder' ); ?></a>
-<div class="hks-site-header" data-hks-site-header>
+<div class="hks-site-header<?php echo $is_front_page ? ' hks-site-header--home-overlay' : ''; ?>" data-hks-site-header>
+	<?php if ( ! $is_front_page ) : ?>
 	<div class="hks-utility">
 		<div class="hks-shell hks-utility__inner">
 			<span class="hks-utility__operator">
@@ -128,6 +130,7 @@ $render_terms = static function ( array $terms ): void {
 			</div>
 		</div>
 	</div>
+	<?php endif; ?>
 
 	<div class="hks-primary-header">
 		<div class="hks-shell hks-primary-header__inner">

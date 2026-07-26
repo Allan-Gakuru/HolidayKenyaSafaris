@@ -104,13 +104,17 @@ Avoid generic orange sunsets, wildlife collages, fake luxury staging, aggressive
 
 Use a slim Midnight Navy utility bar and a white primary header on desktop. The utility bar contains only confirmed operator, contact, and social information, including one clean WhatsApp icon rather than a separate phone glyph. The WhatsApp icon and number open a direct chat with a concise prefilled message; on Tour and Campaign pages that message includes the current title and URL. The primary header and mobile navigation drawer both use `assets/images/brand/holiday-kenya-safaris-logo.svg`, with product-led dropdown navigation and without repeating the utility contact as a large quote button.
 
+The homepage is the deliberate exception: omit the utility bar and place the existing logo and primary navigation in a light Pale Mist translucent header over the Featured Tour hero. The surface uses a near-opaque fallback and a restrained blur where supported, remains legible independently of the photograph, and scrolls away naturally with the hero. Internal pages retain the complete utility bar and white primary header. Dropdown panels and the mobile drawer remain solid white in both contexts.
+
 On mobile, use the Wayfinder mark and a familiar menu icon. The full-height navigation drawer uses accessible accordion groups, direct contact routes, and a quote action. It must trap focus, close with Escape, return focus to its trigger, and prevent background scrolling.
 
 The header must not resemble a software toolbar. Search is optional and should appear only when the catalogue is large enough for it to help.
 
 ### Homepage and catalogue
 
-Use one decisive hero image or no more than three curated slides. Keep the next section discoverable, and place verified featured Tours immediately after the hero. Tour grids use stable image ratios, consistent title space, and practical metadata rather than image-and-title-only cards.
+The homepage hero uses up to five published Tours explicitly marked Featured and carrying a valid featured image with useful alt text. The active Tour supplies the only H1, a destination or Tour-scope label, the full-bleed image, and a `Click here to book tour` link to the canonical Tour page. Portrait preview cards form the queue. Use a 2.5-second cycle on every viewport, minimal previous/next controls, direct card selection, touch drag or swipe, keyboard commands, and a compact pause/resume control. Pause when the hero is not viewable or the visitor is interacting with it; disable autoplay under reduced motion.
+
+If only one eligible Featured Tour exists, render a static hero without controls. If none exists, render a compact generic fallback and catalogue action. Place Browse by destination immediately after the hero, followed by the existing Featured Tours grid. Tour grids use stable image ratios, consistent title space, and practical metadata rather than image-and-title-only cards.
 
 Catalogue and taxonomy pages use a compact title and breadcrumb band, useful filters, a responsive Tour grid, and clear no-results behavior. Avoid abstract gradients, empty metadata, and oversized media inventory.
 
@@ -161,7 +165,7 @@ Prefer concrete facts—route, vehicle, accommodation, inclusions, exclusions, o
 - Visible focus rings use a high-contrast two-layer treatment and are never removed.
 - Hover, active, selected, loading, success, and error states must be distinct without relying solely on colour.
 - Default transitions are 120–220ms and limited to opacity, colour, border, and transform.
-- Avoid scroll-jacking, autoplay, parallax, bouncing CTAs, and ornamental motion.
+- Avoid scroll-jacking, parallax, bouncing CTAs, and ornamental motion. The approved Featured Tour hero is the sole autoplay exception and must retain its pause control, viewport/visibility pauses, and reduced-motion fallback.
 - Under `prefers-reduced-motion: reduce`, remove non-essential movement and shorten necessary state changes.
 
 ## Editorial content state
