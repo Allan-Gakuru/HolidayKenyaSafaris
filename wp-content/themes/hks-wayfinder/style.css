@@ -3320,13 +3320,16 @@ body.home .hks-site-header .hks-utility {
 
 @media (min-width: 64rem) {
 	.hks-home-hero--featured .hks-home-gallery__inner {
-		align-items: end;
+		align-content: stretch;
+		align-items: stretch;
 		grid-template-columns: minmax(17rem, 0.62fr) minmax(0, 1.38fr);
+		grid-template-rows: auto minmax(0, 1fr) auto;
 	}
 
 	.hks-home-hero--featured .hks-home-gallery__copy {
-		align-self: center;
-		padding-bottom: 3rem;
+		align-self: start;
+		grid-column: 1;
+		grid-row: 1;
 	}
 
 	.hks-home-hero--featured .hks-home-gallery__copy h1 {
@@ -3340,6 +3343,9 @@ body.home .hks-site-header .hks-utility {
 	}
 
 	.hks-home-hero--featured .hks-home-gallery__queue {
+		align-self: end;
+		grid-column: 2;
+		grid-row: 3;
 		width: 100%;
 	}
 }
