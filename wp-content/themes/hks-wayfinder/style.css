@@ -677,6 +677,17 @@ body.home .hks-site-header.is-scrolled .hks-primary-header {
 	max-width: 24ch;
 }
 
+.single-hks_tour .hks-title-band h1 {
+	font-size: clamp(1.125rem, 2.5vw, 1.75rem);
+	max-width: none;
+}
+
+@media (min-width: 56.0625rem) {
+	.single-hks_tour .hks-title-band h1 {
+		white-space: nowrap;
+	}
+}
+
 .hks-title-band p {
 	font-size: var(--wp--preset--font-size--lead);
 	margin: 0.75rem 0 0;
