@@ -92,7 +92,7 @@ Exclude by default:
 ## UI and UX Structure
 
 - The approved catalogue contract governs the global navigation, image-led homepage, catalogue grids, and canonical Tour pages.
-- The homepage is the only header exception: it omits the utility bar and overlays the existing logo and primary navigation on the hero using a light translucent Pale Mist surface that scrolls away. Internal pages retain the two-level header.
+- The homepage is the only header exception: it omits the utility bar and overlays the existing logo and primary navigation directly on the hero using an almost-clear, lightly blurred Pale Mist surface that scrolls away. Internal pages retain the two-level header.
 - The homepage hero uses up to five published Featured Tours whose featured images are at least 1200 × 675 pixels. Hero eligibility does not depend on WordPress alt text; the repeated hero and preview images are decorative because the Tour title, destination, and labeled controls carry the same context. The active Tour title is the single H1, its CTA reads `Click here to book tour` and links to the canonical Tour, and portrait cards cycle every five seconds with minimal arrows, direct selection, swipe/drag, keyboard support, pause/resume, a synchronized progress line, and reduced-motion safeguards.
 - Browse by destination appears directly below the hero, followed by the Featured Tours grid.
 - Catalogue-mode implementation must keep the Wayfinder identity, HKS copy, shared conversion service, compact media treatment, clear package context, and accessible interactions.

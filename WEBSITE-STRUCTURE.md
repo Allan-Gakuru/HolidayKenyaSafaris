@@ -17,7 +17,7 @@ Use a compact trust and contact strip containing only confirmed information:
 - Phone and email.
 - Social links.
 
-The homepage intentionally omits this strip. Its logo-and-menu header overlays the Featured Tour hero on a light translucent Pale Mist surface and scrolls away naturally. Internal pages retain the utility bar and white primary header.
+The homepage intentionally omits this strip. Its logo-and-menu header overlays the Featured Tour hero on an almost-clear, lightly blurred Pale Mist surface so the photograph remains continuous, and it scrolls away naturally. Internal pages retain the utility bar and white primary header.
 
 ### Primary navigation
 

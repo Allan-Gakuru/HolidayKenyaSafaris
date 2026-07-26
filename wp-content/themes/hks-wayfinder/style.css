@@ -174,20 +174,24 @@ body.home .hks-site-header {
 	width: 100%;
 }
 
+body.admin-bar.home .hks-site-header {
+	top: 32px;
+}
+
 body.home .hks-site-header .hks-primary-header {
-	background: rgb(243 241 234 / 94%);
-	border-bottom: 1px solid rgb(24 43 58 / 18%);
+	background: rgb(243 241 234 / 14%);
+	border-bottom: 1px solid rgb(255 255 255 / 24%);
 }
 
 body.home .hks-site-header .hks-utility {
 	display: none;
 }
 
-@supports ((-webkit-backdrop-filter: blur(12px)) or (backdrop-filter: blur(12px))) {
+@supports ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
 	body.home .hks-site-header .hks-primary-header {
-		-webkit-backdrop-filter: blur(12px);
-		backdrop-filter: blur(12px);
-		background: rgb(243 241 234 / 82%);
+		-webkit-backdrop-filter: blur(10px);
+		backdrop-filter: blur(10px);
+		background: rgb(243 241 234 / 4%);
 	}
 }
 
@@ -197,6 +201,12 @@ body.home .hks-site-header .hks-utility {
 		backdrop-filter: none;
 		background: var(--wp--preset--color--pale-mist);
 		border-bottom-color: rgb(24 43 58 / 42%);
+	}
+}
+
+@media (max-width: 782px) {
+	body.admin-bar.home .hks-site-header {
+		top: 46px;
 	}
 }
 
