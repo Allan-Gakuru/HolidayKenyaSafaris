@@ -22,6 +22,17 @@
 		window.addEventListener('pageshow', updateHeaderSurface);
 	}
 
+	const floatingWhatsApp = document.querySelector('.hks-floating-whatsapp');
+	if (floatingWhatsApp && document.body.classList.contains('single-hks_tour')) {
+		const tourTitle = document.querySelector('.hks-title-band h1')?.textContent.trim();
+		const tourUrl = document.querySelector('link[rel="canonical"]')?.href || window.location.href.split('#')[0];
+
+		if (tourTitle) {
+			const message = `Hi Holiday Kenya Safaris, I'm interested in ${tourTitle}. Please help me plan this trip: ${tourUrl}`;
+			floatingWhatsApp.href = `https://wa.me/254712965131?text=${encodeURIComponent(message)}`;
+		}
+	}
+
 	const menu = header.querySelector('[data-hks-mobile-menu]');
 	const openButton = header.querySelector('[data-hks-menu-open]');
 	const closeButton = header.querySelector('[data-hks-menu-close]');
