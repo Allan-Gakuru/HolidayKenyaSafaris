@@ -665,10 +665,23 @@ body.home .hks-site-header.is-scrolled .hks-primary-header {
 }
 
 /* Title bands and breadcrumbs */
+body:not(.home) .wp-site-blocks > main {
+	margin-block-start: 0;
+}
+
+.hks-catalogue-page > *,
+.hks-destination-page > *,
+.hks-taxonomy-page > *,
+.hks-tour-page > *,
+.hks-standard-page > *,
+.hks-group-travel-page > * {
+	margin-block-start: 0;
+}
+
 .hks-title-band {
 	background: var(--wp--preset--color--pale-mist);
 	border-bottom: 1px solid rgb(24 43 58 / 12%);
-	padding-block: clamp(2rem, 5vw, 3.75rem);
+	padding-block: 0.5rem 0.625rem;
 }
 
 .hks-title-band h1 {
@@ -690,13 +703,13 @@ body.home .hks-site-header.is-scrolled .hks-primary-header {
 
 .hks-title-band p {
 	font-size: var(--wp--preset--font-size--lead);
-	margin: 0.75rem 0 0;
+	margin: 0.375rem 0 0;
 	max-width: 56rem;
 }
 
 .hks-breadcrumbs {
 	font-size: 0.8rem;
-	margin-bottom: 0.75rem;
+	margin-bottom: 0.3rem;
 }
 
 .hks-breadcrumbs ol {
@@ -1768,7 +1781,7 @@ body.home .hks-site-header.is-scrolled .hks-primary-header {
 	display: grid;
 	gap: clamp(1.5rem, 3vw, 2.5rem);
 	grid-template-columns: minmax(0, 1fr) minmax(18rem, 20rem);
-	padding-block: clamp(1.5rem, 4vw, 3rem) clamp(2.5rem, 6vw, 5rem);
+	padding-block: 0.75rem clamp(2.5rem, 6vw, 5rem);
 }
 
 .hks-tour-facts {
@@ -2256,7 +2269,7 @@ body.home .hks-site-header.is-scrolled .hks-primary-header {
 .hks-catalogue-body,
 .hks-destination-results,
 .hks-taxonomy-results {
-	padding-block: clamp(2.5rem, 6vw, 5rem);
+	padding-block: 0.75rem clamp(2.5rem, 6vw, 5rem);
 }
 
 .hks-title-band .hks-taxonomy-intro__label {
@@ -2264,7 +2277,7 @@ body.home .hks-site-header.is-scrolled .hks-primary-header {
 	font-size: 0.75rem;
 	font-weight: 800;
 	letter-spacing: 0.09em;
-	margin: 0 0 0.55rem;
+	margin: 0 0 0.25rem;
 	text-transform: uppercase;
 }
 
@@ -2335,7 +2348,7 @@ body.home .hks-site-header.is-scrolled .hks-primary-header {
 	display: grid;
 	gap: 2.5rem;
 	grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.8fr);
-	padding-block: 2rem;
+	padding-block: 0.75rem 2rem;
 }
 
 .hks-destination-intro__body figure {
@@ -2521,10 +2534,6 @@ body.home .hks-site-header.is-scrolled .hks-primary-header {
 		display: none;
 	}
 
-	.hks-title-band {
-		padding-block: 1.75rem;
-	}
-
 	.hks-home-hero {
 		padding-block: 2.75rem;
 	}
@@ -2672,7 +2681,7 @@ body.home .hks-site-header.is-scrolled .hks-primary-header {
 
 .hks-group-travel-lead {
 	background: var(--wp--preset--color--white);
-	padding-block: clamp(3.5rem, 8vw, 7rem);
+	padding-block: 0.75rem clamp(3.5rem, 8vw, 7rem);
 }
 
 .hks-group-travel-lead__inner {
@@ -2880,7 +2889,7 @@ body.home .hks-site-header.is-scrolled .hks-primary-header {
 }
 
 .hks-editorial-page {
-	padding-block: clamp(3rem, 7vw, 6rem);
+	padding-block: 0.75rem clamp(3rem, 7vw, 6rem);
 }
 
 .hks-editorial-page > .wp-block-post-content {
