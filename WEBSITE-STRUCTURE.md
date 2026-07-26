@@ -83,10 +83,10 @@ Default order:
 
 Hero rules:
 
-- Query up to five published Tours explicitly marked Featured and require a valid featured image with useful alt text.
+- Query up to five published Tours explicitly marked Featured and require a featured image at least 1200 × 675 pixels. Hero eligibility does not depend on native alt text; its repeated images are decorative because the adjacent text and controls provide equivalent context.
 - Use the active Tour's destination or scope, literal title, full-bleed image, and `Click here to book tour` canonical link.
-- Use portrait preview cards with a 2.5-second cycle, minimal previous/next controls, card selection, swipe or drag, keyboard commands, and a compact pause/resume control.
-- Pause while hidden, outside the viewport, or under direct interaction. Reduced motion disables autoplay and shared-element travel.
+- Use portrait preview cards with a five-second cycle, synchronized slim Saffron progress line, minimal previous/next controls, card selection, swipe or drag, keyboard commands, and a compact pause/resume control.
+- Open the selected card into the stage through a clipped-image reveal, retaining the previous scene and title until the content swap near the end. Pause while hidden, outside the viewport, or under direct interaction. Reduced motion hides progress and disables autoplay and card-to-stage travel.
 - One eligible Tour renders as a static hero; zero eligible Tours render a generic catalogue fallback.
 - Keep Browse by destination visually discoverable after the hero.
 

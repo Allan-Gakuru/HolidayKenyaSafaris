@@ -122,11 +122,11 @@ Default sequence:
 
 Hero rules:
 
-- Use up to five published Tours explicitly marked Featured and carrying valid featured images with useful alt text.
+- Use up to five published Tours explicitly marked Featured and carrying featured images at least 1200 × 675 pixels. Do not use native alt text as an eligibility gate; the repeated hero and preview images are decorative beside equivalent textual labels and controls.
 - The active Tour supplies the full-bleed image, destination or scope label, single H1, and `Click here to book tour` link to its canonical Tour.
-- Use portrait queue cards and one shared-element expansion as the homepage's signature motion.
-- Cycle every 2.5 seconds on all normal viewports. Provide minimal previous/next controls, direct card selection, touch drag or swipe, keyboard commands, and an accessible pause/resume control.
-- Pause while the hero is outside the viewport, the document is hidden, or the visitor is interacting. Disable autoplay and large movement under reduced motion.
+- Use portrait queue cards and a clipped card-to-stage image reveal as the homepage's signature motion. Keep the previous scene and title visible during the opening phase, then swap the active content near the end without stretching the image.
+- Cycle every five seconds on all normal viewports and show a synchronized slim Saffron progress line. Provide minimal previous/next controls, direct card selection, touch drag or swipe, keyboard commands, and an accessible pause/resume control.
+- Pause while the hero is outside the viewport, the document is hidden, or the visitor is interacting. Hide progress and disable autoplay and large movement under reduced motion.
 - One eligible Tour renders statically without controls. No eligible Tours render a compact catalogue fallback.
 - The next Browse by destination section should remain discoverable on common desktop and mobile viewports.
 

@@ -546,13 +546,17 @@ final class TourBlocks {
 		$types          = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_tour_type', 8 ) : array();
 		$occasions      = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_occasion', 8 ) : array();
 		$hero_tours     = self::home_featured_tours( 5 );
+		$active_tour    = $hero_tours[0] ?? null;
+		$active_title_length = $active_tour
+			? ( function_exists( 'mb_strlen' ) ? mb_strlen( $active_tour['title'] ) : strlen( $active_tour['title'] ) )
+			: 0;
 
 		ob_start();
 		?>
 		<div class="hks-home">
-			<?php if ( $hero_tours ) : $active_tour = $hero_tours[0]; ?>
+			<?php if ( $active_tour ) : ?>
 				<section class="hks-home-hero hks-home-hero--featured" aria-labelledby="hks-home-title">
-					<div class="hks-home-gallery<?php echo count( $hero_tours ) < 2 ? ' is-static' : ''; ?>" data-hks-home-gallery data-hks-gallery-interval="2500" role="region" aria-roledescription="carousel" aria-labelledby="hks-home-title" aria-describedby="hks-home-gallery-instructions">
+					<div class="hks-home-gallery<?php echo count( $hero_tours ) < 2 ? ' is-static' : ''; ?>" data-hks-home-gallery data-hks-gallery-interval="5000" role="region" aria-roledescription="carousel" aria-labelledby="hks-home-title" aria-describedby="hks-home-gallery-instructions">
 						<p class="hks-sr-only" id="hks-home-gallery-instructions"><?php esc_html_e( 'Featured tours. Select a preview, swipe or drag the card queue, use the previous and next buttons, or use the left and right arrow keys while the gallery is focused.', 'hks-wayfinder' ); ?></p>
 						<figure class="hks-home-gallery__stage" data-hks-home-gallery-stage>
 							<?php
@@ -567,6 +571,7 @@ final class TourBlocks {
 										'decoding'      => 'async',
 										'sizes'         => '100vw',
 										'draggable'     => 'false',
+										'alt'           => '',
 										'data-hks-home-gallery-active-image' => '',
 									)
 								)
@@ -574,15 +579,16 @@ final class TourBlocks {
 							?>
 						</figure>
 						<div class="hks-home-gallery__wash" aria-hidden="true"></div>
+						<span class="hks-home-gallery__progress" data-hks-home-gallery-progress aria-hidden="true"></span>
 						<div class="hks-shell hks-home-gallery__inner">
-							<div class="hks-home-gallery__copy" data-hks-home-gallery-copy>
+							<div class="hks-home-gallery__copy<?php echo $active_title_length > 28 ? ' has-long-title' : ''; ?>" data-hks-home-gallery-copy>
 								<p class="hks-home-gallery__eyebrow" data-hks-home-gallery-eyebrow><?php echo esc_html( $active_tour['eyebrow'] ); ?></p>
 								<h1 id="hks-home-title" data-hks-home-gallery-title><?php echo esc_html( $active_tour['title'] ); ?></h1>
 								<a class="hks-home-gallery__cta" href="<?php echo esc_url( $active_tour['url'] ); ?>" data-hks-home-gallery-link><?php esc_html_e( 'Click here to book tour', 'hks-wayfinder' ); ?></a>
 							</div>
 
 							<div class="hks-home-gallery__queue" aria-label="<?php esc_attr_e( 'Choose a featured tour', 'hks-wayfinder' ); ?>">
-								<button class="hks-home-gallery__arrow hks-home-gallery__arrow--previous" type="button" data-hks-home-gallery-prev aria-controls="hks-home-gallery-track" aria-label="<?php esc_attr_e( 'Show previous featured tour', 'hks-wayfinder' ); ?>"><span aria-hidden="true">&larr;</span></button>
+								<button class="hks-home-gallery__arrow hks-home-gallery__arrow--previous" type="button" data-hks-home-gallery-prev aria-controls="hks-home-gallery-track" aria-label="<?php esc_attr_e( 'Show previous featured tour', 'hks-wayfinder' ); ?>"><span aria-hidden="true">&#8249;</span></button>
 								<div class="hks-home-gallery__viewport" data-hks-home-gallery-track tabindex="0" id="hks-home-gallery-track">
 									<?php foreach ( $hero_tours as $index => $hero_tour ) : ?>
 										<button
@@ -592,6 +598,7 @@ final class TourBlocks {
 											data-hks-tour-title="<?php echo esc_attr( $hero_tour['title'] ); ?>"
 											data-hks-tour-eyebrow="<?php echo esc_attr( $hero_tour['eyebrow'] ); ?>"
 											data-hks-tour-url="<?php echo esc_url( $hero_tour['url'] ); ?>"
+											data-hks-tour-long-title="<?php echo esc_attr( $hero_tour['long_title'] ); ?>"
 											aria-label="<?php echo esc_attr( sprintf( __( 'Show %s', 'hks-wayfinder' ), $hero_tour['title'] ) ); ?>"
 										>
 											<span class="hks-home-gallery__media">
@@ -606,19 +613,20 @@ final class TourBlocks {
 															'decoding'  => 'async',
 															'sizes'     => '(min-width: 1280px) 11rem, (min-width: 768px) 10rem, 52vw',
 															'draggable' => 'false',
+															'alt'       => '',
 														)
 													)
 												);
 												?>
 											</span>
-											<span class="hks-home-gallery__caption"><?php echo esc_html( $hero_tour['title'] ); ?></span>
+											<span class="hks-home-gallery__caption"><?php echo esc_html( $hero_tour['caption'] ); ?></span>
 										</button>
 									<?php endforeach; ?>
 								</div>
-								<button class="hks-home-gallery__arrow hks-home-gallery__arrow--next" type="button" data-hks-home-gallery-next aria-controls="hks-home-gallery-track" aria-label="<?php esc_attr_e( 'Show next featured tour', 'hks-wayfinder' ); ?>"><span aria-hidden="true">&rarr;</span></button>
+								<button class="hks-home-gallery__arrow hks-home-gallery__arrow--next" type="button" data-hks-home-gallery-next aria-controls="hks-home-gallery-track" aria-label="<?php esc_attr_e( 'Show next featured tour', 'hks-wayfinder' ); ?>"><span aria-hidden="true">&#8250;</span></button>
 								<div class="hks-home-gallery__controls">
 									<span class="hks-home-gallery__status" data-hks-home-gallery-status></span>
-									<button class="hks-home-gallery__pause" type="button" data-hks-home-gallery-pause aria-label="<?php esc_attr_e( 'Pause featured tour rotation', 'hks-wayfinder' ); ?>"><span data-hks-home-gallery-pause-icon aria-hidden="true">&#8545;</span></button>
+									<button class="hks-home-gallery__pause" type="button" data-hks-home-gallery-pause aria-label="<?php esc_attr_e( 'Pause featured tour rotation', 'hks-wayfinder' ); ?>"><span data-hks-home-gallery-pause-icon aria-hidden="true">&#x23F8;</span></button>
 									<span class="hks-sr-only" aria-live="polite" aria-atomic="true" data-hks-home-gallery-announcer></span>
 								</div>
 							</div>
@@ -898,7 +906,7 @@ final class TourBlocks {
 			array(
 				'post_type'      => 'hks_tour',
 				'post_status'    => 'publish',
-				'posts_per_page' => 50,
+				'posts_per_page' => -1,
 				'orderby'        => array(
 					'menu_order' => 'ASC',
 					'date'       => 'DESC',
@@ -919,22 +927,30 @@ final class TourBlocks {
 			$url      = get_permalink( $tour );
 			$image_id = absint( get_post_thumbnail_id( $tour ) );
 
-			if ( '' === $title || ! is_string( $url ) || '' === $url || ! self::media_allowed( $image_id ) ) {
+			if ( '' === $title || ! is_string( $url ) || '' === $url || ! self::hero_media_allowed( $image_id ) ) {
 				continue;
 			}
 
-			$eyebrow = implode( ', ', self::term_names( $tour->ID, 'hks_destination' ) );
+			$destination_names = self::term_names( $tour->ID, 'hks_destination' );
+			$eyebrow           = implode( ', ', $destination_names );
 
 			if ( '' === $eyebrow ) {
 				$eyebrow = implode( ', ', self::term_names( $tour->ID, 'hks_tour_scope' ) );
 			}
 
+			$duration      = self::public_text( self::field( 'hks_duration_label', $tour->ID ) );
+			$caption_parts = array_filter( array( $destination_names[0] ?? '', $duration ) );
+			$caption       = $caption_parts ? implode( ' · ', $caption_parts ) : $title;
+			$title_length  = function_exists( 'mb_strlen' ) ? mb_strlen( $title ) : strlen( $title );
+
 			$tours[] = array(
-				'id'       => $tour->ID,
-				'title'    => $title,
-				'url'      => $url,
-				'image_id' => $image_id,
-				'eyebrow'  => $eyebrow ?: __( 'Featured tour', 'hks-wayfinder' ),
+				'id'         => $tour->ID,
+				'title'      => $title,
+				'url'        => $url,
+				'image_id'   => $image_id,
+				'eyebrow'    => $eyebrow ?: __( 'Featured tour', 'hks-wayfinder' ),
+				'caption'    => $caption,
+				'long_title' => $title_length > 28 ? 'true' : 'false',
 			);
 
 			if ( count( $tours ) >= $limit ) {
@@ -943,6 +959,26 @@ final class TourBlocks {
 		}
 
 		return $tours;
+	}
+
+	/**
+	 * Check that a Featured Tour image is large enough for the full-bleed hero.
+	 *
+	 * Hero images are decorative because the Tour title and labeled controls
+	 * provide the equivalent context, so native alt text is not an eligibility
+	 * requirement here.
+	 *
+	 * @param int $attachment_id Attachment ID.
+	 * @return bool
+	 */
+	private static function hero_media_allowed( int $attachment_id ): bool {
+		if ( ! $attachment_id || 'attachment' !== get_post_type( $attachment_id ) ) {
+			return false;
+		}
+
+		$image = wp_get_attachment_image_src( $attachment_id, 'full' );
+
+		return is_array( $image ) && isset( $image[1], $image[2] ) && 1200 <= (int) $image[1] && 675 <= (int) $image[2];
 	}
 
 	/**

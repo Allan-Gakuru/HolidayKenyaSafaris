@@ -14,13 +14,16 @@
 		const next = gallery.querySelector('[data-hks-home-gallery-next]');
 		const pauseButton = gallery.querySelector('[data-hks-home-gallery-pause]');
 		const pauseIcon = gallery.querySelector('[data-hks-home-gallery-pause-icon]');
+		const progress = gallery.querySelector('[data-hks-home-gallery-progress]');
 		const status = gallery.querySelector('[data-hks-home-gallery-status]');
 		const announcer = gallery.querySelector('[data-hks-home-gallery-announcer]');
 		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-		const interval = Math.max(2500, Number(gallery.dataset.hksGalleryInterval) || 2500);
+		const interval = Math.max(5000, Number(gallery.dataset.hksGalleryInterval) || 5000);
 		const pauseReasons = new Set();
 		let activeIndex = 0;
+		let pendingIndex = null;
 		let autoTimer = 0;
+		let progressAnimation = null;
 		let isInView = true;
 		let userPaused = false;
 		let drag = null;
@@ -28,6 +31,7 @@
 		let isAnimating = false;
 		let activeAnimation = null;
 		let activeClone = null;
+		let transitionSwapTimer = 0;
 		let transitionToken = 0;
 
 		if (!track || !stage || !stageImage || !copy || !title || !link || !slides.length) return;
@@ -37,15 +41,21 @@
 		}
 
 		function visibleSlots() {
-			if (window.matchMedia('(min-width: 80rem)').matches) return 4;
 			if (window.matchMedia('(min-width: 64rem)').matches) return 4;
 			if (window.matchMedia('(min-width: 48rem)').matches) return 3;
 			return 2;
 		}
 
+		function clearProgress() {
+			progressAnimation?.cancel();
+			progressAnimation = null;
+			if (progress) progress.style.transform = 'scaleX(0)';
+		}
+
 		function clearAuto() {
 			window.clearTimeout(autoTimer);
 			autoTimer = 0;
+			clearProgress();
 		}
 
 		function canAutoAdvance() {
@@ -57,10 +67,24 @@
 				&& slides.length > 1;
 		}
 
+		function startProgress() {
+			if (!progress || typeof progress.animate !== 'function') return;
+
+			progressAnimation = progress.animate(
+				[
+					{ transform: 'scaleX(0)' },
+					{ transform: 'scaleX(1)' },
+				],
+				{ duration: interval, easing: 'linear', fill: 'forwards' }
+			);
+			progressAnimation.finished.catch(() => {});
+		}
+
 		function scheduleAuto() {
 			clearAuto();
 			if (!canAutoAdvance()) return;
 
+			startProgress();
 			autoTimer = window.setTimeout(() => {
 				goTo(activeIndex + 1, false);
 			}, interval);
@@ -77,11 +101,12 @@
 		}
 
 		function copyImageAttributes(source, destination) {
-			['src', 'srcset', 'alt', 'width', 'height'].forEach((attribute) => {
+			['src', 'srcset', 'width', 'height'].forEach((attribute) => {
 				const value = source.getAttribute(attribute);
 				if (value) destination.setAttribute(attribute, value);
 				else destination.removeAttribute(attribute);
 			});
+			destination.setAttribute('alt', '');
 			destination.setAttribute('sizes', '100vw');
 			destination.setAttribute('loading', 'eager');
 			destination.setAttribute('decoding', 'async');
@@ -131,16 +156,14 @@
 		}
 
 		function cleanupTransition() {
-			if (!isAnimating && !activeAnimation && !activeClone) {
-				gallery.classList.remove('is-changing');
-				return;
-			}
-
 			transitionToken += 1;
+			window.clearTimeout(transitionSwapTimer);
+			transitionSwapTimer = 0;
 			activeAnimation?.cancel();
 			activeAnimation = null;
 			activeClone?.remove();
 			activeClone = null;
+			pendingIndex = null;
 			isAnimating = false;
 			gallery.classList.remove('is-changing');
 		}
@@ -151,57 +174,87 @@
 			if (eyebrow) eyebrow.textContent = selected.dataset.hksTourEyebrow || 'Featured tour';
 			title.textContent = selected.dataset.hksTourTitle || '';
 			link.href = selected.dataset.hksTourUrl || '#';
+			copy.classList.toggle('has-long-title', 'true' === selected.dataset.hksTourLongTitle);
 		}
 
-		function animateSelection(selected) {
+		function commitSelection(selected, nextIndex, announce) {
+			updateActiveContent(selected);
+			activeIndex = nextIndex;
+			pendingIndex = null;
+			render(announce);
+		}
+
+		function clipPathForSource(sourceRect, targetRect) {
+			const top = Math.max(0, sourceRect.top - targetRect.top);
+			const right = Math.max(0, targetRect.right - sourceRect.right);
+			const bottom = Math.max(0, targetRect.bottom - sourceRect.bottom);
+			const left = Math.max(0, sourceRect.left - targetRect.left);
+
+			return `inset(${top}px ${right}px ${bottom}px ${left}px round 12px)`;
+		}
+
+		function animateSelection(selected, nextIndex, announce) {
 			const selectedImage = selected.querySelector('img');
 			if (reducedMotion.matches || !selectedImage || typeof selectedImage.animate !== 'function') {
-				updateActiveContent(selected);
+				cleanupTransition();
+				commitSelection(selected, nextIndex, announce);
 				return;
 			}
 
 			cleanupTransition();
-			const token = transitionToken;
+			const token = ++transitionToken;
 			const sourceRect = selected.getBoundingClientRect();
 			const targetRect = stage.getBoundingClientRect();
 
 			if (!sourceRect.width || !sourceRect.height || !targetRect.width || !targetRect.height) {
-				updateActiveContent(selected);
+				commitSelection(selected, nextIndex, announce);
 				return;
 			}
 
-			const clone = selectedImage.cloneNode(true);
+			const clone = document.createElement('div');
+			const cloneImage = selectedImage.cloneNode(true);
 			clone.className = 'hks-home-gallery__transition-image';
-			clone.removeAttribute('loading');
 			clone.setAttribute('aria-hidden', 'true');
-			clone.style.left = `${sourceRect.left}px`;
-			clone.style.top = `${sourceRect.top}px`;
-			clone.style.width = `${sourceRect.width}px`;
-			clone.style.height = `${sourceRect.height}px`;
+			clone.style.left = `${targetRect.left}px`;
+			clone.style.top = `${targetRect.top}px`;
+			clone.style.width = `${targetRect.width}px`;
+			clone.style.height = `${targetRect.height}px`;
+			cloneImage.removeAttribute('loading');
+			cloneImage.setAttribute('alt', '');
+			clone.appendChild(cloneImage);
 			document.body.appendChild(clone);
+
 			activeClone = clone;
+			pendingIndex = nextIndex;
 			isAnimating = true;
 			gallery.classList.add('is-changing');
-			updateActiveContent(selected);
 
-			const deltaX = targetRect.left - sourceRect.left;
-			const deltaY = targetRect.top - sourceRect.top;
-			const scaleX = targetRect.width / sourceRect.width;
-			const scaleY = targetRect.height / sourceRect.height;
-
+			const initialClip = clipPathForSource(sourceRect, targetRect);
 			activeAnimation = clone.animate(
 				[
-					{ borderRadius: '12px', opacity: 1, transform: 'translate3d(0, 0, 0) scale(1, 1)' },
-					{ borderRadius: '0', opacity: 0.96, offset: 0.78, transform: `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${scaleX}, ${scaleY})` },
-					{ borderRadius: '0', opacity: 0, transform: `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${scaleX}, ${scaleY})` },
+					{ clipPath: initialClip, opacity: 0.15 },
+					{ clipPath: initialClip, opacity: 1, offset: 0.08 },
+					{ clipPath: 'inset(0px 0px 0px 0px round 0px)', opacity: 1, offset: 0.82 },
+					{ clipPath: 'inset(0px 0px 0px 0px round 0px)', opacity: 0 },
 				],
-				{ duration: 600, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'forwards' }
+				{ duration: 650, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'forwards' }
 			);
 
+			let committed = false;
+			const commit = () => {
+				if (committed || token !== transitionToken) return;
+				committed = true;
+				commitSelection(selected, nextIndex, announce);
+			};
+
+			transitionSwapTimer = window.setTimeout(commit, 455);
 			activeAnimation.finished
 				.catch(() => {})
 				.finally(() => {
 					if (token !== transitionToken) return;
+					commit();
+					window.clearTimeout(transitionSwapTimer);
+					transitionSwapTimer = 0;
 					activeAnimation = null;
 					activeClone?.remove();
 					activeClone = null;
@@ -212,24 +265,24 @@
 
 		function goTo(index, announce = false) {
 			const nextIndex = (index + slides.length) % slides.length;
-			if (nextIndex === activeIndex && !announce) {
+			if (nextIndex === activeIndex && !isAnimating) {
+				if (announce) updateStatus(true);
 				scheduleAuto();
 				return;
 			}
 
-			const selected = slides[nextIndex];
-			animateSelection(selected);
-			activeIndex = nextIndex;
-			render(announce);
+			animateSelection(slides[nextIndex], nextIndex, announce);
 			scheduleAuto();
 		}
 
 		function showPrevious() {
-			goTo(activeIndex - 1, true);
+			const baseIndex = null === pendingIndex ? activeIndex : pendingIndex;
+			goTo(baseIndex - 1, true);
 		}
 
 		function showNext() {
-			goTo(activeIndex + 1, true);
+			const baseIndex = null === pendingIndex ? activeIndex : pendingIndex;
+			goTo(baseIndex + 1, true);
 		}
 
 		function updatePauseControl() {
@@ -237,7 +290,7 @@
 			pauseButton.hidden = reducedMotion.matches || slides.length < 2;
 			pauseButton.setAttribute('aria-pressed', userPaused ? 'true' : 'false');
 			pauseButton.setAttribute('aria-label', userPaused ? 'Resume featured tour rotation' : 'Pause featured tour rotation');
-			if (pauseIcon) pauseIcon.textContent = userPaused ? '\u25B6' : '\u2161';
+			if (pauseIcon) pauseIcon.textContent = userPaused ? '\u25B6' : '\u23F8';
 		}
 
 		previous?.addEventListener('click', showPrevious);

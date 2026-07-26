@@ -96,7 +96,7 @@ Keep paragraph measure near 65 characters. Use sentence case. Avoid all-caps par
 
 Destination photography must show the actual place, route, accommodation, vehicle, or experience being described. Media uploaded or assigned by an authorized editor and used on published content is treated as client-approved for the website. Generated Mara and Mercy images in this repository are internal presentation references and must never be published.
 
-Avoid generic orange sunsets, wildlife collages, fake luxury staging, aggressive colour grading, and images an authorized editor has not deliberately selected for the public site. Every public image needs useful native WordPress alt text; add a public credit only when one must be displayed.
+Avoid generic orange sunsets, wildlife collages, fake luxury staging, aggressive colour grading, and images an authorized editor has not deliberately selected for the public site. Meaningful public images need useful native WordPress alt text; add a public credit only when one must be displayed. Repeated hero and preview imagery may be deliberately decorative when adjacent text and labeled controls provide the same context.
 
 ## Components
 
@@ -112,7 +112,7 @@ The header must not resemble a software toolbar. Search is optional and should a
 
 ### Homepage and catalogue
 
-The homepage hero uses up to five published Tours explicitly marked Featured and carrying a valid featured image with useful alt text. The active Tour supplies the only H1, a destination or Tour-scope label, the full-bleed image, and a `Click here to book tour` link to the canonical Tour page. Portrait preview cards form the queue. Use a 2.5-second cycle on every viewport, minimal previous/next controls, direct card selection, touch drag or swipe, keyboard commands, and a compact pause/resume control. Pause when the hero is not viewable or the visitor is interacting with it; disable autoplay under reduced motion.
+The homepage hero uses up to five published Tours explicitly marked Featured and carrying a featured image at least 1200 × 675 pixels. Hero eligibility does not depend on native alt text; render the repeated stage and preview images with empty alt text because the adjacent Tour title, destination, and labeled controls provide equivalent context. The active Tour supplies the only H1, a destination or Tour-scope label, the full-bleed image, and a `Click here to book tour` link to the canonical Tour page. Portrait preview cards form the queue. Use a five-second cycle and synchronized slim Saffron progress line on every viewport, minimal previous/next controls, direct card selection, touch drag or swipe, keyboard commands, and a compact pause/resume control. Open a selected card into the full stage with a clipped-image reveal, retain the old scene and copy during the opening phase, and swap the image and copy near the end. Pause when the hero is not viewable or the visitor is interacting with it; hide progress and disable autoplay under reduced motion.
 
 If only one eligible Featured Tour exists, render a static hero without controls. If none exists, render a compact generic fallback and catalogue action. Place Browse by destination immediately after the hero, followed by the existing Featured Tours grid. Tour grids use stable image ratios, consistent title space, and practical metadata rather than image-and-title-only cards.
 

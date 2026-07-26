@@ -139,7 +139,7 @@ Acceptance:
 
 ## Phase 6: Templates and Pages
 
-Implementation status (2026-07-26): the global, Tour, Campaign, catalogue, all four Tour taxonomy archive families, Destination, homepage, and standard Page templates are implemented. The homepage uses a Featured Tour hero with a homepage-only translucent logo-and-menu header, one changing Tour-title H1, up to five portrait queue cards, an accessible 2.5-second cycle, and Browse by destination before the Featured Tours grid. Group Travel has a dedicated catalogue-driven planner on its published Page and reuses the shared inquiry recovery and WhatsApp flow. The global floating Chat on WhatsApp contact uses a fixed general message and remains separate from the saved-inquiry quote flow. Internal pages retain the complete utility bar and white primary header. The desktop header and mobile drawer share the production `holiday-kenya-safaris-logo.svg` lockup. About is available; Contact and four legal routes remain protected drafts until their missing project-level information is supplied.
+Implementation status (2026-07-26): the global, Tour, Campaign, catalogue, all four Tour taxonomy archive families, Destination, homepage, and standard Page templates are implemented. The homepage uses a Featured Tour hero with a homepage-only translucent logo-and-menu header, one changing Tour-title H1, up to five portrait queue cards backed by featured images at least 1200 × 675 pixels, an accessible five-second cycle with a synchronized progress line, and Browse by destination before the Featured Tours grid. Hero eligibility does not depend on alt text; its repeated stage and preview images are decorative. Group Travel has a dedicated catalogue-driven planner on its published Page and reuses the shared inquiry recovery and WhatsApp flow. The global floating Chat on WhatsApp contact uses a fixed general message and remains separate from the saved-inquiry quote flow. Internal pages retain the complete utility bar and white primary header. The desktop header and mobile drawer share the production `holiday-kenya-safaris-logo.svg` lockup. About is available; Contact and four legal routes remain protected drafts until their missing project-level information is supplied.
 
 Build in this order:
 
@@ -227,7 +227,7 @@ Test:
 - Publish-as-approval behavior for Tours, Destinations, FAQs, public package notes, and assigned media.
 - Tour price rendering: positive Tour amounts display consistently across cards, archives, details, related Tours, and quote panels; blank amounts disappear cleanly; Campaign overrides and inheritance behave correctly.
 - Core Web Vitals and layout shift.
-- Featured Tour hero selection, 2.5-second autoplay, pause/resume, pointer drag, keyboard commands, reduced-motion behavior, and homepage-header contrast at 360, 390, 768, 1024, 1280, and 1440px.
+- Featured Tour hero image eligibility, five-second autoplay and progress synchronization, clipped card-to-stage reveal, pause/resume, pointer drag, keyboard commands, reduced-motion behavior, and homepage-header contrast at 360, 390, 768, 1024, 1280, and 1440px.
 - Analytics debug modes.
 
 Capture desktop and mobile screenshots for the core templates before acceptance.

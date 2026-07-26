@@ -88,8 +88,8 @@ def main() -> int:
             errors.append(f"missing {path.relative_to(ROOT)}: {error}")
             sources[label] = ""
 
-    require(errors, "theme metadata", sources["style"], ["Version: 0.6.0", ".hks-site-header--home-overlay", ".hks-home-hero--featured", ".hks-home-gallery__viewport", "--hks-card-width", ".hks-home-gallery__transition-image", "aspect-ratio: 3 / 4", ".hks-tour-workspace", ".hks-tour-gallery", ".hks-mobile-menu", ".hks-editorial-page", ".hks-group-travel-planner", ".hks-group-travel-visuals", ":focus-visible", "prefers-reduced-motion", "prefers-reduced-transparency"])
-    forbid(errors, "theme stylesheet", sources["style"], ["linear-gradient(", "radial-gradient("])
+    require(errors, "theme metadata", sources["style"], ["Version: 0.6.0", "body.home .hks-site-header", ".hks-home-hero--featured", ".hks-home-gallery__viewport", ".hks-home-gallery__progress", "--hks-card-width", ".hks-home-gallery__transition-image", "clip-path", "aspect-ratio: 3 / 4", ".hks-tour-workspace", ".hks-tour-gallery", ".hks-mobile-menu", ".hks-editorial-page", ".hks-group-travel-planner", ".hks-group-travel-visuals", ":focus-visible", "prefers-reduced-motion", "prefers-reduced-transparency"])
+    forbid(errors, "theme stylesheet", sources["style"], ["linear-gradient(", "radial-gradient(", ".hks-site-header--home-overlay"])
 
     require(
         errors,
@@ -118,8 +118,7 @@ def main() -> int:
         sources["header"],
         [
             "hks-utility",
-            "hks-site-header--home-overlay",
-            "is_front_page()",
+            "hks-site-header",
             "hks-primary-nav",
             "data-hks-nav-menu",
             "data-hks-mobile-menu",
@@ -136,6 +135,7 @@ def main() -> int:
             "hks-mobile-menu__social",
         ],
     )
+    forbid(errors, "header", sources["header"], ["is_front_page()", "hks-site-header--home-overlay"])
     header_actions = re.search(r'<div class="hks-header-actions">(.*?)</div>', sources["header"], re.DOTALL)
     if not header_actions or "hks-button--quote" in header_actions.group(1):
         errors.append("desktop primary header must not contain the large quote button")
@@ -206,7 +206,7 @@ def main() -> int:
             "Holiday Kenya Safaris is operated by Ashford Tours & Travel.",
             "data-hks-primary-quote",
             "data-hks-home-gallery",
-            "data-hks-gallery-interval=\"2500\"",
+            "data-hks-gallery-interval=\"5000\"",
             "data-hks-home-gallery-slide",
             "home_featured_tours",
             "hks_featured",
@@ -215,6 +215,11 @@ def main() -> int:
             "data-hks-home-gallery-eyebrow",
             "data-hks-home-gallery-link",
             "data-hks-home-gallery-pause",
+            "data-hks-home-gallery-progress",
+            "data-hks-tour-long-title",
+            "hero_media_allowed",
+            "1200 <= (int) $image[1]",
+            "675 <= (int) $image[2]",
             "data-hks-tour-title",
             "data-hks-tour-eyebrow",
             "data-hks-tour-url",
@@ -280,7 +285,8 @@ def main() -> int:
 
     require(errors, "navigation script", sources["navigation"], ["showModal", "aria-expanded", "Escape", "data-hks-quote-proxy", "data-hks-inquiry-open"])
     require(errors, "utility contact strip", sources["header"], ["info@holidaykenyasafaris.ke", "instagram.com/holidaykenyasafaris", "facebook.com/people/Holiday-Kenya-Safaris/61591508593846", "hks-utility__social", "hks-utility__whatsapp"])
-    require(errors, "homepage gallery script", sources["home_gallery"], ["2500", "prefers-reduced-motion", "IntersectionObserver", "pointermove", "ArrowLeft", "ArrowRight", "dataset.hksPosition", "aria-hidden", "is-dragging", "drag.captured", "track.setPointerCapture", "data-hks-home-gallery-pause", "activeIndex", "userPaused", "activeAnimation", "clone.animate", "preload.decode", "visibilitychange"])
+    require(errors, "homepage gallery script", sources["home_gallery"], ["5000", "prefers-reduced-motion", "IntersectionObserver", "pointermove", "ArrowLeft", "ArrowRight", "dataset.hksPosition", "aria-hidden", "is-dragging", "drag.captured", "track.setPointerCapture", "data-hks-home-gallery-pause", "data-hks-home-gallery-progress", "activeIndex", "userPaused", "activeAnimation", "transitionSwapTimer", "clipPath", "clone.animate", "preload.decode", "visibilitychange"])
+    forbid(errors, "homepage gallery timing", sources["home_gallery"], ["2500", "3000"])
     pointer_capture = sources["home_gallery"].find("track.setPointerCapture")
     drag_threshold = sources["home_gallery"].find("drag.moved = true")
     if pointer_capture < drag_threshold:
