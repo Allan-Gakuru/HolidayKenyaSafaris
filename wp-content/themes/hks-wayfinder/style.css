@@ -3025,6 +3025,23 @@ body.home .hks-site-header .hks-utility {
 	transition: background-color 180ms ease-out, border-color 180ms ease-out, color 180ms ease-out, transform 120ms ease-out;
 }
 
+.hks-home-gallery__actions {
+	align-items: center;
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 0.5rem;
+	margin-top: 0.8rem;
+}
+
+.hks-home-gallery__actions .hks-home-gallery__cta {
+	margin-top: 0;
+}
+
+.hks-home-gallery__cta--destinations {
+	background: rgb(225 166 43 / 50%);
+	color: var(--wp--preset--color--white);
+}
+
 .hks-home-gallery__cta::before {
 	content: "";
 	inset: -8px;
@@ -3048,6 +3065,15 @@ body.home .hks-site-header .hks-utility {
 
 .hks-home-gallery__cta:hover::after {
 	transform: translateX(0.2rem);
+}
+
+.hks-home-gallery__cta--destinations::after {
+	color: var(--wp--preset--color--white);
+}
+
+.hks-home-gallery__cta--destinations:hover {
+	background: rgb(225 166 43 / 78%);
+	border-color: var(--wp--preset--color--white);
 }
 
 .hks-home-gallery__cta:active {
