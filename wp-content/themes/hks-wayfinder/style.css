@@ -707,6 +707,18 @@ body:not(.home) .wp-site-blocks > main {
 	max-width: 56rem;
 }
 
+.hks-catalogue-page .hks-title-band h1,
+.hks-destination-page .hks-title-band h1,
+.hks-taxonomy-page .hks-title-band h1 {
+	font-size: clamp(1.125rem, 2.5vw, 1.75rem);
+}
+
+.hks-catalogue-page .hks-title-band p,
+.hks-destination-page .hks-title-band p,
+.hks-taxonomy-page .hks-title-band p {
+	font-size: clamp(0.5625rem, calc(0.5rem + 0.2vw), 0.65625rem);
+}
+
 .hks-breadcrumbs {
 	font-size: 0.8rem;
 	margin-bottom: 0.3rem;
