@@ -2865,8 +2865,10 @@ body.home .hks-site-header .hks-utility {
 .hks-home-hero--featured {
 	background: var(--wp--preset--color--midnight-navy);
 	color: var(--wp--preset--color--white);
-	min-height: max(44rem, 100svh);
+	height: max(50rem, 100svh);
+	min-height: 0;
 	overflow: hidden;
+	overflow-anchor: none;
 	padding: 0;
 }
 
@@ -2884,9 +2886,10 @@ body.home .hks-site-header .hks-utility {
 }
 
 .hks-home-hero--featured .hks-home-gallery {
+	height: 100%;
 	isolation: isolate;
 	margin: 0;
-	min-height: inherit;
+	min-height: 0;
 	position: relative;
 }
 
@@ -2931,7 +2934,8 @@ body.home .hks-site-header .hks-utility {
 	align-content: end;
 	display: grid;
 	gap: clamp(2rem, 6vw, 4.5rem);
-	min-height: max(44rem, 100svh);
+	height: 100%;
+	min-height: 0;
 	padding-block: calc(68px + clamp(2.25rem, 8vw, 4.5rem)) clamp(2rem, 7vw, 4rem);
 	position: relative;
 	z-index: 2;
@@ -3235,9 +3239,8 @@ body.home .hks-site-header .hks-utility {
 }
 
 @media (min-width: 48rem) {
-	.hks-home-hero--featured,
-	.hks-home-hero--featured .hks-home-gallery__inner {
-		min-height: max(46rem, 92svh);
+	.hks-home-hero--featured {
+		height: max(46rem, 92svh);
 	}
 
 	.hks-home-hero--featured .hks-home-gallery__inner {
@@ -3257,6 +3260,12 @@ body.home .hks-site-header .hks-utility {
 	.hks-home-hero--featured .hks-home-gallery__queue {
 		justify-self: end;
 		width: min(100%, 30rem);
+	}
+}
+
+@media (max-width: 47.99rem) {
+	.hks-home-hero--featured .hks-home-gallery__copy {
+		min-height: 18rem;
 	}
 }
 
