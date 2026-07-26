@@ -19,7 +19,6 @@
 		const pauseButton = gallery.querySelector('[data-hks-home-gallery-pause]');
 		const pauseIcon = gallery.querySelector('[data-hks-home-gallery-pause-icon]');
 		const progress = gallery.querySelector('[data-hks-home-gallery-progress]');
-		const status = gallery.querySelector('[data-hks-home-gallery-status]');
 		const announcer = gallery.querySelector('[data-hks-home-gallery-announcer]');
 		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 		const interval = Math.max(5000, Number(gallery.dataset.hksGalleryInterval) || 5000);
@@ -134,7 +133,6 @@
 			const selected = slides[activeIndex];
 			const selectedTitle = selected.dataset.hksTourLabel || selected.dataset.hksTourTitle || `Tour ${activeIndex + 1}`;
 
-			if (status) status.textContent = `${activeIndex + 1} / ${slides.length}`;
 			if (announce && announcer) {
 				announcer.textContent = `Showing ${selectedTitle}, featured tour ${activeIndex + 1} of ${slides.length}.`;
 			}

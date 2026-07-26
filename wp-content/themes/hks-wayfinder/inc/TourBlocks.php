@@ -639,7 +639,6 @@ final class TourBlocks {
 								</div>
 								<button class="hks-home-gallery__arrow hks-home-gallery__arrow--next" type="button" data-hks-home-gallery-next aria-controls="hks-home-gallery-track" aria-label="<?php esc_attr_e( 'Show next featured tour', 'hks-wayfinder' ); ?>"><span aria-hidden="true">&#8250;</span></button>
 								<div class="hks-home-gallery__controls">
-									<span class="hks-home-gallery__status" data-hks-home-gallery-status></span>
 									<button class="hks-home-gallery__pause" type="button" data-hks-home-gallery-pause aria-label="<?php esc_attr_e( 'Pause featured tour rotation', 'hks-wayfinder' ); ?>"><span data-hks-home-gallery-pause-icon aria-hidden="true">&#x23F8;</span></button>
 									<span class="hks-sr-only" aria-live="polite" aria-atomic="true" data-hks-home-gallery-announcer></span>
 								</div>
