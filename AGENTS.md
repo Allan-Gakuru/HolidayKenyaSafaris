@@ -100,7 +100,7 @@ Adapt the process to page and ad copy:
 
 - Use the Wayfinder palette, typography direction, and production logo described in `BRAND-WAYFINDER.md`.
 - Follow `DESIGN.md` and `UI-REFERENCE-CATALOGUE.md` for the global header, homepage, catalogue, canonical Tour template, responsive behavior, and the distinction between Catalogue and Campaign modes.
-- Use the approved canonical Tour information architecture: title band, three-image gallery, destination line, two-column desktop workspace, tabs, itinerary disclosures, related Tours, and persistent quote panel.
+- Use the approved canonical Tour information architecture: title band, destination line, desktop three-column composition with a thumbnail gallery rail, one active image and a persistent quote panel, followed by Tour facts, tabs, itinerary disclosures, and related Tours.
 - Replace the reference site's permanent booking form with the HKS **Request quote on WhatsApp** button and approved intake-to-WhatsApp flow.
 - Preserve the information clarity and conversion path of the existing Maasai Mara prototype for Campaign pages, not as the default canonical Tour layout.
 - Destination photography should reveal the actual place and experience.
@@ -151,7 +151,7 @@ The website is ready for launch only when:
 
 - Editors can add a Tour once and publish it across catalogue, destination, and campaign templates.
 - Campaign variants can change messaging and optionally present their own selling price without duplicating factual Tour itinerary data.
-- Canonical Tour pages use the approved gallery, two-column workspace, tabs/disclosures, related Tours, and sticky quote panel at desktop and mobile breakpoints.
+- Canonical Tour pages use the approved desktop thumbnail-rail, active-image and sticky-quote composition, with horizontal gallery previews and normal-flow content on smaller viewports, plus tabs/disclosures and related Tours.
 - No canonical Tour page contains a permanent long booking form; every quote command opens the shared HKS intake and WhatsApp handoff.
 - WhatsApp inquiries include enough context for a consultant to quote.
 - Every published price, photograph, trust claim, and policy was deliberately entered, assigned, imported under the current client authorization, or published by an authorized editor.

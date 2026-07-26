@@ -31,7 +31,7 @@ The homepage intentionally omits this strip. Its logo-and-menu header overlays t
 
 The utility bar carries a compact direct WhatsApp contact with a prefilled, page-aware reach-out message. Do not repeat it as a large button in the desktop primary header. Page-level quote actions retain the structured intake and recovery flow.
 
-The desktop header and mobile drawer use the same production `holiday-kenya-safaris-logo.svg` lockup. A separate global floating **Chat on WhatsApp** control opens the official number with one fixed general message; it does not create an inquiry record or replace the structured page-level quote actions.
+The desktop header and mobile drawer use the same production `holiday-kenya-safaris-logo.svg` lockup. A separate global floating **Chat on WhatsApp** control opens the official number with a concise general message, adding the current Tour title and canonical link on Tour pages; it does not create an inquiry record or replace the structured page-level quote actions.
 
 Suggested dropdown structure:
 
@@ -155,20 +155,20 @@ Default order:
 
 1. Utility bar and primary header.
 2. Compact title and breadcrumb band containing the only page H1.
-3. Three-image gallery mosaic with View gallery control.
-4. Destination or route line.
-5. Two-column Tour workspace.
+3. Desktop vertical thumbnail rail, active gallery image and sticky quote panel.
+4. Destination or route line beneath the active media.
+5. Tour facts and information workspace beneath the gallery.
 6. Related Tours.
 7. Final WhatsApp quote prompt.
 8. Footer.
 
 #### Gallery
 
-Desktop uses one dominant image and two stacked supporting images. Mobile uses one dominant image with a useful supporting preview or gallery control. The lightbox must be keyboard operable and show only media assigned by an authorized editor to the published Tour.
+Desktop uses the Tour's assigned images as a vertical thumbnail rail beside one dominant active image. Selecting a thumbnail updates the active image; activating the main image or View gallery control opens the keyboard-operable lightbox at that image. Mobile uses one dominant image with a horizontally scrollable thumbnail strip. Only media assigned by an authorized editor to the published Tour may appear.
 
 #### Tour workspace
 
-Desktop uses an approximately 68/32 main-content and quote-panel split.
+Desktop reads as three columns: the thumbnail rail, flexible active-media/main-content column and narrower sticky quote panel. Tour facts and information continue below the gallery while the quote panel remains persistent.
 
 Main content includes:
 
@@ -315,7 +315,7 @@ Potential modules, only when verified:
 - Tour card.
 - Destination card.
 - Catalogue filters and mobile filter drawer.
-- Tour gallery mosaic and lightbox.
+- Tour thumbnail rail, active image and lightbox.
 - Duration and facts strip.
 - Accessible Tour tabs and mobile disclosures.
 - Canonical Tour quote panel with optional starting price and standard quote context.

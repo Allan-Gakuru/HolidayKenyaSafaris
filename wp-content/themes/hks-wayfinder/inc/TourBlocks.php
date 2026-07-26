@@ -200,17 +200,14 @@ final class TourBlocks {
 	}
 
 	/**
-	 * Render the canonical Tour title band and approved gallery.
+	 * Render the canonical Tour title band.
 	 *
 	 * @param int $tour_id Tour ID.
 	 * @return string
 	 */
 	private static function render_canonical_hero( int $tour_id ): string {
-		$title        = self::public_text( get_the_title( $tour_id ) );
-		$route        = self::public_text( self::field( 'hks_route_summary', $tour_id ) );
-		$destinations = self::term_names( $tour_id, 'hks_destination' );
-		$images       = self::tour_images( $tour_id );
-		$tours_url    = get_post_type_archive_link( 'hks_tour' ) ?: home_url( '/tours/' );
+		$title     = self::public_text( get_the_title( $tour_id ) );
+		$tours_url = get_post_type_archive_link( 'hks_tour' ) ?: home_url( '/tours/' );
 
 		ob_start();
 		?>
@@ -221,12 +218,6 @@ final class TourBlocks {
 					<h1><?php echo esc_html( $title ); ?></h1>
 				</div>
 			</div>
-			<?php if ( $images ) : ?>
-				<?php self::render_gallery( $images, $title ); ?>
-			<?php endif; ?>
-			<?php if ( $destinations || $route ) : ?>
-				<div class="hks-shell"><p class="hks-tour-lead__route"><?php echo esc_html( implode( ' · ', array_filter( array( implode( ', ', $destinations ), $route ) ) ) ); ?></p></div>
-			<?php endif; ?>
 		</section>
 		<?php
 
@@ -303,19 +294,34 @@ final class TourBlocks {
 	 * @return string
 	 */
 	private static function render_canonical_details( int $tour_id ): string {
-		$overview   = get_post_field( 'post_content', $tour_id );
-		$itinerary   = self::rows( self::field( 'hks_itinerary', $tour_id ) );
-		$inclusions  = self::rows( self::field( 'hks_inclusions', $tour_id ) );
-		$exclusions  = self::rows( self::field( 'hks_exclusions', $tour_id ) );
-		$policies   = self::approved_policies( $tour_id );
-		$faqs       = self::approved_faqs( array( 'tour_id' => $tour_id, 'campaign_id' => 0 ) );
-		$facts      = self::tour_facts( $tour_id );
-		$price      = self::tour_price_summary( $tour_id );
-		$quote      = do_blocks( '<!-- wp:hks/quote-cta {"location":"tour_sidebar","label":"Request quote on WhatsApp"} /-->' );
+		$title        = self::public_text( get_the_title( $tour_id ) );
+		$overview     = get_post_field( 'post_content', $tour_id );
+		$itinerary    = self::rows( self::field( 'hks_itinerary', $tour_id ) );
+		$inclusions   = self::rows( self::field( 'hks_inclusions', $tour_id ) );
+		$exclusions   = self::rows( self::field( 'hks_exclusions', $tour_id ) );
+		$policies     = self::approved_policies( $tour_id );
+		$faqs         = self::approved_faqs( array( 'tour_id' => $tour_id, 'campaign_id' => 0 ) );
+		$facts        = self::tour_facts( $tour_id );
+		$price        = self::tour_price_summary( $tour_id );
+		$images       = self::tour_images( $tour_id );
+		$route        = self::public_text( self::field( 'hks_route_summary', $tour_id ) );
+		$destinations = self::term_names( $tour_id, 'hks_destination' );
+		$quote        = do_blocks( '<!-- wp:hks/quote-cta {"location":"tour_sidebar","label":"Request quote on WhatsApp"} /-->' );
 
 		ob_start();
 		?>
 		<section class="hks-tour-workspace hks-shell" data-hks-tour-id="<?php echo esc_attr( (string) $tour_id ); ?>">
+			<?php if ( $images || $destinations || $route ) : ?>
+				<div class="hks-tour-media">
+					<?php if ( $images ) : ?>
+						<?php self::render_gallery( $images, $title ); ?>
+					<?php endif; ?>
+					<?php if ( $destinations || $route ) : ?>
+						<p class="hks-tour-lead__route"><?php echo esc_html( implode( ' · ', array_filter( array( implode( ', ', $destinations ), $route ) ) ) ); ?></p>
+					<?php endif; ?>
+				</div>
+			<?php endif; ?>
+
 			<?php if ( $facts ) : ?>
 				<dl class="hks-tour-facts" aria-label="<?php esc_attr_e( 'Tour facts', 'hks-wayfinder' ); ?>">
 					<?php foreach ( $facts as $label => $value ) : ?><div><dt><?php echo esc_html( $label ); ?></dt><dd><?php echo esc_html( $value ); ?></dd></div><?php endforeach; ?>
@@ -739,13 +745,39 @@ final class TourBlocks {
 	 * @return void
 	 */
 	private static function render_gallery( array $images, string $title ): void {
-		$count = count( $images );
+		$count            = count( $images );
+		$initial_image_id = $images[0];
 		?>
-		<div class="hks-tour-gallery hks-tour-gallery--<?php echo esc_attr( (string) min( 3, $count ) ); ?> hks-shell" data-hks-gallery>
-			<div class="hks-tour-gallery__grid">
-				<?php foreach ( array_slice( $images, 0, 3 ) as $index => $image_id ) : ?><button type="button" class="hks-tour-gallery__item" data-hks-gallery-open="<?php echo esc_attr( (string) $index ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Open image %1$s of %2$s for %3$s', 'hks-wayfinder' ), $index + 1, $count, $title ) ); ?>"><?php echo wp_kses_post( wp_get_attachment_image( $image_id, 0 === $index ? 'large' : 'medium_large', false, array( 'loading' => 0 === $index ? 'eager' : 'lazy', 'sizes' => 0 === $index ? '(max-width: 768px) 100vw, 66vw' : '(max-width: 768px) 50vw, 33vw' ) ) ); ?></button><?php endforeach; ?>
+		<div class="hks-tour-gallery hks-tour-gallery--<?php echo esc_attr( (string) min( 3, $count ) ); ?>" data-hks-gallery>
+			<div class="hks-tour-gallery__grid<?php echo 1 === $count ? ' hks-tour-gallery__grid--single' : ''; ?>">
+				<?php if ( $count > 1 ) : ?>
+					<div class="hks-tour-gallery__thumbnails" role="group" aria-label="<?php esc_attr_e( 'Choose a gallery image', 'hks-wayfinder' ); ?>">
+						<?php
+						foreach ( $images as $index => $image_id ) :
+							$stage_src    = wp_get_attachment_image_url( $image_id, 'large' ) ?: wp_get_attachment_url( $image_id );
+							$stage_srcset = wp_get_attachment_image_srcset( $image_id, 'large' ) ?: '';
+							$stage_alt    = trim( (string) get_post_meta( $image_id, '_wp_attachment_image_alt', true ) );
+							$stage_label  = sprintf( __( 'Open image %1$s of %2$s for %3$s', 'hks-wayfinder' ), $index + 1, $count, $title );
+							?>
+							<button
+								type="button"
+								class="hks-tour-gallery__thumbnail"
+								data-hks-gallery-thumb="<?php echo esc_attr( (string) $index ); ?>"
+								data-hks-gallery-stage-src="<?php echo esc_url( $stage_src ); ?>"
+								data-hks-gallery-stage-srcset="<?php echo esc_attr( $stage_srcset ); ?>"
+								data-hks-gallery-stage-alt="<?php echo esc_attr( $stage_alt ); ?>"
+								data-hks-gallery-stage-label="<?php echo esc_attr( $stage_label ); ?>"
+								aria-label="<?php echo esc_attr( sprintf( __( 'Show image %1$s of %2$s for %3$s', 'hks-wayfinder' ), $index + 1, $count, $title ) ); ?>"
+								aria-pressed="<?php echo 0 === $index ? 'true' : 'false'; ?>"
+							><?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'thumbnail', false, array( 'alt' => '', 'loading' => $index < 5 ? 'eager' : 'lazy', 'sizes' => '112px' ) ) ); ?></button>
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
+				<div class="hks-tour-gallery__stage-wrap">
+					<button type="button" class="hks-tour-gallery__stage" data-hks-gallery-stage data-hks-gallery-open="0" aria-label="<?php echo esc_attr( sprintf( __( 'Open image %1$s of %2$s for %3$s', 'hks-wayfinder' ), 1, $count, $title ) ); ?>"><?php echo wp_kses_post( wp_get_attachment_image( $initial_image_id, 'large', false, array( 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '(max-width: 56rem) calc(100vw - 2rem), (max-width: 80rem) 54vw, 760px' ) ) ); ?></button>
+					<button type="button" class="hks-tour-gallery__view" data-hks-gallery-view data-hks-gallery-open="0"><?php esc_html_e( 'View gallery', 'hks-wayfinder' ); ?><span><?php echo esc_html( sprintf( _n( '%s image', '%s images', $count, 'hks-wayfinder' ), number_format_i18n( $count ) ) ); ?></span></button>
+				</div>
 			</div>
-			<button type="button" class="hks-tour-gallery__view" data-hks-gallery-open="0"><?php esc_html_e( 'View gallery', 'hks-wayfinder' ); ?><span><?php echo esc_html( sprintf( _n( '%s image', '%s images', $count, 'hks-wayfinder' ), number_format_i18n( $count ) ) ); ?></span></button>
 			<dialog class="hks-gallery-lightbox" data-hks-gallery-dialog aria-label="<?php echo esc_attr( sprintf( __( '%s image gallery', 'hks-wayfinder' ), $title ) ); ?>">
 				<div class="hks-gallery-lightbox__bar"><span data-hks-gallery-counter></span><button type="button" data-hks-gallery-close aria-label="<?php esc_attr_e( 'Close gallery', 'hks-wayfinder' ); ?>">×</button></div>
 				<div class="hks-gallery-lightbox__slides"><?php foreach ( $images as $index => $image_id ) : ?><figure data-hks-gallery-slide <?php echo 0 === $index ? '' : 'hidden'; ?>><?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'full', false, array( 'loading' => 'lazy' ) ) ); ?><?php self::render_credit( $image_id ); ?></figure><?php endforeach; ?></div>

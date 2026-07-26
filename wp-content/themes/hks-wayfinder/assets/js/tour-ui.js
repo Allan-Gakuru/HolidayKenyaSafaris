@@ -118,8 +118,47 @@
 		const dialog = gallery.querySelector('[data-hks-gallery-dialog]');
 		const slides = dialog ? Array.from(dialog.querySelectorAll('[data-hks-gallery-slide]')) : [];
 		const counter = dialog?.querySelector('[data-hks-gallery-counter]');
+		const stage = gallery.querySelector('[data-hks-gallery-stage]');
+		const stageImage = stage?.querySelector('img');
+		const viewButton = gallery.querySelector('[data-hks-gallery-view]');
+		const thumbnails = Array.from(gallery.querySelectorAll('[data-hks-gallery-thumb]'));
 		let active = 0;
 		let returnFocus = null;
+
+		function selectPreview(index, focus = false) {
+			const thumbnail = thumbnails[index];
+			const nextSrc = thumbnail?.dataset.hksGalleryStageSrc;
+			if (!thumbnail || !stage || !stageImage || !nextSrc) return;
+
+			const nextSrcset = thumbnail.dataset.hksGalleryStageSrcset || '';
+			if (nextSrcset) stageImage.setAttribute('srcset', nextSrcset);
+			else stageImage.removeAttribute('srcset');
+			stageImage.src = nextSrc;
+			stageImage.alt = thumbnail.dataset.hksGalleryStageAlt || '';
+
+			const stageLabel = thumbnail.dataset.hksGalleryStageLabel || '';
+			if (stageLabel) stage.setAttribute('aria-label', stageLabel);
+			stage.dataset.hksGalleryOpen = String(index);
+			if (viewButton) viewButton.dataset.hksGalleryOpen = String(index);
+
+			thumbnails.forEach((item, itemIndex) => {
+				item.setAttribute('aria-pressed', itemIndex === index ? 'true' : 'false');
+			});
+			if (focus) thumbnail.focus();
+		}
+
+		thumbnails.forEach((thumbnail, index) => {
+			thumbnail.addEventListener('keydown', (event) => {
+				let next = index;
+				if (event.key === 'ArrowDown' || event.key === 'ArrowRight') next = (index + 1) % thumbnails.length;
+				else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') next = (index - 1 + thumbnails.length) % thumbnails.length;
+				else if (event.key === 'Home') next = 0;
+				else if (event.key === 'End') next = thumbnails.length - 1;
+				else return;
+				event.preventDefault();
+				selectPreview(next, true);
+			});
+		});
 
 		function show(index) {
 			active = (index + slides.length) % slides.length;
@@ -128,6 +167,12 @@
 		}
 
 		gallery.addEventListener('click', (event) => {
+			const thumbnail = event.target.closest('[data-hks-gallery-thumb]');
+			if (thumbnail) {
+				selectPreview(Number(thumbnail.dataset.hksGalleryThumb || 0));
+				return;
+			}
+
 			const opener = event.target.closest('[data-hks-gallery-open]');
 			if (opener && dialog && slides.length) {
 				returnFocus = opener;

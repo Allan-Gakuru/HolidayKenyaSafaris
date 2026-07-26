@@ -123,14 +123,14 @@ Catalogue and taxonomy pages use a compact title and breadcrumb band, useful fil
 Use the structure in `UI-REFERENCE-CATALOGUE.md`:
 
 1. Compact title and breadcrumb band with the only H1.
-2. Three-image gallery mosaic.
-3. Destination or route line.
-4. Approximately 68/32 desktop workspace.
-5. Main Tour facts and accessible tabs.
-6. Sticky quote panel.
+2. Desktop three-column composition: vertical thumbnail rail, one active gallery image, and the sticky quote panel.
+3. Destination or route line beneath the active media.
+4. Main Tour facts and accessible tabs beneath the media while the quote panel remains sticky.
+5. Accessible thumbnail selection and full-gallery lightbox.
+6. Horizontal image previews and normal-flow quote content below desktop width.
 7. Related Tours and final quote prompt.
 
-On mobile, the gallery simplifies, tabs become stacked disclosures, the quote panel returns to normal document flow, and a safe-area-aware sticky action remains available.
+On mobile, the gallery uses one stable active image followed by a horizontally scrollable thumbnail strip, tabs become stacked disclosures, the quote panel returns to normal document flow, and a safe-area-aware sticky action remains available.
 
 ### Package summaries
 
@@ -144,7 +144,7 @@ Use a readable day-by-day timeline with native headings and accessible disclosur
 
 The canonical primary label is **Request quote on WhatsApp**. Opening the action reveals the intake form first; it must never silently send visitor data. Canonical Tour pages use a sticky desktop quote panel containing the optional Tour starting price, the primary action, and a short explanation of the tailored quote and message-review step. Campaign pages may override the linked Tour amount with their own optional starting price. They do not use a permanently visible long booking form. A mobile sticky action must respect safe areas and leave enough bottom padding that it cannot obscure content.
 
-The global floating **Chat on WhatsApp** control is a separate lightweight contact route. It stays at the bottom right, uses one fixed general prefilled message, opens the official number in a new tab, and does not create an inquiry record. It must rise above the Tour and Campaign mobile quote bar, respect device safe areas, and never replace or visually compete with the structured page-level quote action.
+The global floating **Chat on WhatsApp** control is a separate lightweight contact route. It stays at the bottom right, uses a concise general prefilled message and adds the current Tour title and canonical link on Tour pages, opens the official number in a new tab, and does not create an inquiry record. It must rise above the Tour and Campaign mobile quote bar, respect device safe areas, and never replace or visually compete with the structured page-level quote action.
 
 ### Group Travel planner
 

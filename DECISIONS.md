@@ -66,7 +66,7 @@ Exclude by default:
 - Official public email: `info@holidaykenyasafaris.ke`.
 - Official Instagram: `https://www.instagram.com/holidaykenyasafaris/`.
 - Official Facebook: `https://www.facebook.com/people/Holiday-Kenya-Safaris/61591508593846/`.
-- A global floating **Chat on WhatsApp** control opens the official number with one fixed general reach-out message. It does not collect answers, customize the message, or create a WordPress inquiry record; structured quote actions continue to use the intake, consent, recovery, review, and visitor-controlled launch flow.
+- A global floating **Chat on WhatsApp** control opens the official number with a concise general reach-out message; on canonical Tour pages it adds the current Tour title and canonical link. It does not collect answers or create a WordPress inquiry record; structured quote actions continue to use the intake, consent, recovery, review, and visitor-controlled launch flow.
 - Every quote CTA opens an intake form before WhatsApp.
 - Required fields: name, phone, package, preferred travel date or month, and number of travelers.
 - The form constructs a prefilled WhatsApp message that the visitor chooses to send.
@@ -98,7 +98,7 @@ Exclude by default:
 - Catalogue-mode implementation must keep the Wayfinder identity, HKS copy, shared conversion service, compact media treatment, clear package context, and accessible interactions.
 - Standard website pages use light, browseable Catalogue mode.
 - Focused paid-ad pages use Campaign mode and may retain the immersive emotional structure of the existing Maasai Mara prototype.
-- Canonical Tour pages use a compact title and breadcrumb band, three-image gallery, destination line, approximately 68/32 desktop workspace, accessible tabs, mobile disclosures, itinerary timeline, sticky quote panel, related Tours, and final quote prompt.
+- Canonical Tour pages use a compact title and breadcrumb band followed by a desktop three-column composition: vertical gallery thumbnails, one active image and a sticky quote panel. Tour facts, accessible tabs, mobile disclosures, itinerary timeline, related Tours and the final quote prompt remain part of the canonical flow.
 - A conventional booking sidebar is replaced by an HKS quote panel whose **Request quote on WhatsApp** button opens the approved intake, consent, private recovery, message-review, and WhatsApp-launch flow.
 - Desktop navigation uses a utility bar plus product-led primary header. The utility bar carries a direct WhatsApp link with a prefilled, page-aware reach-out message; the primary header does not repeat it as a large button. Page-level quote actions still open the approved intake and recovery flow. Mobile uses a full-height accessible navigation drawer.
 - Approved top-level navigation is Home, Safaris, Coast & Stays, Destinations, Group Travel, About, and Contact. The mobile drawer retains a clear Request quote on WhatsApp action.

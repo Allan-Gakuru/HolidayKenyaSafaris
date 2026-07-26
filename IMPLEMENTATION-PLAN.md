@@ -139,12 +139,12 @@ Acceptance:
 
 ## Phase 6: Templates and Pages
 
-Implementation status (2026-07-26): the global, Tour, Campaign, catalogue, all four Tour taxonomy archive families, Destination, homepage, and standard Page templates are implemented. The homepage uses a Featured Tour hero with a homepage-only translucent logo-and-menu header that stays fixed and becomes solid white after scrolling, one changing Tour-title H1, up to five portrait queue cards backed by featured images at least 1200 × 675 pixels, an accessible five-second cycle with a synchronized progress line, and Browse by destination before the Featured Tours grid. Hero eligibility does not depend on alt text; its repeated stage and preview images are decorative. Group Travel has a dedicated catalogue-driven planner on its published Page and reuses the shared inquiry recovery and WhatsApp flow. The global floating Chat on WhatsApp contact uses a fixed general message and remains separate from the saved-inquiry quote flow. Internal pages retain the complete utility bar and white primary header. The desktop header and mobile drawer share the production `holiday-kenya-safaris-logo.svg` lockup. About is available; Contact and four legal routes remain protected drafts until their missing project-level information is supplied.
+Implementation status (2026-07-26): the global, Tour, Campaign, catalogue, all four Tour taxonomy archive families, Destination, homepage, and standard Page templates are implemented. The homepage uses a Featured Tour hero with a homepage-only translucent logo-and-menu header that stays fixed and becomes solid white after scrolling, one changing Tour-title H1, up to five portrait queue cards backed by featured images at least 1200 × 675 pixels, an accessible five-second cycle with a synchronized progress line, and Browse by destination before the Featured Tours grid. Hero eligibility does not depend on alt text; its repeated stage and preview images are decorative. Group Travel has a dedicated catalogue-driven planner on its published Page and reuses the shared inquiry recovery and WhatsApp flow. The global floating Chat on WhatsApp contact uses a concise general message, adding the current Tour title and canonical link on Tour pages, and remains separate from the saved-inquiry quote flow. Internal pages retain the complete utility bar and white primary header. The desktop header and mobile drawer share the production `holiday-kenya-safaris-logo.svg` lockup. About is available; Contact and four legal routes remain protected drafts until their missing project-level information is supplied.
 
 Build in this order:
 
 1. Utility bar, desktop header, dropdown navigation, mobile drawer, and footer.
-2. Canonical Tour title band and three-image gallery.
+2. Canonical Tour title band and thumbnail-led active gallery.
 3. Canonical Tour facts, accessible tabs, mobile disclosures, and itinerary timeline.
 4. Sticky desktop quote panel and mobile in-flow/sticky quote actions.
 5. Related-Tour cards and query/override behavior.
@@ -167,7 +167,7 @@ Acceptance:
 
 - Every template uses the shared design system and structured content.
 - Campaign pages inherit canonical Tour facts.
-- The canonical Tour page implements the approved title band, gallery, two-column workspace, tabs/disclosures, itinerary, quote panel, and related-Tour flow within the Wayfinder system.
+- The canonical Tour page implements the approved title band, desktop thumbnail-rail/active-image/sticky-quote composition, responsive horizontal thumbnail strip, tabs/disclosures, itinerary, and related-Tour flow within the Wayfinder system.
 - The permanent reference-site booking form is absent; every Tour quote action opens the approved HKS intake and WhatsApp handoff.
 - The current Maasai Mara prototype's strongest UX is preserved in Campaign mode without carrying over its old identity.
 - Group Travel navigation resolves to one canonical Page whose published Destination and Tour choices feed the same private inquiry and WhatsApp review service as Tour and Campaign pages.

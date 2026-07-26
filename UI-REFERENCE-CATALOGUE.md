@@ -13,7 +13,7 @@ Use this catalogue grammar for the main website:
 - a full mobile navigation drawer;
 - an image-led homepage with prominent package discovery;
 - three-column catalogue grids;
-- a canonical Tour page with a title band, image gallery, tabbed content, two-column desktop layout, related Tours, and a persistent conversion panel.
+- a canonical Tour page with a title band, thumbnail-led active gallery, tabbed content, a three-column desktop composition, related Tours, and a persistent conversion panel.
 
 Do not use a permanent long booking form. The right-hand conversion area must be a Holiday Kenya Safaris quote panel whose primary command is **Request quote on WhatsApp**. That command opens the approved intake form, saves a private recovery record only after consent, lets the visitor review the generated message, and then launches WhatsApp under the visitor's control.
 
@@ -159,9 +159,9 @@ The canonical Tour page should follow the approved information architecture and 
 
 1. Global utility bar and header.
 2. Compact title and breadcrumb band containing the only page H1.
-3. Three-image gallery mosaic with a View gallery control.
-4. Destination or route line.
-5. Two-column Tour workspace.
+3. Desktop thumbnail rail, active image and sticky quote panel.
+4. Destination or route line beneath the active media.
+5. Tour facts and information workspace beneath the gallery.
 6. Related Tours.
 7. Final WhatsApp quote prompt.
 8. Global footer.
@@ -170,21 +170,22 @@ The canonical Tour page should follow the approved information architecture and 
 
 Desktop:
 
-- One dominant landscape image occupying approximately two-thirds of the width.
-- Two supporting images stacked in the remaining third.
-- A clear View gallery control over or beside the final image.
+- A vertical rail showing the Tour's assigned gallery images in editorial order.
+- One dominant active landscape image beside the thumbnail rail.
+- A clear View gallery control over the active image.
+- Selecting a thumbnail updates the active image without opening the lightbox; activating the main image or View gallery control opens the lightbox at that image.
 
 Mobile:
 
 - One dominant image with a stable aspect ratio.
-- A small supporting preview or horizontal gallery affordance.
+- A horizontally scrollable thumbnail strip below the active image.
 - No tiny image collage that makes the destination impossible to inspect.
 
 The gallery must use media deliberately assigned by an authorized editor to the published Tour, in editorial order. It should open an accessible lightbox or gallery dialog with keyboard navigation, image count, close control, and useful alt text.
 
 ### Desktop Tour workspace
 
-Use an approximately 68/32 main-content and quote-panel split.
+The desktop composition reads as three columns: thumbnail rail, active media/main content, and sticky quote panel. The gallery and main Tour information share the flexible content column; the quote panel uses the narrower right column and remains sticky while the visitor reads the Tour information.
 
 Main content begins with:
 
@@ -263,7 +264,7 @@ Mobile quote entry points:
 
 Never use `Book now`, `Submit Booking`, or language implying confirmed availability or payment when the action only requests a quote.
 
-The separate global **Chat on WhatsApp** control uses one fixed general message and opens the official number directly. It does not open the intake, save an inquiry, or replace any **Request quote on WhatsApp** entry point. Keep it at the bottom right, above any mobile quote bar and outside form controls or footer content.
+The separate global **Chat on WhatsApp** control uses a concise general message, adding the current Tour title and canonical link on Tour pages, and opens the official number directly. It does not open the intake, save an inquiry, or replace any **Request quote on WhatsApp** entry point. Keep it at the bottom right, above any mobile quote bar and outside form controls or footer content.
 
 ### Group Travel route
 
@@ -317,7 +318,7 @@ Build reusable theme parts and blocks for:
 - Tour and destination cards.
 - Catalogue filters.
 - Title and breadcrumb band.
-- Tour gallery mosaic and lightbox.
+- Tour thumbnail rail, active image and lightbox.
 - Tour tabs and mobile disclosures.
 - Itinerary timeline.
 - Sticky quote panel.
