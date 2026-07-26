@@ -128,7 +128,7 @@
 
 		function updateStatus(announce = false) {
 			const selected = slides[activeIndex];
-			const selectedTitle = selected.dataset.hksTourTitle || `Tour ${activeIndex + 1}`;
+			const selectedTitle = selected.dataset.hksTourLabel || selected.dataset.hksTourTitle || `Tour ${activeIndex + 1}`;
 
 			if (status) status.textContent = `${activeIndex + 1} / ${slides.length}`;
 			if (announce && announcer) {

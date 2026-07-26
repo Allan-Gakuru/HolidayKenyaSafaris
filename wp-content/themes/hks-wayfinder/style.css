@@ -2956,7 +2956,7 @@ body.home .hks-site-header .hks-utility {
 
 .hks-home-hero--featured .hks-home-gallery__copy h1 {
 	color: var(--wp--preset--color--white);
-	font-size: clamp(2.45rem, 10vw, 4.5rem);
+	font-size: clamp(1.225rem, 5vw, 2.25rem);
 	letter-spacing: -0.035em;
 	line-height: 1.02;
 	margin: 0;
@@ -2965,7 +2965,7 @@ body.home .hks-site-header .hks-utility {
 }
 
 .hks-home-hero--featured .hks-home-gallery__copy.has-long-title h1 {
-	font-size: clamp(2.15rem, 8vw, 3.65rem);
+	font-size: clamp(1.075rem, 4vw, 1.825rem);
 	max-width: 16ch;
 }
 
@@ -2976,7 +2976,7 @@ body.home .hks-site-header .hks-utility {
 	border-radius: 999px;
 	color: var(--wp--preset--color--white);
 	display: inline-flex;
-	font-size: 0.95rem;
+	font-size: 0.475rem;
 	font-weight: 700;
 	justify-content: center;
 	margin-top: 1.5rem;
@@ -3281,11 +3281,11 @@ body.home .hks-site-header .hks-utility {
 	}
 
 	.hks-home-hero--featured .hks-home-gallery__copy h1 {
-		font-size: clamp(3.5rem, 5.4vw, 5.75rem);
+		font-size: clamp(1.75rem, 2.7vw, 2.875rem);
 	}
 
 	.hks-home-hero--featured .hks-home-gallery__copy.has-long-title h1 {
-		font-size: clamp(2.8rem, 4.3vw, 4.4rem);
+		font-size: clamp(1.4rem, 2.15vw, 2.2rem);
 	}
 
 	.hks-home-hero--featured .hks-home-gallery.is-ready .hks-home-gallery__viewport {

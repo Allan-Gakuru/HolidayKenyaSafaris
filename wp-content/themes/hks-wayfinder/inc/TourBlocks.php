@@ -548,7 +548,7 @@ final class TourBlocks {
 		$hero_tours     = self::home_featured_tours( 5 );
 		$active_tour    = $hero_tours[0] ?? null;
 		$active_title_length = $active_tour
-			? ( function_exists( 'mb_strlen' ) ? mb_strlen( $active_tour['title'] ) : strlen( $active_tour['title'] ) )
+			? ( function_exists( 'mb_strlen' ) ? mb_strlen( $active_tour['caption'] ) : strlen( $active_tour['caption'] ) )
 			: 0;
 
 		ob_start();
@@ -583,7 +583,7 @@ final class TourBlocks {
 						<div class="hks-shell hks-home-gallery__inner">
 							<div class="hks-home-gallery__copy<?php echo $active_title_length > 28 ? ' has-long-title' : ''; ?>" data-hks-home-gallery-copy>
 								<p class="hks-home-gallery__eyebrow" data-hks-home-gallery-eyebrow><?php echo esc_html( $active_tour['eyebrow'] ); ?></p>
-								<h1 id="hks-home-title" data-hks-home-gallery-title><?php echo esc_html( $active_tour['title'] ); ?></h1>
+								<h1 id="hks-home-title" data-hks-home-gallery-title><?php echo esc_html( $active_tour['caption'] ); ?></h1>
 								<a class="hks-home-gallery__cta" href="<?php echo esc_url( $active_tour['url'] ); ?>" data-hks-home-gallery-link><?php esc_html_e( 'Click here to book tour', 'hks-wayfinder' ); ?></a>
 							</div>
 
@@ -595,7 +595,8 @@ final class TourBlocks {
 											class="hks-home-gallery__slide<?php echo 0 === $index ? ' is-active' : ''; ?>"
 											type="button"
 											data-hks-home-gallery-slide
-											data-hks-tour-title="<?php echo esc_attr( $hero_tour['title'] ); ?>"
+											data-hks-tour-title="<?php echo esc_attr( $hero_tour['caption'] ); ?>"
+											data-hks-tour-label="<?php echo esc_attr( $hero_tour['title'] ); ?>"
 											data-hks-tour-eyebrow="<?php echo esc_attr( $hero_tour['eyebrow'] ); ?>"
 											data-hks-tour-url="<?php echo esc_url( $hero_tour['url'] ); ?>"
 											data-hks-tour-long-title="<?php echo esc_attr( $hero_tour['long_title'] ); ?>"
