@@ -174,6 +174,7 @@ Desktop:
 - One dominant active landscape image beside the thumbnail rail.
 - A clear View gallery control over the active image.
 - Selecting a thumbnail updates the active image without opening the lightbox; activating the main image or View gallery control opens the lightbox at that image.
+- Previous and next chevrons sit inside the active image. Multi-image galleries advance every five seconds, pause while hovered or focused and while off-screen or hidden, and do not autoplay when reduced motion is requested.
 
 Mobile:
 

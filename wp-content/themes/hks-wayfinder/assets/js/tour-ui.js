@@ -122,27 +122,84 @@
 		const stageImage = stage?.querySelector('img');
 		const viewButton = gallery.querySelector('[data-hks-gallery-view]');
 		const thumbnails = Array.from(gallery.querySelectorAll('[data-hks-gallery-thumb]'));
+		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+		const autoplayInterval = Math.max(1000, Number(gallery.dataset.hksGalleryInterval || 5000));
 		let active = 0;
+		let previewIndex = 0;
 		let returnFocus = null;
+		let autoplayTimer = 0;
+		let inViewport = true;
+		let isHovered = false;
+		let hasFocus = false;
+		let previewAnimation = null;
+
+		function stopAutoplay() {
+			if (!autoplayTimer) return;
+			window.clearTimeout(autoplayTimer);
+			autoplayTimer = 0;
+		}
+
+		function canAutoplay() {
+			return thumbnails.length > 1
+				&& !reducedMotion.matches
+				&& inViewport
+				&& !isHovered
+				&& !hasFocus
+				&& !document.hidden
+				&& !dialog?.open;
+		}
+
+		function preloadPreview(index) {
+			if (!thumbnails.length) return;
+			const normalizedIndex = (index + thumbnails.length) % thumbnails.length;
+			const thumbnail = thumbnails[normalizedIndex];
+			const nextSrc = thumbnail?.dataset.hksGalleryStageSrc;
+			if (!nextSrc) return;
+			const preload = new Image();
+			preload.decoding = 'async';
+			preload.sizes = stageImage?.sizes || '';
+			preload.srcset = thumbnail.dataset.hksGalleryStageSrcset || '';
+			preload.src = nextSrc;
+		}
+
+		function scheduleAutoplay() {
+			stopAutoplay();
+			if (!canAutoplay()) return;
+			preloadPreview(previewIndex + 1);
+			autoplayTimer = window.setTimeout(() => {
+				autoplayTimer = 0;
+				selectPreview(previewIndex + 1);
+				scheduleAutoplay();
+			}, autoplayInterval);
+		}
 
 		function selectPreview(index, focus = false) {
-			const thumbnail = thumbnails[index];
+			const normalizedIndex = (index + thumbnails.length) % thumbnails.length;
+			const thumbnail = thumbnails[normalizedIndex];
 			const nextSrc = thumbnail?.dataset.hksGalleryStageSrc;
 			if (!thumbnail || !stage || !stageImage || !nextSrc) return;
 
+			previewIndex = normalizedIndex;
 			const nextSrcset = thumbnail.dataset.hksGalleryStageSrcset || '';
 			if (nextSrcset) stageImage.setAttribute('srcset', nextSrcset);
 			else stageImage.removeAttribute('srcset');
 			stageImage.src = nextSrc;
 			stageImage.alt = thumbnail.dataset.hksGalleryStageAlt || '';
+			if (!reducedMotion.matches && typeof stageImage.animate === 'function') {
+				previewAnimation?.cancel();
+				previewAnimation = stageImage.animate(
+					[{ opacity: 0.55 }, { opacity: 1 }],
+					{ duration: 240, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }
+				);
+			}
 
 			const stageLabel = thumbnail.dataset.hksGalleryStageLabel || '';
 			if (stageLabel) stage.setAttribute('aria-label', stageLabel);
-			stage.dataset.hksGalleryOpen = String(index);
-			if (viewButton) viewButton.dataset.hksGalleryOpen = String(index);
+			stage.dataset.hksGalleryOpen = String(normalizedIndex);
+			if (viewButton) viewButton.dataset.hksGalleryOpen = String(normalizedIndex);
 
 			thumbnails.forEach((item, itemIndex) => {
-				item.setAttribute('aria-pressed', itemIndex === index ? 'true' : 'false');
+				item.setAttribute('aria-pressed', itemIndex === normalizedIndex ? 'true' : 'false');
 			});
 			if (focus) thumbnail.focus();
 		}
@@ -157,6 +214,7 @@
 				else return;
 				event.preventDefault();
 				selectPreview(next, true);
+				scheduleAutoplay();
 			});
 		});
 
@@ -170,11 +228,25 @@
 			const thumbnail = event.target.closest('[data-hks-gallery-thumb]');
 			if (thumbnail) {
 				selectPreview(Number(thumbnail.dataset.hksGalleryThumb || 0));
+				scheduleAutoplay();
+				return;
+			}
+
+			if (event.target.closest('[data-hks-gallery-stage-prev]')) {
+				selectPreview(previewIndex - 1);
+				scheduleAutoplay();
+				return;
+			}
+
+			if (event.target.closest('[data-hks-gallery-stage-next]')) {
+				selectPreview(previewIndex + 1);
+				scheduleAutoplay();
 				return;
 			}
 
 			const opener = event.target.closest('[data-hks-gallery-open]');
 			if (opener && dialog && slides.length) {
+				stopAutoplay();
 				returnFocus = opener;
 				show(Number(opener.dataset.hksGalleryOpen || 0));
 				dialog.showModal();
@@ -185,8 +257,29 @@
 			if (event.target.closest('[data-hks-gallery-next]')) show(active + 1);
 			if (event.target.closest('[data-hks-gallery-prev]')) show(active - 1);
 		});
+		gallery.addEventListener('mouseenter', () => {
+			isHovered = true;
+			stopAutoplay();
+		});
+		gallery.addEventListener('mouseleave', () => {
+			isHovered = false;
+			scheduleAutoplay();
+		});
+		gallery.addEventListener('focusin', () => {
+			hasFocus = true;
+			stopAutoplay();
+		});
+		gallery.addEventListener('focusout', () => {
+			window.setTimeout(() => {
+				hasFocus = gallery.contains(document.activeElement);
+				scheduleAutoplay();
+			}, 0);
+		});
 		dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
-		dialog?.addEventListener('close', () => { if (returnFocus) returnFocus.focus(); });
+		dialog?.addEventListener('close', () => {
+			if (returnFocus) returnFocus.focus();
+			scheduleAutoplay();
+		});
 		dialog?.addEventListener('keydown', (event) => {
 			if (event.key === 'ArrowRight') {
 				event.preventDefault();
@@ -197,6 +290,19 @@
 				show(active - 1);
 			}
 		});
+
+		if ('IntersectionObserver' in window) {
+			const observer = new IntersectionObserver((entries) => {
+				inViewport = Boolean(entries[0]?.isIntersecting);
+				if (inViewport) scheduleAutoplay();
+				else stopAutoplay();
+			}, { threshold: 0.35 });
+			observer.observe(gallery);
+		}
+
+		document.addEventListener('visibilitychange', scheduleAutoplay);
+		reducedMotion.addEventListener('change', scheduleAutoplay);
+		scheduleAutoplay();
 	});
 
 	document.querySelectorAll('[data-hks-related-tour]').forEach((link) => {

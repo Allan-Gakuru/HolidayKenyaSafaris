@@ -151,7 +151,7 @@ The website is ready for launch only when:
 
 - Editors can add a Tour once and publish it across catalogue, destination, and campaign templates.
 - Campaign variants can change messaging and optionally present their own selling price without duplicating factual Tour itinerary data.
-- Canonical Tour pages use the approved desktop thumbnail-rail, active-image and sticky-quote composition, with horizontal gallery previews and normal-flow content on smaller viewports, plus tabs/disclosures and related Tours.
+- Canonical Tour pages use the approved desktop thumbnail-rail, active-image and sticky-quote composition, with horizontal gallery previews and normal-flow content on smaller viewports, plus tabs/disclosures and related Tours. Multi-image galleries expose previous/next chevrons and rotate every five seconds, pausing for interaction, hidden/off-screen state and reduced-motion preferences.
 - No canonical Tour page contains a permanent long booking form; every quote command opens the shared HKS intake and WhatsApp handoff.
 - WhatsApp inquiries include enough context for a consultant to quote.
 - Every published price, photograph, trust claim, and policy was deliberately entered, assigned, imported under the current client authorization, or published by an authorized editor.

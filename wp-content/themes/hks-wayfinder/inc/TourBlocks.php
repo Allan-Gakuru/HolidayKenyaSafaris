@@ -748,7 +748,7 @@ final class TourBlocks {
 		$count            = count( $images );
 		$initial_image_id = $images[0];
 		?>
-		<div class="hks-tour-gallery hks-tour-gallery--<?php echo esc_attr( (string) min( 3, $count ) ); ?>" data-hks-gallery>
+		<div class="hks-tour-gallery hks-tour-gallery--<?php echo esc_attr( (string) min( 3, $count ) ); ?>" data-hks-gallery data-hks-gallery-interval="5000">
 			<div class="hks-tour-gallery__grid<?php echo 1 === $count ? ' hks-tour-gallery__grid--single' : ''; ?>">
 				<?php if ( $count > 1 ) : ?>
 					<div class="hks-tour-gallery__thumbnails" role="group" aria-label="<?php esc_attr_e( 'Choose a gallery image', 'hks-wayfinder' ); ?>">
@@ -775,6 +775,10 @@ final class TourBlocks {
 				<?php endif; ?>
 				<div class="hks-tour-gallery__stage-wrap">
 					<button type="button" class="hks-tour-gallery__stage" data-hks-gallery-stage data-hks-gallery-open="0" aria-label="<?php echo esc_attr( sprintf( __( 'Open image %1$s of %2$s for %3$s', 'hks-wayfinder' ), 1, $count, $title ) ); ?>"><?php echo wp_kses_post( wp_get_attachment_image( $initial_image_id, 'large', false, array( 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '(max-width: 56rem) calc(100vw - 2rem), (max-width: 80rem) 54vw, 760px' ) ) ); ?></button>
+					<?php if ( $count > 1 ) : ?>
+						<button type="button" class="hks-tour-gallery__nav hks-tour-gallery__nav--prev" data-hks-gallery-stage-prev aria-label="<?php esc_attr_e( 'Show previous gallery image', 'hks-wayfinder' ); ?>"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
+						<button type="button" class="hks-tour-gallery__nav hks-tour-gallery__nav--next" data-hks-gallery-stage-next aria-label="<?php esc_attr_e( 'Show next gallery image', 'hks-wayfinder' ); ?>"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg></button>
+					<?php endif; ?>
 					<button type="button" class="hks-tour-gallery__view" data-hks-gallery-view data-hks-gallery-open="0"><?php esc_html_e( 'View gallery', 'hks-wayfinder' ); ?><span><?php echo esc_html( sprintf( _n( '%s image', '%s images', $count, 'hks-wayfinder' ), number_format_i18n( $count ) ) ); ?></span></button>
 				</div>
 			</div>
