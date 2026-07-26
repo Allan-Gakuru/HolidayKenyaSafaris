@@ -2972,18 +2972,25 @@ body.home .hks-site-header .hks-utility {
 .hks-home-gallery__cta {
 	align-items: center;
 	background: transparent;
-	border: 1px solid rgb(255 255 255 / 82%);
+	border: 1px solid rgb(255 255 255 / 72%);
 	border-radius: 999px;
 	color: var(--wp--preset--color--white);
 	display: inline-flex;
 	font-size: 0.475rem;
 	font-weight: 700;
 	justify-content: center;
-	margin-top: 1.5rem;
-	min-height: 48px;
-	padding: 0.7rem 1.2rem;
+	margin-top: 0.8rem;
+	min-height: 28px;
+	padding: 0.35rem 0.65rem;
+	position: relative;
 	text-decoration: none;
 	transition: background-color 180ms ease-out, border-color 180ms ease-out, color 180ms ease-out, transform 120ms ease-out;
+}
+
+.hks-home-gallery__cta::before {
+	content: "";
+	inset: -8px;
+	position: absolute;
 }
 
 .hks-home-gallery__cta::after {
@@ -2991,7 +2998,7 @@ body.home .hks-site-header .hks-utility {
 	content: "→";
 	font-size: 1.15em;
 	line-height: 1;
-	margin-left: 0.65rem;
+	margin-left: 0.35rem;
 	transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
