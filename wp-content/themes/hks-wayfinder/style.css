@@ -2969,6 +2969,53 @@ body.home .hks-site-header .hks-utility {
 	max-width: 16ch;
 }
 
+.hks-home-gallery__details {
+	display: grid;
+	gap: 0.35rem;
+	margin: 0.75rem 0 0;
+	max-width: 42rem;
+}
+
+.hks-home-gallery__details[hidden],
+.hks-home-gallery__detail[hidden] {
+	display: none;
+}
+
+.hks-home-gallery__detail {
+	align-items: start;
+	display: grid;
+	gap: 0.65rem;
+	grid-template-columns: 4.25rem minmax(0, 1fr);
+}
+
+.hks-home-gallery__detail dt,
+.hks-home-gallery__detail dd {
+	margin: 0;
+}
+
+.hks-home-gallery__detail dt {
+	color: rgb(255 255 255 / 68%);
+	font-size: 0.6rem;
+	font-weight: 600;
+	line-height: 1.45;
+}
+
+.hks-home-gallery__detail dd {
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	color: var(--wp--preset--color--white);
+	display: -webkit-box;
+	font-size: 0.7rem;
+	font-weight: 600;
+	line-height: 1.4;
+	overflow: hidden;
+}
+
+.hks-home-gallery__detail:first-child dd {
+	color: var(--wp--preset--color--saffron);
+	display: block;
+}
+
 .hks-home-gallery__cta {
 	align-items: center;
 	background: transparent;

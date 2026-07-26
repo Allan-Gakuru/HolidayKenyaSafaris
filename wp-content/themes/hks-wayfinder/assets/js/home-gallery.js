@@ -10,6 +10,10 @@
 		const eyebrow = gallery.querySelector('[data-hks-home-gallery-eyebrow]');
 		const title = gallery.querySelector('[data-hks-home-gallery-title]');
 		const link = gallery.querySelector('[data-hks-home-gallery-link]');
+		const details = gallery.querySelector('[data-hks-home-gallery-details]');
+		const price = gallery.querySelector('[data-hks-home-gallery-price]');
+		const route = gallery.querySelector('[data-hks-home-gallery-route]');
+		const included = gallery.querySelector('[data-hks-home-gallery-included]');
 		const previous = gallery.querySelector('[data-hks-home-gallery-prev]');
 		const next = gallery.querySelector('[data-hks-home-gallery-next]');
 		const pauseButton = gallery.querySelector('[data-hks-home-gallery-pause]');
@@ -175,6 +179,21 @@
 			title.textContent = selected.dataset.hksTourTitle || '';
 			link.href = selected.dataset.hksTourUrl || '#';
 			copy.classList.toggle('has-long-title', 'true' === selected.dataset.hksTourLongTitle);
+			updateDetail(price, selected.dataset.hksTourPrice || '');
+			updateDetail(route, selected.dataset.hksTourRoute || '');
+			updateDetail(included, selected.dataset.hksTourIncluded || '');
+
+			if (details) {
+				details.hidden = ![price, route, included].some((detail) => detail && !detail.closest('[data-hks-home-gallery-detail-item]')?.hidden);
+			}
+		}
+
+		function updateDetail(detail, value) {
+			if (!detail) return;
+
+			const item = detail.closest('[data-hks-home-gallery-detail-item]');
+			detail.textContent = value;
+			if (item) item.hidden = !value;
 		}
 
 		function commitSelection(selected, nextIndex, announce) {

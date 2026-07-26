@@ -584,6 +584,20 @@ final class TourBlocks {
 							<div class="hks-home-gallery__copy<?php echo $active_title_length > 28 ? ' has-long-title' : ''; ?>" data-hks-home-gallery-copy>
 								<p class="hks-home-gallery__eyebrow" data-hks-home-gallery-eyebrow><?php echo esc_html( $active_tour['eyebrow'] ); ?></p>
 								<h1 id="hks-home-title" data-hks-home-gallery-title><?php echo esc_html( $active_tour['caption'] ); ?></h1>
+								<dl class="hks-home-gallery__details" data-hks-home-gallery-details aria-label="<?php esc_attr_e( 'Active tour details', 'hks-wayfinder' ); ?>" <?php echo array_filter( array( $active_tour['price'], $active_tour['route'], $active_tour['included'] ) ) ? '' : 'hidden'; ?>>
+									<div class="hks-home-gallery__detail" data-hks-home-gallery-detail-item <?php echo $active_tour['price'] ? '' : 'hidden'; ?>>
+										<dt><?php esc_html_e( 'Price', 'hks-wayfinder' ); ?></dt>
+										<dd data-hks-home-gallery-price><?php echo esc_html( $active_tour['price'] ); ?></dd>
+									</div>
+									<div class="hks-home-gallery__detail" data-hks-home-gallery-detail-item <?php echo $active_tour['route'] ? '' : 'hidden'; ?>>
+										<dt><?php esc_html_e( 'Route', 'hks-wayfinder' ); ?></dt>
+										<dd data-hks-home-gallery-route><?php echo esc_html( $active_tour['route'] ); ?></dd>
+									</div>
+									<div class="hks-home-gallery__detail" data-hks-home-gallery-detail-item <?php echo $active_tour['included'] ? '' : 'hidden'; ?>>
+										<dt><?php esc_html_e( 'Included', 'hks-wayfinder' ); ?></dt>
+										<dd data-hks-home-gallery-included><?php echo esc_html( $active_tour['included'] ); ?></dd>
+									</div>
+								</dl>
 								<a class="hks-home-gallery__cta" href="<?php echo esc_url( $active_tour['url'] ); ?>" data-hks-home-gallery-link><?php esc_html_e( 'Click here to book tour', 'hks-wayfinder' ); ?></a>
 							</div>
 
@@ -599,6 +613,9 @@ final class TourBlocks {
 											data-hks-tour-label="<?php echo esc_attr( $hero_tour['title'] ); ?>"
 											data-hks-tour-eyebrow="<?php echo esc_attr( $hero_tour['eyebrow'] ); ?>"
 											data-hks-tour-url="<?php echo esc_url( $hero_tour['url'] ); ?>"
+											data-hks-tour-price="<?php echo esc_attr( $hero_tour['price'] ); ?>"
+											data-hks-tour-route="<?php echo esc_attr( $hero_tour['route'] ); ?>"
+											data-hks-tour-included="<?php echo esc_attr( $hero_tour['included'] ); ?>"
 											data-hks-tour-long-title="<?php echo esc_attr( $hero_tour['long_title'] ); ?>"
 											aria-label="<?php echo esc_attr( sprintf( __( 'Show %s', 'hks-wayfinder' ), $hero_tour['title'] ) ); ?>"
 										>
@@ -943,6 +960,9 @@ final class TourBlocks {
 			$caption_parts = array_filter( array( $destination_names[0] ?? '', $duration ) );
 			$caption       = $caption_parts ? implode( ' · ', $caption_parts ) : $title;
 			$title_length  = function_exists( 'mb_strlen' ) ? mb_strlen( $title ) : strlen( $title );
+			$price         = self::tour_price_summary( $tour->ID );
+			$route         = self::public_text( self::field( 'hks_route_summary', $tour->ID ) );
+			$included      = self::hero_inclusions_summary( $tour->ID );
 
 			$tours[] = array(
 				'id'         => $tour->ID,
@@ -951,6 +971,9 @@ final class TourBlocks {
 				'image_id'   => $image_id,
 				'eyebrow'    => $eyebrow ?: __( 'Featured tour', 'hks-wayfinder' ),
 				'caption'    => $caption,
+				'price'      => $price['label'] ?? '',
+				'route'      => $route,
+				'included'   => $included,
 				'long_title' => $title_length > 28 ? 'true' : 'false',
 			);
 
@@ -960,6 +983,34 @@ final class TourBlocks {
 		}
 
 		return $tours;
+	}
+
+	/**
+	 * Build a concise, sourced inclusion summary for the Featured Tour hero.
+	 *
+	 * @param int $tour_id Tour ID.
+	 * @return string
+	 */
+	private static function hero_inclusions_summary( int $tour_id ): string {
+		$items = array();
+
+		foreach ( self::rows( self::field( 'hks_inclusions', $tour_id ) ) as $row ) {
+			$item = self::public_text( $row['item'] ?? '' );
+			if ( $item ) {
+				$items[] = $item;
+			}
+		}
+
+		if ( ! $items ) {
+			return '';
+		}
+
+		$summary = implode( ' · ', array_slice( $items, 0, 2 ) );
+		$more    = count( $items ) - 2;
+
+		return 0 < $more
+			? sprintf( __( '%1$s · +%2$d more', 'hks-wayfinder' ), $summary, $more )
+			: $summary;
 	}
 
 	/**

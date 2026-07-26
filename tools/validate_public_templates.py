@@ -216,7 +216,15 @@ def main() -> int:
             "data-hks-home-gallery-link",
             "data-hks-home-gallery-pause",
             "data-hks-home-gallery-progress",
+            "data-hks-home-gallery-details",
+            "data-hks-home-gallery-price",
+            "data-hks-home-gallery-route",
+            "data-hks-home-gallery-included",
             "data-hks-tour-long-title",
+            "data-hks-tour-price",
+            "data-hks-tour-route",
+            "data-hks-tour-included",
+            "hero_inclusions_summary",
             "hero_media_allowed",
             "1200 <= (int) $image[1]",
             "675 <= (int) $image[2]",
@@ -285,7 +293,7 @@ def main() -> int:
 
     require(errors, "navigation script", sources["navigation"], ["showModal", "aria-expanded", "Escape", "data-hks-quote-proxy", "data-hks-inquiry-open"])
     require(errors, "utility contact strip", sources["header"], ["info@holidaykenyasafaris.ke", "instagram.com/holidaykenyasafaris", "facebook.com/people/Holiday-Kenya-Safaris/61591508593846", "hks-utility__social", "hks-utility__whatsapp"])
-    require(errors, "homepage gallery script", sources["home_gallery"], ["5000", "prefers-reduced-motion", "IntersectionObserver", "pointermove", "ArrowLeft", "ArrowRight", "dataset.hksPosition", "aria-hidden", "is-dragging", "drag.captured", "track.setPointerCapture", "data-hks-home-gallery-pause", "data-hks-home-gallery-progress", "activeIndex", "userPaused", "activeAnimation", "transitionSwapTimer", "clipPath", "clone.animate", "preload.decode", "visibilitychange"])
+    require(errors, "homepage gallery script", sources["home_gallery"], ["5000", "prefers-reduced-motion", "IntersectionObserver", "pointermove", "ArrowLeft", "ArrowRight", "dataset.hksPosition", "aria-hidden", "is-dragging", "drag.captured", "track.setPointerCapture", "data-hks-home-gallery-pause", "data-hks-home-gallery-progress", "data-hks-home-gallery-details", "data-hks-home-gallery-price", "data-hks-home-gallery-route", "data-hks-home-gallery-included", "dataset.hksTourPrice", "dataset.hksTourRoute", "dataset.hksTourIncluded", "activeIndex", "userPaused", "activeAnimation", "transitionSwapTimer", "clipPath", "clone.animate", "preload.decode", "visibilitychange"])
     forbid(errors, "homepage gallery timing", sources["home_gallery"], ["2500", "3000"])
     pointer_capture = sources["home_gallery"].find("track.setPointerCapture")
     drag_threshold = sources["home_gallery"].find("drag.moved = true")
