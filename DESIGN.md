@@ -116,7 +116,7 @@ The homepage hero uses up to five published Tours explicitly marked Featured and
 
 If only one eligible Featured Tour exists, render a static hero without controls. If none exists, render a compact generic fallback and catalogue action. Place Browse by destination immediately after the hero, followed by the existing Featured Tours grid. Tour grids use stable image ratios, consistent title space, and practical metadata rather than image-and-title-only cards.
 
-Catalogue and taxonomy pages use a compact title and breadcrumb band, useful filters, a responsive Tour grid, and clear no-results behavior. Avoid abstract gradients, empty metadata, and oversized media inventory.
+Catalogue and taxonomy pages use a compact title and breadcrumb band, useful filters, a responsive Tour grid, and clear no-results behavior. On the Tour catalogue, filters form a sticky vertical left rail from 1024px upward; below that breakpoint, a sticky `Filters` button opens the same controls in an accessible drawer. Avoid abstract gradients, empty metadata, and oversized media inventory.
 
 ### Canonical Tour shell
 

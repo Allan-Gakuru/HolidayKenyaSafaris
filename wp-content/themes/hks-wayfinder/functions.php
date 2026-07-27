@@ -79,6 +79,18 @@ function hks_wayfinder_enqueue_scripts(): void {
 		);
 	}
 
+	if ( is_post_type_archive( 'hks_tour' ) ) {
+		$catalogue_filters_path = get_theme_file_path( 'assets/js/catalogue-filters.js' );
+
+		wp_enqueue_script(
+			'hks-wayfinder-catalogue-filters',
+			get_theme_file_uri( 'assets/js/catalogue-filters.js' ),
+			array(),
+			is_readable( $catalogue_filters_path ) ? (string) filemtime( $catalogue_filters_path ) : wp_get_theme()->get( 'Version' ),
+			array( 'in_footer' => true, 'strategy' => 'defer' )
+		);
+	}
+
 	if ( is_singular( array( 'hks_tour', 'hks_campaign' ) ) ) {
 		$tour_ui_path = get_theme_file_path( 'assets/js/tour-ui.js' );
 

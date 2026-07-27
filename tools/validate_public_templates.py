@@ -74,6 +74,7 @@ def main() -> int:
         "footer": THEME / "parts" / "footer.html",
         "navigation": THEME / "assets" / "js" / "navigation.js",
         "home_gallery": THEME / "assets" / "js" / "home-gallery.js",
+        "catalogue_filters": THEME / "assets" / "js" / "catalogue-filters.js",
         "tour_ui": THEME / "assets" / "js" / "tour-ui.js",
         "quote": PLUGIN / "src" / "Conversion" / "QuoteBlock.php",
         "inquiry_repository": PLUGIN / "src" / "Conversion" / "InquiryRepository.php",
@@ -88,7 +89,7 @@ def main() -> int:
             errors.append(f"missing {path.relative_to(ROOT)}: {error}")
             sources[label] = ""
 
-    require(errors, "theme metadata", sources["style"], ["Version: 0.6.0", "body.home .hks-site-header", "body.home .hks-site-header.is-scrolled", "position: fixed", ".hks-home-hero--featured", ".hks-home-gallery__viewport", ".hks-home-gallery__progress", "--hks-card-width", ".hks-home-gallery__transition-image", "clip-path", "aspect-ratio: 3 / 4", ".hks-tour-workspace", ".hks-tour-media", ".hks-tour-gallery__thumbnails", ".hks-tour-gallery__stage", ".hks-tour-gallery__nav--prev", ".hks-tour-gallery__nav--next", ".hks-mobile-menu", ".hks-editorial-page", ".hks-group-travel-planner", ".hks-group-travel-visuals", ":focus-visible", "prefers-reduced-motion", "prefers-reduced-transparency"])
+    require(errors, "theme metadata", sources["style"], ["Version: 0.6.0", "body.home .hks-site-header", "body.home .hks-site-header.is-scrolled", "position: fixed", ".hks-home-hero--featured", ".hks-home-gallery__viewport", ".hks-home-gallery__progress", "--hks-card-width", ".hks-home-gallery__transition-image", "clip-path", "aspect-ratio: 3 / 4", ".hks-tour-workspace", ".hks-tour-media", ".hks-tour-gallery__thumbnails", ".hks-tour-gallery__stage", ".hks-tour-gallery__nav--prev", ".hks-tour-gallery__nav--next", ".hks-mobile-menu", ".hks-catalogue-filter-sidebar", ".hks-catalogue-filter-toggle", ".hks-catalogue-filter-drawer", "grid-template-columns: minmax(14rem, 16rem) minmax(0, 1fr)", ".hks-editorial-page", ".hks-group-travel-planner", ".hks-group-travel-visuals", ":focus-visible", "prefers-reduced-motion", "prefers-reduced-transparency"])
     forbid(errors, "theme stylesheet", sources["style"], ["linear-gradient(", "radial-gradient(", ".hks-site-header--home-overlay"])
 
     require(
@@ -99,6 +100,7 @@ def main() -> int:
             "inc/TourBlocks.php",
             "assets/js/navigation.js",
             "assets/js/home-gallery.js",
+            "assets/js/catalogue-filters.js",
             "assets/js/tour-ui.js",
             "hks_wayfinder_filter_tour_archive",
             "is_admin()",
@@ -172,6 +174,12 @@ def main() -> int:
         [
             "home-experience",
             "catalogue-controls",
+            "hks-catalogue-filter-sidebar",
+            "hks-catalogue-filter-toggle",
+            "hks-catalogue-filter-drawer",
+            "data-hks-filter-open",
+            "data-hks-filter-close",
+            "data-hks-filter-dialog",
             "render_canonical_hero",
             "render_campaign_hero",
             "hks-title-band",
@@ -302,6 +310,7 @@ def main() -> int:
         errors.append("public renderer must create one canonical and one Group Travel shared quote block instance")
 
     require(errors, "navigation script", sources["navigation"], ["showModal", "aria-expanded", "Escape", "data-hks-quote-proxy", "data-hks-inquiry-open", "is-scrolled", "window.scrollY", "requestAnimationFrame", "{ passive: true }"])
+    require(errors, "catalogue filter script", sources["catalogue_filters"], ["showModal", "aria-expanded", "data-hks-filter-dialog", "data-hks-filter-open", "data-hks-filter-close", "hks-filter-is-open", "cancel", "event.target === dialog", "returnFocus", "matchMedia('(min-width: 64rem)"])
     require(errors, "utility contact strip", sources["header"], ["info@holidaykenyasafaris.ke", "instagram.com/holidaykenyasafaris", "facebook.com/people/Holiday-Kenya-Safaris/61591508593846", "hks-utility__social", "hks-utility__whatsapp"])
     require(errors, "homepage gallery script", sources["home_gallery"], ["5000", "prefers-reduced-motion", "IntersectionObserver", "pointermove", "ArrowLeft", "ArrowRight", "dataset.hksPosition", "aria-hidden", "is-dragging", "drag.captured", "track.setPointerCapture", "data-hks-home-gallery-pause", "data-hks-home-gallery-progress", "data-hks-home-gallery-details", "data-hks-home-gallery-price", "data-hks-home-gallery-route", "data-hks-home-gallery-included", "dataset.hksTourPrice", "dataset.hksTourRoute", "dataset.hksTourIncluded", "activeIndex", "userPaused", "activeAnimation", "transitionSwapTimer", "animateStageSelection", "cloneImage.decode", "scale(1.025)", "is-copy-ready", "clone.animate", "preload.decode", "visibilitychange"])
     forbid(errors, "homepage gallery timing", sources["home_gallery"], ["2500", "3000"])

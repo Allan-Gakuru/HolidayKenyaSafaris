@@ -34,7 +34,8 @@ html {
 	scroll-padding-top: 8rem;
 }
 
-html.hks-menu-is-open {
+html.hks-menu-is-open,
+html.hks-filter-is-open {
 	overflow: hidden;
 }
 
@@ -2335,6 +2336,183 @@ body:not(.home) .wp-site-blocks > main {
 .hks-catalogue-controls__actions a {
 	font-size: 0.86rem;
 	font-weight: 700;
+}
+
+.hks-catalogue-body > .hks-catalogue-filter-shell,
+.hks-catalogue-body > .wp-block-query {
+	margin-block-start: 0 !important;
+	margin-inline: 0 !important;
+	max-width: none;
+	min-width: 0;
+	width: 100%;
+}
+
+.hks-catalogue-filter-shell {
+	margin-bottom: 1rem !important;
+	position: sticky;
+	top: 0.5rem;
+	z-index: 40;
+}
+
+.hks-catalogue-filter-toggle {
+	align-items: center;
+	background: var(--wp--preset--color--midnight-navy);
+	border: 1px solid rgb(255 255 255 / 18%);
+	border-radius: 8px;
+	color: var(--wp--preset--color--white);
+	cursor: pointer;
+	display: flex;
+	font-family: var(--wp--preset--font-family--montserrat);
+	font-size: 0.9rem;
+	font-weight: 700;
+	gap: 0.55rem;
+	justify-content: center;
+	min-height: 48px;
+	padding: 0.7rem 1rem;
+	width: 100%;
+}
+
+.hks-catalogue-filter-toggle svg,
+.hks-catalogue-filter-drawer__header button svg {
+	fill: none;
+	height: 1.25rem;
+	stroke: currentColor;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-width: 1.8;
+	width: 1.25rem;
+}
+
+.hks-catalogue-filter-toggle:hover {
+	background: var(--wp--preset--color--lake-teal);
+}
+
+.hks-catalogue-filter-sidebar {
+	display: none;
+}
+
+.hks-catalogue-filter-drawer {
+	background: var(--wp--preset--color--white);
+	border: 0;
+	color: var(--wp--preset--color--near-black);
+	height: 100dvh;
+	margin: 0 auto 0 0;
+	max-height: none;
+	max-width: 24rem;
+	padding: 0;
+	width: min(100%, 24rem);
+}
+
+.hks-catalogue-filter-drawer::backdrop {
+	background: rgb(24 43 58 / 68%);
+}
+
+.hks-catalogue-filter-drawer__header {
+	align-items: center;
+	border-bottom: 1px solid rgb(24 43 58 / 14%);
+	display: flex;
+	justify-content: space-between;
+	min-height: 64px;
+	padding: 0.65rem 1.25rem;
+}
+
+.hks-catalogue-filter-drawer__header h2 {
+	font-size: 1.15rem;
+	margin: 0;
+}
+
+.hks-catalogue-filter-drawer__header button {
+	align-items: center;
+	background: transparent;
+	border: 0;
+	border-radius: 50%;
+	color: var(--wp--preset--color--midnight-navy);
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	min-height: 44px;
+	min-width: 44px;
+	padding: 0;
+}
+
+.hks-catalogue-filter-drawer__header button:hover {
+	background: var(--wp--preset--color--pale-mist);
+}
+
+.hks-catalogue-controls--drawer {
+	border: 0;
+	border-radius: 0;
+	height: calc(100dvh - 64px);
+	margin: 0;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	padding: 1rem 1.25rem max(1.25rem, env(safe-area-inset-bottom));
+}
+
+.hks-catalogue-controls--drawer .hks-catalogue-controls__fields,
+.hks-catalogue-controls--sidebar .hks-catalogue-controls__fields {
+	grid-template-columns: 1fr;
+}
+
+.hks-catalogue-controls--drawer .hks-catalogue-controls__actions {
+	background: var(--wp--preset--color--white);
+	border-top: 1px solid rgb(24 43 58 / 14%);
+	bottom: calc(-1 * max(1.25rem, env(safe-area-inset-bottom)));
+	margin: 1rem -1.25rem 0;
+	padding: 1rem 1.25rem max(1rem, env(safe-area-inset-bottom));
+	position: sticky;
+}
+
+@media (min-width: 64rem) {
+	.hks-catalogue-body {
+		align-items: start;
+		display: grid;
+		gap: clamp(1.5rem, 3vw, 2.5rem);
+		grid-template-columns: minmax(14rem, 16rem) minmax(0, 1fr);
+	}
+
+	.hks-catalogue-filter-shell {
+		margin-bottom: 0 !important;
+		position: sticky;
+		top: 1rem;
+		z-index: auto;
+	}
+
+	.hks-catalogue-filter-toggle,
+	.hks-catalogue-filter-drawer {
+		display: none;
+	}
+
+	.hks-catalogue-filter-sidebar {
+		display: block;
+	}
+
+	.hks-catalogue-filter-sidebar > h2 {
+		font-size: 1.15rem;
+		margin: 0 0 0.75rem;
+	}
+
+	.hks-catalogue-controls--sidebar {
+		margin: 0;
+		padding: 1rem;
+	}
+
+	.hks-catalogue-controls--sidebar .hks-catalogue-controls__actions {
+		align-items: stretch;
+		flex-direction: column;
+	}
+
+	.hks-catalogue-controls--sidebar .hks-catalogue-controls__actions button {
+		width: 100%;
+	}
+
+	.hks-catalogue-controls--sidebar .hks-catalogue-controls__actions a {
+		align-items: center;
+		display: flex;
+		justify-content: center;
+		min-height: 44px;
+		text-align: center;
+	}
 }
 
 .wp-block-query-pagination {

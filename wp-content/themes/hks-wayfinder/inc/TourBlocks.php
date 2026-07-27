@@ -699,7 +699,7 @@ final class TourBlocks {
 	 */
 	public static function render_catalogue_controls(): string {
 		$taxonomies = array(
-			'hks_tour_scope' => __( 'Tour scope', 'hks-wayfinder' ),
+			'hks_tour_scope'  => __( 'Tour scope', 'hks-wayfinder' ),
 			'hks_destination' => __( 'Destination', 'hks-wayfinder' ),
 			'hks_tour_type'   => __( 'Trip type', 'hks-wayfinder' ),
 			'hks_occasion'    => __( 'Occasion', 'hks-wayfinder' ),
@@ -718,11 +718,61 @@ final class TourBlocks {
 			return '';
 		}
 
-		$archive = get_post_type_archive_link( 'hks_tour' ) ?: home_url( '/tours/' );
+		$archive          = get_post_type_archive_link( 'hks_tour' ) ?: home_url( '/tours/' );
+		$drawer_id        = wp_unique_id( 'hks-catalogue-filter-drawer-' );
+		$drawer_title_id  = $drawer_id . '-title';
+		$sidebar_title_id = wp_unique_id( 'hks-catalogue-filter-sidebar-title-' );
 
 		ob_start();
 		?>
-		<form class="hks-catalogue-controls" method="get" action="<?php echo esc_url( $archive ); ?>" data-hks-catalogue-controls>
+		<div class="hks-catalogue-filter-shell" data-hks-catalogue-filters>
+			<button
+				class="hks-catalogue-filter-toggle"
+				type="button"
+				aria-controls="<?php echo esc_attr( $drawer_id ); ?>"
+				aria-expanded="false"
+				data-hks-filter-open
+			>
+				<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 5h16l-6.5 7.2v5.3l-3 1.5v-6.8L4 5Z"></path></svg>
+				<span><?php esc_html_e( 'Filters', 'hks-wayfinder' ); ?></span>
+			</button>
+
+			<aside class="hks-catalogue-filter-sidebar" aria-labelledby="<?php echo esc_attr( $sidebar_title_id ); ?>">
+				<h2 id="<?php echo esc_attr( $sidebar_title_id ); ?>"><?php esc_html_e( 'Filters', 'hks-wayfinder' ); ?></h2>
+				<?php self::render_catalogue_filter_form( $available, $archive, 'sidebar' ); ?>
+			</aside>
+
+			<dialog
+				class="hks-catalogue-filter-drawer"
+				id="<?php echo esc_attr( $drawer_id ); ?>"
+				aria-labelledby="<?php echo esc_attr( $drawer_title_id ); ?>"
+				data-hks-filter-dialog
+			>
+				<div class="hks-catalogue-filter-drawer__header">
+					<h2 id="<?php echo esc_attr( $drawer_title_id ); ?>"><?php esc_html_e( 'Filters', 'hks-wayfinder' ); ?></h2>
+					<button type="button" aria-label="<?php esc_attr_e( 'Close filters', 'hks-wayfinder' ); ?>" data-hks-filter-close>
+						<svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+					</button>
+				</div>
+				<?php self::render_catalogue_filter_form( $available, $archive, 'drawer' ); ?>
+			</dialog>
+		</div>
+		<?php
+
+		return (string) ob_get_clean();
+	}
+
+	/**
+	 * Render one catalogue filter form for the current viewport presentation.
+	 *
+	 * @param array<string,array{label:string,terms:array}> $available Available filter groups.
+	 * @param string                                       $archive   Tour archive URL.
+	 * @param string                                       $variant   Sidebar or drawer.
+	 * @return void
+	 */
+	private static function render_catalogue_filter_form( array $available, string $archive, string $variant ): void {
+		?>
+		<form class="hks-catalogue-controls hks-catalogue-controls--<?php echo esc_attr( $variant ); ?>" method="get" action="<?php echo esc_url( $archive ); ?>" data-hks-catalogue-controls="<?php echo esc_attr( $variant ); ?>">
 			<div class="hks-catalogue-controls__fields">
 				<?php foreach ( $available as $taxonomy => $group ) : $raw_selected = $_GET[ $taxonomy ] ?? ''; $selected = is_string( $raw_selected ) ? sanitize_title( wp_unslash( $raw_selected ) ) : ''; ?>
 					<label><span><?php echo esc_html( $group['label'] ); ?></span><select name="<?php echo esc_attr( $taxonomy ); ?>"><option value=""><?php echo esc_html( sprintf( __( 'All %s', 'hks-wayfinder' ), strtolower( $group['label'] ) ) ); ?></option><?php foreach ( $group['terms'] as $term ) : ?><option value="<?php echo esc_attr( $term->slug ); ?>" <?php selected( $selected, $term->slug ); ?>><?php echo esc_html( $term->name ); ?></option><?php endforeach; ?></select></label>
@@ -733,8 +783,6 @@ final class TourBlocks {
 			<div class="hks-catalogue-controls__actions"><button type="submit"><?php esc_html_e( 'Apply filters', 'hks-wayfinder' ); ?></button><a href="<?php echo esc_url( $archive ); ?>"><?php esc_html_e( 'Clear', 'hks-wayfinder' ); ?></a></div>
 		</form>
 		<?php
-
-		return (string) ob_get_clean();
 	}
 
 	/**

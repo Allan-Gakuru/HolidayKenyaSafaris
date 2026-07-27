@@ -149,7 +149,7 @@ Use a compact title and breadcrumb band followed by:
 5. Pagination or a deliberate load-more pattern.
 6. A final quote or discovery prompt.
 
-Desktop filters may be horizontal or use a restrained sidebar. Mobile filters must use an accessible drawer or dialog. Do not expose empty filters or meaningless metadata such as a default `1 person` value.
+The Tour catalogue uses a restrained, sticky vertical filter sidebar from 1024px upward. Below that breakpoint, a sticky `Filters` control opens the same GET-based fields in a native accessible dialog drawer with Escape, backdrop-close, focus return, and scroll lock. Do not expose empty filters or meaningless metadata such as a default `1 person` value.
 
 ## Canonical Tour Template
 

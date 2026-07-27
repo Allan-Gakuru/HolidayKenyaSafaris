@@ -132,7 +132,7 @@ Tour cards show:
 - `From KSh X per person` when a positive Tour price exists.
 - View trip action.
 
-Do not display meaningless default metadata such as `1 person`. Mobile filters use an accessible drawer or dialog.
+Do not display meaningless default metadata such as `1 person`. On the Tour catalogue, filters are arranged vertically in a sticky left column from 1024px upward. Below 1024px, a sticky `Filters` button opens the same controls in an accessible drawer or dialog.
 
 ### Destination Pages
 
