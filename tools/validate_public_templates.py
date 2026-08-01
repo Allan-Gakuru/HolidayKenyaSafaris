@@ -218,6 +218,8 @@ def main() -> int:
             "_wp_attachment_image_alt",
             "wp_get_attachment_caption",
             "Request a tailored quote",
+            "hks-tour-quote__reassurances",
+            "A quote request is not a booking.",
             "Your quote confirms the final package for your dates and group.",
             "Holiday Kenya Safaris is operated by Ashford Tours & Travel.",
             "data-hks-primary-quote",
