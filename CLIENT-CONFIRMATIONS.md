@@ -49,7 +49,7 @@ Use this file for project-level decisions such as contact details, legal wording
 | Facebook | Confirmed | `https://www.facebook.com/people/Holiday-Kenya-Safaris/61591508593846/` |
 | Address | CLIENT CONFIRMATION REQUIRED | Verify against current Ashford source and client approval |
 | Business hours | CLIENT CONFIRMATION REQUIRED | Do not infer |
-| Quote response expectation | CLIENT CONFIRMATION REQUIRED | Do not promise a response time without operations approval |
+| Quote response expectation | Confirmed for public reassurance wording | Tour quote panels may state `Fast quote response`. This approval does not create a fixed response-time SLA. Approved by the client in a Codex task on 2026-08-02. |
 | Legal company/operator wording | CLIENT CONFIRMATION REQUIRED | Approve footer, terms, invoice, and operator language |
 | Registration and tax details | CLIENT CONFIRMATION REQUIRED | Publish only when verified and appropriate |
 | Memberships and licenses | CLIENT CONFIRMATION REQUIRED | Record exact source and expiry/current status |
@@ -61,7 +61,7 @@ All are `CLIENT CONFIRMATION REQUIRED`:
 - Deposit amount or percentage.
 - Payment methods and official payment destination.
 - Balance deadline.
-- Cancellation and amendment policy.
+- Cancellation and amendment policy. The Tour quote-panel reassurance `Flexible cancellation terms` was approved by the client in a Codex task on 2026-08-02; detailed public terms still require confirmation before the policy route is published.
 - Refund policy.
 - No-show policy.
 - Child age bands and rates.
