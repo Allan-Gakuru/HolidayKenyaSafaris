@@ -36,6 +36,7 @@ BLOCKS = {
     "blocks/taxonomy-intro/block.json": "hks-wayfinder/taxonomy-intro",
     "blocks/home-experience/block.json": "hks-wayfinder/home-experience",
     "blocks/catalogue-controls/block.json": "hks-wayfinder/catalogue-controls",
+    "blocks/footer-navigation/block.json": "hks-wayfinder/footer-navigation",
     "blocks/page-title/block.json": "hks-wayfinder/page-title",
     "blocks/group-travel-page/block.json": "hks-wayfinder/group-travel-page",
 }
@@ -68,6 +69,7 @@ def main() -> int:
     sources: Dict[str, str] = {}
     source_paths = {
         "renderer": THEME / "inc" / "TourBlocks.php",
+        "nav_menus": THEME / "inc" / "NavMenus.php",
         "functions": THEME / "functions.php",
         "style": THEME / "style.css",
         "header": THEME / "patterns" / "header.php",
@@ -89,7 +91,7 @@ def main() -> int:
             errors.append(f"missing {path.relative_to(ROOT)}: {error}")
             sources[label] = ""
 
-    require(errors, "theme metadata", sources["style"], ["Version: 0.6.0", "body.home .hks-site-header", "body.home .hks-site-header.is-scrolled", "position: fixed", ".hks-home-hero--featured", ".hks-home-gallery__viewport", ".hks-home-gallery__progress", "--hks-card-width", ".hks-home-gallery__transition-image", "clip-path", "aspect-ratio: 3 / 4", ".hks-tour-workspace", ".hks-tour-media", ".hks-tour-gallery__thumbnails", ".hks-tour-gallery__stage", ".hks-tour-gallery__nav--prev", ".hks-tour-gallery__nav--next", ".hks-mobile-menu", ".hks-catalogue-filter-sidebar", ".hks-catalogue-filter-toggle", ".hks-catalogue-filter-drawer", "grid-template-columns: minmax(14rem, 16rem) minmax(0, 1fr)", ".hks-editorial-page", ".hks-group-travel-planner", ".hks-group-travel-visuals", ":focus-visible", "prefers-reduced-motion", "prefers-reduced-transparency"])
+    require(errors, "theme metadata", sources["style"], ["Version: 0.6.0", "body.home .hks-site-header", "body.home .hks-site-header.is-scrolled", "position: fixed", ".hks-home-hero--featured", ".hks-home-gallery__viewport", ".hks-home-gallery__progress", "--hks-card-width", ".hks-home-gallery__transition-image", "clip-path", "aspect-ratio: 3 / 4", ".hks-tour-workspace", ".hks-tour-media", ".hks-tour-gallery__thumbnails", ".hks-tour-gallery__stage", ".hks-tour-gallery__nav--prev", ".hks-tour-gallery__nav--next", ".hks-mobile-menu", ".hks-mobile-menu__parent-link", ".hks-footer-menu", ".hks-catalogue-filter-sidebar", ".hks-catalogue-filter-toggle", ".hks-catalogue-filter-drawer", "grid-template-columns: minmax(14rem, 16rem) minmax(0, 1fr)", ".hks-editorial-page", ".hks-group-travel-planner", ".hks-group-travel-visuals", ":focus-visible", "prefers-reduced-motion", "prefers-reduced-transparency"])
     forbid(errors, "theme stylesheet", sources["style"], ["linear-gradient(", "radial-gradient(", ".hks-site-header--home-overlay"])
 
     require(
@@ -97,7 +99,10 @@ def main() -> int:
         "theme registration",
         sources["functions"],
         [
+            "inc/NavMenus.php",
             "inc/TourBlocks.php",
+            "NavMenus::register",
+            "register_admin_page",
             "assets/js/navigation.js",
             "assets/js/home-gallery.js",
             "assets/js/catalogue-filters.js",
@@ -135,6 +140,9 @@ def main() -> int:
             "Request quote on WhatsApp",
             "data-hks-quote-proxy",
             "hks-mobile-menu__social",
+            "NavMenus::has_primary_menu",
+            "NavMenus::render_desktop",
+            "NavMenus::render_mobile",
         ],
     )
     forbid(errors, "header", sources["header"], ["is_front_page()", "hks-site-header--home-overlay"])
@@ -145,7 +153,8 @@ def main() -> int:
     utility_whatsapp = re.search(r'<a class="hks-utility__contact hks-utility__whatsapp"(.*?)</a>', sources["header"], re.DOTALL)
     if not utility_whatsapp or "data-hks-quote-proxy" in utility_whatsapp.group(1):
         errors.append("utility WhatsApp contact must be a direct link, not a quote-form proxy")
-    require(errors, "footer", sources["footer"], ["operated by Ashford Tours &amp; Travel", "href=\"/tours/\"", "href=\"/group-travel/\""])
+    require(errors, "footer", sources["footer"], ["operated by Ashford Tours &amp; Travel", "hks-wayfinder/footer-navigation"])
+    require(errors, "managed navigation", sources["nav_menus"], ["register_nav_menus", "PRIMARY_LOCATION", "FOOTER_LOCATION", "wp_nav_menu", "Desktop_Menu_Walker", "Mobile_Menu_Walker", "hks-nav-menu__panel", "hks-mobile-menu__parent-link", "nav-menus.php", "href=\"%4$s\"", "home_url( '/tours/' )"])
 
     require(errors, "home template", files["home"], ["hks-wayfinder/home-experience"])
     require(errors, "catalogue template", files["catalogue"], ["hks-title-band", "hks-wayfinder/catalogue-controls", "hks-wayfinder/tour-card", "postType\":\"hks_tour", "inherit\":true"])
@@ -174,6 +183,7 @@ def main() -> int:
         [
             "home-experience",
             "catalogue-controls",
+            "footer-navigation",
             "hks-catalogue-filter-sidebar",
             "hks-catalogue-filter-toggle",
             "hks-catalogue-filter-drawer",

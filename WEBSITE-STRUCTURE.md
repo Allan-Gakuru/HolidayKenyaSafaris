@@ -44,6 +44,8 @@ Suggested dropdown structure:
 
 Do not expose empty categories. Do not include visa services, standalone transfers, or unrelated service pages.
 
+The client manages header and footer links under **Appearance > Site Menus**. Assign one menu to `Primary header and mobile menu`; its top-level items and one child level render consistently as desktop links/dropdowns and mobile links/accordions. Assign a separate menu to `Footer menu`. Unassigned locations retain the documented theme fallback so navigation cannot disappear during editing or deployment.
+
 ### Mobile navigation
 
 Use a full-height drawer with:

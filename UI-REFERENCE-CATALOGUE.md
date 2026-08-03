@@ -70,6 +70,8 @@ Approved primary structure:
 6. About.
 7. Contact.
 
+Editors manage this hierarchy in WordPress through the registered `Primary header and mobile menu` location. The same assigned menu must render in both the desktop header and mobile drawer: top-level items with children become desktop dropdowns and mobile accordions. Keep the managed hierarchy to two levels. The separate `Footer menu` location controls footer links. If either location is unassigned, the theme renders its existing safe fallback rather than an unrelated WordPress page list.
+
 The mobile drawer and page-level conversion surfaces retain the **Request quote on WhatsApp** action.
 
 `Safaris` may expose only populated, approved routes such as:

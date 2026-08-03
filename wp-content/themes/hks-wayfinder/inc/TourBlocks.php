@@ -33,6 +33,7 @@ final class TourBlocks {
 			'taxonomy-intro'     => 'render_taxonomy_intro',
 			'home-experience'    => 'render_home_experience',
 			'catalogue-controls' => 'render_catalogue_controls',
+			'footer-navigation'  => 'render_footer_navigation',
 			'page-title'         => 'render_page_title',
 			'group-travel-page'  => 'render_group_travel_page',
 		);
@@ -43,6 +44,15 @@ final class TourBlocks {
 				array( 'render_callback' => array( self::class, $callback ) )
 			);
 		}
+	}
+
+	/**
+	 * Render the dashboard-managed footer menu with its existing safe fallback.
+	 *
+	 * @return string
+	 */
+	public static function render_footer_navigation(): string {
+		return NavMenus::render_footer();
 	}
 
 	/**

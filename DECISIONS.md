@@ -102,6 +102,7 @@ Exclude by default:
 - A conventional booking sidebar is replaced by an HKS quote panel whose **Request quote on WhatsApp** button opens the approved intake, consent, private recovery, message-review, and WhatsApp-launch flow.
 - Desktop navigation uses a utility bar plus product-led primary header. The utility bar carries a direct WhatsApp link with a prefilled, page-aware reach-out message; the primary header does not repeat it as a large button. Page-level quote actions still open the approved intake and recovery flow. Mobile uses a full-height accessible navigation drawer.
 - Approved top-level navigation is Home, Safaris, Coast & Stays, Destinations, Group Travel, About, and Contact. The mobile drawer retains a clear Request quote on WhatsApp action.
+- Header/mobile and footer links use native WordPress menu locations exposed as **Appearance > Site Menus**. One assigned two-level Primary menu drives both desktop dropdowns and mobile accordions; Footer has its own location. The prior catalogue-aware markup remains the fallback until an editor assigns a menu, preventing an empty header during rollout.
 - Kenya and international Tours are separated by the public Tour Scope taxonomy. Destination remains the geographic taxonomy used beneath either scope.
 - Visa services, standalone transfers, and non-Tour service pages remain excluded.
 

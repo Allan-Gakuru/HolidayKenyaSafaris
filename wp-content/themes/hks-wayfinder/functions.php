@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+require_once get_theme_file_path( 'inc/NavMenus.php' );
 require_once get_theme_file_path( 'inc/TourBlocks.php' );
 
 /**
@@ -26,10 +27,13 @@ function hks_wayfinder_setup(): void {
 	add_theme_support( 'responsive-embeds' );
 	add_theme_support( 'title-tag' );
 	add_theme_support( 'wp-block-styles' );
+	\HKS_Wayfinder\NavMenus::register();
 
 	add_editor_style( 'style.css' );
 }
 add_action( 'after_setup_theme', 'hks_wayfinder_setup' );
+
+add_action( 'admin_menu', array( \HKS_Wayfinder\NavMenus::class, 'register_admin_page' ), 90 );
 
 /**
  * Enqueue the small structural stylesheet that complements theme.json.

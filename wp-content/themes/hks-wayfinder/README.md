@@ -21,7 +21,7 @@ Regenerate or verify the font package from the pinned Montserrat WOFF2 and OFL f
 ## First activation
 
 1. Activate **HKS Wayfinder** under Appearance → Themes.
-2. Confirm the product-led desktop navigation and mobile drawer. Only populated catalogue terms and published routes appear.
+2. Open **Appearance > Site Menus**, create or select the Primary and Footer menus, and assign them to `Primary header and mobile menu` and `Footer menu`. Keep Primary to two levels; child items become desktop dropdown links and mobile accordion links. Until a menu is assigned, the existing populated catalogue navigation remains active.
 3. Configure the WordPress Site Icon when the final identity has client sign-off; until then, the theme fallback is used.
 4. Do not publish a photograph until its source and usage approval are recorded.
 

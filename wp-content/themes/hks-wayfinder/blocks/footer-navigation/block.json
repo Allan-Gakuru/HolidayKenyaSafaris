@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "hks-wayfinder/footer-navigation",
+  "version": "0.1.0",
+  "title": "HKS Footer navigation",
+  "category": "theme",
+  "icon": "menu",
+  "description": "Render the footer menu assigned in Appearance > Site Menus.",
+  "textdomain": "hks-wayfinder",
+  "supports": { "html": false, "multiple": false }
+}

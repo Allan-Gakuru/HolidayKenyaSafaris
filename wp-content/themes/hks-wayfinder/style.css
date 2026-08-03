@@ -379,7 +379,10 @@ body.home .hks-site-header.is-scrolled .hks-primary-header {
 
 .hks-primary-nav > a:hover,
 .hks-nav-menu > summary:hover,
-.hks-nav-menu[open] > summary {
+.hks-nav-menu[open] > summary,
+.hks-primary-nav > a.current-menu-item,
+.hks-nav-menu.current-menu-ancestor > summary,
+.hks-nav-menu.current-menu-item > summary {
 	color: var(--wp--preset--color--lake-teal);
 }
 
@@ -597,6 +600,23 @@ body.home .hks-site-header.is-scrolled .hks-primary-header {
 	font-size: 0.92rem;
 	justify-content: space-between;
 	padding: 0.45rem 0.25rem;
+}
+
+.hks-mobile-menu__parent-link {
+	align-items: center;
+	color: var(--wp--preset--color--lake-teal);
+	display: flex;
+	font-size: 0.88rem;
+	font-weight: 700;
+	justify-content: space-between;
+	padding: 0.35rem 0.25rem 0.2rem;
+	text-decoration: none;
+}
+
+.hks-mobile-menu__nav .current-menu-item > a,
+.hks-mobile-menu__nav > a.current-menu-item,
+.hks-mobile-menu__nav details.current-menu-ancestor > summary {
+	color: var(--wp--preset--color--lake-teal);
 }
 
 .hks-mobile-menu__footer {
@@ -2600,6 +2620,14 @@ body:not(.home) .wp-site-blocks > main {
 	display: grid;
 	font-size: 0.9rem;
 	gap: 0.5rem;
+}
+
+.hks-footer-menu {
+	display: grid;
+	gap: 0.5rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
 .hks-floating-whatsapp {

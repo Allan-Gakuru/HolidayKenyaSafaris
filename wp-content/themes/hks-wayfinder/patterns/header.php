@@ -28,6 +28,7 @@ $instagram_url      = 'https://www.instagram.com/holidaykenyasafaris/';
 $facebook_url       = 'https://www.facebook.com/people/Holiday-Kenya-Safaris/61591508593846/';
 $whatsapp_number    = '254712965131';
 $whatsapp_message   = __( "Hi Holiday Kenya Safaris, I'd like help choosing and planning a trip.", 'hks-wayfinder' );
+$has_primary_menu   = \HKS_Wayfinder\NavMenus::has_primary_menu();
 $safari_terms       = array();
 $coast_terms        = array();
 $kenya_scope        = null;
@@ -136,6 +137,9 @@ $render_terms = static function ( array $terms ): void {
 			</a>
 
 			<nav class="hks-primary-nav" aria-label="<?php echo esc_attr__( 'Primary navigation', 'hks-wayfinder' ); ?>">
+				<?php if ( $has_primary_menu ) : ?>
+					<?php echo \HKS_Wayfinder\NavMenus::render_desktop(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Generated and escaped by the menu walker. ?>
+				<?php else : ?>
 				<a href="<?php echo esc_url( $home_url ); ?>"><?php esc_html_e( 'Home', 'hks-wayfinder' ); ?></a>
 
 				<?php if ( $kenya_scope instanceof WP_Term ) : ?>
@@ -195,6 +199,7 @@ $render_terms = static function ( array $terms ): void {
 				<a href="<?php echo esc_url( $group_url ); ?>"><?php esc_html_e( 'Group Travel', 'hks-wayfinder' ); ?></a>
 				<?php if ( $about_url ) : ?><a href="<?php echo esc_url( $about_url ); ?>"><?php esc_html_e( 'About', 'hks-wayfinder' ); ?></a><?php endif; ?>
 				<?php if ( $contact_url ) : ?><a href="<?php echo esc_url( $contact_url ); ?>"><?php esc_html_e( 'Contact', 'hks-wayfinder' ); ?></a><?php endif; ?>
+				<?php endif; ?>
 			</nav>
 
 			<div class="hks-header-actions">
@@ -212,6 +217,9 @@ $render_terms = static function ( array $terms ): void {
 			<button type="button" data-hks-menu-close aria-label="<?php echo esc_attr__( 'Close menu', 'hks-wayfinder' ); ?>"><span aria-hidden="true">×</span></button>
 		</div>
 		<nav class="hks-mobile-menu__nav" aria-label="<?php echo esc_attr__( 'Mobile primary navigation', 'hks-wayfinder' ); ?>">
+			<?php if ( $has_primary_menu ) : ?>
+				<?php echo \HKS_Wayfinder\NavMenus::render_mobile(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Generated and escaped by the menu walker. ?>
+			<?php else : ?>
 			<a href="<?php echo esc_url( $home_url ); ?>"><?php esc_html_e( 'Home', 'hks-wayfinder' ); ?><span aria-hidden="true">→</span></a>
 			<?php if ( $kenya_scope instanceof WP_Term ) : ?>
 				<details><summary><?php esc_html_e( 'Kenya Tours', 'hks-wayfinder' ); ?></summary><ul><?php $render_terms( $kenya_destinations ?: $safari_terms ); ?><li><a href="<?php echo esc_url( hks_wayfinder_term_url( $kenya_scope ) ); ?>"><?php esc_html_e( 'All Kenya tours', 'hks-wayfinder' ); ?><span aria-hidden="true">&rarr;</span></a></li></ul></details>
@@ -232,6 +240,7 @@ $render_terms = static function ( array $terms ): void {
 			<a href="<?php echo esc_url( $group_url ); ?>"><?php esc_html_e( 'Group Travel', 'hks-wayfinder' ); ?><span aria-hidden="true">→</span></a>
 			<?php if ( $about_url ) : ?><a href="<?php echo esc_url( $about_url ); ?>"><?php esc_html_e( 'About', 'hks-wayfinder' ); ?><span aria-hidden="true">→</span></a><?php endif; ?>
 			<?php if ( $contact_url ) : ?><a href="<?php echo esc_url( $contact_url ); ?>"><?php esc_html_e( 'Contact', 'hks-wayfinder' ); ?><span aria-hidden="true">→</span></a><?php endif; ?>
+			<?php endif; ?>
 		</nav>
 		<div class="hks-mobile-menu__footer">
 			<?php if ( $is_quote_context ) : ?>
