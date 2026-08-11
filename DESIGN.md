@@ -128,7 +128,7 @@ Use the structure in `UI-REFERENCE-CATALOGUE.md`:
 2. Desktop three-column composition: vertical thumbnail rail, one active gallery image, and the sticky quote panel.
 3. Destination or route line beneath the active media.
 4. Main Tour facts and accessible tabs beneath the media while the quote panel remains sticky.
-5. Accessible thumbnail selection, over-image previous/next chevrons, five-second automatic rotation with interaction and visibility pauses, and a full-gallery lightbox.
+5. Accessible thumbnail selection, over-image previous/next chevrons, five-second automatic rotation with interaction and visibility pauses, and a full-gallery lightbox. Desktop shows no more than six rail thumbnails; when more images exist, the sixth uses a dark count overlay and opens the lightbox at that image.
 6. Horizontal image previews and normal-flow quote content below desktop width.
 7. Related Tours and final quote prompt.
 

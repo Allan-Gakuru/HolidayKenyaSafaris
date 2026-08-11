@@ -172,7 +172,7 @@ The canonical Tour page should follow the approved information architecture and 
 
 Desktop:
 
-- A vertical rail showing the Tour's assigned gallery images in editorial order.
+- A vertical rail showing at most six of the Tour's assigned gallery images in editorial order. When additional images exist, the sixth thumbnail carries a dark `+N more` overlay and opens the full gallery at that image; later thumbnails stay available through the active-image controls and lightbox without extending the desktop row.
 - One dominant active landscape image beside the thumbnail rail.
 - A clear View gallery control over the active image.
 - Selecting a thumbnail updates the active image without opening the lightbox; activating the main image or View gallery control opens the lightbox at that image.

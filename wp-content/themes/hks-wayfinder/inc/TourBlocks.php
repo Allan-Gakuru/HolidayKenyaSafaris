@@ -808,8 +808,10 @@ final class TourBlocks {
 	 * @return void
 	 */
 	private static function render_gallery( array $images, string $title ): void {
-		$count            = count( $images );
-		$initial_image_id = $images[0];
+		$count                     = count( $images );
+		$initial_image_id          = $images[0];
+		$desktop_thumbnail_limit   = 6;
+		$additional_desktop_images = max( 0, $count - $desktop_thumbnail_limit );
 		?>
 		<div class="hks-tour-gallery hks-tour-gallery--<?php echo esc_attr( (string) min( 3, $count ) ); ?>" data-hks-gallery data-hks-gallery-interval="5000">
 			<div class="hks-tour-gallery__grid<?php echo 1 === $count ? ' hks-tour-gallery__grid--single' : ''; ?>">
@@ -821,18 +823,47 @@ final class TourBlocks {
 							$stage_srcset = wp_get_attachment_image_srcset( $image_id, 'large' ) ?: '';
 							$stage_alt    = trim( (string) get_post_meta( $image_id, '_wp_attachment_image_alt', true ) );
 							$stage_label  = sprintf( __( 'Open image %1$s of %2$s for %3$s', 'hks-wayfinder' ), $index + 1, $count, $title );
+							$is_more_thumbnail = $additional_desktop_images > 0 && ( $desktop_thumbnail_limit - 1 ) === $index;
+							$is_desktop_overflow = $index >= $desktop_thumbnail_limit;
+							$thumbnail_class = 'hks-tour-gallery__thumbnail';
+							$thumbnail_label = sprintf( __( 'Show image %1$s of %2$s for %3$s', 'hks-wayfinder' ), $index + 1, $count, $title );
+
+							if ( $is_more_thumbnail ) {
+								$thumbnail_class .= ' hks-tour-gallery__thumbnail--more';
+								$thumbnail_label  = sprintf(
+									/* translators: 1: image position, 2: gallery image count, 3: Tour title, 4: number of later images. */
+									_n( 'View image %1$s of %2$s for %3$s; %4$s additional image follows', 'View image %1$s of %2$s for %3$s; %4$s additional images follow', $additional_desktop_images, 'hks-wayfinder' ),
+									$index + 1,
+									$count,
+									$title,
+									number_format_i18n( $additional_desktop_images )
+								);
+							}
+
+							if ( $is_desktop_overflow ) {
+								$thumbnail_class .= ' hks-tour-gallery__thumbnail--desktop-overflow';
+							}
 							?>
 							<button
 								type="button"
-								class="hks-tour-gallery__thumbnail"
+								class="<?php echo esc_attr( $thumbnail_class ); ?>"
 								data-hks-gallery-thumb="<?php echo esc_attr( (string) $index ); ?>"
+								<?php if ( $is_more_thumbnail ) : ?>data-hks-gallery-more-open="<?php echo esc_attr( (string) $index ); ?>"<?php endif; ?>
 								data-hks-gallery-stage-src="<?php echo esc_url( $stage_src ); ?>"
 								data-hks-gallery-stage-srcset="<?php echo esc_attr( $stage_srcset ); ?>"
 								data-hks-gallery-stage-alt="<?php echo esc_attr( $stage_alt ); ?>"
 								data-hks-gallery-stage-label="<?php echo esc_attr( $stage_label ); ?>"
-								aria-label="<?php echo esc_attr( sprintf( __( 'Show image %1$s of %2$s for %3$s', 'hks-wayfinder' ), $index + 1, $count, $title ) ); ?>"
+								aria-label="<?php echo esc_attr( $thumbnail_label ); ?>"
 								aria-pressed="<?php echo 0 === $index ? 'true' : 'false'; ?>"
-							><?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'thumbnail', false, array( 'alt' => '', 'loading' => $index < 5 ? 'eager' : 'lazy', 'sizes' => '112px' ) ) ); ?></button>
+							>
+								<?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'thumbnail', false, array( 'alt' => '', 'loading' => $index < 5 ? 'eager' : 'lazy', 'sizes' => '112px' ) ) ); ?>
+								<?php if ( $is_more_thumbnail ) : ?>
+									<span class="hks-tour-gallery__thumbnail-more" aria-hidden="true">
+										<strong>+<?php echo esc_html( number_format_i18n( $additional_desktop_images ) ); ?></strong>
+										<span><?php echo esc_html( _n( 'more image', 'more images', $additional_desktop_images, 'hks-wayfinder' ) ); ?></span>
+									</span>
+								<?php endif; ?>
+							</button>
 						<?php endforeach; ?>
 					</div>
 				<?php endif; ?>

@@ -1634,6 +1634,10 @@ body:not(.home) .wp-site-blocks > main {
 	opacity: 1;
 }
 
+.hks-tour-gallery__thumbnail-more {
+	display: none;
+}
+
 .hks-tour-gallery__stage-wrap {
 	aspect-ratio: 4 / 3;
 	min-width: 0;
@@ -2681,6 +2685,44 @@ body:not(.home) .wp-site-blocks > main {
 
 	.hks-catalogue-controls__fields {
 		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+@media (min-width: 56.0625rem) {
+	.hks-tour-gallery__thumbnail--desktop-overflow {
+		display: none;
+	}
+
+	.hks-tour-gallery__thumbnail--more {
+		position: relative;
+	}
+
+	.hks-tour-gallery__thumbnail--more img,
+	.hks-tour-gallery__thumbnail--more:hover img,
+	.hks-tour-gallery__thumbnail--more[aria-pressed="true"] img {
+		opacity: 0.48;
+	}
+
+	.hks-tour-gallery__thumbnail-more {
+		align-items: center;
+		background: rgb(24 43 58 / 64%);
+		color: var(--wp--preset--color--white);
+		display: flex;
+		flex-direction: column;
+		font-size: 0.7rem;
+		font-weight: 700;
+		inset: 0;
+		justify-content: center;
+		line-height: 1.15;
+		pointer-events: none;
+		position: absolute;
+		text-align: center;
+	}
+
+	.hks-tour-gallery__thumbnail-more strong {
+		font-size: 1.1rem;
+		font-variant-numeric: tabular-nums;
+		line-height: 1;
 	}
 }
 

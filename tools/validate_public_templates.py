@@ -91,7 +91,7 @@ def main() -> int:
             errors.append(f"missing {path.relative_to(ROOT)}: {error}")
             sources[label] = ""
 
-    require(errors, "theme metadata", sources["style"], ["Version: 0.6.0", "body.home .hks-site-header", "body.home .hks-site-header.is-scrolled", "position: fixed", ".hks-home-hero--featured", ".hks-home-gallery__viewport", ".hks-home-gallery__progress", "--hks-card-width", ".hks-home-gallery__transition-image", "clip-path", "aspect-ratio: 3 / 4", ".hks-tour-workspace", ".hks-tour-media", ".hks-tour-gallery__thumbnails", ".hks-tour-gallery__stage", ".hks-tour-gallery__nav--prev", ".hks-tour-gallery__nav--next", ".hks-mobile-menu", ".hks-mobile-menu__parent-link", ".hks-footer-menu", ".hks-catalogue-filter-sidebar", ".hks-catalogue-filter-toggle", ".hks-catalogue-filter-drawer", "grid-template-columns: minmax(14rem, 16rem) minmax(0, 1fr)", ".hks-editorial-page", ".hks-group-travel-planner", ".hks-group-travel-visuals", ":focus-visible", "prefers-reduced-motion", "prefers-reduced-transparency"])
+    require(errors, "theme metadata", sources["style"], ["Version: 0.6.0", "body.home .hks-site-header", "body.home .hks-site-header.is-scrolled", "position: fixed", ".hks-home-hero--featured", ".hks-home-gallery__viewport", ".hks-home-gallery__progress", "--hks-card-width", ".hks-home-gallery__transition-image", "clip-path", "aspect-ratio: 3 / 4", ".hks-tour-workspace", ".hks-tour-media", ".hks-tour-gallery__thumbnails", ".hks-tour-gallery__thumbnail--desktop-overflow", ".hks-tour-gallery__thumbnail-more", ".hks-tour-gallery__stage", ".hks-tour-gallery__nav--prev", ".hks-tour-gallery__nav--next", ".hks-mobile-menu", ".hks-mobile-menu__parent-link", ".hks-footer-menu", ".hks-catalogue-filter-sidebar", ".hks-catalogue-filter-toggle", ".hks-catalogue-filter-drawer", "grid-template-columns: minmax(14rem, 16rem) minmax(0, 1fr)", ".hks-editorial-page", ".hks-group-travel-planner", ".hks-group-travel-visuals", ":focus-visible", "prefers-reduced-motion", "prefers-reduced-transparency"])
     forbid(errors, "theme stylesheet", sources["style"], ["linear-gradient(", "radial-gradient(", ".hks-site-header--home-overlay"])
 
     require(
@@ -198,6 +198,7 @@ def main() -> int:
             "hks-tour-gallery--",
             "hks-tour-media",
             "data-hks-gallery-thumb",
+            "data-hks-gallery-more-open",
             "data-hks-gallery-stage",
             "data-hks-gallery-view",
             "data-hks-gallery-stage-prev",
@@ -332,7 +333,7 @@ def main() -> int:
     drag_threshold = sources["home_gallery"].find("drag.moved = true")
     if pointer_capture < drag_threshold:
         errors.append("homepage gallery must capture the pointer only after a real drag begins")
-    require(errors, "Tour UI script", sources["tour_ui"], ["role', 'tablist", "ArrowRight", "matchMedia('(min-width: 769px)", "tour_gallery_open", "tour_section_open", "itinerary_toggle", "related_tour_select", "selectPreview", "data-hks-gallery-thumb", "data-hks-gallery-stage-prev", "data-hks-gallery-stage-next", "hksGalleryStageSrc", "hksGalleryInterval", "5000", "scheduleAutoplay", "IntersectionObserver", "visibilitychange", "prefers-reduced-motion", "aria-pressed"])
+    require(errors, "Tour UI script", sources["tour_ui"], ["role', 'tablist", "ArrowRight", "matchMedia('(min-width: 769px)", "tour_gallery_open", "tour_section_open", "itinerary_toggle", "related_tour_select", "selectPreview", "data-hks-gallery-thumb", "data-hks-gallery-more-open", "openDialogAt", "data-hks-gallery-stage-prev", "data-hks-gallery-stage-next", "hksGalleryStageSrc", "hksGalleryInterval", "5000", "scheduleAutoplay", "IntersectionObserver", "visibilitychange", "prefers-reduced-motion", "aria-pressed"])
     require(errors, "quote block", sources["quote"], ["$attributes['label']", "$attributes['mode']", "Request quote on WhatsApp", "InquiryRepository::REST_NAMESPACE", "data-hks-inquiry-form", "data-hks-whatsapp-launch", "group_context", "group_fields", "data-hks-inquiry-inline", "destination_selection", "tour_selection", "data-form-token"])
     require(errors, "Group Travel inquiry script", sources["inquiry_script"], ["destination_selection", "tour_selection", "syncGroupTour", "filterGroupTours", "destination_id", "inquiry_route", "group_travel"])
     require(errors, "Group Travel inquiry storage", sources["inquiry_repository"], ["_hks_inquiry_destination", "_hks_inquiry_route", "destination_label", "group_travel"])

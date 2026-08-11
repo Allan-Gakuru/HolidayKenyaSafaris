@@ -169,7 +169,7 @@ Acceptance:
 
 - Every template uses the shared design system and structured content.
 - Campaign pages inherit canonical Tour facts.
-- The canonical Tour page implements the approved title band, desktop thumbnail-rail/active-image/sticky-quote composition, responsive horizontal thumbnail strip, five-second visibility-aware gallery rotation, previous/next controls, tabs/disclosures, itinerary, and related-Tour flow within the Wayfinder system.
+- The canonical Tour page implements the approved title band, desktop thumbnail-rail/active-image/sticky-quote composition, six-thumbnail desktop rail cap with a `+N more` lightbox trigger, responsive full horizontal thumbnail strip, five-second visibility-aware gallery rotation, previous/next controls, tabs/disclosures, itinerary, and related-Tour flow within the Wayfinder system.
 - The permanent reference-site booking form is absent; every Tour quote action opens the approved HKS intake and WhatsApp handoff.
 - The current Maasai Mara prototype's strongest UX is preserved in Campaign mode without carrying over its old identity.
 - Group Travel navigation resolves to one canonical Page whose published Destination and Tour choices feed the same private inquiry and WhatsApp review service as Tour and Campaign pages.

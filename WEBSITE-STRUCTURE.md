@@ -166,7 +166,7 @@ Default order:
 
 #### Gallery
 
-Desktop uses the Tour's assigned images as a vertical thumbnail rail beside one dominant active image. Selecting a thumbnail or the over-image previous/next chevrons updates the active image; activating the main image or View gallery control opens the keyboard-operable lightbox at that image. Multi-image galleries advance every five seconds, pausing for hover, focus, hidden/off-screen state and reduced-motion preferences. Mobile uses one dominant image with the same chevrons and a horizontally scrollable thumbnail strip. Only media assigned by an authorized editor to the published Tour may appear.
+Desktop uses the Tour's assigned images as a vertical thumbnail rail beside one dominant active image. The rail is capped at six visible thumbnails; when more images exist, the sixth shows a dark `+N more` overlay that opens the keyboard-operable lightbox at that image, while all later images remain available through the active-image controls and lightbox. Selecting a regular thumbnail or the over-image previous/next chevrons updates the active image; activating the main image or View gallery control opens the lightbox at that image. Multi-image galleries advance every five seconds, pausing for hover, focus, hidden/off-screen state and reduced-motion preferences. Mobile keeps the full horizontally scrollable thumbnail strip beneath one dominant image with the same chevrons. Only media assigned by an authorized editor to the published Tour may appear.
 
 #### Tour workspace
 

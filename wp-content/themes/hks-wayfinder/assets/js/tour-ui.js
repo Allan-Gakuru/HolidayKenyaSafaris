@@ -123,6 +123,7 @@
 		const viewButton = gallery.querySelector('[data-hks-gallery-view]');
 		const thumbnails = Array.from(gallery.querySelectorAll('[data-hks-gallery-thumb]'));
 		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+		const desktopThumbnailRail = window.matchMedia('(min-width: 56.0625rem)');
 		const autoplayInterval = Math.max(1000, Number(gallery.dataset.hksGalleryInterval || 5000));
 		let active = 0;
 		let previewIndex = 0;
@@ -173,7 +174,7 @@
 			}, autoplayInterval);
 		}
 
-		function selectPreview(index, focus = false) {
+		function selectPreview(index) {
 			const normalizedIndex = (index + thumbnails.length) % thumbnails.length;
 			const thumbnail = thumbnails[normalizedIndex];
 			const nextSrc = thumbnail?.dataset.hksGalleryStageSrc;
@@ -198,22 +199,31 @@
 			stage.dataset.hksGalleryOpen = String(normalizedIndex);
 			if (viewButton) viewButton.dataset.hksGalleryOpen = String(normalizedIndex);
 
-			thumbnails.forEach((item, itemIndex) => {
-				item.setAttribute('aria-pressed', itemIndex === normalizedIndex ? 'true' : 'false');
+			thumbnails.forEach((item) => {
+				const itemIndex = Number(item.dataset.hksGalleryThumb || 0);
+				const representsMore = desktopThumbnailRail.matches
+					&& item.hasAttribute('data-hks-gallery-more-open')
+					&& normalizedIndex >= itemIndex;
+				item.setAttribute('aria-pressed', itemIndex === normalizedIndex || representsMore ? 'true' : 'false');
 			});
-			if (focus) thumbnail.focus();
 		}
 
-		thumbnails.forEach((thumbnail, index) => {
+		thumbnails.forEach((thumbnail) => {
 			thumbnail.addEventListener('keydown', (event) => {
-				let next = index;
-				if (event.key === 'ArrowDown' || event.key === 'ArrowRight') next = (index + 1) % thumbnails.length;
-				else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') next = (index - 1 + thumbnails.length) % thumbnails.length;
+				const navigableThumbnails = desktopThumbnailRail.matches
+					? thumbnails.filter((item) => !item.classList.contains('hks-tour-gallery__thumbnail--desktop-overflow'))
+					: thumbnails;
+				const position = navigableThumbnails.indexOf(thumbnail);
+				let next = position;
+				if (event.key === 'ArrowDown' || event.key === 'ArrowRight') next = (position + 1) % navigableThumbnails.length;
+				else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') next = (position - 1 + navigableThumbnails.length) % navigableThumbnails.length;
 				else if (event.key === 'Home') next = 0;
-				else if (event.key === 'End') next = thumbnails.length - 1;
+				else if (event.key === 'End') next = navigableThumbnails.length - 1;
 				else return;
 				event.preventDefault();
-				selectPreview(next, true);
+				const nextThumbnail = navigableThumbnails[next];
+				selectPreview(Number(nextThumbnail.dataset.hksGalleryThumb || 0));
+				nextThumbnail.focus();
 				scheduleAutoplay();
 			});
 		});
@@ -224,7 +234,23 @@
 			if (counter) counter.textContent = `${active + 1} / ${slides.length}`;
 		}
 
+		function openDialogAt(opener, index) {
+			if (!opener || !dialog || !slides.length) return;
+			stopAutoplay();
+			returnFocus = opener;
+			show(index);
+			dialog.showModal();
+			dialog.querySelector('[data-hks-gallery-close]')?.focus();
+			track('tour_gallery_open', { image_index: active + 1 });
+		}
+
 		gallery.addEventListener('click', (event) => {
+			const moreOpener = event.target.closest('[data-hks-gallery-more-open]');
+			if (moreOpener && desktopThumbnailRail.matches) {
+				openDialogAt(moreOpener, Number(moreOpener.dataset.hksGalleryMoreOpen || 0));
+				return;
+			}
+
 			const thumbnail = event.target.closest('[data-hks-gallery-thumb]');
 			if (thumbnail) {
 				selectPreview(Number(thumbnail.dataset.hksGalleryThumb || 0));
@@ -245,14 +271,7 @@
 			}
 
 			const opener = event.target.closest('[data-hks-gallery-open]');
-			if (opener && dialog && slides.length) {
-				stopAutoplay();
-				returnFocus = opener;
-				show(Number(opener.dataset.hksGalleryOpen || 0));
-				dialog.showModal();
-				dialog.querySelector('[data-hks-gallery-close]')?.focus();
-				track('tour_gallery_open', { image_index: active + 1 });
-			}
+			if (opener) openDialogAt(opener, Number(opener.dataset.hksGalleryOpen || 0));
 			if (event.target.closest('[data-hks-gallery-close]')) dialog?.close();
 			if (event.target.closest('[data-hks-gallery-next]')) show(active + 1);
 			if (event.target.closest('[data-hks-gallery-prev]')) show(active - 1);
@@ -302,6 +321,7 @@
 
 		document.addEventListener('visibilitychange', scheduleAutoplay);
 		reducedMotion.addEventListener('change', scheduleAutoplay);
+		desktopThumbnailRail.addEventListener('change', () => selectPreview(previewIndex));
 		scheduleAutoplay();
 	});
 
