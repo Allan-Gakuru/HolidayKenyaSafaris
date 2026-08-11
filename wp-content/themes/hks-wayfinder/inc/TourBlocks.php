@@ -618,7 +618,7 @@ final class TourBlocks {
 								</dl>
 								<div class="hks-home-gallery__actions">
 									<a class="hks-home-gallery__cta" href="<?php echo esc_url( $active_tour['url'] ); ?>" data-hks-home-gallery-link><?php esc_html_e( 'Click here to book tour', 'hks-wayfinder' ); ?></a>
-									<a class="hks-home-gallery__cta hks-home-gallery__cta--destinations" href="#destinations"><?php esc_html_e( 'Click here to browse destinations', 'hks-wayfinder' ); ?></a>
+									<a class="hks-home-gallery__cta hks-home-gallery__cta--destinations" href="<?php echo esc_url( $tours_url ); ?>"><?php esc_html_e( 'Click here to browse destinations', 'hks-wayfinder' ); ?></a>
 								</div>
 							</div>
 

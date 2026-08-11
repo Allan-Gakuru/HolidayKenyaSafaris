@@ -264,7 +264,7 @@ def main() -> int:
             "Click here to book tour",
             "hks-home-gallery__cta--destinations",
             "Click here to browse destinations",
-            "href=\"#destinations\"",
+            "href=\"<?php echo esc_url( $tours_url ); ?>\"",
             "render_group_travel_page",
             "hks-group-travel-planner",
             "group_travel_page",
