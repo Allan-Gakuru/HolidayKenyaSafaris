@@ -344,9 +344,9 @@ final class TourBlocks {
 					<h2><?php esc_html_e( 'Request a tailored quote', 'hks-wayfinder' ); ?></h2>
 					<?php if ( $price ) : ?><p class="hks-tour-quote__price"><?php echo esc_html( $price['label'] ); ?></p><p class="hks-tour-quote__price-note"><?php echo esc_html( $price['status'] ); ?></p><?php endif; ?>
 					<ul class="hks-tour-quote__reassurances">
-						<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Fast quote response', 'hks-wayfinder' ); ?></span></li>
+						<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Inclusions and exclusions clarified', 'hks-wayfinder' ); ?></span></li>
 						<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'No booking commitment required', 'hks-wayfinder' ); ?></span></li>
-						<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Flexible cancellation terms', 'hks-wayfinder' ); ?></span></li>
+						<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Fast Responses to all queries', 'hks-wayfinder' ); ?></span></li>
 					</ul>
 					<?php echo $quote; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Trusted server-rendered block. ?>
 					<p class="hks-tour-quote__note"><?php esc_html_e( 'Tell us your dates and group size, check the prepared message, then open WhatsApp when you are ready.', 'hks-wayfinder' ); ?></p>
