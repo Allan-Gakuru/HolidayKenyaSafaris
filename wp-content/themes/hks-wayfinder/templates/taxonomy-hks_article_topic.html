@@ -1,25 +1,19 @@
 <!-- wp:template-part {"slug":"header","tagName":"header"} /-->
 
-<!-- wp:group {"tagName":"main","align":"full","className":"hks-article-archive","layout":{"type":"default"}} -->
-<main id="main-content" class="wp-block-group alignfull hks-article-archive"><!-- wp:hks-wayfinder/article-archive-intro /-->
+<!-- wp:group {"tagName":"main","align":"full","className":"hks-article-archive hks-article-topic-archive","layout":{"type":"default"}} -->
+<main id="main-content" class="wp-block-group alignfull hks-article-archive hks-article-topic-archive"><!-- wp:hks-wayfinder/article-archive-intro /-->
 
 <!-- wp:group {"align":"wide","className":"hks-article-results","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignwide hks-article-results"><!-- wp:query {"queryId":21,"query":{"perPage":12,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true},"align":"wide"} -->
+<div class="wp-block-group alignwide hks-article-results"><!-- wp:query {"queryId":22,"query":{"perPage":12,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true},"align":"wide"} -->
 <div class="wp-block-query alignwide"><!-- wp:post-template {"className":"hks-article-grid","layout":{"type":"grid","columnCount":3}} -->
 <!-- wp:hks-wayfinder/article-card /-->
 <!-- /wp:post-template -->
-
 <!-- wp:query-pagination {"layout":{"type":"flex","justifyContent":"space-between"}} -->
 <!-- wp:query-pagination-previous /-->
 <!-- wp:query-pagination-numbers /-->
 <!-- wp:query-pagination-next /-->
 <!-- /wp:query-pagination -->
-
-<!-- wp:query-no-results -->
-<!-- wp:paragraph -->
-<p>Travel Guides are being prepared. Check back soon for destination ideas and planning help.</p>
-<!-- /wp:paragraph -->
-<!-- /wp:query-no-results --></div>
+<!-- wp:query-no-results --><p>No Travel Guides are available in this topic yet.</p><!-- /wp:query-no-results --></div>
 <!-- /wp:query --></div>
 <!-- /wp:group --></main>
 <!-- /wp:group -->

@@ -16,6 +16,12 @@ The Group Travel route enters the same system through an inline planner:
 
 `Group Travel page -> Destination -> matching Tour -> dates and group size -> consent and private recovery record -> reviewed WhatsApp message -> consultant response`
 
+Travel Guides add two intentional paths:
+
+`Standard Guide -> View this trip -> canonical Tour -> Request quote on WhatsApp -> shared intake and review flow`
+
+`Advertorial -> early or contextual Request quote on WhatsApp -> shared intake and review flow`
+
 ## Qualified Inquiry
 
 At minimum, a qualified website inquiry contains:
@@ -55,6 +61,20 @@ Mobile entry points:
 - Final Tour quote prompt.
 
 Every entry point opens the same intake dialog or mobile sheet with Tour and campaign context already attached. Do not show a separate long form in the sidebar, silently launch WhatsApp, or describe the action as booking.
+
+## Travel Guides Conversion Placement
+
+A Standard Guide is reading-first. When it has a Primary Tour, show an early **View this trip** link to the canonical Tour. Do not give Standard Guides a sticky quote bar or bypass the Tour page with a quote action.
+
+An Advertorial requires a published Primary Tour and may use:
+
+- An opening **Request quote on WhatsApp** action after the article promise.
+- A sticky desktop Primary Tour panel beside the reading column.
+- Contextual quote actions after useful proof or planning sections.
+- A final quote prompt.
+- A mobile sticky quote action after the opening action has left the viewport.
+
+Every Advertorial quote action opens the same existing intake. The visitor still provides consent, creates or refreshes the private recovery record, reviews the message, and chooses whether to launch WhatsApp. Repetition must support a real decision point rather than manufacture urgency.
 
 ## WhatsApp Behavior
 
@@ -104,6 +124,8 @@ Use a stable event vocabulary for Meta and GA4.
 | `tour_section_open` | Visitor opens a Tour tab or mobile disclosure | tour ID, section name, device layout |
 | `itinerary_toggle` | Visitor opens a day or uses expand/collapse all | tour ID, day label or action; no personal values |
 | `related_tour_select` | Visitor opens a related Tour | source tour ID, selected tour ID, position |
+| `view_article` | A Standard Guide or Advertorial becomes viewable | article ID, article format, Primary Tour ID when present, public Destination and Article Topic slugs |
+| `article_primary_tour_click` | Visitor uses **View this trip** or an article Primary Tour link | article ID, article format, Primary Tour ID, CTA location |
 | `quote_cta_click` | Visitor opens the intake form | tour ID, campaign ID, CTA location |
 | `quote_form_start` | Visitor interacts with first field | tour ID, campaign ID |
 | `quote_form_error` | Validation prevents completion | field name, error type; never send sensitive values |
@@ -115,6 +137,10 @@ Use a stable event vocabulary for Meta and GA4.
 Do not treat `whatsapp_launch` as a confirmed lead or booking. Reconcile website events with WhatsApp conversations and sales records.
 
 For the Group Travel planner, use `page_type: group_travel` and `cta_location: group_travel_page`. The selected Tour ID and slug become the standard Tour context before completion events fire. Do not place the visitor's name, phone, dates, Destination label, or exact traveler count in analytics; the inquiry record may store the derived Destination privately for operational triage.
+
+For an Advertorial quote, use `page_type: article` and include only article ID, article format, Primary Tour ID, CTA location, public taxonomy slugs, and existing attribution values. Reuse `quote_cta_click`, `quote_form_complete`, and `whatsapp_launch`; do not create a second quote-event vocabulary. Standard Guides use `view_article` and `article_primary_tour_click` only unless the visitor later enters the canonical Tour flow.
+
+These measurements are for Google Analytics 4 and Meta reporting after the client supplies and configures their IDs. The browser emits small anonymous event names and non-sensitive page context into the existing analytics adapter; the integrations use them to compare which guide formats and placements lead visitors toward a Tour or quote. Until IDs and consent configuration exist, the hooks remain disabled. Do not implement scroll depth, time-on-page, author tracking, names, phone numbers, dates, exact traveller answers, or generated WhatsApp message content.
 
 ## Required IDs
 

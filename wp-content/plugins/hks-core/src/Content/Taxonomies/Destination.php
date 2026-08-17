@@ -7,7 +7,6 @@
 
 namespace HolidayKenyaSafaris\Core\Content\Taxonomies;
 
-use HolidayKenyaSafaris\Core\Content\PostTypes\Tour;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -23,6 +22,9 @@ final class Destination {
 	 */
 	public const TAXONOMY = 'hks_destination';
 
+	/** One-shot site option consumed after the taxonomy is registered. */
+	public const ANCHOR_SEED_OPTION = 'hks_core_seed_anchor_destinations';
+
 	/**
 	 * Register the taxonomy.
 	 *
@@ -31,7 +33,7 @@ final class Destination {
 	public static function register() {
 		register_taxonomy(
 			self::TAXONOMY,
-			array( Tour::POST_TYPE ),
+			array( 'hks_tour', 'post' ),
 			array(
 				'labels'             => self::labels(),
 				'description'        => __( 'Geographic places used to group tours and build destination discovery pages. Add only destinations supported by approved tours or verified editorial content.', 'hks-core' ),
@@ -54,6 +56,39 @@ final class Destination {
 				),
 			)
 		);
+	}
+
+	/**
+	 * Seed the approved Travel Guide anchor destinations idempotently.
+	 *
+	 * Exact slug and exact name matches are both respected. Existing terms are
+	 * never renamed, reparented, or otherwise modified.
+	 *
+	 * @return true|\WP_Error True on success, otherwise an insertion error.
+	 */
+	public static function seed_anchor_terms() {
+		$terms = array(
+			'Diani'       => 'diani',
+			'Dubai'       => 'dubai',
+			'Maasai Mara' => 'maasai-mara',
+		);
+
+		foreach ( $terms as $name => $slug ) {
+			$by_slug = get_term_by( 'slug', $slug, self::TAXONOMY );
+			$by_name = get_term_by( 'name', $name, self::TAXONOMY );
+
+			if ( $by_slug instanceof \WP_Term || $by_name instanceof \WP_Term ) {
+				continue;
+			}
+
+			$result = wp_insert_term( $name, self::TAXONOMY, array( 'slug' => $slug ) );
+
+			if ( is_wp_error( $result ) && 'term_exists' !== $result->get_error_code() ) {
+				return $result;
+			}
+		}
+
+		return true;
 	}
 
 	/**

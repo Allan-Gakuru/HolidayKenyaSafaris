@@ -3,7 +3,7 @@ Theme Name: HKS Wayfinder
 Theme URI: https://github.com/Allan-Gakuru/HolidayKenyaSafaris
 Author: Holiday Kenya Safaris
 Description: Custom block theme for the Holiday Kenya Safaris Wayfinder website.
-Version: 0.6.0
+Version: 0.7.0
 Update URI: https://github.com/Allan-Gakuru/HolidayKenyaSafaris
 Requires at least: 6.6
 Requires PHP: 8.3
@@ -3851,4 +3851,209 @@ body:not(.home) .wp-site-blocks > main {
 		scroll-behavior: auto !important;
 		transition-duration: 0.01ms !important;
 	}
+}
+
+/* Travel Guides: reading-first catalogue cards and focused advertorial conversion. */
+.hks-article-archive-intro .hks-title-band,
+.hks-article-hero {
+	background: var(--wp--preset--color--pale-mist);
+}
+
+.hks-article-archive-intro .hks-title-band {
+	padding-block: clamp(3rem, 7vw, 6rem);
+}
+
+.hks-article-kicker,
+.hks-article-card__meta,
+.hks-article-intent {
+	color: var(--wp--preset--color--lake-teal);
+	font-size: var(--wp--preset--font-size--utility);
+	font-weight: 700;
+	letter-spacing: .04em;
+	margin: 0 0 .75rem;
+	text-transform: uppercase;
+}
+
+.hks-article-archive-intro__back {
+	margin: 0 auto;
+	max-width: 1240px;
+	padding: 1rem clamp(1rem, 4vw, 2rem) 0;
+	text-align: right;
+}
+
+.hks-article-discovery {
+	background: var(--wp--preset--color--white);
+	border-bottom: 1px solid rgb(24 43 58 / 14%);
+	padding: 1.25rem clamp(1rem, 4vw, 2rem);
+}
+
+.hks-article-discovery__form {
+	align-items: end;
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(2, minmax(12rem, 1fr)) auto auto;
+	margin: 0 auto;
+	max-width: 1240px;
+}
+
+.hks-article-discovery__form label { display: grid; gap: .4rem; }
+.hks-article-discovery__form label span { color: var(--wp--preset--color--midnight-navy); font-size: .8125rem; font-weight: 700; }
+.hks-article-discovery__form select { background: var(--wp--preset--color--white); border: 1px solid rgb(24 43 58 / 28%); border-radius: 8px; color: var(--wp--preset--color--near-black); font: inherit; min-height: 48px; padding: .65rem 2.5rem .65rem .8rem; width: 100%; }
+.hks-article-discovery__form button { background: var(--wp--preset--color--midnight-navy); border: 0; border-radius: 8px; color: var(--wp--preset--color--white); font: inherit; font-weight: 700; min-height: 48px; padding: .7rem 1rem; }
+.hks-article-discovery__form > a { align-self: center; font-size: .875rem; font-weight: 700; }
+
+.hks-article-results {
+	padding-block: clamp(3rem, 7vw, 6rem);
+}
+
+.hks-article-grid {
+	display: grid !important;
+	gap: clamp(1.25rem, 2.6vw, 2rem);
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.hks-article-card {
+	background: var(--wp--preset--color--white);
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.hks-article-card__media {
+	 aspect-ratio: 16 / 10;
+	background: var(--wp--preset--color--pale-mist);
+	overflow: hidden;
+}
+
+.hks-article-card__media img {
+	height: 100%;
+	object-fit: cover;
+	transition: transform .2s ease;
+	width: 100%;
+}
+
+.hks-article-card:hover .hks-article-card__media img,
+.hks-article-card:focus-within .hks-article-card__media img {
+	transform: scale(1.025);
+}
+
+.hks-article-card__body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.hks-article-card__body :is(h2, h3) {
+	font-size: clamp(1.25rem, 2.3vw, 1.75rem);
+	margin: 0 0 .8rem;
+}
+
+.hks-article-card__body :is(h2, h3) a { text-decoration: none; }
+.hks-article-card__body > p:not(.hks-article-card__meta) { margin-top: 0; }
+.hks-article-card__link { font-weight: 700; margin-top: auto; padding-top: 1rem; }
+
+.hks-article-card--no-image { border-top: 4px solid var(--wp--preset--color--saffron); }
+
+.hks-article-single { background: var(--wp--preset--color--white); }
+
+.hks-article-hero {
+	display: grid;
+	gap: clamp(2rem, 6vw, 6rem);
+	grid-template-columns: minmax(0, 1fr) minmax(18rem, .9fr);
+	margin-inline: auto;
+	max-width: 1440px;
+	padding: clamp(2rem, 6vw, 5rem) max(clamp(1rem, 4vw, 2rem), calc((100vw - 1240px) / 2));
+}
+
+.hks-article-hero__copy { align-self: center; max-width: 46rem; }
+.hks-article-hero h1 { font-size: clamp(2.2rem, 5vw, 4.5rem); margin: 0; }
+.hks-article-hero__promise { font-size: clamp(1.1rem, 2vw, 1.35rem); line-height: 1.55; margin: 1.25rem 0 0; max-width: 42rem; }
+.hks-article-hero__tour-link,
+.hks-article-hero__quote { margin-top: 1.75rem; }
+.hks-article-hero__quote { cursor: pointer; }
+.hks-article-hero__media { aspect-ratio: 4 / 3; margin: 0; overflow: hidden; }
+.hks-article-hero__media img { height: 100%; object-fit: cover; width: 100%; }
+
+.hks-article-layout {
+	display: grid;
+	gap: clamp(2rem, 6vw, 6rem);
+	grid-template-columns: minmax(0, 720px);
+	margin: 0 auto;
+	max-width: 1240px;
+	padding: clamp(3rem, 7vw, 6rem) clamp(1rem, 4vw, 2rem);
+}
+
+.hks-article-layout--conversion { grid-template-columns: minmax(0, 720px) minmax(17rem, 24rem); }
+.hks-article-content { min-width: 0; }
+.hks-article-content > :first-child { margin-top: 0; }
+.hks-article-content img { height: auto; }
+.hks-article-content h2 { margin-top: 2.5em; }
+.hks-article-content h3 { margin-top: 2em; }
+.hks-article-tour-cta { border-top: 1px solid rgb(24 43 58 / 18%); margin-top: 3rem; padding-top: 2rem; }
+.hks-article-tour-cta p { font-weight: 600; margin-bottom: .8rem; }
+
+.hks-article-final-quote {
+	background: var(--wp--preset--color--pale-mist);
+	border-top: 4px solid var(--wp--preset--color--saffron);
+	margin-top: clamp(3rem, 7vw, 5rem);
+	padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.hks-article-final-quote h2 { font-size: clamp(1.6rem, 3vw, 2.35rem); margin: 0 0 1rem; }
+.hks-article-final-quote .hks-article-kicker { margin-bottom: .65rem; }
+.hks-article-final-quote button { cursor: pointer; }
+
+.hks-article-conversion-panel {
+	align-self: start;
+	background: var(--wp--preset--color--midnight-navy);
+	color: var(--wp--preset--color--white);
+	padding: clamp(1.25rem, 3vw, 2rem);
+	position: sticky;
+	top: 6rem;
+}
+
+.hks-article-conversion-panel h2 { color: var(--wp--preset--color--white); font-size: clamp(1.35rem, 2vw, 2rem); margin: 0 0 1rem; }
+.hks-article-conversion-panel .hks-article-kicker { color: var(--wp--preset--color--saffron); }
+.hks-article-conversion-panel .hks-inquiry__trigger { width: 100%; }
+.hks-article-mobile-quote { display: none; }
+
+.hks-article-related,
+.hks-destination-guides { background: var(--wp--preset--color--pale-mist); padding-block: clamp(3rem, 7vw, 6rem); }
+.hks-article-related .hks-section-heading,
+.hks-destination-guides .hks-section-heading { align-items: end; display: flex; gap: 1rem; justify-content: space-between; margin-bottom: 2rem; }
+.hks-article-related .hks-section-heading h2,
+.hks-destination-guides .hks-section-heading h2 { margin: 0; }
+.hks-article-related .hks-article-grid,
+.hks-destination-guides .hks-article-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+@media (max-width: 62rem) {
+	.hks-article-grid,
+	.hks-article-related .hks-article-grid,
+	.hks-destination-guides .hks-article-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.hks-article-layout--conversion { grid-template-columns: minmax(0, 1fr); }
+	.hks-article-conversion-panel { position: static; }
+}
+
+@media (max-width: 48rem) {
+	.hks-article-hero { grid-template-columns: minmax(0, 1fr); padding-block: 2rem 3rem; }
+	.hks-article-hero__media { grid-row: 1; }
+	.hks-article-hero__copy { grid-row: 2; }
+	.hks-article-grid,
+	.hks-article-related .hks-article-grid,
+	.hks-destination-guides .hks-article-grid { grid-template-columns: minmax(0, 1fr); }
+	.hks-article-related .hks-section-heading,
+	.hks-destination-guides .hks-section-heading { align-items: start; flex-direction: column; }
+	.hks-article-discovery__form { align-items: stretch; grid-template-columns: minmax(0, 1fr); }
+	.hks-article-discovery__form > a { justify-self: start; }
+	.hks-article-conversion-panel { background: transparent; color: inherit; padding: 0; }
+	.hks-article-conversion-panel > .hks-article-kicker,
+	.hks-article-conversion-panel > h2,
+	.hks-article-conversion-panel > p,
+	.hks-article-conversion-panel .hks-inquiry__trigger { display: none; }
+	.hks-article-mobile-quote { background: var(--wp--preset--color--white); border-top: 1px solid rgb(24 43 58 / 16%); bottom: 0; display: block; left: 0; opacity: 0; padding: .75rem max(1rem, env(safe-area-inset-left)) max(.75rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-right)); pointer-events: none; position: fixed; right: 0; transform: translateY(100%); transition: opacity .18s ease, transform .18s ease, visibility .18s ease; visibility: hidden; z-index: 210; }
+	.hks-article-mobile-quote.is-visible { opacity: 1; pointer-events: auto; transform: translateY(0); visibility: visible; }
+	.hks-article-mobile-quote button { background: var(--wp--preset--color--midnight-navy); border: 0; border-radius: 8px; color: var(--wp--preset--color--white); font: inherit; font-weight: 700; padding: .9rem 1rem; width: 100%; }
+	.hks-article-format-advertorial .hks-floating-whatsapp { bottom: calc(5.5rem + env(safe-area-inset-bottom)); z-index: 220; }
+	.hks-article-format-advertorial .hks-site-footer { padding-bottom: 10rem; }
 }

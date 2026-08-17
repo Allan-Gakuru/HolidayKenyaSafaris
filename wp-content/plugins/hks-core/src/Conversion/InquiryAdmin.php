@@ -227,6 +227,7 @@ final class InquiryAdmin {
 		$labels = array(
 			'group_travel' => __( 'Group Travel page', 'hks-core' ),
 			'campaign'     => __( 'Campaign page', 'hks-core' ),
+			'article'      => __( 'Travel Guide', 'hks-core' ),
 			'tour'         => __( 'Tour page', 'hks-core' ),
 		);
 

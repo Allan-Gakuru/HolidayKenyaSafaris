@@ -25,11 +25,14 @@ The homepage intentionally omits this strip. Its logo-and-menu header overlays t
 - Safaris.
 - Coast & Stays.
 - Destinations.
+- Travel Guides.
 - Group Travel.
 - About.
 - Contact.
 
 The utility bar carries a compact direct WhatsApp contact with a prefilled, page-aware reach-out message. Do not repeat it as a large button in the desktop primary header. Page-level quote actions retain the structured intake and recovery flow.
+
+Travel Guides sits between Destinations and Group Travel and resolves to `/travel-guides/`. Public-facing navigation and page copy spell **Holiday Kenya Safaris** in full.
 
 The desktop header and mobile drawer use the same production `holiday-kenya-safaris-logo.svg` lockup. A separate global floating **Chat on WhatsApp** control opens the official number with a concise general message, adding the current Tour title and canonical link on Tour pages; it does not create an inquiry record or replace the structured page-level quote actions.
 
@@ -53,7 +56,7 @@ Use a full-height drawer with:
 - Wayfinder mark and accessible Close control.
 - Search only when the catalogue is large enough to justify it.
 - Accordion groups for Safaris, Coast & Stays, and Destinations.
-- Direct Group Travel, About, and Contact links.
+- Direct Travel Guides, Group Travel, About, and Contact links.
 - Confirmed contacts and social links.
 - Request quote on WhatsApp action.
 
@@ -145,9 +148,47 @@ Purpose:
 - Group relevant Tours.
 - Explain suitable durations, travel styles, access context, and local considerations.
 
-Use the catalogue visual system: compact title band, strong destination photography, practical introduction, relevant Tour grid, verified guidance, and final quote prompt.
+Use the catalogue visual system: compact title band, strong destination photography, practical introduction, relevant Tour grid, verified guidance, related Travel Guides, and final quote prompt.
+
+Destination is one public taxonomy shared by Tours and native Posts. Its main archive query and pagination remain Tour-only. Render relevant Travel Guides as a separate secondary query below the Tour catalogue, without allowing Posts to alter Tour counts, Tour navigation, or Tour pagination. A Destination used only by Posts must not appear in Tour browse navigation.
 
 Never invent weather, park-fee, or access information. Date and source any changeable facts.
+
+### Travel Guides Hub
+
+Canonical route: `/travel-guides/`.
+
+Purpose:
+
+- Help Kenyan travellers answer practical planning questions and move confidently toward the most relevant trip.
+- Give Diani, Dubai, Maasai Mara, and later destinations useful search entry points without duplicating Destination archives.
+- Offer two public editorial formats while keeping the Tour catalogue authoritative for package facts and conversion.
+
+Default order:
+
+1. Compact internal header and breadcrumb band.
+2. One literal H1 and a concise planning promise.
+3. Destination and Article Topic filters using server-rendered links or GET controls.
+4. A responsive article grid with intentional image and no-image card states.
+5. Pagination and a useful empty state.
+
+Initial Article Topics are Destination Guides, Planning & FAQs, Travel Inspiration, Comparisons, and Holiday Kenya Safaris News. Article Topic archives live at `/travel-guides/topics/<topic>/`. Article cards may show the title, excerpt, modified date, and public Destination/Topic context, but never an author name.
+
+### Standard Guide
+
+Canonical route: `/travel-guides/<postname>/`.
+
+The Standard Guide is reading-first: breadcrumbs, public Destination/Topic context, one H1, concise excerpt, optional featured image or deliberate text-led opening, and a highly legible article column. It shows no author name. When an editor assigns a Primary Tour, an early **View this trip** action links to that canonical Tour. It has no persistent quote action.
+
+End with up to three related Posts, never related Tours. Resolve them in this order: editor-selected Posts, same-Destination Posts, then same-Article-Topic Posts. Exclude the current Post and duplicates.
+
+### Advertorial
+
+Canonical route: `/travel-guides/<postname>/` using the Advertorial article format.
+
+The Advertorial is the conversion-focused editorial format. Publishing requires one published Primary Tour. Its opening connects the visitor's planning situation to concrete, verified itinerary and package facts without fabricated urgency or proof. Place an early **Request quote on WhatsApp** action, repeat it only at meaningful decision points, and send every instance into the existing intake, consent, private recovery, message-review, and visitor-controlled WhatsApp launch flow.
+
+Desktop uses a 680–720px reading column with an approximately 320px sticky Primary Tour panel. Mobile reveals a sticky quote action only after the opening CTA leaves view; it must respect safe areas and stack below the global Chat on WhatsApp control without obscuring content. The featured image remains optional. No permanent form or direct quote-to-WhatsApp jump is allowed.
 
 ### Canonical Tour Detail Page
 
@@ -332,6 +373,10 @@ Potential modules, only when verified:
 - Global bottom-right Chat on WhatsApp contact that uses a fixed message, respects safe areas, and sits above Tour or Campaign mobile quote actions.
 - Campaign attribution handler.
 - Related-Tour query using shared destinations and a catalogue fallback.
+- Travel Guide card with intentional featured-image and no-image states.
+- Standard Guide reading composition and optional Primary Tour link.
+- Advertorial Primary Tour quote panel and mobile sticky quote action using the shared intake.
+- Related-guide resolver: manual Posts, then Destination, then Article Topic, maximum three.
 - Global footer.
 
 ## Visual Requirements
@@ -355,6 +400,7 @@ Potential modules, only when verified:
 - The intake form must support the on-screen keyboard and retain entered values.
 - WhatsApp launch must not occur before validation, consent, inquiry save, and message review.
 - Sticky actions respect safe areas and leave sufficient bottom padding.
+- Standard Guides have no persistent mobile quote bar. Advertorial bars appear only after the opening quote action leaves view and must not cover the global Chat on WhatsApp control.
 
 ## SEO Requirements
 
@@ -363,6 +409,8 @@ Potential modules, only when verified:
 - Unique titles, descriptions, and canonical behavior.
 - Server-rendered canonical Tour facts even when tabs enhance presentation.
 - Tour and destination internal linking.
+- Travel Guides hub, native Post, Article Topic, and shared Destination sitemap entries without a second destination taxonomy.
+- Primary Tour links from relevant guides and contextual guide links from Destination pages.
 - Breadcrumbs where useful.
 - Image alt text that describes the content rather than stuffing keywords.
 - Structured data only where it accurately represents the offer and organization.

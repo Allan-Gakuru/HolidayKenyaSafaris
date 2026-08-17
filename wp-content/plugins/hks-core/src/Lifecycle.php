@@ -7,6 +7,9 @@
 
 namespace HolidayKenyaSafaris\Core;
 
+use HolidayKenyaSafaris\Core\Content\Taxonomies\ArticleTopic;
+use HolidayKenyaSafaris\Core\Content\Taxonomies\Destination;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -405,7 +408,53 @@ final class Lifecycle {
 			'0.10.0' => array(
 				'site' => array( self::class, 'schedule_rewrite_flush' ),
 			),
+			'0.11.0' => array(
+				'site' => array(
+					array( self::class, 'schedule_rewrite_flush' ),
+					array( self::class, 'seed_article_topic_terms' ),
+					array( self::class, 'seed_anchor_destination_terms' ),
+				),
+			),
 		);
+	}
+
+	/**
+	 * Seed the initial Travel Guide topics without replacing editor changes.
+	 *
+	 * @param string $from_version      Existing stored version.
+	 * @param string $migration_version Migration target version.
+	 * @param string $scope             Current storage scope.
+	 * @return true|\WP_Error True on success, otherwise an update error.
+	 */
+	public static function seed_article_topic_terms( $from_version, $migration_version, $scope ) {
+		unset( $from_version, $migration_version, $scope );
+		if ( taxonomy_exists( ArticleTopic::TAXONOMY ) ) {
+			return ArticleTopic::seed_initial_terms();
+		}
+
+		update_option( ArticleTopic::SEED_OPTION, '1', false );
+
+		return (bool) get_option( ArticleTopic::SEED_OPTION, false );
+	}
+
+	/**
+	 * Seed approved anchor Destinations when possible or schedule setup at init.
+	 *
+	 * @param string $from_version      Existing stored version.
+	 * @param string $migration_version Migration target version.
+	 * @param string $scope             Current storage scope.
+	 * @return true|\WP_Error True on success, otherwise an update error.
+	 */
+	public static function seed_anchor_destination_terms( $from_version, $migration_version, $scope ) {
+		unset( $from_version, $migration_version, $scope );
+
+		if ( taxonomy_exists( Destination::TAXONOMY ) ) {
+			return Destination::seed_anchor_terms();
+		}
+
+		update_option( Destination::ANCHOR_SEED_OPTION, '1', false );
+
+		return (bool) get_option( Destination::ANCHOR_SEED_OPTION, false );
 	}
 
 	/**

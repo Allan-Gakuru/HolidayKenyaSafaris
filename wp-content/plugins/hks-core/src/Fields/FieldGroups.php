@@ -11,6 +11,7 @@ use HolidayKenyaSafaris\Core\Content\PostTypes\Campaign;
 use HolidayKenyaSafaris\Core\Content\PostTypes\Faq;
 use HolidayKenyaSafaris\Core\Content\PostTypes\Tour;
 use HolidayKenyaSafaris\Core\Content\Taxonomies\Destination;
+use HolidayKenyaSafaris\Core\Content\Taxonomies\ArticleTopic;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -36,6 +37,7 @@ final class FieldGroups {
 			self::tour_policies_group(),
 			self::tour_media_group(),
 			self::campaign_public_group(),
+			self::article_public_group(),
 			self::faq_public_group(),
 			self::destination_public_group(),
 			self::settings_group(),
@@ -277,6 +279,34 @@ final class FieldGroups {
 			self::location( 'post_type', Campaign::POST_TYPE ),
 			true,
 			__( 'Campaign fields consumed by the public template, plus the explicit planning-date exception.', 'hks-core' ),
+			0
+		);
+	}
+
+	/**
+	 * Public Travel Guide fields stored on native WordPress Posts.
+	 *
+	 * Native title, editor, excerpt, featured image, URL and publication status
+	 * remain WordPress-owned. These fields only describe the guide and its
+	 * conversion relationships.
+	 *
+	 * @return array<string, mixed>
+	 */
+	private static function article_public_group() {
+		return self::group(
+			'article_public',
+			__( 'Travel Guide: Public details', 'hks-core' ),
+			array(
+				self::message( 'article_native_mappings', __( 'Travel Guide content', 'hks-core' ), __( 'Use the WordPress title for the guide headline, the editor for the article, the excerpt for its summary, and the optional featured image for article cards.', 'hks-core' ) ),
+				self::field( 'article_format', __( 'Article format', 'hks-core' ), 'hks_article_format', 'select', array_merge( self::choice_args( array( 'guide' => __( 'Guide', 'hks-core' ), 'advertorial' => __( 'Advertorial', 'hks-core' ) ), false ), array( 'default_value' => 'guide', 'required' => 1 ) ) ),
+				self::field( 'article_primary_tour', __( 'Primary Tour', 'hks-core' ), 'hks_article_primary_tour', 'post_object', array_merge( self::post_object_args( 'hks_tour', false ), array( 'post_status' => array( 'publish', 'draft', 'private', 'future' ), 'allow_null' => 1 ) ) ),
+				self::field( 'article_related_posts', __( 'Related Travel Guides', 'hks-core' ), 'hks_article_related_posts', 'post_object', array( 'post_type' => array( 'post' ), 'post_status' => array( 'publish' ), 'return_format' => 'id', 'multiple' => 1, 'allow_null' => 1, 'ui' => 1, 'max' => 3, 'instructions' => __( 'Optional. Choose up to three published Travel Guides in the order they should appear. Do not select this article.', 'hks-core' ) ) ),
+				self::field( 'article_destination', __( 'Destination', 'hks-core' ), 'hks_article_destination', 'taxonomy', array( 'taxonomy' => Destination::TAXONOMY, 'field_type' => 'checkbox', 'return_format' => 'id', 'add_term' => 0, 'save_terms' => 1, 'load_terms' => 1, 'allow_null' => 1 ) ),
+				self::field( 'article_topic', __( 'Article Topic', 'hks-core' ), 'hks_article_topic', 'taxonomy', array( 'taxonomy' => ArticleTopic::TAXONOMY, 'field_type' => 'checkbox', 'return_format' => 'id', 'add_term' => 0, 'save_terms' => 1, 'load_terms' => 1, 'allow_null' => 1 ) ),
+			),
+			self::location( 'post_type', 'post' ),
+			true,
+			__( 'Conversion-focused Travel Guide fields; author identity is intentionally not part of this public model.', 'hks-core' ),
 			0
 		);
 	}

@@ -26,6 +26,9 @@ TEMPLATES = {
     "tour scope": "templates/taxonomy-hks_tour_scope.html",
     "page": "templates/page.html",
     "group travel": "templates/page-group-travel.html",
+    "travel guides": "templates/home.html",
+    "article": "templates/single-post.html",
+    "article topic": "templates/taxonomy-hks_article_topic.html",
 }
 
 BLOCKS = {
@@ -39,6 +42,10 @@ BLOCKS = {
     "blocks/footer-navigation/block.json": "hks-wayfinder/footer-navigation",
     "blocks/page-title/block.json": "hks-wayfinder/page-title",
     "blocks/group-travel-page/block.json": "hks-wayfinder/group-travel-page",
+    "blocks/article-archive-intro/block.json": "hks-wayfinder/article-archive-intro",
+    "blocks/article-card/block.json": "hks-wayfinder/article-card",
+    "blocks/article-page/block.json": "hks-wayfinder/article-page",
+    "blocks/destination-guides/block.json": "hks-wayfinder/destination-guides",
 }
 
 
@@ -69,6 +76,7 @@ def main() -> int:
     sources: Dict[str, str] = {}
     source_paths = {
         "renderer": THEME / "inc" / "TourBlocks.php",
+        "article_renderer": THEME / "inc" / "ArticleBlocks.php",
         "nav_menus": THEME / "inc" / "NavMenus.php",
         "functions": THEME / "functions.php",
         "style": THEME / "style.css",
@@ -78,6 +86,7 @@ def main() -> int:
         "home_gallery": THEME / "assets" / "js" / "home-gallery.js",
         "catalogue_filters": THEME / "assets" / "js" / "catalogue-filters.js",
         "tour_ui": THEME / "assets" / "js" / "tour-ui.js",
+        "article_ui": THEME / "assets" / "js" / "article-ui.js",
         "quote": PLUGIN / "src" / "Conversion" / "QuoteBlock.php",
         "inquiry_repository": PLUGIN / "src" / "Conversion" / "InquiryRepository.php",
         "inquiry_admin": PLUGIN / "src" / "Conversion" / "InquiryAdmin.php",
@@ -91,7 +100,7 @@ def main() -> int:
             errors.append(f"missing {path.relative_to(ROOT)}: {error}")
             sources[label] = ""
 
-    require(errors, "theme metadata", sources["style"], ["Version: 0.6.0", "body.home .hks-site-header", "body.home .hks-site-header.is-scrolled", "position: fixed", ".hks-home-hero--featured", ".hks-home-gallery__viewport", ".hks-home-gallery__progress", "--hks-card-width", ".hks-home-gallery__transition-image", "clip-path", "aspect-ratio: 3 / 4", ".hks-tour-workspace", ".hks-tour-media", ".hks-tour-gallery__thumbnails", ".hks-tour-gallery__thumbnail--desktop-overflow", ".hks-tour-gallery__thumbnail-more", ".hks-tour-gallery__stage", ".hks-tour-gallery__nav--prev", ".hks-tour-gallery__nav--next", ".hks-mobile-menu", ".hks-mobile-menu__parent-link", ".hks-footer-menu", ".hks-catalogue-filter-sidebar", ".hks-catalogue-filter-toggle", ".hks-catalogue-filter-drawer", "grid-template-columns: minmax(14rem, 16rem) minmax(0, 1fr)", ".hks-editorial-page", ".hks-group-travel-planner", ".hks-group-travel-visuals", ":focus-visible", "prefers-reduced-motion", "prefers-reduced-transparency"])
+    require(errors, "theme metadata", sources["style"], ["Version: 0.7.0", "body.home .hks-site-header", "body.home .hks-site-header.is-scrolled", "position: fixed", ".hks-home-hero--featured", ".hks-home-gallery__viewport", ".hks-home-gallery__progress", "--hks-card-width", ".hks-home-gallery__transition-image", "clip-path", "aspect-ratio: 3 / 4", ".hks-tour-workspace", ".hks-tour-media", ".hks-tour-gallery__thumbnails", ".hks-tour-gallery__thumbnail--desktop-overflow", ".hks-tour-gallery__thumbnail-more", ".hks-tour-gallery__stage", ".hks-tour-gallery__nav--prev", ".hks-tour-gallery__nav--next", ".hks-mobile-menu", ".hks-mobile-menu__parent-link", ".hks-footer-menu", ".hks-catalogue-filter-sidebar", ".hks-catalogue-filter-toggle", ".hks-catalogue-filter-drawer", "grid-template-columns: minmax(14rem, 16rem) minmax(0, 1fr)", ".hks-editorial-page", ".hks-group-travel-planner", ".hks-group-travel-visuals", ".hks-article-mobile-quote.is-visible", ".hks-article-discovery__form", ":focus-visible", "prefers-reduced-motion", "prefers-reduced-transparency"])
     forbid(errors, "theme stylesheet", sources["style"], ["linear-gradient(", "radial-gradient(", ".hks-site-header--home-overlay"])
 
     require(
@@ -101,12 +110,14 @@ def main() -> int:
         [
             "inc/NavMenus.php",
             "inc/TourBlocks.php",
+            "inc/ArticleBlocks.php",
             "NavMenus::register",
             "register_admin_page",
             "assets/js/navigation.js",
             "assets/js/home-gallery.js",
             "assets/js/catalogue-filters.js",
             "assets/js/tour-ui.js",
+            "assets/js/article-ui.js",
             "hks_wayfinder_filter_tour_archive",
             "is_admin()",
             "hks_wayfinder_campaign_robots",
@@ -135,6 +146,7 @@ def main() -> int:
             "Safaris",
             "Coast & Stays",
             "Destinations",
+            "Travel Guides",
             "Group Travel",
             "group-travel",
             "Request quote on WhatsApp",
@@ -154,7 +166,7 @@ def main() -> int:
     if not utility_whatsapp or "data-hks-quote-proxy" in utility_whatsapp.group(1):
         errors.append("utility WhatsApp contact must be a direct link, not a quote-form proxy")
     require(errors, "footer", sources["footer"], ["operated by Ashford Tours &amp; Travel", "hks-wayfinder/footer-navigation"])
-    require(errors, "managed navigation", sources["nav_menus"], ["register_nav_menus", "PRIMARY_LOCATION", "FOOTER_LOCATION", "wp_nav_menu", "Desktop_Menu_Walker", "Mobile_Menu_Walker", "hks-nav-menu__panel", "hks-mobile-menu__parent-link", "nav-menus.php", "href=\"%4$s\"", "home_url( '/tours/' )"])
+    require(errors, "managed navigation", sources["nav_menus"], ["register_nav_menus", "PRIMARY_LOCATION", "FOOTER_LOCATION", "wp_nav_menu", "Desktop_Menu_Walker", "Mobile_Menu_Walker", "hks-nav-menu__panel", "hks-mobile-menu__parent-link", "nav-menus.php", "href=\"%4$s\"", "home_url( '/tours/' )", "Destinations", "Travel Guides", "home_url( '/travel-guides/' )"])
 
     require(errors, "home template", files["home"], ["hks-wayfinder/home-experience"])
     require(errors, "catalogue template", files["catalogue"], ["hks-title-band", "hks-wayfinder/catalogue-controls", "hks-wayfinder/tour-card", "postType\":\"hks_tour", "inherit\":true"])
@@ -162,11 +174,16 @@ def main() -> int:
     require(errors, "Tour template", files["tour"], ["hks-wayfinder/tour-hero", "hks-wayfinder/tour-details", "data-hks-quote-proxy", "Request quote on WhatsApp"])
     forbid(errors, "Tour template", files["tour"], ["<!-- wp:hks/quote-cta"])
     require(errors, "Campaign template", files["campaign"], ["hks-wayfinder/tour-hero", "hks-wayfinder/tour-details", "hks/quote-cta", "campaign_hero"])
-    require(errors, "Destination template", files["destination"], ["hks-wayfinder/destination-intro", "hks-wayfinder/tour-card", "inherit\":true", "hks-catalogue-prompt"])
+    require(errors, "Destination template", files["destination"], ["hks-wayfinder/destination-intro", "hks-wayfinder/tour-card", "inherit\":true", "hks-wayfinder/destination-guides", "hks-catalogue-prompt"])
     for label in ("tour type", "occasion", "travel style"):
         require(errors, f"{label.title()} template", files[label], ["hks-wayfinder/taxonomy-intro", "hks-wayfinder/tour-card", "inherit\":true", "hks-catalogue-prompt"])
     require(errors, "standard Page template", files["page"], ["hks-standard-page", "hks-wayfinder/page-title", "hks-editorial-page", "wp:post-content"])
     require(errors, "Group Travel template", files["group travel"], ["hks-group-travel-page", "hks-wayfinder/page-title", "hks-wayfinder/group-travel-page", "hks-group-travel-page__support", "wp:post-content"])
+    require(errors, "Travel Guides template", files["travel guides"], ["hks-wayfinder/article-archive-intro", "hks-wayfinder/article-card", "postType\":\"post", "inherit\":true"])
+    forbid(errors, "Travel Guides template", files["travel guides"], ["wp:post-author", "wp:post-author-name"])
+    require(errors, "article template", files["article"], ["hks-wayfinder/article-page"])
+    forbid(errors, "article template", files["article"], ["wp:post-author", "wp:post-author-name"])
+    require(errors, "article topic template", files["article topic"], ["hks-wayfinder/article-archive-intro", "hks-wayfinder/article-card", "postType\":\"post", "inherit\":true"])
 
     for label, template in files.items():
         if 'id="main-content"' not in template:
@@ -295,9 +312,41 @@ def main() -> int:
             "Find a Kenya trip that fits you.",
         ],
     )
+    require(
+        errors,
+        "Travel Guides renderer",
+        sources["article_renderer"],
+        [
+            "hks_article_format",
+            "hks_article_primary_tour",
+            "hks_article_related_posts",
+            "get_post_field( 'post_excerpt'",
+            "data-hks-primary-tour-id",
+            "data-hks-article-early-quote",
+            "data-hks-cta-location=\"article_hero\"",
+            "data-hks-cta-location=\"article_final\"",
+            "data-hks-cta-location=\"article_mobile_sticky\"",
+            "Request quote on WhatsApp",
+            "View this trip",
+            "hks-article-final-quote",
+            "hks-article-conversion-panel",
+            "hks-article-mobile-quote",
+            "hks-article-discovery__form",
+            "hks_guide_destination",
+            "hks_guide_topic",
+            "terms_for_posts",
+            "render_related_posts",
+            "post_type' => 'post'",
+        ],
+    )
+    forbid(errors, "Travel Guides renderer", sources["article_renderer"], ["destination_url", "wp:post-author", "related tours", "Related tours"])
+    require(errors, "Travel Guides query filtering", sources["functions"], ["$query->is_home()", "hks_guide_destination", "hks_guide_topic", "'hks_destination'", "'hks_article_topic'", "ignore_sticky_posts"])
+    require(errors, "article UI script", sources["article_ui"], ["view_article", "article_primary_tour_click", "article_id", "article_format", "primary_tour_id", "cta_location", "IntersectionObserver", "data-hks-article-quote-stop", ".hks-site-footer", "is-visible", "aria-hidden"])
+    forbid(errors, "article UI analytics", sources["article_ui"], ["destination_url", "window.location", "link.href"])
     public_copy = "\n".join(
         [
             sources["renderer"],
+            sources["article_renderer"],
             sources["quote"],
             sources["footer"],
             files["catalogue"],
@@ -351,6 +400,13 @@ def main() -> int:
             continue
         if block.get("name") != expected_name or block.get("apiVersion") != 3:
             errors.append(f"{relative} has the wrong name or API version")
+        if relative in {
+            "blocks/article-archive-intro/block.json",
+            "blocks/article-card/block.json",
+            "blocks/article-page/block.json",
+            "blocks/destination-guides/block.json",
+        } and "Holiday Kenya Safaris" not in str(block.get("title", "")):
+            errors.append(f"{relative} must spell Holiday Kenya Safaris in full in its editor title")
         if block.get("supports", {}).get("html") is not False:
             errors.append(f"{relative} must disable unrestricted HTML")
 

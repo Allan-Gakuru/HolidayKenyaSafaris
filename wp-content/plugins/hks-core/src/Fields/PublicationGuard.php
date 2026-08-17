@@ -69,6 +69,7 @@ final class PublicationGuard implements Module {
 		add_action( 'acf/validate_save_post', array( $this, 'validate_scf_save' ), 20 );
 		add_filter( 'rest_pre_insert_hks_tour', array( $this, 'validate_rest_tour' ), 20, 2 );
 		add_filter( 'rest_pre_insert_hks_campaign', array( $this, 'validate_rest_campaign' ), 20, 2 );
+		add_filter( 'rest_pre_insert_post', array( $this, 'validate_rest_article' ), 20, 2 );
 		add_filter( 'wp_insert_post_data', array( $this, 'guard_insert' ), 99, 4 );
 		add_action( 'transition_post_status', array( $this, 'protect_linked_campaigns' ), 20, 3 );
 		add_action( 'before_delete_post', array( $this, 'protect_campaigns_before_tour_delete' ), 20, 2 );
@@ -133,6 +134,17 @@ final class PublicationGuard implements Module {
 	 */
 	public function validate_rest_campaign( $prepared_post, $request ) {
 		return $this->validate_rest_request( Campaign::POST_TYPE, $prepared_post, $request );
+	}
+
+	/**
+	 * Validate a native Travel Guide Post REST create or update.
+	 *
+	 * @param mixed $prepared_post Prepared post object.
+	 * @param mixed $request       REST request.
+	 * @return mixed
+	 */
+	public function validate_rest_article( $prepared_post, $request ) {
+		return $this->validate_rest_request( 'post', $prepared_post, $request );
 	}
 
 	/**
@@ -865,7 +877,7 @@ final class PublicationGuard implements Module {
 		set_transient(
 			self::NOTICE_TRANSIENT_PREFIX . $user_id,
 			array(
-				'post_label' => Tour::POST_TYPE === $post_type ? __( 'Tour', 'hks-core' ) : __( 'Campaign', 'hks-core' ),
+				'post_label' => Tour::POST_TYPE === $post_type ? __( 'Tour', 'hks-core' ) : ( Campaign::POST_TYPE === $post_type ? __( 'Campaign', 'hks-core' ) : __( 'Travel Guide', 'hks-core' ) ),
 				'errors'     => $errors,
 			),
 			120
@@ -913,7 +925,7 @@ final class PublicationGuard implements Module {
 	 * @return bool
 	 */
 	private function is_supported_post_type( $post_type ) {
-		return in_array( $post_type, array( Tour::POST_TYPE, Campaign::POST_TYPE ), true );
+		return in_array( $post_type, array( Tour::POST_TYPE, Campaign::POST_TYPE, 'post' ), true );
 	}
 
 	/**

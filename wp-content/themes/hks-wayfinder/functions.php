@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once get_theme_file_path( 'inc/NavMenus.php' );
 require_once get_theme_file_path( 'inc/TourBlocks.php' );
+require_once get_theme_file_path( 'inc/ArticleBlocks.php' );
 
 /**
  * Register theme supports and editor styles.
@@ -106,6 +107,18 @@ function hks_wayfinder_enqueue_scripts(): void {
 			array( 'in_footer' => true, 'strategy' => 'defer' )
 		);
 	}
+
+	if ( is_singular( 'post' ) || is_tax( 'hks_article_topic' ) || is_home() ) {
+		$article_path = get_theme_file_path( 'assets/js/article-ui.js' );
+
+		wp_enqueue_script(
+			'hks-wayfinder-article-ui',
+			get_theme_file_uri( 'assets/js/article-ui.js' ),
+			array(),
+			is_readable( $article_path ) ? (string) filemtime( $article_path ) : wp_get_theme()->get( 'Version' ),
+			array( 'in_footer' => true, 'strategy' => 'defer' )
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'hks_wayfinder_enqueue_scripts' );
 
@@ -133,6 +146,7 @@ function hks_wayfinder_favicon_fallback(): void {
 add_action( 'wp_head', 'hks_wayfinder_favicon_fallback', 2 );
 
 add_action( 'init', array( \HKS_Wayfinder\TourBlocks::class, 'register' ), 20 );
+add_action( 'init', array( \HKS_Wayfinder\ArticleBlocks::class, 'register' ), 20 );
 
 /**
  * Respect Campaign noindex governance independently of SEO plugins.
@@ -160,7 +174,7 @@ function hks_wayfinder_campaign_robots( array $robots ): array {
 add_filter( 'wp_robots', 'hks_wayfinder_campaign_robots' );
 
 /**
- * Add Campaign navigation-mode classes for focused landing pages.
+ * Add public mode classes for focused Campaign and article presentation.
  *
  * @param string[] $classes Body classes.
  * @return string[]
@@ -170,6 +184,12 @@ function hks_wayfinder_campaign_body_class( array $classes ): array {
 		$post_id = get_queried_object_id();
 		$mode    = function_exists( 'get_field' ) ? get_field( 'hks_navigation_mode', $post_id ) : get_post_meta( $post_id, 'hks_navigation_mode', true );
 		$classes[] = 'hks-campaign-navigation-' . sanitize_html_class( $mode ?: 'campaign_minimal' );
+	}
+
+	if ( is_singular( 'post' ) ) {
+		$post_id = get_queried_object_id();
+		$format  = function_exists( 'get_field' ) ? get_field( 'hks_article_format', $post_id ) : get_post_meta( $post_id, 'hks_article_format', true );
+		$classes[] = 'hks-article-format-' . sanitize_html_class( 'advertorial' === $format ? 'advertorial' : 'guide' );
 	}
 
 	return $classes;
@@ -186,6 +206,36 @@ add_filter( 'body_class', 'hks_wayfinder_campaign_body_class' );
 function hks_wayfinder_populated_terms( string $taxonomy, int $limit = 0 ): array {
 	if ( ! taxonomy_exists( $taxonomy ) ) {
 		return array();
+	}
+
+	if ( 'hks_destination' === $taxonomy ) {
+		$tour_ids = get_posts(
+			array(
+				'post_type'      => 'hks_tour',
+				'post_status'    => 'publish',
+				'posts_per_page' => -1,
+				'fields'         => 'ids',
+				'no_found_rows'  => true,
+			)
+		);
+		if ( ! $tour_ids ) {
+			return array();
+		}
+		$terms = wp_get_object_terms( $tour_ids, $taxonomy, array( 'orderby' => 'name', 'order' => 'ASC' ) );
+		if ( is_wp_error( $terms ) ) {
+			return array();
+		}
+		$counts = array();
+		foreach ( $tour_ids as $tour_id ) {
+			foreach ( (array) wp_get_post_terms( $tour_id, $taxonomy ) as $term ) {
+				$counts[ $term->term_id ] = ( $counts[ $term->term_id ] ?? 0 ) + 1;
+			}
+		}
+		foreach ( $terms as $term ) {
+			$term->count = (int) ( $counts[ $term->term_id ] ?? 0 );
+		}
+		usort( $terms, static fn( $left, $right ) => $right->count <=> $left->count ?: strnatcasecmp( $left->name, $right->name ) );
+		return array_slice( $terms, 0, $limit > 0 ? $limit : count( $terms ) );
 	}
 
 	$terms = get_terms(
@@ -358,6 +408,14 @@ function hks_wayfinder_taxonomy_archive_description( WP_Term $term ): string {
  * @return array<string,string>
  */
 function hks_wayfinder_taxonomy_document_title( array $parts ): array {
+	if ( is_tax( 'hks_article_topic' ) ) {
+		$term = get_queried_object();
+		if ( $term instanceof WP_Term ) {
+			$parts['title'] = sprintf( __( '%s travel guides', 'hks-wayfinder' ), $term->name );
+		}
+		return $parts;
+	}
+
 	if ( ! is_tax( array( 'hks_tour_scope', 'hks_destination', 'hks_tour_type', 'hks_occasion', 'hks_travel_style' ) ) ) {
 		return $parts;
 	}
@@ -392,6 +450,38 @@ function hks_wayfinder_published_page_url( string $path ): string {
  */
 function hks_wayfinder_filter_tour_archive( WP_Query $query ): void {
 	if ( is_admin() || ! $query->is_main_query() ) {
+		return;
+	}
+
+	if ( $query->is_home() ) {
+		$tax_query = array();
+		$filters   = array(
+			'hks_guide_destination' => 'hks_destination',
+			'hks_guide_topic'       => 'hks_article_topic',
+		);
+		foreach ( $filters as $parameter => $taxonomy ) {
+			$raw  = $_GET[ $parameter ] ?? '';
+			$slug = is_string( $raw ) ? sanitize_title( wp_unslash( $raw ) ) : '';
+			if ( '' !== $slug && taxonomy_exists( $taxonomy ) && term_exists( $slug, $taxonomy ) ) {
+				$tax_query[] = array( 'taxonomy' => $taxonomy, 'field' => 'slug', 'terms' => $slug );
+			}
+		}
+		if ( $tax_query ) {
+			$query->set( 'tax_query', $tax_query );
+		}
+		$query->set( 'post_type', 'post' );
+		$query->set( 'post_status', 'publish' );
+		$query->set( 'posts_per_page', 12 );
+		$query->set( 'ignore_sticky_posts', true );
+		return;
+	}
+
+	if ( $query->is_tax( 'hks_article_topic' ) ) {
+		$query->set( 'post_type', 'post' );
+		$query->set( 'post_status', 'publish' );
+		$query->set( 'posts_per_page', 12 );
+		$query->set( 'orderby', 'date' );
+		$query->set( 'order', 'DESC' );
 		return;
 	}
 

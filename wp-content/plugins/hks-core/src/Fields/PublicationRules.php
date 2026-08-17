@@ -17,6 +17,9 @@ defined( 'ABSPATH' ) || exit;
  */
 final class PublicationRules {
 
+	/** Native WordPress post type used for Travel Guides. */
+	private const ARTICLE_POST_TYPE = 'post';
+
 	/** Editorial sentinel that must never become public copy. */
 	private const CONFIRMATION_SENTINEL = 'CLIENT CONFIRMATION REQUIRED';
 
@@ -36,6 +39,10 @@ final class PublicationRules {
 
 		if ( Campaign::POST_TYPE === $post_type ) {
 			return self::validate_campaign( $values, $native );
+		}
+
+		if ( self::ARTICLE_POST_TYPE === $post_type ) {
+			return self::validate_article( $values, $post_id, $native );
 		}
 
 		return array();
@@ -153,6 +160,70 @@ final class PublicationRules {
 	}
 
 	/**
+	 * Validate a public native Travel Guide Post.
+	 *
+	 * Advertorials must point to one published Tour. Guides may omit the Primary
+	 * Tour, but any supplied relationship must still point to one published Tour.
+	 * Related guides are ordered, published Posts and cannot include the current
+	 * article.
+	 *
+	 * @param array<string, mixed> $values  Complete candidate SCF values.
+	 * @param int                  $post_id Current Post ID, or zero for a new Post.
+	 * @param array<string, mixed> $native  Candidate native WordPress fields.
+	 * @return array<int, array{code:string,field:string,message:string}>
+	 */
+	public static function validate_article( $values, $post_id = 0, $native = array() ) {
+		$errors       = array();
+		$format        = sanitize_key( (string) self::value( $values, 'hks_article_format' ) );
+		$primary_tours = self::relationship_ids( self::value( $values, 'hks_article_primary_tour' ) );
+		$related_ids   = self::relationship_ids( self::value( $values, 'hks_article_related_posts' ) );
+
+		if ( ! self::is_meaningful( self::value( $native, 'post_title' ) ) ) {
+			self::add_error( $errors, 'hks_article_title_required', 'post_title', __( 'Add the public Travel Guide title before publishing.', 'hks-core' ) );
+		}
+
+		if ( ! in_array( $format, array( 'guide', 'advertorial' ), true ) ) {
+			self::add_error( $errors, 'hks_article_format_required', 'hks_article_format', __( 'Choose whether this article is a Guide or an Advertorial before publishing.', 'hks-core' ) );
+		}
+
+		if ( 'advertorial' === $format && 1 !== count( $primary_tours ) ) {
+			self::add_error( $errors, 'hks_advertorial_primary_tour_required', 'hks_article_primary_tour', __( 'An Advertorial must reference exactly one published Primary Tour before publishing.', 'hks-core' ) );
+		}
+
+		if ( count( $primary_tours ) > 1 ) {
+			self::add_error( $errors, 'hks_article_primary_tour_multiple', 'hks_article_primary_tour', __( 'A Travel Guide may reference no more than one Primary Tour.', 'hks-core' ) );
+		}
+
+		if ( 1 === count( $primary_tours ) && ! self::is_published_tour( $primary_tours[0] ) ) {
+			self::add_error( $errors, 'hks_article_primary_tour_not_public', 'hks_article_primary_tour', __( 'The Primary Tour must be published before this Travel Guide can be public.', 'hks-core' ) );
+		}
+
+		if ( count( $related_ids ) > 3 ) {
+			self::add_error( $errors, 'hks_article_related_posts_limit', 'hks_article_related_posts', __( 'Choose no more than three Related Travel Guides.', 'hks-core' ) );
+		}
+
+		foreach ( $related_ids as $related_id ) {
+			if ( $post_id > 0 && $related_id === (int) $post_id ) {
+				self::add_error( $errors, 'hks_article_related_post_self', 'hks_article_related_posts', __( 'A Travel Guide cannot relate to itself.', 'hks-core' ) );
+				continue;
+			}
+
+			if ( 'post' !== get_post_type( $related_id ) || 'publish' !== get_post_status( $related_id ) ) {
+				self::add_error( $errors, 'hks_article_related_post_not_public', 'hks_article_related_posts', __( 'Every Related Travel Guide must be a published Post.', 'hks-core' ) );
+			}
+		}
+
+		$public_values           = self::select_values( $values, self::article_public_field_names() );
+		$public_values['native'] = self::select_values( $native, array( 'post_title', 'post_excerpt', 'post_content' ) );
+
+		if ( self::contains_confirmation_sentinel( $public_values ) ) {
+			self::add_error( $errors, 'hks_article_public_confirmation_sentinel', 'hks_public_content', __( 'Remove the CLIENT CONFIRMATION REQUIRED placeholder from public Travel Guide content before publishing.', 'hks-core' ) );
+		}
+
+		return $errors;
+	}
+
+	/**
 	 * Return every field the guard may need to load individually.
 	 *
 	 * @param string $post_type Post type name.
@@ -165,6 +236,10 @@ final class PublicationRules {
 
 		if ( Campaign::POST_TYPE === $post_type ) {
 			return self::campaign_public_field_names();
+		}
+
+		if ( self::ARTICLE_POST_TYPE === $post_type ) {
+			return self::article_public_field_names();
 		}
 
 		return array();
@@ -224,6 +299,17 @@ final class PublicationRules {
 			'hks_navigation_mode',
 			'hks_campaign_start_date',
 			'hks_campaign_end_date',
+		);
+	}
+
+	/** Public Travel Guide field names used for candidate loading and checks. */
+	private static function article_public_field_names() {
+		return array(
+			'hks_article_format',
+			'hks_article_primary_tour',
+			'hks_article_related_posts',
+			'hks_article_destination',
+			'hks_article_topic',
 		);
 	}
 

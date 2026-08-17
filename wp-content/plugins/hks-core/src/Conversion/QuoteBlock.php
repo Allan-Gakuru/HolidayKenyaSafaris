@@ -62,6 +62,8 @@ final class QuoteBlock {
 			data-whatsapp-number="<?php echo esc_attr( self::WHATSAPP_NUMBER ); ?>"
 			data-tour-id="<?php echo esc_attr( $context['tour_id'] ); ?>"
 			data-tour-slug="<?php echo esc_attr( $context['tour_slug'] ); ?>"
+			data-article-id="<?php echo esc_attr( $context['article_id'] ?? 0 ); ?>"
+			data-article-format="<?php echo esc_attr( $context['article_format'] ?? '' ); ?>"
 			data-campaign-id="<?php echo esc_attr( $context['campaign_id'] ); ?>"
 			data-campaign-label="<?php echo esc_attr( $context['campaign_label'] ); ?>"
 			data-page-type="<?php echo esc_attr( $context['page_type'] ); ?>"
@@ -228,6 +230,8 @@ final class QuoteBlock {
 		return array(
 			'tour_id'            => 0,
 			'tour_slug'          => '',
+			'article_id'         => 0,
+			'article_format'     => '',
 			'campaign_id'        => 0,
 			'campaign_label'     => '',
 			'page_type'          => 'group_travel',
@@ -294,11 +298,15 @@ final class QuoteBlock {
 			$tour_id     = absint( self::field( 'hks_linked_tour', $post_id ) );
 			$campaign_id = $post_id;
 			$page_type   = 'campaign';
+		} elseif ( 'post' === $post_type ) {
+			$tour_id     = absint( self::field( 'hks_article_primary_tour', $post_id ) );
+			$campaign_id = 0;
+			$page_type   = 'article';
 		} else {
 			return null;
 		}
 
-		if ( ! $tour_id || Tour::POST_TYPE !== get_post_type( $tour_id ) ) {
+		if ( ! $tour_id || Tour::POST_TYPE !== get_post_type( $tour_id ) || 'publish' !== get_post_status( $tour_id ) ) {
 			return null;
 		}
 
@@ -322,6 +330,8 @@ final class QuoteBlock {
 		return array(
 			'tour_id'            => $tour_id,
 			'tour_slug'          => get_post_field( 'post_name', $tour_id ),
+			'article_id'         => 'article' === $page_type ? $post_id : 0,
+			'article_format'     => 'article' === $page_type ? sanitize_key( (string) self::field( 'hks_article_format', $post_id ) ) : '',
 			'campaign_id'        => $campaign_id,
 			'campaign_label'     => $campaign_id ? sanitize_text_field( self::field( 'hks_analytics_campaign_label', $campaign_id ) ) : '',
 			'page_type'          => $page_type,

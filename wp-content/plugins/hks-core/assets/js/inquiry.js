@@ -51,6 +51,8 @@
 			event_contract_version: '1.0',
 			tour_id: Number(root.dataset.tourId || 0),
 			tour_slug: safeText(root.dataset.tourSlug, 100),
+			article_id: Number(root.dataset.articleId || 0),
+			article_format: safeText(root.dataset.articleFormat, 20),
 			campaign_id: Number(root.dataset.campaignId || 0),
 			campaign_label: safeText(root.dataset.campaignLabel, 100),
 			page_type: safeText(root.dataset.pageType, 30),

@@ -86,6 +86,9 @@ Actions:
 - Use native WordPress publication state as approval; remove client confirmation, source-audit, rights-status, and validity fields from content workflows.
 - Expose one editable Tour `From price per person (KSh)` field. Retain the separate optional Campaign override and Campaign-only start/end dates.
 - Add the public Tour Scope taxonomy with `Kenya Tours` and `International Tours`; keep Destination as the geographic taxonomy.
+- Extend the existing Destination taxonomy to native Posts and Tours while keeping every catalogue query and Tour count explicitly Tour-only.
+- Add the Post-only Article Topic taxonomy and code-registered Secure Custom Fields for Article Format, Primary Tour, Related Reading, Destination, and Article Topic.
+- Use native Posts for Travel Guides. Standard Guides have an optional Primary Tour; Advertorials cannot publish without one published Primary Tour. Featured images remain optional and no public author name is rendered.
 - Lock critical templates while preserving practical editing regions.
 - Add preview behavior for Tours and Campaigns.
 - Keep the ordered public gallery, Featured Tour placement, visible package facts, itinerary, inclusions/exclusions, package notes, and FAQ relationship required by the current templates.
@@ -143,6 +146,16 @@ Implementation status (2026-07-27): the global, Tour, Campaign, catalogue, all f
 
 Menu management status (2026-08-03): the primary header/mobile hierarchy and footer links use native WordPress menu locations exposed under **Appearance > Site Menus**. One two-level Primary menu drives both responsive header surfaces, while a separate Footer menu controls footer links. The existing catalogue-aware output remains the safe fallback until an editor assigns a menu.
 
+Travel Guides implementation target (2026-08-17): extend native WordPress Posts into a public `/travel-guides/` hub with Standard Guide and Advertorial formats. Destination remains one shared public taxonomy and one sitemap route, but its main archive stays Tour-first and Tour-paginated; relevant guides appear in a secondary section. Add public Article Topic archives, Post-only related reading, no-author output, optional-image fallbacks, and the approved Primary Tour conversion behavior. The first design examples use Diani, Dubai, and Maasai Mara; editorial research and production article writing follow design approval.
+
+Production setup after the code release:
+
+1. Create and publish a WordPress Page named **Travel Guides** with slug `travel-guides`, then select it as the Posts page under **Settings > Reading**.
+2. Confirm whether any existing native Post URLs require redirects. If none do, set the Post permalink structure to `/travel-guides/%postname%/` under **Settings > Permalinks** and save once to refresh rewrite rules. The plugin deliberately does not change this global setting automatically.
+3. Add Travel Guides between Destinations and Group Travel in the assigned Primary menu. The theme fallback already preserves that order when no menu is assigned.
+4. Verify native Post, Article Topic, and shared Destination entries in the generated XML sitemap and verify canonical URLs before indexing.
+5. Keep the existing default Post unpublished or remove it from the public editorial plan before launch.
+
 Build in this order:
 
 1. Utility bar, desktop header, dropdown navigation, mobile drawer, and footer.
@@ -159,6 +172,9 @@ Build in this order:
 12. Group Travel.
 13. Contact.
 14. Legal and policy templates.
+15. Travel Guides hub and Article Topic archive.
+16. Standard Guide and Advertorial templates.
+17. Destination-page Travel Guides section and related-guide resolver.
 
 Why this order:
 
@@ -173,6 +189,9 @@ Acceptance:
 - The permanent reference-site booking form is absent; every Tour quote action opens the approved HKS intake and WhatsApp handoff.
 - The current Maasai Mara prototype's strongest UX is preserved in Campaign mode without carrying over its old identity.
 - Group Travel navigation resolves to one canonical Page whose published Destination and Tour choices feed the same private inquiry and WhatsApp review service as Tour and Campaign pages.
+- Travel Guides navigation appears between Destinations and Group Travel, public page copy spells Holiday Kenya Safaris in full, and no author name appears in article cards or pages.
+- A Standard Guide may publish without a Primary Tour and uses **View this trip** when one is assigned. An Advertorial requires one published Primary Tour and sends all quote actions into the shared intake and review flow.
+- Sharing Destination never mixes Posts into Tour archive pagination, Tour navigation, or Tour counts. Related reading contains up to three Posts in manual, Destination, then Article Topic priority.
 
 ## Phase 7: Catalogue Migration
 
@@ -231,6 +250,10 @@ Test:
 - Core Web Vitals and layout shift.
 - Featured Tour hero image eligibility, five-second autoplay and progress synchronization, clipped card-to-stage reveal, pause/resume, pointer drag, keyboard commands, reduced-motion behavior, and homepage-header contrast at 360, 390, 768, 1024, 1280, and 1440px.
 - Analytics debug modes.
+- Travel Guides at 360, 390, 768, 1024, and 1440px: hub filters, image/no-image cards, long titles, Standard Guide with and without Primary Tour, Advertorial desktop panel and mobile sticky action, and related-Post ordering.
+- Publication guard: block an Advertorial whose Primary Tour is blank or unpublished while allowing a Standard Guide without a Primary Tour.
+- Shared Destination regression: a Destination with Tours and Posts remains Tour-first, and a Post-only Destination is absent from Tour navigation and Tour counts.
+- Travel Guides keyboard behavior, quote-dialog focus return, safe-area spacing, reduced motion, sitemap routes, canonical URLs, and one anonymous analytics event per action.
 
 Capture desktop and mobile screenshots for the core templates before acceptance.
 

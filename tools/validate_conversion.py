@@ -47,7 +47,7 @@ def main() -> int:
             errors.append(f"missing {relative}: {error}")
             content[label] = ""
 
-    require(errors, "plugin bootstrap", content["bootstrap"], ["Version:           0.10.0", "define( 'HKS_CORE_VERSION', '0.10.0' )"])
+    require(errors, "plugin bootstrap", content["bootstrap"], ["Version:           0.11.0", "define( 'HKS_CORE_VERSION', '0.11.0' )"])
     require(
         errors,
         "client-ready copy migration",
@@ -57,6 +57,9 @@ def main() -> int:
             "make_public_copy_client_ready",
             "source duration and route outline",
             "is_repeater_row",
+            "0.11.0",
+            "seed_article_topic_terms",
+            "seed_anchor_destination_terms",
         ],
     )
     require(errors, "plugin coordinator", content["plugin"], ["Conversion\\Module as ConversionModule", "ConversionModule::class"])
@@ -112,6 +115,10 @@ def main() -> int:
             "InquiryRepository::CONSENT_VERSION",
             "FormToken::issue",
             "group_context",
+            "article_id",
+            "article_format",
+            "hks_article_primary_tour",
+            "'article' === $page_type",
             "destination_selection",
             "tour_selection",
             "data-hks-inquiry-inline",

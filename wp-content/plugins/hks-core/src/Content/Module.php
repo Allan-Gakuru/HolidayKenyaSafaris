@@ -12,6 +12,7 @@ use HolidayKenyaSafaris\Core\Content\PostTypes\Faq;
 use HolidayKenyaSafaris\Core\Content\PostTypes\Inquiry;
 use HolidayKenyaSafaris\Core\Content\PostTypes\Tour;
 use HolidayKenyaSafaris\Core\Content\Taxonomies\Destination;
+use HolidayKenyaSafaris\Core\Content\Taxonomies\ArticleTopic;
 use HolidayKenyaSafaris\Core\Content\Taxonomies\Occasion;
 use HolidayKenyaSafaris\Core\Content\Taxonomies\TourType;
 use HolidayKenyaSafaris\Core\Content\Taxonomies\TourScope;
@@ -53,6 +54,8 @@ final class Module implements ModuleContract {
 	 */
 	public function register() {
 		add_action( 'init', array( $this, 'register_content_model' ), 5 );
+		add_action( 'init', array( $this, 'maybe_seed_article_topics' ), 6 );
+		add_action( 'init', array( $this, 'maybe_seed_anchor_destinations' ), 6 );
 		add_action( 'wp_loaded', array( $this, 'maybe_flush_rewrite_rules' ) );
 	}
 
@@ -68,10 +71,37 @@ final class Module implements ModuleContract {
 		Inquiry::register();
 
 		Destination::register();
+		ArticleTopic::register();
 		TourScope::register();
 		TourType::register();
 		Occasion::register();
 		TravelStyle::register();
+	}
+
+	/** Seed Travel Guide topics after WordPress knows the taxonomy exists. */
+	public function maybe_seed_article_topics() {
+		if ( ! get_option( ArticleTopic::SEED_OPTION, false ) ) {
+			return;
+		}
+
+		$result = ArticleTopic::seed_initial_terms();
+
+		if ( ! is_wp_error( $result ) ) {
+			delete_option( ArticleTopic::SEED_OPTION );
+		}
+	}
+
+	/** Seed approved anchor Destinations after the taxonomy is registered. */
+	public function maybe_seed_anchor_destinations() {
+		if ( ! get_option( Destination::ANCHOR_SEED_OPTION, false ) ) {
+			return;
+		}
+
+		$result = Destination::seed_anchor_terms();
+
+		if ( ! is_wp_error( $result ) ) {
+			delete_option( Destination::ANCHOR_SEED_OPTION );
+		}
 	}
 
 	/**

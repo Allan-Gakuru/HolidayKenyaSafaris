@@ -25,6 +25,12 @@ Regenerate or verify the font package from the pinned Montserrat WOFF2 and OFL f
 3. Configure the WordPress Site Icon when the final identity has client sign-off; until then, the theme fallback is used.
 4. Do not publish a photograph until its source and usage approval are recorded.
 
+Version `0.7.0` provides the catalogue-led public experience plus the Travel Guides
+system: native WordPress Posts can render as reading-first destination guides or
+focused conversion stories. Standard Guides may have an optional Primary Tour;
+Advertorials require one published Primary Tour and use the existing intake-to-WhatsApp
+quote flow. Related content contains guide Posts only. No author byline is rendered publicly.
+
 Version `0.5.0` provides the catalogue-led public experience: a product-led header,
 image-led homepage, filterable Tour archive, compact Destination pages, and the
 canonical Tour gallery/workspace with desktop tabs, mobile disclosures, a sticky

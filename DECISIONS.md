@@ -34,6 +34,12 @@ Exclude by default:
 - Retain factual itinerary, route, inclusion, exclusion, duration, and accommodation information from approved Ashford sources.
 - Rewrite marketing copy around local identities, occasions, problems, desires, objections, and objectives.
 - Do not restrict the whole website to Mercy. Support avatar-specific campaign pages and tour-page variants.
+- Use native WordPress Posts for the public **Travel Guides** section. Posts are public editorial pages, not a private classification system.
+- Give Posts two public discovery relationships through Secure Custom Fields: the shared Destination taxonomy and the Post-only Article Topic taxonomy.
+- Seed Article Topics for Destination Guides, Planning & FAQs, Travel Inspiration, Comparisons, and Holiday Kenya Safaris News. Comparisons cover useful travel choices and trip formats.
+- Support a reading-first Standard Guide and a conversion-focused Advertorial. A Standard Guide may link one Primary Tour; an Advertorial must link one published Primary Tour.
+- Show no author name on Travel Guides pages, cards, archives, or related-guide modules. Featured images remain optional and missing imagery must produce an intentional text-led design.
+- Related reading contains blog posts only: up to three editor-selected Posts first, then Posts sharing the Destination, then Posts sharing the Article Topic.
 - Treat photographs uploaded or assigned by an authorized editor and used on published content as approved for the website.
 - Use clear Kenyan English and KSh pricing.
 - Any unavailable company information may be taken from Ashford's current website if relevant and verifiable; otherwise request it.
@@ -84,6 +90,7 @@ Exclude by default:
 - Tour catalogue.
 - Destination pages.
 - Tour/package detail pages.
+- Travel Guides hub, Article Topic archives, Standard Guides, and Advertorials.
 - About and trust page.
 - Contact page.
 - Reusable focused landing-page template for advertising.
@@ -101,9 +108,12 @@ Exclude by default:
 - Canonical Tour pages use a compact title and breadcrumb band followed by a desktop three-column composition: a vertical gallery rail capped at six visible thumbnails, one active image and a sticky quote panel. When more images exist, the sixth thumbnail shows a dark `+N more` overlay and opens the full gallery, preventing the rail from increasing the workspace row height. The active image has previous/next chevrons and advances every five seconds unless the visitor is interacting, the gallery is off-screen, the document is hidden or reduced motion is requested. Tour facts, accessible tabs, mobile disclosures, itinerary timeline, related Tours and the final quote prompt remain part of the canonical flow.
 - A conventional booking sidebar is replaced by an HKS quote panel whose **Request quote on WhatsApp** button opens the approved intake, consent, private recovery, message-review, and WhatsApp-launch flow.
 - Desktop navigation uses a utility bar plus product-led primary header. The utility bar carries a direct WhatsApp link with a prefilled, page-aware reach-out message; the primary header does not repeat it as a large button. Page-level quote actions still open the approved intake and recovery flow. Mobile uses a full-height accessible navigation drawer.
-- Approved top-level navigation is Home, Safaris, Coast & Stays, Destinations, Group Travel, About, and Contact. The mobile drawer retains a clear Request quote on WhatsApp action.
+- Approved top-level navigation is Home, Safaris, Coast & Stays, Destinations, Travel Guides, Group Travel, About, and Contact. The mobile drawer retains a clear Request quote on WhatsApp action.
+- Travel Guides appears between Destinations and Group Travel in the primary navigation. Its canonical hub is `/travel-guides/`.
 - Header/mobile and footer links use native WordPress menu locations exposed as **Appearance > Site Menus**. One assigned two-level Primary menu drives both desktop dropdowns and mobile accordions; Footer has its own location. The prior catalogue-aware markup remains the fallback until an editor assigns a menu, preventing an empty header during rollout.
 - Kenya and international Tours are separated by the public Tour Scope taxonomy. Destination remains the geographic taxonomy used beneath either scope.
+- Destination is shared by Tours and native Posts so one place has one canonical Destination archive and one taxonomy sitemap entry. The Destination archive remains Tour-first: its main query, pagination, browse counts, and Tour navigation count published Tours only, while relevant Travel Guides appear in a separate section below the Tour catalogue.
+- Standard Guides use a contextual **View this trip** link when a Primary Tour is assigned and have no persistent quote action. Advertorials use early and repeated **Request quote on WhatsApp** actions that open the shared intake and review flow, plus a desktop sticky Tour panel and a mobile sticky quote action after the opening CTA leaves view.
 - Visa services, standalone transfers, and non-Tour service pages remain excluded.
 
 ## Brand
@@ -135,6 +145,8 @@ Prepare integrations for:
 - WhatsApp CTA and inquiry events.
 - UTM and campaign attribution.
 - Consent and privacy controls appropriate to the final tracking setup.
+
+Travel Guides use the minimal anonymous event set `view_article` and `article_primary_tour_click`, plus the existing `quote_cta_click`, `quote_form_complete`, and `whatsapp_launch` events when an Advertorial enters the quote flow. Article ID, format, Primary Tour ID, CTA location, public taxonomy slugs, and campaign attribution may be used; personal details and exact form answers may not.
 
 Client IDs will be supplied later. Do not hard-code invented IDs.
 

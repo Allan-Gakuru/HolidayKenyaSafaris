@@ -409,14 +409,18 @@ final class NavMenus {
 		}
 
 		return sprintf(
-			'<nav aria-label="%1$s"><a href="%2$s">%3$s</a><a href="%4$s">%5$s</a><a href="%6$s">%7$s</a></nav>',
+			'<nav aria-label="%1$s"><a href="%2$s">%3$s</a><a href="%4$s">%5$s</a><a href="%6$s">%7$s</a><a href="%8$s">%9$s</a><a href="%10$s">%11$s</a></nav>',
 			esc_attr__( 'Footer navigation', 'hks-wayfinder' ),
 			esc_url( home_url( '/' ) ),
 			esc_html__( 'Home', 'hks-wayfinder' ),
 			esc_url( get_post_type_archive_link( 'hks_tour' ) ?: home_url( '/tours/' ) ),
 			esc_html__( 'All tours', 'hks-wayfinder' ),
+			esc_url( home_url( '/#destinations' ) ),
+			esc_html__( 'Destinations', 'hks-wayfinder' ),
+			esc_url( home_url( '/travel-guides/' ) ),
+			esc_html__( 'Travel Guides', 'hks-wayfinder' ),
 			esc_url( home_url( '/group-travel/' ) ),
-			 esc_html__( 'Group travel', 'hks-wayfinder' )
+			esc_html__( 'Group travel', 'hks-wayfinder' )
 		);
 	}
 

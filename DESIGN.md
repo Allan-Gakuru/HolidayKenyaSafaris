@@ -25,6 +25,15 @@ Focused paid-ad pages may use the immersive, emotionally concentrated structure 
 
 Do not blend both modes into an indecisive hybrid on every page. Canonical Tour pages use the catalogue shell. Campaign pages earn the more dramatic opening.
 
+### Travel Guides modes
+
+Travel Guides extends the Wayfinder system with two deliberate editorial compositions:
+
+- **Standard Guide / Field Guide:** reading-first, quiet, and practical. Use a maximum 720px reading measure, clear heading rhythm, restrained public taxonomy context, and an optional **View this trip** link to the Primary Tour. It has no persistent conversion control.
+- **Advertorial / Conversion Story:** emotionally focused but evidence-led. Use an early **Request quote on WhatsApp** action, a 680–720px reading column beside an approximately 320px sticky Primary Tour panel on desktop, and a mobile quote bar only after the opening action leaves view. Every quote action opens the shared intake and review flow.
+
+Both formats omit author names and support an intentional text-led opening when no featured image is assigned. Neither format may invent urgency, availability, reviews, prices, or operational proof. Article cards and related modules link to Posts; the Primary Tour is a separate, explicit conversion relationship.
+
 ## Identity
 
 - Exact name: **Holiday Kenya Safaris**.
@@ -153,6 +162,16 @@ The global floating **Chat on WhatsApp** control is a separate lightweight conta
 The canonical `/group-travel/` Page uses Catalogue mode and keeps one H1 in the standard title band. Follow it with a concise image-led introduction using media already assigned to published Tours, an inline planner, a three-step explanation, and the Page's editable supporting content.
 
 The planner reuses the shared HKS inquiry component rather than opening a second form. Destination and Tour are linked required selects; name, phone, preferred date or month, traveler count, consent, private recovery, message review, and visitor-controlled WhatsApp launch retain the global conversion behavior. The form must remain legible as one column on mobile and must not promise group capabilities that have not been confirmed.
+
+### Travel Guides
+
+The `/travel-guides/` hub uses the internal-page shell, one H1, a concise planning promise, Destination and Article Topic discovery controls, and a responsive editorial grid. Article cards may show public destination/topic context and modified date, never an author. A missing featured image becomes a designed Midnight Navy or Pale Mist typographic surface; never render a broken image slot or generic stock placeholder.
+
+Standard Guides privilege the reading flow. When a Primary Tour exists, place **View this trip** after the opening promise and link to the canonical Tour. Do not turn this into a sticky action or open the quote dialog from that label.
+
+Advertorials require a published Primary Tour. The desktop Tour panel may surface only verified canonical facts and a positive stored starting price when available. Repeated quote controls are proxies to one shared intake dialog; do not duplicate forms. On mobile, use `IntersectionObserver` or an equivalent visibility primitive to reveal the sticky quote bar after the opening quote action leaves view and hide it when it would collide with the footer. The global Chat on WhatsApp control remains above it.
+
+Related reading appears after either format and contains up to three Posts in a stable grid or list. Use the same card component as the hub, including its no-image state. Destination pages remain Tour-first and place relevant Travel Guides below the Tour catalogue as a visually quieter secondary section.
 
 ### Forms and dialogs
 

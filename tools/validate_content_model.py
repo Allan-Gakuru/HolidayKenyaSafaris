@@ -20,6 +20,7 @@ EXPECTED_GROUPS = {
     "tour_policies": True,
     "tour_media": True,
     "campaign_public": True,
+    "article_public": True,
     "faq_public": True,
     "destination_public": True,
     "settings": False,
@@ -37,6 +38,8 @@ REQUIRED_FIELDS = {
     "hks_navigation_mode",
     "hks_campaign_start_date", "hks_campaign_end_date", "hks_faq_answer",
     "hks_short_summary", "hks_overview", "hks_hero_image",
+    "hks_article_format", "hks_article_primary_tour", "hks_article_related_posts",
+    "hks_article_destination", "hks_article_topic",
 }
 
 FORBIDDEN_EDITOR_FIELDS = {
@@ -60,6 +63,7 @@ FORBIDDEN_EDITOR_FIELDS = {
     "hks_analytics_campaign_label", "hks_noindex", "hks_confirmation_status",
     "hks_permission_status", "hks_usage_scopes", "hks_license_basis",
     "hks_permission_evidence", "hks_rights_checked_date",
+    "hks_primary_tour", "hks_related_articles",
 }
 
 REQUIRED_FILES = (
@@ -72,6 +76,8 @@ REQUIRED_FILES = (
     "src/Content/Taxonomies/TravelStyle.php",
     "src/Fields/FieldsModule.php", "src/Fields/PublicationRules.php",
     "src/Fields/PublicationGuard.php",
+    "src/Content/Taxonomies/ArticleTopic.php",
+    "src/Content/Taxonomies/Destination.php",
 )
 
 
@@ -125,6 +131,7 @@ def main() -> int:
     require(errors, "Tour price field", fields, ("hks_from_price_ksh", "From price per person (KSh)", "'min'          => 1", "'step'         => 1"))
     require(errors, "Campaign price field", fields, ("hks_campaign_from_price_ksh", "From price per person (KSh)", "'min'          => 1", "'step'         => 1", "Leave blank to omit price"))
     require(errors, "campaign dates", fields, ("hks_campaign_start_date", "hks_campaign_end_date", "do not publish, unpublish, expire, or change this Campaign"))
+    require(errors, "Travel Guide fields", fields, ("hks_article_primary_tour", "hks_article_related_posts", "'default_value' => 'guide'", "'required' => 1", "'max' => 3", "'save_terms' => 1", "'load_terms' => 1"))
     require(errors, "settings compatibility", fields, ("public_setting", "'hks_settings_' . $slug", "Holiday Kenya Safaris", "254712965131", "info@holidaykenyasafaris.ke"))
     require(errors, "fields module", files["src/Fields/FieldsModule.php"], ("acf_add_local_field_group", "acf_add_options_page", "hks-settings"))
 
@@ -137,6 +144,8 @@ def main() -> int:
             "is_positive_whole_number", "hks_linked_tour",
             "hks_campaign_start_date", "hks_campaign_end_date",
             "CLIENT CONFIRMATION REQUIRED",
+            "hks_article_format", "hks_article_primary_tour", "hks_article_related_posts",
+            "hks_advertorial_primary_tour_required", "hks_article_related_post_self",
         ),
     )
     if "hks_tour_from_price_invalid" not in rules or "'hks_from_price_ksh'" not in rules:
@@ -153,11 +162,16 @@ def main() -> int:
             "acf/validate_save_post", "rest_pre_insert_hks_tour",
             "rest_pre_insert_hks_campaign", "wp_insert_post_data",
             "transition_post_status", "before_delete_post",
+            "rest_pre_insert_post", "Travel Guide",
         ),
     )
 
     require(errors, "Tour type", files["src/Content/PostTypes/Tour.php"], ("'hks_tour'", "'show_in_rest'        => true"))
     require(errors, "Campaign type", files["src/Content/PostTypes/Campaign.php"], ("'hks_campaign'", "'publicly_queryable'  => true"))
+    require(errors, "Travel Guide topic", files["src/Content/Taxonomies/ArticleTopic.php"], ("'hks_article_topic'", "array( 'post' )", "'travel-guides/topics'", "'hierarchical'       => true", "'show_in_rest'       => true"))
+    require(errors, "shared Destination taxonomy", files["src/Content/Taxonomies/Destination.php"], ("array( 'hks_tour', 'post' )", "'destinations'"))
+    require(errors, "anchor Destination seed", files["src/Content/Taxonomies/Destination.php"], ("'Diani'", "'diani'", "'Dubai'", "'dubai'", "'Maasai Mara'", "'maasai-mara'", "get_term_by( 'slug'", "get_term_by( 'name'", "wp_insert_term"))
+    require(errors, "anchor seed setup", files["src/Content/Module.php"], ("maybe_seed_anchor_destinations", "Destination::seed_anchor_terms", "Destination::ANCHOR_SEED_OPTION"))
     require(errors, "Tour Type archive", files["src/Content/Taxonomies/TourType.php"], ("'public'             => true", "'publicly_queryable' => true", "'slug'         => 'tour-types'"))
     require(errors, "Tour Scope archive", files["src/Content/Taxonomies/TourScope.php"], ("'hks_tour_scope'", "'public'             => true", "'publicly_queryable' => true", "'slug'         => 'tour-scope'"))
     require(errors, "Occasion archive", files["src/Content/Taxonomies/Occasion.php"], ("'public'             => true", "'publicly_queryable' => true", "'slug'         => 'occasions'"))

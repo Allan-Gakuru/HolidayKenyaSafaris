@@ -51,6 +51,17 @@ It may override:
 
 Campaign start and end dates record the intended operating window. They do not auto-publish or unpublish content. Every Campaign inherits the linked Tour's canonical facts and may add one optional Campaign-specific starting price.
 
+### Travel Guide Post
+
+Use native WordPress Posts for every page in the public **Travel Guides** section. Do not add a parallel article post type.
+
+A Post has one of two public formats:
+
+- **Standard Guide**: reading-first editorial content. Its Primary Tour is optional. When set, the public action is **View this trip** and links to the canonical Tour.
+- **Advertorial**: a conversion-focused article. Publishing requires one linked, published Primary Tour. Its quote actions open the existing intake, consent, private recovery, message-review, and visitor-controlled WhatsApp launch flow.
+
+The native title, excerpt, content, publication status, slug, and optional featured image remain the canonical editorial values. Travel Guides never render an author name. A missing featured image is a supported public state, not a validation error.
+
 ### Testimonial
 
 Optional structured content type when real approved reviews are available.
@@ -87,7 +98,25 @@ Examples:
 - Mount Kenya.
 - Mombasa and coast.
 
-Destination terms may have SCF fields only for the short public summary, public overview, and hero image currently consumed by the templates.
+Destination is shared by Tours and native Posts. Editors assign it to a Post through a Secure Custom Fields taxonomy control that saves the native term relationship; the site must not create a second blog-destination taxonomy.
+
+Sharing Destination creates one canonical place archive and one Destination taxonomy sitemap entry. It must not create a mixed catalogue query: the Destination archive's primary query, pagination, Tour browse controls, and Tour counts remain explicitly limited to published Tours. Relevant Posts render in a secondary Travel Guides section after the Tour catalogue. A Destination used only by Posts is excluded from Tour navigation.
+
+Destination terms may have SCF fields only for the short public summary, public overview, and hero image currently consumed by the templates. The initial editorial anchors are Diani, Dubai, and Maasai Mara; setup must resolve existing terms by exact name or slug before creating any missing term.
+
+### Article Topic
+
+Article Topic is a public, hierarchical, Post-only taxonomy stored as `hks_article_topic`, with canonical archives below `/travel-guides/topics/`.
+
+Initial terms:
+
+- Destination Guides.
+- Planning & FAQs.
+- Travel Inspiration.
+- Comparisons.
+- Holiday Kenya Safaris News.
+
+Editors assign Article Topic through a Secure Custom Fields taxonomy control that saves the native term relationship. These are public discovery choices only; no private editorial classification is added.
 
 ### Tour Type
 
@@ -256,6 +285,25 @@ Campaigns inherit the linked Tour facts, itinerary, inclusions, exclusions, and 
 
 Use the Campaign price only when one figure can truthfully represent a per-person starting price and price is a useful selling point for that focused offer. Outside the explicitly authorized 24 July 2026 Ashford migration, never auto-convert a USD amount, copy a legacy Tour price, or seed an unconfirmed public price.
 
+## Travel Guide Post Fields
+
+| Field | Type | Public behavior |
+|---|---|---|
+| Title | Native title | Article H1 and card title |
+| Short promise | Native excerpt | Hub, archive, and related-guide summary |
+| Article body | Native content | Main reading experience |
+| Featured image | Native featured image, optional | Hero/card image when supplied; intentional text-led layout when blank |
+| Destination | SCF taxonomy field saving native `hks_destination` terms | Place discovery and related-guide matching |
+| Article Topic | SCF taxonomy field saving native `hks_article_topic` terms | Topic discovery and related-guide matching |
+| Article format | SCF choice: `guide` or `advertorial` | Selects the Standard Guide or Advertorial public composition |
+| Primary Tour | SCF relationship to one Tour | Optional for Standard Guides; required and published for Advertorials |
+| Related reading | Ordered SCF relationship to native Posts, maximum three | Public related-guide priority |
+| Publication state | Native post status | Draft is private; Published is editor approval |
+
+Related reading always contains Posts, never Tours. Fill a maximum of three slots in this order: valid manual Posts in editor order, then published Posts sharing Destination, then published Posts sharing Article Topic. Exclude the current Post and duplicates. Do not add a generic latest-post fallback.
+
+Do not infer Primary Tour from Destination. The editor's explicit relationship is authoritative even where the intended catalogue has one Tour for a destination.
+
 ## Destination and FAQ Editors
 
 Destination terms expose only public values consumed by the current templates:
@@ -312,6 +360,9 @@ The simplified editor must not rename custom post types, taxonomies, existing SC
 - Avoid free-form flexible content for canonical tour facts. Use it only for optional campaign storytelling modules.
 - Use the featured image plus gallery when available; otherwise render deliberate single-image or no-image fallbacks without empty tiles.
 - Do not allow a permanent booking-form block in the canonical Tour quote-panel area.
+- Prevent an Advertorial from publishing without one published Primary Tour. A Standard Guide may publish without a Primary Tour; if one is selected it must be published.
+- Limit manual Travel Guide relationships to three published Posts, exclude the current Post, and keep featured imagery optional.
+- Keep every Travel Guides author name out of public templates and structured card output.
 
 ## REST Readiness
 

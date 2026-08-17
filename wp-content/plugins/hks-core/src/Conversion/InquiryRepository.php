@@ -304,7 +304,7 @@ final class InquiryRepository {
 		$requested_route = sanitize_key( $payload['inquiry_route'] ?? '' );
 		$inquiry_route   = 'group_travel' === $requested_route && ! $context['campaign_id']
 			? 'group_travel'
-			: ( $context['campaign_id'] ? 'campaign' : 'tour' );
+			: ( $context['campaign_id'] ? 'campaign' : ( 'article' === $requested_route ? 'article' : 'tour' ) );
 		$traveler_limit  = 'group_travel' === $inquiry_route ? 999 : 99;
 		$travelers       = absint( $payload['travelers'] ?? 0 );
 

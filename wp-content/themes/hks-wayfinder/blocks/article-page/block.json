@@ -1,0 +1,11 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "hks-wayfinder/article-page",
+  "version": "0.1.0",
+  "title": "Holiday Kenya Safaris Travel Guide page",
+  "category": "theme",
+  "icon": "media-document",
+  "textdomain": "hks-wayfinder",
+  "supports": { "html": false, "inserter": false, "multiple": false }
+}
