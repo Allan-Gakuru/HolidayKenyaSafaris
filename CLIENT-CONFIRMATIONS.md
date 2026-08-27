@@ -32,7 +32,7 @@ Use this file for project-level decisions such as contact details, legal wording
 | Domain | Confirmed | `holidaykenyasafaris.ke` | Production configuration |
 | Hosting | Confirmed | cPanel account `holidayk`; document root `/home/holidayk/public_html` | Deployment |
 | WordPress admin ownership | CLIENT CONFIRMATION REQUIRED | Name account owners and editorial roles | Production access |
-| Meta Pixel ID | CLIENT CONFIRMATION REQUIRED | Supply ID | Meta tracking launch |
+| Meta Pixel ID | Confirmed | `1741203640340218` (`Holiday Kenya Safaris Pixel`), verified in Meta Events Manager and the official Meta Pixel for WordPress connection on 2026-08-26 | Meta tracking launch |
 | GA4 Measurement ID | CLIENT CONFIRMATION REQUIRED | Supply ID | GA4 tracking launch |
 | GTM container | CLIENT CONFIRMATION REQUIRED | Decide whether GTM is used and supply ID | Tag configuration |
 | Consent/privacy approach | CLIENT CONFIRMATION REQUIRED | Approve privacy and cookie behavior | Production tracking |

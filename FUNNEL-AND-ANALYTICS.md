@@ -134,6 +134,8 @@ Use a stable event vocabulary for Meta and GA4.
 | `whatsapp_launch` | Website opens the `wa.me` URL | tour ID, campaign ID, CTA location, UTMs |
 | `contact_click` | Visitor uses phone, email, utility WhatsApp, floating WhatsApp, or map contact | method, page type, contact location |
 
+The connected Meta integration maps `quote_form_complete` to Meta's standard `Lead` event. It fires only after the validated inquiry has been saved and sends only the non-sensitive Tour/Campaign context and traveler-count bucket already allowed by this contract. It does not fire on the initial quote-button click, validation failure, or WhatsApp launch.
+
 Do not treat `whatsapp_launch` as a confirmed lead or booking. Reconcile website events with WhatsApp conversations and sales records.
 
 For the Group Travel planner, use `page_type: group_travel` and `cta_location: group_travel_page`. The selected Tour ID and slug become the standard Tour context before completion events fire. Do not place the visitor's name, phone, dates, Destination label, or exact traveler count in analytics; the inquiry record may store the derived Destination privately for operational triage.

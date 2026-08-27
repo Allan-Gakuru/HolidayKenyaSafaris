@@ -65,6 +65,33 @@
 		window.dataLayer = window.dataLayer || [];
 		window.dataLayer.push(payload);
 		document.dispatchEvent(new CustomEvent('hks:analytics', { detail: payload }));
+
+		if (eventName === 'quote_form_complete') {
+			trackMetaLead(payload);
+		}
+	}
+
+	function trackMetaLead(payload) {
+		if (!window.FacebookSignal || typeof window.FacebookSignal.trackEvent !== 'function') return;
+
+		const parameters = {
+			content_name: payload.tour_slug || payload.campaign_label || 'quote_request',
+			content_category: payload.page_type || 'quote',
+			hks_event: 'quote_form_complete',
+			event_contract_version: payload.event_contract_version || '1.0'
+		};
+
+		['tour_id', 'campaign_id', 'cta_location', 'traveler_count_bucket'].forEach(function (name) {
+			if (payload[name]) parameters[name] = payload[name];
+		});
+
+		window.FacebookSignal.trackEvent(
+			'Lead',
+			parameters,
+			{},
+			'track',
+			'hks_lead_' + uuid()
+		);
 	}
 
 	function uuid() {
