@@ -192,7 +192,8 @@ def check_quote_context() -> None:
         "elseif ( 'post' === $post_type )",
         "self::field( 'hks_article_primary_tour', $post_id )",
         "FormToken::issue",
-        "Review WhatsApp message",
+        "Review quote request",
+        "data-hks-email-launch",
         "data-launch-endpoint",
     )
     require_regex(
@@ -305,7 +306,7 @@ def check_analytics() -> None:
     article_js = read("wp-content/themes/hks-wayfinder/assets/js/article-ui.js")
     inquiry_js = read("wp-content/plugins/hks-core/assets/js/inquiry.js")
     require("Travel Guide analytics", article_js, "track('view_article'", "track('article_primary_tour_click'", "window.dataLayer.push(payload)")
-    require("existing quote analytics", inquiry_js, "quote_cta_click", "quote_form_complete", "whatsapp_launch", "article_id", "article_format")
+    require("existing quote analytics", inquiry_js, "quote_cta_click", "quote_form_complete", "whatsapp_launch", "email_launch", "article_id", "article_format")
     if re.search(r"\b(name|phone|email|preferred_date|travelers|budget_range)\b", article_js, re.IGNORECASE):
         ERRORS.append("Travel Guide analytics: article events contain inquiry/PII field names")
     if "window.location" in article_js and "search" in article_js:

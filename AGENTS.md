@@ -31,15 +31,15 @@ This documentation package overrides older workspace material when there is a co
 
 ## Objective
 
-Build an exquisite, fast, trustworthy WordPress website that turns Facebook-ad traffic and high-intent visitors into qualified WhatsApp inquiries for Kenya and international tours.
+Build an exquisite, fast, trustworthy WordPress website that turns Facebook-ad traffic and high-intent visitors into qualified quote inquiries for Kenya and international tours.
 
-The main website must feel like a complete, browseable travel catalogue. Its homepage, navigation, archives, and canonical Tour pages use the catalogue-led structure in `UI-REFERENCE-CATALOGUE.md`. Focused paid-ad Campaign pages retain a more emotionally concentrated conversion format.
+The main website must feel like a complete, browseable travel catalogue. Its homepage, navigation, archives, canonical Tour pages, and Campaign pages use the catalogue-led structure in `UI-REFERENCE-CATALOGUE.md`. Campaigns retain ad congruency through their controlled headline, supporting copy, featured image, price override, and optional focused navigation treatment.
 
 Work backward from the conversion:
 
-`Facebook ad -> relevant package or campaign page -> trust and package detail -> short intake form -> prefilled WhatsApp message -> human quote conversation`
+`Facebook ad -> relevant package or campaign page -> trust and package detail -> short intake form -> reviewed message -> visitor chooses WhatsApp or email -> human quote conversation`
 
-The initial commercial endpoint is a qualified WhatsApp conversation, not online checkout.
+The initial commercial endpoint is a qualified WhatsApp or email quote conversation, not online checkout.
 
 ## Approved Architecture
 
@@ -68,13 +68,13 @@ The initial commercial endpoint is a qualified WhatsApp conversation, not online
 
 ## Conversion Rules
 
-- Every package and campaign page has a prominent WhatsApp quote CTA.
+- Every package and campaign page has a prominent **Request a quote** CTA.
 - Opening the CTA first shows a short intake form.
 - Required fields: name, phone, package, preferred date or month, and number of travelers.
 - Optional package-specific fields may include departure town, adults and children, residency, vehicle preference, accommodation preference, and budget range.
-- After validation, construct a readable WhatsApp message from the answers and preserve campaign attribution.
-- Do not send data silently. The visitor reviews and sends the message in WhatsApp.
-- Instrument page view, package view, CTA click, form open, form completion, and WhatsApp launch.
+- After validation, construct one readable message from the answers and preserve campaign attribution.
+- Do not send data silently. The visitor reviews the message, then chooses whether to open WhatsApp or an email addressed to `info@holidaykenyasafaris.ke` and sends it from that app.
+- Instrument page view, package view, CTA click, form open, form completion, WhatsApp launch, and email launch.
 
 ## Audience Rule
 
@@ -101,11 +101,11 @@ Adapt the process to page and ad copy:
 - Use the Wayfinder palette, typography direction, and production logo described in `BRAND-WAYFINDER.md`.
 - Follow `DESIGN.md` and `UI-REFERENCE-CATALOGUE.md` for the global header, homepage, catalogue, canonical Tour template, responsive behavior, and the distinction between Catalogue and Campaign modes.
 - Use the approved canonical Tour information architecture: title band, destination line, desktop three-column composition with a thumbnail gallery rail, one active image and a persistent quote panel, followed by Tour facts, tabs, itinerary disclosures, and related Tours.
-- Replace the reference site's permanent booking form with the HKS **Request quote on WhatsApp** button and approved intake-to-WhatsApp flow.
-- Preserve the information clarity and conversion path of the existing Maasai Mara prototype for Campaign pages, not as the default canonical Tour layout.
+- Replace the reference site's permanent booking form with the HKS **Request a quote** button and approved intake-to-review-to-WhatsApp-or-email flow.
+- Campaign pages use the canonical Tour title band, gallery, facts, sticky quote panel, tabs/disclosures, itinerary, related Tours, responsive behavior, and final quote prompt. A Campaign may override the headline, supporting copy, first gallery image, and starting price while retaining its selected navigation mode.
 - Destination photography should reveal the actual place and experience.
 - Keep interfaces quiet, premium, and highly legible. Avoid tourism-poster clutter, fake luxury, oversized decorative cards, and generic orange sunsets.
-- Mobile is a primary conversion surface. Keep WhatsApp CTAs reachable without obscuring content.
+- Mobile is a primary conversion surface. Keep quote CTAs reachable without obscuring content.
 - Meet WCAG AA contrast, keyboard access, reduced-motion preferences, and sensible focus states.
 
 ## Source Hierarchy
@@ -138,7 +138,7 @@ Never treat a hypothesis as sales data. A converted USD rate becomes an approved
 4. Scaffold the WordPress environment, custom block theme, and site plugin.
 5. Implement content models and SCF field groups before hard-coding package pages.
 6. Seed and validate the three priority packages.
-7. Build the intake-to-WhatsApp component and analytics event contract.
+7. Build the intake-to-review-to-WhatsApp-or-email component and analytics event contract.
 8. Build and approve the catalogue-led global header, Tour gallery, canonical Tour workspace, sticky quote panel, tabs/disclosures, and related-Tour pattern.
 9. Build the catalogue, destination, homepage, and Campaign templates from the approved components.
 10. Add the remaining approved Kenya and international Ashford catalogue in controlled batches.
@@ -152,8 +152,8 @@ The website is ready for launch only when:
 - Editors can add a Tour once and publish it across catalogue, destination, and campaign templates.
 - Campaign variants can change messaging and optionally present their own selling price without duplicating factual Tour itinerary data.
 - Canonical Tour pages use the approved desktop thumbnail-rail, active-image and sticky-quote composition, with horizontal gallery previews and normal-flow content on smaller viewports, plus tabs/disclosures and related Tours. Multi-image galleries expose previous/next chevrons and rotate every five seconds, pausing for interaction, hidden/off-screen state and reduced-motion preferences.
-- No canonical Tour page contains a permanent long booking form; every quote command opens the shared HKS intake and WhatsApp handoff.
-- WhatsApp inquiries include enough context for a consultant to quote.
+- No canonical Tour or Campaign page contains a permanent long booking form; every quote command opens the shared HKS intake and visitor-controlled WhatsApp/email handoff.
+- Quote inquiries include enough context for a consultant to quote.
 - Every published price, photograph, trust claim, and policy was deliberately entered, assigned, imported under the current client authorization, or published by an authorized editor.
 - Wayfinder assets are crisp at favicon, header, social, print, and vehicle sizes.
 - Meta and GA4 events have been tested with client IDs.
@@ -164,4 +164,4 @@ The website is ready for launch only when:
 
 Use this prompt in a new Codex task opened at the workspace root:
 
-> Read `AGENTS.md` and every file it marks as required. Then inspect the repository, referenced source material, and existing implementation. Build or revise the Holiday Kenya Safaris WordPress website according to the documented architecture, including the catalogue-led canonical Tour UI and the HKS intake-to-WhatsApp conversion flow. Do not invent rates, policies, reviews, photographs, or company details. Start by reporting the repository state, blocking client confirmations, and the implementation plan; then proceed through the documented build sequence.
+> Read `AGENTS.md` and every file it marks as required. Then inspect the repository, referenced source material, and existing implementation. Build or revise the Holiday Kenya Safaris WordPress website according to the documented architecture, including the catalogue-led canonical Tour and Campaign UI and the HKS intake-to-review-to-WhatsApp-or-email conversion flow. Do not invent rates, policies, reviews, photographs, or company details. Start by reporting the repository state, blocking client confirmations, and the implementation plan; then proceed through the documented build sequence.

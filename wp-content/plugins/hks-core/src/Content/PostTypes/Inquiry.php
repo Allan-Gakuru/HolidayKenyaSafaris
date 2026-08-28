@@ -10,7 +10,7 @@ namespace HolidayKenyaSafaris\Core\Content\PostTypes;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Registers qualified quote inquiries captured before WhatsApp opens.
+ * Registers qualified quote inquiries captured before message handoff.
  */
 final class Inquiry {
 
@@ -32,7 +32,7 @@ final class Inquiry {
 			self::POST_TYPE,
 			array(
 				'labels'              => self::labels(),
-				'description'         => __( 'Private quote-request recovery records captured with visitor consent before WhatsApp opens.', 'hks-core' ),
+				'description'         => __( 'Private quote-request recovery records captured with visitor consent before message handoff.', 'hks-core' ),
 				'public'              => false,
 				'hierarchical'        => false,
 				'exclude_from_search' => true,

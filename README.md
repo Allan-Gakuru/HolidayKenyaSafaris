@@ -1,6 +1,6 @@
 # Holiday Kenya Safaris
 
-Custom WordPress website for Holiday Kenya Safaris, a local-market travel brand operated by Ashford Tours & Travel. The site is designed around qualified WhatsApp quote inquiries rather than online checkout.
+Custom WordPress website for Holiday Kenya Safaris, a local-market travel brand operated by Ashford Tours & Travel. The site is designed around qualified WhatsApp or email quote inquiries rather than online checkout.
 
 ## Start Here
 
@@ -15,13 +15,13 @@ maintenance, troubleshooting, and launch checks, use the
 - Custom block theme: `wp-content/themes/hks-wayfinder/`.
 - Site plugin: `wp-content/plugins/hks-core/`.
 - Secure Custom Fields with version-controlled field definitions.
-- Primary conversion: explicitly saved private inquiry, visitor-reviewed WhatsApp message, and visitor-controlled send.
+- Primary conversion: explicitly saved private inquiry, one visitor-reviewed message, and a visitor-controlled WhatsApp or email handoff.
 
 ## UI Architecture
 
 - Catalogue mode: product-led global header, image-led homepage, Tour grids, destinations, and canonical Tour pages within the Wayfinder system.
 - Campaign mode: focused paid-ad pages using the existing Maasai Mara prototype's emotional conversion structure.
-- Canonical Tour conversion: sticky quote panel and **Request quote on WhatsApp** action, not a permanent booking form.
+- Tour and Campaign conversion: shared canonical gallery/workspace, sticky quote panel, and **Request a quote** action, not a permanent booking form.
 - Source of truth: `UI-REFERENCE-CATALOGUE.md`, `WEBSITE-STRUCTURE.md`, and `DESIGN.md`.
 
 ## Development and Verification

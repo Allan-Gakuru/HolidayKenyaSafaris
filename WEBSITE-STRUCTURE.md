@@ -2,7 +2,7 @@
 
 ## Structural Reference
 
-The standard website uses the catalogue and canonical Tour structure documented in `UI-REFERENCE-CATALOGUE.md`. Holiday Kenya Safaris keeps the Wayfinder identity, a local-market focus with Kenya and international Tours, verified Ashford facts, editable KSh starting prices, and the qualified WhatsApp conversion flow.
+The standard website uses the catalogue and canonical Tour structure documented in `UI-REFERENCE-CATALOGUE.md`. Holiday Kenya Safaris keeps the Wayfinder identity, a local-market focus with Kenya and international Tours, verified Ashford facts, editable KSh starting prices, and the qualified WhatsApp/email quote flow.
 
 The existing Maasai Mara prototype is retained as a Campaign landing-page reference. It is not the default canonical Tour template.
 
@@ -58,7 +58,7 @@ Use a full-height drawer with:
 - Accordion groups for Safaris, Coast & Stays, and Destinations.
 - Direct Travel Guides, Group Travel, About, and Contact links.
 - Confirmed contacts and social links.
-- Request quote on WhatsApp action.
+- Request a quote action.
 
 The drawer must trap focus, close with Escape, return focus to the menu button, and prevent background scrolling.
 
@@ -71,7 +71,7 @@ Purpose:
 - Establish a broad, credible local-travel catalogue.
 - Help visitors discover relevant verified Tours quickly.
 - Make the Ashford operator relationship and quote process clear.
-- Move visitors to a Tour, Campaign, destination, group-travel route, or qualified WhatsApp inquiry.
+- Move visitors to a Tour, Campaign, destination, group-travel route, or qualified quote inquiry.
 
 Default order:
 
@@ -81,10 +81,10 @@ Default order:
 4. Featured verified Tours.
 5. Browse by trip type or occasion.
 6. Why Holiday Kenya Safaris and the Ashford operator relationship.
-7. How the WhatsApp quote process works.
+7. How the quote process works.
 8. Group Travel route.
 9. Verified proof when available.
-10. Final WhatsApp prompt and footer.
+10. Final quote prompt and footer.
 
 Hero rules:
 
@@ -115,7 +115,7 @@ Default order:
 3. Filters and sort controls when inventory supports them.
 4. Responsive Tour grid.
 5. Pagination or deliberate load-more control.
-6. Final discovery or WhatsApp prompt.
+6. Final discovery or quote prompt.
 
 Initial filters may include:
 
@@ -186,13 +186,13 @@ End with up to three related Posts, never related Tours. Resolve them in this or
 
 Canonical route: `/travel-guides/<postname>/` using the Advertorial article format.
 
-The Advertorial is the conversion-focused editorial format. Publishing requires one published Primary Tour. Its opening connects the visitor's planning situation to concrete, verified itinerary and package facts without fabricated urgency or proof. Place an early **Request quote on WhatsApp** action, repeat it only at meaningful decision points, and send every instance into the existing intake, consent, private recovery, message-review, and visitor-controlled WhatsApp launch flow.
+The Advertorial is the conversion-focused editorial format. Publishing requires one published Primary Tour. Its opening connects the visitor's planning situation to concrete, verified itinerary and package facts without fabricated urgency or proof. Place an early **Request a quote** action, repeat it only at meaningful decision points, and send every instance into the existing intake, consent, private recovery, message-review, and visitor-controlled WhatsApp/email handoff.
 
 Desktop uses a 680–720px reading column with an approximately 320px sticky Primary Tour panel. Mobile reveals a sticky quote action only after the opening CTA leaves view; it must respect safe areas and stack below the global Chat on WhatsApp control without obscuring content. The featured image remains optional. No permanent form or direct quote-to-WhatsApp jump is allowed.
 
 ### Canonical Tour Detail Page
 
-Implement the approved canonical Tour structure, with a Holiday Kenya Safaris WhatsApp quote panel instead of a permanent booking form.
+Implement the approved canonical Tour structure, with a Holiday Kenya Safaris quote panel instead of a permanent booking form.
 
 Default order:
 
@@ -202,7 +202,7 @@ Default order:
 4. Destination or route line beneath the active media.
 5. Tour facts and information workspace beneath the gallery.
 6. Related Tours.
-7. Final WhatsApp quote prompt.
+7. Final quote prompt.
 8. Footer.
 
 #### Gallery
@@ -225,8 +225,8 @@ Main content includes:
 The right column contains a sticky quote panel with:
 
 - A clear tailored-quote heading without a Tour price or request-rate fallback.
-- A short note explaining that the visitor shares dates and group details, reviews the message, and decides whether to send it in WhatsApp.
-- Primary **Request quote on WhatsApp** button.
+- A short note explaining that the visitor shares dates and group details, reviews the message, and chooses WhatsApp or email.
+- Primary **Request a quote** button.
 - Short explanation of the intake and message-review step.
 - Confirmed operator or response details when available.
 
@@ -254,7 +254,7 @@ Show up to three relevant Tours from shared destinations, then use a catalogue f
 
 Every Tour quote action follows:
 
-`Request quote on WhatsApp -> intake form -> validation and consent -> private recovery record -> message review -> visitor launches WhatsApp -> visitor sends message`
+`Request a quote -> intake form -> validation and consent -> private recovery record -> message review -> visitor chooses WhatsApp or email -> visitor sends message in that app`
 
 Required intake fields:
 
@@ -270,7 +270,7 @@ Preserve from the existing Maasai Mara prototype:
 
 - Clear practical detail.
 - Clear quote context.
-- Intake before WhatsApp.
+- Intake before either handoff.
 - Mobile CTA clarity.
 
 Do not use its dark campaign hero as the canonical Tour opening.
@@ -283,16 +283,16 @@ Purpose:
 - Convert one audience, occasion, desire, problem, or objection efficiently.
 - Reuse canonical Tour facts.
 
-Campaign pages may retain the immersive, emotionally focused structure of the existing Maasai Mara prototype.
+Campaign pages use the same title band, gallery, facts, sticky quote panel, tabs/disclosures, itinerary, important information, related Tours, responsive behavior, and final quote prompt as canonical Tour pages.
 
 Features:
 
 - Linked Tour required.
 - Full, reduced, or minimal navigation.
-- Campaign-specific hero and navigation treatment.
+- Campaign-specific headline, supporting copy, first gallery image, price override, and navigation treatment.
 - Canonical itinerary, inclusions, exclusions, and logistics inherited from the linked Tour.
 - One optional Campaign-specific `From KSh... per person` override. When blank, the linked Tour starting price may display.
-- Attribution retained through inquiry save and WhatsApp launch.
+- Attribution retained through inquiry save and WhatsApp/email launch.
 - Start and end dates exist on Campaigns only; Campaign indexing defaults are template-controlled.
 
 Campaign pages are not constrained to Mercy. Add variants as evidence supports them.
@@ -306,10 +306,10 @@ The opening experience contains:
 1. Standard Page title and breadcrumb band with the only H1.
 2. Image-led introduction using media assigned to published Tours.
 3. An inline shared inquiry planner.
-4. A concise explanation of storage, message review, and visitor-controlled WhatsApp launch.
+4. A concise explanation of storage, message review, and visitor-controlled WhatsApp/email handoff.
 5. Existing editable Page content for audience-specific supporting information.
 
-The planner lets a visitor choose a populated Destination, choose a matching published Tour, enter a proposed date or month and traveler count, provide contact details and consent, then request a group quote on WhatsApp. It reuses the existing private inquiry record and WhatsApp review flow. It must not build a parallel form or store a client-maintained duplicate of Destination or Tour facts.
+The planner lets a visitor choose a populated Destination, choose a matching published Tour, enter a proposed date or month and traveler count, provide contact details and consent, then review one group quote request and choose WhatsApp or email. It reuses the existing private inquiry record and review flow. It must not build a parallel form or store a client-maintained duplicate of Destination or Tour facts.
 
 Supporting content may provide routes for:
 
@@ -368,8 +368,8 @@ Potential modules, only when verified:
 - Vehicle and accommodation evidence drawn from the public gallery and practical details, without duplicate media fields.
 - Trust module.
 - Testimonial module only after real public testimonial content and a rendered component are implemented.
-- Intake-to-WhatsApp dialog or sheet.
-- Sticky mobile WhatsApp action that does not obscure content.
+- Intake-to-review-to-WhatsApp-or-email dialog or sheet.
+- Sticky mobile quote action that does not obscure content.
 - Global bottom-right Chat on WhatsApp contact that uses a fixed message, respects safe areas, and sits above Tour or Campaign mobile quote actions.
 - Campaign attribution handler.
 - Related-Tour query using shared destinations and a catalogue fallback.
@@ -393,12 +393,12 @@ Potential modules, only when verified:
 
 ## Mobile Requirements
 
-- Design and test mobile first because Facebook traffic and WhatsApp conversion are mobile-heavy.
+- Design and test mobile first because Facebook traffic and messaging conversion are mobile-heavy.
 - The mobile drawer, gallery, disclosures, intake sheet, and sticky quote action must be tested at 360 and 390px.
 - Mobile Tour pages expose the same factual information as desktop.
 - The initial Tour facts and quote action must be discoverable without navigating a long permanent form.
 - The intake form must support the on-screen keyboard and retain entered values.
-- WhatsApp launch must not occur before validation, consent, inquiry save, and message review.
+- WhatsApp or email launch must not occur before validation, consent, inquiry save, and message review.
 - Sticky actions respect safe areas and leave sufficient bottom padding.
 - Standard Guides have no persistent mobile quote bar. Advertorial bars appear only after the opening quote action leaves view and must not cover the global Chat on WhatsApp control.
 

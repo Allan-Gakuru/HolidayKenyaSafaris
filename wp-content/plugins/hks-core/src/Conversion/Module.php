@@ -1,6 +1,6 @@
 <?php
 /**
- * Qualified inquiry and WhatsApp conversion module.
+ * Qualified inquiry and visitor-controlled message handoff module.
  *
  * @package HolidayKenyaSafaris\Core
  */

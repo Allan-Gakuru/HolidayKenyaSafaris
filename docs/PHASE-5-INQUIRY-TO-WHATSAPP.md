@@ -1,23 +1,26 @@
-# Phase 5: Saved inquiry to WhatsApp
+# Phase 5: Saved inquiry to WhatsApp or email
 
 The MVP conversion component is the dynamic `hks/quote-cta` block. On a published
 Tour or Campaign it resolves the canonical Tour, selected intake questions, CTA
-copy, Campaign label, and official Holiday Kenya Safaris WhatsApp destination.
+copy, Campaign label, and official Holiday Kenya Safaris WhatsApp and email destinations.
 
 ## Visitor journey
 
-1. The quote CTA opens an accessible modal rather than WhatsApp.
+1. The quote CTA opens an accessible modal rather than a messaging app.
 2. The visitor completes the required name, phone, package, preferred date/month,
    and traveler fields plus only the optional questions enabled for that Tour.
 3. The form explains that WordPress will save the request for recovery and requires
    contact consent.
-4. Selecting **Save & review WhatsApp message** validates the form and creates or
+4. Selecting **Review quote request** validates the form and creates or
    refreshes an idempotent private inquiry.
 5. The visitor reviews the exact message and request reference.
-6. **Open WhatsApp to send** opens `wa.me/254712965131`; the visitor still sends the
-   message inside WhatsApp.
+6. **Open WhatsApp to send** opens `wa.me/254712965131`; **Open email to send** opens
+   the visitor's configured email app with `info@holidaykenyasafaris.ke` as recipient,
+   the Tour name and request reference in the subject, and the exact reviewed message
+   in the body. The visitor still sends the message inside the chosen app.
 
-The website records `WhatsApp opened`, never `message sent`.
+The website may record `WhatsApp opened` and the anonymous `email_launch` event,
+never `message sent`.
 
 ## Data and security boundaries
 
@@ -46,6 +49,7 @@ the same payload as `hks:analytics`:
 - `quote_inquiry_saved`
 - `quote_form_complete` (traveler-count bucket only)
 - `whatsapp_launch`
+- `email_launch`
 
 No Meta, GA4, or GTM ID is invented or loaded. Production trackers and consent
 management remain gated on client configuration.
@@ -59,8 +63,9 @@ After cPanel deployment, confirm:
 3. one valid submission appears under **Tours → Quote inquiries**;
 4. editing and resaving the same browser request updates rather than duplicates it;
 5. the review message contains the correct package and request reference;
-6. WhatsApp opens with encoded text and the record changes only to `Opened`; and
-7. no inquiry answer appears in REST responses or `dataLayer`.
+6. WhatsApp opens with encoded text and the record changes only to `Opened`;
+7. the email app opens with the confirmed recipient, subject, and exact reviewed body; and
+8. no inquiry answer appears in REST responses or `dataLayer`.
 
 Before production launch, approve the privacy notice, retention period, deletion
 process, access roles, cookie/analytics consent, and tracking IDs.

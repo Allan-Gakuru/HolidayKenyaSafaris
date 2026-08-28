@@ -2,7 +2,7 @@
 
 ## Conversion Funnel
 
-`Facebook ad -> package or campaign page -> WhatsApp CTA -> intake form -> private WordPress recovery record -> reviewed prefilled WhatsApp message -> consultant response -> quote -> follow-up -> booking`
+`Facebook ad -> package or campaign page -> Request a quote -> intake form -> private WordPress recovery record -> reviewed message -> WhatsApp or email handoff -> consultant response -> quote -> follow-up -> booking`
 
 Other channels may enter the same system:
 
@@ -14,13 +14,13 @@ Other channels may enter the same system:
 
 The Group Travel route enters the same system through an inline planner:
 
-`Group Travel page -> Destination -> matching Tour -> dates and group size -> consent and private recovery record -> reviewed WhatsApp message -> consultant response`
+`Group Travel page -> Destination -> matching Tour -> dates and group size -> consent and private recovery record -> reviewed message -> WhatsApp or email handoff -> consultant response`
 
 Travel Guides add two intentional paths:
 
-`Standard Guide -> View this trip -> canonical Tour -> Request quote on WhatsApp -> shared intake and review flow`
+`Standard Guide -> View this trip -> canonical Tour -> Request a quote -> shared intake and review flow`
 
-`Advertorial -> early or contextual Request quote on WhatsApp -> shared intake and review flow`
+`Advertorial -> early or contextual Request a quote -> shared intake and review flow`
 
 ## Qualified Inquiry
 
@@ -57,10 +57,10 @@ Desktop entry points:
 Mobile entry points:
 
 - In-flow quote panel after the initial Tour facts.
-- Safe-area-aware sticky **Request quote on WhatsApp** action.
+- Safe-area-aware sticky **Request a quote** action.
 - Final Tour quote prompt.
 
-Every entry point opens the same intake dialog or mobile sheet with Tour and campaign context already attached. Do not show a separate long form in the sidebar, silently launch WhatsApp, or describe the action as booking.
+Every entry point opens the same intake dialog or mobile sheet with Tour and campaign context already attached. Campaigns use the same title-band, gallery, facts, sticky quote panel, tabs/disclosures, itinerary, related-Tour, and responsive structure as canonical Tours, with Campaign-controlled headline, supporting copy, first gallery image, price, and navigation mode. Do not show a separate long form in the sidebar, silently launch a handoff app, or describe the action as booking.
 
 ## Travel Guides Conversion Placement
 
@@ -68,19 +68,23 @@ A Standard Guide is reading-first. When it has a Primary Tour, show an early **V
 
 An Advertorial requires a published Primary Tour and may use:
 
-- An opening **Request quote on WhatsApp** action after the article promise.
+- An opening **Request a quote** action after the article promise.
 - A sticky desktop Primary Tour panel beside the reading column.
 - Contextual quote actions after useful proof or planning sections.
 - A final quote prompt.
 - A mobile sticky quote action after the opening action has left the viewport.
 
-Every Advertorial quote action opens the same existing intake. The visitor still provides consent, creates or refreshes the private recovery record, reviews the message, and chooses whether to launch WhatsApp. Repetition must support a real decision point rather than manufacture urgency.
+Every Advertorial quote action opens the same existing intake. The visitor still provides consent, creates or refreshes the private recovery record, reviews the message, and chooses WhatsApp or email. Repetition must support a real decision point rather than manufacture urgency.
 
-## WhatsApp Behavior
+## Message Handoff Behavior
 
 Official Holiday Kenya Safaris destination:
 
 `https://wa.me/254712965131`
+
+Official email destination:
+
+`info@holidaykenyasafaris.ke`
 
 The compact utility-bar WhatsApp contact and global floating **Chat on WhatsApp** control are lightweight direct-chat routes. The utility contact uses a concise page-aware message and includes the current title and URL on a Tour or Campaign. The floating control uses one fixed general message with no visitor customization. Neither route replaces the structured intake path used by page-level quote actions or creates an inquiry recovery record.
 
@@ -101,13 +105,14 @@ Please confirm availability, the current KSh price, what is included, and the ne
 
 Requirements:
 
-- Explain that selecting `Save & review WhatsApp message` stores the validated answers privately in WordPress for lead recovery.
+- Explain that selecting `Review quote request` stores the validated answers privately in WordPress for lead recovery.
 - Require contact consent before creating the recovery record.
 - Store inquiry records outside public queries, search, REST responses, and analytics, with administrator-only access.
 - Encode message text safely.
-- Validate fields before opening WhatsApp.
-- Let the user see that WhatsApp will open.
-- Never claim the inquiry has been sent until the user sends it in WhatsApp.
+- Validate fields before offering either handoff.
+- Let the user choose **Open WhatsApp to send** or **Open email to send** after reviewing the same message.
+- Build the email with `info@holidaykenyasafaris.ke` as recipient, the Tour name and request reference in the subject, and the exact reviewed message in the body.
+- Never claim the inquiry has been sent merely because WhatsApp or the email app opened.
 - Preserve UTMs and campaign label in hidden state or the generated message, subject to privacy decisions.
 - Support WhatsApp app and web behavior on mobile and desktop.
 
@@ -132,15 +137,16 @@ Use a stable event vocabulary for Meta and GA4.
 | `quote_form_complete` | Valid form is used to construct message | tour ID, campaign ID, traveler-count bucket |
 | `quote_inquiry_saved` | A private recovery record is successfully created or refreshed | tour ID, campaign ID, non-sensitive request reference |
 | `whatsapp_launch` | Website opens the `wa.me` URL | tour ID, campaign ID, CTA location, UTMs |
+| `email_launch` | Website opens the visitor's email app with the reviewed request | tour ID, campaign ID, CTA location, UTMs |
 | `contact_click` | Visitor uses phone, email, utility WhatsApp, floating WhatsApp, or map contact | method, page type, contact location |
 
-The connected Meta integration maps `quote_form_complete` to Meta's standard `Lead` event. It fires only after the validated inquiry has been saved and sends only the non-sensitive Tour/Campaign context and traveler-count bucket already allowed by this contract. It does not fire on the initial quote-button click, validation failure, or WhatsApp launch.
+The connected Meta integration maps `quote_form_complete` to Meta's standard `Lead` event. It fires only after the validated inquiry has been saved and sends only the non-sensitive Tour/Campaign context and traveler-count bucket already allowed by this contract. It does not fire on the initial quote-button click, validation failure, WhatsApp launch, or email launch.
 
-Do not treat `whatsapp_launch` as a confirmed lead or booking. Reconcile website events with WhatsApp conversations and sales records.
+Do not treat `whatsapp_launch` or `email_launch` as proof that a message was sent, a confirmed lead, or a booking. Reconcile website events with actual conversations and sales records.
 
 For the Group Travel planner, use `page_type: group_travel` and `cta_location: group_travel_page`. The selected Tour ID and slug become the standard Tour context before completion events fire. Do not place the visitor's name, phone, dates, Destination label, or exact traveler count in analytics; the inquiry record may store the derived Destination privately for operational triage.
 
-For an Advertorial quote, use `page_type: article` and include only article ID, article format, Primary Tour ID, CTA location, public taxonomy slugs, and existing attribution values. Reuse `quote_cta_click`, `quote_form_complete`, and `whatsapp_launch`; do not create a second quote-event vocabulary. Standard Guides use `view_article` and `article_primary_tour_click` only unless the visitor later enters the canonical Tour flow.
+For an Advertorial quote, use `page_type: article` and include only article ID, article format, Primary Tour ID, CTA location, public taxonomy slugs, and existing attribution values. Reuse `quote_cta_click`, `quote_form_complete`, `whatsapp_launch`, and `email_launch`; do not create a second quote-event vocabulary. Standard Guides use `view_article` and `article_primary_tour_click` only unless the visitor later enters the canonical Tour flow.
 
 These measurements are for Google Analytics 4 and Meta reporting after the client supplies and configures their IDs. The browser emits small anonymous event names and non-sensitive page context into the existing analytics adapter; the integrations use them to compare which guide formats and placements lead visitors toward a Tour or quote. Until IDs and consent configuration exist, the hooks remain disabled. Do not implement scroll depth, time-on-page, author tracking, names, phone numbers, dates, exact traveller answers, or generated WhatsApp message content.
 
@@ -175,9 +181,9 @@ Persist attribution long enough for the visitor to browse from a campaign page t
 
 Primary:
 
-- Cost per qualified WhatsApp conversation.
+- Cost per qualified quote conversation.
 - Quote-form completion rate.
-- WhatsApp launch rate.
+- WhatsApp and email launch rates.
 - Inquiry-to-quote rate.
 - Quote-to-booking rate, once sales data is available.
 

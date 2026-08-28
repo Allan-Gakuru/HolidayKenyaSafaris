@@ -51,7 +51,7 @@ If the page is broad, write to the shared local desire for a clear, trustworthy,
 
 ### Reduce effort and sacrifice
 
-- Pre-fill the WhatsApp inquiry.
+- Prepare one complete inquiry message for WhatsApp or email.
 - Ask only for information needed to quote.
 - Explain which planning work the operator handles.
 - Keep package comparisons and options understandable.
@@ -98,7 +98,7 @@ Canonical Tour pages use the catalogue-led structure rather than an avatar-speci
 5. **Included/Excluded:** state the practical boundaries plainly.
 6. **Important Information:** show published package notes and FAQs, then explain that the tailored quote confirms dates, group, availability, and selected package details.
 7. **Trust and logistics:** vehicle, guide, accommodation, meals, pickup, operator relationship, and approved proof.
-8. **Quote panel:** name the next step, explain the short intake, and use **Request quote on WhatsApp**.
+8. **Quote panel:** name the next step, explain the short intake, and use **Request a quote**.
 9. **Related Tours:** use factual card titles and useful comparison details.
 
 The gallery and page structure provide visual aspiration. The copy should provide clarity, confidence, and a reason to request the quote.
@@ -113,7 +113,7 @@ Campaign pages may be shorter and more focused:
 4. Condensed itinerary.
 5. Critical exclusions and the available Tour starting price or deliberately entered Campaign override.
 6. Trust proof.
-7. Intake form and WhatsApp handoff.
+7. Intake form, message review, and visitor-chosen WhatsApp or email handoff.
 
 Do not change factual Tour data to fit an ad. Change the Campaign headline, supporting copy, featured hero image, and navigation treatment within the controlled template.
 
@@ -144,7 +144,7 @@ Add:
 
 - Write to the traveller and help them choose the next action. Do not describe the website implementation, publishing workflow, content model, archive query, funnel, or internal recovery mechanism in promotional copy.
 - Avoid public phrases such as `published Tour`, `package context`, `intake`, `recovery record`, `stored in WordPress`, or `sales conversation`. Use direct guidance such as `choose a tour`, `add your dates`, `check your message`, and `request a tailored quote`.
-- Keep the inquiry privacy disclosure accurate and plain: the details are kept private so the team can respond if WhatsApp does not open, and the visitor sends the message only when they choose to do so in WhatsApp.
+- Keep the inquiry privacy disclosure accurate and plain: the details are kept private so the team can respond if the chosen app does not open, and the visitor sends the message only when they choose to do so in WhatsApp or their email app.
 - Every taxonomy archive H1 and introduction must identify both the taxonomy and the current term. For example: `Tours in Maasai Mara`, `Road Safari tours in Kenya`, `Kenya tours for Couples`, or `Short Break Kenya tours`.
 - Empty states should help the traveller continue. Never expose editorial statuses or assignment mechanics in public no-results messages.
 
@@ -166,10 +166,10 @@ Stronger pressure-led campaign copy:
 
 Preferred:
 
-- Request quote on WhatsApp.
-- Request your WhatsApp quote.
+- Request a quote.
+- Request your tailored quote.
 - Check dates and current KSh rate.
-- Plan this trip on WhatsApp.
+- Plan this trip.
 - Get a family quote.
 - Ask about private vehicle options.
 

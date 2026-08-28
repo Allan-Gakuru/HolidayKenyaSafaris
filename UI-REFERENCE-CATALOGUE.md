@@ -2,7 +2,7 @@
 
 ## Status
 
-This document records the approved layout and interaction system for the Holiday Kenya Safaris website, consolidating review decisions made on 2026-07-15 and the catalogue expansion approved on 2026-07-24. Holiday Kenya Safaris must use the Wayfinder identity, local-market focus, Kenya and international Tour scopes, approved content model, KSh pricing rules, and qualified WhatsApp funnel.
+This document records the approved layout and interaction system for the Holiday Kenya Safaris website, consolidating review decisions made on 2026-07-15 and the catalogue expansion approved on 2026-07-24. Holiday Kenya Safaris must use the Wayfinder identity, local-market focus, Kenya and international Tour scopes, approved content model, KSh pricing rules, and qualified quote funnel.
 
 ## Core Decision
 
@@ -15,7 +15,7 @@ Use this catalogue grammar for the main website:
 - three-column catalogue grids;
 - a canonical Tour page with a title band, thumbnail-led active gallery, tabbed content, a three-column desktop composition, related Tours, and a persistent conversion panel.
 
-Do not use a permanent long booking form. The right-hand conversion area must be a Holiday Kenya Safaris quote panel whose primary command is **Request quote on WhatsApp**. That command opens the approved intake form, saves a private recovery record only after consent, lets the visitor review the generated message, and then launches WhatsApp under the visitor's control.
+Do not use a permanent long booking form. The right-hand conversion area must be a Holiday Kenya Safaris quote panel whose primary command is **Request a quote**. That command opens the approved intake form, saves a private recovery record only after consent, lets the visitor review the generated message, and then lets the visitor choose WhatsApp or an email addressed to `info@holidaykenyasafaris.ke`.
 
 ## Two Page Modes
 
@@ -35,7 +35,7 @@ Catalogue mode is light, browseable, photography-led, and internally connected. 
 
 Use for focused Facebook and other paid-ad landing pages.
 
-Campaign mode may retain the immersive, emotionally focused structure of the existing Maasai Mara prototype. It may use reduced navigation, a pressure-led headline, supporting copy, a featured hero image, template-controlled repeated quote prompts, and one optional Campaign-specific starting price. It must still inherit the factual itinerary, inclusions, exclusions, and logistics from the linked canonical Tour.
+Campaign mode uses the canonical Tour title band, gallery, facts, sticky quote panel, tabs/disclosures, itinerary, related-Tour system, responsive behavior, and final quote prompt. It may use full, reduced, or minimal navigation plus a pressure-led headline, supporting copy, a featured image placed first in the gallery, and one optional Campaign-specific starting price. It inherits the remaining media and all factual itinerary, inclusions, exclusions, and logistics from the linked canonical Tour.
 
 The existing Maasai Mara prototype is a Campaign reference, not the default canonical Tour template.
 
@@ -72,7 +72,7 @@ Approved primary structure:
 
 Editors manage this hierarchy in WordPress through the registered `Primary header and mobile menu` location. The same assigned menu must render in both the desktop header and mobile drawer: top-level items with children become desktop dropdowns and mobile accordions. Keep the managed hierarchy to two levels. The separate `Footer menu` location controls footer links. If either location is unassigned, the theme renders its existing safe fallback rather than an unrelated WordPress page list.
 
-The mobile drawer and page-level conversion surfaces retain the **Request quote on WhatsApp** action.
+The mobile drawer and page-level conversion surfaces retain the **Request a quote** action.
 
 `Safaris` may expose only populated, approved routes such as:
 
@@ -101,7 +101,7 @@ Use a compact white header with the Wayfinder mark and a familiar menu icon. Ope
 - Accordion navigation for Safaris, Coast & Stays, and Destinations.
 - Direct Group Travel, About, and Contact links.
 - Confirmed contact and social links.
-- A clear Request quote on WhatsApp action.
+- A clear Request a quote action.
 
 The drawer must trap focus while open, close with Escape, return focus to the menu button, and prevent background scrolling. The menu and close buttons require visible labels for assistive technology.
 
@@ -117,10 +117,10 @@ Default sequence:
 4. Featured Tours grid.
 5. Browse by trip type or occasion.
 6. Why Holiday Kenya Safaris and the Ashford operator relationship.
-7. How the WhatsApp quote process works.
+7. How the quote request process works.
 8. Group Travel route.
 9. Verified proof, testimonials, affiliations, or people when available.
-10. Final WhatsApp prompt and full footer.
+10. Final quote prompt and full footer.
 
 Hero rules:
 
@@ -165,7 +165,7 @@ The canonical Tour page should follow the approved information architecture and 
 4. Destination or route line beneath the active media.
 5. Tour facts and information workspace beneath the gallery.
 6. Related Tours.
-7. Final WhatsApp quote prompt.
+7. Final quote prompt.
 8. Global footer.
 
 ### Gallery
@@ -205,15 +205,15 @@ The panel should contain:
 
 - A clear tailored-quote heading.
 - The Tour's `From KSh X per person` starting price when populated, plus a concise reminder that the final quote depends on dates and group details.
-- A short note explaining that the visitor shares dates and group details, reviews the message, and chooses whether to send it in WhatsApp.
+- A short note explaining that the visitor shares dates and group details, reviews the message, and chooses WhatsApp or email.
 - A compact availability statement that does not invent availability.
-- The primary **Request quote on WhatsApp** button.
-- A short explanation that the visitor will answer a few questions and review a prepared WhatsApp message.
+- The primary **Request a quote** button.
+- A short explanation that the visitor will answer a few questions, review one prepared message, and choose how to send it.
 - Confirmed response or operator details only when available.
 
 Do not display first name, last name, email, country, date selectors, adult count, child count, notes, and a Submit Booking form permanently in the sidebar.
 
-The WhatsApp button opens the shared HKS intake dialog or mobile sheet. The required fields remain name, phone, package, preferred date or month, and number of travelers. Package-specific optional questions appear only when they improve quote accuracy.
+The quote button opens the shared HKS intake dialog or mobile sheet. The required fields remain name, phone, package, preferred date or month, and number of travelers. Package-specific optional questions appear only when they improve quote accuracy.
 
 ### Tour tabs and mobile disclosures
 
@@ -247,11 +247,11 @@ Show up to three useful related Tours based on destination, duration, Tour type,
 
 ## Quote Interaction
 
-The visible command is **Request quote on WhatsApp**.
+The visible command is **Request a quote**.
 
 Flow:
 
-`Quote button -> intake dialog or sheet -> validation and consent -> private recovery record -> message review -> visitor launches WhatsApp -> visitor sends message`
+`Quote button -> intake dialog or sheet -> validation and consent -> private recovery record -> message review -> visitor chooses WhatsApp or email -> visitor sends message in that app`
 
 Desktop quote entry points:
 
@@ -267,15 +267,15 @@ Mobile quote entry points:
 
 Never use `Book now`, `Submit Booking`, or language implying confirmed availability or payment when the action only requests a quote.
 
-The separate global **Chat on WhatsApp** control uses a concise general message, adding the current Tour title and canonical link on Tour pages, and opens the official number directly. It does not open the intake, save an inquiry, or replace any **Request quote on WhatsApp** entry point. Keep it at the bottom right, above any mobile quote bar and outside form controls or footer content.
+The separate global **Chat on WhatsApp** control uses a concise general message, adding the current Tour title and canonical link on Tour pages, and opens the official number directly. It does not open the intake, save an inquiry, or replace any **Request a quote** entry point. Keep it at the bottom right, above any mobile quote bar and outside form controls or footer content.
 
 ### Group Travel route
 
 The direct Group Travel navigation route resolves to `/group-travel/`, not a homepage anchor. Its inline planner is the shared quote conversion in a Group Travel presentation mode:
 
-`Destination -> matching published Tour -> dates/month -> traveler count -> contact and consent -> private recovery record -> message review -> visitor launches WhatsApp`
+`Destination -> matching published Tour -> dates/month -> traveler count -> contact and consent -> private recovery record -> message review -> visitor chooses WhatsApp or email`
 
-Only published Tours with assigned Destination terms appear. Changing Destination filters the Tour choices without duplicating Tour data. Keep the selected Tour as the canonical package context used by validation, storage, analytics, and the generated WhatsApp message.
+Only published Tours with assigned Destination terms appear. Changing Destination filters the Tour choices without duplicating Tour data. Keep the selected Tour as the canonical package context used by validation, storage, analytics, and the generated message.
 
 ## Visual Translation to Wayfinder
 
@@ -325,7 +325,7 @@ Build reusable theme parts and blocks for:
 - Tour tabs and mobile disclosures.
 - Itinerary timeline.
 - Sticky quote panel.
-- Intake-to-WhatsApp dialog or sheet.
+- Intake-to-review-to-WhatsApp-or-email dialog or sheet.
 - Related Tours.
 
 ## Responsive Acceptance Criteria

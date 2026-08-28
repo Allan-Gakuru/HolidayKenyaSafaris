@@ -2,11 +2,11 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "hks/quote-cta",
-  "version": "0.4.0",
-  "title": "HKS WhatsApp quote",
+  "version": "0.5.0",
+  "title": "HKS quote request",
   "category": "widgets",
   "icon": "format-chat",
-  "description": "Context-aware quote intake, WordPress recovery record, review, and WhatsApp handoff.",
+  "description": "Context-aware quote intake, private recovery record, review, and visitor-controlled WhatsApp or email handoff.",
   "textdomain": "hks-core",
   "attributes": {
     "location": {

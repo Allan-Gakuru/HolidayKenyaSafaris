@@ -183,7 +183,7 @@ final class TourBlocks {
 					<ol>
 					<li><span>1</span><div><h3><?php esc_html_e( 'Choose the trip', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'Select a destination and the tour your group is considering.', 'hks-wayfinder' ); ?></p></div></li>
 						<li><span>2</span><div><h3><?php esc_html_e( 'Share the essentials', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'Add the proposed dates, number of travelers and contact details.', 'hks-wayfinder' ); ?></p></div></li>
-					<li><span>3</span><div><h3><?php esc_html_e( 'Check your message', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'Review the prepared message, then open WhatsApp when you are ready to send it.', 'hks-wayfinder' ); ?></p></div></li>
+					<li><span>3</span><div><h3><?php esc_html_e( 'Check your message', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'Review the prepared message, then choose WhatsApp or email when you are ready to send it.', 'hks-wayfinder' ); ?></p></div></li>
 					</ol>
 					<p class="hks-group-travel-process__operator"><?php esc_html_e( 'Holiday Kenya Safaris is operated by Ashford Tours & Travel.', 'hks-wayfinder' ); ?></p>
 				</div>
@@ -235,47 +235,27 @@ final class TourBlocks {
 	}
 
 	/**
-	 * Preserve the emotionally concentrated Campaign lead.
+	 * Render Campaign-controlled copy inside the canonical Tour title band.
 	 *
 	 * @param array<string, int> $context Campaign context.
 	 * @return string
 	 */
 	private static function render_campaign_hero( array $context ): string {
-		$tour_id      = $context['tour_id'];
 		$campaign_id  = $context['campaign_id'];
 		$title        = self::public_text( self::field( 'hks_hero_headline', $campaign_id ) ) ?: self::public_text( get_the_title( $campaign_id ) );
-		$introduction = self::public_html( self::field( 'hks_supporting_copy', $campaign_id ) ) ?: self::public_text( get_post_field( 'post_excerpt', $tour_id ) );
-		$duration     = self::public_text( self::field( 'hks_duration_label', $tour_id ) );
-		$route        = self::public_text( self::field( 'hks_route_summary', $tour_id ) );
-		$price        = self::campaign_price_summary( $campaign_id, $tour_id );
-		$image_id     = get_post_thumbnail_id( $campaign_id );
-
-		if ( ! self::media_allowed( $image_id ) ) {
-			$image_id = get_post_thumbnail_id( $tour_id );
-		}
-
-		if ( ! self::media_allowed( $image_id ) ) {
-			$image_id = 0;
-		}
-
-		$destinations = self::term_names( $tour_id, 'hks_destination' );
+		$introduction = self::public_html( self::field( 'hks_supporting_copy', $campaign_id ) );
+		$tours_url    = get_post_type_archive_link( 'hks_tour' ) ?: home_url( '/tours/' );
 
 		ob_start();
 		?>
-		<section class="hks-campaign-hero<?php echo $image_id ? ' hks-campaign-hero--with-image' : ''; ?>">
-			<div class="hks-campaign-hero__content">
-				<p class="hks-kicker"><?php echo esc_html( $destinations ? $destinations[0] : get_the_title( $tour_id ) ); ?></p>
-				<h1><?php echo esc_html( $title ); ?></h1>
-				<?php if ( $introduction ) : ?><div class="hks-campaign-hero__intro"><?php echo wp_kses_post( wpautop( $introduction ) ); ?></div><?php endif; ?>
-				<ul class="hks-fast-facts" aria-label="<?php esc_attr_e( 'Package summary', 'hks-wayfinder' ); ?>">
-					<?php if ( $duration ) : ?><li><span><?php esc_html_e( 'Time', 'hks-wayfinder' ); ?></span><strong><?php echo esc_html( $duration ); ?></strong></li><?php endif; ?>
-					<?php if ( $route ) : ?><li><span><?php esc_html_e( 'Route', 'hks-wayfinder' ); ?></span><strong><?php echo esc_html( $route ); ?></strong></li><?php endif; ?>
-					<?php if ( $price ) : ?><li><span><?php esc_html_e( 'Rate', 'hks-wayfinder' ); ?></span><strong><?php echo esc_html( $price['label'] ); ?></strong></li><?php endif; ?>
-				</ul>
+		<section class="hks-tour-lead hks-campaign-lead">
+			<div class="hks-title-band">
+				<div class="hks-shell">
+					<?php self::breadcrumbs( array( __( 'Tours', 'hks-wayfinder' ) => $tours_url, $title => '' ) ); ?>
+					<h1><?php echo esc_html( $title ); ?></h1>
+					<?php if ( $introduction ) : ?><div class="hks-campaign-lead__intro"><?php echo wp_kses_post( wpautop( $introduction ) ); ?></div><?php endif; ?>
+				</div>
 			</div>
-			<?php if ( $image_id ) : ?>
-				<figure class="hks-campaign-hero__media"><?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'large', false, array( 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '(max-width: 800px) 100vw, 48vw' ) ) ); ?><?php self::render_credit( $image_id ); ?></figure>
-			<?php endif; ?>
 		</section>
 		<?php
 
@@ -283,7 +263,7 @@ final class TourBlocks {
 	}
 
 	/**
-	 * Render canonical Tour workspace or the existing Campaign detail flow.
+	 * Render the canonical Tour workspace for Tours and Campaigns.
 	 *
 	 * @return string
 	 */
@@ -294,29 +274,31 @@ final class TourBlocks {
 			return '';
 		}
 
-		return $context['campaign_id'] ? self::render_campaign_details( $context ) : self::render_canonical_details( $context['tour_id'] );
+		return self::render_canonical_details( $context['tour_id'], $context['campaign_id'] );
 	}
 
 	/**
 	 * Render the 68/32 canonical Tour workspace, sections and one quote form.
 	 *
-	 * @param int $tour_id Tour ID.
+	 * @param int $tour_id     Tour ID.
+	 * @param int $campaign_id Optional Campaign ID.
 	 * @return string
 	 */
-	private static function render_canonical_details( int $tour_id ): string {
-		$title        = self::public_text( get_the_title( $tour_id ) );
+	private static function render_canonical_details( int $tour_id, int $campaign_id = 0 ): string {
+		$title        = $campaign_id ? self::public_text( self::field( 'hks_hero_headline', $campaign_id ) ) ?: self::public_text( get_the_title( $campaign_id ) ) : self::public_text( get_the_title( $tour_id ) );
 		$overview     = get_post_field( 'post_content', $tour_id );
 		$itinerary    = self::rows( self::field( 'hks_itinerary', $tour_id ) );
 		$inclusions   = self::rows( self::field( 'hks_inclusions', $tour_id ) );
 		$exclusions   = self::rows( self::field( 'hks_exclusions', $tour_id ) );
 		$policies     = self::approved_policies( $tour_id );
-		$faqs         = self::approved_faqs( array( 'tour_id' => $tour_id, 'campaign_id' => 0 ) );
+		$faqs         = self::approved_faqs( array( 'tour_id' => $tour_id, 'campaign_id' => $campaign_id ) );
 		$facts        = self::tour_facts( $tour_id );
-		$price        = self::tour_price_summary( $tour_id );
-		$images       = self::tour_images( $tour_id );
+		$price        = $campaign_id ? self::campaign_price_summary( $campaign_id, $tour_id ) : self::tour_price_summary( $tour_id );
+		$images       = $campaign_id ? self::campaign_images( $campaign_id, $tour_id ) : self::tour_images( $tour_id );
 		$route        = self::public_text( self::field( 'hks_route_summary', $tour_id ) );
 		$destinations = self::term_names( $tour_id, 'hks_destination' );
-		$quote        = do_blocks( '<!-- wp:hks/quote-cta {"location":"tour_sidebar","label":"Request quote on WhatsApp"} /-->' );
+		$quote_location = $campaign_id ? 'campaign_sidebar' : 'tour_sidebar';
+		$quote          = do_blocks( sprintf( '<!-- wp:hks/quote-cta {"location":"%s","label":"Request a quote"} /-->', $quote_location ) );
 
 		ob_start();
 		?>
@@ -349,7 +331,7 @@ final class TourBlocks {
 						<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Fast Responses to all queries', 'hks-wayfinder' ); ?></span></li>
 					</ul>
 					<?php echo $quote; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Trusted server-rendered block. ?>
-					<p class="hks-tour-quote__note"><?php esc_html_e( 'Tell us your dates and group size, check the prepared message, then open WhatsApp when you are ready.', 'hks-wayfinder' ); ?></p>
+					<p class="hks-tour-quote__note"><?php esc_html_e( 'Tell us your dates and group size, check the prepared message, then choose WhatsApp or email.', 'hks-wayfinder' ); ?></p>
 				</div>
 			</aside>
 
@@ -392,36 +374,7 @@ final class TourBlocks {
 		</section>
 
 		<?php self::render_related_tours( $tour_id ); ?>
-		<div class="hks-mobile-quote-bar"><button type="button" data-hks-quote-proxy><?php esc_html_e( 'Request quote on WhatsApp', 'hks-wayfinder' ); ?></button></div>
-		<?php
-
-		return (string) ob_get_clean();
-	}
-
-	/**
-	 * Keep Campaign details linear and conversion focused.
-	 *
-	 * @param array<string, int> $context Campaign context.
-	 * @return string
-	 */
-	private static function render_campaign_details( array $context ): string {
-		$tour_id     = $context['tour_id'];
-		$campaign_id = $context['campaign_id'];
-		$overview    = get_post_field( 'post_content', $tour_id );
-		$price       = self::campaign_price_summary( $campaign_id, $tour_id );
-		$itinerary  = self::rows( self::field( 'hks_itinerary', $tour_id ) );
-		$inclusions = self::rows( self::field( 'hks_inclusions', $tour_id ) );
-		$exclusions = self::rows( self::field( 'hks_exclusions', $tour_id ) );
-
-		ob_start();
-		?>
-		<div class="hks-campaign-details hks-shell">
-			<?php if ( self::public_text( $overview ) ) : ?><section class="hks-campaign-section"><h2><?php esc_html_e( 'The trip at a glance', 'hks-wayfinder' ); ?></h2><div class="hks-prose"><?php echo wp_kses_post( do_blocks( $overview ) ); ?></div></section><?php endif; ?>
-			<?php if ( $price ) : ?><section class="hks-price-panel"><div><p class="hks-kicker"><?php esc_html_e( 'Starting price', 'hks-wayfinder' ); ?></p><h2><?php echo esc_html( $price['label'] ); ?></h2><p><?php echo esc_html( $price['status'] ); ?></p></div></section><?php endif; ?>
-			<?php if ( $itinerary ) : ?><section class="hks-campaign-section"><h2><?php esc_html_e( 'Your itinerary', 'hks-wayfinder' ); ?></h2><?php self::render_itinerary( $itinerary ); ?></section><?php endif; ?>
-			<?php if ( $inclusions || $exclusions ) : ?><section class="hks-campaign-section"><h2><?php esc_html_e( 'Included and not included', 'hks-wayfinder' ); ?></h2><div class="hks-list-columns"><?php self::render_item_list( __( 'Included', 'hks-wayfinder' ), $inclusions, 'included' ); ?><?php self::render_item_list( __( 'Not included', 'hks-wayfinder' ), $exclusions, 'excluded' ); ?></div></section><?php endif; ?>
-			<section class="hks-quote-process"><h2><?php esc_html_e( 'Tell us what you need for this trip', 'hks-wayfinder' ); ?></h2><ol><li><?php esc_html_e( 'Add your dates, group size and useful trip details.', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'Check the prepared WhatsApp message.', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'Open WhatsApp and send the message when you are ready.', 'hks-wayfinder' ); ?></li></ol></section>
-		</div>
+		<div class="hks-mobile-quote-bar"><button type="button" data-hks-quote-proxy><?php esc_html_e( 'Request a quote', 'hks-wayfinder' ); ?></button></div>
 		<?php
 
 		return (string) ob_get_clean();
@@ -694,7 +647,7 @@ final class TourBlocks {
 
 			<section class="hks-operator-section"><div class="hks-shell hks-operator-section__grid"><div><p><?php esc_html_e( 'Your safari team', 'hks-wayfinder' ); ?></p><h2><?php esc_html_e( 'Holiday Kenya Safaris is operated by Ashford Tours & Travel.', 'hks-wayfinder' ); ?></h2></div><div><p><?php esc_html_e( 'Choose your trip with Holiday Kenya Safaris, then speak with the Ashford Tours & Travel team about your dates, group and quote.', 'hks-wayfinder' ); ?></p><a href="<?php echo esc_url( $tours_url ); ?>"><?php esc_html_e( 'Explore all tours', 'hks-wayfinder' ); ?><span aria-hidden="true">→</span></a></div></div></section>
 
-			<section class="hks-home-section hks-shell" aria-labelledby="hks-quote-process-title"><div class="hks-section-heading"><div><p><?php esc_html_e( 'Request a quote on WhatsApp', 'hks-wayfinder' ); ?></p><h2 id="hks-quote-process-title"><?php esc_html_e( 'Start with a trip, then tell us what you need', 'hks-wayfinder' ); ?></h2></div></div><ol class="hks-process-grid"><li><span>1</span><h3><?php esc_html_e( 'Choose your tour', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'Compare the route, itinerary and practical details.', 'hks-wayfinder' ); ?></p></li><li><span>2</span><h3><?php esc_html_e( 'Add your trip details', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'Share your preferred dates, group size and useful preferences.', 'hks-wayfinder' ); ?></p></li><li><span>3</span><h3><?php esc_html_e( 'Check your message', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'Review the prepared message, then open WhatsApp when you are ready to send it.', 'hks-wayfinder' ); ?></p></li></ol></section>
+			<section class="hks-home-section hks-shell" aria-labelledby="hks-quote-process-title"><div class="hks-section-heading"><div><p><?php esc_html_e( 'Request a quote', 'hks-wayfinder' ); ?></p><h2 id="hks-quote-process-title"><?php esc_html_e( 'Start with a trip, then tell us what you need', 'hks-wayfinder' ); ?></h2></div></div><ol class="hks-process-grid"><li><span>1</span><h3><?php esc_html_e( 'Choose your tour', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'Compare the route, itinerary and practical details.', 'hks-wayfinder' ); ?></p></li><li><span>2</span><h3><?php esc_html_e( 'Add your trip details', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'Share your preferred dates, group size and useful preferences.', 'hks-wayfinder' ); ?></p></li><li><span>3</span><h3><?php esc_html_e( 'Check your message', 'hks-wayfinder' ); ?></h3><p><?php esc_html_e( 'Review the prepared message, then choose WhatsApp or email when you are ready to send it.', 'hks-wayfinder' ); ?></p></li></ol></section>
 
 			<section class="hks-group-route" id="group-travel"><div class="hks-shell hks-group-route__inner"><div><p><?php esc_html_e( 'Group travel', 'hks-wayfinder' ); ?></p><h2><?php esc_html_e( 'Planning for family, friends or colleagues?', 'hks-wayfinder' ); ?></h2><p><?php esc_html_e( 'Choose a tour, then tell us your group size, dates and departure town so we can prepare a relevant quote.', 'hks-wayfinder' ); ?></p></div><a class="hks-button" href="<?php echo esc_url( $group_url ); ?>"><?php esc_html_e( 'Plan group travel', 'hks-wayfinder' ); ?></a></div></section>
 
@@ -1015,6 +968,24 @@ final class TourBlocks {
 		}
 
 		return $allowed;
+	}
+
+	/**
+	 * Lead the canonical gallery with the Campaign image when one is approved.
+	 *
+	 * @param int $campaign_id Campaign ID.
+	 * @param int $tour_id     Linked Tour ID.
+	 * @return int[]
+	 */
+	private static function campaign_images( int $campaign_id, int $tour_id ): array {
+		$campaign_image = absint( get_post_thumbnail_id( $campaign_id ) );
+		$images         = self::tour_images( $tour_id );
+
+		if ( self::media_allowed( $campaign_image ) ) {
+			array_unshift( $images, $campaign_image );
+		}
+
+		return array_values( array_unique( $images ) );
 	}
 
 	/**

@@ -12,6 +12,7 @@
 .hks-inquiry__trigger,
 .hks-inquiry__submit,
 .hks-inquiry__launch,
+.hks-inquiry__email-launch,
 .hks-inquiry__back,
 .hks-inquiry__close {
 	align-items: center;
@@ -41,6 +42,18 @@
 .hks-inquiry__launch:hover {
 	background: #2ee073;
 	color: var(--hks-navy);
+	transform: translateY(-1px);
+}
+
+.hks-inquiry__email-launch {
+	background: var(--hks-teal);
+	color: var(--hks-white);
+	padding: 0.85rem 1.25rem;
+}
+
+.hks-inquiry__email-launch:hover {
+	background: var(--hks-navy);
+	color: var(--hks-white);
 	transform: translateY(-1px);
 }
 

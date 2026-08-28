@@ -149,7 +149,7 @@ def main() -> int:
             "Travel Guides",
             "Group Travel",
             "group-travel",
-            "Request quote on WhatsApp",
+            "Request a quote",
             "data-hks-quote-proxy",
             "hks-mobile-menu__social",
             "NavMenus::has_primary_menu",
@@ -171,9 +171,10 @@ def main() -> int:
     require(errors, "home template", files["home"], ["hks-wayfinder/home-experience"])
     require(errors, "catalogue template", files["catalogue"], ["hks-title-band", "hks-wayfinder/catalogue-controls", "hks-wayfinder/tour-card", "postType\":\"hks_tour", "inherit\":true"])
     forbid(errors, "catalogue template", files["catalogue"], ["KSh starting price", "Request current KSh rate"])
-    require(errors, "Tour template", files["tour"], ["hks-wayfinder/tour-hero", "hks-wayfinder/tour-details", "data-hks-quote-proxy", "Request quote on WhatsApp"])
+    require(errors, "Tour template", files["tour"], ["hks-wayfinder/tour-hero", "hks-wayfinder/tour-details", "data-hks-quote-proxy", "Request a quote", "choose WhatsApp or email"])
     forbid(errors, "Tour template", files["tour"], ["<!-- wp:hks/quote-cta"])
-    require(errors, "Campaign template", files["campaign"], ["hks-wayfinder/tour-hero", "hks-wayfinder/tour-details", "hks/quote-cta", "campaign_hero"])
+    require(errors, "Campaign template", files["campaign"], ["hks-wayfinder/tour-hero", "hks-wayfinder/tour-details", "data-hks-quote-proxy", "Request a quote", "choose WhatsApp or email"])
+    forbid(errors, "Campaign template", files["campaign"], ["<!-- wp:hks/quote-cta", "campaign_hero", "hks-hero-cta"])
     require(errors, "Destination template", files["destination"], ["hks-wayfinder/destination-intro", "hks-wayfinder/tour-card", "inherit\":true", "hks-wayfinder/destination-guides", "hks-catalogue-prompt"])
     for label in ("tour type", "occasion", "travel style"):
         require(errors, f"{label.title()} template", files[label], ["hks-wayfinder/taxonomy-intro", "hks-wayfinder/tour-card", "inherit\":true", "hks-catalogue-prompt"])
@@ -229,7 +230,11 @@ def main() -> int:
             "data-hks-itinerary-day",
             "hks-tour-quote__panel",
             "tour_sidebar",
-            "Request quote on WhatsApp",
+            "Request a quote",
+            "campaign_images",
+            "campaign_sidebar",
+            "hks_hero_headline",
+            "hks_supporting_copy",
             "render_related_tours",
             "hks-mobile-quote-bar",
             "hks-tour-card__destination",
@@ -326,7 +331,7 @@ def main() -> int:
             "data-hks-cta-location=\"article_hero\"",
             "data-hks-cta-location=\"article_final\"",
             "data-hks-cta-location=\"article_mobile_sticky\"",
-            "Request quote on WhatsApp",
+            "Request a quote",
             "View this trip",
             "hks-article-final-quote",
             "hks-article-conversion-panel",
@@ -370,7 +375,7 @@ def main() -> int:
             "assigned to this",
         ],
     )
-    if sources["renderer"].count("do_blocks( '<!-- wp:hks/quote-cta") != 2:
+    if sources["renderer"].count("wp:hks/quote-cta") != 2:
         errors.append("public renderer must create one canonical and one Group Travel shared quote block instance")
 
     require(errors, "navigation script", sources["navigation"], ["showModal", "aria-expanded", "Escape", "data-hks-quote-proxy", "data-hks-inquiry-open", "is-scrolled", "window.scrollY", "requestAnimationFrame", "{ passive: true }"])
@@ -383,7 +388,7 @@ def main() -> int:
     if pointer_capture < drag_threshold:
         errors.append("homepage gallery must capture the pointer only after a real drag begins")
     require(errors, "Tour UI script", sources["tour_ui"], ["role', 'tablist", "ArrowRight", "matchMedia('(min-width: 769px)", "tour_gallery_open", "tour_section_open", "itinerary_toggle", "related_tour_select", "selectPreview", "data-hks-gallery-thumb", "data-hks-gallery-more-open", "openDialogAt", "data-hks-gallery-stage-prev", "data-hks-gallery-stage-next", "hksGalleryStageSrc", "hksGalleryInterval", "5000", "scheduleAutoplay", "IntersectionObserver", "visibilitychange", "prefers-reduced-motion", "aria-pressed"])
-    require(errors, "quote block", sources["quote"], ["$attributes['label']", "$attributes['mode']", "Request quote on WhatsApp", "InquiryRepository::REST_NAMESPACE", "data-hks-inquiry-form", "data-hks-whatsapp-launch", "group_context", "group_fields", "data-hks-inquiry-inline", "destination_selection", "tour_selection", "data-form-token"])
+    require(errors, "quote block", sources["quote"], ["$attributes['label']", "$attributes['mode']", "Request a quote", "InquiryRepository::REST_NAMESPACE", "data-hks-inquiry-form", "data-hks-whatsapp-launch", "data-hks-email-launch", "info@holidaykenyasafaris.ke", "group_context", "group_fields", "data-hks-inquiry-inline", "destination_selection", "tour_selection", "data-form-token"])
     require(errors, "Group Travel inquiry script", sources["inquiry_script"], ["destination_selection", "tour_selection", "syncGroupTour", "filterGroupTours", "destination_id", "inquiry_route", "group_travel"])
     require(errors, "Group Travel inquiry storage", sources["inquiry_repository"], ["_hks_inquiry_destination", "_hks_inquiry_route", "destination_label", "group_travel"])
     require(errors, "Group Travel inquiry administration", sources["inquiry_admin"], ["Inquiry route", "Destination", "Group Travel page"])

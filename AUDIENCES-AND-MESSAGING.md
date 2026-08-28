@@ -38,7 +38,7 @@ Example emotional entry:
 
 Follow immediately with proof:
 
-> Three days. Two nights. Nairobi return. Clear itinerary, accommodation options, game drives, meals, and a WhatsApp quote built around your dates and group.
+> Three days. Two nights. Nairobi return. Clear itinerary, accommodation options, game drives, meals, and a tailored quote built around your dates and group.
 
 ## Shared Desires
 
@@ -68,7 +68,7 @@ Follow immediately with proof:
 3. Show the actual route, accommodation basis, transport, meals, activities, and exclusions.
 4. Make the operator relationship and human support visible.
 5. Show the honest editable KSh per-person starting price when available, then explain that the tailored quote confirms the final package for the visitor's dates and group. Campaigns may override the linked Tour amount.
-6. Offer a small next step: request a tailored WhatsApp quote.
+6. Offer a small next step: request a tailored quote and choose WhatsApp or email after reviewing it.
 
 ## Campaign Variation Examples
 

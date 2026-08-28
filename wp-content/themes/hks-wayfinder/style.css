@@ -711,9 +711,18 @@ body:not(.home) .wp-site-blocks > main {
 	max-width: 24ch;
 }
 
-.single-hks_tour .hks-title-band h1 {
+.single-hks_tour .hks-title-band h1,
+.single-hks_campaign .hks-title-band h1 {
 	font-size: clamp(1.125rem, 2.5vw, 1.75rem);
 	max-width: none;
+}
+
+.hks-campaign-lead__intro {
+	max-width: 65ch;
+}
+
+.hks-campaign-lead__intro > :last-child {
+	margin-bottom: 0;
 }
 
 @media (min-width: 56.0625rem) {

@@ -251,18 +251,18 @@ final class FieldGroups {
 			'campaign_public',
 			__( 'Campaign: Landing page', 'hks-core' ),
 			array(
-				self::message( 'campaign_native_mappings', __( 'Campaign content', 'hks-core' ), __( 'Use the WordPress title as the Campaign name and the featured image as its hero. The linked Tour supplies the route, itinerary, inclusions, and exclusions. The optional price belongs to this Campaign only.', 'hks-core' ) ),
+				self::message( 'campaign_native_mappings', __( 'Campaign content', 'hks-core' ), __( 'Use the WordPress title as the Campaign name. The Campaign headline and supporting copy lead the standard Tour layout, while its featured image appears first in the linked Tour gallery. The linked Tour supplies the route, facts, itinerary, inclusions, exclusions, and remaining images.', 'hks-core' ) ),
 				self::tab( 'campaign_tab_content', __( 'Content', 'hks-core' ) ),
 				self::field( 'campaign_linked_tour', __( 'Linked Tour', 'hks-core' ), 'hks_linked_tour', 'post_object', array_merge( self::post_object_args( Tour::POST_TYPE, false ), array( 'required' => 1, 'multiple' => 0, 'allow_null' => 0 ) ) ),
 				self::field( 'campaign_hero_headline', __( 'Hero headline', 'hks-core' ), 'hks_hero_headline', 'text', array( 'instructions' => __( 'Displayed as the Campaign H1. Leave blank to use the Campaign title.', 'hks-core' ) ) ),
-				self::field( 'campaign_supporting_copy', __( 'Supporting copy', 'hks-core' ), 'hks_supporting_copy', 'textarea', array( 'instructions' => __( 'Displayed below the Campaign headline.', 'hks-core' ), 'rows' => 4, 'new_lines' => 'wpautop' ) ),
+				self::field( 'campaign_supporting_copy', __( 'Supporting copy', 'hks-core' ), 'hks_supporting_copy', 'textarea', array( 'instructions' => __( 'Displayed below the Campaign headline in the standard Tour title band.', 'hks-core' ), 'rows' => 4, 'new_lines' => 'wpautop' ) ),
 				self::field(
 					'campaign_from_price_ksh',
 					__( 'From price per person (KSh)', 'hks-core' ),
 					'hks_campaign_from_price_ksh',
 					'number',
 					array(
-						'instructions' => __( 'Optional. Enter a positive whole KSh amount only when price is a selling point for this Campaign. Leave blank to omit price.', 'hks-core' ),
+						'instructions' => __( 'Optional. Enter a positive whole KSh amount to override the linked Tour price for this Campaign. Leave blank to inherit the Tour price when available.', 'hks-core' ),
 						'min'          => 1,
 						'step'         => 1,
 						'prepend'      => 'KSh',

@@ -1,6 +1,6 @@
 # HKS Wayfinder block theme
 
-This is the custom block-theme foundation for Holiday Kenya Safaris. WordPress content types, structured fields, validation, analytics, and the intake-to-WhatsApp flow belong in the separate `hks-core` site plugin.
+This is the custom block-theme foundation for Holiday Kenya Safaris. WordPress content types, structured fields, validation, analytics, and the intake-to-review-to-WhatsApp-or-email flow belong in the separate `hks-core` site plugin.
 
 ## Runtime baseline
 
@@ -28,15 +28,18 @@ Regenerate or verify the font package from the pinned Montserrat WOFF2 and OFL f
 Version `0.7.0` provides the catalogue-led public experience plus the Travel Guides
 system: native WordPress Posts can render as reading-first destination guides or
 focused conversion stories. Standard Guides may have an optional Primary Tour;
-Advertorials require one published Primary Tour and use the existing intake-to-WhatsApp
-quote flow. Related content contains guide Posts only. No author byline is rendered publicly.
+Advertorials require one published Primary Tour and use the existing shared quote flow.
+Campaigns use the canonical Tour presentation with controlled headline, supporting-copy,
+first-image, price, and navigation overrides. Related content contains guide Posts only.
+No author byline is rendered publicly.
 
 Version `0.5.0` provides the catalogue-led public experience: a product-led header,
 image-led homepage, filterable Tour archive, compact Destination pages, and the
 canonical Tour gallery/workspace with desktop tabs, mobile disclosures, a sticky
-quote panel, itinerary timeline, and related Tours. Focused Campaigns retain their
-separate emotional conversion layout. The HKS Core quote block remains the single
-source of the saved inquiry, message review, and visitor-controlled WhatsApp handoff.
+quote panel, itinerary timeline, and related Tours. Campaigns now reuse that complete
+Tour presentation while retaining their ad-congruency overrides and navigation mode.
+The HKS Core quote block remains the single source of the saved inquiry, message
+review, and visitor-controlled handoff.
 The footer also supplies a global floating Chat on WhatsApp contact with one fixed
 general message. It opens the official number directly and does not create a private
 inquiry record or replace the structured quote actions.
@@ -49,7 +52,7 @@ the corresponding Page has been published.
 Public presentation is fail-closed:
 
 - Tour cards, archives, canonical Tour pages, related Tours, and Tour quote panels never render price;
-- a Campaign renders `From KSh… per person` only when its own optional positive amount is populated;
+- a Campaign renders its own positive `From KSh… per person` override or inherits the linked Tour amount when blank;
 - optional policies and FAQs render only when their public fields are populated;
 - Destination guidance renders only when the editor has supplied it; and
 - Tour photographs render only when the attachment has useful native alt text.

@@ -47,7 +47,7 @@ def main() -> int:
             errors.append(f"missing {relative}: {error}")
             content[label] = ""
 
-    require(errors, "plugin bootstrap", content["bootstrap"], ["Version:           0.11.0", "define( 'HKS_CORE_VERSION', '0.11.0' )"])
+    require(errors, "plugin bootstrap", content["bootstrap"], ["Version:           0.12.0", "define( 'HKS_CORE_VERSION', '0.12.0' )"])
     require(
         errors,
         "client-ready copy migration",
@@ -109,9 +109,12 @@ def main() -> int:
         content["renderer"],
         [
             "254712965131",
-            "Review WhatsApp message",
+            "info@holidaykenyasafaris.ke",
+            "Review quote request",
             "We keep these details private",
-            "open WhatsApp when you are ready to send it",
+            "choose WhatsApp or email",
+            "Open email to send",
+            "data-hks-email-launch",
             "InquiryRepository::CONSENT_VERSION",
             "FormToken::issue",
             "group_context",
@@ -141,13 +144,14 @@ def main() -> int:
         "quote_inquiry_saved",
         "quote_form_complete",
         "whatsapp_launch",
+        "email_launch",
     ]
     require(errors, "browser event contract", content["script"], [f"'{event}'" for event in events])
     require(
         errors,
         "browser privacy and handoff",
         content["script"],
-        ["window.dataLayer.push(payload)", "sessionStorage", "encodeURIComponent(reviewedMessage)", "keepalive: true", "sourceAttribution", "destination_id", "inquiry_route", "group_travel"],
+        ["window.dataLayer.push(payload)", "sessionStorage", "encodeURIComponent(reviewedMessage)", "mailto:", "encodeURIComponent(emailSubject)", "keepalive: true", "sourceAttribution", "destination_id", "inquiry_route", "group_travel"],
     )
 
     for line_number, line in enumerate(content["script"].splitlines(), 1):
@@ -166,7 +170,7 @@ def main() -> int:
         ):
             errors.append(f"analytics call on JS line {line_number} appears to contain an inquiry answer")
 
-    require(errors, "accessible modal styling", content["style"], ["::backdrop", ":focus-visible", "prefers-reduced-motion", "#25d366", "min-height: 48px"])
+    require(errors, "accessible modal styling", content["style"], ["::backdrop", ":focus-visible", "prefers-reduced-motion", "#25d366", "min-height: 48px", ".hks-inquiry__email-launch"])
 
     if errors:
         print("Conversion validation failed:")
@@ -174,7 +178,7 @@ def main() -> int:
             print(f"- {error}")
         return 1
 
-    print("Conversion validation passed (private recovery, review, WhatsApp, analytics, and privacy boundaries).")
+    print("Conversion validation passed (private recovery, review, WhatsApp/email handoff, analytics, and privacy boundaries).")
     return 0
 
 

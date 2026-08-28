@@ -2,7 +2,7 @@
 
 ## Principle
 
-Build backward from a qualified WhatsApp inquiry. Do not start by producing a generic homepage and then bolt on conversion later.
+Build backward from a qualified quote inquiry handed off through WhatsApp or email. Do not start by producing a generic homepage and then bolt on conversion later.
 
 The standard site must also feel like a complete travel catalogue. Follow `UI-REFERENCE-CATALOGUE.md` for the global shell, homepage, archives, and canonical Tour pages. Use the existing Maasai Mara prototype only for Campaign-mode structure.
 
@@ -105,11 +105,11 @@ Acceptance:
 
 Actions:
 
-- Build the reusable intake form and WhatsApp handoff.
+- Build the reusable intake, review, and WhatsApp/email handoff.
 - Implement field validation, accessible dialog/sheet behavior, focus management, error handling, and mobile keyboard behavior.
 - Persist package and campaign attribution.
 - Implement the event contract with placeholder-disabled analytics configuration.
-- Test desktop WhatsApp Web and mobile WhatsApp behavior.
+- Test desktop and mobile WhatsApp behavior plus `mailto:` handoff to the visitor's configured email application.
 - Expose one reusable API and block/pattern contract so the desktop sticky quote panel, mobile sticky action, in-flow panels, header action, and Campaign pages all open the same intake flow.
 
 Acceptance:
@@ -142,7 +142,7 @@ Acceptance:
 
 ## Phase 6: Templates and Pages
 
-Implementation status (2026-07-27): the global, Tour, Campaign, catalogue, all four Tour taxonomy archive families, Destination, homepage, and standard Page templates are implemented. The homepage uses a Featured Tour hero with a homepage-only translucent logo-and-menu header that stays fixed and becomes solid white after scrolling, one changing Tour-title H1, up to five portrait queue cards backed by featured images at least 1200 × 675 pixels, an accessible five-second cycle with a synchronized progress line, and Browse by destination before the Featured Tours grid. Hero eligibility does not depend on alt text; its repeated stage and preview images are decorative. The Tour catalogue presents its filters as a sticky vertical left rail from 1024px upward and as a sticky `Filters` control opening an accessible native-dialog drawer below that breakpoint; both presentations retain the same server-rendered GET filter contract. Group Travel has a dedicated catalogue-driven planner on its published Page and reuses the shared inquiry recovery and WhatsApp flow. The global floating Chat on WhatsApp contact uses a concise general message, adding the current Tour title and canonical link on Tour pages, and remains separate from the saved-inquiry quote flow. Internal pages retain the complete utility bar and white primary header. The desktop header and mobile drawer share the production `holiday-kenya-safaris-logo.svg` lockup. About is available; Contact and four legal routes remain protected drafts until their missing project-level information is supplied.
+Implementation status (2026-08-28): the global, Tour, Campaign, catalogue, all four Tour taxonomy archive families, Destination, homepage, and standard Page templates are implemented. Campaigns now share the canonical Tour title-band, gallery, facts, sticky quote panel, tabs/disclosures, itinerary, related-Tour, responsive, and final-quote system while retaining Campaign-controlled headline, supporting copy, first gallery image, price override, and navigation mode. The shared saved inquiry produces one reviewed message and lets the visitor open WhatsApp or an email addressed to `info@holidaykenyasafaris.ke`. The homepage uses a Featured Tour hero with a homepage-only translucent logo-and-menu header that stays fixed and becomes solid white after scrolling, one changing Tour-title H1, up to five portrait queue cards backed by featured images at least 1200 × 675 pixels, an accessible five-second cycle with a synchronized progress line, and Browse by destination before the Featured Tours grid. Hero eligibility does not depend on alt text; its repeated stage and preview images are decorative. The Tour catalogue presents its filters as a sticky vertical left rail from 1024px upward and as a sticky `Filters` control opening an accessible native-dialog drawer below that breakpoint; both presentations retain the same server-rendered GET filter contract. Group Travel has a dedicated catalogue-driven planner on its published Page and reuses the shared inquiry recovery and handoff flow. The global floating Chat on WhatsApp contact uses a concise general message, adding the current Tour title and canonical link on Tour pages, and remains separate from the saved-inquiry quote flow. Internal pages retain the complete utility bar and white primary header. The desktop header and mobile drawer share the production `holiday-kenya-safaris-logo.svg` lockup. About is available; Contact and four legal routes remain protected drafts until their missing project-level information is supplied.
 
 Menu management status (2026-08-03): the primary header/mobile hierarchy and footer links use native WordPress menu locations exposed under **Appearance > Site Menus**. One two-level Primary menu drives both responsive header surfaces, while a separate Footer menu controls footer links. The existing catalogue-aware output remains the safe fallback until an editor assigns a menu.
 
@@ -164,7 +164,7 @@ Build in this order:
 4. Sticky desktop quote panel and mobile in-flow/sticky quote actions.
 5. Related-Tour cards and query/override behavior.
 6. Complete canonical Tour detail template.
-7. Campaign landing-page template based on the existing Maasai Mara conversion structure.
+7. Campaign landing-page mapping onto the canonical Tour structure with Campaign-specific overrides.
 8. Tour catalogue and taxonomy archives.
 9. Destination page.
 10. Homepage.
@@ -184,11 +184,10 @@ Why this order:
 Acceptance:
 
 - Every template uses the shared design system and structured content.
-- Campaign pages inherit canonical Tour facts.
+- Campaign pages inherit the complete canonical Tour presentation and facts while retaining their approved overrides and navigation mode.
 - The canonical Tour page implements the approved title band, desktop thumbnail-rail/active-image/sticky-quote composition, six-thumbnail desktop rail cap with a `+N more` lightbox trigger, responsive full horizontal thumbnail strip, five-second visibility-aware gallery rotation, previous/next controls, tabs/disclosures, itinerary, and related-Tour flow within the Wayfinder system.
-- The permanent reference-site booking form is absent; every Tour quote action opens the approved HKS intake and WhatsApp handoff.
-- The current Maasai Mara prototype's strongest UX is preserved in Campaign mode without carrying over its old identity.
-- Group Travel navigation resolves to one canonical Page whose published Destination and Tour choices feed the same private inquiry and WhatsApp review service as Tour and Campaign pages.
+- The permanent reference-site booking form is absent; every structured quote action opens the approved HKS intake, review, and WhatsApp/email handoff.
+- Group Travel navigation resolves to one canonical Page whose published Destination and Tour choices feed the same private inquiry and review service as Tour, Campaign, and Advertorial pages.
 - Travel Guides navigation appears between Destinations and Group Travel, public page copy spells Holiday Kenya Safaris in full, and no author name appears in article cards or pages.
 - A Standard Guide may publish without a Primary Tour and uses **View this trip** when one is assigned. An Advertorial requires one published Primary Tour and sends all quote actions into the shared intake and review flow.
 - Sharing Destination never mixes Posts into Tour archive pagination, Tour navigation, or Tour counts. Related reading contains up to three Posts in manual, Destination, then Article Topic priority.
@@ -227,7 +226,7 @@ Actions:
 Acceptance:
 
 - Events fire once with correct parameters.
-- Campaign UTMs survive the journey to WhatsApp launch.
+- Campaign UTMs survive the journey to WhatsApp or email launch.
 - No fake reviews or inaccurate offer schema is published.
 - Backup and restore process is documented.
 
@@ -242,7 +241,7 @@ Test:
 - Desktop dropdown navigation, mobile drawer focus behavior, gallery lightbox, tabs, disclosures, itinerary expand/collapse, and related-Tour navigation.
 - Canonical Tour layouts at 360, 390, 768, 1024, 1280, and 1440px.
 - Sticky quote-panel stopping behavior before the footer and mobile safe-area spacing.
-- Form errors, WhatsApp cancellation, and back navigation.
+- Form errors, WhatsApp/email cancellation, and back navigation.
 - Slow connections and image failures.
 - Template editing by a non-developer.
 - Publish-as-approval behavior for Tours, Destinations, FAQs, public package notes, and assigned media.
@@ -266,7 +265,7 @@ Actions:
 - Complete all launch-blocking confirmations.
 - Freeze and back up staging.
 - Deploy through a documented process.
-- Verify SSL, forms, WhatsApp, analytics, indexing, redirects, and backups in production.
+- Verify SSL, forms, WhatsApp, email handoff, analytics, indexing, redirects, and backups in production.
 - Launch initial Facebook campaign pages.
 - Review inquiry quality and consultant feedback weekly.
 

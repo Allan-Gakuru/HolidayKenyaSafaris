@@ -11,7 +11,7 @@ The visual rhythm is:
 1. reveal the destination and the emotional payoff;
 2. make the route, timing, accommodation, transport, inclusions, and exclusions easy to scan;
 3. place a clear, informed quote action beside that proof;
-4. collect only the details needed to continue in WhatsApp.
+4. collect only the details needed to continue through WhatsApp or email.
 
 ## Interface modes
 
@@ -21,16 +21,16 @@ The homepage, global navigation, catalogue, destination pages, and canonical Tou
 
 ### Campaign mode
 
-Focused paid-ad pages may use the immersive, emotionally concentrated structure of the existing Maasai Mara prototype. Campaign mode can change the opening headline, supporting copy, featured hero image, and navigation density while inheriting canonical Tour facts.
+Focused paid-ad pages use the canonical Tour title band, gallery, facts, sticky quote panel, tabs/disclosures, itinerary, related-Tour system, and responsive behavior. Campaign mode can change the headline, supporting copy, first gallery image, optional starting price, and navigation density while inheriting canonical Tour facts and remaining media.
 
-Do not blend both modes into an indecisive hybrid on every page. Canonical Tour pages use the catalogue shell. Campaign pages earn the more dramatic opening.
+Campaign differentiation comes from ad-matched content and optional focused navigation, not a second visual composition.
 
 ### Travel Guides modes
 
 Travel Guides extends the Wayfinder system with two deliberate editorial compositions:
 
 - **Standard Guide / Field Guide:** reading-first, quiet, and practical. Use a maximum 720px reading measure, clear heading rhythm, restrained public taxonomy context, and an optional **View this trip** link to the Primary Tour. It has no persistent conversion control.
-- **Advertorial / Conversion Story:** emotionally focused but evidence-led. Use an early **Request quote on WhatsApp** action, a 680–720px reading column beside an approximately 320px sticky Primary Tour panel on desktop, and a mobile quote bar only after the opening action leaves view. Every quote action opens the shared intake and review flow.
+- **Advertorial / Conversion Story:** emotionally focused but evidence-led. Use an early **Request a quote** action, a 680–720px reading column beside an approximately 320px sticky Primary Tour panel on desktop, and a mobile quote bar only after the opening action leaves view. Every quote action opens the shared intake and review flow.
 
 Both formats omit author names and support an intentional text-led opening when no featured image is assigned. Neither format may invent urgency, availability, reviews, prices, or operational proof. Article cards and related modules link to Posts; the Primary Tour is a separate, explicit conversion relationship.
 
@@ -153,7 +153,7 @@ Use a readable day-by-day timeline with native headings and accessible disclosur
 
 ### Quote actions
 
-The canonical primary label is **Request quote on WhatsApp**. Opening the action reveals the intake form first; it must never silently send visitor data. Canonical Tour pages use a sticky desktop quote panel containing the optional Tour starting price, the primary action, and a short explanation of the tailored quote and message-review step. Campaign pages may override the linked Tour amount with their own optional starting price. They do not use a permanently visible long booking form. A mobile sticky action must respect safe areas and leave enough bottom padding that it cannot obscure content.
+The canonical primary label is **Request a quote**. Opening the action reveals the intake form first; it must never silently send visitor data. Tour and Campaign pages use the same sticky desktop quote panel containing the applicable starting price, the primary action, and a short explanation of the tailored quote and message-review step. A positive Campaign price overrides the linked Tour amount; a blank Campaign price inherits it when available. Neither page type uses a permanently visible long booking form. A mobile sticky action must respect safe areas and leave enough bottom padding that it cannot obscure content.
 
 The global floating **Chat on WhatsApp** control is a separate lightweight contact route. It stays at the bottom right, uses a concise general prefilled message and adds the current Tour title and canonical link on Tour pages, opens the official number in a new tab, and does not create an inquiry record. It must rise above the Tour and Campaign mobile quote bar, respect device safe areas, and never replace or visually compete with the structured page-level quote action.
 
@@ -161,7 +161,7 @@ The global floating **Chat on WhatsApp** control is a separate lightweight conta
 
 The canonical `/group-travel/` Page uses Catalogue mode and keeps one H1 in the standard title band. Follow it with a concise image-led introduction using media already assigned to published Tours, an inline planner, a three-step explanation, and the Page's editable supporting content.
 
-The planner reuses the shared HKS inquiry component rather than opening a second form. Destination and Tour are linked required selects; name, phone, preferred date or month, traveler count, consent, private recovery, message review, and visitor-controlled WhatsApp launch retain the global conversion behavior. The form must remain legible as one column on mobile and must not promise group capabilities that have not been confirmed.
+The planner reuses the shared HKS inquiry component rather than opening a second form. Destination and Tour are linked required selects; name, phone, preferred date or month, traveler count, consent, private recovery, message review, and visitor-controlled WhatsApp/email handoff retain the global conversion behavior. The form must remain legible as one column on mobile and must not promise group capabilities that have not been confirmed.
 
 ### Travel Guides
 
@@ -175,7 +175,7 @@ Related reading appears after either format and contains up to three Posts in a 
 
 ### Forms and dialogs
 
-Labels remain visible above their controls. Required fields are identified in text, not only by colour or an asterisk. Validation is inline, specific, focus-managed, and announced to assistive technology. The visitor reviews the generated message before choosing to launch WhatsApp.
+Labels remain visible above their controls. Required fields are identified in text, not only by colour or an asterisk. Validation is inline, specific, focus-managed, and announced to assistive technology. The visitor reviews the generated message before choosing to open WhatsApp or an email addressed to `info@holidaykenyasafaris.ke`.
 
 ### Trust and proof
 

@@ -23,6 +23,11 @@ final class QuoteBlock {
 	private const WHATSAPP_NUMBER = '254712965131';
 
 	/**
+	 * Official Holiday Kenya Safaris public email destination.
+	 */
+	private const EMAIL_RECIPIENT = 'info@holidaykenyasafaris.ke';
+
+	/**
 	 * Render a context-aware quote CTA.
 	 *
 	 * @param array<string, mixed> $attributes Block attributes.
@@ -60,6 +65,7 @@ final class QuoteBlock {
 			data-capture-endpoint="<?php echo esc_url( rest_url( InquiryRepository::REST_NAMESPACE . '/inquiries' ) ); ?>"
 			data-launch-endpoint="<?php echo esc_url( rest_url( InquiryRepository::REST_NAMESPACE . '/inquiries/' ) ); ?>"
 			data-whatsapp-number="<?php echo esc_attr( self::WHATSAPP_NUMBER ); ?>"
+			data-email-recipient="<?php echo esc_attr( self::EMAIL_RECIPIENT ); ?>"
 			data-tour-id="<?php echo esc_attr( $context['tour_id'] ); ?>"
 			data-tour-slug="<?php echo esc_attr( $context['tour_slug'] ); ?>"
 			data-article-id="<?php echo esc_attr( $context['article_id'] ?? 0 ); ?>"
@@ -91,7 +97,7 @@ final class QuoteBlock {
 						<?php else : ?>
 						<p class="hks-inquiry__eyebrow"><?php esc_html_e( 'Step 1 of 2 · Your trip', 'hks-core' ); ?></p>
 						<h2 id="<?php echo esc_attr( $instance_id ); ?>-title"><?php esc_html_e( 'Tell us about your trip', 'hks-core' ); ?></h2>
-						<p class="hks-inquiry__intro"><?php esc_html_e( 'Add the essentials below. You can check the full message before WhatsApp opens.', 'hks-core' ); ?></p>
+						<p class="hks-inquiry__intro"><?php esc_html_e( 'Add the essentials below. You can check the full request before choosing how to send it.', 'hks-core' ); ?></p>
 						<?php endif; ?>
 
 						<form class="hks-inquiry__form" data-hks-inquiry-form novalidate>
@@ -130,23 +136,24 @@ final class QuoteBlock {
 								<label for="<?php echo esc_attr( $instance_id ); ?>-consent"><?php esc_html_e( 'I agree that Holiday Kenya Safaris may use these details to respond to this quote request.', 'hks-core' ); ?></label>
 							</div>
 
-							<p class="hks-inquiry__save-note"><?php esc_html_e( 'We keep these details private so the team can respond even if WhatsApp does not open. Your message is sent only when you choose to send it in WhatsApp.', 'hks-core' ); ?></p>
+							<p class="hks-inquiry__save-note"><?php esc_html_e( 'We keep these details private so the team can respond even if your chosen app does not open. The website does not send the message for you.', 'hks-core' ); ?></p>
 							<p class="hks-inquiry__status" data-hks-inquiry-status role="status" aria-live="polite"></p>
-							<button class="hks-inquiry__submit" type="submit"><?php echo esc_html( $is_group_context ? __( 'Request group quote on WhatsApp', 'hks-core' ) : __( 'Review WhatsApp message', 'hks-core' ) ); ?></button>
+							<button class="hks-inquiry__submit" type="submit"><?php echo esc_html( $is_group_context ? __( 'Review group quote request', 'hks-core' ) : __( 'Review quote request', 'hks-core' ) ); ?></button>
 						</form>
 					</div>
 
 					<div class="hks-inquiry__review" data-hks-review-step hidden>
 						<p class="hks-inquiry__eyebrow"><?php esc_html_e( 'Step 2 of 2 · Review', 'hks-core' ); ?></p>
-						<h2><?php esc_html_e( 'Check your WhatsApp message', 'hks-core' ); ?></h2>
-						<p><?php esc_html_e( 'Review the message below, then open WhatsApp when you are ready to send it.', 'hks-core' ); ?></p>
+						<h2><?php esc_html_e( 'Check your quote request', 'hks-core' ); ?></h2>
+						<p><?php esc_html_e( 'Review the message below, then choose WhatsApp or email when you are ready to send it.', 'hks-core' ); ?></p>
 						<p class="hks-inquiry__reference"><span><?php esc_html_e( 'Request reference', 'hks-core' ); ?></span> <strong data-hks-reference></strong></p>
 						<pre class="hks-inquiry__message" data-hks-message tabindex="0"></pre>
-						<div class="hks-inquiry__actions">
+						<div class="hks-inquiry__actions" role="group" aria-label="<?php esc_attr_e( 'Quote request actions', 'hks-core' ); ?>">
 							<button class="hks-inquiry__back" type="button" data-hks-inquiry-back><?php esc_html_e( 'Edit details', 'hks-core' ); ?></button>
+							<a class="hks-inquiry__email-launch" data-hks-email-launch href="#"><?php esc_html_e( 'Open email to send', 'hks-core' ); ?></a>
 							<a class="hks-inquiry__launch" data-hks-whatsapp-launch href="#" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Open WhatsApp to send', 'hks-core' ); ?></a>
 						</div>
-						<p class="hks-inquiry__send-note"><?php esc_html_e( 'Opening WhatsApp is not confirmation that the message was sent.', 'hks-core' ); ?></p>
+						<p class="hks-inquiry__send-note"><?php esc_html_e( 'Opening WhatsApp or your email app is not confirmation that the message was sent.', 'hks-core' ); ?></p>
 					</div>
 				</div>
 			<?php if ( ! $is_group_context ) : ?>
@@ -236,7 +243,7 @@ final class QuoteBlock {
 			'campaign_label'     => '',
 			'page_type'          => 'group_travel',
 			'package_label'      => __( 'Choose a Tour to continue', 'hks-core' ),
-			'cta_label'          => __( 'Request group quote on WhatsApp', 'hks-core' ),
+			'cta_label'          => __( 'Request a group quote', 'hks-core' ),
 			'optional_questions' => array(),
 			'destinations'       => array_values( $destinations ),
 			'tours'              => $tours,
@@ -318,7 +325,7 @@ final class QuoteBlock {
 		}
 
 		if ( '' === $cta_label ) {
-			$cta_label = __( 'Request quote on WhatsApp', 'hks-core' );
+			$cta_label = __( 'Request a quote', 'hks-core' );
 		}
 
 		if ( '' === $package_label ) {

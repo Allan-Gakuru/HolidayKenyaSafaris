@@ -136,7 +136,7 @@ final class ArticleBlocks {
 		$content      = apply_filters( 'the_content', get_post_field( 'post_content', $post_id ) );
 		$tour_title   = $tour_valid ? self::text( get_the_title( $tour_id ) ) : '';
 		$tour_link    = $tour_valid ? get_permalink( $tour_id ) : '';
-		$quote        = $is_ad && $tour_valid ? do_blocks( '<!-- wp:hks/quote-cta {"location":"article_sidebar","label":"Request quote on WhatsApp"} /-->' ) : '';
+		$quote        = $is_ad && $tour_valid ? do_blocks( '<!-- wp:hks/quote-cta {"location":"article_sidebar","label":"Request a quote"} /-->' ) : '';
 
 		ob_start();
 		?>
@@ -148,7 +148,7 @@ final class ArticleBlocks {
 					<h1><?php echo esc_html( $title ); ?></h1>
 					<?php if ( $excerpt ) : ?><p class="hks-article-hero__promise"><?php echo esc_html( $excerpt ); ?></p><?php endif; ?>
 					<?php if ( $tour_valid && ! $is_ad ) : ?><a class="hks-button hks-article-hero__tour-link" data-hks-article-primary-tour-click data-hks-cta-location="article_hero" href="<?php echo esc_url( $tour_link ); ?>"><?php esc_html_e( 'View this trip', 'hks-wayfinder' ); ?> <span aria-hidden="true">→</span></a><?php endif; ?>
-					<?php if ( $is_ad && $quote ) : ?><button class="hks-button hks-article-hero__quote" type="button" data-hks-quote-proxy data-hks-article-early-quote data-hks-cta-location="article_hero"><?php esc_html_e( 'Request quote on WhatsApp', 'hks-wayfinder' ); ?></button><?php endif; ?>
+					<?php if ( $is_ad && $quote ) : ?><button class="hks-button hks-article-hero__quote" type="button" data-hks-quote-proxy data-hks-article-early-quote data-hks-cta-location="article_hero"><?php esc_html_e( 'Request a quote', 'hks-wayfinder' ); ?></button><?php endif; ?>
 				</div>
 				<?php if ( $image_id ) : ?><figure class="hks-article-hero__media"><?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'large', false, array( 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '(max-width: 800px) 100vw, 48vw' ) ) ); ?></figure><?php endif; ?>
 			</header>
@@ -157,12 +157,12 @@ final class ArticleBlocks {
 					<?php if ( $is_ad && $tour_valid && $tour_title ) : ?><p class="hks-article-intent"><?php echo esc_html( sprintf( __( 'Considering %s?', 'hks-wayfinder' ), $tour_title ) ); ?></p><?php endif; ?>
 					<?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Filtered through the_content. ?>
 					<?php if ( $tour_valid && ! $is_ad ) : ?><div class="hks-article-tour-cta"><p><?php esc_html_e( 'Ready to explore the route?', 'hks-wayfinder' ); ?></p><a class="hks-button" data-hks-article-primary-tour-click data-hks-cta-location="article_footer" href="<?php echo esc_url( $tour_link ); ?>"><?php esc_html_e( 'View this trip', 'hks-wayfinder' ); ?> <span aria-hidden="true">→</span></a></div><?php endif; ?>
-					<?php if ( $is_ad && $quote ) : ?><section class="hks-article-final-quote" aria-labelledby="hks-article-final-quote-title"><p class="hks-article-kicker"><?php esc_html_e( 'Your next step', 'hks-wayfinder' ); ?></p><h2 id="hks-article-final-quote-title"><?php esc_html_e( 'Turn the idea into a trip that fits your dates.', 'hks-wayfinder' ); ?></h2><p><?php esc_html_e( 'Share your preferred dates and group size. You will review the prepared message before WhatsApp opens.', 'hks-wayfinder' ); ?></p><button class="hks-button" type="button" data-hks-quote-proxy data-hks-cta-location="article_final"><?php esc_html_e( 'Request quote on WhatsApp', 'hks-wayfinder' ); ?></button></section><?php endif; ?>
+					<?php if ( $is_ad && $quote ) : ?><section class="hks-article-final-quote" aria-labelledby="hks-article-final-quote-title"><p class="hks-article-kicker"><?php esc_html_e( 'Your next step', 'hks-wayfinder' ); ?></p><h2 id="hks-article-final-quote-title"><?php esc_html_e( 'Turn the idea into a trip that fits your dates.', 'hks-wayfinder' ); ?></h2><p><?php esc_html_e( 'Share your preferred dates and group size. You will review the prepared message before choosing WhatsApp or email.', 'hks-wayfinder' ); ?></p><button class="hks-button" type="button" data-hks-quote-proxy data-hks-cta-location="article_final"><?php esc_html_e( 'Request a quote', 'hks-wayfinder' ); ?></button></section><?php endif; ?>
 				</div>
-				<?php if ( $is_ad && $quote ) : ?><aside class="hks-article-conversion-panel" aria-label="<?php esc_attr_e( 'Request a quote for this trip', 'hks-wayfinder' ); ?>"><p class="hks-article-kicker"><?php esc_html_e( 'Plan this trip', 'hks-wayfinder' ); ?></p><h2><?php echo esc_html( $tour_title ); ?></h2><p><?php esc_html_e( 'Share your dates and group details, review the prepared message, then choose whether to send it in WhatsApp.', 'hks-wayfinder' ); ?></p><?php echo $quote; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Registered HKS quote block. ?></aside><?php endif; ?>
+				<?php if ( $is_ad && $quote ) : ?><aside class="hks-article-conversion-panel" aria-label="<?php esc_attr_e( 'Request a quote for this trip', 'hks-wayfinder' ); ?>"><p class="hks-article-kicker"><?php esc_html_e( 'Plan this trip', 'hks-wayfinder' ); ?></p><h2><?php echo esc_html( $tour_title ); ?></h2><p><?php esc_html_e( 'Share your dates and group details, review the prepared message, then choose WhatsApp or email.', 'hks-wayfinder' ); ?></p><?php echo $quote; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Registered HKS quote block. ?></aside><?php endif; ?>
 			</div>
 			<?php self::render_related_posts( $post_id ); ?>
-			<?php if ( $is_ad && $quote ) : ?><div class="hks-article-mobile-quote" data-hks-article-mobile-quote aria-hidden="true"><button type="button" data-hks-quote-proxy data-hks-cta-location="article_mobile_sticky"><?php esc_html_e( 'Request quote on WhatsApp', 'hks-wayfinder' ); ?></button></div><?php endif; ?>
+			<?php if ( $is_ad && $quote ) : ?><div class="hks-article-mobile-quote" data-hks-article-mobile-quote aria-hidden="true"><button type="button" data-hks-quote-proxy data-hks-cta-location="article_mobile_sticky"><?php esc_html_e( 'Request a quote', 'hks-wayfinder' ); ?></button></div><?php endif; ?>
 		</article>
 		<?php
 		return (string) ob_get_clean();

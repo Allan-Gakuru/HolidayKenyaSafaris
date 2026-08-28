@@ -19,8 +19,8 @@ Facebook ad or other visit
 -> package details and trust information
 -> short quote form
 -> private WordPress inquiry record
--> visitor-reviewed WhatsApp message
--> visitor sends the message in WhatsApp
+-> visitor-reviewed quote message
+-> visitor chooses WhatsApp or email and sends the message in that app
 -> consultant confirms a quote and next steps
 ```
 
@@ -300,7 +300,7 @@ and default sharing imagery.
 Do not add a public value without its confirmation envelope. Never put passwords,
 API secrets, private keys, or customer details in HKS Settings.
 
-## 13. Quote inquiry and WhatsApp workflow
+## 13. Quote inquiry and message handoff workflow
 
 ### 13.1 What the visitor experiences
 
@@ -308,14 +308,14 @@ API secrets, private keys, or customer details in HKS Settings.
 2. An accessible form asks for name, phone, package, preferred date/month, and
    traveler count plus Tour-specific optional questions.
 3. The visitor consents to private recovery storage.
-4. **Save & review WhatsApp message** creates or refreshes a private inquiry.
+4. **Review quote request** creates or refreshes a private inquiry.
 5. The visitor reviews the exact message and request reference.
-6. **Open WhatsApp to send** launches WhatsApp.
-7. The visitor must still select Send inside WhatsApp.
+6. The visitor chooses **Open WhatsApp to send** or **Open email to send**.
+7. The visitor must still select Send inside the chosen app.
 
 On `/group-travel/`, the same form is shown inline. The visitor first selects a
 Destination and then one of its published Tours. The standard name, phone,
-date/month, traveler-count, consent, recovery, review, and WhatsApp steps remain
+date/month, traveler-count, consent, recovery, review, and handoff steps remain
 unchanged. Destination and Tour choices update automatically when catalogue
 records are published or their Destination assignments change.
 
@@ -371,10 +371,11 @@ Current events include:
 - `quote_form_error` without entered values;
 - `quote_inquiry_saved`;
 - `quote_form_complete` using a traveler-count bucket;
-- `whatsapp_launch`.
+- `whatsapp_launch`;
+- `email_launch`.
 
-`whatsapp_launch` is not a sent inquiry, qualified conversation, quote, or
-booking. Reconcile website activity with real consultant conversations and sales.
+Neither launch event is proof of a sent inquiry, qualified conversation, quote,
+or booking. Reconcile website activity with real consultant conversations and sales.
 
 Before enabling production trackers, approve the privacy/cookie behavior and add
 the real IDs through a reviewed integration. Never place names, phone numbers,
@@ -442,7 +443,7 @@ or repository documentation.
 7. Select **Deploy HEAD Commit**.
 8. Review deployment output for failures.
 9. Clear relevant WordPress/page/CDN caches.
-10. Smoke-test the homepage, Tours, one Campaign, an inquiry, and WhatsApp launch.
+10. Smoke-test the homepage, Tours, one Campaign, an inquiry, WhatsApp launch, and email handoff.
 
 Git deployment changes code only. Tours, Campaigns, settings, users, inquiries,
 media, and other WordPress content remain in the production database.
@@ -530,7 +531,7 @@ code, not a backup of live WordPress content or media.
 - Required and optional quote fields work on mobile and desktop.
 - A valid form creates one recoverable inquiry.
 - Retrying the same browser request does not create duplicates.
-- The WhatsApp message contains the correct package and reference.
+- The reviewed message contains the correct package and reference in both handoff options.
 - WordPress records Opened without claiming Sent.
 - Privacy notice, retention, deletion, and consent behavior are approved.
 - Administrator inquiry access is restricted.

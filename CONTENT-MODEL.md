@@ -58,7 +58,7 @@ Use native WordPress Posts for every page in the public **Travel Guides** sectio
 A Post has one of two public formats:
 
 - **Standard Guide**: reading-first editorial content. Its Primary Tour is optional. When set, the public action is **View this trip** and links to the canonical Tour.
-- **Advertorial**: a conversion-focused article. Publishing requires one linked, published Primary Tour. Its quote actions open the existing intake, consent, private recovery, message-review, and visitor-controlled WhatsApp launch flow.
+- **Advertorial**: a conversion-focused article. Publishing requires one linked, published Primary Tour. Its quote actions open the existing intake, consent, private recovery, message-review, and visitor-controlled WhatsApp/email handoff.
 
 The native title, excerpt, content, publication status, slug, and optional featured image remain the canonical editorial values. Travel Guides never render an author name. A missing featured image is a supported public state, not a validation error.
 
@@ -258,7 +258,7 @@ Exclusion fields may cover:
 
 - Featured FAQ relationship, because selected FAQs render publicly.
 
-The Tour title supplies the WhatsApp package label. The canonical CTA, quote-panel heading, supporting copy, and intake behavior are template-controlled. Do not expose Tour-level overrides until a public template actually consumes them.
+The Tour title supplies the canonical package label used in the reviewed message and email subject. The canonical CTA, quote-panel heading, supporting copy, and intake behavior are template-controlled. Do not expose Tour-level overrides until a public template actually consumes them.
 
 The Group Travel planner adds no Tour editor fields. It queries published Tours and their existing Destination assignments, uses the chosen Tour as the signed package context, and derives the private inquiry Destination from that Tour. Inquiry records may store `_hks_inquiry_route` and `_hks_inquiry_destination` for administrator triage; neither value is public or editor-maintained Tour data.
 
@@ -282,6 +282,8 @@ The title band, gallery mosaic, desktop tabs, mobile disclosures, itinerary beha
 - Campaign start date and Campaign end date.
 
 Campaigns inherit the linked Tour facts, itinerary, inclusions, exclusions, and default starting price. A positive Campaign price renders as `From KSh X per person` and overrides the Tour amount on that Campaign; blank or zero falls back to the linked Tour price when it is populated. Campaign dates record the planned campaign window only; they do not auto-publish, unpublish, expire, or alter either price. Campaign attribution and default indexing behavior are generated from the Campaign ID, slug, and template rather than requested as client fields.
+
+Campaigns use the canonical Tour title band, gallery, facts, sticky quote panel, tabs/disclosures, itinerary, important information, related Tours, mobile behavior, and final quote prompt. The Campaign headline replaces the page H1, supporting copy appears beneath it, and the Campaign featured image becomes the first active gallery image before the deduplicated linked-Tour gallery. Navigation mode remains Campaign-controlled.
 
 Use the Campaign price only when one figure can truthfully represent a per-person starting price and price is a useful selling point for that focused offer. Outside the explicitly authorized 24 July 2026 Ashford migration, never auto-convert a USD amount, copy a legacy Tour price, or seed an unconfirmed public price.
 

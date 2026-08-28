@@ -8,7 +8,7 @@
 | Parent/operator relationship | Disclose discreetly that it is operated by Ashford Tours & Travel |
 | Primary market | Local Kenyan travelers and local organizations |
 | Positioning | Attainable-premium: better planned and more trustworthy than bargain poster sellers, warmer and more reachable than formal luxury operators |
-| Initial commercial goal | Qualified WhatsApp inquiries generated from Facebook ads and high-intent website visits |
+| Initial commercial goal | Qualified quote inquiries generated from Facebook ads and high-intent website visits, handed off through WhatsApp or email |
 | Checkout | Not part of the initial build |
 
 ## Product Scope
@@ -73,15 +73,15 @@ Exclude by default:
 - Official Instagram: `https://www.instagram.com/holidaykenyasafaris/`.
 - Official Facebook: `https://www.facebook.com/people/Holiday-Kenya-Safaris/61591508593846/`.
 - A global floating **Chat on WhatsApp** control opens the official number with a concise general reach-out message; on canonical Tour pages it adds the current Tour title and canonical link. It does not collect answers or create a WordPress inquiry record; structured quote actions continue to use the intake, consent, recovery, review, and visitor-controlled launch flow.
-- Every quote CTA opens an intake form before WhatsApp.
+- Every structured quote CTA opens an intake form before the visitor chooses WhatsApp or email.
 - Required fields: name, phone, package, preferred travel date or month, and number of travelers.
-- The form constructs a prefilled WhatsApp message that the visitor chooses to send.
-- Selecting `Review WhatsApp message` stores the validated inquiry privately in WordPress before the review step, so the team can recover a lead when WhatsApp does not open or the visitor does not complete the handoff.
-- The form must disclose storage and require contact consent before saving. WordPress records `WhatsApp opened` only after the launch click and must never claim that the message was sent.
+- The form constructs one reviewed message that the visitor may open in WhatsApp or in an email addressed to `info@holidaykenyasafaris.ke`.
+- Selecting `Review quote request` stores the validated inquiry privately in WordPress before the review step, so the team can recover a lead when the chosen app does not open or the visitor does not complete the handoff.
+- The form must disclose storage and require contact consent before saving. WordPress records `WhatsApp opened` only after that launch click, analytics may record a non-sensitive `email_launch`, and neither action may be described as proof that the message was sent.
 - Campaign attribution and package context should be retained.
-- The canonical public CTA label is **Request quote on WhatsApp**.
+- The canonical public CTA label is **Request a quote**.
 - Canonical Tour pages use a persistent quote panel, not a permanently visible long booking form.
-- The published Group Travel page uses the same intake, consent, private recovery record, message review, and visitor-controlled WhatsApp launch. It adds linked Destination and Tour choices, then uses the standard date/month and traveler-count fields.
+- The published Group Travel page uses the same intake, consent, private recovery record, message review, and visitor-controlled WhatsApp/email handoff. It adds linked Destination and Tour choices, then uses the standard date/month and traveler-count fields.
 - Group Travel Destination and Tour choices come from published catalogue records. The selected Destination is derived from the chosen Tour when the inquiry is stored; no duplicate client-maintained Group Travel fields are added.
 
 ## Website Scope
@@ -104,16 +104,16 @@ Exclude by default:
 - Browse by destination appears directly below the hero, followed by the Featured Tours grid.
 - Catalogue-mode implementation must keep the Wayfinder identity, HKS copy, shared conversion service, compact media treatment, clear package context, and accessible interactions.
 - Standard website pages use light, browseable Catalogue mode.
-- Focused paid-ad pages use Campaign mode and may retain the immersive emotional structure of the existing Maasai Mara prototype.
+- Focused paid-ad pages use the canonical Tour title-band, gallery, facts, quote-panel, tabs/disclosures, itinerary, related-Tour, and responsive structure. Campaigns preserve ad congruency through editable headline, supporting copy, first gallery image, price override, and navigation mode.
 - Canonical Tour pages use a compact title and breadcrumb band followed by a desktop three-column composition: a vertical gallery rail capped at six visible thumbnails, one active image and a sticky quote panel. When more images exist, the sixth thumbnail shows a dark `+N more` overlay and opens the full gallery, preventing the rail from increasing the workspace row height. The active image has previous/next chevrons and advances every five seconds unless the visitor is interacting, the gallery is off-screen, the document is hidden or reduced motion is requested. Tour facts, accessible tabs, mobile disclosures, itinerary timeline, related Tours and the final quote prompt remain part of the canonical flow.
-- A conventional booking sidebar is replaced by an HKS quote panel whose **Request quote on WhatsApp** button opens the approved intake, consent, private recovery, message-review, and WhatsApp-launch flow.
+- A conventional booking sidebar is replaced by an HKS quote panel whose **Request a quote** button opens the approved intake, consent, private recovery, message-review, and visitor-controlled WhatsApp/email handoff.
 - Desktop navigation uses a utility bar plus product-led primary header. The utility bar carries a direct WhatsApp link with a prefilled, page-aware reach-out message; the primary header does not repeat it as a large button. Page-level quote actions still open the approved intake and recovery flow. Mobile uses a full-height accessible navigation drawer.
-- Approved top-level navigation is Home, Safaris, Coast & Stays, Destinations, Travel Guides, Group Travel, About, and Contact. The mobile drawer retains a clear Request quote on WhatsApp action.
+- Approved top-level navigation is Home, Safaris, Coast & Stays, Destinations, Travel Guides, Group Travel, About, and Contact. The mobile drawer retains a clear Request a quote action.
 - Travel Guides appears between Destinations and Group Travel in the primary navigation. Its canonical hub is `/travel-guides/`.
 - Header/mobile and footer links use native WordPress menu locations exposed as **Appearance > Site Menus**. One assigned two-level Primary menu drives both desktop dropdowns and mobile accordions; Footer has its own location. The prior catalogue-aware markup remains the fallback until an editor assigns a menu, preventing an empty header during rollout.
 - Kenya and international Tours are separated by the public Tour Scope taxonomy. Destination remains the geographic taxonomy used beneath either scope.
 - Destination is shared by Tours and native Posts so one place has one canonical Destination archive and one taxonomy sitemap entry. The Destination archive remains Tour-first: its main query, pagination, browse counts, and Tour navigation count published Tours only, while relevant Travel Guides appear in a separate section below the Tour catalogue.
-- Standard Guides use a contextual **View this trip** link when a Primary Tour is assigned and have no persistent quote action. Advertorials use early and repeated **Request quote on WhatsApp** actions that open the shared intake and review flow, plus a desktop sticky Tour panel and a mobile sticky quote action after the opening CTA leaves view.
+- Standard Guides use a contextual **View this trip** link when a Primary Tour is assigned and have no persistent quote action. Advertorials use early and repeated **Request a quote** actions that open the shared intake and review flow, plus a desktop sticky Tour panel and a mobile sticky quote action after the opening CTA leaves view.
 - Visa services, standalone transfers, and non-Tour service pages remain excluded.
 
 ## Brand
@@ -142,7 +142,7 @@ Prepare integrations for:
 - Meta Pixel.
 - Google Analytics 4.
 - Optionally Google Tag Manager if selected during implementation.
-- WhatsApp CTA and inquiry events.
+- Quote CTA, inquiry, WhatsApp-launch, and email-launch events.
 - UTM and campaign attribution.
 - Consent and privacy controls appropriate to the final tracking setup.
 

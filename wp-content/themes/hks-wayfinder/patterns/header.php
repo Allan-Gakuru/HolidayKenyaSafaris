@@ -247,9 +247,9 @@ $render_terms = static function ( array $terms ): void {
 		</nav>
 		<div class="hks-mobile-menu__footer">
 			<?php if ( $is_quote_context ) : ?>
-				<button class="hks-button hks-button--quote" type="button" data-hks-quote-proxy><?php esc_html_e( 'Request quote on WhatsApp', 'hks-wayfinder' ); ?></button>
+				<button class="hks-button hks-button--quote" type="button" data-hks-quote-proxy><?php esc_html_e( 'Request a quote', 'hks-wayfinder' ); ?></button>
 			<?php else : ?>
-				<a class="hks-button hks-button--quote" href="<?php echo esc_url( $tours_url ); ?>"><?php esc_html_e( 'Request quote on WhatsApp', 'hks-wayfinder' ); ?></a>
+				<a class="hks-button hks-button--quote" href="<?php echo esc_url( $tours_url ); ?>"><?php esc_html_e( 'Request a quote', 'hks-wayfinder' ); ?></a>
 			<?php endif; ?>
 			<nav class="hks-mobile-menu__social" aria-label="<?php echo esc_attr__( 'Follow Holiday Kenya Safaris', 'hks-wayfinder' ); ?>">
 				<a href="<?php echo esc_url( $facebook_url ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr__( 'Holiday Kenya Safaris on Facebook', 'hks-wayfinder' ); ?>">

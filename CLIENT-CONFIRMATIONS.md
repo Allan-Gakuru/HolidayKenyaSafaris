@@ -10,7 +10,7 @@ Use this file for project-level decisions such as contact details, legal wording
 | Market | Confirmed | Local Kenyan market |
 | Operator relationship | Confirmed | Disclose operation by Ashford Tours & Travel |
 | Identity direction | Confirmed | The Wayfinder |
-| Main conversion | Confirmed | WhatsApp quote inquiry |
+| Main conversion | Confirmed | Saved quote inquiry followed by a visitor-chosen WhatsApp or email handoff |
 | Product scope | Confirmed | Domestic safaris, excursions, coast, staycations, groups, relevant local special-interest products, and international holidays sourced from Ashford |
 | Default exclusions | Confirmed | Visa services, standalone transfers, and products that cannot be represented accurately as Tours |
 | Catalogue separation | Confirmed | Public Tour Scope taxonomy with `Kenya Tours` and `International Tours`; Destination remains the geographic taxonomy |
@@ -20,7 +20,7 @@ Use this file for project-level decisions such as contact details, legal wording
 | Editorial approval | Confirmed | Draft means private; publishing by an authorized editor approves public copy and assigned media without additional confirmation fields |
 | Content dates | Confirmed | Start and end dates exist only on Campaigns and do not automatically alter the optional Campaign price |
 | Required intake fields | Confirmed | Name, phone, package, preferred date/month, travelers |
-| Inquiry recovery storage | Confirmed | Save a private WordPress inquiry after explicit disclosure and contact consent, before showing the WhatsApp review step |
+| Inquiry recovery storage | Confirmed | Save a private WordPress inquiry after explicit disclosure and contact consent, before showing the channel-neutral review step |
 | Site scope | Confirmed | Home, catalogue, destinations, Tour pages, trust/about, contact, campaign template |
 | CMS direction | Confirmed | WordPress with templates and structured content management |
 

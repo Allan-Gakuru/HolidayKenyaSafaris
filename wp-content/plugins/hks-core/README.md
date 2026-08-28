@@ -16,11 +16,11 @@ Version `0.11.0` provides:
 - controlled public-field REST exposure; and
 - shared publication rules across SCF, REST, and programmatic saves;
 - an idempotent administrator importer for the original MVP, seven standard site Page drafts, and 40 protected catalogue drafts in four controlled batches; and
-- an explicitly consented private inquiry record, visitor review, and WhatsApp handoff.
+- an explicitly consented private inquiry record, visitor review, and WhatsApp/email handoff.
 
 Campaigns link to exactly one Tour and may change messaging, presentation, and their own optional selling price, never the linked Tour itinerary, logistics, inclusions, or policy facts. Drafts remain saveable while incomplete. Public or scheduled records must pass the publication rules.
 
-Travel Guide Posts expose only public format, Primary Tour, Related Travel Guides, Destination, and Article Topic controls. Standard Guides may omit the Primary Tour. Advertorials require one published Primary Tour and reuse the existing intake-to-WhatsApp flow; they never add a direct launch shortcut. Featured images remain optional and author identity is not part of the public Travel Guides model.
+Travel Guide Posts expose only public format, Primary Tour, Related Travel Guides, Destination, and Article Topic controls. Standard Guides may omit the Primary Tour. Advertorials require one published Primary Tour and reuse the existing intake-to-review-to-WhatsApp-or-email flow; they never add a direct launch shortcut. Featured images remain optional and author identity is not part of the public Travel Guides model.
 
 ## Structure
 
@@ -28,7 +28,7 @@ Travel Guide Posts expose only public format, Primary Tour, Related Travel Guide
 hks-core.php          Plugin entry point, dependency declaration, and versions
 src/Content/          Post types, taxonomies, and deferred rewrite handling
 src/Fields/           SCF definitions, controlled choices, and publication rules
-src/Conversion/       Private inquiry capture, administration, analytics events, and WhatsApp handoff
+src/Conversion/       Private inquiry capture, administration, analytics events, and WhatsApp/email handoff
 src/Analytics/        Reserved for configured vendor integrations
 acf-json/             Reserved; current field groups are registered in code
 blocks/               Server-rendered quote CTA and future constrained blocks
