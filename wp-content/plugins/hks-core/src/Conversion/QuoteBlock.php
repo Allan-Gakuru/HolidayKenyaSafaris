@@ -136,7 +136,7 @@ final class QuoteBlock {
 								<label for="<?php echo esc_attr( $instance_id ); ?>-consent"><?php esc_html_e( 'I agree that Holiday Kenya Safaris may use these details to respond to this quote request.', 'hks-core' ); ?></label>
 							</div>
 
-							<p class="hks-inquiry__save-note"><?php esc_html_e( 'We keep these details private so the team can respond even if your chosen app does not open. The website does not send the message for you.', 'hks-core' ); ?></p>
+							<p class="hks-inquiry__save-note"><?php esc_html_e( 'When you review, we privately save these details and email them to our team so they can respond. You still choose whether to send the prepared message through WhatsApp or your email app.', 'hks-core' ); ?></p>
 							<p class="hks-inquiry__status" data-hks-inquiry-status role="status" aria-live="polite"></p>
 							<button class="hks-inquiry__submit" type="submit"><?php echo esc_html( $is_group_context ? __( 'Review group quote request', 'hks-core' ) : __( 'Review quote request', 'hks-core' ) ); ?></button>
 						</form>

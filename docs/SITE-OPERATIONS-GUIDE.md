@@ -19,6 +19,7 @@ Facebook ad or other visit
 -> package details and trust information
 -> short quote form
 -> private WordPress inquiry record
+-> automatic notification to the privately configured team recipients
 -> visitor-reviewed quote message
 -> visitor chooses WhatsApp or email and sends the message in that app
 -> consultant confirms a quote and next steps
@@ -307,8 +308,10 @@ API secrets, private keys, or customer details in HKS Settings.
 1. The visitor selects a quote CTA.
 2. An accessible form asks for name, phone, package, preferred date/month, and
    traveler count plus Tour-specific optional questions.
-3. The visitor consents to private recovery storage.
-4. **Review quote request** creates or refreshes a private inquiry.
+3. The visitor consents to private recovery storage and team notification.
+4. **Review quote request** creates or refreshes a private inquiry and emails its
+   validated details and reference to the recipients configured under **HKS Settings
+   → Conversion**.
 5. The visitor reviews the exact message and request reference.
 6. The visitor chooses **Open WhatsApp to send** or **Open email to send**.
 7. The visitor must still select Send inside the chosen app.
@@ -330,7 +333,7 @@ quote form or Group Travel planner.
 1. Sign in as an Administrator.
 2. Open **Tours -> Quote inquiries**.
 3. Review the reference, name, phone, package, Destination where available,
-   travel plan, capture time, and WhatsApp state.
+   travel plan, capture time, team-email acceptance or failure, and WhatsApp state.
 4. Open the record for the inquiry route, optional answers, and campaign
    attribution. **Group Travel page** identifies requests made through the
    dedicated planner.
@@ -340,6 +343,12 @@ quote form or Group Travel planner.
 **Opened** means only that the website launched WhatsApp. It does not prove that
 the visitor sent the message. **Not recorded** means the recovery record exists
 but no WhatsApp launch was recorded.
+
+**Team email accepted** means WordPress handed the internal notification to the
+configured mailer. Confirm delivery or diagnose failures under **Settings → Fluent
+SMTP → Email Logs**. Manage recipients under **HKS Settings → Conversion → Quote
+notification recipients**; add one valid email per row. Addresses saved there are
+private operational settings and must not be copied into page content.
 
 The MVP inquiry screen is a read-only recovery view, not a sales CRM. Track quote,
 follow-up, booking, and revenue status through the operator's approved sales
@@ -443,7 +452,7 @@ or repository documentation.
 7. Select **Deploy HEAD Commit**.
 8. Review deployment output for failures.
 9. Clear relevant WordPress/page/CDN caches.
-10. Smoke-test the homepage, Tours, one Campaign, an inquiry, WhatsApp launch, and email handoff.
+10. Smoke-test the homepage, Tours, one Campaign, an inquiry, its Fluent SMTP team notification, WhatsApp launch, and visitor email handoff.
 
 Git deployment changes code only. Tours, Campaigns, settings, users, inquiries,
 media, and other WordPress content remain in the production database.
@@ -474,7 +483,7 @@ Before updating WordPress, Secure Custom Fields, PHP, HKS Core, or HKS Wayfinder
 2. Record current versions and the deployed Git SHA.
 3. Update staging first when staging is available.
 4. Verify the editor fields, Tour publishing, Campaign linking, quote form,
-   inquiry records, and WhatsApp launch.
+   inquiry records, Fluent SMTP team notification, and WhatsApp launch.
 5. Update production and repeat the smoke test.
 
 Do not edit HKS theme or plugin files through the WordPress Plugin File Editor or

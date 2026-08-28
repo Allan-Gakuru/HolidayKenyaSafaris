@@ -21,7 +21,9 @@ FILES = {
     "module": "src/Conversion/Module.php",
     "token": "src/Conversion/FormToken.php",
     "repository": "src/Conversion/InquiryRepository.php",
+    "notification": "src/Conversion/InquiryNotification.php",
     "admin": "src/Conversion/InquiryAdmin.php",
+    "fields": "src/Fields/FieldGroups.php",
     "renderer": "src/Conversion/QuoteBlock.php",
     "block": "blocks/quote-cta/block.json",
     "script": "assets/js/inquiry.js",
@@ -47,7 +49,7 @@ def main() -> int:
             errors.append(f"missing {relative}: {error}")
             content[label] = ""
 
-    require(errors, "plugin bootstrap", content["bootstrap"], ["Version:           0.12.0", "define( 'HKS_CORE_VERSION', '0.12.0' )"])
+    require(errors, "plugin bootstrap", content["bootstrap"], ["Version:           0.12.1", "define( 'HKS_CORE_VERSION', '0.12.1' )"])
     require(
         errors,
         "client-ready copy migration",
@@ -100,9 +102,37 @@ def main() -> int:
             "_hks_whatsapp_opened_at",
             "'contact_consent'",
             "'website'",
+            "InquiryNotification::send",
         ],
     )
-    require(errors, "restricted admin", content["admin"], ["Quote request details", "administrator access", "It does not prove"])
+    require(
+        errors,
+        "internal inquiry notification",
+        content["notification"],
+        [
+            "hks_settings_inquiry_notification_recipients",
+            "get_field( self::RECIPIENTS_FIELD, 'hks_settings' )",
+            "sanitize_email",
+            "array_unique",
+            "wp_mail",
+            "_hks_inquiry_notification_hash",
+            "_hks_inquiry_notification_sent_at",
+            "_hks_inquiry_notification_failed_at",
+            "Review quote request",
+        ],
+    )
+    require(
+        errors,
+        "private notification recipient settings",
+        content["fields"],
+        [
+            "hks_settings_inquiry_notification_recipients",
+            "Quote notification recipients",
+            "Add notification email",
+            "Leave all rows empty to disable notifications",
+        ],
+    )
+    require(errors, "restricted admin", content["admin"], ["Quote request details", "administrator access", "Team email accepted", "No quote notification recipients are configured", "does not prove"])
     require(
         errors,
         "quote renderer",
@@ -111,7 +141,7 @@ def main() -> int:
             "254712965131",
             "info@holidaykenyasafaris.ke",
             "Review quote request",
-            "We keep these details private",
+            "privately save these details and email them to our team",
             "choose WhatsApp or email",
             "Open email to send",
             "data-hks-email-launch",

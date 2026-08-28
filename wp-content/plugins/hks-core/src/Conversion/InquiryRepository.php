@@ -91,7 +91,7 @@ final class InquiryRepository {
 	}
 
 	/**
-	 * Validate and store an inquiry before the WhatsApp review step.
+	 * Validate, store, and notify the team before the message review step.
 	 *
 	 * @param \WP_REST_Request $request REST request.
 	 * @return \WP_REST_Response|\WP_Error
@@ -205,6 +205,7 @@ final class InquiryRepository {
 				),
 			)
 		);
+		InquiryNotification::send( $inquiry_id, $reference, $context, $values );
 
 		return $this->response( $inquiry_id, $reference, $context['package_label'], $status );
 	}

@@ -387,6 +387,20 @@ final class FieldGroups {
 
 			self::tab( 'settings_tab_conversion', __( 'Conversion', 'hks-core' ) ),
 			self::public_setting( 'default_cta', __( 'Default quote CTA wording', 'hks-core' ), 'text' ),
+			self::field(
+				'settings_inquiry_notification_recipients',
+				__( 'Quote notification recipients', 'hks-core' ),
+				'hks_settings_inquiry_notification_recipients',
+				'repeater',
+				array(
+					'layout'       => 'table',
+					'button_label' => __( 'Add notification email', 'hks-core' ),
+					'instructions' => __( 'Private operational addresses that receive validated quote details and the request reference. Add one address per row. Leave all rows empty to disable notifications.', 'hks-core' ),
+					'sub_fields'   => array(
+						self::field( 'settings_inquiry_notification_email', __( 'Email address', 'hks-core' ), 'email', 'email', array( 'required' => 1 ) ),
+					),
+				)
+			),
 
 			self::tab( 'settings_tab_legal', __( 'Legal and policy pages', 'hks-core' ) ),
 			self::public_setting( 'privacy_page', __( 'Privacy policy page', 'hks-core' ), 'post_object', $page_args ),

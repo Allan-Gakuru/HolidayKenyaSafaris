@@ -2,7 +2,7 @@
 
 ## Conversion Funnel
 
-`Facebook ad -> package or campaign page -> Request a quote -> intake form -> private WordPress recovery record -> reviewed message -> WhatsApp or email handoff -> consultant response -> quote -> follow-up -> booking`
+`Facebook ad -> package or campaign page -> Request a quote -> intake form -> private WordPress recovery record and team notification -> reviewed message -> WhatsApp or email handoff -> consultant response -> quote -> follow-up -> booking`
 
 Other channels may enter the same system:
 
@@ -14,7 +14,7 @@ Other channels may enter the same system:
 
 The Group Travel route enters the same system through an inline planner:
 
-`Group Travel page -> Destination -> matching Tour -> dates and group size -> consent and private recovery record -> reviewed message -> WhatsApp or email handoff -> consultant response`
+`Group Travel page -> Destination -> matching Tour -> dates and group size -> consent, private recovery record and team notification -> reviewed message -> WhatsApp or email handoff -> consultant response`
 
 Travel Guides add two intentional paths:
 
@@ -105,9 +105,11 @@ Please confirm availability, the current KSh price, what is included, and the ne
 
 Requirements:
 
-- Explain that selecting `Review quote request` stores the validated answers privately in WordPress for lead recovery.
+- Explain that selecting `Review quote request` stores the validated answers privately in WordPress and emails them to the configured internal recipients for follow-up.
 - Require contact consent before creating the recovery record.
 - Store inquiry records outside public queries, search, REST responses, and analytics, with administrator-only access.
+- Store internal recipient addresses only in the private HKS Settings options record. Never expose them in public markup, REST responses, analytics, or the public repository.
+- Deduplicate internal notifications for an unchanged idempotent request. Record mailer acceptance or failure privately, without blocking the visitor's WhatsApp/email handoff.
 - Encode message text safely.
 - Validate fields before offering either handoff.
 - Let the user choose **Open WhatsApp to send** or **Open email to send** after reviewing the same message.

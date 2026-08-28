@@ -9,10 +9,13 @@ copy, Campaign label, and official Holiday Kenya Safaris WhatsApp and email dest
 1. The quote CTA opens an accessible modal rather than a messaging app.
 2. The visitor completes the required name, phone, package, preferred date/month,
    and traveler fields plus only the optional questions enabled for that Tour.
-3. The form explains that WordPress will save the request for recovery and requires
-   contact consent.
+3. The form explains that WordPress will save the request privately and notify the
+   configured team recipients, then requires contact consent.
 4. Selecting **Review quote request** validates the form and creates or
-   refreshes an idempotent private inquiry.
+   refreshes an idempotent private inquiry, creates its reference, and sends the
+   validated details to every address configured under **HKS Settings → Conversion →
+   Quote notification recipients**. An identical retry is not emailed twice; revised
+   answers may generate a new notification.
 5. The visitor reviews the exact message and request reference.
 6. **Open WhatsApp to send** opens `wa.me/254712965131`; **Open email to send** opens
    the visitor's configured email app with `info@holidaykenyasafaris.ke` as recipient,
@@ -36,6 +39,11 @@ never `message sent`.
   them.
 - A retry with the same request key refreshes the same record instead of creating a
   duplicate.
+- Notification recipients are repeatable private HKS Settings values. They never
+  appear in public markup, REST responses, analytics, or source-controlled defaults.
+- WordPress records whether its configured mailer accepted or rejected the team
+  notification. Fluent SMTP's Email Logs remain the delivery-troubleshooting record;
+  notification failure does not remove the visitor's WhatsApp/email handoff choices.
 
 ## Event contract
 
@@ -60,12 +68,16 @@ After cPanel deployment, confirm:
 
 1. the modal works on a published Tour and Campaign;
 2. invalid and expired requests fail without creating a record;
-3. one valid submission appears under **Tours → Quote inquiries**;
-4. editing and resaving the same browser request updates rather than duplicates it;
+3. add the approved internal recipients under **HKS Settings → Conversion**, then
+   confirm one valid submission appears under **Tours → Quote inquiries** and one
+   notification appears in Fluent SMTP's Email Logs for every configured recipient;
+4. replaying the same unchanged request does not create another notification, while
+   editing an answer and reviewing again does;
 5. the review message contains the correct package and request reference;
 6. WhatsApp opens with encoded text and the record changes only to `Opened`;
-7. the email app opens with the confirmed recipient, subject, and exact reviewed body; and
-8. no inquiry answer appears in REST responses or `dataLayer`.
+7. the visitor's email app opens with the confirmed public recipient, subject, and
+   exact reviewed body; and
+8. no inquiry answer or internal recipient appears in REST responses or `dataLayer`.
 
 Before production launch, approve the privacy notice, retention period, deletion
 process, access roles, cookie/analytics consent, and tracking IDs.

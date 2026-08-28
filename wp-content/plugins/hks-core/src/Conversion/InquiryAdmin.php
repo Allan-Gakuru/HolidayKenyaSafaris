@@ -80,6 +80,8 @@ final class InquiryAdmin {
 			__( 'Accommodation preference', 'hks-core' ) => $this->meta( $post->ID, 'accommodation_preference' ),
 			__( 'Budget range', 'hks-core' )             => $this->meta( $post->ID, 'budget_range' ),
 			__( 'Consent recorded (UTC)', 'hks-core' )   => $this->meta( $post->ID, 'consent_at' ),
+			__( 'Team email accepted (UTC)', 'hks-core' )  => $this->meta( $post->ID, 'notification_sent_at' ),
+			__( 'Team email failed (UTC)', 'hks-core' )    => $this->meta( $post->ID, 'notification_failed_at' ),
 			__( 'WhatsApp opened (UTC)', 'hks-core' )    => $this->meta( $post->ID, 'whatsapp_opened_at', true ),
 		);
 		?>
@@ -108,7 +110,7 @@ final class InquiryAdmin {
 			<p><?php esc_html_e( 'No campaign attribution was captured.', 'hks-core' ); ?></p>
 		<?php endif; ?>
 
-		<p><strong><?php esc_html_e( 'Status note:', 'hks-core' ); ?></strong> <?php esc_html_e( '“WhatsApp opened” records only that the website launched WhatsApp. It does not prove that the visitor sent the message.', 'hks-core' ); ?></p>
+		<p><strong><?php esc_html_e( 'Status note:', 'hks-core' ); ?></strong> <?php esc_html_e( '“Team email accepted” means WordPress handed the notification to the configured mailer; use Fluent SMTP logs to confirm delivery. “WhatsApp opened” records only that the website launched WhatsApp and does not prove the visitor sent the message.', 'hks-core' ); ?></p>
 		<?php
 	}
 
@@ -200,6 +202,17 @@ final class InquiryAdmin {
 		}
 		?>
 		<div class="notice notice-warning"><p><?php esc_html_e( 'Quote inquiries contain personal data. Restrict administrator access and approve the privacy notice, retention period, deletion process, and consent behavior before production launch.', 'hks-core' ); ?></p></div>
+		<?php if ( ! InquiryNotification::recipients() ) : ?>
+			<div class="notice notice-error"><p>
+				<?php
+				printf(
+					/* translators: %s: private HKS Settings URL. */
+					wp_kses_post( __( 'No quote notification recipients are configured. Add at least one under <a href="%s">HKS Settings → Conversion</a>.', 'hks-core' ) ),
+					esc_url( admin_url( 'admin.php?page=hks-settings' ) )
+				);
+				?>
+			</p></div>
+		<?php endif; ?>
 		<?php
 	}
 
