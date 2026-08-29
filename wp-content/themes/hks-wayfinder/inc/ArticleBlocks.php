@@ -145,10 +145,19 @@ final class ArticleBlocks {
 		?>
 		<article class="hks-article hks-article--<?php echo esc_attr( $is_ad ? 'advertorial' : 'guide' ); ?>" data-hks-article-id="<?php echo esc_attr( (string) $post_id ); ?>" data-hks-article-format="<?php echo esc_attr( $is_ad ? 'advertorial' : 'guide' ); ?>" data-hks-primary-tour-id="<?php echo esc_attr( (string) ( $tour_valid ? $tour_id : 0 ) ); ?>">
 			<header class="hks-article-hero<?php echo $image_id ? ' hks-article-hero--with-image' : ''; ?>">
+				<?php if ( $is_ad ) : ?>
+					<div class="hks-article-hero__heading">
+						<?php self::breadcrumbs( array( __( 'Travel Guides', 'hks-wayfinder' ) => home_url( '/travel-guides/' ), $title => '' ) ); ?>
+						<?php if ( $topics || $destinations ) : ?><p class="hks-article-kicker"><?php echo esc_html( implode( ' · ', array_slice( array_merge( $destinations, $topics ), 0, 2 ) ) ); ?></p><?php endif; ?>
+						<h1><?php echo esc_html( $title ); ?></h1>
+					</div>
+				<?php endif; ?>
 				<div class="hks-article-hero__copy">
-					<?php self::breadcrumbs( array( __( 'Travel Guides', 'hks-wayfinder' ) => home_url( '/travel-guides/' ), $title => '' ) ); ?>
-					<?php if ( $topics || $destinations ) : ?><p class="hks-article-kicker"><?php echo esc_html( implode( ' · ', array_slice( array_merge( $destinations, $topics ), 0, 2 ) ) ); ?></p><?php endif; ?>
-					<h1><?php echo esc_html( $title ); ?></h1>
+					<?php if ( ! $is_ad ) : ?>
+						<?php self::breadcrumbs( array( __( 'Travel Guides', 'hks-wayfinder' ) => home_url( '/travel-guides/' ), $title => '' ) ); ?>
+						<?php if ( $topics || $destinations ) : ?><p class="hks-article-kicker"><?php echo esc_html( implode( ' · ', array_slice( array_merge( $destinations, $topics ), 0, 2 ) ) ); ?></p><?php endif; ?>
+						<h1><?php echo esc_html( $title ); ?></h1>
+					<?php endif; ?>
 					<?php if ( $excerpt ) : ?><p class="hks-article-hero__promise"><?php echo esc_html( $excerpt ); ?></p><?php endif; ?>
 					<?php echo $toc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Generated and escaped by render_article_toc(). ?>
 					<?php if ( $tour_valid && ! $is_ad ) : ?><a class="hks-button hks-article-hero__tour-link" data-hks-article-primary-tour-click data-hks-cta-location="article_hero" href="<?php echo esc_url( $tour_link ); ?>"><?php esc_html_e( 'View this trip', 'hks-wayfinder' ); ?> <span aria-hidden="true">→</span></a><?php endif; ?>

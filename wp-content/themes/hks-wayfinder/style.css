@@ -3987,7 +3987,14 @@ body:not(.home) .wp-site-blocks > main {
 
 /* Advertorials use a tighter editorial scale than Standard Guides. */
 .hks-article--advertorial .hks-article-hero {
+	column-gap: clamp(2rem, 6vw, 6rem);
 	padding-top: clamp(1rem, 2.5vw, 2rem);
+	row-gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.hks-article--advertorial .hks-article-hero__heading {
+	grid-column: 1 / -1;
+	min-width: 0;
 }
 
 .hks-article--advertorial .hks-article-hero h1 {
@@ -4051,8 +4058,8 @@ body:not(.home) .wp-site-blocks > main {
 
 @media (min-width: 48.0625rem) {
 	.hks-article--advertorial .hks-article-hero__media {
-		align-self: stretch;
-		aspect-ratio: auto;
+		align-self: start;
+		aspect-ratio: 4 / 3;
 	}
 }
 
@@ -4128,7 +4135,8 @@ body:not(.home) .wp-site-blocks > main {
 	.hks-article-hero__copy { grid-row: 2; }
 	.hks-article--advertorial .hks-article-hero { padding-block: 1rem 2rem; }
 	.hks-article--advertorial .hks-article-hero__media { display: none; }
-	.hks-article--advertorial .hks-article-hero__copy { grid-row: 1; }
+	.hks-article--advertorial .hks-article-hero__heading { grid-column: 1; grid-row: 1; }
+	.hks-article--advertorial .hks-article-hero__copy { grid-row: 2; }
 	.hks-article-grid,
 	.hks-article-related .hks-article-grid,
 	.hks-destination-guides .hks-article-grid { grid-template-columns: minmax(0, 1fr); }

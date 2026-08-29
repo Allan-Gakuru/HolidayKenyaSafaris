@@ -39,6 +39,7 @@ Exclude by default:
 - Seed Article Topics for Destination Guides, Planning & FAQs, Travel Inspiration, Comparisons, and Holiday Kenya Safaris News. Comparisons cover useful travel choices and trip formats.
 - Support a reading-first Standard Guide and a conversion-focused Advertorial. A Standard Guide may link one Primary Tour; an Advertorial must link one published Primary Tour.
 - Advertorial heroes place a fully expanded **What we’ll cover** outline immediately below the excerpt and before the opening quote action. It links every rendered body H2 and H3, nests H3 links beneath the preceding H2, assigns deterministic unique IDs where needed, and remains a simple non-sticky article aid with no active-section state.
+- On desktop, the Advertorial breadcrumbs, context and H1 span the full hero width. The excerpt, outline and opening quote action sit beneath them beside a fixed 4:3 featured image. On mobile, the image remains hidden and the heading precedes the article-aid content in one column.
 - Show no author name on Travel Guides pages, cards, archives, or related-guide modules. Featured images remain optional and missing imagery must produce an intentional text-led design.
 - Related reading contains blog posts only: up to three editor-selected Posts first, then Posts sharing the Destination, then Posts sharing the Article Topic.
 - Treat photographs uploaded or assigned by an authorized editor and used on published content as approved for the website.

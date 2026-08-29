@@ -277,7 +277,6 @@ def check_theme() -> None:
         ".hks-article-toc {",
         ".hks-article-toc__list ul {",
         ".hks-article-content :is(h2, h3)[id] { scroll-margin-top:",
-        ".hks-article--advertorial .hks-article-hero__media {\n\t\talign-self: stretch;",
         ".hks-article--advertorial .hks-article-hero__media { display: none; }",
     )
     toc_style_start = style.find(".hks-article-toc {")
@@ -285,6 +284,21 @@ def check_theme() -> None:
     toc_style = style[toc_style_start:toc_style_end]
     if "position: sticky" in toc_style or "display: none" in toc_style:
         ERRORS.append("Advertorial article outline styling: TOC must remain fully expanded in normal flow")
+    require(
+        "Advertorial full-width desktop title",
+        article_blocks,
+        "hks-article-hero__heading",
+        "<?php if ( ! $is_ad ) : ?>",
+    )
+    require(
+        "Advertorial full-width desktop title styling",
+        style,
+        ".hks-article--advertorial .hks-article-hero__heading {",
+        "grid-column: 1 / -1;",
+        "align-self: start;\n\t\taspect-ratio: 4 / 3;",
+        ".hks-article--advertorial .hks-article-hero__heading { grid-column: 1; grid-row: 1; }",
+        ".hks-article--advertorial .hks-article-hero__copy { grid-row: 2; }",
+    )
     require(
         "Advertorial desktop quote reassurances",
         article_blocks,
