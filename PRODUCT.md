@@ -10,7 +10,7 @@ Holiday Kenya Safaris serves Kenyan residents, local organizations, and locally 
 
 ## Product Purpose
 
-The website turns local-market interest in Kenya and international travel into qualified quote conversations. It combines a broad, image-led travel catalogue with focused Campaign landing pages. Visitors can discover a relevant trip, understand its route and practical details, inspect the available proof, see an editable KSh starting price when one is available, provide the minimum details needed for an accurate quote, consent to private capture and team notification, review one prepared message, and knowingly continue through WhatsApp or email. Success is a traceable, well-qualified human inquiry, not an online checkout or an unqualified app launch.
+The website turns local-market interest in Kenya and international travel into qualified quote conversations. It combines a broad, image-led travel catalogue with focused Campaign landing pages. Visitors can discover a relevant trip, understand its route and practical details, inspect the available proof, see an editable KSh starting price when one is available, provide the minimum details needed for an accurate quote, review one prepared message, and knowingly continue through WhatsApp or email. Success is a traceable, well-qualified human inquiry, not an online checkout or an unqualified app launch.
 
 ## Brand Personality
 

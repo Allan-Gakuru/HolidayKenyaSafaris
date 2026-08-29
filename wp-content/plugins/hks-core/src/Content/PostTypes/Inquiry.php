@@ -32,7 +32,7 @@ final class Inquiry {
 			self::POST_TYPE,
 			array(
 				'labels'              => self::labels(),
-				'description'         => __( 'Private quote-request recovery records captured with visitor consent before message handoff.', 'hks-core' ),
+				'description'         => __( 'Private quote-request recovery records captured before message handoff.', 'hks-core' ),
 				'public'              => false,
 				'hierarchical'        => false,
 				'exclude_from_search' => true,

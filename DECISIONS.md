@@ -72,16 +72,16 @@ Exclude by default:
 - Official public email: `info@holidaykenyasafaris.ke`.
 - Official Instagram: `https://www.instagram.com/holidaykenyasafaris/`.
 - Official Facebook: `https://www.facebook.com/people/Holiday-Kenya-Safaris/61591508593846/`.
-- A global floating **Chat on WhatsApp** control opens the official number with a concise general reach-out message; on canonical Tour pages it adds the current Tour title and canonical link. It does not collect answers or create a WordPress inquiry record; structured quote actions continue to use the intake, consent, recovery, review, and visitor-controlled launch flow.
+- A global floating **Chat on WhatsApp** control opens the official number with a concise general reach-out message; on canonical Tour pages it adds the current Tour title and canonical link. It does not collect answers or create a WordPress inquiry record; structured quote actions continue to use the intake, recovery, review, and visitor-controlled launch flow.
 - Every structured quote CTA opens an intake form before the visitor chooses WhatsApp or email.
 - Required fields: name, phone, package, preferred travel date or month, and number of travelers.
 - The form constructs one reviewed message that the visitor may open in WhatsApp or in an email addressed to `info@holidaykenyasafaris.ke`.
 - Selecting `Review quote request` stores the validated inquiry privately in WordPress, creates its `HKS-######` reference, and sends the details to the private repeatable notification-recipient list under **HKS Settings → Conversion** before the review step. Identical retries are deduplicated; revised answers may trigger a new notification.
-- The form must disclose private storage and team notification email, then require contact consent before saving. A team-notification timestamp means WordPress handed the email to its configured mailer; Fluent SMTP logs remain the delivery record. WordPress records `WhatsApp opened` only after that launch click, analytics may record a non-sensitive `email_launch`, and neither visitor-controlled action may be described as proof that the reviewed message was sent.
+- A team-notification timestamp means WordPress handed the email to its configured mailer; Fluent SMTP logs remain the delivery record. WordPress records `WhatsApp opened` only after that launch click, analytics may record a non-sensitive `email_launch`, and neither visitor-controlled action may be described as proof that the reviewed message was sent.
 - Campaign attribution and package context should be retained.
 - The canonical public CTA label is **Request a quote**.
 - Canonical Tour pages use a persistent quote panel, not a permanently visible long booking form.
-- The published Group Travel page uses the same intake, consent, private recovery record, message review, and visitor-controlled WhatsApp/email handoff. It adds linked Destination and Tour choices, then uses the standard date/month and traveler-count fields.
+- The published Group Travel page uses the same intake, private recovery record, message review, and visitor-controlled WhatsApp/email handoff. It adds linked Destination and Tour choices, then uses the standard date/month and traveler-count fields.
 - Group Travel Destination and Tour choices come from published catalogue records. The selected Destination is derived from the chosen Tour when the inquiry is stored; no duplicate client-maintained Group Travel fields are added.
 
 ## Website Scope
@@ -106,7 +106,7 @@ Exclude by default:
 - Standard website pages use light, browseable Catalogue mode.
 - Focused paid-ad pages use the canonical Tour title-band, gallery, facts, quote-panel, tabs/disclosures, itinerary, related-Tour, and responsive structure. Campaigns preserve ad congruency through editable headline, supporting copy, first gallery image, price override, and navigation mode.
 - Canonical Tour pages use a compact title and breadcrumb band followed by a desktop three-column composition: a vertical gallery rail capped at six visible thumbnails, one active image and a sticky quote panel. When more images exist, the sixth thumbnail shows a dark `+N more` overlay and opens the full gallery, preventing the rail from increasing the workspace row height. The active image has previous/next chevrons and advances every five seconds unless the visitor is interacting, the gallery is off-screen, the document is hidden or reduced motion is requested. Tour facts, accessible tabs, mobile disclosures, itinerary timeline, related Tours and the final quote prompt remain part of the canonical flow.
-- A conventional booking sidebar is replaced by an HKS quote panel whose **Request a quote** button opens the approved intake, consent, private recovery, message-review, and visitor-controlled WhatsApp/email handoff.
+- A conventional booking sidebar is replaced by an HKS quote panel whose **Request a quote** button opens the approved intake, private recovery, message-review, and visitor-controlled WhatsApp/email handoff.
 - Desktop navigation uses a utility bar plus product-led primary header. The utility bar carries a direct WhatsApp link with a prefilled, page-aware reach-out message; the primary header does not repeat it as a large button. Page-level quote actions still open the approved intake and recovery flow. Mobile uses a full-height accessible navigation drawer.
 - Approved top-level navigation is Home, Safaris, Coast & Stays, Destinations, Travel Guides, Group Travel, About, and Contact. The mobile drawer retains a clear Request a quote action.
 - Travel Guides appears between Destinations and Group Travel in the primary navigation. Its canonical hub is `/travel-guides/`.

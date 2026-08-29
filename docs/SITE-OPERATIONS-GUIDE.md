@@ -308,17 +308,16 @@ API secrets, private keys, or customer details in HKS Settings.
 1. The visitor selects a quote CTA.
 2. An accessible form asks for name, phone, package, preferred date/month, and
    traveler count plus Tour-specific optional questions.
-3. The visitor consents to private recovery storage and team notification.
-4. **Review quote request** creates or refreshes a private inquiry and emails its
+3. **Review quote request** creates or refreshes a private inquiry and emails its
    validated details and reference to the recipients configured under **HKS Settings
    → Conversion**.
-5. The visitor reviews the exact message and request reference.
-6. The visitor chooses **Open WhatsApp to send** or **Open email to send**.
-7. The visitor must still select Send inside the chosen app.
+4. The visitor reviews the exact message and request reference.
+5. The visitor chooses **Open WhatsApp to send** or **Open email to send**.
+6. The visitor must still select Send inside the chosen app.
 
 On `/group-travel/`, the same form is shown inline. The visitor first selects a
 Destination and then one of its published Tours. The standard name, phone,
-date/month, traveler-count, consent, recovery, review, and handoff steps remain
+date/month, traveler-count, recovery, review, and handoff steps remain
 unchanged. Destination and Tour choices update automatically when catalogue
 records are published or their Destination assignments change.
 

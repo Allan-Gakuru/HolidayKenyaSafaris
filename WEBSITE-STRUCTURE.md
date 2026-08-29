@@ -186,7 +186,7 @@ End with up to three related Posts, never related Tours. Resolve them in this or
 
 Canonical route: `/travel-guides/<postname>/` using the Advertorial article format.
 
-The Advertorial is the conversion-focused editorial format. Publishing requires one published Primary Tour. Its opening connects the visitor's planning situation to concrete, verified itinerary and package facts without fabricated urgency or proof. Place an early **Request a quote** action, repeat it only at meaningful decision points, and send every instance into the existing intake, consent, private recovery, message-review, and visitor-controlled WhatsApp/email handoff.
+The Advertorial is the conversion-focused editorial format. Publishing requires one published Primary Tour. Its opening connects the visitor's planning situation to concrete, verified itinerary and package facts without fabricated urgency or proof. Place an early **Request a quote** action, repeat it only at meaningful decision points, and send every instance into the existing intake, private recovery, message-review, and visitor-controlled WhatsApp/email handoff.
 
 Desktop uses a 680–720px reading column with an approximately 320px sticky Primary Tour panel. Mobile reveals a sticky quote action only after the opening CTA leaves view; it must respect safe areas and stack below the global Chat on WhatsApp control without obscuring content. The featured image remains optional. No permanent form or direct quote-to-WhatsApp jump is allowed.
 
@@ -309,7 +309,7 @@ The opening experience contains:
 4. A concise explanation of storage, message review, and visitor-controlled WhatsApp/email handoff.
 5. Existing editable Page content for audience-specific supporting information.
 
-The planner lets a visitor choose a populated Destination, choose a matching published Tour, enter a proposed date or month and traveler count, provide contact details and consent, then review one group quote request and choose WhatsApp or email. It reuses the existing private inquiry record and review flow. It must not build a parallel form or store a client-maintained duplicate of Destination or Tour facts.
+The planner lets a visitor choose a populated Destination, choose a matching published Tour, enter a proposed date or month and traveler count, provide contact details, then review one group quote request and choose WhatsApp or email. It reuses the existing private inquiry record and review flow. It must not build a parallel form or store a client-maintained duplicate of Destination or Tour facts.
 
 Supporting content may provide routes for:
 
@@ -398,7 +398,7 @@ Potential modules, only when verified:
 - Mobile Tour pages expose the same factual information as desktop.
 - The initial Tour facts and quote action must be discoverable without navigating a long permanent form.
 - The intake form must support the on-screen keyboard and retain entered values.
-- WhatsApp or email launch must not occur before validation, consent, inquiry save, and message review.
+- WhatsApp or email launch must not occur before validation, inquiry save, and message review.
 - Sticky actions respect safe areas and leave sufficient bottom padding.
 - Standard Guides have no persistent mobile quote bar. Advertorial bars appear only after the opening quote action leaves view and must not cover the global Chat on WhatsApp control.
 

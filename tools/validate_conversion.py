@@ -49,7 +49,7 @@ def main() -> int:
             errors.append(f"missing {relative}: {error}")
             content[label] = ""
 
-    require(errors, "plugin bootstrap", content["bootstrap"], ["Version:           0.12.1", "define( 'HKS_CORE_VERSION', '0.12.1' )"])
+    require(errors, "plugin bootstrap", content["bootstrap"], ["Version:           0.12.2", "define( 'HKS_CORE_VERSION', '0.12.2' )"])
     require(
         errors,
         "client-ready copy migration",
@@ -98,9 +98,7 @@ def main() -> int:
             "_hks_inquiry_travelers",
             "_hks_inquiry_destination",
             "_hks_inquiry_route",
-            "_hks_inquiry_consent_version",
             "_hks_whatsapp_opened_at",
-            "'contact_consent'",
             "'website'",
             "InquiryNotification::send",
         ],
@@ -141,11 +139,10 @@ def main() -> int:
             "254712965131",
             "info@holidaykenyasafaris.ke",
             "Review quote request",
-            "privately save these details and email them to our team",
+            "Holiday Kenya Safaris is owned and operated by Ashford Tours and Travels. With over 20 years of international travelers experience, we made Holiday Kenya Safaris created to serve Kenyans.",
             "choose WhatsApp or email",
             "Open email to send",
             "data-hks-email-launch",
-            "InquiryRepository::CONSENT_VERSION",
             "FormToken::issue",
             "group_context",
             "article_id",
@@ -157,6 +154,16 @@ def main() -> int:
             "data-hks-inquiry-inline",
         ],
     )
+
+    forbidden_consent = {
+        "quote renderer": content["renderer"],
+        "capture repository": content["repository"],
+        "browser payload": content["script"],
+    }
+    for label, text in forbidden_consent.items():
+        for snippet in ("contact_consent", "consent_version", "I agree that Holiday Kenya Safaris"):
+            if snippet in text:
+                errors.append(f"{label} still contains removed consent control: {snippet}")
 
     try:
         block = json.loads(content["block"])

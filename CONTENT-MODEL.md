@@ -58,7 +58,7 @@ Use native WordPress Posts for every page in the public **Travel Guides** sectio
 A Post has one of two public formats:
 
 - **Standard Guide**: reading-first editorial content. Its Primary Tour is optional. When set, the public action is **View this trip** and links to the canonical Tour.
-- **Advertorial**: a conversion-focused article. Publishing requires one linked, published Primary Tour. Its quote actions open the existing intake, consent, private recovery, message-review, and visitor-controlled WhatsApp/email handoff.
+- **Advertorial**: a conversion-focused article. Publishing requires one linked, published Primary Tour. Its quote actions open the existing intake, private recovery, message-review, and visitor-controlled WhatsApp/email handoff.
 
 The native title, excerpt, content, publication status, slug, and optional featured image remain the canonical editorial values. Travel Guides never render an author name. A missing featured image is a supported public state, not a validation error.
 

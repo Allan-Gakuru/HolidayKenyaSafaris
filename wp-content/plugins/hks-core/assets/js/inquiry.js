@@ -173,8 +173,6 @@
 			form_token: safeText(data.get('form_token'), 500),
 			request_key: safeText(data.get('request_key'), 36),
 			started_at: Number(data.get('started_at')),
-			consent_version: safeText(data.get('consent_version'), 40),
-			contact_consent: data.get('contact_consent') === '1',
 			website: safeText(data.get('website'), 120),
 			name: safeText(data.get('name'), 100),
 			phone: safeText(data.get('phone'), 30),

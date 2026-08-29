@@ -9,8 +9,7 @@ copy, Campaign label, and official Holiday Kenya Safaris WhatsApp and email dest
 1. The quote CTA opens an accessible modal rather than a messaging app.
 2. The visitor completes the required name, phone, package, preferred date/month,
    and traveler fields plus only the optional questions enabled for that Tour.
-3. The form explains that WordPress will save the request privately and notify the
-   configured team recipients, then requires contact consent.
+3. The visitor completes the form and selects **Review quote request**.
 4. Selecting **Review quote request** validates the form and creates or
    refreshes an idempotent private inquiry, creates its reference, and sends the
    validated details to every address configured under **HKS Settings → Conversion →

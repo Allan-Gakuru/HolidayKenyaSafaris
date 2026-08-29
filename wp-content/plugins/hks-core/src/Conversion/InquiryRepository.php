@@ -24,11 +24,6 @@ final class InquiryRepository {
 	public const REST_NAMESPACE = 'hks/v1';
 
 	/**
-	 * Form disclosure/consent contract version.
-	 */
-	public const CONSENT_VERSION = 'hks_inquiry_v1';
-
-	/**
 	 * Whitelisted attribution fields.
 	 */
 	private const ATTRIBUTION_KEYS = array(
@@ -320,10 +315,6 @@ final class InquiryRepository {
 			);
 		}
 
-		if ( true !== ( $payload['contact_consent'] ?? false ) || self::CONSENT_VERSION !== ( $payload['consent_version'] ?? '' ) ) {
-			return $this->error( 'contact_consent', __( 'Confirm that we may use these details to respond to this quote request.', 'hks-core' ) );
-		}
-
 		$destination_label = $context['destination_label'];
 
 		if ( 'group_travel' === $inquiry_route ) {
@@ -410,8 +401,6 @@ final class InquiryRepository {
 			'_hks_inquiry_destination'     => $values['destination_label'],
 			'_hks_inquiry_route'           => $values['inquiry_route'],
 			'_hks_inquiry_attribution'     => wp_json_encode( $values['attribution'] ),
-			'_hks_inquiry_consent_version' => self::CONSENT_VERSION,
-			'_hks_inquiry_consent_at'      => current_time( 'mysql', true ),
 		);
 
 		foreach ( self::OPTIONAL_FIELDS as $field ) {

@@ -225,26 +225,6 @@
 	padding: 0 0.5rem 0 0;
 }
 
-.hks-inquiry__consent {
-	align-items: start;
-	display: grid;
-	gap: 0.7rem;
-	grid-template-columns: 22px 1fr;
-	margin-top: 1.5rem;
-}
-
-.hks-inquiry__consent input {
-	accent-color: var(--hks-teal);
-	height: 20px;
-	margin: 0.15rem 0 0;
-	width: 20px;
-}
-
-.hks-inquiry__consent label {
-	font-size: 0.9375rem;
-	line-height: 1.5;
-}
-
 .hks-inquiry__save-note,
 .hks-inquiry__send-note {
 	color: rgb(22 27 31 / 75%);

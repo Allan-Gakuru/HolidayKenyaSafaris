@@ -106,7 +106,6 @@ final class QuoteBlock {
 							<input type="hidden" name="form_token" value="<?php echo esc_attr( $is_group_context ? '' : FormToken::issue( $context['tour_id'], $context['campaign_id'] ) ); ?>">
 							<input type="hidden" name="request_key" value="">
 							<input type="hidden" name="started_at" value="">
-							<input type="hidden" name="consent_version" value="<?php echo esc_attr( InquiryRepository::CONSENT_VERSION ); ?>">
 
 							<div class="hks-inquiry__honeypot" aria-hidden="true">
 								<label for="<?php echo esc_attr( $instance_id ); ?>-website">Website</label>
@@ -131,12 +130,7 @@ final class QuoteBlock {
 
 							<?php self::optional_fields( $instance_id, $context['optional_questions'] ); ?>
 
-							<div class="hks-inquiry__consent">
-								<input id="<?php echo esc_attr( $instance_id ); ?>-consent" type="checkbox" name="contact_consent" value="1" required>
-								<label for="<?php echo esc_attr( $instance_id ); ?>-consent"><?php esc_html_e( 'I agree that Holiday Kenya Safaris may use these details to respond to this quote request.', 'hks-core' ); ?></label>
-							</div>
-
-							<p class="hks-inquiry__save-note"><?php esc_html_e( 'When you review, we privately save these details and email them to our team so they can respond. You still choose whether to send the prepared message through WhatsApp or your email app.', 'hks-core' ); ?></p>
+							<p class="hks-inquiry__save-note"><?php esc_html_e( 'Holiday Kenya Safaris is owned and operated by Ashford Tours and Travels. With over 20 years of international travelers experience, we made Holiday Kenya Safaris created to serve Kenyans.', 'hks-core' ); ?></p>
 							<p class="hks-inquiry__status" data-hks-inquiry-status role="status" aria-live="polite"></p>
 							<button class="hks-inquiry__submit" type="submit"><?php echo esc_html( $is_group_context ? __( 'Review group quote request', 'hks-core' ) : __( 'Review quote request', 'hks-core' ) ); ?></button>
 						</form>

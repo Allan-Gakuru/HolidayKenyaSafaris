@@ -14,7 +14,7 @@ Other channels may enter the same system:
 
 The Group Travel route enters the same system through an inline planner:
 
-`Group Travel page -> Destination -> matching Tour -> dates and group size -> consent, private recovery record and team notification -> reviewed message -> WhatsApp or email handoff -> consultant response`
+`Group Travel page -> Destination -> matching Tour -> dates and group size -> private recovery record and team notification -> reviewed message -> WhatsApp or email handoff -> consultant response`
 
 Travel Guides add two intentional paths:
 
@@ -74,7 +74,7 @@ An Advertorial requires a published Primary Tour and may use:
 - A final quote prompt.
 - A mobile sticky quote action after the opening action has left the viewport.
 
-Every Advertorial quote action opens the same existing intake. The visitor still provides consent, creates or refreshes the private recovery record, reviews the message, and chooses WhatsApp or email. Repetition must support a real decision point rather than manufacture urgency.
+Every Advertorial quote action opens the same existing intake. The visitor creates or refreshes the private recovery record, reviews the message, and chooses WhatsApp or email. Repetition must support a real decision point rather than manufacture urgency.
 
 ## Message Handoff Behavior
 
@@ -106,7 +106,6 @@ Please confirm availability, the current KSh price, what is included, and the ne
 Requirements:
 
 - Explain that selecting `Review quote request` stores the validated answers privately in WordPress and emails them to the configured internal recipients for follow-up.
-- Require contact consent before creating the recovery record.
 - Store inquiry records outside public queries, search, REST responses, and analytics, with administrator-only access.
 - Store internal recipient addresses only in the private HKS Settings options record. Never expose them in public markup, REST responses, analytics, or the public repository.
 - Deduplicate internal notifications for an unchanged idempotent request. Record mailer acceptance or failure privately, without blocking the visitor's WhatsApp/email handoff.
