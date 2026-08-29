@@ -45,9 +45,14 @@ final class ArticleBlocks {
 		<section class="hks-article-archive-intro">
 			<div class="hks-title-band"><div class="hks-shell">
 				<?php self::breadcrumbs( is_tax( 'hks_article_topic' ) ? array( __( 'Travel Guides', 'hks-wayfinder' ) => home_url( '/travel-guides/' ), $title => '' ) : array( $title => '' ) ); ?>
-				<p class="hks-article-kicker"><?php esc_html_e( 'Plan with confidence', 'hks-wayfinder' ); ?></p>
-				<h1><?php echo esc_html( $title ); ?></h1>
-				<p><?php echo wp_kses_post( wp_strip_all_tags( (string) $description ) ); ?></p>
+				<div class="hks-article-archive-intro__layout">
+					<div>
+						<p class="hks-article-kicker"><?php esc_html_e( 'Plan with confidence', 'hks-wayfinder' ); ?></p>
+						<h1><?php echo esc_html( $title ); ?></h1>
+						<p class="hks-article-archive-intro__promise"><?php echo wp_kses_post( wp_strip_all_tags( (string) $description ) ); ?></p>
+					</div>
+					<?php if ( ! is_tax( 'hks_article_topic' ) ) : ?><p class="hks-article-archive-intro__note"><?php esc_html_e( 'Start with a destination or browse by the question you are trying to answer. Each guide gives you a clear next step when you are ready to plan.', 'hks-wayfinder' ); ?></p><?php endif; ?>
+				</div>
 			</div></div>
 			<?php if ( is_home() ) : ?><?php echo self::render_archive_filters(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped by the renderer. ?><?php endif; ?>
 			<?php if ( is_tax( 'hks_article_topic' ) ) : ?><p class="hks-article-archive-intro__back"><a href="<?php echo esc_url( home_url( '/travel-guides/' ) ); ?>"><?php esc_html_e( 'Browse all Travel Guides', 'hks-wayfinder' ); ?> <span aria-hidden="true">→</span></a></p><?php endif; ?>
@@ -106,7 +111,14 @@ final class ArticleBlocks {
 		ob_start();
 		?>
 		<article class="hks-article-card<?php echo $image_id ? '' : ' hks-article-card--no-image'; ?>">
-			<?php if ( $image_id ) : ?><a class="hks-article-card__media" href="<?php echo esc_url( $link ); ?>" tabindex="-1" aria-hidden="true"><?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'medium_large', false, array( 'loading' => 'lazy', 'sizes' => '(max-width: 700px) 100vw, 33vw' ) ) ); ?></a><?php endif; ?>
+			<a class="hks-article-card__media<?php echo $image_id ? '' : ' hks-article-card__media--placeholder'; ?>" href="<?php echo esc_url( $link ); ?>" tabindex="-1" aria-hidden="true">
+				<?php if ( $image_id ) : ?>
+					<?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'medium_large', false, array( 'loading' => 'lazy', 'sizes' => '(max-width: 700px) 100vw, 33vw' ) ) ); ?>
+				<?php else : ?>
+					<span><?php esc_html_e( 'Holiday Kenya Safaris', 'hks-wayfinder' ); ?></span>
+					<strong><?php esc_html_e( 'Travel Guide', 'hks-wayfinder' ); ?></strong>
+				<?php endif; ?>
+			</a>
 			<div class="hks-article-card__body">
 				<?php if ( $topics || $destination ) : ?><p class="hks-article-card__meta"><?php echo esc_html( implode( ' · ', array_slice( array_merge( $topics, $destination ), 0, 2 ) ) ); ?></p><?php endif; ?>
 				<<?php echo esc_attr( $heading ); ?>><a href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $title ); ?></a></<?php echo esc_attr( $heading ); ?>>

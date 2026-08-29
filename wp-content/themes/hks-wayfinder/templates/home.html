@@ -4,7 +4,21 @@
 <main id="main-content" class="wp-block-group alignfull hks-article-archive"><!-- wp:hks-wayfinder/article-archive-intro /-->
 
 <!-- wp:group {"align":"wide","className":"hks-article-results","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignwide hks-article-results"><!-- wp:query {"queryId":21,"query":{"perPage":12,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true},"align":"wide"} -->
+<div class="wp-block-group alignwide hks-article-results"><!-- wp:group {"className":"hks-article-results__heading","layout":{"type":"default"}} -->
+<div class="wp-block-group hks-article-results__heading"><!-- wp:paragraph {"className":"hks-article-kicker"} -->
+<p class="hks-article-kicker">Browse the library</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Useful before you book</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Use these destination guides, planning answers and travel ideas to make the next decision with confidence.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:query {"queryId":21,"query":{"perPage":12,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true},"align":"wide"} -->
 <div class="wp-block-query alignwide"><!-- wp:post-template {"className":"hks-article-grid","layout":{"type":"grid","columnCount":3}} -->
 <!-- wp:hks-wayfinder/article-card /-->
 <!-- /wp:post-template -->
