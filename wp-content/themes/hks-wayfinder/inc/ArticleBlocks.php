@@ -45,13 +45,8 @@ final class ArticleBlocks {
 		<section class="hks-article-archive-intro">
 			<div class="hks-title-band"><div class="hks-shell">
 				<?php self::breadcrumbs( is_tax( 'hks_article_topic' ) ? array( __( 'Travel Guides', 'hks-wayfinder' ) => home_url( '/travel-guides/' ), $title => '' ) : array( $title => '' ) ); ?>
-				<div class="hks-article-archive-intro__layout">
-					<div>
-						<p class="hks-article-kicker"><?php esc_html_e( 'Plan with confidence', 'hks-wayfinder' ); ?></p>
-						<h1><?php echo esc_html( $title ); ?></h1>
-						<p class="hks-article-archive-intro__promise"><?php echo wp_kses_post( wp_strip_all_tags( (string) $description ) ); ?></p>
-					</div>
-				</div>
+				<h1><?php echo esc_html( $title ); ?></h1>
+				<p class="hks-article-archive-intro__promise"><?php echo wp_kses_post( wp_strip_all_tags( (string) $description ) ); ?></p>
 			</div></div>
 			<?php if ( is_home() ) : ?><?php echo self::render_archive_filters(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped by the renderer. ?><?php endif; ?>
 			<?php if ( is_tax( 'hks_article_topic' ) ) : ?><p class="hks-article-archive-intro__back"><a href="<?php echo esc_url( home_url( '/travel-guides/' ) ); ?>"><?php esc_html_e( 'Browse all Travel Guides', 'hks-wayfinder' ); ?> <span aria-hidden="true">→</span></a></p><?php endif; ?>

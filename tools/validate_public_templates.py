@@ -186,6 +186,52 @@ def main() -> int:
     forbid(errors, "article template", files["article"], ["wp:post-author", "wp:post-author-name"])
     require(errors, "article topic template", files["article topic"], ["hks-wayfinder/article-archive-intro", "hks-wayfinder/article-card", "postType\":\"post", "inherit\":true"])
 
+    archive_labels = (
+        "catalogue",
+        "destination",
+        "tour type",
+        "occasion",
+        "travel style",
+        "tour scope",
+        "travel guides",
+        "article topic",
+    )
+    for label in archive_labels:
+        require(errors, f"{label.title()} archive contract", files[label], ["hks-archive-page"])
+    for label in ("home", "tour"):
+        forbid(errors, f"{label.title()} archive isolation", files[label], ["hks-archive-page"])
+
+    require(
+        errors,
+        "shared archive presentation",
+        sources["style"],
+        [
+            ".wp-site-blocks > .hks-archive-page",
+            ".hks-archive-page > *",
+            ".hks-archive-page .hks-title-band {",
+            "padding-block: 0.5rem 0.625rem;",
+            ".hks-archive-page .hks-title-band h1",
+            "font-size: clamp(1.6875rem, 3.75vw, 2.625rem);",
+            ".hks-archive-page .hks-title-band p:not(.hks-taxonomy-intro__label)",
+            "font-size: clamp(0.84375rem, calc(0.75rem + 0.3vw), 0.984375rem);",
+            ".hks-article-discovery__form select",
+            "min-height: 44px;",
+            ".hks-article-discovery__form button",
+            "min-height: 46px;",
+            ".hks-article-card__body :is(h2, h3)",
+            "font-size: var(--wp--preset--font-size--card-title);",
+        ],
+    )
+    forbid(
+        errors,
+        "legacy Travel Guides archive presentation",
+        sources["style"],
+        [
+            ".hks-article-archive-intro__layout",
+            ".hks-article-results__heading",
+        ],
+    )
+
     for label, template in files.items():
         if 'id="main-content"' not in template:
             errors.append(f"{label} template is not a valid skip-link target")

@@ -690,13 +690,18 @@ body:not(.home) .wp-site-blocks > main {
 	margin-block-start: 0;
 }
 
+.wp-site-blocks > .hks-archive-page {
+	margin-block-start: 0;
+}
+
 .hks-catalogue-page > *,
 .hks-destination-page > *,
 .hks-taxonomy-page > *,
 .hks-tour-page > *,
 .hks-standard-page > *,
 .hks-group-travel-page > *,
-.hks-article-single > * {
+.hks-article-single > *,
+.hks-archive-page > * {
 	margin-block-start: 0;
 }
 
@@ -738,15 +743,15 @@ body:not(.home) .wp-site-blocks > main {
 	max-width: 56rem;
 }
 
-.hks-catalogue-page .hks-title-band h1,
-.hks-destination-page .hks-title-band h1,
-.hks-taxonomy-page .hks-title-band h1 {
+.hks-archive-page .hks-title-band {
+	padding-block: 0.5rem 0.625rem;
+}
+
+.hks-archive-page .hks-title-band h1 {
 	font-size: clamp(1.6875rem, 3.75vw, 2.625rem);
 }
 
-.hks-catalogue-page .hks-title-band p,
-.hks-destination-page .hks-title-band p,
-.hks-taxonomy-page .hks-title-band p {
+.hks-archive-page .hks-title-band p:not(.hks-taxonomy-intro__label) {
 	font-size: clamp(0.84375rem, calc(0.75rem + 0.3vw), 0.984375rem);
 }
 
@@ -3863,32 +3868,9 @@ body:not(.home) .wp-site-blocks > main {
 	}
 }
 
-/* Travel Guides: reading-first catalogue cards and focused advertorial conversion. */
-.hks-article-archive-intro .hks-title-band,
+/* Travel Guides: archive presentation and focused advertorial conversion. */
 .hks-article-hero {
 	background: var(--wp--preset--color--pale-mist);
-}
-
-.hks-article-archive-intro .hks-title-band {
-	padding-block: .5rem 1.125rem;
-}
-
-.hks-article-archive-intro__layout {
-	padding-top: .5rem;
-}
-
-.hks-article-archive-intro__layout h1 {
-	font-size: clamp(1.875rem, 4.5vw, 3.9375rem);
-	letter-spacing: -.035em;
-	margin: 0;
-	max-width: 18ch;
-}
-
-.hks-article-archive-intro__promise {
-	font-size: clamp(.875rem, 1.35vw, 1rem);
-	line-height: 1.55;
-	margin: .5rem 0 0;
-	max-width: 52rem;
 }
 
 .hks-article-kicker,
@@ -3912,7 +3894,7 @@ body:not(.home) .wp-site-blocks > main {
 .hks-article-discovery {
 	background: var(--wp--preset--color--white);
 	border-bottom: 1px solid rgb(24 43 58 / 14%);
-	padding: 1.25rem clamp(1rem, 4vw, 2rem);
+	padding: .75rem clamp(1rem, 4vw, 2rem);
 }
 
 .hks-article-discovery__form {
@@ -3924,36 +3906,14 @@ body:not(.home) .wp-site-blocks > main {
 	max-width: 1240px;
 }
 
-.hks-article-discovery__form label { display: grid; gap: .4rem; }
-.hks-article-discovery__form label span { color: var(--wp--preset--color--midnight-navy); font-size: .8125rem; font-weight: 700; }
-.hks-article-discovery__form select { background: var(--wp--preset--color--white); border: 1px solid rgb(24 43 58 / 28%); border-radius: 8px; color: var(--wp--preset--color--near-black); font: inherit; min-height: 48px; padding: .65rem 2.5rem .65rem .8rem; width: 100%; }
-.hks-article-discovery__form button { background: var(--wp--preset--color--midnight-navy); border: 0; border-radius: 8px; color: var(--wp--preset--color--white); font: inherit; font-weight: 700; min-height: 48px; padding: .7rem 1rem; }
-.hks-article-discovery__form > a { align-self: center; font-size: .875rem; font-weight: 700; }
+.hks-article-discovery__form label { display: grid; font-size: .76rem; font-weight: 700; gap: .3rem; }
+.hks-article-discovery__form label span { color: var(--wp--preset--color--midnight-navy); }
+.hks-article-discovery__form select { background: var(--wp--preset--color--white); border: 1px solid rgb(24 43 58 / 24%); border-radius: 7px; color: var(--wp--preset--color--near-black); font: inherit; font-weight: 700; min-height: 44px; padding: .55rem 2rem .55rem .65rem; width: 100%; }
+.hks-article-discovery__form button { background: var(--wp--preset--color--midnight-navy); border: 0; border-radius: 8px; color: var(--wp--preset--color--white); font-family: var(--wp--preset--font-family--montserrat); font-size: .9rem; font-weight: 650; line-height: 1.2; min-height: 46px; padding: .75rem 1.1rem; }
+.hks-article-discovery__form > a { align-self: center; font-size: .86rem; font-weight: 700; }
 
 .hks-article-results {
-	padding-block: clamp(3rem, 7vw, 6rem);
-}
-
-.hks-article-results__heading {
-	display: grid;
-	grid-template-columns: minmax(0, 1fr) minmax(17rem, .72fr);
-	margin-bottom: clamp(1.75rem, 4vw, 3rem);
-}
-
-.hks-article-results__heading .hks-article-kicker {
-	grid-column: 1 / -1;
-}
-
-.hks-article-results__heading h2 {
-	font-size: clamp(1.8rem, 3.5vw, 3rem);
-	letter-spacing: -.025em;
-	margin: 0;
-}
-
-.hks-article-results__heading > p:last-child {
-	align-self: end;
-	line-height: 1.6;
-	margin: 0;
+	padding-block: .75rem clamp(2.5rem, 6vw, 5rem);
 }
 
 .hks-article-grid {
@@ -4024,17 +3984,18 @@ body:not(.home) .wp-site-blocks > main {
 	display: flex;
 	flex: 1;
 	flex-direction: column;
-	padding: clamp(1.25rem, 3vw, 2rem);
+	padding: clamp(1.1rem, 2vw, 1.5rem);
 }
 
 .hks-article-card__body :is(h2, h3) {
-	font-size: clamp(1.25rem, 2.3vw, 1.75rem);
-	margin: 0 0 .8rem;
+	font-size: var(--wp--preset--font-size--card-title);
+	margin: 0;
 }
 
 .hks-article-card__body :is(h2, h3) a { text-decoration: none; }
-.hks-article-card__body > p:not(.hks-article-card__meta) { margin-top: 0; }
-.hks-article-card__link { font-weight: 700; margin-top: auto; padding-top: 1rem; }
+.hks-article-archive .hks-article-card__meta { font-size: .82rem; letter-spacing: normal; margin: 0 0 .45rem; text-transform: none; }
+.hks-article-card__body > p:not(.hks-article-card__meta) { color: rgb(22 27 31 / 72%); font-size: .88rem; margin: .7rem 0 1.1rem; }
+.hks-article-card__link { align-items: center; display: inline-flex; font-size: .88rem; font-weight: 700; gap: .35rem; margin-top: auto; padding-top: 1rem; }
 
 .hks-article-results .hks-article-grid > :only-child {
 	grid-column: 1 / -1;
@@ -4225,8 +4186,6 @@ body:not(.home) .wp-site-blocks > main {
 }
 
 @media (max-width: 48rem) {
-	.hks-article-results__heading { grid-template-columns: minmax(0, 1fr); }
-	.hks-article-results__heading > p:last-child { margin-top: 1rem; }
 	.hks-article-hero { grid-template-columns: minmax(0, 1fr); padding-block: 2rem 3rem; }
 	.hks-article-hero__media { grid-row: 1; }
 	.hks-article-hero__copy { grid-row: 2; }
