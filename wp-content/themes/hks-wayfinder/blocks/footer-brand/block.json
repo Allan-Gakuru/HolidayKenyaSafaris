@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "hks-wayfinder/footer-brand",
+  "version": "0.1.0",
+  "title": "HKS Footer brand",
+  "category": "theme",
+  "icon": "admin-site-alt3",
+  "description": "Render the reversed Holiday Kenya Safaris logo in the site footer.",
+  "textdomain": "hks-wayfinder",
+  "supports": { "html": false, "multiple": false }
+}

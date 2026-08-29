@@ -33,6 +33,7 @@ final class TourBlocks {
 			'taxonomy-intro'     => 'render_taxonomy_intro',
 			'home-experience'    => 'render_home_experience',
 			'catalogue-controls' => 'render_catalogue_controls',
+			'footer-brand'       => 'render_footer_brand',
 			'footer-navigation'  => 'render_footer_navigation',
 			'page-title'         => 'render_page_title',
 			'group-travel-page'  => 'render_group_travel_page',
@@ -44,6 +45,24 @@ final class TourBlocks {
 				array( 'render_callback' => array( self::class, $callback ) )
 			);
 		}
+	}
+
+	/**
+	 * Render the reversed production lockup on the dark footer surface.
+	 *
+	 * @return string
+	 */
+	public static function render_footer_brand(): string {
+		$home_url = home_url( '/' );
+		$logo_url = get_theme_file_uri( 'assets/images/brand/holiday-kenya-safaris-logo-reversed.svg' );
+
+		return sprintf(
+			'<a class="hks-footer-brand" href="%1$s" rel="home" aria-label="%2$s"><img src="%3$s" width="895" height="342" alt="%4$s" loading="lazy" decoding="async"></a>',
+			esc_url( $home_url ),
+			esc_attr__( 'Holiday Kenya Safaris home', 'hks-wayfinder' ),
+			esc_url( $logo_url ),
+			esc_attr__( 'Holiday Kenya Safaris', 'hks-wayfinder' )
+		);
 	}
 
 	/**

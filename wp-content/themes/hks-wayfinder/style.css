@@ -2625,6 +2625,19 @@ body:not(.home) .wp-site-blocks > main {
 	grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(10rem, 0.6fr));
 }
 
+.hks-footer-brand {
+	align-items: center;
+	display: inline-flex;
+	min-height: 44px;
+}
+
+.hks-footer-brand img {
+	display: block;
+	height: auto;
+	max-width: 100%;
+	width: clamp(12rem, 18vw, 15rem);
+}
+
 .hks-site-footer h2 {
 	color: inherit;
 	font-size: 0.9rem !important;
