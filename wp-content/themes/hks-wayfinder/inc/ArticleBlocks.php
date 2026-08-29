@@ -51,7 +51,6 @@ final class ArticleBlocks {
 						<h1><?php echo esc_html( $title ); ?></h1>
 						<p class="hks-article-archive-intro__promise"><?php echo wp_kses_post( wp_strip_all_tags( (string) $description ) ); ?></p>
 					</div>
-					<?php if ( ! is_tax( 'hks_article_topic' ) ) : ?><p class="hks-article-archive-intro__note"><?php esc_html_e( 'Start with a destination or browse by the question you are trying to answer. Each guide gives you a clear next step when you are ready to plan.', 'hks-wayfinder' ); ?></p><?php endif; ?>
 				</div>
 			</div></div>
 			<?php if ( is_home() ) : ?><?php echo self::render_archive_filters(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped by the renderer. ?><?php endif; ?>
