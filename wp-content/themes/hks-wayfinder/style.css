@@ -3999,6 +3999,8 @@ body:not(.home) .wp-site-blocks > main {
 
 .hks-article--advertorial .hks-article-hero h1 {
 	font-size: clamp(1.65rem, 3.75vw, 3.375rem);
+	max-width: none;
+	width: 100%;
 }
 
 .hks-article--advertorial .hks-article-hero__promise {
@@ -4057,6 +4059,10 @@ body:not(.home) .wp-site-blocks > main {
 }
 
 @media (min-width: 48.0625rem) {
+	.hks-article--advertorial .hks-article-hero__heading h1 {
+		text-wrap: wrap;
+	}
+
 	.hks-article--advertorial .hks-article-hero__media {
 		align-self: start;
 		aspect-ratio: 4 / 3;

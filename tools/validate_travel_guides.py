@@ -295,6 +295,8 @@ def check_theme() -> None:
         style,
         ".hks-article--advertorial .hks-article-hero__heading {",
         "grid-column: 1 / -1;",
+        "max-width: none;\n\twidth: 100%;",
+        ".hks-article--advertorial .hks-article-hero__heading h1 {\n\t\ttext-wrap: wrap;",
         "align-self: start;\n\t\taspect-ratio: 4 / 3;",
         ".hks-article--advertorial .hks-article-hero__heading { grid-column: 1; grid-row: 1; }",
         ".hks-article--advertorial .hks-article-hero__copy { grid-row: 2; }",
