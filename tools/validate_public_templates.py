@@ -179,7 +179,7 @@ def main() -> int:
     for label in ("tour type", "occasion", "travel style"):
         require(errors, f"{label.title()} template", files[label], ["hks-wayfinder/taxonomy-intro", "hks-wayfinder/tour-card", "inherit\":true", "hks-catalogue-prompt"])
     require(errors, "standard Page template", files["page"], ["hks-standard-page", "hks-wayfinder/page-title", "hks-editorial-page", "wp:post-content"])
-    require(errors, "Group Travel template", files["group travel"], ["hks-group-travel-page", "hks-wayfinder/page-title", "hks-wayfinder/group-travel-page", "hks-group-travel-page__support", "wp:post-content"])
+    require(errors, "Group Travel template", files["group travel"], ["hks-standard-page", "hks-group-travel-page", "hks-wayfinder/page-title", "hks-wayfinder/group-travel-page", "hks-group-travel-page__support", "wp:post-content"])
     require(errors, "Travel Guides template", files["travel guides"], ["hks-wayfinder/article-archive-intro", "hks-wayfinder/article-card", "postType\":\"post", "inherit\":true"])
     forbid(errors, "Travel Guides template", files["travel guides"], ["wp:post-author", "wp:post-author-name"])
     require(errors, "article template", files["article"], ["hks-wayfinder/article-page"])
@@ -201,19 +201,33 @@ def main() -> int:
     for label in ("home", "tour"):
         forbid(errors, f"{label.title()} archive isolation", files[label], ["hks-archive-page"])
 
+    for label in ("page", "group travel"):
+        require(errors, f"{label.title()} standard Page contract", files[label], ["hks-standard-page"])
+    for label in ("home", "tour", "campaign"):
+        forbid(errors, f"{label.title()} standard Page isolation", files[label], ["hks-standard-page"])
+
     require(
         errors,
-        "shared archive presentation",
+        "shared archive and Page presentation",
         sources["style"],
         [
             ".wp-site-blocks > .hks-archive-page",
             ".hks-archive-page > *",
-            ".hks-archive-page .hks-title-band {",
-            "padding-block: 0.5rem 0.625rem;",
-            ".hks-archive-page .hks-title-band h1",
-            "font-size: clamp(1.6875rem, 3.75vw, 2.625rem);",
-            ".hks-archive-page .hks-title-band p:not(.hks-taxonomy-intro__label)",
-            "font-size: clamp(0.84375rem, calc(0.75rem + 0.3vw), 0.984375rem);",
+            "--hks-standard-page-title-size: clamp(1.6875rem, 3.75vw, 2.625rem);",
+            "--hks-standard-subtitle-size: clamp(0.84375rem, calc(0.75rem + 0.3vw), 0.984375rem);",
+            "--hks-standard-section-title-size: var(--wp--preset--font-size--card-title);",
+            "--hks-standard-paragraph-size: 1rem;",
+            "--hks-standard-card-copy-size: 0.88rem;",
+            "--hks-standard-title-band-padding: 0.5rem 0.625rem;",
+            "--hks-standard-content-padding: 0.75rem clamp(2.5rem, 6vw, 5rem);",
+            ":is(.hks-archive-page, .hks-standard-page, body.page:not(.home) main) .hks-title-band {",
+            "padding-block: var(--hks-standard-title-band-padding);",
+            ":is(.hks-archive-page, .hks-standard-page, body.page:not(.home) main) .hks-title-band h1",
+            "font-size: var(--hks-standard-page-title-size);",
+            ":is(.hks-archive-page, .hks-standard-page, body.page:not(.home) main) .hks-title-band p:not(.hks-taxonomy-intro__label)",
+            "font-size: var(--hks-standard-subtitle-size);",
+            ":is(.hks-standard-page, body.page:not(.home) main) .hks-editorial-page :is(p:not(.hks-page-lead), li)",
+            ":is(.hks-standard-page, body.page:not(.home) main) .hks-editorial-page .wp-block-button__link",
             ".hks-article-discovery__form select",
             "min-height: 44px;",
             ".hks-article-discovery__form button",
