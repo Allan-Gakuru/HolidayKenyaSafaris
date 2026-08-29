@@ -209,6 +209,7 @@ def check_quote_context() -> None:
 def check_theme() -> None:
     article_blocks = read("wp-content/themes/hks-wayfinder/inc/ArticleBlocks.php")
     functions = read("wp-content/themes/hks-wayfinder/functions.php")
+    style = read("wp-content/themes/hks-wayfinder/style.css")
     destination_template = read("wp-content/themes/hks-wayfinder/templates/taxonomy-hks_destination.html")
     home = read("wp-content/themes/hks-wayfinder/templates/home.html")
     topic_template = read("wp-content/themes/hks-wayfinder/templates/taxonomy-hks_article_topic.html")
@@ -251,6 +252,39 @@ def check_theme() -> None:
         "assets/js/article-ui.js",
         "ArticleBlocks::class, 'register'",
     )
+
+    require(
+        "Advertorial article outline",
+        article_blocks,
+        "private static function prepare_article_outline",
+        "private static function render_article_toc",
+        "WP_HTML_Processor::create_fragment",
+        "'H2' === $tag || 'H3' === $tag",
+        "set_attribute( 'id'",
+        "get_last_error()",
+        "What we’ll cover",
+        "hks-article-toc__list",
+    )
+    outline_call = article_blocks.find("$outline      = $is_ad ? self::prepare_article_outline")
+    toc_output = article_blocks.find("<?php echo $toc;")
+    excerpt_output = article_blocks.find('class="hks-article-hero__promise"')
+    quote_output = article_blocks.find('class="hks-button hks-article-hero__quote"')
+    if min(outline_call, excerpt_output, toc_output, quote_output) < 0 or not (excerpt_output < toc_output < quote_output):
+        ERRORS.append("Advertorial article outline: TOC must be advertorial-only and render between the hero excerpt and opening quote action")
+    require(
+        "Advertorial article outline styling",
+        style,
+        ".hks-article-toc {",
+        ".hks-article-toc__list ul {",
+        ".hks-article-content :is(h2, h3)[id] { scroll-margin-top:",
+        ".hks-article--advertorial .hks-article-hero__media {\n\t\talign-self: stretch;",
+        ".hks-article--advertorial .hks-article-hero__media { display: none; }",
+    )
+    toc_style_start = style.find(".hks-article-toc {")
+    toc_style_end = style.find(".hks-article-layout {", toc_style_start)
+    toc_style = style[toc_style_start:toc_style_end]
+    if "position: sticky" in toc_style or "display: none" in toc_style:
+        ERRORS.append("Advertorial article outline styling: TOC must remain fully expanded in normal flow")
 
     # No author identity is allowed in the public article renderer, article
     # templates, or examples. Empty Query author attributes are not display.

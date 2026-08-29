@@ -134,6 +134,9 @@ final class ArticleBlocks {
 		$destinations = self::term_names( $post_id, 'hks_destination' );
 		$topics       = self::term_names( $post_id, 'hks_article_topic' );
 		$content      = apply_filters( 'the_content', get_post_field( 'post_content', $post_id ) );
+		$outline      = $is_ad ? self::prepare_article_outline( $content ) : array( 'content' => $content, 'headings' => array() );
+		$content      = $outline['content'];
+		$toc          = $is_ad ? self::render_article_toc( $outline['headings'] ) : '';
 		$tour_title   = $tour_valid ? self::text( get_the_title( $tour_id ) ) : '';
 		$tour_link    = $tour_valid ? get_permalink( $tour_id ) : '';
 		$quote        = $is_ad && $tour_valid ? do_blocks( '<!-- wp:hks/quote-cta {"location":"article_sidebar","label":"Request a quote"} /-->' ) : '';
@@ -147,6 +150,7 @@ final class ArticleBlocks {
 					<?php if ( $topics || $destinations ) : ?><p class="hks-article-kicker"><?php echo esc_html( implode( ' · ', array_slice( array_merge( $destinations, $topics ), 0, 2 ) ) ); ?></p><?php endif; ?>
 					<h1><?php echo esc_html( $title ); ?></h1>
 					<?php if ( $excerpt ) : ?><p class="hks-article-hero__promise"><?php echo esc_html( $excerpt ); ?></p><?php endif; ?>
+					<?php echo $toc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Generated and escaped by render_article_toc(). ?>
 					<?php if ( $tour_valid && ! $is_ad ) : ?><a class="hks-button hks-article-hero__tour-link" data-hks-article-primary-tour-click data-hks-cta-location="article_hero" href="<?php echo esc_url( $tour_link ); ?>"><?php esc_html_e( 'View this trip', 'hks-wayfinder' ); ?> <span aria-hidden="true">→</span></a><?php endif; ?>
 					<?php if ( $is_ad && $quote ) : ?><button class="hks-button hks-article-hero__quote" type="button" data-hks-quote-proxy data-hks-article-early-quote data-hks-cta-location="article_hero"><?php esc_html_e( 'Request a quote', 'hks-wayfinder' ); ?></button><?php endif; ?>
 				</div>
@@ -164,6 +168,169 @@ final class ArticleBlocks {
 			<?php self::render_related_posts( $post_id ); ?>
 			<?php if ( $is_ad && $quote ) : ?><div class="hks-article-mobile-quote" data-hks-article-mobile-quote aria-hidden="true"><button type="button" data-hks-quote-proxy data-hks-cta-location="article_mobile_sticky"><?php esc_html_e( 'Request a quote', 'hks-wayfinder' ); ?></button></div><?php endif; ?>
 		</article>
+		<?php
+		return (string) ob_get_clean();
+	}
+
+	/**
+	 * Add stable, unique IDs to every rendered H2 and H3 and return their labels.
+	 *
+	 * The outline is derived after the_content filters run so it always follows
+	 * the headings a visitor actually sees. Existing IDs are kept when they do
+	 * not collide with another element; later duplicates receive a stable suffix.
+	 *
+	 * @param string $content Filtered article HTML.
+	 * @return array{content:string,headings:array<int,array{level:int,id:string,label:string}>}
+	 */
+	private static function prepare_article_outline( string $content ): array {
+		if ( ! class_exists( '\\WP_HTML_Processor' ) || '' === trim( $content ) ) {
+			return array( 'content' => $content, 'headings' => array() );
+		}
+
+		$processor        = \WP_HTML_Processor::create_fragment( $content );
+		$headings         = array();
+		$current_heading  = null;
+		$non_heading_ids  = array(
+			'hks-article-toc-title'         => true,
+			'hks-article-final-quote-title' => true,
+		);
+		$original_ids     = $non_heading_ids;
+
+		while ( $processor->next_token() ) {
+			$token_type = $processor->get_token_type();
+
+			if ( '#tag' === $token_type ) {
+				$tag       = $processor->get_tag();
+				$is_closer = $processor->is_tag_closer();
+
+				if ( ! $is_closer ) {
+					$id         = $processor->get_attribute( 'id' );
+					$id         = is_string( $id ) ? trim( $id ) : '';
+					$is_heading = 'H2' === $tag || 'H3' === $tag;
+
+					if ( '' !== $id ) {
+						$original_ids[ $id ] = true;
+						if ( ! $is_heading ) {
+							$non_heading_ids[ $id ] = true;
+						}
+					}
+
+					if ( $is_heading ) {
+						$headings[]        = array(
+							'level'       => (int) substr( $tag, 1 ),
+							'original_id' => $id,
+							'label'       => '',
+						);
+						$current_heading = array_key_last( $headings );
+					}
+				} elseif ( null !== $current_heading && 'H' . $headings[ $current_heading ]['level'] === $tag ) {
+					$current_heading = null;
+				}
+			} elseif ( '#text' === $token_type && null !== $current_heading ) {
+				$headings[ $current_heading ]['label'] .= $processor->get_modifiable_text();
+			}
+		}
+
+		if ( null !== $processor->get_last_error() || ! $headings ) {
+			return array( 'content' => $content, 'headings' => array() );
+		}
+
+		$assigned_ids  = array();
+		$preserved_ids = array();
+
+		foreach ( $headings as $index => &$heading ) {
+			$label = wp_specialchars_decode( wp_strip_all_tags( $heading['label'] ), ENT_QUOTES );
+			$label = preg_replace( '/\s+/u', ' ', trim( $label ) );
+			$label = is_string( $label ) && '' !== $label ? $label : sprintf( __( 'Section %d', 'hks-wayfinder' ), $index + 1 );
+
+			$original_id = $heading['original_id'];
+			$can_preserve = '' !== $original_id
+				&& ! isset( $non_heading_ids[ $original_id ] )
+				&& ! isset( $preserved_ids[ $original_id ] );
+
+			if ( $can_preserve ) {
+				$id = $original_id;
+				$preserved_ids[ $id ] = true;
+			} else {
+				$base = sanitize_title( $label );
+				$base = '' !== $base ? $base : 'section-' . ( $index + 1 );
+				$id   = $base;
+				$suffix = 2;
+				while ( isset( $original_ids[ $id ] ) || isset( $assigned_ids[ $id ] ) ) {
+					$id = $base . '-' . $suffix;
+					++$suffix;
+				}
+			}
+
+			$heading = array(
+				'level' => $heading['level'],
+				'id'    => $id,
+				'label' => $label,
+			);
+			$assigned_ids[ $id ] = true;
+		}
+		unset( $heading );
+
+		$rewriter      = \WP_HTML_Processor::create_fragment( $content );
+		$heading_index = 0;
+		while ( $rewriter->next_tag() && isset( $headings[ $heading_index ] ) ) {
+			$tag = $rewriter->get_tag();
+			if ( 'H2' !== $tag && 'H3' !== $tag ) {
+				continue;
+			}
+			$rewriter->set_attribute( 'id', $headings[ $heading_index ]['id'] );
+			++$heading_index;
+		}
+
+		if ( null !== $rewriter->get_last_error() || $heading_index !== count( $headings ) ) {
+			return array( 'content' => $content, 'headings' => array() );
+		}
+
+		return array(
+			'content'  => $rewriter->get_updated_html(),
+			'headings' => $headings,
+		);
+	}
+
+	/**
+	 * Render the advertorial's simple, fully expanded table of contents.
+	 *
+	 * @param array<int,array{level:int,id:string,label:string}> $headings Article outline.
+	 */
+	private static function render_article_toc( array $headings ): string {
+		if ( ! $headings ) {
+			return '';
+		}
+
+		$groups        = array();
+		$current_group = null;
+		foreach ( $headings as $heading ) {
+			if ( 2 === $heading['level'] ) {
+				$groups[]      = array( 'heading' => $heading, 'children' => array(), 'orphan' => false );
+				$current_group = array_key_last( $groups );
+			} elseif ( null !== $current_group ) {
+				$groups[ $current_group ]['children'][] = $heading;
+			} else {
+				$groups[] = array( 'heading' => $heading, 'children' => array(), 'orphan' => true );
+			}
+		}
+
+		ob_start();
+		?>
+		<nav class="hks-article-toc" aria-labelledby="hks-article-toc-title">
+			<h2 id="hks-article-toc-title"><?php esc_html_e( 'What we’ll cover', 'hks-wayfinder' ); ?></h2>
+			<ul class="hks-article-toc__list">
+				<?php foreach ( $groups as $group ) : ?>
+					<li<?php echo $group['orphan'] ? ' class="hks-article-toc__orphan"' : ''; ?>><a href="#<?php echo esc_attr( $group['heading']['id'] ); ?>"><?php echo esc_html( $group['heading']['label'] ); ?></a>
+						<?php if ( $group['children'] ) : ?>
+							<ul>
+								<?php foreach ( $group['children'] as $child ) : ?><li><a href="#<?php echo esc_attr( $child['id'] ); ?>"><?php echo esc_html( $child['label'] ); ?></a></li><?php endforeach; ?>
+							</ul>
+						<?php endif; ?>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		</nav>
 		<?php
 		return (string) ob_get_clean();
 	}
