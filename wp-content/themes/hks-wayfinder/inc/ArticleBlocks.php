@@ -163,7 +163,18 @@ final class ArticleBlocks {
 					<?php if ( $tour_valid && ! $is_ad ) : ?><div class="hks-article-tour-cta"><p><?php esc_html_e( 'Ready to explore the route?', 'hks-wayfinder' ); ?></p><a class="hks-button" data-hks-article-primary-tour-click data-hks-cta-location="article_footer" href="<?php echo esc_url( $tour_link ); ?>"><?php esc_html_e( 'View this trip', 'hks-wayfinder' ); ?> <span aria-hidden="true">→</span></a></div><?php endif; ?>
 					<?php if ( $is_ad && $quote ) : ?><section class="hks-article-final-quote" aria-labelledby="hks-article-final-quote-title"><p class="hks-article-kicker"><?php esc_html_e( 'Your next step', 'hks-wayfinder' ); ?></p><h2 id="hks-article-final-quote-title"><?php esc_html_e( 'Turn the idea into a trip that fits your dates.', 'hks-wayfinder' ); ?></h2><p><?php esc_html_e( 'Share your preferred dates and group size. You will review the prepared message before choosing WhatsApp or email.', 'hks-wayfinder' ); ?></p><button class="hks-button" type="button" data-hks-quote-proxy data-hks-cta-location="article_final"><?php esc_html_e( 'Request a quote', 'hks-wayfinder' ); ?></button></section><?php endif; ?>
 				</div>
-				<?php if ( $is_ad && $quote ) : ?><aside class="hks-article-conversion-panel" aria-label="<?php esc_attr_e( 'Request a quote for this trip', 'hks-wayfinder' ); ?>"><p class="hks-article-kicker"><?php esc_html_e( 'Plan this trip', 'hks-wayfinder' ); ?></p><h2><?php echo esc_html( $tour_title ); ?></h2><p><?php esc_html_e( 'Share your dates and group details, review the prepared message, then choose WhatsApp or email.', 'hks-wayfinder' ); ?></p><?php echo $quote; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Registered HKS quote block. ?></aside><?php endif; ?>
+				<?php if ( $is_ad && $quote ) : ?>
+					<aside class="hks-article-conversion-panel" aria-label="<?php esc_attr_e( 'Request a quote for this trip', 'hks-wayfinder' ); ?>">
+						<p class="hks-article-kicker"><?php esc_html_e( 'Plan this trip', 'hks-wayfinder' ); ?></p>
+						<h2><?php echo esc_html( $tour_title ); ?></h2>
+						<ul class="hks-tour-quote__reassurances hks-article-conversion-panel__reassurances">
+							<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Inclusions and exclusions clarified', 'hks-wayfinder' ); ?></span></li>
+							<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'No booking commitment required', 'hks-wayfinder' ); ?></span></li>
+							<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Fast Responses to all queries', 'hks-wayfinder' ); ?></span></li>
+						</ul>
+						<?php echo $quote; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Registered HKS quote block. ?>
+					</aside>
+				<?php endif; ?>
 			</div>
 			<?php self::render_related_posts( $post_id ); ?>
 			<?php if ( $is_ad && $quote ) : ?><div class="hks-article-mobile-quote" data-hks-article-mobile-quote aria-hidden="true"><button type="button" data-hks-quote-proxy data-hks-cta-location="article_mobile_sticky"><?php esc_html_e( 'Request a quote', 'hks-wayfinder' ); ?></button></div><?php endif; ?>

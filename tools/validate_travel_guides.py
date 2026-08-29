@@ -285,6 +285,21 @@ def check_theme() -> None:
     toc_style = style[toc_style_start:toc_style_end]
     if "position: sticky" in toc_style or "display: none" in toc_style:
         ERRORS.append("Advertorial article outline styling: TOC must remain fully expanded in normal flow")
+    require(
+        "Advertorial desktop quote reassurances",
+        article_blocks,
+        "hks-article-conversion-panel__reassurances",
+        "Inclusions and exclusions clarified",
+        "No booking commitment required",
+        "Fast Responses to all queries",
+    )
+    if "Share your dates and group details, review the prepared message, then choose WhatsApp or email." in article_blocks:
+        ERRORS.append("Advertorial desktop quote reassurances: superseded instruction paragraph still renders")
+    require(
+        "Advertorial mobile quote-panel reduction",
+        style,
+        ".hks-article-conversion-panel__reassurances,",
+    )
 
     # No author identity is allowed in the public article renderer, article
     # templates, or examples. Empty Query author attributes are not display.
