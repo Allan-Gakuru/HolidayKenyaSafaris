@@ -106,7 +106,7 @@ Acceptance:
 Actions:
 
 - Build the reusable intake, review, and WhatsApp/email handoff.
-- Send validated inquiry details and their request reference through WordPress mail to the repeatable private notification-recipient list, with identical-request deduplication and private attempt status.
+- Queue validated inquiry details and their request reference for background WordPress mail delivery to the repeatable private notification-recipient list, with identical-request deduplication and private queued/accepted/failed status. Never make the visitor wait for SMTP.
 - Implement field validation, accessible dialog/sheet behavior, focus management, error handling, and mobile keyboard behavior.
 - Persist package and campaign attribution.
 - Implement the event contract with placeholder-disabled analytics configuration.

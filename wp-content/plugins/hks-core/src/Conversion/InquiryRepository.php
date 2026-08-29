@@ -86,7 +86,7 @@ final class InquiryRepository {
 	}
 
 	/**
-	 * Validate, store, and notify the team before the message review step.
+	 * Validate, store, and queue team notification before message review.
 	 *
 	 * @param \WP_REST_Request $request REST request.
 	 * @return \WP_REST_Response|\WP_Error
@@ -200,7 +200,7 @@ final class InquiryRepository {
 				),
 			)
 		);
-		InquiryNotification::send( $inquiry_id, $reference, $context, $values );
+		InquiryNotification::queue( $inquiry_id );
 
 		return $this->response( $inquiry_id, $reference, $context['package_label'], $status );
 	}

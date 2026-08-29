@@ -76,7 +76,7 @@ Exclude by default:
 - Every structured quote CTA opens an intake form before the visitor chooses WhatsApp or email.
 - Required fields: name, phone, package, preferred travel date or month, and number of travelers.
 - The form constructs one reviewed message that the visitor may open in WhatsApp or in an email addressed to `info@holidaykenyasafaris.ke`.
-- Selecting `Review quote request` stores the validated inquiry privately in WordPress, creates its `HKS-######` reference, and sends the details to the private repeatable notification-recipient list under **HKS Settings → Conversion** before the review step. Identical retries are deduplicated; revised answers may trigger a new notification.
+- Selecting `Review quote request` stores the validated inquiry privately in WordPress, creates its `HKS-######` reference, and queues the details for background delivery to the private repeatable notification-recipient list under **HKS Settings → Conversion**. The review step does not wait for SMTP. Identical retries are deduplicated; revised answers may trigger a new notification.
 - A team-notification timestamp means WordPress handed the email to its configured mailer; Fluent SMTP logs remain the delivery record. WordPress records `WhatsApp opened` only after that launch click, analytics may record a non-sensitive `email_launch`, and neither visitor-controlled action may be described as proof that the reviewed message was sent.
 - Campaign attribution and package context should be retained.
 - The canonical public CTA label is **Request a quote**.

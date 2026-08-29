@@ -16,7 +16,7 @@ Version `0.11.0` provides:
 - controlled public-field REST exposure; and
 - shared publication rules across SCF, REST, and programmatic saves;
 - an idempotent administrator importer for the original MVP, seven standard site Page drafts, and 40 protected catalogue drafts in four controlled batches; and
-- a private inquiry record, deduplicated email notification to the private repeatable recipient list, visitor review, and WhatsApp/email handoff.
+- a private inquiry record, deduplicated background email notification to the private repeatable recipient list, visitor review, and WhatsApp/email handoff.
 
 Campaigns link to exactly one Tour and may change messaging, presentation, and their own optional selling price, never the linked Tour itinerary, logistics, inclusions, or policy facts. Drafts remain saveable while incomplete. Public or scheduled records must pass the publication rules.
 

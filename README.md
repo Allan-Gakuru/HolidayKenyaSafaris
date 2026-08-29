@@ -15,7 +15,7 @@ maintenance, troubleshooting, and launch checks, use the
 - Custom block theme: `wp-content/themes/hks-wayfinder/`.
 - Site plugin: `wp-content/plugins/hks-core/`.
 - Secure Custom Fields with version-controlled field definitions.
-- Primary conversion: explicitly saved private inquiry, deduplicated notification to the privately configured team-recipient list, one visitor-reviewed message, and a visitor-controlled WhatsApp or email handoff.
+- Primary conversion: explicitly saved private inquiry, deduplicated background notification to the privately configured team-recipient list, one visitor-reviewed message, and a visitor-controlled WhatsApp or email handoff.
 
 ## UI Architecture
 

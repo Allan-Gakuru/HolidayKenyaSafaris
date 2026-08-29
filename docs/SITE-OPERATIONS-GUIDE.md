@@ -308,9 +308,9 @@ API secrets, private keys, or customer details in HKS Settings.
 1. The visitor selects a quote CTA.
 2. An accessible form asks for name, phone, package, preferred date/month, and
    traveler count plus Tour-specific optional questions.
-3. **Review quote request** creates or refreshes a private inquiry and emails its
-   validated details and reference to the recipients configured under **HKS Settings
-   → Conversion**.
+3. **Review quote request** creates or refreshes a private inquiry and queues its
+   validated details and reference for background delivery to the recipients configured
+   under **HKS Settings → Conversion**. The review step does not wait for SMTP.
 4. The visitor reviews the exact message and request reference.
 5. The visitor chooses **Open WhatsApp to send** or **Open email to send**.
 6. The visitor must still select Send inside the chosen app.
@@ -343,7 +343,7 @@ quote form or Group Travel planner.
 the visitor sent the message. **Not recorded** means the recovery record exists
 but no WhatsApp launch was recorded.
 
-**Team email accepted** means WordPress handed the internal notification to the
+**Team email queued** means background delivery was scheduled. **Team email accepted** means WordPress handed the internal notification to the
 configured mailer. Confirm delivery or diagnose failures under **Settings → Fluent
 SMTP → Email Logs**. Manage recipients under **HKS Settings → Conversion → Quote
 notification recipients**; add one valid email per row. Addresses saved there are

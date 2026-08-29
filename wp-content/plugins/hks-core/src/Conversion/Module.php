@@ -28,6 +28,7 @@ final class Module implements ModuleContract {
 		add_action( 'init', array( $this, 'register_assets' ), 8 );
 		add_action( 'init', array( $this, 'register_quote_block' ), 10 );
 		add_action( 'rest_api_init', array( $repository, 'register_routes' ) );
+		add_action( InquiryNotification::CRON_HOOK, array( InquiryNotification::class, 'send_saved' ) );
 
 		$admin->register();
 	}

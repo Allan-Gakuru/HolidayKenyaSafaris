@@ -49,7 +49,7 @@ def main() -> int:
             errors.append(f"missing {relative}: {error}")
             content[label] = ""
 
-    require(errors, "plugin bootstrap", content["bootstrap"], ["Version:           0.12.2", "define( 'HKS_CORE_VERSION', '0.12.2' )"])
+    require(errors, "plugin bootstrap", content["bootstrap"], ["Version:           0.12.3", "define( 'HKS_CORE_VERSION', '0.12.3' )"])
     require(
         errors,
         "client-ready copy migration",
@@ -80,7 +80,7 @@ def main() -> int:
             "'edit_posts'             => 'manage_options'",
         ],
     )
-    require(errors, "conversion module", content["module"], ["register_block_type", "rest_api_init", "assets/css/inquiry.css", "assets/js/inquiry.js"])
+    require(errors, "conversion module", content["module"], ["register_block_type", "rest_api_init", "InquiryNotification::CRON_HOOK", "InquiryNotification::class, 'send_saved'", "assets/css/inquiry.css", "assets/js/inquiry.js"])
     require(errors, "signed form token", content["token"], ["hash_hmac( 'sha256'", "hash_equals", "wp_salt( 'nonce' )", "DAY_IN_SECONDS"])
     require(
         errors,
@@ -100,20 +100,28 @@ def main() -> int:
             "_hks_inquiry_route",
             "_hks_whatsapp_opened_at",
             "'website'",
-            "InquiryNotification::send",
+            "InquiryNotification::queue",
         ],
     )
+    if "InquiryNotification::send(" in content["repository"]:
+        errors.append("capture repository still sends SMTP synchronously")
     require(
         errors,
         "internal inquiry notification",
         content["notification"],
         [
             "hks_settings_inquiry_notification_recipients",
+            "public const CRON_HOOK = 'hks_send_inquiry_notification'",
+            "wp_schedule_single_event",
+            "wp_next_scheduled",
+            "spawn_cron",
+            "send_saved",
             "get_field( self::RECIPIENTS_FIELD, 'hks_settings' )",
             "sanitize_email",
             "array_unique",
             "wp_mail",
             "_hks_inquiry_notification_hash",
+            "_hks_inquiry_notification_queued_at",
             "_hks_inquiry_notification_sent_at",
             "_hks_inquiry_notification_failed_at",
             "Review quote request",
@@ -130,7 +138,7 @@ def main() -> int:
             "Leave all rows empty to disable notifications",
         ],
     )
-    require(errors, "restricted admin", content["admin"], ["Quote request details", "administrator access", "Team email accepted", "No quote notification recipients are configured", "does not prove"])
+    require(errors, "restricted admin", content["admin"], ["Quote request details", "administrator access", "Team email queued", "Team email accepted", "No quote notification recipients are configured", "does not prove"])
     require(
         errors,
         "quote renderer",

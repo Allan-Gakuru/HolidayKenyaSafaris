@@ -7,17 +7,95 @@
 
 namespace HolidayKenyaSafaris\Core\Conversion;
 
+use HolidayKenyaSafaris\Core\Content\PostTypes\Inquiry;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Sends one operational email when a validated inquiry is reviewed.
+ * Queues and sends one operational email when an inquiry is reviewed.
  */
 final class InquiryNotification {
+
+	/**
+	 * Background notification hook.
+	 */
+	public const CRON_HOOK = 'hks_send_inquiry_notification';
 
 	/**
 	 * Private HKS Settings field containing operational recipients.
 	 */
 	private const RECIPIENTS_FIELD = 'hks_settings_inquiry_notification_recipients';
+
+	/**
+	 * Queue delivery outside the visitor-facing REST request.
+	 *
+	 * @param int $inquiry_id Inquiry post ID.
+	 * @return bool Whether delivery is scheduled.
+	 */
+	public static function queue( $inquiry_id ) {
+		$inquiry_id = absint( $inquiry_id );
+		$args       = array( $inquiry_id );
+
+		if ( ! $inquiry_id || Inquiry::POST_TYPE !== get_post_type( $inquiry_id ) ) {
+			return false;
+		}
+
+		$scheduled = wp_next_scheduled( self::CRON_HOOK, $args );
+		if ( ! $scheduled ) {
+			$scheduled = wp_schedule_single_event( time(), self::CRON_HOOK, $args, true );
+		}
+
+		if ( is_wp_error( $scheduled ) || false === $scheduled ) {
+			update_post_meta( $inquiry_id, '_hks_inquiry_notification_failed_at', current_time( 'mysql', true ) );
+			return false;
+		}
+
+		update_post_meta( $inquiry_id, '_hks_inquiry_notification_queued_at', current_time( 'mysql', true ) );
+
+		if ( function_exists( 'spawn_cron' ) ) {
+			spawn_cron();
+		}
+
+		return true;
+	}
+
+	/**
+	 * Send a queued notification from the saved private inquiry.
+	 *
+	 * @param int $inquiry_id Inquiry post ID.
+	 * @return bool Whether WordPress accepted the notification for delivery.
+	 */
+	public static function send_saved( $inquiry_id ) {
+		$inquiry_id = absint( $inquiry_id );
+
+		if ( ! $inquiry_id || Inquiry::POST_TYPE !== get_post_type( $inquiry_id ) ) {
+			return false;
+		}
+
+		$context = array(
+			'tour_id'       => absint( self::meta( $inquiry_id, 'tour_id' ) ),
+			'campaign_id'   => absint( self::meta( $inquiry_id, 'campaign_id' ) ),
+			'package_label' => self::meta( $inquiry_id, 'package_label' ),
+		);
+		$values  = array(
+			'name'              => self::meta( $inquiry_id, 'name' ),
+			'phone'             => self::meta( $inquiry_id, 'phone' ),
+			'preferred_date'    => self::meta( $inquiry_id, 'preferred_date' ),
+			'travelers'         => absint( self::meta( $inquiry_id, 'travelers' ) ),
+			'destination_label' => self::meta( $inquiry_id, 'destination' ),
+			'inquiry_route'     => self::meta( $inquiry_id, 'route' ),
+			'attribution'       => self::attribution( self::meta( $inquiry_id, 'attribution' ) ),
+		);
+
+		foreach ( array( 'departure_town', 'adults', 'children', 'residency', 'vehicle_preference', 'accommodation_preference', 'budget_range' ) as $field ) {
+			$value = self::meta( $inquiry_id, $field );
+			if ( '' !== $value ) {
+				$values[ $field ] = in_array( $field, array( 'adults', 'children' ), true ) ? absint( $value ) : $value;
+			}
+		}
+
+		return self::send( $inquiry_id, InquiryRepository::reference( $inquiry_id ), $context, $values );
+	}
 
 	/**
 	 * Notify the team unless this exact inquiry payload was already accepted.
@@ -251,5 +329,28 @@ final class InquiryNotification {
 				)
 			)
 		);
+	}
+
+	/**
+	 * Read one protected value from a saved inquiry.
+	 *
+	 * @param int    $inquiry_id Inquiry post ID.
+	 * @param string $name       Metadata suffix.
+	 * @return string
+	 */
+	private static function meta( $inquiry_id, $name ) {
+		return (string) get_post_meta( $inquiry_id, '_hks_inquiry_' . $name, true );
+	}
+
+	/**
+	 * Decode stored allowlisted attribution.
+	 *
+	 * @param string $encoded Stored JSON.
+	 * @return array<string, string>
+	 */
+	private static function attribution( $encoded ) {
+		$attribution = json_decode( $encoded, true );
+
+		return is_array( $attribution ) ? $attribution : array();
 	}
 }

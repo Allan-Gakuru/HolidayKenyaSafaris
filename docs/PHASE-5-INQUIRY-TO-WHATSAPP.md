@@ -11,10 +11,10 @@ copy, Campaign label, and official Holiday Kenya Safaris WhatsApp and email dest
    and traveler fields plus only the optional questions enabled for that Tour.
 3. The visitor completes the form and selects **Review quote request**.
 4. Selecting **Review quote request** validates the form and creates or
-   refreshes an idempotent private inquiry, creates its reference, and sends the
-   validated details to every address configured under **HKS Settings → Conversion →
+   refreshes an idempotent private inquiry, creates its reference, and queues the
+   validated details for background delivery to every address configured under **HKS Settings → Conversion →
    Quote notification recipients**. An identical retry is not emailed twice; revised
-   answers may generate a new notification.
+   answers may generate a new notification. The visitor does not wait for SMTP.
 5. The visitor reviews the exact message and request reference.
 6. **Open WhatsApp to send** opens `wa.me/254712965131`; **Open email to send** opens
    the visitor's configured email app with `info@holidaykenyasafaris.ke` as recipient,
@@ -40,8 +40,8 @@ never `message sent`.
   duplicate.
 - Notification recipients are repeatable private HKS Settings values. They never
   appear in public markup, REST responses, analytics, or source-controlled defaults.
-- WordPress records whether its configured mailer accepted or rejected the team
-  notification. Fluent SMTP's Email Logs remain the delivery-troubleshooting record;
+- WordPress records whether the team notification is queued and whether its configured
+  mailer later accepts or rejects it. Fluent SMTP's Email Logs remain the delivery-troubleshooting record;
   notification failure does not remove the visitor's WhatsApp/email handoff choices.
 
 ## Event contract

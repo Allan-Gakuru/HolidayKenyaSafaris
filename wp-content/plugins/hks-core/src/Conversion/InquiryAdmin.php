@@ -80,6 +80,7 @@ final class InquiryAdmin {
 			__( 'Accommodation preference', 'hks-core' ) => $this->meta( $post->ID, 'accommodation_preference' ),
 			__( 'Budget range', 'hks-core' )             => $this->meta( $post->ID, 'budget_range' ),
 			__( 'Consent recorded (UTC)', 'hks-core' )   => $this->meta( $post->ID, 'consent_at' ),
+			__( 'Team email queued (UTC)', 'hks-core' )    => $this->meta( $post->ID, 'notification_queued_at' ),
 			__( 'Team email accepted (UTC)', 'hks-core' )  => $this->meta( $post->ID, 'notification_sent_at' ),
 			__( 'Team email failed (UTC)', 'hks-core' )    => $this->meta( $post->ID, 'notification_failed_at' ),
 			__( 'WhatsApp opened (UTC)', 'hks-core' )    => $this->meta( $post->ID, 'whatsapp_opened_at', true ),
@@ -110,7 +111,7 @@ final class InquiryAdmin {
 			<p><?php esc_html_e( 'No campaign attribution was captured.', 'hks-core' ); ?></p>
 		<?php endif; ?>
 
-		<p><strong><?php esc_html_e( 'Status note:', 'hks-core' ); ?></strong> <?php esc_html_e( '“Team email accepted” means WordPress handed the notification to the configured mailer; use Fluent SMTP logs to confirm delivery. “WhatsApp opened” records only that the website launched WhatsApp and does not prove the visitor sent the message.', 'hks-core' ); ?></p>
+		<p><strong><?php esc_html_e( 'Status note:', 'hks-core' ); ?></strong> <?php esc_html_e( '“Team email queued” means delivery was scheduled in the background. “Team email accepted” means WordPress handed it to the configured mailer; use Fluent SMTP logs to confirm delivery. “WhatsApp opened” records only that the website launched WhatsApp and does not prove the visitor sent the message.', 'hks-core' ); ?></p>
 		<?php
 	}
 
