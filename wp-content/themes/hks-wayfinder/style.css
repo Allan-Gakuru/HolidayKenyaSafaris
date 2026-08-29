@@ -695,7 +695,8 @@ body:not(.home) .wp-site-blocks > main {
 .hks-taxonomy-page > *,
 .hks-tour-page > *,
 .hks-standard-page > *,
-.hks-group-travel-page > * {
+.hks-group-travel-page > *,
+.hks-article-single > * {
 	margin-block-start: 0;
 }
 
@@ -3984,6 +3985,19 @@ body:not(.home) .wp-site-blocks > main {
 .hks-article-hero__media { aspect-ratio: 4 / 3; margin: 0; overflow: hidden; }
 .hks-article-hero__media img { height: 100%; object-fit: cover; width: 100%; }
 
+/* Advertorials use a tighter editorial scale than Standard Guides. */
+.hks-article--advertorial .hks-article-hero {
+	padding-top: clamp(1rem, 2.5vw, 2rem);
+}
+
+.hks-article--advertorial .hks-article-hero h1 {
+	font-size: clamp(1.65rem, 3.75vw, 3.375rem);
+}
+
+.hks-article--advertorial .hks-article-hero__promise {
+	font-size: clamp(1rem, 1.5vw, 1.0625rem);
+}
+
 .hks-article-layout {
 	display: grid;
 	gap: clamp(2rem, 6vw, 6rem);
@@ -3999,6 +4013,9 @@ body:not(.home) .wp-site-blocks > main {
 .hks-article-content img { height: auto; }
 .hks-article-content h2 { margin-top: 2.5em; }
 .hks-article-content h3 { margin-top: 2em; }
+.hks-article--advertorial .hks-article-content { font-size: 1rem; line-height: 1.65; }
+.hks-article--advertorial .hks-article-content h2 { font-size: clamp(1.375rem, 2.25vw, 1.875rem); }
+.hks-article--advertorial .hks-article-content h3 { font-size: clamp(1.0625rem, 1.5vw, 1.25rem); }
 .hks-article-tour-cta { border-top: 1px solid rgb(24 43 58 / 18%); margin-top: 3rem; padding-top: 2rem; }
 .hks-article-tour-cta p { font-weight: 600; margin-bottom: .8rem; }
 
@@ -4010,6 +4027,7 @@ body:not(.home) .wp-site-blocks > main {
 }
 
 .hks-article-final-quote h2 { font-size: clamp(1.6rem, 3vw, 2.35rem); margin: 0 0 1rem; }
+.hks-article--advertorial .hks-article-final-quote h2 { font-size: clamp(1.3rem, 2.25vw, 1.75rem); }
 .hks-article-final-quote .hks-article-kicker { margin-bottom: .65rem; }
 .hks-article-final-quote button { cursor: pointer; }
 
@@ -4023,6 +4041,7 @@ body:not(.home) .wp-site-blocks > main {
 }
 
 .hks-article-conversion-panel h2 { color: var(--wp--preset--color--white); font-size: clamp(1.35rem, 2vw, 2rem); margin: 0 0 1rem; }
+.hks-article--advertorial .hks-article-conversion-panel h2 { font-size: clamp(1.125rem, 1.5vw, 1.5rem); }
 .hks-article-conversion-panel .hks-article-kicker { color: var(--wp--preset--color--saffron); }
 .hks-article-conversion-panel .hks-inquiry__trigger { width: 100%; }
 .hks-article-mobile-quote { display: none; }
@@ -4048,6 +4067,9 @@ body:not(.home) .wp-site-blocks > main {
 	.hks-article-hero { grid-template-columns: minmax(0, 1fr); padding-block: 2rem 3rem; }
 	.hks-article-hero__media { grid-row: 1; }
 	.hks-article-hero__copy { grid-row: 2; }
+	.hks-article--advertorial .hks-article-hero { padding-block: 1rem 2rem; }
+	.hks-article--advertorial .hks-article-hero__media { display: none; }
+	.hks-article--advertorial .hks-article-hero__copy { grid-row: 1; }
 	.hks-article-grid,
 	.hks-article-related .hks-article-grid,
 	.hks-destination-guides .hks-article-grid { grid-template-columns: minmax(0, 1fr); }
