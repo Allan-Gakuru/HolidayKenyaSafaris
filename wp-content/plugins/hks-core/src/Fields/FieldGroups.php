@@ -297,7 +297,7 @@ final class FieldGroups {
 			'article_public',
 			__( 'Travel Guide: Public details', 'hks-core' ),
 			array(
-				self::message( 'article_native_mappings', __( 'Travel Guide content', 'hks-core' ), __( 'Use the WordPress title for the guide headline, the editor for the article, the excerpt for its summary, and the optional featured image for article cards.', 'hks-core' ) ),
+				self::message( 'article_native_mappings', __( 'Travel Guide content', 'hks-core' ), __( 'Use the WordPress title for the guide headline, the editor for the article, and the excerpt for its short summary. The optional featured image appears on cards and as an Advertorial hero; when an Advertorial has no featured image, its Primary Tour image is used.', 'hks-core' ) ),
 				self::field( 'article_format', __( 'Article format', 'hks-core' ), 'hks_article_format', 'select', array_merge( self::choice_args( array( 'guide' => __( 'Guide', 'hks-core' ), 'advertorial' => __( 'Advertorial', 'hks-core' ) ), false ), array( 'default_value' => 'guide', 'required' => 1 ) ) ),
 				self::field( 'article_primary_tour', __( 'Primary Tour', 'hks-core' ), 'hks_article_primary_tour', 'post_object', array_merge( self::post_object_args( 'hks_tour', false ), array( 'post_status' => array( 'publish', 'draft', 'private', 'future' ), 'allow_null' => 1 ) ) ),
 				self::field( 'article_related_posts', __( 'Related Travel Guides', 'hks-core' ), 'hks_article_related_posts', 'post_object', array( 'post_type' => array( 'post' ), 'post_status' => array( 'publish' ), 'return_format' => 'id', 'multiple' => 1, 'allow_null' => 1, 'ui' => 1, 'max' => 3, 'instructions' => __( 'Optional. Choose up to three published Travel Guides in the order they should appear. Do not select this article.', 'hks-core' ) ) ),

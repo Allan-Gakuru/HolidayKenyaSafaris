@@ -294,7 +294,7 @@ Use the Campaign price only when one figure can truthfully represent a per-perso
 | Title | Native title | Article H1 and card title |
 | Short promise | Native excerpt | Hub, archive, and related-guide summary |
 | Article body | Native content | Main reading experience |
-| Featured image | Native featured image, optional | Hero/card image when supplied; intentional text-led layout when blank |
+| Featured image | Native featured image, optional | Card image and the Advertorial hero background when supplied; an Advertorial falls back to its Primary Tour featured image, then to an intentional text-led hero |
 | Destination | SCF taxonomy field saving native `hks_destination` terms | Place discovery and related-guide matching |
 | Article Topic | SCF taxonomy field saving native `hks_article_topic` terms | Topic discovery and related-guide matching |
 | Article format | SCF choice: `guide` or `advertorial` | Selects the Standard Guide or Advertorial public composition |

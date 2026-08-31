@@ -146,33 +146,46 @@ final class ArticleBlocks {
 		$tour_title   = $tour_valid ? self::text( get_the_title( $tour_id ) ) : '';
 		$tour_link    = $tour_valid ? get_permalink( $tour_id ) : '';
 		$quote        = $is_ad && $tour_valid ? do_blocks( '<!-- wp:hks/quote-cta {"location":"article_sidebar","label":"Request a quote"} /-->' ) : '';
+		if ( $is_ad && ! $image_id && $tour_valid ) {
+			$image_id = get_post_thumbnail_id( $tour_id );
+		}
+		$learn_more_target = $toc ? '#hks-article-toc' : '#hks-article-content';
 
 		ob_start();
 		?>
 		<article class="hks-article hks-article--<?php echo esc_attr( $is_ad ? 'advertorial' : 'guide' ); ?>" data-hks-article-id="<?php echo esc_attr( (string) $post_id ); ?>" data-hks-article-format="<?php echo esc_attr( $is_ad ? 'advertorial' : 'guide' ); ?>" data-hks-primary-tour-id="<?php echo esc_attr( (string) ( $tour_valid ? $tour_id : 0 ) ); ?>">
-			<header class="hks-article-hero<?php echo $image_id ? ' hks-article-hero--with-image' : ''; ?>">
-				<?php if ( $is_ad ) : ?>
-					<div class="hks-article-hero__heading">
-						<?php self::breadcrumbs( array( __( 'Travel Guides', 'hks-wayfinder' ) => home_url( '/travel-guides/' ), $title => '' ) ); ?>
-						<?php if ( $topics || $destinations ) : ?><p class="hks-article-kicker"><?php echo esc_html( implode( ' · ', array_slice( array_merge( $destinations, $topics ), 0, 2 ) ) ); ?></p><?php endif; ?>
-						<h1><?php echo esc_html( $title ); ?></h1>
+			<?php if ( $is_ad ) : ?>
+				<header class="hks-article-hero hks-article-hero--advertorial-cover<?php echo $image_id ? ' hks-article-hero--with-image' : ' hks-article-hero--without-image'; ?>">
+					<?php if ( $image_id ) : ?><figure class="hks-article-hero__media" aria-hidden="true"><?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'full', false, array( 'alt' => '', 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '100vw' ) ) ); ?></figure><?php endif; ?>
+					<span class="hks-article-hero__wash" aria-hidden="true"></span>
+					<div class="hks-shell hks-article-hero__inner">
+						<div class="hks-article-hero__copy">
+							<?php self::breadcrumbs( array( __( 'Travel Guides', 'hks-wayfinder' ) => home_url( '/travel-guides/' ), $title => '' ) ); ?>
+							<?php if ( $topics || $destinations ) : ?><p class="hks-article-kicker"><?php echo esc_html( implode( ' · ', array_slice( array_merge( $destinations, $topics ), 0, 2 ) ) ); ?></p><?php endif; ?>
+							<h1><?php echo esc_html( $title ); ?></h1>
+							<?php if ( $excerpt ) : ?><p class="hks-article-hero__promise"><?php echo esc_html( $excerpt ); ?></p><?php endif; ?>
+							<div class="hks-article-hero__actions">
+								<?php if ( $quote ) : ?><button class="hks-button hks-article-hero__quote hks-article-hero__cta--outline" type="button" data-hks-quote-proxy data-hks-article-early-quote data-hks-cta-location="article_hero"><?php esc_html_e( 'Book this tour now', 'hks-wayfinder' ); ?></button><?php endif; ?>
+								<a class="hks-button hks-article-hero__learn" href="<?php echo esc_url( $learn_more_target ); ?>"><?php esc_html_e( 'Learn more', 'hks-wayfinder' ); ?></a>
+							</div>
+						</div>
 					</div>
-				<?php endif; ?>
-				<div class="hks-article-hero__copy">
-					<?php if ( ! $is_ad ) : ?>
+				</header>
+				<?php if ( $toc ) : ?><section class="hks-article-outline" aria-label="<?php esc_attr_e( 'Article contents', 'hks-wayfinder' ); ?>"><div class="hks-shell"><?php echo $toc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Generated and escaped by render_article_toc(). ?></div></section><?php endif; ?>
+			<?php else : ?>
+				<header class="hks-article-hero<?php echo $image_id ? ' hks-article-hero--with-image' : ''; ?>">
+					<div class="hks-article-hero__copy">
 						<?php self::breadcrumbs( array( __( 'Travel Guides', 'hks-wayfinder' ) => home_url( '/travel-guides/' ), $title => '' ) ); ?>
 						<?php if ( $topics || $destinations ) : ?><p class="hks-article-kicker"><?php echo esc_html( implode( ' · ', array_slice( array_merge( $destinations, $topics ), 0, 2 ) ) ); ?></p><?php endif; ?>
 						<h1><?php echo esc_html( $title ); ?></h1>
-					<?php endif; ?>
-					<?php if ( $excerpt ) : ?><p class="hks-article-hero__promise"><?php echo esc_html( $excerpt ); ?></p><?php endif; ?>
-					<?php echo $toc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Generated and escaped by render_article_toc(). ?>
-					<?php if ( $tour_valid && ! $is_ad ) : ?><a class="hks-button hks-article-hero__tour-link" data-hks-article-primary-tour-click data-hks-cta-location="article_hero" href="<?php echo esc_url( $tour_link ); ?>"><?php esc_html_e( 'View this trip', 'hks-wayfinder' ); ?> <span aria-hidden="true">→</span></a><?php endif; ?>
-					<?php if ( $is_ad && $quote ) : ?><button class="hks-button hks-article-hero__quote" type="button" data-hks-quote-proxy data-hks-article-early-quote data-hks-cta-location="article_hero"><?php esc_html_e( 'Request a quote', 'hks-wayfinder' ); ?></button><?php endif; ?>
-				</div>
-				<?php if ( $image_id ) : ?><figure class="hks-article-hero__media"><?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'large', false, array( 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '(max-width: 800px) 100vw, 48vw' ) ) ); ?></figure><?php endif; ?>
-			</header>
+						<?php if ( $excerpt ) : ?><p class="hks-article-hero__promise"><?php echo esc_html( $excerpt ); ?></p><?php endif; ?>
+						<?php if ( $tour_valid ) : ?><a class="hks-button hks-article-hero__tour-link" data-hks-article-primary-tour-click data-hks-cta-location="article_hero" href="<?php echo esc_url( $tour_link ); ?>"><?php esc_html_e( 'View this trip', 'hks-wayfinder' ); ?> <span aria-hidden="true">→</span></a><?php endif; ?>
+					</div>
+					<?php if ( $image_id ) : ?><figure class="hks-article-hero__media"><?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'large', false, array( 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '(max-width: 800px) 100vw, 48vw' ) ) ); ?></figure><?php endif; ?>
+				</header>
+			<?php endif; ?>
 			<div class="hks-article-layout<?php echo $is_ad && $quote ? ' hks-article-layout--conversion' : ''; ?>">
-				<div class="hks-article-content hks-prose">
+				<div id="hks-article-content" class="hks-article-content hks-prose">
 					<?php if ( $is_ad && $tour_valid && $tour_title ) : ?><p class="hks-article-intent"><?php echo esc_html( sprintf( __( 'Considering %s?', 'hks-wayfinder' ), $tour_title ) ); ?></p><?php endif; ?>
 					<?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Filtered through the_content. ?>
 					<?php if ( $tour_valid && ! $is_ad ) : ?><div class="hks-article-tour-cta"><p><?php esc_html_e( 'Ready to explore the route?', 'hks-wayfinder' ); ?></p><a class="hks-button" data-hks-article-primary-tour-click data-hks-cta-location="article_footer" href="<?php echo esc_url( $tour_link ); ?>"><?php esc_html_e( 'View this trip', 'hks-wayfinder' ); ?> <span aria-hidden="true">→</span></a></div><?php endif; ?>
@@ -217,6 +230,8 @@ final class ArticleBlocks {
 		$headings         = array();
 		$current_heading  = null;
 		$non_heading_ids  = array(
+			'hks-article-content'           => true,
+			'hks-article-toc'               => true,
 			'hks-article-toc-title'         => true,
 			'hks-article-final-quote-title' => true,
 		);
@@ -343,7 +358,7 @@ final class ArticleBlocks {
 
 		ob_start();
 		?>
-		<nav class="hks-article-toc" aria-labelledby="hks-article-toc-title">
+		<nav id="hks-article-toc" class="hks-article-toc" aria-labelledby="hks-article-toc-title">
 			<h2 id="hks-article-toc-title"><?php esc_html_e( 'What we’ll cover', 'hks-wayfinder' ); ?></h2>
 			<ul class="hks-article-toc__list">
 				<?php foreach ( $groups as $group ) : ?>

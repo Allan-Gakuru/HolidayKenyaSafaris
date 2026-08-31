@@ -264,20 +264,37 @@ def check_theme() -> None:
         "get_last_error()",
         "What we’ll cover",
         "hks-article-toc__list",
+        'id="hks-article-toc"',
     )
     outline_call = article_blocks.find("$outline      = $is_ad ? self::prepare_article_outline")
-    toc_output = article_blocks.find("<?php echo $toc;")
+    cover_start = article_blocks.find('hks-article-hero--advertorial-cover')
+    cover_end = article_blocks.find("</header>", cover_start)
+    toc_output = article_blocks.find('class="hks-article-outline"', cover_end)
+    layout_output = article_blocks.find('class="hks-article-layout', toc_output)
     excerpt_output = article_blocks.find('class="hks-article-hero__promise"')
-    quote_output = article_blocks.find('class="hks-button hks-article-hero__quote"')
-    if min(outline_call, excerpt_output, toc_output, quote_output) < 0 or not (excerpt_output < toc_output < quote_output):
-        ERRORS.append("Advertorial article outline: TOC must be advertorial-only and render between the hero excerpt and opening quote action")
+    quote_output = article_blocks.find("data-hks-article-early-quote")
+    if min(outline_call, cover_start, cover_end, excerpt_output, quote_output, toc_output, layout_output) < 0:
+        ERRORS.append("Advertorial article outline: static hero, opening actions, or post-hero TOC output is missing")
+    elif not (cover_start < excerpt_output < quote_output < cover_end < toc_output < layout_output):
+        ERRORS.append("Advertorial article outline: TOC must render immediately after the static hero and before article content")
+    require(
+        "Advertorial static hero",
+        article_blocks,
+        "$image_id = get_post_thumbnail_id( $tour_id );",
+        "hks-article-hero__wash",
+        "'sizes' => '100vw'",
+        "Book this tour now",
+        "hks-article-hero__cta--outline",
+        "hks-article-hero__learn",
+        "$learn_more_target",
+    )
     require(
         "Advertorial article outline styling",
         style,
+        ".hks-article-outline {",
         ".hks-article-toc {",
         ".hks-article-toc__list ul {",
         ".hks-article-content :is(h2, h3)[id] { scroll-margin-top:",
-        ".hks-article--advertorial .hks-article-hero__media { display: none; }",
     )
     toc_style_start = style.find(".hks-article-toc {")
     toc_style_end = style.find(".hks-article-layout {", toc_style_start)
@@ -285,22 +302,18 @@ def check_theme() -> None:
     if "position: sticky" in toc_style or "display: none" in toc_style:
         ERRORS.append("Advertorial article outline styling: TOC must remain fully expanded in normal flow")
     require(
-        "Advertorial full-width desktop title",
-        article_blocks,
-        "hks-article-hero__heading",
-        "<?php if ( ! $is_ad ) : ?>",
-    )
-    require(
-        "Advertorial full-width desktop title styling",
+        "Advertorial static cover styling",
         style,
-        ".hks-article--advertorial .hks-article-hero__heading {",
-        "grid-column: 1 / -1;",
-        "max-width: none;\n\twidth: 100%;",
-        ".hks-article--advertorial .hks-article-hero__heading h1 {\n\t\ttext-wrap: wrap;",
-        "align-self: start;\n\t\taspect-ratio: 4 / 3;",
-        ".hks-article--advertorial .hks-article-hero__heading { grid-column: 1; grid-row: 1; }",
-        ".hks-article--advertorial .hks-article-hero__copy { grid-row: 2; }",
+        ".hks-article--advertorial .hks-article-hero--advertorial-cover {",
+        ".hks-article--advertorial .hks-article-hero__media img {",
+        ".hks-article--advertorial .hks-article-hero__wash {",
+        ".hks-article-hero__actions {",
+        ".hks-article--advertorial .hks-article-hero__cta--outline {",
+        ".hks-article--advertorial .hks-article-hero__learn {",
+        "flex-direction: column;",
     )
+    if re.search(r"\.hks-article--advertorial\s+\.hks-article-hero__media\s*\{[^}]*display:\s*none", style, re.DOTALL):
+        ERRORS.append("Advertorial static cover styling: hero image must remain visible on mobile")
     require(
         "Advertorial desktop quote reassurances",
         article_blocks,
