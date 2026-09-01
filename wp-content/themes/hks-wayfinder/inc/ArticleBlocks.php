@@ -356,23 +356,48 @@ final class ArticleBlocks {
 			}
 		}
 
+		$columns = array( array(), array() );
+		foreach ( $groups as $index => $group ) {
+			$columns[ $index % 2 ][] = $group;
+		}
+
 		ob_start();
 		?>
 		<nav id="hks-article-toc" class="hks-article-toc" aria-labelledby="hks-article-toc-title">
 			<h2 id="hks-article-toc-title"><?php esc_html_e( 'What we’ll cover', 'hks-wayfinder' ); ?></h2>
-			<ul class="hks-article-toc__list">
-				<?php foreach ( $groups as $group ) : ?>
-					<li<?php echo $group['orphan'] ? ' class="hks-article-toc__orphan"' : ''; ?>><a href="#<?php echo esc_attr( $group['heading']['id'] ); ?>"><?php echo esc_html( $group['heading']['label'] ); ?></a>
-						<?php if ( $group['children'] ) : ?>
-							<ul>
-								<?php foreach ( $group['children'] as $child ) : ?><li><a href="#<?php echo esc_attr( $child['id'] ); ?>"><?php echo esc_html( $child['label'] ); ?></a></li><?php endforeach; ?>
-							</ul>
-						<?php endif; ?>
-					</li>
+			<div class="hks-article-toc__columns">
+				<?php foreach ( $columns as $column ) : ?>
+					<ul class="hks-article-toc__list hks-article-toc__column">
+						<?php echo self::render_article_toc_items( $column ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Generated and escaped by render_article_toc_items(). ?>
+					</ul>
 				<?php endforeach; ?>
+			</div>
+			<ul class="hks-article-toc__list hks-article-toc__list--mobile">
+				<?php echo self::render_article_toc_items( $groups ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Generated and escaped by render_article_toc_items(). ?>
 			</ul>
 		</nav>
 		<?php
+		return (string) ob_get_clean();
+	}
+
+	/**
+	 * Render table-of-contents groups for one visual list.
+	 *
+	 * @param array<int,array{heading:array{level:int,id:string,label:string},children:array<int,array{level:int,id:string,label:string}>,orphan:bool}> $groups Heading groups.
+	 */
+	private static function render_article_toc_items( array $groups ): string {
+		ob_start();
+		foreach ( $groups as $group ) :
+			?>
+			<li<?php echo $group['orphan'] ? ' class="hks-article-toc__orphan"' : ''; ?>><a href="#<?php echo esc_attr( $group['heading']['id'] ); ?>"><?php echo esc_html( $group['heading']['label'] ); ?></a>
+				<?php if ( $group['children'] ) : ?>
+					<ul>
+						<?php foreach ( $group['children'] as $child ) : ?><li><a href="#<?php echo esc_attr( $child['id'] ); ?>"><?php echo esc_html( $child['label'] ); ?></a></li><?php endforeach; ?>
+					</ul>
+				<?php endif; ?>
+			</li>
+			<?php
+		endforeach;
 		return (string) ob_get_clean();
 	}
 

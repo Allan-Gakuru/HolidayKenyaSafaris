@@ -258,12 +258,15 @@ def check_theme() -> None:
         article_blocks,
         "private static function prepare_article_outline",
         "private static function render_article_toc",
+        "private static function render_article_toc_items",
         "WP_HTML_Processor::create_fragment",
         "'H2' === $tag || 'H3' === $tag",
         "set_attribute( 'id'",
         "get_last_error()",
         "What we’ll cover",
         "hks-article-toc__list",
+        "hks-article-toc__columns",
+        "hks-article-toc__list--mobile",
         'id="hks-article-toc"',
     )
     outline_call = article_blocks.find("$outline      = $is_ad ? self::prepare_article_outline")
@@ -293,14 +296,21 @@ def check_theme() -> None:
         style,
         ".hks-article-outline {",
         ".hks-article-toc {",
+        ".hks-article-toc__columns {",
+        ".hks-article-toc__column {",
+        ".hks-article-toc__list--mobile { display: none; }",
         ".hks-article-toc__list ul {",
+        ".hks-article-toc__columns { display: none; }",
+        ".hks-article-toc__list--mobile { display: grid; gap: 1.25rem; }",
         ".hks-article-content :is(h2, h3)[id] { scroll-margin-top:",
     )
     toc_style_start = style.find(".hks-article-toc {")
     toc_style_end = style.find(".hks-article-layout {", toc_style_start)
     toc_style = style[toc_style_start:toc_style_end]
-    if "position: sticky" in toc_style or "display: none" in toc_style:
+    if "position: sticky" in toc_style:
         ERRORS.append("Advertorial article outline styling: TOC must remain fully expanded in normal flow")
+    if ".hks-article-toc__list > li:nth-child(" in toc_style:
+        ERRORS.append("Advertorial article outline styling: interleaved floats can reintroduce cross-column gaps")
     require(
         "Advertorial static cover styling",
         style,
