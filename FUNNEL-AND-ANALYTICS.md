@@ -28,6 +28,7 @@ At minimum, a qualified website inquiry contains:
 
 - Name.
 - Phone number.
+- Email address.
 - Package interest.
 - Preferred date or travel month.
 - Number of travelers.
@@ -96,6 +97,7 @@ Hi Holiday Kenya Safaris, my name is {name}.
 I am interested in {package}.
 Preferred travel date/month: {date}.
 Travelers: {traveler_summary}.
+Email: {email}.
 Departure town: {departure_or_not_provided}.
 
 I came from: {campaign_or_page_label}.
@@ -145,7 +147,7 @@ The connected Meta integration maps `quote_form_complete` to Meta's standard `Le
 
 Do not treat `whatsapp_launch` or `email_launch` as proof that a message was sent, a confirmed lead, or a booking. Reconcile website events with actual conversations and sales records.
 
-For the Group Travel planner, use `page_type: group_travel` and `cta_location: group_travel_page`. The selected Tour ID and slug become the standard Tour context before completion events fire. Do not place the visitor's name, phone, dates, Destination label, or exact traveler count in analytics; the inquiry record may store the derived Destination privately for operational triage.
+For the Group Travel planner, use `page_type: group_travel` and `cta_location: group_travel_page`. The selected Tour ID and slug become the standard Tour context before completion events fire. Do not place the visitor's name, phone, email, dates, Destination label, or exact traveler count in analytics; the inquiry record may store the derived Destination privately for operational triage.
 
 For an Advertorial quote, use `page_type: article` and include only article ID, article format, Primary Tour ID, CTA location, public taxonomy slugs, and existing attribution values. Reuse `quote_cta_click`, `quote_form_complete`, `whatsapp_launch`, and `email_launch`; do not create a second quote-event vocabulary. Standard Guides use `view_article` and `article_primary_tour_click` only unless the visitor later enters the canonical Tour flow.
 

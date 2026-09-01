@@ -7,7 +7,7 @@ copy, Campaign label, and official Holiday Kenya Safaris WhatsApp and email dest
 ## Visitor journey
 
 1. The quote CTA opens an accessible modal rather than a messaging app.
-2. The visitor completes the required name, phone, package, preferred date/month,
+2. The visitor completes the required name, phone, email, package, preferred date/month,
    and traveler fields plus only the optional questions enabled for that Tour.
 3. The visitor completes the form and selects **Review quote request**.
 4. Selecting **Review quote request** validates the form and creates or
@@ -29,7 +29,7 @@ never `message sent`.
 - Inquiries use a non-public, non-queryable `hks_inquiry` post type.
 - The post type is absent from REST, search, navigation, feeds, and export.
 - Only users with `manage_options` can see inquiry screens.
-- Names and phone numbers are protected metadata, never post titles or analytics.
+- Names, phone numbers, and email addresses are protected metadata, never post titles or analytics.
 - The public capture endpoint verifies a signed Tour/Campaign token, a UUID v4
   idempotency key, a time trap, a honeypot, strict fields, and a salted-IP transient
   rate limit. Raw IP addresses are not stored.

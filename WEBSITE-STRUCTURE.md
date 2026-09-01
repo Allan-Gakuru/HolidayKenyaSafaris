@@ -260,6 +260,7 @@ Required intake fields:
 
 - Name.
 - Phone.
+- Email.
 - Package.
 - Preferred date or month.
 - Number of travelers.

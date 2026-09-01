@@ -161,7 +161,7 @@ The global floating **Chat on WhatsApp** control is a separate lightweight conta
 
 The canonical `/group-travel/` Page uses Catalogue mode and keeps one H1 in the standard title band. Follow it with a concise image-led introduction using media already assigned to published Tours, an inline planner, a three-step explanation, and the Page's editable supporting content.
 
-The planner reuses the shared HKS inquiry component rather than opening a second form. Destination and Tour are linked required selects; name, phone, preferred date or month, traveler count, private recovery, message review, and visitor-controlled WhatsApp/email handoff retain the global conversion behavior. The form must remain legible as one column on mobile and must not promise group capabilities that have not been confirmed.
+The planner reuses the shared HKS inquiry component rather than opening a second form. Destination and Tour are linked required selects; name, phone, email, preferred date or month, traveler count, private recovery, message review, and visitor-controlled WhatsApp/email handoff retain the global conversion behavior. The form must remain legible as one column on mobile and must not promise group capabilities that have not been confirmed.
 
 ### Travel Guides
 

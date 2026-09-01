@@ -291,6 +291,13 @@ final class InquiryRepository {
 			return $this->error( 'phone', __( 'Enter a valid phone number.', 'hks-core' ) );
 		}
 
+		$email_input = trim( (string) ( $payload['email'] ?? '' ) );
+		$email       = sanitize_email( $email_input );
+
+		if ( ! $email || strlen( $email ) > 254 || ! is_email( $email ) || 0 !== strcasecmp( $email, $email_input ) ) {
+			return $this->error( 'email', __( 'Enter a valid email address.', 'hks-core' ) );
+		}
+
 		$travel_date = $this->text( $payload['preferred_date'] ?? '', 80 );
 
 		if ( strlen( $travel_date ) < 2 ) {
@@ -336,6 +343,7 @@ final class InquiryRepository {
 		$values = array(
 			'name'              => $name,
 			'phone'             => $phone,
+			'email'             => $email,
 			'preferred_date'    => $travel_date,
 			'travelers'         => $travelers,
 			'destination_label' => $destination_label,
@@ -393,6 +401,7 @@ final class InquiryRepository {
 			'_hks_inquiry_status'          => 'captured',
 			'_hks_inquiry_name'            => $values['name'],
 			'_hks_inquiry_phone'           => $values['phone'],
+			'_hks_inquiry_email'           => $values['email'],
 			'_hks_inquiry_preferred_date'  => $values['preferred_date'],
 			'_hks_inquiry_travelers'       => $values['travelers'],
 			'_hks_inquiry_tour_id'         => $context['tour_id'],

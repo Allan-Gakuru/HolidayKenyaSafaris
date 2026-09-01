@@ -260,7 +260,7 @@ Exclusion fields may cover:
 
 The Tour title supplies the canonical package label used in the reviewed message and email subject. The canonical CTA, quote-panel heading, supporting copy, and intake behavior are template-controlled. Do not expose Tour-level overrides until a public template actually consumes them.
 
-The Group Travel planner adds no Tour editor fields. It queries published Tours and their existing Destination assignments, uses the chosen Tour as the signed package context, and derives the private inquiry Destination from that Tour. Inquiry records may store `_hks_inquiry_route`, `_hks_inquiry_destination`, and private notification attempt timestamps for administrator triage; none is public or editor-maintained Tour data. The repeatable `hks_settings_inquiry_notification_recipients` option belongs under the private HKS Settings Conversion tab and never renders publicly.
+The Group Travel planner adds no Tour editor fields. It queries published Tours and their existing Destination assignments, uses the chosen Tour as the signed package context, and derives the private inquiry Destination from that Tour. Inquiry records store the required contact email as protected `_hks_inquiry_email` metadata and may store `_hks_inquiry_route`, `_hks_inquiry_destination`, and private notification attempt timestamps for administrator triage; none is public or editor-maintained Tour data. The repeatable `hks_settings_inquiry_notification_recipients` option belongs under the private HKS Settings Conversion tab and never renders publicly.
 
 ### Presentation and Relationships
 

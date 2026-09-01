@@ -124,6 +124,7 @@ final class QuoteBlock {
 							<div class="hks-inquiry__grid">
 								<?php self::text_input( $instance_id, 'name', __( 'Your name', 'hks-core' ), 'text', 'name', true ); ?>
 								<?php self::text_input( $instance_id, 'phone', __( 'Phone number', 'hks-core' ), 'tel', 'tel', true, __( 'e.g. 0722 000 000', 'hks-core' ) ); ?>
+								<?php self::text_input( $instance_id, 'email', __( 'Email address', 'hks-core' ), 'email', 'email', true, __( 'e.g. you@example.com', 'hks-core' ), '', '', '254' ); ?>
 								<?php self::text_input( $instance_id, 'preferred_date', __( 'Preferred date or month', 'hks-core' ), 'text', 'off', true, __( 'e.g. August 2026', 'hks-core' ) ); ?>
 								<?php self::text_input( $instance_id, 'travelers', __( 'Number of travelers', 'hks-core' ), 'number', 'off', true, '', '1', $is_group_context ? '999' : '99' ); ?>
 							</div>
@@ -398,9 +399,10 @@ final class QuoteBlock {
 	 * @param string $placeholder Placeholder.
 	 * @param string $min         Optional numeric minimum.
 	 * @param string $max         Optional numeric maximum.
+	 * @param string $maxlength   Optional maximum text length.
 	 * @return void
 	 */
-	private static function text_input( $instance_id, $name, $label, $type, $autocomplete, $required = false, $placeholder = '', $min = '', $max = '' ) {
+	private static function text_input( $instance_id, $name, $label, $type, $autocomplete, $required = false, $placeholder = '', $min = '', $max = '', $maxlength = '' ) {
 		?>
 		<div class="hks-inquiry__field">
 			<label for="<?php echo esc_attr( $instance_id . '-' . $name ); ?>"><?php echo esc_html( $label ); ?><?php if ( $required ) : ?> <span aria-hidden="true">*</span><?php endif; ?></label>
@@ -413,6 +415,7 @@ final class QuoteBlock {
 				<?php if ( $required ) : ?>required<?php endif; ?>
 				<?php if ( $min ) : ?>min="<?php echo esc_attr( $min ); ?>"<?php endif; ?>
 				<?php if ( $max ) : ?>max="<?php echo esc_attr( $max ); ?>"<?php endif; ?>
+				<?php if ( $maxlength ) : ?>maxlength="<?php echo esc_attr( $maxlength ); ?>"<?php endif; ?>
 			>
 		</div>
 		<?php

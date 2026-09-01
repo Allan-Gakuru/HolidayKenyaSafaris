@@ -306,7 +306,7 @@ API secrets, private keys, or customer details in HKS Settings.
 ### 13.1 What the visitor experiences
 
 1. The visitor selects a quote CTA.
-2. An accessible form asks for name, phone, package, preferred date/month, and
+2. An accessible form asks for name, phone, email, package, preferred date/month, and
    traveler count plus Tour-specific optional questions.
 3. **Review quote request** creates or refreshes a private inquiry and queues its
    validated details and reference for background delivery to the recipients configured
@@ -316,7 +316,7 @@ API secrets, private keys, or customer details in HKS Settings.
 6. The visitor must still select Send inside the chosen app.
 
 On `/group-travel/`, the same form is shown inline. The visitor first selects a
-Destination and then one of its published Tours. The standard name, phone,
+Destination and then one of its published Tours. The standard name, phone, email,
 date/month, traveler-count, recovery, review, and handoff steps remain
 unchanged. Destination and Tour choices update automatically when catalogue
 records are published or their Destination assignments change.
@@ -331,7 +331,7 @@ quote form or Group Travel planner.
 
 1. Sign in as an Administrator.
 2. Open **Tours -> Quote inquiries**.
-3. Review the reference, name, phone, package, Destination where available,
+3. Review the reference, name, phone, email, package, Destination where available,
    travel plan, capture time, team-email acceptance or failure, and WhatsApp state.
 4. Open the record for the inquiry route, optional answers, and campaign
    attribution. **Group Travel page** identifies requests made through the

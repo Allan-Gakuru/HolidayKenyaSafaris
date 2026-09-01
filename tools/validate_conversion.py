@@ -94,12 +94,16 @@ def main() -> int:
             "_hks_inquiry_request_key",
             "_hks_inquiry_name",
             "_hks_inquiry_phone",
+            "_hks_inquiry_email",
             "_hks_inquiry_preferred_date",
             "_hks_inquiry_travelers",
             "_hks_inquiry_destination",
             "_hks_inquiry_route",
             "_hks_whatsapp_opened_at",
             "'website'",
+            "sanitize_email( $email_input )",
+            "is_email( $email )",
+            "Enter a valid email address.",
             "InquiryNotification::queue",
         ],
     )
@@ -116,6 +120,8 @@ def main() -> int:
             "wp_next_scheduled",
             "spawn_cron",
             "send_saved",
+            "self::meta( $inquiry_id, 'email' )",
+            "__( 'Email', 'hks-core' )",
             "get_field( self::RECIPIENTS_FIELD, 'hks_settings' )",
             "sanitize_email",
             "array_unique",
@@ -138,7 +144,7 @@ def main() -> int:
             "Leave all rows empty to disable notifications",
         ],
     )
-    require(errors, "restricted admin", content["admin"], ["Quote request details", "administrator access", "Team email queued", "Team email accepted", "No quote notification recipients are configured", "does not prove"])
+    require(errors, "restricted admin", content["admin"], ["Quote request details", "administrator access", "__( 'Email', 'hks-core' )", "Team email queued", "Team email accepted", "No quote notification recipients are configured", "does not prove"])
     require(
         errors,
         "quote renderer",
@@ -150,6 +156,7 @@ def main() -> int:
             "Holiday Kenya Safaris is owned and operated by Ashford Tours and Travels. With over 20 years of international travelers experience, we made Holiday Kenya Safaris created to serve Kenyans.",
             "choose WhatsApp or email",
             "Open email to send",
+            "'email', __( 'Email address', 'hks-core' ), 'email', 'email', true",
             "data-hks-email-launch",
             "FormToken::issue",
             "group_context",
@@ -196,7 +203,7 @@ def main() -> int:
         errors,
         "browser privacy and handoff",
         content["script"],
-        ["window.dataLayer.push(payload)", "sessionStorage", "encodeURIComponent(reviewedMessage)", "mailto:", "encodeURIComponent(emailSubject)", "keepalive: true", "sourceAttribution", "destination_id", "inquiry_route", "group_travel"],
+        ["window.dataLayer.push(payload)", "sessionStorage", "email: safeText(data.get('email'), 254)", "encodeURIComponent(reviewedMessage)", "mailto:", "encodeURIComponent(emailSubject)", "keepalive: true", "sourceAttribution", "destination_id", "inquiry_route", "group_travel"],
     )
 
     for line_number, line in enumerate(content["script"].splitlines(), 1):
@@ -204,10 +211,12 @@ def main() -> int:
             sensitive in line
             for sensitive in (
                 "form.elements.phone.value",
+                "form.elements.email.value",
                 "form.elements.preferred_date.value",
                 "form.elements.budget_range.value",
                 "form.elements.name.value",
                 "data.get('phone')",
+                "data.get('email')",
                 "data.get('preferred_date')",
                 "data.get('budget_range')",
                 "data.get('name')",

@@ -70,7 +70,7 @@ The initial commercial endpoint is a qualified WhatsApp or email quote conversat
 
 - Every package and campaign page has a prominent **Request a quote** CTA.
 - Opening the CTA first shows a short intake form.
-- Required fields: name, phone, package, preferred date or month, and number of travelers.
+- Required fields: name, phone, email, package, preferred date or month, and number of travelers.
 - Optional package-specific fields may include departure town, adults and children, residency, vehicle preference, accommodation preference, and budget range.
 - After validation, store the private inquiry, create its request reference, and queue a background email containing the validated details for every private recipient configured under **HKS Settings → Conversion**. The visitor-facing save response must not wait for SMTP. Identical retries must not create duplicate notifications; revised answers may produce a new notification.
 - Construct one readable message from the answers and preserve campaign attribution. The visitor reviews that message, then chooses whether to open WhatsApp or an email addressed to `info@holidaykenyasafaris.ke` and sends it from that app. The automatic internal notification must not be described as the visitor having sent the reviewed message.

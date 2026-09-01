@@ -67,6 +67,7 @@ final class InquiryAdmin {
 		$fields = array(
 			__( 'Name', 'hks-core' )                     => $this->meta( $post->ID, 'name' ),
 			__( 'Phone', 'hks-core' )                    => $this->meta( $post->ID, 'phone' ),
+			__( 'Email', 'hks-core' )                    => $this->meta( $post->ID, 'email' ),
 			__( 'Inquiry route', 'hks-core' )            => $this->route_label( $this->meta( $post->ID, 'route' ) ),
 			__( 'Destination', 'hks-core' )              => $this->meta( $post->ID, 'destination' ),
 			__( 'Package', 'hks-core' )                  => $this->meta( $post->ID, 'package_label' ),

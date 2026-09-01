@@ -213,7 +213,7 @@ The panel should contain:
 
 Do not display first name, last name, email, country, date selectors, adult count, child count, notes, and a Submit Booking form permanently in the sidebar.
 
-The quote button opens the shared HKS intake dialog or mobile sheet. The required fields remain name, phone, package, preferred date or month, and number of travelers. Package-specific optional questions appear only when they improve quote accuracy.
+The quote button opens the shared HKS intake dialog or mobile sheet. The required fields remain name, phone, email, package, preferred date or month, and number of travelers. Package-specific optional questions appear only when they improve quote accuracy.
 
 ### Tour tabs and mobile disclosures
 

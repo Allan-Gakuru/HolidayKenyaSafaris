@@ -131,7 +131,8 @@
 			'I am interested in ' + packageLabel + '.',
 			'Preferred travel date/month: ' + safeText(data.get('preferred_date'), 80) + '.',
 			'Travelers: ' + safeText(data.get('travelers'), 3) + '.',
-			'Phone: ' + safeText(data.get('phone'), 30) + '.'
+			'Phone: ' + safeText(data.get('phone'), 30) + '.',
+			'Email: ' + safeText(data.get('email'), 254) + '.'
 		];
 		if (destination) lines.splice(3, 0, 'Destination: ' + destination + '.');
 
@@ -176,6 +177,7 @@
 			website: safeText(data.get('website'), 120),
 			name: safeText(data.get('name'), 100),
 			phone: safeText(data.get('phone'), 30),
+			email: safeText(data.get('email'), 254),
 			preferred_date: safeText(data.get('preferred_date'), 80),
 			travelers: Number(data.get('travelers')),
 			destination_id: Number(data.get('destination_selection') || 0),

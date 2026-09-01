@@ -80,6 +80,7 @@ final class InquiryNotification {
 		$values  = array(
 			'name'              => self::meta( $inquiry_id, 'name' ),
 			'phone'             => self::meta( $inquiry_id, 'phone' ),
+			'email'             => self::meta( $inquiry_id, 'email' ),
 			'preferred_date'    => self::meta( $inquiry_id, 'preferred_date' ),
 			'travelers'         => absint( self::meta( $inquiry_id, 'travelers' ) ),
 			'destination_label' => self::meta( $inquiry_id, 'destination' ),
@@ -209,6 +210,7 @@ final class InquiryNotification {
 			self::line( __( 'Received', 'hks-core' ), wp_date( 'j M Y, g:i a T' ) ),
 			self::line( __( 'Name', 'hks-core' ), $values['name'] ),
 			self::line( __( 'Phone', 'hks-core' ), $values['phone'] ),
+			self::line( __( 'Email', 'hks-core' ), $values['email'] ),
 			self::line( __( 'Inquiry route', 'hks-core' ), self::route_label( $values['inquiry_route'] ) ),
 			self::line( __( 'Package', 'hks-core' ), $context['package_label'] ),
 			self::line( __( 'Destination', 'hks-core' ), $values['destination_label'] ),
