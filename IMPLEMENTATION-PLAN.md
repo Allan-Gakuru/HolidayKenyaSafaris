@@ -108,7 +108,7 @@ Actions:
 - Build the reusable intake, review, and WhatsApp/email handoff.
 - Queue validated inquiry details and their request reference for background WordPress mail delivery to the repeatable private notification-recipient list, with identical-request deduplication and private queued/accepted/failed status. Never make the visitor wait for SMTP.
 - Implement field validation, accessible dialog/sheet behavior, focus management, error handling, and mobile keyboard behavior.
-- Persist package and campaign attribution.
+- Persist package and campaign attribution privately; keep campaign/Facebook source details and the HKS destination number out of the visitor-reviewed message.
 - Implement the event contract with placeholder-disabled analytics configuration.
 - Test desktop and mobile WhatsApp behavior plus `mailto:` handoff to the visitor's configured email application.
 - Expose one reusable API and block/pattern contract so the desktop sticky quote panel, mobile sticky action, in-flow panels, header action, and Campaign pages all open the same intake flow.

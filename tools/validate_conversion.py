@@ -49,7 +49,7 @@ def main() -> int:
             errors.append(f"missing {relative}: {error}")
             content[label] = ""
 
-    require(errors, "plugin bootstrap", content["bootstrap"], ["Version:           0.12.3", "define( 'HKS_CORE_VERSION', '0.12.3' )"])
+    require(errors, "plugin bootstrap", content["bootstrap"], ["Version:           0.12.4", "define( 'HKS_CORE_VERSION', '0.12.4' )"])
     require(
         errors,
         "client-ready copy migration",
@@ -205,6 +205,26 @@ def main() -> int:
         content["script"],
         ["window.dataLayer.push(payload)", "sessionStorage", "email: safeText(data.get('email'), 254)", "encodeURIComponent(reviewedMessage)", "mailto:", "encodeURIComponent(emailSubject)", "keepalive: true", "sourceAttribution", "destination_id", "inquiry_route", "group_travel"],
     )
+
+    message_start = content["script"].find("function buildMessage(")
+    message_end = content["script"].find("function formPayload(", message_start)
+    reviewed_message = content["script"][message_start:message_end] if message_start >= 0 and message_end > message_start else ""
+    require(
+        errors,
+        "visitor-reviewed quote message",
+        reviewed_message,
+        [
+            "data.get('name')",
+            "data.get('preferred_date')",
+            "data.get('travelers')",
+            "data.get('phone')",
+            "data.get('email')",
+            "Request reference:",
+        ],
+    )
+    for snippet in ("whatsappNumber", "254712965131", "Campaign:", "Source:", "utm_source", "utm_campaign", "campaignLabel", "attribution"):
+        if snippet in reviewed_message:
+            errors.append(f"visitor-reviewed quote message exposes private destination or campaign attribution: {snippet}")
 
     for line_number, line in enumerate(content["script"].splitlines(), 1):
         if "track(root" in line and any(

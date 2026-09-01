@@ -97,10 +97,9 @@ Hi Holiday Kenya Safaris, my name is {name}.
 I am interested in {package}.
 Preferred travel date/month: {date}.
 Travelers: {traveler_summary}.
+Phone: {phone}.
 Email: {email}.
 Departure town: {departure_or_not_provided}.
-
-I came from: {campaign_or_page_label}.
 
 Please confirm availability, the current KSh price, what is included, and the next booking step.
 ```
@@ -116,7 +115,7 @@ Requirements:
 - Let the user choose **Open WhatsApp to send** or **Open email to send** after reviewing the same message.
 - Build the email with `info@holidaykenyasafaris.ke` as recipient, the Tour name and request reference in the subject, and the exact reviewed message in the body.
 - Never claim the inquiry has been sent merely because WhatsApp or the email app opened.
-- Preserve UTMs and campaign label in hidden state or the generated message, subject to privacy decisions.
+- Preserve UTMs and the campaign label privately with the inquiry and in non-sensitive launch analytics. Do not include them, Facebook source information, or the HKS destination number in the visitor-reviewed message.
 - Support WhatsApp app and web behavior on mobile and desktop.
 
 ## Event Contract

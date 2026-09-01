@@ -539,7 +539,7 @@ code, not a backup of live WordPress content or media.
 - Required and optional quote fields work on mobile and desktop.
 - A valid form creates one recoverable inquiry.
 - Retrying the same browser request does not create duplicates.
-- The reviewed message contains the correct package and reference in both handoff options.
+- The reviewed message contains the correct visitor contact details, package, and reference in both handoff options, without the HKS destination number or Campaign/Facebook/UTM attribution.
 - WordPress records Opened without claiming Sent.
 - Privacy notice, retention, deletion, and consent behavior are approved.
 - Administrator inquiry access is restricted.

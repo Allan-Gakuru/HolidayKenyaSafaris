@@ -122,7 +122,7 @@
 		return safeText(field.value, 120);
 	}
 
-	function buildMessage(form, packageLabel, reference, source) {
+	function buildMessage(form, packageLabel, reference, context) {
 		const data = new FormData(form);
 		const destination = selectedLabel(form, 'destination_selection');
 		const lines = [
@@ -153,12 +153,7 @@
 
 		lines.push('', 'Request reference: ' + reference + '.');
 
-		const campaign = safeText(source.campaignLabel, 100);
-		const sourceParts = [safeText(source.attribution.utm_source, 80), safeText(source.attribution.utm_campaign, 100)].filter(Boolean);
-		if (campaign) lines.push('Campaign: ' + campaign + '.');
-		if (sourceParts.length) lines.push('Source: ' + sourceParts.join(' / ') + '.');
-
-		if (safeText(source.pageType, 30) === 'group_travel') {
+		if (safeText(context.pageType, 30) === 'group_travel') {
 			lines.push('', 'Please confirm availability and send a tailored KSh quote for this group, including what is included and the next booking step.');
 		} else {
 			lines.push('', 'Please confirm availability, the current KSh price, what is included, and the next booking step.');
@@ -344,9 +339,7 @@
 				const reviewedPackage = safeText(result.package_label, 160);
 				const reviewedReference = safeText(result.reference, 30);
 				const reviewedMessage = buildMessage(form, reviewedPackage, reviewedReference, {
-					campaignLabel: root.dataset.campaignLabel,
-					pageType: root.dataset.pageType,
-					attribution: sourceAttribution
+					pageType: root.dataset.pageType
 				});
 				const emailRecipient = safeText(root.dataset.emailRecipient, 254).replace(/[^a-z0-9@._+-]/gi, '');
 				const emailSubject = 'Quote request – ' + reviewedPackage + ' – ' + reviewedReference;

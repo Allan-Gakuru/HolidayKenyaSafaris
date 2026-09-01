@@ -73,7 +73,7 @@ The initial commercial endpoint is a qualified WhatsApp or email quote conversat
 - Required fields: name, phone, email, package, preferred date or month, and number of travelers.
 - Optional package-specific fields may include departure town, adults and children, residency, vehicle preference, accommodation preference, and budget range.
 - After validation, store the private inquiry, create its request reference, and queue a background email containing the validated details for every private recipient configured under **HKS Settings → Conversion**. The visitor-facing save response must not wait for SMTP. Identical retries must not create duplicate notifications; revised answers may produce a new notification.
-- Construct one readable message from the answers and preserve campaign attribution. The visitor reviews that message, then chooses whether to open WhatsApp or an email addressed to `info@holidaykenyasafaris.ke` and sends it from that app. The automatic internal notification must not be described as the visitor having sent the reviewed message.
+- Construct one readable message from the visitor's contact and trip answers. Do not include the HKS destination number, campaign label, Facebook/UTM source, or other internal attribution in that visitor-reviewed message. Preserve campaign attribution privately with the inquiry and in non-sensitive launch analytics. The visitor reviews the message, then chooses whether to open WhatsApp or an email addressed to `info@holidaykenyasafaris.ke` and sends it from that app. The automatic internal notification must not be described as the visitor having sent the reviewed message.
 - Instrument page view, package view, CTA click, form open, form completion, WhatsApp launch, and email launch.
 
 ## Audience Rule

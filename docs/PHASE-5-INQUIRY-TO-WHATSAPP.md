@@ -15,7 +15,9 @@ copy, Campaign label, and official Holiday Kenya Safaris WhatsApp and email dest
    validated details for background delivery to every address configured under **HKS Settings → Conversion →
    Quote notification recipients**. An identical retry is not emailed twice; revised
    answers may generate a new notification. The visitor does not wait for SMTP.
-5. The visitor reviews the exact message and request reference.
+5. The visitor reviews the exact message and request reference. It contains the
+   visitor's contact and trip answers, but not the HKS destination number,
+   Campaign label, or Facebook/UTM source information.
 6. **Open WhatsApp to send** opens `wa.me/254712965131`; **Open email to send** opens
    the visitor's configured email app with `info@holidaykenyasafaris.ke` as recipient,
    the Tour name and request reference in the subject, and the exact reviewed message
@@ -35,7 +37,8 @@ never `message sent`.
   rate limit. Raw IP addresses are not stored.
 - Attribution is limited to UTMs, the landing path, referrer host, canonical Tour,
   and Campaign context. Click IDs remain excluded until privacy decisions permit
-  them.
+  them. This attribution remains private with the inquiry and in non-sensitive
+  launch analytics; it is not copied into the visitor-reviewed message.
 - A retry with the same request key refreshes the same record instead of creating a
   duplicate.
 - Notification recipients are repeatable private HKS Settings values. They never
@@ -72,7 +75,9 @@ After cPanel deployment, confirm:
    notification appears in Fluent SMTP's Email Logs for every configured recipient;
 4. replaying the same unchanged request does not create another notification, while
    editing an answer and reviewing again does;
-5. the review message contains the correct package and request reference;
+5. the review message contains the correct visitor contact details, package, and
+   request reference without the HKS destination number or Campaign/Facebook/UTM
+   attribution;
 6. WhatsApp opens with encoded text and the record changes only to `Opened`;
 7. the visitor's email app opens with the confirmed public recipient, subject, and
    exact reviewed body; and

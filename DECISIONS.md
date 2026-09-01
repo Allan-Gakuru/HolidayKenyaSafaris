@@ -80,7 +80,7 @@ Exclude by default:
 - The form constructs one reviewed message that the visitor may open in WhatsApp or in an email addressed to `info@holidaykenyasafaris.ke`.
 - Selecting `Review quote request` stores the validated inquiry privately in WordPress, creates its `HKS-######` reference, and queues the details for background delivery to the private repeatable notification-recipient list under **HKS Settings → Conversion**. The review step does not wait for SMTP. Identical retries are deduplicated; revised answers may trigger a new notification.
 - A team-notification timestamp means WordPress handed the email to its configured mailer; Fluent SMTP logs remain the delivery record. WordPress records `WhatsApp opened` only after that launch click, analytics may record a non-sensitive `email_launch`, and neither visitor-controlled action may be described as proof that the reviewed message was sent.
-- Campaign attribution and package context should be retained.
+- Campaign attribution and package context should be retained privately with the inquiry and in non-sensitive launch analytics. Campaign labels, Facebook/UTM source information, and the HKS destination number do not appear in the visitor-reviewed message.
 - The canonical public CTA label is **Request a quote**.
 - Canonical Tour pages use a persistent quote panel, not a permanently visible long booking form.
 - The published Group Travel page uses the same intake, private recovery record, message review, and visitor-controlled WhatsApp/email handoff. It adds linked Destination and Tour choices, then uses the standard date/month and traveler-count fields.
