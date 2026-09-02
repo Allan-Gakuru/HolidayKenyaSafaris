@@ -30,6 +30,39 @@ final class ArticleBlocks {
 		}
 	}
 
+	/**
+	 * Return the image used by the current advertorial cover.
+	 *
+	 * This is exposed so the theme can advertise the exact LCP image in the
+	 * document head before the article block is encountered by the parser.
+	 *
+	 * @return int Attachment ID, or zero when the current post is not an advertorial.
+	 */
+	public static function current_advertorial_image_id(): int {
+		if ( ! is_singular( 'post' ) ) {
+			return 0;
+		}
+
+		$post_id = get_queried_object_id();
+		$format  = sanitize_key( (string) self::field( 'hks_article_format', $post_id ) ) ?: 'guide';
+
+		if ( 'advertorial' !== $format ) {
+			return 0;
+		}
+
+		$image_id = absint( get_post_thumbnail_id( $post_id ) );
+		if ( $image_id ) {
+			return $image_id;
+		}
+
+		$tour_id = self::post_id( self::field( 'hks_article_primary_tour', $post_id ) );
+		if ( ! $tour_id || 'hks_tour' !== get_post_type( $tour_id ) || 'publish' !== get_post_status( $tour_id ) ) {
+			return 0;
+		}
+
+		return absint( get_post_thumbnail_id( $tour_id ) );
+	}
+
 	public static function render_archive_intro(): string {
 		$title       = __( 'Travel Guides', 'hks-wayfinder' );
 		$description = __( 'Practical destination guides, planning help and travel inspiration from Holiday Kenya Safaris.', 'hks-wayfinder' );
@@ -107,7 +140,7 @@ final class ArticleBlocks {
 		<article class="hks-article-card<?php echo $image_id ? '' : ' hks-article-card--no-image'; ?>">
 			<a class="hks-article-card__media<?php echo $image_id ? '' : ' hks-article-card__media--placeholder'; ?>" href="<?php echo esc_url( $link ); ?>" tabindex="-1" aria-hidden="true">
 				<?php if ( $image_id ) : ?>
-					<?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'medium_large', false, array( 'loading' => 'lazy', 'sizes' => '(max-width: 700px) 100vw, 33vw' ) ) ); ?>
+					<?php echo wp_get_attachment_image( $image_id, 'medium_large', false, array( 'loading' => 'lazy', 'decoding' => 'async', 'sizes' => '(max-width: 700px) 100vw, 33vw' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core generates and escapes attachment markup. ?>
 				<?php else : ?>
 					<span><?php esc_html_e( 'Holiday Kenya Safaris', 'hks-wayfinder' ); ?></span>
 					<strong><?php esc_html_e( 'Travel Guide', 'hks-wayfinder' ); ?></strong>
@@ -156,7 +189,7 @@ final class ArticleBlocks {
 		<article class="hks-article hks-article--<?php echo esc_attr( $is_ad ? 'advertorial' : 'guide' ); ?>" data-hks-article-id="<?php echo esc_attr( (string) $post_id ); ?>" data-hks-article-format="<?php echo esc_attr( $is_ad ? 'advertorial' : 'guide' ); ?>" data-hks-primary-tour-id="<?php echo esc_attr( (string) ( $tour_valid ? $tour_id : 0 ) ); ?>">
 			<?php if ( $is_ad ) : ?>
 				<header class="hks-article-hero hks-article-hero--advertorial-cover<?php echo $image_id ? ' hks-article-hero--with-image' : ' hks-article-hero--without-image'; ?>">
-					<?php if ( $image_id ) : ?><figure class="hks-article-hero__media" aria-hidden="true"><?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'full', false, array( 'alt' => '', 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '100vw' ) ) ); ?></figure><?php endif; ?>
+					<?php if ( $image_id ) : ?><figure class="hks-article-hero__media" aria-hidden="true"><?php echo wp_get_attachment_image( $image_id, 'large', false, array( 'alt' => '', 'loading' => 'eager', 'fetchpriority' => 'high', 'decoding' => 'async', 'sizes' => '100vw' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core generates and escapes attachment markup. ?></figure><?php endif; ?>
 					<span class="hks-article-hero__wash" aria-hidden="true"></span>
 					<div class="hks-shell hks-article-hero__inner">
 						<div class="hks-article-hero__copy">
@@ -181,7 +214,7 @@ final class ArticleBlocks {
 						<?php if ( $excerpt ) : ?><p class="hks-article-hero__promise"><?php echo esc_html( $excerpt ); ?></p><?php endif; ?>
 						<?php if ( $tour_valid ) : ?><a class="hks-button hks-article-hero__tour-link" data-hks-article-primary-tour-click data-hks-cta-location="article_hero" href="<?php echo esc_url( $tour_link ); ?>"><?php esc_html_e( 'View this trip', 'hks-wayfinder' ); ?> <span aria-hidden="true">→</span></a><?php endif; ?>
 					</div>
-					<?php if ( $image_id ) : ?><figure class="hks-article-hero__media"><?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'large', false, array( 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '(max-width: 800px) 100vw, 48vw' ) ) ); ?></figure><?php endif; ?>
+					<?php if ( $image_id ) : ?><figure class="hks-article-hero__media"><?php echo wp_get_attachment_image( $image_id, 'large', false, array( 'loading' => 'eager', 'fetchpriority' => 'high', 'decoding' => 'async', 'sizes' => '(max-width: 800px) 100vw, 48vw' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core generates and escapes attachment markup. ?></figure><?php endif; ?>
 				</header>
 			<?php endif; ?>
 			<div class="hks-article-layout<?php echo $is_ad && $quote ? ' hks-article-layout--conversion' : ''; ?>">
