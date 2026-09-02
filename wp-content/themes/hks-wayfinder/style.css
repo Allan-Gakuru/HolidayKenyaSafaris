@@ -3913,8 +3913,7 @@ body:not(.home) .wp-site-blocks > main {
 }
 
 .hks-article-kicker,
-.hks-article-card__meta,
-.hks-article-intent {
+.hks-article-card__meta {
 	color: var(--wp--preset--color--lake-teal);
 	font-size: var(--wp--preset--font-size--utility);
 	font-weight: 700;

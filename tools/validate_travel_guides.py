@@ -239,6 +239,8 @@ def check_theme() -> None:
     require("Travel Guides hub", home, "postType\":\"post\"", "hks-wayfinder/article-archive-intro", "hks-wayfinder/article-card")
     require("Travel Guide topic archive", topic_template, "postType\":\"post\"", "hks-wayfinder/article-archive-intro", "hks-wayfinder/article-card")
     require("native Post template", single_post, "hks-wayfinder/article-page")
+    if "Considering %s?" in article_blocks or "hks-article-intent" in article_blocks:
+        ERRORS.append("Advertorial article content: the automatic Considering [Tour] prompt must not be rendered")
     require(
         "Destination Tour-first archive",
         destination_template,
