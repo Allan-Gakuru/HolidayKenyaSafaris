@@ -12,7 +12,7 @@ This is the custom block-theme foundation for Holiday Kenya Safaris. WordPress c
 
 The deployed theme carries vector-derived Wayfinder header and favicon files in `assets/images/brand/`. The desktop header and mobile drawer both use `holiday-kenya-safaris-logo.svg`; do not give the two navigation surfaces different logo assets.
 
-The header pattern references the full horizontal SVG directly from the theme, so enabling SVG uploads is neither necessary nor recommended. If WordPress has no configured Site Icon, `functions.php` provides SVG, 32px PNG, 512px PNG, and Apple touch icon fallbacks. A Site Icon selected in the dashboard takes precedence automatically; `site-icon-512.png` is also the controlled square source for that dashboard setting.
+The header pattern references the full horizontal SVG directly from the theme, so enabling SVG uploads is neither necessary nor recommended. If WordPress has no configured Site Icon, `functions.php` provides SVG, 32px PNG, 512px PNG, and Apple touch icon fallbacks. A Site Icon selected in the dashboard takes precedence automatically; `holiday-kenya-safaris-site-icon-512.png` is also the controlled square source for that dashboard setting.
 
 Montserrat is the single website family declared in `theme.json`, with safe system fallbacks and self-hosted Google Fonts v31 Latin and Latin Extended variable WOFF2 subsets. The theme uses weights 400–800 across body, navigation, controls, and headings. Source URLs, upstream hashes, output hashes, and the SIL Open Font License path are recorded in `assets/fonts/SOURCES.json`. Compatibility aliases keep block content saved with the former `sora` or `inter` slugs on Montserrat.
 
@@ -56,3 +56,5 @@ Public presentation is fail-closed:
 - optional policies and FAQs render only when their public fields are populated;
 - Destination guidance renders only when the editor has supplied it; and
 - Tour photographs render only when the attachment has useful native alt text.
+
+Shared-link previews use the official 1200 × 630 PNG through Open Graph and Twitter metadata in `inc/Branding.php`. The icons derive from the same approved SVG. Retired logo URLs redirect to their official replacements, and `.cpanel.yml` removes the obsolete files from the deployed theme.

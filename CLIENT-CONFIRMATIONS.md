@@ -28,7 +28,7 @@ Use this file for project-level decisions such as contact details, legal wording
 
 | Item | Current status | Needed action | Blocking point |
 |---|---|---|---|
-| Production Wayfinder logo | Confirmed for website header use | Use `holiday-kenya-safaris-logo.svg` consistently in the desktop header and mobile drawer; retain the supplied approved PNG as a reference/export | Header and mobile navigation |
+| Production Wayfinder logo | Confirmed for website identity | Use `holiday-kenya-safaris-logo.svg` in the header/mobile drawer and export browser icons and the sharing image from that artwork. The client requested removal of the older logo and all active references on 2026-09-03. Retain the supplied approved PNG as a reference. | Header, mobile navigation, browser icons and link previews |
 | Domain | Confirmed | `holidaykenyasafaris.ke` | Production configuration |
 | Hosting | Confirmed | cPanel account `holidayk`; document root `/home/holidayk/public_html` | Deployment |
 | WordPress admin ownership | CLIENT CONFIRMATION REQUIRED | Name account owners and editorial roles | Production access |

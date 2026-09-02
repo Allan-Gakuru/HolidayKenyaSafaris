@@ -19,6 +19,11 @@ EXPECTED_LINES = [
     "    - /bin/mkdir -p $WP_ROOT/wp-content/plugins",
     "    - /bin/cp -R wp-content/themes/hks-wayfinder $WP_ROOT/wp-content/themes/",
     "    - /bin/cp -R wp-content/plugins/hks-core $WP_ROOT/wp-content/plugins/",
+    "    - /bin/rm -f $WP_ROOT/wp-content/themes/hks-wayfinder/assets/images/brand/hks-wayfinder-horizontal-primary.svg",
+    "    - /bin/rm -f $WP_ROOT/wp-content/themes/hks-wayfinder/assets/images/brand/hks-wayfinder-favicon.svg",
+    "    - /bin/rm -f $WP_ROOT/wp-content/themes/hks-wayfinder/assets/images/brand/favicon-32.png",
+    "    - /bin/rm -f $WP_ROOT/wp-content/themes/hks-wayfinder/assets/images/brand/site-icon-512.png",
+    "    - /bin/rm -f $WP_ROOT/wp-content/themes/hks-wayfinder/assets/images/brand/apple-touch-icon-180.png",
 ]
 
 FORBIDDEN = [

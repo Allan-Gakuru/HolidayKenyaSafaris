@@ -17,16 +17,14 @@ No Pantone or other spot-color match is assigned in the current brand contract.
 
 ## Master files
 
-Use the outlined SVG files in `brand/masters/` as the artwork source. They scale without raster interpolation and do not require Sora to be installed at the printer.
+Use the outlined SVG files in `brand/masters/` as the artwork source. They scale without raster interpolation and do not require any font to be installed at the printer.
 
 | Job | Master |
 |---|---|
-| Full-color horizontal | `hks-wayfinder-horizontal-primary.svg` |
-| Full-color stacked | `hks-wayfinder-stacked-primary.svg` |
-| One-color on a light stock | `hks-wayfinder-horizontal-navy.svg` or `hks-wayfinder-stacked-navy.svg` |
-| Knockout on a dark stock | `hks-wayfinder-horizontal-white.svg` or `hks-wayfinder-stacked-white.svg` |
-| White with Saffron cue on a dark stock | `hks-wayfinder-horizontal-reversed.svg` or `hks-wayfinder-stacked-reversed.svg` |
-| Light vehicle panel | `hks-wayfinder-vehicle-door-navy.svg` |
+| Full-color logo on a light surface | `holiday-kenya-safaris-logo.svg` |
+| Reversed logo on a dark surface | `holiday-kenya-safaris-logo-reversed.svg` |
+
+Use these approved masters only. Request a proofed derivative for special print formats; the previous stacked, wordmark-only and vehicle redraws are retired.
 
 The PNG exports are suitable for office documents, mockups, and fixed-size raster delivery. They are not the preferred press master. If a printer cannot accept SVG, place the SVG in a color-managed layout application and supply the printer’s requested press-ready format, such as PDF/X-4, after confirming that format with the printer.
 
@@ -56,7 +54,7 @@ WhatsApp Green remains a conversion-action color, not a logo ink. It is listed o
 4. Soft-proof, then request a physical proof on representative stock or vinyl.
 5. Compare the proof in relevant viewing light and record any printer-specific correction separately from the brand master.
 
-For a true single-ink job, the Navy SVG identifies the intended appearance, not a preselected spot ink. The printer must propose and proof the physical ink match. Do not separate the provisional four-process Navy recipe and call it a spot color.
+For a true single-ink job, request a proofed derivative of the approved master; no preselected spot ink is assigned. The printer must propose and proof the physical ink match. Do not separate the provisional four-process Navy recipe and call it a spot color.
 
 ## Scale and clear space
 
@@ -70,16 +68,16 @@ Let **X** equal one fifth of the compass icon’s outside diameter. Keep at leas
 | Full HKS compass icon | 14 mm |
 | Vehicle-door mark | 400 mm, followed by a 1:1 proof |
 
-The simplified favicon is not print artwork. If the full HKS compass loses letter or point definition under the chosen process, increase the mark or use the approved one-color variant; do not thicken or redraw individual parts at the printer.
+The browser favicon is not print artwork. If the full HKS compass loses letter or point definition under the chosen process, increase the mark or request a proofed single-color derivative; do not thicken or redraw individual parts at the printer.
 
 ## Vehicle-door production
 
-- Start with `hks-wayfinder-vehicle-door-navy.svg` on a light panel.
+- Start with `holiday-kenya-safaris-logo.svg` on a light panel.
 - Print or plot a 1:1 paper proof before cutting vinyl.
 - Check HKS legibility and the complete name from the intended viewing distance.
 - Keep the mark clear of door seams, handles, wheel arches, trim, and highly curved panel transitions.
 - Proof the actual vinyl, laminate, adhesive, and vehicle color; a screen mockup is not a color approval.
-- If the panel is dark, request a suitable white or reversed composition from the approved masters rather than inverting the Navy file informally.
+- If the panel is dark, request a suitable white or reversed composition from the approved masters rather than inverting the primary file informally.
 
 The 400 mm minimum is a working lower bound, not a promise that every vehicle panel will be legible at that size. Panel geometry and viewing distance may require a larger application.
 

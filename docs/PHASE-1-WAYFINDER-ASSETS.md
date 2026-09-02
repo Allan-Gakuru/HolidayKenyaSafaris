@@ -1,76 +1,15 @@
-# Phase 1: Wayfinder Production Assets
+# Official Wayfinder logo assets
 
-Date: 2026-07-14
-Status: implementation baseline complete; final client sign-off remains required
+Updated: 2026-09-03
 
-## Outcome
+The client requested complete removal of the earlier logo from website assets and replacement of every active logo reference with the approved artwork. This supersedes the earlier Phase 1 redraw as the production baseline.
 
-The selected Wayfinder direction has been redrawn as deterministic production artwork for the website, favicon, social avatar, print handoff, and vehicle-door use.
+The source is `brand/masters/holiday-kenya-safaris-logo.svg`, copied without geometry changes from the approved header SVG. The existing official reversed logo remains the footer asset. The compact icon extracts the approved compass monogram; it does not recreate its lettering. The old production masters, raster exports, deployed icons, and redraw generator have been removed.
 
-The released working set contains:
+`node tools/brand/build_logo.cjs` exports the official favicon, touch icon, Site Icon, full raster logo and 1200 × 630 sharing image, then copies web assets to the theme. The build requires Node.js and sharp. `brand/manifest.json` records hashes and dimensions are checked by `python -B tools/brand/validate_assets.py`.
 
-- 18 outlined SVG masters;
-- 19 PNG/ICO exports;
-- full-colour, Navy one-colour, white one-colour, and reversed treatments where applicable;
-- horizontal, stacked, icon, wordmark, compact favicon, and vehicle-door compositions;
-- an official Sora Version 2.000 build-time source font and SIL OFL 1.1 notice;
-- a generated manifest containing byte counts, dimensions or view boxes, and SHA-256 hashes;
-- an internal responsive specimen for visual review.
+The theme emits Open Graph and Twitter sharing tags with the official raster logo, the current page title and canonical page link. Protected post excerpts are omitted. New image filenames avoid reusing old asset URLs. Exact redirects map retired theme asset URLs to the approved replacements. The cPanel deployment manifest removes only the five retired theme files after copying the new release.
 
-The raster concept files in `outputs/brand-identity/` remain references only. The SVG masters in `brand/masters/` are the implementation baseline.
+After deployment, clear site/CDN page caches and inspect the page metadata. Sharing services may retain previews created before deployment until they fetch the page again. Historical concept presentations under `outputs/` are reference material only, never website assets.
 
-## Production decisions
-
-- The HKS letters share a cap line and baseline and no longer use the concept mark's extended vertical bars or central dot.
-- The compass uses four open arcs, three Lake Teal points, and a solid Saffron east point.
-- The wordmark uses outlined Sora Bold paths, so the public logo has no runtime font dependency.
-- The full HKS compass begins at 56px digital width.
-- A dedicated compass/H drawing replaces the full icon between 16px and 48px.
-- The horizontal lockup is the default website mark; compact, stacked, wordmark-only, and physical variants are controlled exceptions.
-- One-colour artwork does not depend on the Saffron cue to remain identifiable.
-
-## Build and verification
-
-Rebuild the identity package with:
-
-```powershell
-python tools\brand\build_logo.py
-```
-
-Validate the package independently with:
-
-```powershell
-python tools\brand\validate_assets.py
-```
-
-The validation run checks:
-
-- exact file inventory and deterministic manifest order;
-- manifest byte counts and SHA-256 hashes;
-- safe, semantic, well-formed SVG structure;
-- outlined lettering, approved solid colours, and one-colour variants;
-- absence of live text, scripts, embedded raster images, gradients, filters, and active references;
-- positive view boxes, accessible titles, and resolved labels;
-- exact PNG/ICO sizes, complete decoding, alpha behaviour, and favicon frames.
-
-The final Phase 1 rebuild produced the same manifest hash before and after regeneration:
-
-`6B1A9F683D0EDAD44D75F48769BAD77C1EB9D3D040F2A0D1F2EDA8D74875127A`
-
-The internal `brand/specimen.html` was rendered in the Codex in-app browser at desktop and 390px mobile widths. All 16 specimen images loaded, no horizontal overflow was detected at 390px, and no browser warnings or errors were recorded. This verifies the specimen and SVG delivery; it does not claim full website browser coverage.
-
-## Usage references
-
-- `DESIGN.md`: website design system and component direction.
-- `brand/README.md`: asset selection, sizes, clear space, colour, typography, and misuse rules.
-- `brand/PRINT-SPEC.md`: provisional CMYK values and printer-proof workflow.
-- `brand/specimen.html`: internal visual QA surface.
-- `brand/manifest.json`: generated asset integrity record.
-
-## Remaining approval gates
-
-- The client must accept the production geometry before permanent signage, large print runs, or public launch.
-- No public photograph is approved by this asset phase. The generated Mara image used in the specimen is clearly marked internal-only.
-- CMYK values are provisional arithmetic conversions. The selected printer must provide the press/substrate ICC profile and a physical proof.
-- Vehicle graphics require a 1:1 panel proof and viewing-distance check.
-- Operator wording, legal details, policies, prices, analytics identifiers, and other launch confirmations remain governed by `CLIENT-CONFIRMATIONS.md`.
+For current asset selection and build instructions see `brand/README.md`; for artwork review see `brand/specimen.html`. Physical print and vehicle applications still require production proofing.

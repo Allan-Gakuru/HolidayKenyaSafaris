@@ -40,7 +40,7 @@ Both formats omit author names and support an intentional text-led opening when 
 - Identity: **The Wayfinder**.
 - Primary mark: full-colour horizontal lockup.
 - Compact mark: HKS compass icon, used only where the wordmark would become unreadable.
-- Favicon: the dedicated simplified compass/H asset. Do not shrink the full lockup into a favicon.
+- Favicon: the official compass monogram export. Do not shrink the full lockup into a favicon.
 - The saffron east point is a directional accent, never the sole carrier of meaning.
 - Logo SVGs contain outlined lettering and require no runtime font.
 
@@ -203,4 +203,4 @@ Do not expose separate confirmation, source-checked, rights-checked, price-statu
 
 ## Current approval boundary
 
-The production geometry in `brand/masters/` is the implementation baseline, rebuilt from the approved Wayfinder direction. Publishing is the per-record approval signal for public content and assigned media. Legal/operator wording, global policies, contact details, analytics identifiers, and other project-level launch decisions remain tracked in `CLIENT-CONFIRMATIONS.md`.
+The approved logo in `brand/masters/holiday-kenya-safaris-logo.svg` is the implementation baseline. Earlier redraws are retired; browser icons and shared-link previews derive from the approved artwork. Publishing is the per-record approval signal for public content and assigned media. Legal/operator wording, global policies, contact details, analytics identifiers, and other project-level launch decisions remain tracked in `CLIENT-CONFIRMATIONS.md`.

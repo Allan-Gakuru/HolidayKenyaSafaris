@@ -125,20 +125,22 @@ REQUIRED_PLUGIN_FILES = [
 ]
 
 # Each deployable copy must remain byte-for-byte identical to its production
-# source.  The WordPress Site Icon uses the square social-avatar export.
+# source. All outputs derive from the same approved logo geometry.
 BRAND_COPIES = {
-    "assets/images/brand/apple-touch-icon-180.png": "brand/exports/apple-touch-icon-180.png",
-    "assets/images/brand/favicon-32.png": "brand/exports/favicon-32.png",
-    "assets/images/brand/hks-wayfinder-favicon.svg": "brand/masters/hks-wayfinder-favicon.svg",
-    "assets/images/brand/hks-wayfinder-horizontal-primary.svg": "brand/masters/hks-wayfinder-horizontal-primary.svg",
-    "assets/images/brand/site-icon-512.png": "brand/exports/social-avatar-512.png",
+    **{
+        f"assets/images/brand/holiday-kenya-safaris-{name}.svg": f"brand/masters/holiday-kenya-safaris-{name}.svg"
+        for name in ("logo", "logo-reversed", "icon")
+    },
+    **{
+        f"assets/images/brand/holiday-kenya-safaris-{name}.png": f"brand/exports/holiday-kenya-safaris-{name}.png"
+        for name in ("apple-touch-icon-180", "favicon-32", "site-icon-512", "social-1200x630")
+    },
 }
 
 # Client-supplied website lockup assets are registered directly in the theme.
-# They are not claimed as byte copies of the earlier Phase 1 brand masters.
+# Retain the supplied raster reference alongside the exact SVG exports.
 REGISTERED_THEME_BRAND_ASSETS = {
     "assets/images/brand/Holiday-Kenya-Safaris-Logo-Approved.png",
-    "assets/images/brand/holiday-kenya-safaris-logo.svg",
 }
 
 EXPECTED_PLUGIN_DIRECTORIES = [

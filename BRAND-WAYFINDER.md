@@ -4,7 +4,7 @@
 
 The client selected **The Wayfinder**. This decision supersedes earlier recommendations for Open Horizon and the Safari Window.
 
-The existing concept board is a visual direction, not production artwork. Redraw it cleanly before using it as the final website logo.
+The approved website logo is the production source in `brand/masters/holiday-kenya-safaris-logo.svg`. Earlier redraws have been retired. Export website icons and sharing images from this approved artwork only.
 
 ## Brand Idea
 
@@ -51,7 +51,7 @@ Self-host the Montserrat Latin and Latin Extended variable WOFF2 subsets and ret
 
 ## Production Logo Requirements
 
-The current website lockup is `wp-content/themes/hks-wayfinder/assets/images/brand/holiday-kenya-safaris-logo.svg`. Use this same asset in the desktop primary header and the mobile navigation drawer so the brand does not change when the menu opens. The approved PNG supplied with it remains a reference/export, not the runtime header asset.
+The current website lockup is `wp-content/themes/hks-wayfinder/assets/images/brand/holiday-kenya-safaris-logo.svg`. Use this same asset in the desktop primary header and the mobile navigation drawer so the brand does not change when the menu opens. The approved PNG supplied with it remains a reference/export, not the runtime header asset. Link previews use `holiday-kenya-safaris-social-1200x630.png`; browser icons use the approved monogram exported as `holiday-kenya-safaris-icon.svg` and matching PNGs.
 
 Create and test:
 
@@ -60,7 +60,7 @@ Create and test:
 - HKS compass icon.
 - One-color Midnight Navy mark.
 - One-color white/reversed mark.
-- Small favicon and social avatar with simplified geometry.
+- Favicon and social avatar exported from the approved compass monogram.
 - Vehicle-door version legible at distance.
 - Print-safe CMYK specification.
 

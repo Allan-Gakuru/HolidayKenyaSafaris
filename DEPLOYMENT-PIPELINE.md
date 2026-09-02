@@ -317,3 +317,7 @@ Do not place actual passwords or private keys in this documentation file.
 - GitHub deployment environments: `https://docs.github.com/en/actions/concepts/workflows-and-actions/deployment-environments`
 - GitHub deployment protection and secrets: `https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments`
 - GitHub secure use: `https://docs.github.com/en/actions/reference/security/secure-use`
+
+## Retired logo cleanup (2026-09-03)
+
+After copying the new theme/plugin release, `.cpanel.yml` removes five explicitly named retired theme logo/icon files. This is non-recursive and confined to the theme brand directory. The theme `.htaccess` redirects their former URLs to official replacements. No media-library files or uploads are removed. Clear page/CDN caches after deploying and verify Open Graph/Twitter image tags reference `holiday-kenya-safaris-social-1200x630.png`.

@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once get_theme_file_path( 'inc/NavMenus.php' );
 require_once get_theme_file_path( 'inc/TourBlocks.php' );
 require_once get_theme_file_path( 'inc/ArticleBlocks.php' );
+require_once get_theme_file_path( 'inc/Branding.php' );
 
 /**
  * Whether the current request renders one of the acquisition/conversion pages.
@@ -475,10 +476,10 @@ function hks_wayfinder_favicon_fallback(): void {
 
 	$brand_path = 'assets/images/brand/';
 	?>
-	<link rel="icon" href="<?php echo esc_url( get_theme_file_uri( $brand_path . 'hks-wayfinder-favicon.svg' ) ); ?>" type="image/svg+xml">
-	<link rel="icon" href="<?php echo esc_url( get_theme_file_uri( $brand_path . 'favicon-32.png' ) ); ?>" sizes="32x32" type="image/png">
-	<link rel="icon" href="<?php echo esc_url( get_theme_file_uri( $brand_path . 'site-icon-512.png' ) ); ?>" sizes="512x512" type="image/png">
-	<link rel="apple-touch-icon" href="<?php echo esc_url( get_theme_file_uri( $brand_path . 'apple-touch-icon-180.png' ) ); ?>" sizes="180x180">
+	<link rel="icon" href="<?php echo esc_url( get_theme_file_uri( $brand_path . 'holiday-kenya-safaris-icon.svg' ) ); ?>" type="image/svg+xml">
+	<link rel="icon" href="<?php echo esc_url( get_theme_file_uri( $brand_path . 'holiday-kenya-safaris-favicon-32.png' ) ); ?>" sizes="32x32" type="image/png">
+	<link rel="icon" href="<?php echo esc_url( get_theme_file_uri( $brand_path . 'holiday-kenya-safaris-site-icon-512.png' ) ); ?>" sizes="512x512" type="image/png">
+	<link rel="apple-touch-icon" href="<?php echo esc_url( get_theme_file_uri( $brand_path . 'holiday-kenya-safaris-apple-touch-icon-180.png' ) ); ?>" sizes="180x180">
 	<?php
 }
 add_action( 'wp_head', 'hks_wayfinder_favicon_fallback', 2 );

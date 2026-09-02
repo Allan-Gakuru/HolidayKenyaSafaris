@@ -1,5 +1,15 @@
 # HKS first-party static assets. HTML compression is handled conditionally by
 # the theme because this directory-level file cannot affect WordPress routes.
+
+# Map retired asset URLs to official artwork after deployment removes the files.
+<IfModule mod_alias.c>
+	Redirect 301 /wp-content/themes/hks-wayfinder/assets/images/brand/hks-wayfinder-horizontal-primary.svg /wp-content/themes/hks-wayfinder/assets/images/brand/holiday-kenya-safaris-logo.svg
+	Redirect 301 /wp-content/themes/hks-wayfinder/assets/images/brand/hks-wayfinder-favicon.svg /wp-content/themes/hks-wayfinder/assets/images/brand/holiday-kenya-safaris-icon.svg
+	Redirect 301 /wp-content/themes/hks-wayfinder/assets/images/brand/favicon-32.png /wp-content/themes/hks-wayfinder/assets/images/brand/holiday-kenya-safaris-favicon-32.png
+	Redirect 301 /wp-content/themes/hks-wayfinder/assets/images/brand/site-icon-512.png /wp-content/themes/hks-wayfinder/assets/images/brand/holiday-kenya-safaris-site-icon-512.png
+	Redirect 301 /wp-content/themes/hks-wayfinder/assets/images/brand/apple-touch-icon-180.png /wp-content/themes/hks-wayfinder/assets/images/brand/holiday-kenya-safaris-apple-touch-icon-180.png
+</IfModule>
+
 <IfModule mod_deflate.c>
 	AddOutputFilterByType DEFLATE text/css text/javascript application/javascript application/x-javascript image/svg+xml
 </IfModule>
