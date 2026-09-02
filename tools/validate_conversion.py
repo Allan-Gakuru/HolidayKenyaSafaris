@@ -80,7 +80,7 @@ def main() -> int:
             "'edit_posts'             => 'manage_options'",
         ],
     )
-    require(errors, "conversion module", content["module"], ["register_block_type", "rest_api_init", "InquiryNotification::CRON_HOOK", "InquiryNotification::class, 'send_saved'", "assets/css/inquiry.css", "assets/js/inquiry.js"])
+    require(errors, "conversion module", content["module"], ["register_block_type", "rest_api_init", "InquiryNotification::CRON_HOOK", "InquiryNotification::class, 'send_saved'", "assets/css/inquiry.css", "assets/js/inquiry.js", "array( 'in_footer' => true, 'strategy' => 'defer' )"])
     require(errors, "signed form token", content["token"], ["hash_hmac( 'sha256'", "hash_equals", "wp_salt( 'nonce' )", "DAY_IN_SECONDS"])
     require(
         errors,

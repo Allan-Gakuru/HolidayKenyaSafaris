@@ -290,7 +290,19 @@ def check_theme() -> None:
         "hks-article-hero__cta--outline",
         "hks-article-hero__learn",
         "$learn_more_target",
+        "current_advertorial_image_id",
     )
+    advertorial_hero = article_blocks[cover_start:cover_end]
+    require(
+        "Advertorial responsive hero",
+        advertorial_hero,
+        "wp_get_attachment_image( $image_id, 'large'",
+        "'loading' => 'eager'",
+        "'fetchpriority' => 'high'",
+        "'decoding' => 'async'",
+    )
+    if "wp_get_attachment_image( $image_id, 'full'" in advertorial_hero:
+        ERRORS.append("Advertorial responsive hero: cover must not ship the original full-size image")
     require(
         "Advertorial article outline styling",
         style,
@@ -379,7 +391,9 @@ def check_theme() -> None:
         "'hks_destination' === $taxonomy",
         "'post_type'      => 'hks_tour'",
         "'post_status'    => 'publish'",
-        "wp_get_object_terms( $tour_ids, $taxonomy",
+        "update_object_term_cache( $tour_ids, 'hks_tour' )",
+        "get_the_terms( $tour_id, $taxonomy )",
+        "get_transient( $cache_key )",
     )
     require(
         "Destination Tour-only main query",

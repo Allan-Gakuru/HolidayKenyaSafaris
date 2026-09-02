@@ -50,7 +50,7 @@ final class Module implements ModuleContract {
 			HKS_CORE_URL . 'assets/js/inquiry.js',
 			array(),
 			HKS_CORE_VERSION,
-			true
+			array( 'in_footer' => true, 'strategy' => 'defer' )
 		);
 	}
 

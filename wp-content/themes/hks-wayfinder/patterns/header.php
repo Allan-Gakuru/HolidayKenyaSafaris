@@ -11,18 +11,14 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$home_url         = home_url( '/' );
-$logo_url         = get_theme_file_uri( 'assets/images/brand/holiday-kenya-safaris-logo.svg' );
-$tours_url        = get_post_type_archive_link( 'hks_tour' ) ?: home_url( '/tours/' );
-$destination_terms = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_destination', 8 ) : array();
-$tour_type_terms   = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_tour_type', 8 ) : array();
-$scope_terms       = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_tour_scope', 4 ) : array();
-$is_quote_context  = is_singular( array( 'hks_tour', 'hks_campaign' ) );
-$menu_id           = wp_unique_id( 'hks-mobile-menu-' );
-$about_url          = function_exists( 'hks_wayfinder_published_page_url' ) ? hks_wayfinder_published_page_url( 'about' ) : '';
-$contact_url        = function_exists( 'hks_wayfinder_published_page_url' ) ? hks_wayfinder_published_page_url( 'contact' ) : '';
-$group_url          = function_exists( 'hks_wayfinder_published_page_url' ) ? hks_wayfinder_published_page_url( 'group-travel' ) : '';
-$group_url          = $group_url ?: home_url( '/group-travel/' );
+$home_url           = home_url( '/' );
+$logo_path          = 'assets/images/brand/holiday-kenya-safaris-logo.svg';
+$logo_file          = get_theme_file_path( $logo_path );
+$logo_url           = get_theme_file_uri( $logo_path );
+$logo_url           = is_readable( $logo_file ) ? add_query_arg( 'ver', (string) filemtime( $logo_file ), $logo_url ) : $logo_url;
+$tours_url          = get_post_type_archive_link( 'hks_tour' ) ?: home_url( '/tours/' );
+$is_quote_context   = is_singular( array( 'hks_tour', 'hks_campaign' ) );
+$menu_id            = wp_unique_id( 'hks-mobile-menu-' );
 $guides_url         = home_url( '/travel-guides/' );
 $public_email       = 'info@holidaykenyasafaris.ke';
 $instagram_url      = 'https://www.instagram.com/holidaykenyasafaris/';
@@ -30,27 +26,54 @@ $facebook_url       = 'https://www.facebook.com/people/Holiday-Kenya-Safaris/615
 $whatsapp_number    = '254712965131';
 $whatsapp_message   = __( "Hi Holiday Kenya Safaris, I'd like help choosing and planning a trip.", 'hks-wayfinder' );
 $has_primary_menu   = \HKS_Wayfinder\NavMenus::has_primary_menu();
+$destination_terms = array();
+$tour_type_terms    = array();
+$scope_terms        = array();
 $safari_terms       = array();
 $coast_terms        = array();
 $kenya_scope        = null;
 $international_scope = null;
 $kenya_destinations = array();
 $international_destinations = array();
+$about_url           = function_exists( 'hks_wayfinder_published_page_url' ) ? hks_wayfinder_published_page_url( 'about' ) : '';
+$contact_url         = function_exists( 'hks_wayfinder_published_page_url' ) ? hks_wayfinder_published_page_url( 'contact' ) : '';
+$group_url           = function_exists( 'hks_wayfinder_published_page_url' ) ? hks_wayfinder_published_page_url( 'group-travel' ) : '';
+$group_url           = $group_url ?: home_url( '/group-travel/' );
 
-foreach ( $scope_terms as $scope_term ) {
-	if ( 'kenya-tours' === $scope_term->slug ) {
-		$kenya_scope = $scope_term;
-	} elseif ( 'international-tours' === $scope_term->slug ) {
-		$international_scope = $scope_term;
+if ( ! $has_primary_menu ) {
+	$destination_terms = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_destination', 8 ) : array();
+	$tour_type_terms    = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_tour_type', 8 ) : array();
+	$scope_terms        = function_exists( 'hks_wayfinder_populated_terms' ) ? hks_wayfinder_populated_terms( 'hks_tour_scope', 4 ) : array();
+
+	foreach ( $scope_terms as $scope_term ) {
+		if ( 'kenya-tours' === $scope_term->slug ) {
+			$kenya_scope = $scope_term;
+		} elseif ( 'international-tours' === $scope_term->slug ) {
+			$international_scope = $scope_term;
+		}
 	}
-}
 
-if ( $kenya_scope instanceof WP_Term && function_exists( 'hks_wayfinder_destinations_for_scope' ) ) {
-	$kenya_destinations = hks_wayfinder_destinations_for_scope( $kenya_scope, 8 );
-}
+	if ( $kenya_scope instanceof WP_Term && function_exists( 'hks_wayfinder_destinations_for_scope' ) ) {
+		$kenya_destinations = hks_wayfinder_destinations_for_scope( $kenya_scope, 8 );
+	}
 
-if ( $international_scope instanceof WP_Term && function_exists( 'hks_wayfinder_destinations_for_scope' ) ) {
-	$international_destinations = hks_wayfinder_destinations_for_scope( $international_scope, 8 );
+	if ( $international_scope instanceof WP_Term && function_exists( 'hks_wayfinder_destinations_for_scope' ) ) {
+		$international_destinations = hks_wayfinder_destinations_for_scope( $international_scope, 8 );
+	}
+
+	foreach ( $tour_type_terms as $term ) {
+		if ( preg_match( '/coast|stay|beach|diani|mombasa|watamu|malindi|lamu|kilifi/i', $term->name . ' ' . $term->slug ) ) {
+			$coast_terms[] = $term;
+		} else {
+			$safari_terms[] = $term;
+		}
+	}
+
+	foreach ( $destination_terms as $term ) {
+		if ( preg_match( '/coast|beach|diani|mombasa|watamu|malindi|lamu|kilifi/i', $term->name . ' ' . $term->slug ) ) {
+			$coast_terms[] = $term;
+		}
+	}
 }
 
 if ( $is_quote_context ) {
@@ -67,20 +90,6 @@ $whatsapp_url = sprintf(
 	rawurlencode( $whatsapp_number ),
 	rawurlencode( $whatsapp_message )
 );
-
-foreach ( $tour_type_terms as $term ) {
-	if ( preg_match( '/coast|stay|beach|diani|mombasa|watamu|malindi|lamu|kilifi/i', $term->name . ' ' . $term->slug ) ) {
-		$coast_terms[] = $term;
-	} else {
-		$safari_terms[] = $term;
-	}
-}
-
-foreach ( $destination_terms as $term ) {
-	if ( preg_match( '/coast|beach|diani|mombasa|watamu|malindi|lamu|kilifi/i', $term->name . ' ' . $term->slug ) ) {
-		$coast_terms[] = $term;
-	}
-}
 
 /**
  * Render a concise list of populated terms.
@@ -134,7 +143,7 @@ $render_terms = static function ( array $terms ): void {
 	<div class="hks-primary-header">
 		<div class="hks-shell hks-primary-header__inner">
 			<a class="hks-brand-link" href="<?php echo esc_url( $home_url ); ?>" aria-label="<?php echo esc_attr__( 'Holiday Kenya Safaris home', 'hks-wayfinder' ); ?>">
-				<img src="<?php echo esc_url( $logo_url ); ?>" width="895" height="342" alt="<?php echo esc_attr__( 'Holiday Kenya Safaris', 'hks-wayfinder' ); ?>">
+				<img src="<?php echo esc_url( $logo_url ); ?>" width="895" height="342" alt="<?php echo esc_attr__( 'Holiday Kenya Safaris', 'hks-wayfinder' ); ?>" loading="eager" fetchpriority="low" decoding="async">
 			</a>
 
 			<nav class="hks-primary-nav" aria-label="<?php echo esc_attr__( 'Primary navigation', 'hks-wayfinder' ); ?>">
@@ -215,7 +224,7 @@ $render_terms = static function ( array $terms ): void {
 
 	<dialog class="hks-mobile-menu" id="<?php echo esc_attr( $menu_id ); ?>" data-hks-mobile-menu aria-label="<?php echo esc_attr__( 'Mobile navigation', 'hks-wayfinder' ); ?>">
 		<div class="hks-mobile-menu__header">
-			<a class="hks-brand-link" href="<?php echo esc_url( $home_url ); ?>"><img src="<?php echo esc_url( $logo_url ); ?>" width="895" height="342" alt="<?php echo esc_attr__( 'Holiday Kenya Safaris', 'hks-wayfinder' ); ?>"></a>
+			<a class="hks-brand-link" href="<?php echo esc_url( $home_url ); ?>"><img src="<?php echo esc_url( $logo_url ); ?>" width="895" height="342" alt="<?php echo esc_attr__( 'Holiday Kenya Safaris', 'hks-wayfinder' ); ?>" loading="lazy" fetchpriority="low" decoding="async"></a>
 			<button type="button" data-hks-menu-close aria-label="<?php echo esc_attr__( 'Close menu', 'hks-wayfinder' ); ?>"><span aria-hidden="true">×</span></button>
 		</div>
 		<nav class="hks-mobile-menu__nav" aria-label="<?php echo esc_attr__( 'Mobile primary navigation', 'hks-wayfinder' ); ?>">

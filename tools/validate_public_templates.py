@@ -87,11 +87,13 @@ def main() -> int:
         "catalogue_filters": THEME / "assets" / "js" / "catalogue-filters.js",
         "tour_ui": THEME / "assets" / "js" / "tour-ui.js",
         "article_ui": THEME / "assets" / "js" / "article-ui.js",
+        "theme_htaccess": THEME / ".htaccess",
         "quote": PLUGIN / "src" / "Conversion" / "QuoteBlock.php",
         "inquiry_repository": PLUGIN / "src" / "Conversion" / "InquiryRepository.php",
         "inquiry_admin": PLUGIN / "src" / "Conversion" / "InquiryAdmin.php",
         "inquiry_script": PLUGIN / "assets" / "js" / "inquiry.js",
         "inquiry_style": PLUGIN / "assets" / "css" / "inquiry.css",
+        "plugin_htaccess": PLUGIN / ".htaccess",
     }
     for label, path in source_paths.items():
         try:
@@ -128,8 +130,59 @@ def main() -> int:
             "%s tours",
             "Tours for %s",
             "hks_noindex",
+            "hks_wayfinder_enable_output_compression",
+            "hks_wayfinder_preload_primary_image",
+            "hks_wayfinder_catalogue_cache_version",
+            "hks_wayfinder_move_meta_signal_to_footer",
+            "hks_wayfinder_move_meta_pixel_to_footer",
+            "FacebookWordpressPixelInjection",
+            "remove_action( 'wp_head'",
+            "hks_wayfinder_capture_deferred_meta_pixel",
+            "hks_wayfinder_print_deferred_meta_pixel",
+            "wp_add_inline_script( 'facebook-signal'",
+            "connect.facebook.net/en_US/fbevents.js",
+            "if(f.fbq)return",
+            "if(!f._fbq)f._fbq=n",
+            "n.loaded=!0",
+            "n.version='2.0'",
+            "n.queue=[]",
+            "FacebookSignal.initPixel(",
+            "fbq('track', 'PageView'",
+            "3 !== count( $matches[1] )",
+            "preg_replace( '#<script\\b[^>]*>.*?</script>#is'",
+            "Meta Pixel Code|End Meta Pixel Code",
+            "$loader_tail_count",
+            "__hksDeferredMetaPixelOwnsLoader",
+            "window.fbq&&window.fbq.callMethod",
+            "data-hks-deferred-meta-pixel",
+            "window.requestIdleCallback(run, { timeout: 1000 })",
+            "window.setTimeout(run, 5000)",
+            "'wp_footer'",
+            "add_action( 'wp_head', 'hks_wayfinder_move_meta_pixel_to_footer', 2 )",
+            "add_action( 'wp_footer', 'hks_wayfinder_print_deferred_meta_pixel', 21 )",
+            "wp_scripts()->add_data( 'facebook-signal', 'group', 1 )",
+            "$GLOBALS['hks_wayfinder_deferred_meta_pixel'][] = $state",
+            "$removed_callbacks",
+            "get_transient",
+            "set_transient",
         ],
     )
+    if not re.search(r"hks_wayfinder_capture_deferred_meta_pixel\( \$callback \);\s*\},\s*9", sources["functions"]):
+        errors.append("Meta Pixel callback must be captured before the official footer-priority-10 CAPI flush")
+    meta_capture = sources["functions"].find("function hks_wayfinder_capture_deferred_meta_pixel")
+    meta_print = sources["functions"].find("function hks_wayfinder_print_deferred_meta_pixel")
+    meta_relocation = sources["functions"].find("function hks_wayfinder_move_meta_pixel_to_footer")
+    if min(meta_capture, meta_print, meta_relocation) < 0 or not (meta_capture < meta_print < meta_relocation):
+        errors.append("Meta Pixel capture, post-helper output and atomic relocation must remain in dependency order")
+    meta_loader = re.search(r"\$state\['javascript'\]\s*=\s*<<<'JS'\s*(.*?)\s*JS;", sources["functions"], re.DOTALL)
+    if not meta_loader:
+        errors.append("Meta Pixel optimization must isolate its deferred external-runtime loader")
+    else:
+        require(errors, "deferred Meta runtime loader", meta_loader.group(1), ["createElement('script')", "insertBefore(s,f)", "connect.facebook.net/en_US/fbevents.js"])
+        forbid(errors, "deferred Meta runtime loader", meta_loader.group(1), ["FacebookSignal.init", "initPixel", "PageView"])
+    forbid(errors, "Meta Pixel hook timing", sources["functions"], ["add_action( 'wp', 'hks_wayfinder_move_meta_pixel_to_footer'", "hks_wayfinder_meta_pixel_deferred"])
+    require(errors, "theme asset delivery", sources["theme_htaccess"], ["AddOutputFilterByType DEFLATE", "ExpiresActive On", "Cache-Control", "immutable"])
+    require(errors, "plugin asset delivery", sources["plugin_htaccess"], ["AddOutputFilterByType DEFLATE", "ExpiresActive On", "Cache-Control", "immutable"])
     require(
         errors,
         "header",
@@ -158,6 +211,15 @@ def main() -> int:
         ],
     )
     forbid(errors, "header", sources["header"], ["is_front_page()", "hks-site-header--home-overlay"])
+    menu_check = sources["header"].find("$has_primary_menu")
+    fallback_guard = sources["header"].find("if ( ! $has_primary_menu )")
+    fallback_lookup = sources["header"].find("hks_wayfinder_populated_terms")
+    if min(menu_check, fallback_guard, fallback_lookup) < 0 or not (menu_check < fallback_guard < fallback_lookup):
+        errors.append("header fallback catalogue queries must run only when no managed primary menu is assigned")
+    require(errors, "header image priorities", sources["header"], ['loading="eager" fetchpriority="low" decoding="async"', 'loading="lazy" fetchpriority="low" decoding="async"'])
+    for label in ("renderer", "article_renderer"):
+        if re.search(r"wp_kses_post\(\s*wp_get_attachment_image", sources[label]):
+            errors.append(f"{label} must preserve responsive image and priority attributes generated by WordPress")
     header_actions = re.search(r'<div class="hks-header-actions">(.*?)</div>', sources["header"], re.DOTALL)
     if not header_actions or "hks-button--quote" in header_actions.group(1):
         errors.append("desktop primary header must not contain the large quote button")
@@ -351,8 +413,24 @@ def main() -> int:
             "render_group_travel_page",
             "hks-group-travel-planner",
             "group_travel_page",
+            "current_gallery_image_id",
         ],
     )
+    gallery_start = sources["renderer"].find("private static function render_gallery")
+    gallery_end = sources["renderer"].find("private static function render_itinerary", gallery_start)
+    gallery = sources["renderer"][gallery_start:gallery_end]
+    require(
+        errors,
+        "Tour gallery critical path",
+        gallery,
+        [
+            "'loading' => 'lazy', 'fetchpriority' => 'low', 'decoding' => 'async', 'sizes' => '112px'",
+            "'loading' => 'eager', 'fetchpriority' => 'high', 'decoding' => 'async'",
+            "'loading' => 'lazy', 'fetchpriority' => 'low', 'decoding' => 'async'",
+        ],
+    )
+    forbid(errors, "Tour gallery critical path", gallery, ["$index < 5 ? 'eager' : 'lazy'"])
+    require(errors, "Campaign shared optimized renderer", sources["renderer"], ["render_canonical_details( $context['tour_id'], $context['campaign_id'] )"])
     forbid(
         errors,
         "public renderer",
@@ -447,7 +525,7 @@ def main() -> int:
     drag_threshold = sources["home_gallery"].find("drag.moved = true")
     if pointer_capture < drag_threshold:
         errors.append("homepage gallery must capture the pointer only after a real drag begins")
-    require(errors, "Tour UI script", sources["tour_ui"], ["role', 'tablist", "ArrowRight", "matchMedia('(min-width: 769px)", "tour_gallery_open", "tour_section_open", "itinerary_toggle", "related_tour_select", "selectPreview", "data-hks-gallery-thumb", "data-hks-gallery-more-open", "openDialogAt", "data-hks-gallery-stage-prev", "data-hks-gallery-stage-next", "hksGalleryStageSrc", "hksGalleryInterval", "5000", "scheduleAutoplay", "IntersectionObserver", "visibilitychange", "prefers-reduced-motion", "aria-pressed"])
+    require(errors, "Tour UI script", sources["tour_ui"], ["role', 'tablist", "ArrowRight", "matchMedia('(min-width: 769px)", "tour_gallery_open", "tour_section_open", "itinerary_toggle", "related_tour_select", "selectPreview", "data-hks-gallery-thumb", "data-hks-gallery-more-open", "openDialogAt", "data-hks-gallery-stage-prev", "data-hks-gallery-stage-next", "hksGalleryStageSrc", "hksGalleryInterval", "5000", "scheduleAutoplay", "IntersectionObserver", "visibilitychange", "prefers-reduced-motion", "aria-pressed", "stageImageReady", "stageImage?.addEventListener('load'", "if (!canAutoplay()) return", "if (stageImageReady) preloadPreview(previewIndex + 1)"])
     require(errors, "quote block", sources["quote"], ["$attributes['label']", "$attributes['mode']", "Request a quote", "InquiryRepository::REST_NAMESPACE", "data-hks-inquiry-form", "data-hks-whatsapp-launch", "data-hks-email-launch", "info@holidaykenyasafaris.ke", "'email', __( 'Email address', 'hks-core' ), 'email', 'email', true", "group_context", "group_fields", "data-hks-inquiry-inline", "destination_selection", "tour_selection", "data-form-token"])
     require(errors, "Group Travel inquiry script", sources["inquiry_script"], ["destination_selection", "tour_selection", "syncGroupTour", "filterGroupTours", "destination_id", "inquiry_route", "group_travel"])
     require(errors, "Group Travel inquiry storage", sources["inquiry_repository"], ["_hks_inquiry_email", "_hks_inquiry_destination", "_hks_inquiry_route", "destination_label", "group_travel"])

@@ -41,6 +41,7 @@ EXPECTED_PALETTE = [
 ]
 
 REQUIRED_THEME_FILES = [
+    ".htaccess",
     "style.css",
     "functions.php",
     "theme.json",
@@ -78,6 +79,7 @@ REQUIRED_THEME_FILES = [
 ]
 
 REQUIRED_PLUGIN_FILES = [
+    ".htaccess",
     "hks-core.php",
     "index.php",
     "README.md",

@@ -48,6 +48,31 @@ final class TourBlocks {
 	}
 
 	/**
+	 * Return the first approved gallery image for the current Tour or Campaign.
+	 *
+	 * The theme uses this before block rendering so the browser can discover the
+	 * eventual LCP image from a responsive preload in the document head.
+	 *
+	 * @return int Attachment ID, or zero when no approved gallery image exists.
+	 */
+	public static function current_gallery_image_id(): int {
+		if ( ! is_singular( array( 'hks_tour', 'hks_campaign' ) ) ) {
+			return 0;
+		}
+
+		$context = self::tour_context();
+		if ( ! $context ) {
+			return 0;
+		}
+
+		$images = $context['campaign_id']
+			? self::campaign_images( $context['campaign_id'], $context['tour_id'] )
+			: self::tour_images( $context['tour_id'] );
+
+		return absint( $images[0] ?? 0 );
+	}
+
+	/**
 	 * Render the reversed production lockup on the dark footer surface.
 	 *
 	 * @return string
@@ -154,18 +179,16 @@ final class TourBlocks {
 							<?php foreach ( $visuals as $index => $visual ) : ?>
 								<figure>
 									<?php
-									echo wp_kses_post(
-										wp_get_attachment_image(
-											$visual['image_id'],
-											'large',
-											false,
-											array(
-												'loading'       => 0 === $index ? 'eager' : 'lazy',
-												'fetchpriority' => 0 === $index ? 'high' : 'auto',
-												'sizes'         => '(min-width: 1024px) 24vw, (min-width: 768px) 30vw, 78vw',
-											)
+									echo wp_get_attachment_image(
+										$visual['image_id'],
+										'large',
+										false,
+										array(
+											'loading'       => 0 === $index ? 'eager' : 'lazy',
+											'fetchpriority' => 0 === $index ? 'high' : 'auto',
+											'sizes'         => '(min-width: 1024px) 24vw, (min-width: 768px) 30vw, 78vw',
 										)
-									);
+									); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core generates and escapes attachment markup.
 									?>
 									<figcaption><strong><?php echo esc_html( $visual['title'] ); ?></strong><?php if ( $visual['destination'] ) : ?><span><?php echo esc_html( $visual['destination'] ); ?></span><?php endif; ?></figcaption>
 								</figure>
@@ -423,7 +446,7 @@ final class TourBlocks {
 		ob_start();
 		?>
 		<article class="hks-tour-card<?php echo $has_image ? '' : ' hks-tour-card--no-image'; ?>">
-			<?php if ( $has_image ) : ?><a class="hks-tour-card__media" href="<?php echo esc_url( $link ); ?>" tabindex="-1" aria-hidden="true"><?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'medium_large', false, array( 'loading' => 'lazy', 'sizes' => '(max-width: 700px) 100vw, 33vw' ) ) ); ?></a><?php endif; ?>
+			<?php if ( $has_image ) : ?><a class="hks-tour-card__media" href="<?php echo esc_url( $link ); ?>" tabindex="-1" aria-hidden="true"><?php echo wp_get_attachment_image( $image_id, 'medium_large', false, array( 'loading' => 'lazy', 'decoding' => 'async', 'sizes' => '(max-width: 700px) 100vw, 33vw' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core generates and escapes attachment markup. ?></a><?php endif; ?>
 			<div class="hks-tour-card__body">
 				<?php if ( $destinations ) : ?><p class="hks-tour-card__destination"><?php echo esc_html( implode( ', ', $destinations ) ); ?></p><?php endif; ?>
 				<h3><a href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( self::public_text( get_the_title( $tour_id ) ) ); ?></a></h3>
@@ -471,7 +494,7 @@ final class TourBlocks {
 		?>
 		<section class="hks-destination-intro<?php echo $image_id ? ' hks-destination-intro--with-image' : ''; ?>">
 			<div class="hks-title-band"><div class="hks-shell"><?php self::breadcrumbs( array( __( 'Tours', 'hks-wayfinder' ) => $tours_url, $term->name => '' ) ); ?><p class="hks-taxonomy-intro__label"><?php esc_html_e( 'Destination', 'hks-wayfinder' ); ?></p><h1><?php echo esc_html( $title ); ?></h1><p><?php echo esc_html( $description ); ?></p></div></div>
-			<?php if ( $image_id || $overview ) : ?><div class="hks-shell hks-destination-intro__body"><?php if ( $overview ) : ?><div class="hks-prose"><?php echo wp_kses_post( $overview ); ?></div><?php endif; ?><?php if ( $image_id ) : ?><figure><?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'large', false, array( 'loading' => 'eager' ) ) ); ?><?php self::render_credit( $image_id ); ?></figure><?php endif; ?></div><?php endif; ?>
+			<?php if ( $image_id || $overview ) : ?><div class="hks-shell hks-destination-intro__body"><?php if ( $overview ) : ?><div class="hks-prose"><?php echo wp_kses_post( $overview ); ?></div><?php endif; ?><?php if ( $image_id ) : ?><figure><?php echo wp_get_attachment_image( $image_id, 'large', false, array( 'loading' => 'eager', 'decoding' => 'async' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core generates and escapes attachment markup. ?><?php self::render_credit( $image_id ); ?></figure><?php endif; ?></div><?php endif; ?>
 		</section>
 		<?php
 
@@ -550,22 +573,20 @@ final class TourBlocks {
 						<p class="hks-sr-only" id="hks-home-gallery-instructions"><?php esc_html_e( 'Featured tours. Select a preview, swipe or drag the card queue, use the previous and next buttons, or use the left and right arrow keys while the gallery is focused.', 'hks-wayfinder' ); ?></p>
 						<figure class="hks-home-gallery__stage" data-hks-home-gallery-stage>
 							<?php
-							echo wp_kses_post(
-								wp_get_attachment_image(
-									$active_tour['image_id'],
-									'full',
-									false,
-									array(
-										'loading'       => 'eager',
-										'fetchpriority' => 'high',
-										'decoding'      => 'async',
-										'sizes'         => '100vw',
-										'draggable'     => 'false',
-										'alt'           => '',
-										'data-hks-home-gallery-active-image' => '',
-									)
+							echo wp_get_attachment_image(
+								$active_tour['image_id'],
+								'full',
+								false,
+								array(
+									'loading'       => 'eager',
+									'fetchpriority' => 'high',
+									'decoding'      => 'async',
+									'sizes'         => '100vw',
+									'draggable'     => 'false',
+									'alt'           => '',
+									'data-hks-home-gallery-active-image' => '',
 								)
-							);
+							); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core generates and escapes attachment markup.
 							?>
 						</figure>
 						<div class="hks-home-gallery__wash" aria-hidden="true"></div>
@@ -613,20 +634,18 @@ final class TourBlocks {
 										>
 											<span class="hks-home-gallery__media">
 												<?php
-												echo wp_kses_post(
-													wp_get_attachment_image(
-														$hero_tour['image_id'],
-														'full',
-														false,
-														array(
-															'loading'   => $index < 2 ? 'eager' : 'lazy',
-															'decoding'  => 'async',
-															'sizes'     => '(min-width: 1280px) 11rem, (min-width: 768px) 10rem, 52vw',
-															'draggable' => 'false',
-															'alt'       => '',
-														)
+												echo wp_get_attachment_image(
+													$hero_tour['image_id'],
+													'full',
+													false,
+													array(
+														'loading'   => $index < 2 ? 'eager' : 'lazy',
+														'decoding'  => 'async',
+														'sizes'     => '(min-width: 1280px) 11rem, (min-width: 768px) 10rem, 52vw',
+														'draggable' => 'false',
+														'alt'       => '',
 													)
-												);
+												); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core generates and escapes attachment markup.
 												?>
 											</span>
 											<span class="hks-home-gallery__caption"><?php echo esc_html( $hero_tour['caption'] ); ?></span>
@@ -652,7 +671,7 @@ final class TourBlocks {
 			<?php endif; ?>
 
 			<?php if ( $destinations ) : ?>
-				<section class="hks-home-section hks-home-section--mist" id="destinations" aria-labelledby="hks-destinations-title"><div class="hks-shell"><div class="hks-section-heading"><div><p><?php esc_html_e( 'Browse by destination', 'hks-wayfinder' ); ?></p><h2 id="hks-destinations-title"><?php esc_html_e( 'Choose the place first', 'hks-wayfinder' ); ?></h2></div></div><div class="hks-destination-grid"><?php foreach ( $destinations as $term ) : $url = hks_wayfinder_term_url( $term ); $image = self::destination_image( $term ); ?><a class="hks-destination-card<?php echo $image ? '' : ' hks-destination-card--no-image'; ?>" href="<?php echo esc_url( $url ); ?>"><?php if ( $image ) : ?><span class="hks-destination-card__media"><?php echo wp_kses_post( wp_get_attachment_image( $image, 'medium_large', false, array( 'loading' => 'lazy' ) ) ); ?></span><?php endif; ?><span class="hks-destination-card__body"><strong><?php echo esc_html( $term->name ); ?></strong><span><?php echo esc_html( sprintf( _n( '%s tour', '%s tours', $term->count, 'hks-wayfinder' ), number_format_i18n( $term->count ) ) ); ?></span></span></a><?php endforeach; ?></div></div></section>
+				<section class="hks-home-section hks-home-section--mist" id="destinations" aria-labelledby="hks-destinations-title"><div class="hks-shell"><div class="hks-section-heading"><div><p><?php esc_html_e( 'Browse by destination', 'hks-wayfinder' ); ?></p><h2 id="hks-destinations-title"><?php esc_html_e( 'Choose the place first', 'hks-wayfinder' ); ?></h2></div></div><div class="hks-destination-grid"><?php foreach ( $destinations as $term ) : $url = hks_wayfinder_term_url( $term ); $image = self::destination_image( $term ); ?><a class="hks-destination-card<?php echo $image ? '' : ' hks-destination-card--no-image'; ?>" href="<?php echo esc_url( $url ); ?>"><?php if ( $image ) : ?><span class="hks-destination-card__media"><?php echo wp_get_attachment_image( $image, 'medium_large', false, array( 'loading' => 'lazy', 'decoding' => 'async' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core generates and escapes attachment markup. ?></span><?php endif; ?><span class="hks-destination-card__body"><strong><?php echo esc_html( $term->name ); ?></strong><span><?php echo esc_html( sprintf( _n( '%s tour', '%s tours', $term->count, 'hks-wayfinder' ), number_format_i18n( $term->count ) ) ); ?></span></span></a><?php endforeach; ?></div></div></section>
 			<?php endif; ?>
 
 			<section class="hks-home-section hks-shell" aria-labelledby="hks-featured-title">
@@ -828,7 +847,7 @@ final class TourBlocks {
 								aria-label="<?php echo esc_attr( $thumbnail_label ); ?>"
 								aria-pressed="<?php echo 0 === $index ? 'true' : 'false'; ?>"
 							>
-								<?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'thumbnail', false, array( 'alt' => '', 'loading' => $index < 5 ? 'eager' : 'lazy', 'sizes' => '112px' ) ) ); ?>
+								<?php echo wp_get_attachment_image( $image_id, 'thumbnail', false, array( 'alt' => '', 'loading' => 'lazy', 'fetchpriority' => 'low', 'decoding' => 'async', 'sizes' => '112px' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core generates and escapes attachment markup. ?>
 								<?php if ( $is_more_thumbnail ) : ?>
 									<span class="hks-tour-gallery__thumbnail-more" aria-hidden="true">
 										<strong>+<?php echo esc_html( number_format_i18n( $additional_desktop_images ) ); ?></strong>
@@ -840,7 +859,7 @@ final class TourBlocks {
 					</div>
 				<?php endif; ?>
 				<div class="hks-tour-gallery__stage-wrap">
-					<button type="button" class="hks-tour-gallery__stage" data-hks-gallery-stage data-hks-gallery-open="0" aria-label="<?php echo esc_attr( sprintf( __( 'Open image %1$s of %2$s for %3$s', 'hks-wayfinder' ), 1, $count, $title ) ); ?>"><?php echo wp_kses_post( wp_get_attachment_image( $initial_image_id, 'large', false, array( 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '(max-width: 56rem) calc(100vw - 2rem), (max-width: 80rem) 54vw, 760px' ) ) ); ?></button>
+					<button type="button" class="hks-tour-gallery__stage" data-hks-gallery-stage data-hks-gallery-open="0" aria-label="<?php echo esc_attr( sprintf( __( 'Open image %1$s of %2$s for %3$s', 'hks-wayfinder' ), 1, $count, $title ) ); ?>"><?php echo wp_get_attachment_image( $initial_image_id, 'large', false, array( 'loading' => 'eager', 'fetchpriority' => 'high', 'decoding' => 'async', 'sizes' => '(max-width: 56rem) calc(100vw - 2rem), (max-width: 80rem) 54vw, 760px' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core generates and escapes attachment markup. ?></button>
 					<?php if ( $count > 1 ) : ?>
 						<button type="button" class="hks-tour-gallery__nav hks-tour-gallery__nav--prev" data-hks-gallery-stage-prev aria-label="<?php esc_attr_e( 'Show previous gallery image', 'hks-wayfinder' ); ?>"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
 						<button type="button" class="hks-tour-gallery__nav hks-tour-gallery__nav--next" data-hks-gallery-stage-next aria-label="<?php esc_attr_e( 'Show next gallery image', 'hks-wayfinder' ); ?>"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg></button>
@@ -850,7 +869,7 @@ final class TourBlocks {
 			</div>
 			<dialog class="hks-gallery-lightbox" data-hks-gallery-dialog aria-label="<?php echo esc_attr( sprintf( __( '%s image gallery', 'hks-wayfinder' ), $title ) ); ?>">
 				<div class="hks-gallery-lightbox__bar"><span data-hks-gallery-counter></span><button type="button" data-hks-gallery-close aria-label="<?php esc_attr_e( 'Close gallery', 'hks-wayfinder' ); ?>">×</button></div>
-				<div class="hks-gallery-lightbox__slides"><?php foreach ( $images as $index => $image_id ) : ?><figure data-hks-gallery-slide <?php echo 0 === $index ? '' : 'hidden'; ?>><?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'full', false, array( 'loading' => 'lazy' ) ) ); ?><?php self::render_credit( $image_id ); ?></figure><?php endforeach; ?></div>
+				<div class="hks-gallery-lightbox__slides"><?php foreach ( $images as $index => $image_id ) : ?><figure data-hks-gallery-slide <?php echo 0 === $index ? '' : 'hidden'; ?>><?php echo wp_get_attachment_image( $image_id, 'full', false, array( 'loading' => 'lazy', 'fetchpriority' => 'low', 'decoding' => 'async' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core generates and escapes attachment markup. ?><?php self::render_credit( $image_id ); ?></figure><?php endforeach; ?></div>
 				<?php if ( $count > 1 ) : ?><div class="hks-gallery-lightbox__controls"><button type="button" data-hks-gallery-prev><?php esc_html_e( 'Previous', 'hks-wayfinder' ); ?></button><button type="button" data-hks-gallery-next><?php esc_html_e( 'Next', 'hks-wayfinder' ); ?></button></div><?php endif; ?>
 			</dialog>
 		</div>
@@ -929,7 +948,15 @@ final class TourBlocks {
 	 */
 	private static function render_related_tours( int $tour_id ): void {
 		$term_ids = wp_get_post_terms( $tour_id, 'hks_destination', array( 'fields' => 'ids' ) );
-		$args     = array( 'post_type' => 'hks_tour', 'post_status' => 'publish', 'posts_per_page' => 3, 'post__not_in' => array( $tour_id ), 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'DESC' ) );
+		$args     = array(
+			'post_type'           => 'hks_tour',
+			'post_status'         => 'publish',
+			'posts_per_page'      => 3,
+			'post__not_in'        => array( $tour_id ),
+			'orderby'             => array( 'menu_order' => 'ASC', 'date' => 'DESC' ),
+			'no_found_rows'       => true,
+			'ignore_sticky_posts' => true,
+		);
 
 		if ( ! is_wp_error( $term_ids ) && $term_ids ) {
 			$args['tax_query'] = array( array( 'taxonomy' => 'hks_destination', 'field' => 'term_id', 'terms' => $term_ids ) );
@@ -972,6 +999,12 @@ final class TourBlocks {
 	 * @return int[]
 	 */
 	private static function tour_images( int $tour_id ): array {
+		static $cache = array();
+
+		if ( isset( $cache[ $tour_id ] ) ) {
+			return $cache[ $tour_id ];
+		}
+
 		$candidates = array( get_post_thumbnail_id( $tour_id ) );
 		$gallery    = self::field( 'hks_gallery', $tour_id );
 
@@ -986,7 +1019,9 @@ final class TourBlocks {
 			}
 		}
 
-		return $allowed;
+		$cache[ $tour_id ] = $allowed;
+
+		return $cache[ $tour_id ];
 	}
 
 	/**
@@ -997,6 +1032,13 @@ final class TourBlocks {
 	 * @return int[]
 	 */
 	private static function campaign_images( int $campaign_id, int $tour_id ): array {
+		static $cache = array();
+		$cache_key    = $campaign_id . ':' . $tour_id;
+
+		if ( isset( $cache[ $cache_key ] ) ) {
+			return $cache[ $cache_key ];
+		}
+
 		$campaign_image = absint( get_post_thumbnail_id( $campaign_id ) );
 		$images         = self::tour_images( $tour_id );
 
@@ -1004,7 +1046,9 @@ final class TourBlocks {
 			array_unshift( $images, $campaign_image );
 		}
 
-		return array_values( array_unique( $images ) );
+		$cache[ $cache_key ] = array_values( array_unique( $images ) );
+
+		return $cache[ $cache_key ];
 	}
 
 	/**
@@ -1206,21 +1250,31 @@ final class TourBlocks {
 	 * @return array<string, int>|null
 	 */
 	private static function tour_context(): ?array {
-		$view_id = get_the_ID();
+		static $cache = array();
+
+		$view_id = get_queried_object_id() ?: get_the_ID();
+		if ( array_key_exists( $view_id, $cache ) ) {
+			return $cache[ $view_id ];
+		}
+
 		$type    = get_post_type( $view_id );
 
 		if ( 'hks_tour' === $type ) {
-			return array( 'view_id' => $view_id, 'tour_id' => $view_id, 'campaign_id' => 0 );
+			$cache[ $view_id ] = array( 'view_id' => $view_id, 'tour_id' => $view_id, 'campaign_id' => 0 );
+			return $cache[ $view_id ];
 		}
 
 		if ( 'hks_campaign' === $type ) {
 			$tour_id = absint( self::field( 'hks_linked_tour', $view_id ) );
 			if ( $tour_id && 'hks_tour' === get_post_type( $tour_id ) ) {
-				return array( 'view_id' => $view_id, 'tour_id' => $tour_id, 'campaign_id' => $view_id );
+				$cache[ $view_id ] = array( 'view_id' => $view_id, 'tour_id' => $tour_id, 'campaign_id' => $view_id );
+				return $cache[ $view_id ];
 			}
 		}
 
-		return null;
+		$cache[ $view_id ] = null;
+
+		return $cache[ $view_id ];
 	}
 
 	/**

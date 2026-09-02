@@ -133,6 +133,7 @@
 		let isHovered = false;
 		let hasFocus = false;
 		let previewAnimation = null;
+		let stageImageReady = !stageImage || stageImage.complete;
 
 		function stopAutoplay() {
 			if (!autoplayTimer) return;
@@ -166,7 +167,7 @@
 		function scheduleAutoplay() {
 			stopAutoplay();
 			if (!canAutoplay()) return;
-			preloadPreview(previewIndex + 1);
+			if (stageImageReady) preloadPreview(previewIndex + 1);
 			autoplayTimer = window.setTimeout(() => {
 				autoplayTimer = 0;
 				selectPreview(previewIndex + 1);
@@ -181,6 +182,7 @@
 			if (!thumbnail || !stage || !stageImage || !nextSrc) return;
 
 			previewIndex = normalizedIndex;
+			stageImageReady = false;
 			const nextSrcset = thumbnail.dataset.hksGalleryStageSrcset || '';
 			if (nextSrcset) stageImage.setAttribute('srcset', nextSrcset);
 			else stageImage.removeAttribute('srcset');
@@ -206,6 +208,10 @@
 					&& normalizedIndex >= itemIndex;
 				item.setAttribute('aria-pressed', itemIndex === normalizedIndex || representsMore ? 'true' : 'false');
 			});
+
+			if (stageImage.complete) {
+				stageImageReady = true;
+			}
 		}
 
 		thumbnails.forEach((thumbnail) => {
@@ -322,6 +328,14 @@
 		document.addEventListener('visibilitychange', scheduleAutoplay);
 		reducedMotion.addEventListener('change', scheduleAutoplay);
 		desktopThumbnailRail.addEventListener('change', () => selectPreview(previewIndex));
+		stageImage?.addEventListener('load', () => {
+			stageImageReady = true;
+			if (canAutoplay()) preloadPreview(previewIndex + 1);
+		});
+		stageImage?.addEventListener('error', () => {
+			stageImageReady = true;
+		});
+		if (stageImage?.complete) stageImageReady = true;
 		scheduleAutoplay();
 	});
 
