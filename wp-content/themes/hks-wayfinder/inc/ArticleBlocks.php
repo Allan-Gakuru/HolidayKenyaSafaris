@@ -390,6 +390,9 @@ final class ArticleBlocks {
 
 		$columns = array( array(), array() );
 		foreach ( $groups as $index => $group ) {
+			// Number in article order before splitting the independent desktop columns.
+			$group['number']         = $index + 1;
+			$groups[ $index ]        = $group;
 			$columns[ $index % 2 ][] = $group;
 		}
 
@@ -399,14 +402,14 @@ final class ArticleBlocks {
 			<h2 id="hks-article-toc-title"><?php esc_html_e( 'What we’ll cover', 'hks-wayfinder' ); ?></h2>
 			<div class="hks-article-toc__columns">
 				<?php foreach ( $columns as $column ) : ?>
-					<ul class="hks-article-toc__list hks-article-toc__column">
+					<ol class="hks-article-toc__list hks-article-toc__column" role="list">
 						<?php echo self::render_article_toc_items( $column ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Generated and escaped by render_article_toc_items(). ?>
-					</ul>
+					</ol>
 				<?php endforeach; ?>
 			</div>
-			<ul class="hks-article-toc__list hks-article-toc__list--mobile">
+			<ol class="hks-article-toc__list hks-article-toc__list--mobile" role="list">
 				<?php echo self::render_article_toc_items( $groups ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Generated and escaped by render_article_toc_items(). ?>
-			</ul>
+			</ol>
 		</nav>
 		<?php
 		return (string) ob_get_clean();
@@ -415,22 +418,40 @@ final class ArticleBlocks {
 	/**
 	 * Render table-of-contents groups for one visual list.
 	 *
-	 * @param array<int,array{heading:array{level:int,id:string,label:string},children:array<int,array{level:int,id:string,label:string}>,orphan:bool}> $groups Heading groups.
+	 * @param array<int,array{number:int,heading:array{level:int,id:string,label:string},children:array<int,array{level:int,id:string,label:string}>,orphan:bool}> $groups Heading groups.
 	 */
 	private static function render_article_toc_items( array $groups ): string {
 		ob_start();
 		foreach ( $groups as $group ) :
 			?>
-			<li<?php echo $group['orphan'] ? ' class="hks-article-toc__orphan"' : ''; ?>><a href="#<?php echo esc_attr( $group['heading']['id'] ); ?>"><?php echo esc_html( $group['heading']['label'] ); ?></a>
+			<li value="<?php echo esc_attr( (string) $group['number'] ); ?>"<?php echo $group['orphan'] ? ' class="hks-article-toc__orphan"' : ''; ?>><?php echo self::render_article_toc_link( $group['heading'], $group['number'] . '.' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Generated and escaped by render_article_toc_link(). ?>
 				<?php if ( $group['children'] ) : ?>
-					<ul>
-						<?php foreach ( $group['children'] as $child ) : ?><li><a href="#<?php echo esc_attr( $child['id'] ); ?>"><?php echo esc_html( $child['label'] ); ?></a></li><?php endforeach; ?>
-					</ul>
+					<ol role="list">
+						<?php foreach ( $group['children'] as $child_index => $child ) : ?><li><?php echo self::render_article_toc_link( $child, $group['number'] . '.' . ( $child_index + 1 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Generated and escaped by render_article_toc_link(). ?></li><?php endforeach; ?>
+					</ol>
 				<?php endif; ?>
 			</li>
 			<?php
 		endforeach;
 		return (string) ob_get_clean();
+	}
+
+	/**
+	 * Keep numbering readable when a link wraps, without changing body headings or IDs.
+	 *
+	 * @param array{level:int,id:string,label:string} $heading Article heading.
+	 * @param string                               $number  Hierarchical TOC number.
+	 */
+	private static function render_article_toc_link( array $heading, string $number ): string {
+		// Replace explicit editorial prefixes such as "1. " or "2) " in the TOC only.
+		$label = preg_replace( '/^\d+(?:\.\d+)*[.)]\s+/u', '', $heading['label'] ) ?: $heading['label'];
+
+		return sprintf(
+			'<a href="#%1$s"><span class="hks-article-toc__number">%2$s</span> <span class="hks-article-toc__label">%3$s</span></a>',
+			esc_attr( $heading['id'] ),
+			esc_html( $number ),
+			esc_html( $label )
+		);
 	}
 
 	public static function render_destination_guides(): string {
