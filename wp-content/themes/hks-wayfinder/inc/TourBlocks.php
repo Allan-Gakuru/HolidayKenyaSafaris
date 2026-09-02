@@ -979,6 +979,11 @@ final class TourBlocks {
 	 * @return array<string, string>
 	 */
 	private static function tour_facts( int $tour_id ): array {
+		$inclusions = array_filter( array_map(
+			static fn( $row ) => self::public_text( $row['item'] ?? '' ),
+			self::rows( self::field( 'hks_inclusions', $tour_id ) )
+		) );
+
 		$facts = array(
 			__( 'Tour scope', 'hks-wayfinder' )    => implode( ', ', self::term_names( $tour_id, 'hks_tour_scope' ) ),
 			__( 'Duration', 'hks-wayfinder' )      => self::public_text( self::field( 'hks_duration_label', $tour_id ) ),
@@ -987,6 +992,7 @@ final class TourBlocks {
 			__( 'Route', 'hks-wayfinder' )         => self::public_text( self::field( 'hks_route_summary', $tour_id ) ),
 			__( 'Transport', 'hks-wayfinder' )     => self::transport_labels( self::field( 'hks_transport_types', $tour_id ) ),
 			__( 'Travel style', 'hks-wayfinder' )  => implode( ', ', self::term_names( $tour_id, 'hks_travel_style' ) ),
+			__( 'Included', 'hks-wayfinder' )      => implode( ', ', $inclusions ),
 		);
 
 		return array_filter( $facts );
