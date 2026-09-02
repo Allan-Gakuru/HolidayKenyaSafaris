@@ -153,7 +153,7 @@ def main() -> int:
             "254712965131",
             "info@holidaykenyasafaris.ke",
             "Review quote request",
-            "Holiday Kenya Safaris is owned and operated by Ashford Tours and Travels. With over 20 years of international travelers experience, we made Holiday Kenya Safaris created to serve Kenyans.",
+            "Backed by over 20 years of Ashford Tours and Travels’ experience, Holiday Kenya Safaris offers thoughtfully planned tours for Kenyans.",
             "choose WhatsApp or email",
             "Open email to send",
             "'email', __( 'Email address', 'hks-core' ), 'email', 'email', true",

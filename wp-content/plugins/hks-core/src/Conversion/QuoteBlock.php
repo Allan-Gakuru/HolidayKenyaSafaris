@@ -131,7 +131,7 @@ final class QuoteBlock {
 
 							<?php self::optional_fields( $instance_id, $context['optional_questions'] ); ?>
 
-							<p class="hks-inquiry__save-note"><?php esc_html_e( 'Holiday Kenya Safaris is owned and operated by Ashford Tours and Travels. With over 20 years of international travelers experience, we made Holiday Kenya Safaris created to serve Kenyans.', 'hks-core' ); ?></p>
+							<p class="hks-inquiry__save-note"><?php esc_html_e( 'Backed by over 20 years of Ashford Tours and Travels’ experience, Holiday Kenya Safaris offers thoughtfully planned tours for Kenyans.', 'hks-core' ); ?></p>
 							<p class="hks-inquiry__status" data-hks-inquiry-status role="status" aria-live="polite"></p>
 							<button class="hks-inquiry__submit" type="submit"><?php echo esc_html( $is_group_context ? __( 'Review group quote request', 'hks-core' ) : __( 'Review quote request', 'hks-core' ) ); ?></button>
 						</form>
