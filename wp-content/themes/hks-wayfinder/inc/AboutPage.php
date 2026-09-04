@@ -104,7 +104,8 @@ final class AboutPage {
 			return '';
 		}
 
-		$group = get_field( 'hks_settings_' . $name, 'hks_settings' );
+		// Registered keys also resolve defaults before a new option has been saved.
+		$group = get_field( 'field_hks_settings_' . $name, 'hks_settings' );
 		$value = is_array( $group ) ? ( $group['value'] ?? '' ) : '';
 
 		if ( ! is_string( $value ) || str_contains( $value, 'CLIENT CONFIRMATION REQUIRED' ) ) {

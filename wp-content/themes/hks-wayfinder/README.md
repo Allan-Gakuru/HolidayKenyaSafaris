@@ -76,6 +76,13 @@ phone and email were saved in HKS Settings during this rebuild; the client's
 map URL and business hours were retained. After deploying, check `/about/` and
 confirm that no saved Site Editor template overrides the file template.
 
+When adding or removing theme patterns, bump the theme version in `style.css`:
+WordPress caches pattern discovery against that version, including after cPanel
+file-copy deployments. The About settings reader uses registered SCF field keys
+so new field defaults work before their first save; explicitly saved blank
+values still hide optional details. Verify the story and map on the deployed
+WordPress page, since the static preview does not exercise either behavior.
+
 Public presentation is fail-closed:
 
 - Tour cards, archives, canonical Tour pages, related Tours, and Tour quote panels never render price;
