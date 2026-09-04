@@ -52,24 +52,45 @@ the corresponding Page has been published.
 ## About page
 
 The `/about/` route uses `templates/page-about.html`. Its opening story is the
-native block pattern `patterns/about-story.php`, based on the client-supplied
-Brand Script and the ownership/experience approval recorded on 4 September 2026.
+native block pattern `patterns/about-story.php`: a single-column introduction
+of at most two paragraphs focused on Holiday Kenya Safaris, based on the
+client-supplied Brand Script and the ownership/experience approval recorded on
+4 September 2026. Keep Ashford's ownership and 20+ years of experience within
+those paragraphs, without a separate introductory headline or CTA.
 Edit that story through the About template in Appearance → Editor, or update
 the version-controlled pattern. This dedicated template replaces the original
 seeded Page body; it does not append the old operator and process sections.
 
-The only sections after the story are Visit Us and Contact Us. `AboutPage.php`
-reads the public address, directions URL, optional map embed URL, business hours,
-phone, email and WhatsApp settings from HKS Settings → Identity and contact.
-Blank settings are omitted. Visit Us includes a responsive, lazy-loaded Google
-Maps iframe with an accessible title, alongside the existing directions link.
+The only sections after the story are Visit Us and Contact Us, in two compact
+columns that stack below 768px. On the left, Visit Us shows working hours,
+address, then the smaller map and directions link. On the right, Contact Us
+shows the public phone number with a Chat on WhatsApp button, “Keep up with
+Holiday Kenya Safaris updates on social media”, and Facebook and Instagram
+follow buttons. `AboutPage.php` reads
+the public address, directions URL, optional map embed URL, business hours and
+phone and WhatsApp from HKS Settings → Identity and contact, and the Facebook and Instagram
+profiles from its existing Social links repeater. Blank settings are omitted.
+The compact Contact Us section has no email row; global contact
+components retain their existing behavior. Visit Us includes a responsive,
+lazy-loaded Google Maps iframe with an accessible title, at 220px desktop and
+200px mobile height, alongside the existing directions link. Keep the layout
+compact: 24px/20px intro padding, 12px paragraph gaps and 1.6 line height, 24px
+vertical padding for the lower area, 32px between columns, and 12px heading/detail
+spacing. Below 768px, stack the lower columns with a 24px gap. Section headings
+use the standard 20–26px token and remain smaller than the page H1.
 The embed URL defaults to the verified Twiga Towers URL obtained through Google
 Maps **Share → Embed a map**. To change the map, paste the iframe's `src` URL
 into the separate embed URL setting; clear it to hide the embedded map. Only
 HTTPS `www.google.com/maps/embed` URLs render, and no API key is required.
 Keep the original Map URL as the destination for the directions link.
-Phone/email/WhatsApp links are general contact actions. The story's Explore our
-trips link leads to the catalogue and the existing Tour quote flow.
+
+All three compact contact/social buttons retain descriptive labels and use the
+client-requested platform styling: WhatsApp Green (`#25D366`) with its recognizable
+logo and Midnight Navy text/icon for contrast, Facebook blue with a white `f`
+logo, and an Instagram purple/pink gradient with a white camera logo. Preserve
+accessible contrast and focus states.
+The Instagram button alone is an approved exception to the site's general
+no-gradient rule.
 
 Code deployment does not overwrite WordPress settings. The confirmed address,
 phone and email were saved in HKS Settings during this rebuild; the client's

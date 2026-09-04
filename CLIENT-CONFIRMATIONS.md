@@ -60,10 +60,12 @@ Use this file for project-level decisions such as contact details, legal wording
 
 The client approved the following direction in the About page rebuild task on 2026-09-04:
 
-- Form the introductory narrative from the **Brand Script** section of the [client-supplied Google Doc](https://docs.google.com/document/d/1S2VXcHRJrdqRUWnoEQutxg2EzbWV6Q1OHwEW9vGpi8Y/edit?tab=t.ryz9ncvyyxv7), specifically tab `t.ryz9ncvyyxv7`.
-- Include the Ashford ownership and 20+ years of travel experience within that narrative.
-- The only additional page sections are **Visit Us** and **Contact Us**.
-- Read public location, embedded map, directions, hours, and contact details from HKS Settings; omit optional blank values cleanly.
+- Form a single-column introductory narrative of at most two paragraphs focused on Holiday Kenya Safaris from the **Brand Script** section of the [client-supplied Google Doc](https://docs.google.com/document/d/1S2VXcHRJrdqRUWnoEQutxg2EzbWV6Q1OHwEW9vGpi8Y/edit?tab=t.ryz9ncvyyxv7), specifically tab `t.ryz9ncvyyxv7`.
+- Include the Ashford ownership and 20+ years of travel experience discreetly within those paragraphs. Remove the oversized introductory headline and extra CTA.
+- The only additional page sections are **Visit Us** and **Contact Us**, side by side in a compact area and stacked on mobile. Keep spaces minimal. Visit Us is on the left and shows working hours, address, then the smaller embedded map and directions link.
+- Contact Us is on the right and shows the phone number with a **Chat on WhatsApp** button, “Keep up with Holiday Kenya Safaris updates on social media”, and Facebook and Instagram follow buttons. Do not include an email row in this compact About section; other site contact components remain unchanged.
+- The client requested platform branding for all three compact buttons: WhatsApp Green (`#25D366`) with its recognizable logo and Midnight Navy label/icon for contrast, Facebook blue with a white `f` logo, and an Instagram purple/pink gradient with a white camera logo, retaining descriptive labels. The Instagram treatment is an exception for this button only to the site's general no-gradient rule.
+- Read public location, embedded map, directions, hours, phone, WhatsApp, and the existing Social links repeater from HKS Settings; omit optional blank values cleanly.
 
 ## Commercial Policies
 
