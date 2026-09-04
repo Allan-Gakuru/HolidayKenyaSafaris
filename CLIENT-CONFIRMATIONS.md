@@ -47,12 +47,23 @@ Use this file for project-level decisions such as contact details, legal wording
 | Email | Confirmed: `info@holidaykenyasafaris.ke` | Official Holiday Kenya Safaris public email |
 | Instagram | Confirmed | `https://www.instagram.com/holidaykenyasafaris/` |
 | Facebook | Confirmed | `https://www.facebook.com/people/Holiday-Kenya-Safaris/61591508593846/` |
-| Address | CLIENT CONFIRMATION REQUIRED | Verify against current Ashford source and client approval |
-| Business hours | CLIENT CONFIRMATION REQUIRED | Do not infer |
+| Address | Confirmed: Suite 101, Twiga Towers, Nairobi | Approved by the client in the About page rebuild task on 2026-09-04. Display through the public address setting. |
+| Map | Confirmed: Twiga Towers directions and embedded Google Map | The client requested an embedded map on 2026-09-04. Retain the saved Map URL for directions and use the verified Google Maps **Share → Embed a map** URL as the default for the separate optional embed URL setting. Editors may replace or clear the embed URL in HKS Settings. |
+| Business hours | Confirmed: Monday–Saturday, 8am–5pm | Approved by the client in the About page rebuild task on 2026-09-04. Display the Business hours value saved under HKS Settings. |
+| About ownership and experience wording | Confirmed for the About narrative | Holiday Kenya Safaris is owned and operated by Ashford Tours & Travel, bringing 20+ years of travel experience. Approved by the client on 2026-09-04; incorporate discreetly in the narrative, without a separate ownership or experience section. This does not approve legal, invoice, or policy wording. |
 | Quote response expectation | Confirmed for public reassurance wording | Tour quote panels may state `Fast Responses to all queries`. This approval does not create a fixed response-time SLA. Approved by the client in a Codex task on 2026-08-16. |
 | Legal company/operator wording | CLIENT CONFIRMATION REQUIRED | Approve footer, terms, invoice, and operator language |
 | Registration and tax details | CLIENT CONFIRMATION REQUIRED | Publish only when verified and appropriate |
 | Memberships and licenses | CLIENT CONFIRMATION REQUIRED | Record exact source and expiry/current status |
+
+## About Page Copy and Structure
+
+The client approved the following direction in the About page rebuild task on 2026-09-04:
+
+- Form the introductory narrative from the **Brand Script** section of the [client-supplied Google Doc](https://docs.google.com/document/d/1S2VXcHRJrdqRUWnoEQutxg2EzbWV6Q1OHwEW9vGpi8Y/edit?tab=t.ryz9ncvyyxv7), specifically tab `t.ryz9ncvyyxv7`.
+- Include the Ashford ownership and 20+ years of travel experience within that narrative.
+- The only additional page sections are **Visit Us** and **Contact Us**.
+- Read public location, embedded map, directions, hours, and contact details from HKS Settings; omit optional blank values cleanly.
 
 ## Commercial Policies
 

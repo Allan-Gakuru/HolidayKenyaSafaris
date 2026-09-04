@@ -1,0 +1,14 @@
+{
+  "apiVersion": 3,
+  "name": "hks-wayfinder/about-contact",
+  "version": "1.0.0",
+  "title": "HKS Visit Us and Contact Us",
+  "category": "theme",
+  "description": "Office details and contact links from HKS Settings.",
+  "textdomain": "hks-wayfinder",
+  "supports": {
+    "html": false,
+    "inserter": false,
+    "multiple": false
+  }
+}

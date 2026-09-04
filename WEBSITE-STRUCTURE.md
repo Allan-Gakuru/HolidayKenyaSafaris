@@ -325,21 +325,16 @@ Do not claim capabilities or documentation that Ashford has not confirmed.
 
 ### About and Trust
 
-Purpose:
+Canonical route: `/about/`.
 
-- Explain Holiday Kenya Safaris and its relationship to Ashford Tours & Travel.
-- Show operational experience and people.
-- Provide verifiable contacts and trust evidence.
+The client-approved structure, confirmed on 2026-09-04, is:
 
-Potential modules, only when verified:
+1. Standard Page title and breadcrumb band with the only H1.
+2. An editable introductory narrative formed from the **Brand Script** section of the [client-supplied Google Doc](https://docs.google.com/document/d/1S2VXcHRJrdqRUWnoEQutxg2EzbWV6Q1OHwEW9vGpi8Y/edit?tab=t.ryz9ncvyyxv7), tab `t.ryz9ncvyyxv7`. Include Holiday Kenya Safaris' ownership and operation by Ashford Tours & Travel and the operator's 20+ years of travel experience discreetly within this narrative.
+3. **Visit Us** with the public address, embedded Google Map, directions link, and business hours from HKS Settings. The confirmed location is Suite 101, Twiga Towers, Nairobi; working hours are Monday–Saturday, 8am–5pm. Retain the client-entered Map URL for directions. The separate optional embed URL defaults to the verified Twiga Towers URL from Google Maps **Share → Embed a map**; editors may replace or clear it. Render a responsive, lazy-loaded iframe with an accessible title only when that embed URL is valid.
+4. **Contact Us** with the public contact details from HKS Settings.
 
-- Operator story.
-- Team and guide profiles.
-- Physical address and contacts.
-- Memberships and licenses.
-- Vehicle or fleet information.
-- Payment and booking process.
-- Real testimonials.
+Visit Us and Contact Us are the only sections beyond the narrative. Keep the Ashford ownership and experience statement within the narrative; do not add separate operator, team, fleet, membership, testimonial, or process sections. Use native blocks in the dedicated About template for the editable story and render the location and contact information from the existing settings. Omit blank optional values without exposing placeholder details.
 
 ### Contact
 

@@ -163,6 +163,10 @@ The canonical `/group-travel/` Page uses Catalogue mode and keeps one H1 in the 
 
 The planner reuses the shared HKS inquiry component rather than opening a second form. Destination and Tour are linked required selects; name, phone, email, preferred date or month, traveler count, private recovery, message review, and visitor-controlled WhatsApp/email handoff retain the global conversion behavior. The form must remain legible as one column on mobile and must not promise group capabilities that have not been confirmed.
 
+### About page
+
+The `/about/` template keeps the standard title band, followed only by the native `about-story` pattern, **Visit Us**, and **Contact Us**. The white narrative pairs its headline and lead with the story body in two desktop columns, collapsing to one below 1024px. Keep Ashford ownership and 20+ years of experience within that story. Use Montserrat throughout: a 40px story heading, reducing to 32px below 576px, and 32px Visit Us and Contact Us headings. Section padding is 64px vertically, reducing to 48px below 576px. Visit Us uses Pale Mist; Contact Us returns to white with simple contact rows. Render address, hours, an embedded Google Map, directions, phone, email, and WhatsApp links from public settings, omitting blank values and entirely empty sections. The responsive map uses a titled, lazy-loaded iframe with its own optional editable embed URL; retain the separate directions link. Directions and WhatsApp links identify that they open in a new tab; preserve visible focus and 44px link targets.
+
 ### Travel Guides
 
 The `/travel-guides/` hub uses the internal-page shell, one H1, a concise planning promise, Destination and Article Topic discovery controls, and a responsive editorial grid. Article cards may show public destination/topic context and modified date, never an author. A missing featured image becomes a designed Midnight Navy or Pale Mist typographic surface; never render a broken image slot or generic stock placeholder.

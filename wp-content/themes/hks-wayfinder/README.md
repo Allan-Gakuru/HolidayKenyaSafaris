@@ -49,6 +49,33 @@ content system for About, Group Travel, Contact, and client-approved legal conte
 header automatically switches its Group Travel, About, and Contact routes on only when
 the corresponding Page has been published.
 
+## About page
+
+The `/about/` route uses `templates/page-about.html`. Its opening story is the
+native block pattern `patterns/about-story.php`, based on the client-supplied
+Brand Script and the ownership/experience approval recorded on 4 September 2026.
+Edit that story through the About template in Appearance → Editor, or update
+the version-controlled pattern. This dedicated template replaces the original
+seeded Page body; it does not append the old operator and process sections.
+
+The only sections after the story are Visit Us and Contact Us. `AboutPage.php`
+reads the public address, directions URL, optional map embed URL, business hours,
+phone, email and WhatsApp settings from HKS Settings → Identity and contact.
+Blank settings are omitted. Visit Us includes a responsive, lazy-loaded Google
+Maps iframe with an accessible title, alongside the existing directions link.
+The embed URL defaults to the verified Twiga Towers URL obtained through Google
+Maps **Share → Embed a map**. To change the map, paste the iframe's `src` URL
+into the separate embed URL setting; clear it to hide the embedded map. Only
+HTTPS `www.google.com/maps/embed` URLs render, and no API key is required.
+Keep the original Map URL as the destination for the directions link.
+Phone/email/WhatsApp links are general contact actions. The story's Explore our
+trips link leads to the catalogue and the existing Tour quote flow.
+
+Code deployment does not overwrite WordPress settings. The confirmed address,
+phone and email were saved in HKS Settings during this rebuild; the client's
+map URL and business hours were retained. After deploying, check `/about/` and
+confirm that no saved Site Editor template overrides the file template.
+
 Public presentation is fail-closed:
 
 - Tour cards, archives, canonical Tour pages, related Tours, and Tour quote panels never render price;

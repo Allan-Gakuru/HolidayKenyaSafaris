@@ -379,6 +379,13 @@ final class FieldGroups {
 			self::public_setting( 'public_email', __( 'Public email address', 'hks-core' ), 'email', array( 'default_value' => 'info@holidaykenyasafaris.ke' ) ),
 			self::public_setting( 'postal_address', __( 'Public address', 'hks-core' ), 'textarea', array( 'rows' => 3, 'new_lines' => 'br' ) ),
 			self::public_setting( 'map_url', __( 'Map URL', 'hks-core' ), 'url' ),
+			self::public_setting(
+				'map_embed_url',
+				__( 'Google Maps embed URL', 'hks-core' ),
+				'url',
+				array( 'default_value' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.82187393095!2d36.8208932!3d-1.2805516000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d4bf65dc8f%3A0xe534a1f3b7f619!2sTwiga%20Towers%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1788506184495!5m2!1sen!2ske' ),
+				__( 'Optional map in About → Visit Us. In Google Maps, choose Share → Embed a map and paste only the iframe src URL, beginning https://www.google.com/maps/embed. The Twiga Towers map is supplied initially. Clear this field to hide the embedded map. Map URL above remains the separate directions link.', 'hks-core' )
+			),
 			self::public_setting( 'business_hours', __( 'Business hours', 'hks-core' ), 'textarea', array( 'rows' => 3, 'new_lines' => 'br' ) ),
 			self::public_setting( 'response_expectation', __( 'Response expectation', 'hks-core' ), 'text' ),
 

@@ -13,6 +13,7 @@ require_once get_theme_file_path( 'inc/NavMenus.php' );
 require_once get_theme_file_path( 'inc/TourBlocks.php' );
 require_once get_theme_file_path( 'inc/ArticleBlocks.php' );
 require_once get_theme_file_path( 'inc/Branding.php' );
+require_once get_theme_file_path( 'inc/AboutPage.php' );
 
 /**
  * Whether the current request renders one of the acquisition/conversion pages.
@@ -486,6 +487,7 @@ add_action( 'wp_head', 'hks_wayfinder_favicon_fallback', 2 );
 
 add_action( 'init', array( \HKS_Wayfinder\TourBlocks::class, 'register' ), 20 );
 add_action( 'init', array( \HKS_Wayfinder\ArticleBlocks::class, 'register' ), 20 );
+add_action( 'init', array( \HKS_Wayfinder\AboutPage::class, 'register' ), 20 );
 
 /**
  * Respect Campaign noindex governance independently of SEO plugins.
