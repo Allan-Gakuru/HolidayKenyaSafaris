@@ -29,6 +29,8 @@
 	function validPhone(value) {
 		if (value.length > 30 || !/^\+?[0-9 () .-]+$/.test(value)) return false;
 		const digits = value.replace(/[ ().-]/g, '');
+		// Reject obvious filler, including 0700000000 and its +254 equivalent.
+		if (/([0-9])\1{6}$/.test(digits)) return false;
 		if (digits.startsWith('+254')) return /^\+254(?:[17][0-9]{8}|[2-6][0-9]{7,8})$/.test(digits);
 		return /^0[17][0-9]{8}$/.test(digits) || /^0[2-6][0-9]{7,8}$/.test(digits) || /^\+[1-9][0-9]{7,14}$/.test(digits);
 	}
@@ -37,6 +39,7 @@
 		if (value.length > 254) return false;
 		const parts = value.split('@');
 		if (parts.length !== 2 || !/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+$/i.test(parts[0])) return false;
+		if (/^[0-9]+$/.test(parts[0])) return false;
 		if (parts[0].length > 64 || parts[0].startsWith('.') || parts[0].endsWith('.') || parts[0].includes('..')) return false;
 		const labels = parts[1].split('.');
 		return labels.length >= 2 && labels.every((label) => label.length <= 63 && /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test(label));
@@ -64,7 +67,8 @@
 			let error = '';
 			if (!field.disabled) {
 				if (field.required && !value) error = 'Please complete this field.';
-				else if (value && field.name === 'phone' && !validPhone(value)) error = 'Use a Kenyan number such as 0712 345 678, or include + and your country code.';
+				else if (value && field.name === 'phone' && !validPhone(value)) error = 'Enter your contact number, not repeated-digit filler. Use Kenyan format or include + and your country code.';
+				else if (value && field.name === 'email' && /^[0-9]+@/.test(value)) error = 'Use an email address whose name before @ is not only numbers.';
 				else if (value && field.name === 'email' && !validEmail(value)) error = 'Enter an email address such as you@example.com.';
 				else if (value && field.name === 'preferred_date' && !validTravelDate(value)) error = 'Choose today or a future date (YYYY-MM-DD), or this month or a future month (YYYY-MM).';
 				else if (value && field.name === 'name' && value.length < 2) error = 'Please enter your name.';

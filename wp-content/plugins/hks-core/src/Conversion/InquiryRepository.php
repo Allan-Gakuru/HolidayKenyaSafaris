@@ -288,18 +288,23 @@ final class InquiryRepository {
 		$phone = is_string( $payload['phone'] ?? null ) ? trim( $payload['phone'] ) : '';
 		$digits = preg_replace( '/[ ().-]/', '', $phone );
 		$phone_valid = strlen( $phone ) <= 30 && 1 === preg_match( '/^\+?[0-9 () .-]+$/D', $phone );
+		// Apply the same lightweight filler check as the browser, after formatting is removed.
+		$phone_valid = $phone_valid && 1 !== preg_match( '/([0-9])\1{6}$/D', $digits );
 		$phone_valid = $phone_valid && ( 1 === preg_match( '/^0[17][0-9]{8}$/D', $digits ) || 1 === preg_match( '/^0[2-6][0-9]{7,8}$/D', $digits ) || 1 === preg_match( '/^\+[1-9][0-9]{7,14}$/D', $digits ) );
 		if ( 0 === strpos( $digits, '+254' ) ) {
 			$phone_valid = $phone_valid && 1 === preg_match( '/^\+254(?:[17][0-9]{8}|[2-6][0-9]{7,8})$/D', $digits );
 		}
 
 		if ( ! $phone_valid ) {
-			return $this->error( 'phone', __( 'Enter a Kenyan number such as 0712 345 678, or an international number with + and its country code.', 'hks-core' ) );
+			return $this->error( 'phone', __( 'Enter your contact number, not repeated-digit filler. Use Kenyan format or include + and your country code.', 'hks-core' ) );
 		}
 
 		$email_input = is_string( $payload['email'] ?? null ) ? trim( $payload['email'] ) : '';
 		$email       = sanitize_email( $email_input );
 		$email_parts = explode( '@', $email_input );
+		if ( count( $email_parts ) === 2 && 1 === preg_match( '/^[0-9]+$/D', $email_parts[0] ) ) {
+			return $this->error( 'email', __( 'Use an email address whose name before @ is not only numbers.', 'hks-core' ) );
+		}
 		$email_shape = count( $email_parts ) === 2 && strlen( $email_parts[0] ) <= 64 && 1 === preg_match( '/^[^.](?:.*[^.])?$/D', $email_parts[0] ) && false === strpos( $email_parts[0], '..' );
 		if ( $email_shape ) {
 			foreach ( explode( '.', $email_parts[1] ) as $label ) {
