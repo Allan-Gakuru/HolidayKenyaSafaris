@@ -1,5 +1,9 @@
 # Confirmed Decisions
 
+## Inquiry date format — 2026-09-09
+
+New quote inquiries require a full preferred travel date in `DD-MM-YYYY` format. The calendar selects days only; month-only entry is removed. Browser and server validation reject past dates and other formats. This supersedes earlier date-or-month inquiry requirements. Existing stored inquiries remain unchanged.
+
 ## Quote handoff update — 2026-09-09
 
 The client replaced the visitor email handoff with WhatsApp only. The review ends with one **Send inquiry on Whatsapp** button and an inline WhatsApp icon. A compact **Edit message** button sits at the top right of the message preview and returns to the existing form with answers preserved. Remove unused visitor email-link construction, event handlers, and styles. Required email collection, private inquiry storage, background team email notifications, validation, and WhatsApp launch tracking remain unchanged. This decision supersedes earlier references to choosing WhatsApp or email in the quote flow.

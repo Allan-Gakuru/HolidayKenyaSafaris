@@ -214,7 +214,7 @@ final class InquiryNotification {
 			self::line( __( 'Inquiry route', 'hks-core' ), self::route_label( $values['inquiry_route'] ) ),
 			self::line( __( 'Package', 'hks-core' ), $context['package_label'] ),
 			self::line( __( 'Destination', 'hks-core' ), $values['destination_label'] ),
-			self::line( __( 'Preferred date or month', 'hks-core' ), $values['preferred_date'] ),
+			self::line( __( 'Preferred travel date', 'hks-core' ), $values['preferred_date'] ),
 			self::line( __( 'Travelers', 'hks-core' ), $values['travelers'] ),
 		);
 

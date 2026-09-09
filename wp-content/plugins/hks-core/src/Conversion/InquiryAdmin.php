@@ -71,7 +71,7 @@ final class InquiryAdmin {
 			__( 'Inquiry route', 'hks-core' )            => $this->route_label( $this->meta( $post->ID, 'route' ) ),
 			__( 'Destination', 'hks-core' )              => $this->meta( $post->ID, 'destination' ),
 			__( 'Package', 'hks-core' )                  => $this->meta( $post->ID, 'package_label' ),
-			__( 'Preferred date or month', 'hks-core' )  => $this->meta( $post->ID, 'preferred_date' ),
+			__( 'Preferred travel date', 'hks-core' )  => $this->meta( $post->ID, 'preferred_date' ),
 			__( 'Travelers', 'hks-core' )                => $this->meta( $post->ID, 'travelers' ),
 			__( 'Departure town', 'hks-core' )           => $this->meta( $post->ID, 'departure_town' ),
 			__( 'Adults', 'hks-core' )                   => $this->meta( $post->ID, 'adults' ),

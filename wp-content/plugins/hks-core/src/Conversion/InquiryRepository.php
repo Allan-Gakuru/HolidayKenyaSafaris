@@ -318,12 +318,12 @@ final class InquiryRepository {
 
 		$travel_date = is_string( $payload['preferred_date'] ?? null ) ? trim( $payload['preferred_date'] ) : '';
 		$date_parts = array();
-		$date_valid = 1 === preg_match( '/^([0-9]{4})-([0-9]{2})(?:-([0-9]{2}))?$/D', $travel_date, $date_parts );
-		$date_valid = $date_valid && checkdate( (int) $date_parts[2], isset( $date_parts[3] ) ? (int) $date_parts[3] : 1, (int) $date_parts[1] );
+		$date_valid = 1 === preg_match( '/^([0-9]{2})-([0-9]{2})-([0-9]{4})$/D', $travel_date, $date_parts );
+		$date_valid = $date_valid && checkdate( (int) $date_parts[2], (int) $date_parts[1], (int) $date_parts[3] );
 		$today = wp_date( 'Y-m-d', null, new \DateTimeZone( 'Africa/Nairobi' ) );
 
-		if ( ! $date_valid || $travel_date < substr( $today, 0, strlen( $travel_date ) ) ) {
-			return $this->error( 'preferred_date', __( 'Choose today or a future date, or the current month or a future month.', 'hks-core' ) );
+		if ( ! $date_valid || implode( '-', array_reverse( explode( '-', $travel_date ) ) ) < $today ) {
+			return $this->error( 'preferred_date', __( 'Choose today or a future date in DD-MM-YYYY format.', 'hks-core' ) );
 		}
 
 		$requested_route = sanitize_key( $payload['inquiry_route'] ?? '' );

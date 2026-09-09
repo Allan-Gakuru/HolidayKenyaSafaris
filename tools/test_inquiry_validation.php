@@ -15,7 +15,7 @@ class WP_Error {
 require dirname( __DIR__ ) . '/wp-content/plugins/hks-core/src/Conversion/InquiryRepository.php';
 $repository = new HolidayKenyaSafaris\Core\Conversion\InquiryRepository();
 $method = new ReflectionMethod( $repository, 'validate_values' );
-$base = array( 'name' => 'Test Traveller', 'phone' => '0712 345 678', 'email' => 'you@example.com', 'preferred_date' => '2027-01-15', 'travelers' => 2 );
+$base = array( 'name' => 'Test Traveller', 'phone' => '0712 345 678', 'email' => 'you@example.com', 'preferred_date' => '15-01-2027', 'travelers' => 2 );
 $context = array( 'allowed_questions' => array(), 'campaign_id' => 0, 'destination_label' => '' );
 $cases = json_decode( file_get_contents( __DIR__ . '/inquiry-validation-cases.json' ), true );
 foreach ( $cases as [ $field, $value, $expected ] ) {

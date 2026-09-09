@@ -16,14 +16,14 @@
 	}
 
 	function validTravelDate(value) {
-		const parts = /^(\d{4})-(\d{2})(?:-(\d{2}))?$/.exec(value);
-		if (!parts || Number(parts[1]) < 1) return false;
-		const year = Number(parts[1]);
+		const parts = /^(\d{2})-(\d{2})-(\d{4})$/.exec(value);
+		if (!parts || Number(parts[3]) < 1) return false;
+		const year = Number(parts[3]);
 		const month = Number(parts[2]);
-		const day = Number(parts[3] || 1);
+		const day = Number(parts[1]);
 		const leap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
 		const days = [31, leap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-		return month >= 1 && month <= 12 && day >= 1 && day <= days[month - 1] && value >= todayInKenya().slice(0, value.length);
+		return month >= 1 && month <= 12 && day >= 1 && day <= days[month - 1] && value.split('-').reverse().join('-') >= todayInKenya();
 	}
 
 	function validPhone(value) {
@@ -70,7 +70,7 @@
 				else if (value && field.name === 'phone' && !validPhone(value)) error = 'Enter your contact number, not repeated-digit filler. Use Kenyan format or include + and your country code.';
 				else if (value && field.name === 'email' && /^[0-9]+@/.test(value)) error = 'Use an email address whose name before @ is not only numbers.';
 				else if (value && field.name === 'email' && !validEmail(value)) error = 'Enter an email address such as you@example.com.';
-				else if (value && field.name === 'preferred_date' && !validTravelDate(value)) error = 'Choose today or a future date (YYYY-MM-DD), or this month or a future month (YYYY-MM).';
+				else if (value && field.name === 'preferred_date' && !validTravelDate(value)) error = 'Choose today or a future date in DD-MM-YYYY format.';
 				else if (value && field.name === 'name' && value.length < 2) error = 'Please enter your name.';
 				else if (!field.validity.valid) error = field.validationMessage;
 			}
@@ -94,12 +94,55 @@
 		};
 	}
 
+	function initMobileFieldScroll(form) {
+		const mobile = window.matchMedia('(max-width: 38rem), (pointer: coarse)');
+		const panel = form.closest('dialog')?.querySelector('.hks-inquiry__panel');
+		let frame;
+		function alignField() {
+			cancelAnimationFrame(frame);
+			frame = requestAnimationFrame(() => {
+				const active = document.activeElement;
+				if (!mobile.matches || !form.contains(active)) {
+					form.style.removeProperty('padding-bottom');
+					return;
+				}
+				if (!active.matches('input:not([type="hidden"]), select, textarea, [data-hks-date-toggle]')) return;
+				const field = active.closest('.hks-inquiry__field');
+				if (!field) return;
+				const viewport = window.visualViewport;
+				const top = viewport?.offsetTop || 0;
+				if (panel) {
+					// Allow even the final field to reach the top of the scrolling panel.
+					form.style.paddingBottom = (viewport?.height || window.innerHeight) + 'px';
+					const target = Math.max(top, panel.getBoundingClientRect().top) + 20;
+					panel.scrollBy({ top: field.getBoundingClientRect().top - target, behavior: 'instant' });
+				} else {
+					window.scrollBy({ top: field.getBoundingClientRect().top - top - 96, behavior: 'instant' });
+				}
+			});
+		}
+		form.addEventListener('focusin', alignField);
+		form.addEventListener('focusout', alignField);
+		// Mobile keyboards can resize the visible viewport after focus has fired.
+		window.visualViewport?.addEventListener('resize', alignField);
+		window.addEventListener('resize', alignField);
+		form.closest('dialog')?.addEventListener('close', () => {
+			cancelAnimationFrame(frame);
+			form.style.removeProperty('padding-bottom');
+		});
+	}
+
 	function initDatePicker(form) {
 		const wrapper = form.querySelector('[data-hks-date]');
 		if (!wrapper) return;
 		const input = form.elements.preferred_date;
 		const toggle = wrapper.querySelector('[data-hks-date-toggle]');
 		const calendar = wrapper.querySelector('[data-hks-calendar]');
+		const touch = window.matchMedia('(pointer: coarse)');
+		const originalInputMode = input.inputMode;
+		const updateInputMode = () => { input.inputMode = touch.matches ? 'none' : originalInputMode; };
+		updateInputMode();
+		touch.addEventListener('change', updateInputMode);
 		let month = todayInKenya().slice(0, 7);
 		let returningFocus = false;
 		let rendering = false;
@@ -110,7 +153,7 @@
 			if (restore) { returningFocus = true; input.focus(); returningFocus = false; }
 		}
 		function select(value) {
-			input.value = value;
+			input.value = value.split('-').reverse().join('-');
 			input.dispatchEvent(new Event('input', { bubbles: true }));
 			input.dispatchEvent(new Event('change', { bubbles: true }));
 			close(true);
@@ -155,7 +198,8 @@
 			const offset = (first.getDay() + 6) % 7;
 			for (let i = 0; i < offset; i++) grid.append(document.createElement('span'));
 			const days = new Date(first.getFullYear(), first.getMonth() + 1, 0).getDate();
-			const tabDay = focusDay || (input.value.length === 10 && input.value.startsWith(month) && validTravelDate(input.value) ? input.value : (month === todayInKenya().slice(0, 7) ? todayInKenya() : month + '-01'));
+			const selectedDate = validTravelDate(input.value) ? input.value.split('-').reverse().join('-') : '';
+			const tabDay = focusDay || (selectedDate.startsWith(month) ? selectedDate : (month === todayInKenya().slice(0, 7) ? todayInKenya() : month + '-01'));
 			for (let day = 1; day <= days; day++) {
 				const date = month + '-' + String(day).padStart(2, '0');
 				const label = new Date(date + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
@@ -163,20 +207,20 @@
 				cell.dataset.date = date;
 				cell.tabIndex = date === tabDay ? 0 : -1;
 				cell.disabled = date < todayInKenya();
-				cell.setAttribute('aria-pressed', String(date === input.value));
+				cell.setAttribute('aria-pressed', String(date === selectedDate));
 				if (date === todayInKenya()) cell.setAttribute('aria-current', 'date');
 				grid.append(cell);
 			}
 			const footer = document.createElement('div');
 			footer.className = 'hks-inquiry__calendar-footer';
-			footer.append(button('Choose ' + title + ' — month only', () => select(month), 'Choose this month'), button('Close calendar', () => close(true), 'Done'));
+			footer.append(button('Close calendar', () => close(true), 'Done'));
 			calendar.append(header, grid, footer);
 			if (focusDay) calendar.querySelector('[data-date="' + focusDay + '"]')?.focus();
 			rendering = false;
 		}
 		function open() {
 			if (returningFocus || !calendar.hidden) return;
-			month = validTravelDate(input.value) ? input.value.slice(0, 7) : todayInKenya().slice(0, 7);
+			month = validTravelDate(input.value) ? input.value.split('-').reverse().join('-').slice(0, 7) : todayInKenya().slice(0, 7);
 			render();
 			calendar.hidden = false;
 			toggle.setAttribute('aria-expanded', 'true');
@@ -196,7 +240,7 @@
 			const date = new Date(event.target.dataset.date + 'T12:00:00');
 			date.setDate(date.getDate() + delta);
 			const value = iso(date);
-			if (!validTravelDate(value)) return;
+			if (!validTravelDate(value.split('-').reverse().join('-'))) return;
 			month = value.slice(0, 7); render(value);
 		});
 		wrapper.addEventListener('focusout', (event) => { if (!rendering && !wrapper.contains(event.relatedTarget)) close(false); });
@@ -324,7 +368,7 @@
 			'Hi Holiday Kenya Safaris, my name is ' + safeText(data.get('name'), 100) + '.',
 			'',
 			'I am interested in ' + packageLabel + '.',
-			'Preferred travel date/month: ' + safeText(data.get('preferred_date'), 80) + '.',
+			'Preferred travel date: ' + safeText(data.get('preferred_date'), 80) + '.',
 			'Travelers: ' + safeText(data.get('travelers'), 3) + '.',
 			'Phone: ' + safeText(data.get('phone'), 30) + '.',
 			'Email: ' + safeText(data.get('email'), 254) + '.'
@@ -403,6 +447,7 @@
 		if (!inline && (!trigger || !dialog || !close)) return;
 		const validation = initValidation(form, status);
 		initDatePicker(form);
+		initMobileFieldScroll(form);
 
 		const requestKey = form.elements.request_key;
 		const startedAt = form.elements.started_at;
