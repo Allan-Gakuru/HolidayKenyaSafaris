@@ -43,13 +43,13 @@ final class Module implements ModuleContract {
 			'hks-inquiry',
 			HKS_CORE_URL . 'assets/css/inquiry.css',
 			array(),
-			HKS_CORE_VERSION
+			HKS_CORE_VERSION . '.' . filemtime( HKS_CORE_PATH . 'assets/css/inquiry.css' )
 		);
 		wp_register_script(
 			'hks-inquiry',
 			HKS_CORE_URL . 'assets/js/inquiry.js',
 			array(),
-			HKS_CORE_VERSION,
+			HKS_CORE_VERSION . '.' . filemtime( HKS_CORE_PATH . 'assets/js/inquiry.js' ),
 			array( 'in_footer' => true, 'strategy' => 'defer' )
 		);
 	}

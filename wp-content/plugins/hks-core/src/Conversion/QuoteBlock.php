@@ -125,7 +125,15 @@ final class QuoteBlock {
 								<?php self::text_input( $instance_id, 'name', __( 'Your name', 'hks-core' ), 'text', 'name', true ); ?>
 								<?php self::text_input( $instance_id, 'phone', __( 'Phone number', 'hks-core' ), 'tel', 'tel', true, __( 'e.g. 0722 000 000', 'hks-core' ) ); ?>
 								<?php self::text_input( $instance_id, 'email', __( 'Email address', 'hks-core' ), 'email', 'email', true, __( 'e.g. you@example.com', 'hks-core' ), '', '', '254' ); ?>
-								<?php self::text_input( $instance_id, 'preferred_date', __( 'Preferred date or month', 'hks-core' ), 'text', 'off', true, __( 'e.g. August 2026', 'hks-core' ) ); ?>
+								<div class="hks-inquiry__field hks-inquiry__date" data-hks-date>
+									<label for="<?php echo esc_attr( $instance_id ); ?>-preferred_date"><?php esc_html_e( 'Preferred date or month (required)', 'hks-core' ); ?></label>
+									<div class="hks-inquiry__date-control">
+										<input id="<?php echo esc_attr( $instance_id ); ?>-preferred_date" name="preferred_date" type="text" required maxlength="10" autocomplete="off" placeholder="YYYY-MM-DD or YYYY-MM" aria-describedby="<?php echo esc_attr( $instance_id ); ?>-date-hint">
+										<button type="button" data-hks-date-toggle aria-label="Open calendar" aria-expanded="false" aria-controls="<?php echo esc_attr( $instance_id ); ?>-calendar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 11h18"/></svg></button>
+									</div>
+									<small id="<?php echo esc_attr( $instance_id ); ?>-date-hint"><?php esc_html_e( 'Choose a day, or select a whole month if your dates are flexible.', 'hks-core' ); ?></small>
+									<div id="<?php echo esc_attr( $instance_id ); ?>-calendar" class="hks-inquiry__calendar" data-hks-calendar role="group" aria-label="Choose your travel date" hidden></div>
+								</div>
 								<?php self::text_input( $instance_id, 'travelers', __( 'Number of travelers', 'hks-core' ), 'number', 'off', true, '', '1', $is_group_context ? '999' : '99' ); ?>
 							</div>
 

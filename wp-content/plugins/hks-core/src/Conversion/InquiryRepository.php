@@ -285,23 +285,40 @@ final class InquiryRepository {
 			return $this->error( 'name', __( 'Enter your name.', 'hks-core' ) );
 		}
 
-		$phone = $this->text( $payload['phone'] ?? '', 30 );
-
-		if ( 1 !== preg_match( '/^\+?[0-9][0-9\s().-]{6,24}$/', $phone ) ) {
-			return $this->error( 'phone', __( 'Enter a valid phone number.', 'hks-core' ) );
+		$phone = is_string( $payload['phone'] ?? null ) ? trim( $payload['phone'] ) : '';
+		$digits = preg_replace( '/[ ().-]/', '', $phone );
+		$phone_valid = strlen( $phone ) <= 30 && 1 === preg_match( '/^\+?[0-9 () .-]+$/D', $phone );
+		$phone_valid = $phone_valid && ( 1 === preg_match( '/^0[17][0-9]{8}$/D', $digits ) || 1 === preg_match( '/^0[2-6][0-9]{7,8}$/D', $digits ) || 1 === preg_match( '/^\+[1-9][0-9]{7,14}$/D', $digits ) );
+		if ( 0 === strpos( $digits, '+254' ) ) {
+			$phone_valid = $phone_valid && 1 === preg_match( '/^\+254(?:[17][0-9]{8}|[2-6][0-9]{7,8})$/D', $digits );
 		}
 
-		$email_input = trim( (string) ( $payload['email'] ?? '' ) );
-		$email       = sanitize_email( $email_input );
+		if ( ! $phone_valid ) {
+			return $this->error( 'phone', __( 'Enter a Kenyan number such as 0712 345 678, or an international number with + and its country code.', 'hks-core' ) );
+		}
 
-		if ( ! $email || strlen( $email ) > 254 || ! is_email( $email ) || 0 !== strcasecmp( $email, $email_input ) ) {
+		$email_input = is_string( $payload['email'] ?? null ) ? trim( $payload['email'] ) : '';
+		$email       = sanitize_email( $email_input );
+		$email_parts = explode( '@', $email_input );
+		$email_shape = count( $email_parts ) === 2 && strlen( $email_parts[0] ) <= 64 && 1 === preg_match( '/^[^.](?:.*[^.])?$/D', $email_parts[0] ) && false === strpos( $email_parts[0], '..' );
+		if ( $email_shape ) {
+			foreach ( explode( '.', $email_parts[1] ) as $label ) {
+				$email_shape = $email_shape && strlen( $label ) <= 63;
+			}
+		}
+
+		if ( ! $email_shape || ! $email || strlen( $email ) > 254 || ! is_email( $email ) || 0 !== strcasecmp( $email, $email_input ) ) {
 			return $this->error( 'email', __( 'Enter a valid email address.', 'hks-core' ) );
 		}
 
-		$travel_date = $this->text( $payload['preferred_date'] ?? '', 80 );
+		$travel_date = is_string( $payload['preferred_date'] ?? null ) ? trim( $payload['preferred_date'] ) : '';
+		$date_parts = array();
+		$date_valid = 1 === preg_match( '/^([0-9]{4})-([0-9]{2})(?:-([0-9]{2}))?$/D', $travel_date, $date_parts );
+		$date_valid = $date_valid && checkdate( (int) $date_parts[2], isset( $date_parts[3] ) ? (int) $date_parts[3] : 1, (int) $date_parts[1] );
+		$today = wp_date( 'Y-m-d', null, new \DateTimeZone( 'Africa/Nairobi' ) );
 
-		if ( strlen( $travel_date ) < 2 ) {
-			return $this->error( 'preferred_date', __( 'Enter a preferred date or travel month.', 'hks-core' ) );
+		if ( ! $date_valid || $travel_date < substr( $today, 0, strlen( $travel_date ) ) ) {
+			return $this->error( 'preferred_date', __( 'Choose today or a future date, or the current month or a future month.', 'hks-core' ) );
 		}
 
 		$requested_route = sanitize_key( $payload['inquiry_route'] ?? '' );

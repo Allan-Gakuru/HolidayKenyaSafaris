@@ -166,7 +166,69 @@
 .hks-inquiry__field {
 	display: grid;
 	gap: 0.4rem;
+	align-content: start;
+	min-width: 0;
 }
+
+.hks-inquiry__error {
+	color: #8b2020;
+	font-size: 0.875rem;
+	line-height: 1.5;
+}
+
+.hks-inquiry__field [aria-invalid="true"] { border-color: #8b2020; }
+.hks-inquiry__date small { font-size: 0.875rem; line-height: 1.5; }
+.hks-inquiry__date-control { position: relative; }
+.hks-inquiry__date-control input { padding-inline-end: 3rem; }
+.hks-inquiry__date-control > button {
+	position: absolute;
+	inset-inline-end: 2px;
+	top: 2px;
+	width: 44px;
+	min-height: 44px;
+	display: grid;
+	place-items: center;
+	border: 0;
+	border-radius: 6px;
+	background: transparent;
+	color: var(--hks-teal);
+	cursor: pointer;
+}
+.hks-inquiry__calendar {
+	background: var(--hks-white);
+	border: 1px solid var(--hks-teal);
+	border-radius: 8px;
+	padding: 0.5rem;
+	font-variant-numeric: tabular-nums;
+}
+.hks-inquiry__calendar[hidden], .hks-inquiry__error[hidden] { display: none; }
+.hks-inquiry__calendar-header, .hks-inquiry__calendar-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.25rem;
+}
+.hks-inquiry__calendar-header strong { text-align: center; font-size: 0.875rem; }
+.hks-inquiry__calendar button {
+	font: inherit;
+	font-size: 0.875rem;
+	min-width: 0;
+	min-height: 40px;
+	padding: 0.25rem;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	background: transparent;
+	color: var(--hks-navy);
+	cursor: pointer;
+}
+.hks-inquiry__calendar button:hover:not(:disabled), .hks-inquiry__date-control > button:hover { background: var(--hks-mist); }
+.hks-inquiry__calendar button:disabled { color: #767676; cursor: not-allowed; text-decoration: line-through; }
+.hks-inquiry__calendar button[aria-current="date"] { border-color: var(--hks-teal); }
+.hks-inquiry__calendar button[aria-pressed="true"] { background: var(--hks-teal); color: var(--hks-white); font-weight: 700; }
+.hks-inquiry__calendar-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 2px; margin-block: 0.5rem; }
+.hks-inquiry__calendar-days > span { text-align: center; font-size: 0.75rem; padding-block: 0.25rem; }
+.hks-inquiry__calendar-footer { border-top: 1px solid var(--hks-mist); padding-top: 0.5rem; }
+.hks-inquiry__calendar-footer button:first-child { color: var(--hks-teal); font-weight: 650; }
 
 .hks-inquiry__field label,
 .hks-inquiry__optional legend {
