@@ -12,7 +12,6 @@
 .hks-inquiry__trigger,
 .hks-inquiry__submit,
 .hks-inquiry__launch,
-.hks-inquiry__email-launch,
 .hks-inquiry__back,
 .hks-inquiry__close {
 	align-items: center;
@@ -42,18 +41,6 @@
 .hks-inquiry__launch:hover {
 	background: #2ee073;
 	color: var(--hks-navy);
-	transform: translateY(-1px);
-}
-
-.hks-inquiry__email-launch {
-	background: var(--hks-teal);
-	color: var(--hks-white);
-	padding: 0.85rem 1.25rem;
-}
-
-.hks-inquiry__email-launch:hover {
-	background: var(--hks-navy);
-	color: var(--hks-white);
 	transform: translateY(-1px);
 }
 
@@ -287,8 +274,7 @@
 	padding: 0 0.5rem 0 0;
 }
 
-.hks-inquiry__save-note,
-.hks-inquiry__send-note {
+.hks-inquiry__save-note {
 	color: rgb(22 27 31 / 75%);
 	font-size: 0.8125rem;
 	line-height: 1.55;
@@ -356,15 +342,29 @@
 	padding: 0.75rem 1rem;
 }
 
-.hks-inquiry__message {
+.hks-inquiry__preview {
 	background: #f8faf9;
 	border: 1px solid rgb(24 43 58 / 18%);
 	border-radius: 8px;
+	margin: 1rem 0 1.25rem;
+	overflow: hidden;
+}
+
+.hks-inquiry__preview-toolbar {
+	display: flex;
+	justify-content: flex-end;
+	padding: 0.5rem 0.5rem 0;
+}
+
+.hks-inquiry__message {
+	background: transparent;
+	border: 0;
+	border-radius: 0;
 	color: var(--hks-ink);
 	font: inherit;
 	font-size: 0.9375rem;
 	line-height: 1.55;
-	margin: 1rem 0 1.25rem;
+	margin: 0;
 	max-height: 18rem;
 	overflow: auto;
 	padding: 1rem;
@@ -372,18 +372,32 @@
 	word-break: break-word;
 }
 
-.hks-inquiry__actions {
+.hks-inquiry__review > .hks-inquiry__launch {
+	color: var(--hks-white);
 	display: flex;
-	flex-wrap: wrap-reverse;
-	gap: 0.75rem;
-	justify-content: flex-end;
+	gap: 0.65rem;
+	min-height: 56px;
+	width: 100%;
+	font-weight: 750;
+	box-sizing: border-box;
+}
+
+.hks-inquiry__launch svg {
+	flex: 0 0 24px;
+}
+
+.hks-inquiry__launch:active {
+	transform: translateY(0);
 }
 
 .hks-inquiry__back {
 	background: transparent;
 	border: 1px solid rgb(24 43 58 / 35%);
 	color: var(--hks-navy);
-	padding: 0.8rem 1rem;
+	padding: 0.4rem 0.65rem;
+	min-height: 36px;
+	font-size: 0.8125rem;
+	border-radius: 5px;
 }
 
 .hks-inquiry__back:hover {
@@ -428,10 +442,6 @@
 
 	.hks-inquiry__group-choice {
 		grid-template-columns: 1fr;
-	}
-
-	.hks-inquiry__actions > * {
-		width: 100%;
 	}
 }
 

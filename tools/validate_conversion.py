@@ -151,13 +151,12 @@ def main() -> int:
         content["renderer"],
         [
             "254712965131",
-            "info@holidaykenyasafaris.ke",
             "Review quote request",
+            "Send inquiry on Whatsapp",
+            "Edit message",
+            "hks-inquiry__preview-toolbar",
             "Backed by over 20 years of Ashford Tours and Travels’ experience, Holiday Kenya Safaris offers thoughtfully planned tours for Kenyans.",
-            "choose WhatsApp or email",
-            "Open email to send",
             "'email', __( 'Email address', 'hks-core' ), 'email', 'email', true",
-            "data-hks-email-launch",
             "FormToken::issue",
             "group_context",
             "article_id",
@@ -169,6 +168,11 @@ def main() -> int:
             "data-hks-inquiry-inline",
         ],
     )
+
+    for label in ("renderer", "script", "style"):
+        for obsolete in ("data-hks-email-launch", "emailLaunch", "emailRecipient", "emailSubject", "EMAIL_RECIPIENT", "email_launch", "hks-inquiry__email-launch", "hks-inquiry__actions"):
+            if obsolete in content[label]:
+                errors.append(f"{label} retains obsolete email handoff code: {obsolete}")
 
     forbidden_consent = {
         "quote renderer": content["renderer"],
@@ -196,14 +200,13 @@ def main() -> int:
         "quote_inquiry_saved",
         "quote_form_complete",
         "whatsapp_launch",
-        "email_launch",
     ]
     require(errors, "browser event contract", content["script"], [f"'{event}'" for event in events])
     require(
         errors,
         "browser privacy and handoff",
         content["script"],
-        ["window.dataLayer.push(payload)", "sessionStorage", "email: safeText(data.get('email'), 254)", "encodeURIComponent(reviewedMessage)", "mailto:", "encodeURIComponent(emailSubject)", "keepalive: true", "sourceAttribution", "destination_id", "inquiry_route", "group_travel"],
+        ["window.dataLayer.push(payload)", "sessionStorage", "email: safeText(data.get('email'), 254)", "encodeURIComponent(reviewedMessage)", "keepalive: true", "sourceAttribution", "destination_id", "inquiry_route", "group_travel"],
     )
 
     message_start = content["script"].find("function buildMessage(")
@@ -244,7 +247,7 @@ def main() -> int:
         ):
             errors.append(f"analytics call on JS line {line_number} appears to contain an inquiry answer")
 
-    require(errors, "accessible modal styling", content["style"], ["::backdrop", ":focus-visible", "prefers-reduced-motion", "#25d366", "min-height: 48px", ".hks-inquiry__email-launch"])
+    require(errors, "accessible modal styling", content["style"], ["::backdrop", ":focus-visible", "prefers-reduced-motion", "#25d366", "min-height: 48px", ".hks-inquiry__preview-toolbar"])
 
     if errors:
         print("Conversion validation failed:")
@@ -252,7 +255,7 @@ def main() -> int:
             print(f"- {error}")
         return 1
 
-    print("Conversion validation passed (private recovery, review, WhatsApp/email handoff, analytics, and privacy boundaries).")
+    print("Conversion validation passed (private recovery, review, WhatsApp handoff, analytics, and privacy boundaries).")
     return 0
 
 

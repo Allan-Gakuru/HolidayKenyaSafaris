@@ -396,11 +396,10 @@
 		const reviewStep = root.querySelector('[data-hks-review-step]');
 		const back = root.querySelector('[data-hks-inquiry-back]');
 		const launch = root.querySelector('[data-hks-whatsapp-launch]');
-		const emailLaunch = root.querySelector('[data-hks-email-launch]');
 		const message = root.querySelector('[data-hks-message]');
 		const reference = root.querySelector('[data-hks-reference]');
 
-		if (!form || !status || !formStep || !reviewStep || !back || !launch || !emailLaunch || !message || !reference) return;
+		if (!form || !status || !formStep || !reviewStep || !back || !launch || !message || !reference) return;
 		if (!inline && (!trigger || !dialog || !close)) return;
 		const validation = initValidation(form, status);
 		initDatePicker(form);
@@ -537,12 +536,9 @@
 				const reviewedMessage = buildMessage(form, reviewedPackage, reviewedReference, {
 					pageType: root.dataset.pageType
 				});
-				const emailRecipient = safeText(root.dataset.emailRecipient, 254).replace(/[^a-z0-9@._+-]/gi, '');
-				const emailSubject = 'Quote request – ' + reviewedPackage + ' – ' + reviewedReference;
 				message.textContent = reviewedMessage;
 				reference.textContent = reviewedReference;
 				launch.href = 'https://wa.me/' + root.dataset.whatsappNumber + '?text=' + encodeURIComponent(reviewedMessage);
-				emailLaunch.href = 'mailto:' + emailRecipient + '?subject=' + encodeURIComponent(emailSubject) + '&body=' + encodeURIComponent(reviewedMessage);
 				formStep.hidden = true;
 				reviewStep.hidden = false;
 				reviewStep.setAttribute('tabindex', '-1');
@@ -582,14 +578,6 @@
 			}).catch(function () {
 				// The inquiry is already saved; launch-state recovery is best effort.
 			});
-		});
-
-		emailLaunch.addEventListener('click', function () {
-			const utms = {};
-			ATTRIBUTION_FIELDS.forEach(function (field) {
-				if (sourceAttribution[field]) utms[field] = safeText(sourceAttribution[field], 160);
-			});
-			track(root, 'email_launch', utms);
 		});
 	}
 

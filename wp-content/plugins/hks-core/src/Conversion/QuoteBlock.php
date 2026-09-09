@@ -23,11 +23,6 @@ final class QuoteBlock {
 	private const WHATSAPP_NUMBER = '254712965131';
 
 	/**
-	 * Official Holiday Kenya Safaris public email destination.
-	 */
-	private const EMAIL_RECIPIENT = 'info@holidaykenyasafaris.ke';
-
-	/**
 	 * Render a context-aware quote CTA.
 	 *
 	 * @param array<string, mixed> $attributes Block attributes.
@@ -65,7 +60,6 @@ final class QuoteBlock {
 			data-capture-endpoint="<?php echo esc_url( rest_url( InquiryRepository::REST_NAMESPACE . '/inquiries' ) ); ?>"
 			data-launch-endpoint="<?php echo esc_url( rest_url( InquiryRepository::REST_NAMESPACE . '/inquiries/' ) ); ?>"
 			data-whatsapp-number="<?php echo esc_attr( self::WHATSAPP_NUMBER ); ?>"
-			data-email-recipient="<?php echo esc_attr( self::EMAIL_RECIPIENT ); ?>"
 			data-tour-id="<?php echo esc_attr( $context['tour_id'] ); ?>"
 			data-tour-slug="<?php echo esc_attr( $context['tour_slug'] ); ?>"
 			data-article-id="<?php echo esc_attr( $context['article_id'] ?? 0 ); ?>"
@@ -97,7 +91,7 @@ final class QuoteBlock {
 						<?php else : ?>
 						<p class="hks-inquiry__eyebrow"><?php esc_html_e( 'Step 1 of 2 · Your trip', 'hks-core' ); ?></p>
 						<h2 id="<?php echo esc_attr( $instance_id ); ?>-title"><?php esc_html_e( 'Tell us about your trip', 'hks-core' ); ?></h2>
-						<p class="hks-inquiry__intro"><?php esc_html_e( 'Add the essentials below. You can check the full request before choosing how to send it.', 'hks-core' ); ?></p>
+						<p class="hks-inquiry__intro"><?php esc_html_e( 'Add the essentials below. You can check the full request before opening WhatsApp to send it.', 'hks-core' ); ?></p>
 						<?php endif; ?>
 
 						<form class="hks-inquiry__form" data-hks-inquiry-form novalidate>
@@ -148,15 +142,15 @@ final class QuoteBlock {
 					<div class="hks-inquiry__review" data-hks-review-step hidden>
 						<p class="hks-inquiry__eyebrow"><?php esc_html_e( 'Step 2 of 2 · Review', 'hks-core' ); ?></p>
 						<h2><?php esc_html_e( 'Check your quote request', 'hks-core' ); ?></h2>
-						<p><?php esc_html_e( 'Review the message below, then choose WhatsApp or email when you are ready to send it.', 'hks-core' ); ?></p>
+						<p><?php esc_html_e( 'Review your message below, then send your inquiry on WhatsApp.', 'hks-core' ); ?></p>
 						<p class="hks-inquiry__reference"><span><?php esc_html_e( 'Request reference', 'hks-core' ); ?></span> <strong data-hks-reference></strong></p>
-						<pre class="hks-inquiry__message" data-hks-message tabindex="0"></pre>
-						<div class="hks-inquiry__actions" role="group" aria-label="<?php esc_attr_e( 'Quote request actions', 'hks-core' ); ?>">
-							<button class="hks-inquiry__back" type="button" data-hks-inquiry-back><?php esc_html_e( 'Edit details', 'hks-core' ); ?></button>
-							<a class="hks-inquiry__email-launch" data-hks-email-launch href="#"><?php esc_html_e( 'Open email to send', 'hks-core' ); ?></a>
-							<a class="hks-inquiry__launch" data-hks-whatsapp-launch href="#" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Open WhatsApp to send', 'hks-core' ); ?></a>
+						<div class="hks-inquiry__preview">
+							<div class="hks-inquiry__preview-toolbar">
+								<button class="hks-inquiry__back" type="button" data-hks-inquiry-back><?php esc_html_e( 'Edit message', 'hks-core' ); ?></button>
+							</div>
+							<pre class="hks-inquiry__message" data-hks-message tabindex="0"></pre>
 						</div>
-						<p class="hks-inquiry__send-note"><?php esc_html_e( 'Opening WhatsApp or your email app is not confirmation that the message was sent.', 'hks-core' ); ?></p>
+						<a class="hks-inquiry__launch" data-hks-whatsapp-launch href="#" target="_blank" rel="noopener noreferrer"><svg width="24" height="24" fill="currentColor" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-1.76-.88-2.91-1.57-4.07-3.56-.31-.53.31-.49.88-1.63.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49 1.88.81 2.62.88 3.56.74.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35ZM12.05 21.8h-.01a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26C2.16 6.45 6.6 2 12.06 2a9.83 9.83 0 0 1 9.89 9.9c0 5.45-4.44 9.9-9.9 9.9Zm8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.9 11.9 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.23-6.16-3.48-8.41Z"></path></svg><span><?php esc_html_e( 'Send inquiry on Whatsapp', 'hks-core' ); ?></span></a>
 					</div>
 				</div>
 			<?php if ( ! $is_group_context ) : ?>
