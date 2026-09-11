@@ -133,7 +133,7 @@ final class ArticleBlocks {
 		$destination = self::term_names( $post_id, 'hks_destination' );
 		$topics      = self::term_names( $post_id, 'hks_article_topic' );
 		$image_id    = get_post_thumbnail_id( $post_id );
-		$heading     = is_singular( 'post' ) || is_tax( 'hks_destination' ) ? 'h3' : 'h2';
+		$heading     = is_front_page() || is_singular( 'post' ) || is_tax( 'hks_destination' ) ? 'h3' : 'h2';
 
 		ob_start();
 		?>
@@ -154,6 +154,42 @@ final class ArticleBlocks {
 			</div>
 		</article>
 		<?php
+		return (string) ob_get_clean();
+	}
+
+	/**
+	 * Show recent public guides near the end of the homepage.
+	 */
+	public static function render_home_guides(): string {
+		$query = new \WP_Query(
+			array(
+				'post_type'           => 'post',
+				'post_status'         => 'publish',
+				'has_password'        => false,
+				'posts_per_page'      => 3,
+				'ignore_sticky_posts' => true,
+				'no_found_rows'       => true,
+				'orderby'             => array( 'date' => 'DESC', 'ID' => 'DESC' ),
+			)
+		);
+
+		if ( ! $query->have_posts() ) {
+			return '';
+		}
+
+		ob_start();
+		?>
+		<section class="hks-home-section hks-shell" aria-labelledby="hks-home-guides-title">
+			<div class="hks-section-heading">
+				<div><h2 id="hks-home-guides-title"><?php esc_html_e( 'Travel Guides', 'hks-wayfinder' ); ?></h2></div>
+				<a href="<?php echo esc_url( home_url( '/travel-guides/' ) ); ?>"><?php esc_html_e( 'Browse all guides', 'hks-wayfinder' ); ?> <span aria-hidden="true">→</span></a>
+			</div>
+			<div class="hks-article-grid">
+				<?php while ( $query->have_posts() ) : $query->the_post(); echo self::render_article_card(); endwhile; ?>
+			</div>
+		</section>
+		<?php
+		wp_reset_postdata();
 		return (string) ob_get_clean();
 	}
 

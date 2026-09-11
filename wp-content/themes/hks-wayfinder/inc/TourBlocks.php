@@ -691,6 +691,8 @@ final class TourBlocks {
 
 			<section class="hks-home-section hks-shell hks-proof-section" aria-labelledby="hks-proof-title"><div><p><?php esc_html_e( 'Compare with confidence', 'hks-wayfinder' ); ?></p><h2 id="hks-proof-title"><?php esc_html_e( 'Check the trip details before you request a quote', 'hks-wayfinder' ); ?></h2></div><ul><li><?php esc_html_e( 'Route, duration and departure context', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'Any available day-by-day itinerary', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'Any listed inclusions and exclusions', 'hks-wayfinder' ); ?></li><li><?php esc_html_e( 'Any available accommodation and transport details', 'hks-wayfinder' ); ?></li></ul></section>
 
+			<?php echo ArticleBlocks::render_home_guides(); ?>
+
 			<section class="hks-final-cta"><div class="hks-shell"><h2><?php esc_html_e( 'Ready to narrow down the options?', 'hks-wayfinder' ); ?></h2><p><?php esc_html_e( 'Choose a tour, then use its WhatsApp quote button to tell us your dates and group size.', 'hks-wayfinder' ); ?></p><a class="hks-button" href="<?php echo esc_url( $tours_url ); ?>"><?php esc_html_e( 'Explore all tours', 'hks-wayfinder' ); ?></a></div></section>
 		</div>
 		<?php
