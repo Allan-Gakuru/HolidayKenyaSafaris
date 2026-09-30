@@ -6,7 +6,7 @@ The client approved a dedicated short webinar landing Page and matching thank-yo
 
 The four visible answers are required name, required email, required booking-payment band and optional family priority. The client removed KES 50,000–59,999; the remaining choices are KES 60,000–79,999, KES 80,000–99,999 and KES 100,000 or more. KES 60,000 is the planned family booking payment and counts toward the holiday total. An answer is not a commitment and a higher band does not increase the holiday price. Actual holiday capacity is limited and may fill during the presentation, so visitors should come prepared to book if it suits them; no invented availability count or deadline is permitted.
 
-The client subsequently requested the speaker description “Senior tour consultant and holiday expert.” and removal of the “Holiday example” family-price block from the form. The booking-payment question retains its KES 60,000 context and credit toward the holiday total.
+The client subsequently requested the speaker description “Senior tour consultant and holiday expert.” and removal of the “Holiday example” family-price block from the form. The booking-payment question retains its KES 60,000 context and credit toward the holiday total. The header logo is a non-clickable image on both webinar Pages.
 
 Registrations are private WordPress records with an administrator list and CSV export. Confirmation email is queued in the background through `wp_mail` and the existing FluentSMTP transport, with calendar links. The thank-you requires a signed receipt from a stored registration. One event configuration supplies Africa/Nairobi timing and the joining URL to both Pages, email, Google Calendar and ICS. Personal answers never enter URLs or analytics.
 

@@ -29,7 +29,7 @@ final class WebinarPage {
 	}
 
 	private static function header(): string {
-		return '<a class="hks-webinar-skip" href="#main-content">Skip to content</a><header class="hks-webinar-header"><a href="' . esc_url( home_url( '/' ) ) . '" aria-label="Holiday Kenya Safaris home"><img src="' . esc_url( get_theme_file_uri( 'assets/images/brand/holiday-kenya-safaris-logo.svg' ) ) . '" width="224" height="68" alt="Holiday Kenya Safaris"></a><span>Operated by<br><strong>Ashford Tours &amp; Travel</strong></span></header>';
+		return '<a class="hks-webinar-skip" href="#main-content">Skip to content</a><header class="hks-webinar-header"><img src="' . esc_url( get_theme_file_uri( 'assets/images/brand/holiday-kenya-safaris-logo.svg' ) ) . '" width="224" height="68" alt="Holiday Kenya Safaris"><span>Operated by<br><strong>Ashford Tours &amp; Travel</strong></span></header>';
 	}
 
 	private static function footer(): string {
