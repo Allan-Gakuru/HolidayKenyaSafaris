@@ -33,8 +33,7 @@
 .hks-webinar-host__photo{width:48px;height:48px;border-radius:50%;object-fit:cover}
 .hks-webinar-form-panel{grid-column:2;grid-row:1 / span 3;min-width:0;background:var(--mist);padding:24px;border-radius:12px;scroll-margin-top:24px}
 .hks-webinar-form-panel>p{font-size:13px;margin-top:10px}
-.hks-webinar-price{margin:20px 0;padding-bottom:18px;border-bottom:1px solid #c5cdce;font-variant-numeric:tabular-nums;font-size:15px}
-.hks-webinar-price p{font-size:12px;line-height:1.6;margin-top:4px}
+.hks-webinar-form-panel form{margin-top:20px}
 .hks-webinar-field{margin-bottom:18px}
 .hks-webinar-field label{display:block;font-size:13px;font-weight:600;line-height:1.5;margin-bottom:7px}
 .hks-webinar-field label small{font-size:11px;font-weight:400;white-space:nowrap}
