@@ -1,6 +1,10 @@
 {
   "$schema": "https://schemas.wp.org/wp/6.6/theme.json",
   "version": 3,
+  "customTemplates": [
+    { "name": "webinar-registration", "title": "Webinar registration", "postTypes": ["page"] },
+    { "name": "webinar-thanks", "title": "Webinar thank-you", "postTypes": ["page"] }
+  ],
   "settings": {
     "appearanceTools": false,
     "useRootPaddingAwareAlignments": true,

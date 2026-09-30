@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-30T00:00:00+03:00",
+  "title": "Wayfinder Diani webinar surface",
+  "scope": "/diani-christmas-presentation/",
+  "extensions": {
+    "motion": [
+      { "name": "button-colour", "value": "background-color .15s ease, color .15s ease", "purpose": "Primary action hover; disabled for reduced motion." }
+    ],
+    "breakpoints": [
+      { "name": "single-column", "value": "767px" },
+      { "name": "compact-desktop", "value": "1100px" },
+      { "name": "wide-display", "value": "1250px" }
+    ],
+    "focus": { "outline": "3px solid #e1a62b", "outlineOffset": "3px", "separation": "0 0 0 5px #182b3a" }
+  },
+  "narrative": {
+    "northStar": "The Wayfinder",
+    "overview": "Scoped extension of the approved HKS identity for informed presentation registration and calendar addition.",
+    "dos": ["Use real approved resort photography for public output.", "Keep the calendar next step explicit and accessible."],
+    "donts": ["Do not treat local test event details as approved public facts.", "Do not apply this four-field registration exception to standard Tour quote forms."]
+  }
+}

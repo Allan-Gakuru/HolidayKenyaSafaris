@@ -4,6 +4,12 @@ Use this file for project-level decisions such as contact details, legal wording
 
 ## Confirmed
 
+### Diani presentation launch details — 2026-09-30
+
+The client approved the dedicated registration-to-calendar flow, the three booking-payment bands starting at KES 60,000, private WordPress attendee storage and confirmation email through FluentSMTP. The approved headline is “Christmas in Diani. A holiday for you, too.” Source: attached page brief and this task's direct client answers.
+
+Before publishing these two Pages, confirm the exact October 2026 presentation date, start time in EAT and actual HTTPS joining URL, assign approved real Diani Sea Resort photography, and verify the selected published privacy policy and existing FluentSMTP delivery. A presenter name/portrait may remain blank; the approved generic host line is used. The intended duration is 55 minutes including questions. The local test date/time/example.com link are fixtures only and must not be copied into production. Setup: [Webinar presentation](docs/WEBINAR-PRESENTATION.md).
+
 | Item | Status | Decision |
 |---|---|---|
 | Exact name | Confirmed | Holiday Kenya Safaris |

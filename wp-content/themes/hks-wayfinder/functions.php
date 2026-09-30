@@ -14,6 +14,8 @@ require_once get_theme_file_path( 'inc/TourBlocks.php' );
 require_once get_theme_file_path( 'inc/ArticleBlocks.php' );
 require_once get_theme_file_path( 'inc/Branding.php' );
 require_once get_theme_file_path( 'inc/AboutPage.php' );
+require_once get_theme_file_path( 'inc/WebinarPage.php' );
+add_action( 'init', array( \HKS_Wayfinder\WebinarPage::class, 'register' ) );
 
 /**
  * Whether the current request renders one of the acquisition/conversion pages.
@@ -21,7 +23,7 @@ require_once get_theme_file_path( 'inc/AboutPage.php' );
  * @return bool
  */
 function hks_wayfinder_is_conversion_content_page(): bool {
-	return is_singular( array( 'hks_tour', 'hks_campaign', 'post' ) );
+	return is_singular( array( 'hks_tour', 'hks_campaign', 'post' ) ) || \HKS_Wayfinder\WebinarPage::is_current();
 }
 
 /**
@@ -130,6 +132,10 @@ add_action( 'admin_menu', array( \HKS_Wayfinder\NavMenus::class, 'register_admin
  * @return void
  */
 function hks_wayfinder_enqueue_styles(): void {
+	if ( \HKS_Wayfinder\WebinarPage::is_current() ) {
+		\HKS_Wayfinder\WebinarPage::enqueue();
+		return;
+	}
 	$stylesheet_path = get_stylesheet_directory() . '/style.css';
 	$version         = is_readable( $stylesheet_path ) ? (string) filemtime( $stylesheet_path ) : wp_get_theme()->get( 'Version' );
 
@@ -149,6 +155,9 @@ add_action( 'wp_enqueue_scripts', 'hks_wayfinder_enqueue_styles' );
  * @return void
  */
 function hks_wayfinder_enqueue_scripts(): void {
+	if ( \HKS_Wayfinder\WebinarPage::is_current() ) {
+		return;
+	}
 	$navigation_path = get_theme_file_path( 'assets/js/navigation.js' );
 	$navigation_uri  = get_theme_file_uri( 'assets/js/navigation.js' );
 

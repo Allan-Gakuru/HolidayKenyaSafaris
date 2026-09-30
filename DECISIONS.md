@@ -1,5 +1,15 @@
 # Confirmed Decisions
 
+## Diani presentation registration — 2026-09-30
+
+The client approved a dedicated short webinar landing Page and matching thank-you Page at `/diani-christmas-presentation/` and `/diani-christmas-presentation/thank-you/`. This is an explicit exception to the Tour/Campaign quote flow: register for the presentation, then add it to a calendar. It neither books the holiday nor collects a payment.
+
+The four visible answers are required name, required email, required booking-payment band and optional family priority. The client removed KES 50,000–59,999; the remaining choices are KES 60,000–79,999, KES 80,000–99,999 and KES 100,000 or more. KES 60,000 is the planned family booking payment and counts toward the holiday total. An answer is not a commitment and a higher band does not increase the holiday price. Actual holiday capacity is limited and may fill during the presentation, so visitors should come prepared to book if it suits them; no invented availability count or deadline is permitted.
+
+Registrations are private WordPress records with an administrator list and CSV export. Confirmation email is queued in the background through `wp_mail` and the existing FluentSMTP transport, with calendar links. The thank-you requires a signed receipt from a stored registration. One event configuration supplies Africa/Nairobi timing and the joining URL to both Pages, email, Google Calendar and ICS. Personal answers never enter URLs or analytics.
+
+This is a scoped extension of the existing Wayfinder identity, using the client-pinned layout and copy brief. There is no replacement visual-world decision, concept roll or generated comp. Code delivery creates drafts; the unconfirmed event details remain blank until an editor supplies them.
+
 ## Inquiry date format — 2026-09-09
 
 New quote inquiries require a full preferred travel date in `DD-MM-YYYY` format. The calendar selects days only; month-only entry is removed. Browser and server validation reject past dates and other formats. This supersedes earlier date-or-month inquiry requirements. Existing stored inquiries remain unchanged.

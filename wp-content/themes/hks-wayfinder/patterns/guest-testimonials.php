@@ -8,6 +8,7 @@
  * Source and excerpt verification: content/testimonials-source.md.
  * @package HKS_Wayfinder
  */
+defined( 'ABSPATH' ) || exit;
 ?>
 <!-- wp:html -->
 <section class="hks-testimonials" aria-labelledby="hks-testimonials-title">

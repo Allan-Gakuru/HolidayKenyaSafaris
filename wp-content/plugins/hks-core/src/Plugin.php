@@ -13,6 +13,7 @@ use HolidayKenyaSafaris\Core\Conversion\Module as ConversionModule;
 use HolidayKenyaSafaris\Core\Fields\FieldsModule;
 use HolidayKenyaSafaris\Core\Fields\PublicationGuard;
 use HolidayKenyaSafaris\Core\Seed\Module as SeedModule;
+use HolidayKenyaSafaris\Core\Webinar\Module as WebinarModule;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -137,6 +138,7 @@ final class Plugin {
 				PublicationGuard::class,
 				SeedModule::class,
 				ConversionModule::class,
+				WebinarModule::class,
 			)
 		);
 

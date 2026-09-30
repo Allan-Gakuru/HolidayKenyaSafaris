@@ -210,3 +210,23 @@ Do not expose separate confirmation, source-checked, rights-checked, price-statu
 ## Current approval boundary
 
 The approved logo in `brand/masters/holiday-kenya-safaris-logo.svg` is the implementation baseline. Earlier redraws are retired; browser icons and shared-link previews derive from the approved artwork. Publishing is the per-record approval signal for public content and assigned media. Legal/operator wording, global policies, contact details, analytics identifiers, and other project-level launch decisions remain tracked in `CLIENT-CONFIRMATIONS.md`.
+
+## Diani webinar surface — 2026-09-30
+
+This focused registration and calendar surface extends Wayfinder without changing the catalogue or quote templates. Its visual authority is the existing approved identity and client page brief; it was built in code without a concept roll or generated comp.
+
+### Layout
+
+A compact logo/operator header and minimal privacy footer frame a white page. The registration layout has a maximum width of 1240px and a desktop grid of 1.24fr to 1fr, with the promise and practical reasons on the left and a Pale Mist form panel on the right. The resort photograph and preparation note continue below the left column. At 767px and below, content follows a single column with 20px side gutters and a full-width opening action. The thank-you uses a centred 730px reading column and one event panel.
+
+### Typography and surfaces
+
+Self-hosted Montserrat retains the existing brand. Registration display type steps from 48px on wide screens to 36px on mobile; the thank-you uses 42px and 34px respectively. Navy carries headings and body text, Teal highlights the second headline line and links, Saffron marks the primary actions, and Pale Mist groups the form/event content. Panels are flat, with 12px corners; buttons use 8px corners and inputs 6px. No decorative shadows or entrance animation are introduced.
+
+### Components and states
+
+The four-field form uses persistent labels, explicit required/optional labels, 16px input text and 46px minimum input height. Actions have a 48px minimum height and consistent authored SVG arrows. A visible Saffron focus outline with Navy separation identifies keyboard focus. Validation announces errors and focuses the first invalid answer; loading prevents repeat submissions and error recovery preserves answers. Server HTML starts with a disabled submit button and explicit POST method; the script enables submission only after its handler is installed and registration is open.
+
+The calendar control is a native disclosure containing Google Calendar and ICS links. Escape closes it and returns focus to its summary; outside clicks close it. Reduced-motion preferences disable the short button colour transitions. Genuine success requires a saved-registration receipt. Missing event details stay in draft previews and cannot produce a public invitation.
+
+Only these two templates load the small webinar stylesheet and deferred script, omitting catalogue assets. Real resort photography uses responsive WordPress image markup; the bundled WebP is a draft preview asset. The test date and example joining URL shown in local review screenshots are not approved event facts. Setup and verification are recorded in [Webinar presentation](docs/WEBINAR-PRESENTATION.md); scoped motion and breakpoint metadata are in [webinar-design.json](docs/webinar-design.json).

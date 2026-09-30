@@ -10,6 +10,10 @@ For WordPress administration, approvals, inquiries, media rights, releases,
 maintenance, troubleshooting, and launch checks, use the
 [complete site operations guide](docs/SITE-OPERATIONS-GUIDE.md).
 
+For the dedicated Diani Christmas webinar registration, attendee records,
+confirmation emails and calendar invitations, see the
+[presentation setup guide](docs/WEBINAR-PRESENTATION.md).
+
 ## Architecture
 
 - Custom block theme: `wp-content/themes/hks-wayfinder/`.
