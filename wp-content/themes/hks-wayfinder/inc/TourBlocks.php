@@ -373,7 +373,12 @@ final class TourBlocks {
 					<?php if ( ! empty( $price['note'] ) ) : ?><p class="hks-tour-quote__price-note"><?php echo esc_html( $price['note'] ); ?></p><?php endif; ?>
 					<ul class="hks-tour-quote__reassurances">
 						<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Inclusions and exclusions clarified', 'hks-wayfinder' ); ?></span></li>
-						<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'No booking commitment required', 'hks-wayfinder' ); ?></span></li>
+						<?php if ( $christmas ) : ?>
+							<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Save upto 6000 per person', 'hks-wayfinder' ); ?></span></li>
+							<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Offer Expires in 2 days', 'hks-wayfinder' ); ?></span></li>
+						<?php else : ?>
+							<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'No booking commitment required', 'hks-wayfinder' ); ?></span></li>
+						<?php endif; ?>
 						<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Fast Responses to all queries', 'hks-wayfinder' ); ?></span></li>
 					</ul>
 					<?php echo $quote; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Trusted server-rendered block. ?>

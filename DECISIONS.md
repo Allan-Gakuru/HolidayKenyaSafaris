@@ -6,6 +6,8 @@ The client requested a new coast Tour and linked Christmas Campaign using the ex
 
 This Campaign's scoped payment controls render a clearly labelled advance booking payment, its basis and optional confirmed details. They never inherit a Tour full price. Its form, server validation and WhatsApp message omit dates, while private inquiry storage and queued team notification retain the shared flow. Details and completion steps: [Christmas coast Campaign](docs/CHRISTMAS-COAST-CAMPAIGN.md).
 
+The client subsequently approved replacing this Campaign's “No booking commitment required” reassurance with two bullets: “Save upto 6000 per person” and “Offer Expires in 2 days”. These are fixed Campaign-only copy; the expiry wording does not introduce a countdown or automatic expiry. Other Tours and Campaigns retain their existing reassurance.
+
 ## Diani presentation registration — 2026-09-30
 
 The client approved a dedicated short webinar landing Page and matching thank-you Page at `/diani-christmas-presentation/` and `/diani-christmas-presentation/thank-you/`. This is an explicit exception to the Tour/Campaign quote flow: register for the presentation, then add it to a calendar. It neither books the holiday nor collects a payment.

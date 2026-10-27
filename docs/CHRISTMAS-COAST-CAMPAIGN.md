@@ -25,7 +25,9 @@ Publish the completed Tour first, then the Campaign. The Campaign publication gu
 
 ## Visitor behaviour
 
-The existing title band, gallery, facts, tabs, itinerary, related Tours, responsive layout and quote buttons are reused. The payment panel says **Advance saver booking payment**, identifies its basis, and explicitly states that this is not the full holiday price. No checkout, confirmed availability, payment commitment, savings amount or refund promise is introduced.
+The existing title band, gallery, facts, tabs, itinerary, related Tours, responsive layout and quote buttons are reused. The payment panel says **Advance saver booking payment**, identifies its basis, and explicitly states that this is not the full holiday price. No checkout, confirmed availability, payment commitment or refund promise is introduced.
+
+On 27 October 2026, the client requested two quote-panel bullets, **Save upto 6000 per person** and **Offer Expires in 2 days**, replacing **No booking commitment required** on this Campaign only. The expiry wording is fixed copy, with no countdown or automatic expiry. All other Tours and Campaigns keep their original reassurance.
 
 The quote form retains name, phone, email, package and traveler count, plus existing Tour-specific optional questions. This Campaign has no date input or calendar. Both browser payload and reviewed WhatsApp message omit the date. The server derives the exemption from the signed Campaign identity, discards unexpected date values, and continues to require dates everywhere else.
 
