@@ -237,7 +237,7 @@ def main() -> int:
     forbid(errors, "catalogue template", files["catalogue"], ["KSh starting price", "Request current KSh rate"])
     require(errors, "Tour template", files["tour"], ["hks-wayfinder/tour-hero", "hks-wayfinder/tour-details", "data-hks-quote-proxy", "Request a quote", "choose WhatsApp or email"])
     forbid(errors, "Tour template", files["tour"], ["<!-- wp:hks/quote-cta"])
-    require(errors, "Campaign template", files["campaign"], ["hks-wayfinder/tour-hero", "hks-wayfinder/tour-details", "data-hks-quote-proxy", "Request a quote", "choose WhatsApp or email"])
+    require(errors, "Campaign template", files["campaign"], ["hks-wayfinder/tour-hero", "hks-wayfinder/tour-details", "data-hks-quote-proxy", "Request a quote", "open WhatsApp to send your inquiry"])
     forbid(errors, "Campaign template", files["campaign"], ["<!-- wp:hks/quote-cta", "campaign_hero", "hks-hero-cta"])
     require(errors, "Destination template", files["destination"], ["hks-wayfinder/destination-intro", "hks-wayfinder/tour-card", "inherit\":true", "hks-wayfinder/destination-guides", "hks-catalogue-prompt"])
     for label in ("tour type", "occasion", "travel style"):

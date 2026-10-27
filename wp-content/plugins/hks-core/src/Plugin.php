@@ -139,6 +139,7 @@ final class Plugin {
 				SeedModule::class,
 				ConversionModule::class,
 				WebinarModule::class,
+				\HolidayKenyaSafaris\Core\Campaigns\ChristmasCoast::class,
 			)
 		);
 

@@ -37,6 +37,7 @@ final class FieldGroups {
 			self::tour_policies_group(),
 			self::tour_media_group(),
 			self::campaign_public_group(),
+			\HolidayKenyaSafaris\Core\Campaigns\ChristmasCoast::field_group(),
 			self::article_public_group(),
 			self::faq_public_group(),
 			self::destination_public_group(),

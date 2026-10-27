@@ -7,6 +7,7 @@
 
 namespace HKS_Wayfinder;
 
+use HolidayKenyaSafaris\Core\Campaigns\ChristmasCoast;
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -336,6 +337,7 @@ final class TourBlocks {
 		$faqs         = self::approved_faqs( array( 'tour_id' => $tour_id, 'campaign_id' => $campaign_id ) );
 		$facts        = self::tour_facts( $tour_id );
 		$price        = $campaign_id ? self::campaign_price_summary( $campaign_id, $tour_id ) : self::tour_price_summary( $tour_id );
+		$christmas    = class_exists( ChristmasCoast::class ) && ChristmasCoast::matches( $campaign_id );
 		$images       = $campaign_id ? self::campaign_images( $campaign_id, $tour_id ) : self::tour_images( $tour_id );
 		$route        = self::public_text( self::field( 'hks_route_summary', $tour_id ) );
 		$destinations = self::term_names( $tour_id, 'hks_destination' );
@@ -365,15 +367,17 @@ final class TourBlocks {
 			<aside class="hks-tour-quote" aria-label="<?php esc_attr_e( 'Request a quote', 'hks-wayfinder' ); ?>">
 				<div class="hks-tour-quote__panel" data-hks-primary-quote>
 					<p class="hks-tour-quote__label"><?php esc_html_e( 'Plan this trip', 'hks-wayfinder' ); ?></p>
-					<h2><?php esc_html_e( 'Request a tailored quote', 'hks-wayfinder' ); ?></h2>
+					<h2><?php echo esc_html( $christmas ? __( 'Advance saver booking payment', 'hks-wayfinder' ) : __( 'Request a tailored quote', 'hks-wayfinder' ) ); ?></h2>
 					<?php if ( $price ) : ?><p class="hks-tour-quote__price"><?php echo esc_html( $price['label'] ); ?></p><p class="hks-tour-quote__price-note"><?php echo esc_html( $price['status'] ); ?></p><?php endif; ?>
+					<?php if ( $christmas && ! $price ) : ?><p class="hks-tour-quote__price-note"><?php esc_html_e( 'Ask us for the advance booking payment and full holiday quote. Your inquiry does not make a payment or confirm a booking.', 'hks-wayfinder' ); ?></p><?php endif; ?>
+					<?php if ( ! empty( $price['note'] ) ) : ?><p class="hks-tour-quote__price-note"><?php echo esc_html( $price['note'] ); ?></p><?php endif; ?>
 					<ul class="hks-tour-quote__reassurances">
 						<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Inclusions and exclusions clarified', 'hks-wayfinder' ); ?></span></li>
 						<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'No booking commitment required', 'hks-wayfinder' ); ?></span></li>
 						<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Fast Responses to all queries', 'hks-wayfinder' ); ?></span></li>
 					</ul>
 					<?php echo $quote; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Trusted server-rendered block. ?>
-					<p class="hks-tour-quote__note"><?php esc_html_e( 'Tell us your dates and group size, check the prepared message, then choose WhatsApp or email.', 'hks-wayfinder' ); ?></p>
+					<p class="hks-tour-quote__note"><?php echo esc_html( $christmas ? __( 'Tell us your group size and contact details, check your message, then open WhatsApp to send your inquiry. No payment is taken here.', 'hks-wayfinder' ) : __( 'Tell us your dates and group size, check the prepared message, then open WhatsApp to send your inquiry.', 'hks-wayfinder' ) ); ?></p>
 				</div>
 			</aside>
 
@@ -1295,6 +1299,9 @@ final class TourBlocks {
 	 * @return array<string, string>
 	 */
 	private static function campaign_price_summary( int $campaign_id, int $tour_id ): array {
+		if ( class_exists( ChristmasCoast::class ) && ChristmasCoast::matches( $campaign_id ) ) {
+			return ChristmasCoast::payment( $campaign_id );
+		}
 		$amount = absint( self::field( 'hks_campaign_from_price_ksh', $campaign_id ) );
 
 		if ( ! $amount ) {

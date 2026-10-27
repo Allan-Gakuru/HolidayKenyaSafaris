@@ -1,5 +1,11 @@
 # Confirmed Decisions
 
+## Christmas coast advance saver Campaign — 2026-10-27
+
+The client requested a new coast Tour and linked Christmas Campaign using the existing Tour/Campaign composition, with an advance booking payment instead of a full holiday price and no travel-date question on this Campaign only. The exception is bound to the generated Campaign ID; all other Tour and Campaign pricing and date requirements remain unchanged. Code deployment creates drafts on the next administrator visit and does not publish incomplete content. No hotel, itinerary, amount, payment basis or payment terms were confirmed for this new offer; the earlier Diani webinar amount must not be reused automatically.
+
+This Campaign's scoped payment controls render a clearly labelled advance booking payment, its basis and optional confirmed details. They never inherit a Tour full price. Its form, server validation and WhatsApp message omit dates, while private inquiry storage and queued team notification retain the shared flow. Details and completion steps: [Christmas coast Campaign](docs/CHRISTMAS-COAST-CAMPAIGN.md).
+
 ## Diani presentation registration — 2026-09-30
 
 The client approved a dedicated short webinar landing Page and matching thank-you Page at `/diani-christmas-presentation/` and `/diani-christmas-presentation/thank-you/`. This is an explicit exception to the Tour/Campaign quote flow: register for the presentation, then add it to a calendar. It neither books the holiday nor collects a payment.

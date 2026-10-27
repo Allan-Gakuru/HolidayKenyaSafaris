@@ -25,6 +25,8 @@ Focused paid-ad pages use the canonical Tour title band, gallery, facts, sticky 
 
 Campaign differentiation comes from ad-matched content and optional focused navigation, not a second visual composition.
 
+The Christmas coast advance saver Campaign (27 October 2026) reuses this composition. Only its ID-scoped quote panel replaces the full-price heading with **Advance saver booking payment**, shows the confirmed amount and payment basis, and clearly identifies it as part payment. Missing advance amounts never fall back to a Tour starting price. Its shared inquiry dialog omits the date control, leaving contact details and traveler count in the existing responsive grid. No new colours, fonts, spacing, gallery rules or motion are introduced. See [the Campaign setup](docs/CHRISTMAS-COAST-CAMPAIGN.md).
+
 ### Travel Guides modes
 
 Travel Guides extends the Wayfinder system with two deliberate editorial compositions:

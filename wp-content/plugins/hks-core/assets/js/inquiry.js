@@ -368,11 +368,11 @@
 			'Hi Holiday Kenya Safaris, my name is ' + safeText(data.get('name'), 100) + '.',
 			'',
 			'I am interested in ' + packageLabel + '.',
-			'Preferred travel date: ' + safeText(data.get('preferred_date'), 80) + '.',
 			'Travelers: ' + safeText(data.get('travelers'), 3) + '.',
 			'Phone: ' + safeText(data.get('phone'), 30) + '.',
 			'Email: ' + safeText(data.get('email'), 254) + '.'
 		];
+		if (form.elements.preferred_date) lines.splice(3, 0, 'Preferred travel date: ' + safeText(data.get('preferred_date'), 80) + '.');
 		if (destination) lines.splice(3, 0, 'Destination: ' + destination + '.');
 
 		const optionalLabels = {
@@ -392,7 +392,9 @@
 
 		lines.push('', 'Request reference: ' + reference + '.');
 
-		if (safeText(context.pageType, 30) === 'group_travel') {
+		if (context.christmasCoast) {
+			lines.push('', 'I am interested in the Christmas coast advance saver offer. Please confirm availability, the full holiday cost, the advance booking payment, the remaining balance and payment terms.');
+		} else if (safeText(context.pageType, 30) === 'group_travel') {
 			lines.push('', 'Please confirm availability and send a tailored KSh quote for this group, including what is included and the next booking step.');
 		} else {
 			lines.push('', 'Please confirm availability, the current KSh price, what is included, and the next booking step.');
@@ -412,12 +414,12 @@
 			name: safeText(data.get('name'), 100),
 			phone: safeText(data.get('phone'), 30),
 			email: safeText(data.get('email'), 254),
-			preferred_date: safeText(data.get('preferred_date'), 80),
 			travelers: Number(data.get('travelers')),
 			destination_id: Number(data.get('destination_selection') || 0),
 			inquiry_route: safeText(root.dataset.pageType, 30),
 			attribution: sourceAttribution
 		};
+		if (form.elements.preferred_date) payload.preferred_date = safeText(data.get('preferred_date'), 80);
 
 		['departure_town', 'residency', 'vehicle_preference', 'accommodation_preference', 'budget_range'].forEach(function (name) {
 			if (form.elements[name]) payload[name] = safeText(data.get(name), 120);
@@ -579,7 +581,8 @@
 				const reviewedPackage = safeText(result.package_label, 160);
 				const reviewedReference = safeText(result.reference, 30);
 				const reviewedMessage = buildMessage(form, reviewedPackage, reviewedReference, {
-					pageType: root.dataset.pageType
+					pageType: root.dataset.pageType,
+					christmasCoast: root.dataset.hksChristmasCoast === 'true'
 				});
 				message.textContent = reviewedMessage;
 				reference.textContent = reviewedReference;

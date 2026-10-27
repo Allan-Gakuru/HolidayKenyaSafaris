@@ -4,6 +4,10 @@ Use this file for project-level decisions such as contact details, legal wording
 
 ## Confirmed
 
+### Christmas coast Campaign — 2026-10-27
+
+Confirmed: reuse the current Tour/Campaign layout, present an explicitly labelled advance saver booking payment, omit the travel-date question on this Campaign only, review the changes and push code to `main`. A new coast Tour has not yet been supplied. The draft still needs the actual destination/resort, duration, transport, itinerary, inclusions/exclusions, approved photography, payment amount and basis, and any terms to be stated publicly. The earlier Diani webinar payment is not confirmation for this separate offer. See [setup and scope](docs/CHRISTMAS-COAST-CAMPAIGN.md).
+
 ### Diani presentation launch details — 2026-09-30
 
 The client approved the dedicated registration-to-calendar flow, the three booking-payment bands starting at KES 60,000, private WordPress attendee storage and confirmation email through FluentSMTP. The approved headline is “Christmas in Diani. A holiday for you, too.” Source: attached page brief and this task's direct client answers.

@@ -272,6 +272,8 @@ The title band, gallery mosaic, desktop tabs, mobile disclosures, itinerary beha
 
 ## Campaign Fields
 
+The ID-scoped Christmas coast Campaign is the explicit 27 October 2026 exception: it adds an advance booking payment amount, payment basis and optional public payment explanation only to that record. It replaces full-price display and omits the inquiry-date question only there. The normal Campaign fields below retain their existing behaviour everywhere else. See [Christmas coast Campaign](docs/CHRISTMAS-COAST-CAMPAIGN.md).
+
 - Native Campaign title and publication state.
 - Linked Tour relationship, required and visible through inherited Tour content.
 - Hero headline.

@@ -7,6 +7,7 @@
 
 namespace HolidayKenyaSafaris\Core\Conversion;
 
+use HolidayKenyaSafaris\Core\Campaigns\ChristmasCoast;
 use HolidayKenyaSafaris\Core\Content\PostTypes\Campaign;
 use HolidayKenyaSafaris\Core\Content\PostTypes\Tour;
 
@@ -41,6 +42,7 @@ final class QuoteBlock {
 		wp_enqueue_script( 'hks-inquiry' );
 
 		$instance_id = wp_unique_id( 'hks-inquiry-' );
+		$christmas   = ChristmasCoast::matches( $context['campaign_id'] );
 		$location    = sanitize_key( $attributes['location'] ?? 'content' );
 		$label       = sanitize_text_field( $attributes['label'] ?? '' );
 
@@ -67,6 +69,7 @@ final class QuoteBlock {
 			data-campaign-id="<?php echo esc_attr( $context['campaign_id'] ); ?>"
 			data-campaign-label="<?php echo esc_attr( $context['campaign_label'] ); ?>"
 			data-page-type="<?php echo esc_attr( $context['page_type'] ); ?>"
+			<?php if ( $christmas ) : ?>data-hks-christmas-coast="true"<?php endif; ?>
 			data-cta-location="<?php echo esc_attr( $location ); ?>"
 		>
 			<?php if ( ! $is_group_context ) : ?>
@@ -119,6 +122,7 @@ final class QuoteBlock {
 								<?php self::text_input( $instance_id, 'name', __( 'Your name', 'hks-core' ), 'text', 'name', true ); ?>
 								<?php self::text_input( $instance_id, 'phone', __( 'Phone number', 'hks-core' ), 'tel', 'tel', true, __( 'e.g. 0722 000 000', 'hks-core' ) ); ?>
 								<?php self::text_input( $instance_id, 'email', __( 'Email address', 'hks-core' ), 'email', 'email', true, __( 'e.g. you@example.com', 'hks-core' ), '', '', '254' ); ?>
+								<?php if ( ! $christmas ) : ?>
 								<div class="hks-inquiry__field hks-inquiry__date" data-hks-date>
 									<label for="<?php echo esc_attr( $instance_id ); ?>-preferred_date"><?php esc_html_e( 'Preferred travel date (required)', 'hks-core' ); ?></label>
 									<div class="hks-inquiry__date-control">
@@ -128,6 +132,7 @@ final class QuoteBlock {
 									<small id="<?php echo esc_attr( $instance_id ); ?>-date-hint"><?php esc_html_e( 'Choose a day from the calendar or enter DD-MM-YYYY.', 'hks-core' ); ?></small>
 									<div id="<?php echo esc_attr( $instance_id ); ?>-calendar" class="hks-inquiry__calendar" data-hks-calendar role="group" aria-label="Choose your travel date" hidden></div>
 								</div>
+								<?php endif; ?>
 								<?php self::text_input( $instance_id, 'travelers', __( 'Number of travelers', 'hks-core' ), 'number', 'off', true, '', '1', $is_group_context ? '999' : '99' ); ?>
 							</div>
 
@@ -310,7 +315,8 @@ final class QuoteBlock {
 			return null;
 		}
 
-		if ( ! $tour_id || Tour::POST_TYPE !== get_post_type( $tour_id ) || 'publish' !== get_post_status( $tour_id ) ) {
+		$draft_preview = $campaign_id && ChristmasCoast::matches( $campaign_id ) && is_preview() && current_user_can( 'edit_post', $campaign_id ) && current_user_can( 'edit_post', $tour_id );
+		if ( ! $tour_id || Tour::POST_TYPE !== get_post_type( $tour_id ) || ( 'publish' !== get_post_status( $tour_id ) && ! $draft_preview ) ) {
 			return null;
 		}
 

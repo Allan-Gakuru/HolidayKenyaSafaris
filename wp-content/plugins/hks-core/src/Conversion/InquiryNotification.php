@@ -213,8 +213,9 @@ final class InquiryNotification {
 			self::line( __( 'Email', 'hks-core' ), $values['email'] ),
 			self::line( __( 'Inquiry route', 'hks-core' ), self::route_label( $values['inquiry_route'] ) ),
 			self::line( __( 'Package', 'hks-core' ), $context['package_label'] ),
+			\HolidayKenyaSafaris\Core\Campaigns\ChristmasCoast::matches( $context['campaign_id'] ) ? self::line( __( 'Offer', 'hks-core' ), __( 'Christmas coast advance saver booking inquiry', 'hks-core' ) ) : null,
 			self::line( __( 'Destination', 'hks-core' ), $values['destination_label'] ),
-			self::line( __( 'Preferred travel date', 'hks-core' ), $values['preferred_date'] ),
+			'' !== $values['preferred_date'] ? self::line( __( 'Preferred travel date', 'hks-core' ), $values['preferred_date'] ) : null,
 			self::line( __( 'Travelers', 'hks-core' ), $values['travelers'] ),
 		);
 

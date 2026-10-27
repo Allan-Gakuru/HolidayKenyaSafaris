@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 from typing import List
@@ -49,7 +50,10 @@ def main() -> int:
             errors.append(f"missing {relative}: {error}")
             content[label] = ""
 
-    require(errors, "plugin bootstrap", content["bootstrap"], ["Version:           0.12.4", "define( 'HKS_CORE_VERSION', '0.12.4' )"])
+    header_version = re.search(r"Version:\s+([0-9.]+)", content["bootstrap"])
+    code_version = re.search(r"define\( 'HKS_CORE_VERSION', '([0-9.]+)' \)", content["bootstrap"])
+    if not header_version or not code_version or header_version[1] != code_version[1]:
+        errors.append("plugin header and runtime versions must be present and equal")
     require(
         errors,
         "client-ready copy migration",

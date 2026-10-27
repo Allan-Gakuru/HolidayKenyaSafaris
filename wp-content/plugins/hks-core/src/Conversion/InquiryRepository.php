@@ -7,6 +7,7 @@
 
 namespace HolidayKenyaSafaris\Core\Conversion;
 
+use HolidayKenyaSafaris\Core\Campaigns\ChristmasCoast;
 use HolidayKenyaSafaris\Core\Content\PostTypes\Campaign;
 use HolidayKenyaSafaris\Core\Content\PostTypes\Inquiry;
 use HolidayKenyaSafaris\Core\Content\PostTypes\Tour;
@@ -249,6 +250,9 @@ final class InquiryRepository {
 			) {
 				return $this->error( 'campaign', __( 'This campaign is not currently available for quote requests.', 'hks-core' ) );
 			}
+			if ( ChristmasCoast::matches( $campaign_id ) && ! ChristmasCoast::payment( $campaign_id ) ) {
+				return $this->error( 'campaign', __( 'This offer is being updated. Please contact us for the current booking details.', 'hks-core' ) );
+			}
 		}
 
 		$package_label = sanitize_text_field( $this->field( 'hks_whatsapp_package_label', $tour_id ) );
@@ -264,6 +268,7 @@ final class InquiryRepository {
 		return array(
 			'tour_id'           => $tour_id,
 			'campaign_id'       => $campaign_id,
+			'collects_date'     => ! ChristmasCoast::matches( $campaign_id ),
 			'package_label'     => $package_label,
 			'destination_label' => $destination_label,
 			'allowed_questions' => is_array( $allowed_questions ) ? $allowed_questions : array(),
@@ -316,13 +321,15 @@ final class InquiryRepository {
 			return $this->error( 'email', __( 'Enter a valid email address.', 'hks-core' ) );
 		}
 
-		$travel_date = is_string( $payload['preferred_date'] ?? null ) ? trim( $payload['preferred_date'] ) : '';
+		// This flag comes only from validated, signed Campaign context, never the payload.
+		$collects_date = $context['collects_date'] ?? true;
+		$travel_date = $collects_date && is_string( $payload['preferred_date'] ?? null ) ? trim( $payload['preferred_date'] ) : '';
 		$date_parts = array();
 		$date_valid = 1 === preg_match( '/^([0-9]{2})-([0-9]{2})-([0-9]{4})$/D', $travel_date, $date_parts );
 		$date_valid = $date_valid && checkdate( (int) $date_parts[2], (int) $date_parts[1], (int) $date_parts[3] );
 		$today = wp_date( 'Y-m-d', null, new \DateTimeZone( 'Africa/Nairobi' ) );
 
-		if ( ! $date_valid || implode( '-', array_reverse( explode( '-', $travel_date ) ) ) < $today ) {
+		if ( $collects_date && ( ! $date_valid || implode( '-', array_reverse( explode( '-', $travel_date ) ) ) < $today ) ) {
 			return $this->error( 'preferred_date', __( 'Choose today or a future date in DD-MM-YYYY format.', 'hks-core' ) );
 		}
 

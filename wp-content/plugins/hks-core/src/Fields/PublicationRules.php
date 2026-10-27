@@ -38,7 +38,7 @@ final class PublicationRules {
 		}
 
 		if ( Campaign::POST_TYPE === $post_type ) {
-			return self::validate_campaign( $values, $native );
+			return self::validate_campaign( $values, $native, $post_id );
 		}
 
 		if ( self::ARTICLE_POST_TYPE === $post_type ) {
@@ -103,7 +103,7 @@ final class PublicationRules {
 	 * @param array<string, mixed> $native Candidate native WordPress fields.
 	 * @return array<int, array{code:string,field:string,message:string}>
 	 */
-	public static function validate_campaign( $values, $native = array() ) {
+	public static function validate_campaign( $values, $native = array(), $post_id = 0 ) {
 		$errors   = array();
 		$tour_ids = self::relationship_ids( self::value( $values, 'hks_linked_tour' ) );
 
@@ -132,7 +132,16 @@ final class PublicationRules {
 			);
 		}
 
-		$price = self::value( $values, 'hks_campaign_from_price_ksh' );
+		$christmas = \HolidayKenyaSafaris\Core\Campaigns\ChristmasCoast::matches( $post_id );
+		if ( $christmas ) {
+			if ( ! \HolidayKenyaSafaris\Core\Campaigns\ChristmasCoast::valid_amount( self::value( $values, 'hks_christmas_advance_ksh' ) ) ) {
+				self::add_error( $errors, 'hks_christmas_payment_required', 'hks_christmas_advance_ksh', __( 'Enter the confirmed advance booking payment as a positive whole KSh amount before publishing.', 'hks-core' ) );
+			}
+			if ( ! in_array( self::value( $values, 'hks_christmas_advance_basis' ), array( 'person', 'family', 'booking' ), true ) ) {
+				self::add_error( $errors, 'hks_christmas_basis_required', 'hks_christmas_advance_basis', __( 'Specify whether the advance payment is per person, family or booking.', 'hks-core' ) );
+			}
+		}
+		$price = $christmas ? null : self::value( $values, 'hks_campaign_from_price_ksh' );
 		if ( self::is_meaningful( $price ) && ! self::is_positive_whole_number( $price ) ) {
 			self::add_error(
 				$errors,
@@ -296,6 +305,9 @@ final class PublicationRules {
 			'hks_hero_headline',
 			'hks_supporting_copy',
 			'hks_campaign_from_price_ksh',
+			'hks_christmas_advance_ksh',
+			'hks_christmas_advance_basis',
+			'hks_christmas_advance_note',
 			'hks_navigation_mode',
 			'hks_campaign_start_date',
 			'hks_campaign_end_date',
