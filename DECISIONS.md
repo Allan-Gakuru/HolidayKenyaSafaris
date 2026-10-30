@@ -8,6 +8,8 @@ This Campaign's scoped payment controls render a clearly labelled advance bookin
 
 The client subsequently approved replacing this Campaign's “No booking commitment required” reassurance with two bullets: “Save upto 6000 per person” and “Offer Expires in 2 days”. These are fixed Campaign-only copy; the expiry wording does not introduce a countdown or automatic expiry. Other Tours and Campaigns retain their existing reassurance.
 
+On 30 October 2026, the client confirmed this Campaign's first bullet as “SGR return ticket, Hotel Transfer, All Inclusive Meals,”, replacing “Inclusions and exclusions clarified”.
+
 ## Diani presentation registration — 2026-09-30
 
 The client approved a dedicated short webinar landing Page and matching thank-you Page at `/diani-christmas-presentation/` and `/diani-christmas-presentation/thank-you/`. This is an explicit exception to the Tour/Campaign quote flow: register for the presentation, then add it to a calendar. It neither books the holiday nor collects a payment.

@@ -29,6 +29,8 @@ The existing title band, gallery, facts, tabs, itinerary, related Tours, respons
 
 On 27 October 2026, the client requested two quote-panel bullets, **Save upto 6000 per person** and **Offer Expires in 2 days**, replacing **No booking commitment required** on this Campaign only. The expiry wording is fixed copy, with no countdown or automatic expiry. All other Tours and Campaigns keep their original reassurance.
 
+On 30 October 2026, the client replaced this Campaign's first bullet, **Inclusions and exclusions clarified**, with **SGR return ticket, Hotel Transfer, All Inclusive Meals,**.
+
 The quote form retains name, phone, email, package and traveler count, plus existing Tour-specific optional questions. This Campaign has no date input or calendar. Both browser payload and reviewed WhatsApp message omit the date. The server derives the exemption from the signed Campaign identity, discards unexpected date values, and continues to require dates everywhere else.
 
 Private inquiry storage, reference generation, idempotent retries, background team notification and the visitor-controlled WhatsApp launch remain the shared flow. Team email identifies the advance saver offer and omits the blank date line. Stale forms cannot save new inquiries after the payment is cleared. No personal answers enter analytics.
