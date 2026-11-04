@@ -43,7 +43,7 @@ Deploy both the theme and plugin from the new commit, then visit WordPress as an
 
 After deployment and the administrator visit, purge the Campaign page through **Delete Cache** and verify the ordinary public URL without login cookies. This release is intended for the cPanel deployment test; do not replace the live theme through WordPress as part of delivery.
 
-The subsequent header revision omits the entire header template part, including its logo strip, on this Campaign only at all screen widths. The title band and breadcrumbs become the start of the page. Other pages retain the shared header.
+The subsequent header revision omits the entire header template part, including its logo strip, on this Campaign only at all screen widths. The client also removed this Campaign's breadcrumbs, so the headline becomes the start of the page. Other pages retain the shared header and breadcrumbs.
 
 Run `node tools/test_christmas_campaign.mjs`, the existing PHP/JS inquiry validation suites, and `tools/test_christmas_campaign_wp.php` against the isolated local WordPress fixture with SCF and HKS active. The integration test requires `HKS_WEBINAR_TESTING=true` and environment `local`, intercepts mail, and restores the two drafts with no test price. It covers ID isolation, publication, malformed amounts, normal price inheritance/overrides, absent dates, malicious client flags, signed-context tampering, saved inquiries and notification deduplication.
 

@@ -12,7 +12,7 @@ On 30 October 2026, the client confirmed this Campaign's first bullet as “SGR 
 
 On 4 November 2026, the client revised the savings to “Save upto 4500 per person” and deadline to “Offer expires November 10th”, confirmed the KSh 60,000 advance as per family, and requested a 50% larger title using the full title-band width with natural wrapping. Mobile quote navigation scrolls to the quote panel; its own button opens the shared intake. A one-time administrator migration updates the stored payment basis and replaces the headline's existing “6000 per person” with “4500 per person”, preserving later editorial changes. This revision is delivered as a new Git commit for cPanel deployment.
 
-The client subsequently removed the site header, including the top logo strip, from this Christmas Campaign on desktop and mobile. The header template part is omitted only for the identified Campaign; the page begins with its title band and breadcrumbs.
+The client subsequently removed the site header, including the top logo strip, and then the breadcrumbs from this Christmas Campaign on desktop and mobile. Both are omitted only for the identified Campaign; the page begins directly with its headline.
 
 ## Diani presentation registration — 2026-09-30
 

@@ -285,6 +285,7 @@ final class TourBlocks {
 	 */
 	private static function render_campaign_hero( array $context ): string {
 		$campaign_id  = $context['campaign_id'];
+		$christmas    = class_exists( ChristmasCoast::class ) && ChristmasCoast::matches( $campaign_id );
 		$title        = self::public_text( self::field( 'hks_hero_headline', $campaign_id ) ) ?: self::public_text( get_the_title( $campaign_id ) );
 		$introduction = self::public_html( self::field( 'hks_supporting_copy', $campaign_id ) );
 		$tours_url    = get_post_type_archive_link( 'hks_tour' ) ?: home_url( '/tours/' );
@@ -294,7 +295,9 @@ final class TourBlocks {
 		<section class="hks-tour-lead hks-campaign-lead">
 			<div class="hks-title-band">
 				<div class="hks-shell">
-					<?php self::breadcrumbs( array( __( 'Tours', 'hks-wayfinder' ) => $tours_url, $title => '' ) ); ?>
+					<?php if ( ! $christmas ) : ?>
+						<?php self::breadcrumbs( array( __( 'Tours', 'hks-wayfinder' ) => $tours_url, $title => '' ) ); ?>
+					<?php endif; ?>
 					<h1><?php echo esc_html( $title ); ?></h1>
 					<?php if ( $introduction ) : ?><div class="hks-campaign-lead__intro"><?php echo wp_kses_post( wpautop( $introduction ) ); ?></div><?php endif; ?>
 				</div>
