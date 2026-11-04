@@ -37,6 +37,12 @@ Private inquiry storage, reference generation, idempotent retries, background te
 
 ## Verification
 
+### 4 November offer revision
+
+Deploy both the theme and plugin from the new commit, then visit WordPress as an administrator once. The Campaign-only migration changes the existing payment basis to **per family** and updates any headline reference to **6000 per person** to **4500 per person**. It leaves the entered amount intact and runs once, preserving later editor changes. The quote-panel bullets now read **Save upto 4500 per person** and **Offer expires November 10th**; this remains fixed copy, with no automatic expiry. The title is 50% larger and uses the full available title-band width with natural line wrapping. On mobile, the floating quote link and other quote navigation controls scroll to the quote panel, where its own button opens the intake.
+
+After deployment and the administrator visit, purge the Campaign page through **Delete Cache** and verify the ordinary public URL without login cookies. This release is intended for the cPanel deployment test; do not replace the live theme through WordPress as part of delivery.
+
 Run `node tools/test_christmas_campaign.mjs`, the existing PHP/JS inquiry validation suites, and `tools/test_christmas_campaign_wp.php` against the isolated local WordPress fixture with SCF and HKS active. The integration test requires `HKS_WEBINAR_TESTING=true` and environment `local`, intercepts mail, and restores the two drafts with no test price. It covers ID isolation, publication, malformed amounts, normal price inheritance/overrides, absent dates, malicious client flags, signed-context tampering, saved inquiries and notification deduplication.
 
 Pushing code to GitHub does not deploy cPanel or publish WordPress content. Use the existing code deployment procedure, then complete the drafts in WordPress.

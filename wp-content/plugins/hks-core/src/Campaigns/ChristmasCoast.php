@@ -12,6 +12,23 @@ final class ChristmasCoast implements Module {
 
 	public function register() {
 		add_action( 'admin_init', array( $this, 'ensure_drafts' ) );
+		add_action( 'admin_init', array( $this, 'update_november_offer' ) );
+	}
+
+	/** Apply the client's November revision once; preserve subsequent editor changes. */
+	public function update_november_offer(): void {
+		$ids = get_option( self::OPTION, array() );
+		$id = (int) ( $ids['campaign'] ?? 0 );
+		$revision = 'hks_christmas_coast_november_offer';
+		if ( ! current_user_can( 'manage_options' ) || get_option( $revision ) || ! self::matches( $id ) ) {
+			return;
+		}
+		update_post_meta( $id, 'hks_christmas_advance_basis', 'family' );
+		$headline = get_post_meta( $id, 'hks_hero_headline', true );
+		if ( is_string( $headline ) ) {
+			update_post_meta( $id, 'hks_hero_headline', str_replace( '6000 per person', '4500 per person', $headline ) );
+		}
+		update_option( $revision, true, false );
 	}
 
 	/** Only the recorded, code-created Campaign gets the exception; never match a title or slug. */

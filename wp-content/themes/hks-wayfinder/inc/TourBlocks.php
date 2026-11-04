@@ -364,7 +364,7 @@ final class TourBlocks {
 				</dl>
 			<?php endif; ?>
 
-			<aside class="hks-tour-quote" aria-label="<?php esc_attr_e( 'Request a quote', 'hks-wayfinder' ); ?>">
+			<aside class="hks-tour-quote"<?php if ( $christmas ) : ?> id="hks-christmas-quote" tabindex="-1"<?php endif; ?> aria-label="<?php esc_attr_e( 'Request a quote', 'hks-wayfinder' ); ?>">
 				<div class="hks-tour-quote__panel" data-hks-primary-quote>
 					<p class="hks-tour-quote__label"><?php esc_html_e( 'Plan this trip', 'hks-wayfinder' ); ?></p>
 					<h2><?php echo esc_html( $christmas ? __( 'Advance saver booking payment', 'hks-wayfinder' ) : __( 'Request a tailored quote', 'hks-wayfinder' ) ); ?></h2>
@@ -374,8 +374,8 @@ final class TourBlocks {
 					<ul class="hks-tour-quote__reassurances">
 						<?php if ( $christmas ) : ?>
 							<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'SGR return ticket, Hotel Transfer, All Inclusive Meals,', 'hks-wayfinder' ); ?></span></li>
-							<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Save upto 6000 per person', 'hks-wayfinder' ); ?></span></li>
-							<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Offer Expires in 2 days', 'hks-wayfinder' ); ?></span></li>
+							<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Save upto 4500 per person', 'hks-wayfinder' ); ?></span></li>
+							<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Offer expires November 10th', 'hks-wayfinder' ); ?></span></li>
 						<?php else : ?>
 							<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Inclusions and exclusions clarified', 'hks-wayfinder' ); ?></span></li>
 							<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'No booking commitment required', 'hks-wayfinder' ); ?></span></li>
@@ -426,7 +426,7 @@ final class TourBlocks {
 		</section>
 
 		<?php self::render_related_tours( $tour_id ); ?>
-		<div class="hks-mobile-quote-bar"><button type="button" data-hks-quote-proxy><?php esc_html_e( 'Request a quote', 'hks-wayfinder' ); ?></button></div>
+		<div class="hks-mobile-quote-bar"><?php if ( $christmas ) : ?><a class="hks-button" href="#hks-christmas-quote"><?php esc_html_e( 'Request a quote', 'hks-wayfinder' ); ?></a><?php else : ?><button type="button" data-hks-quote-proxy><?php esc_html_e( 'Request a quote', 'hks-wayfinder' ); ?></button><?php endif; ?></div>
 		<?php
 
 		return (string) ob_get_clean();

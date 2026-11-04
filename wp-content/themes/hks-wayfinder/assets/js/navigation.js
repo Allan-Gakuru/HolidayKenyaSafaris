@@ -100,6 +100,14 @@
 
 		event.preventDefault();
 		closeMenu(false);
+		if (document.body.classList.contains('hks-christmas-coast') && window.matchMedia('(max-width: 48rem)').matches) {
+			const panel = document.getElementById('hks-christmas-quote');
+			if (panel) {
+				panel.focus({ preventScroll: true });
+				panel.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
+				return;
+			}
+		}
 		window.setTimeout(() => target.click(), 0);
 	});
 }());

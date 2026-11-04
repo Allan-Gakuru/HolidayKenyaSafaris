@@ -32,6 +32,24 @@ $tour = $ids['tour']; $campaign = $ids['campaign'];
 check_christmas( 'draft' === get_post_status( $tour ) && 'draft' === get_post_status( $campaign ), 'Both records start as drafts.' );
 check_christmas( (int) get_post_meta( $campaign, 'hks_linked_tour', true ) === (int) $tour, 'Campaign links to its coast Tour.' );
 check_christmas( ChristmasCoast::matches( $campaign ) && ! ChristmasCoast::matches( $tour ) && ! ChristmasCoast::matches( 0 ), 'Only the recorded Campaign matches.' );
+$offer_revision = get_option( 'hks_christmas_coast_november_offer', false );
+$offer_headline = get_post_meta( $campaign, 'hks_hero_headline', true );
+$offer_basis = get_post_meta( $campaign, 'hks_christmas_advance_basis', true );
+try {
+	delete_option( 'hks_christmas_coast_november_offer' );
+	update_post_meta( $campaign, 'hks_christmas_advance_basis', 'booking' );
+	update_post_meta( $campaign, 'hks_hero_headline', 'Christmas Coast Getaway and Save upto 6000 per person' );
+	$module->update_november_offer();
+	check_christmas( 'family' === get_post_meta( $campaign, 'hks_christmas_advance_basis', true ), 'Deployment migrates the existing payment basis to family.' );
+	check_christmas( 'Christmas Coast Getaway and Save upto 4500 per person' === get_post_meta( $campaign, 'hks_hero_headline', true ), 'Deployment keeps headline savings consistent with the revised offer.' );
+	update_post_meta( $campaign, 'hks_christmas_advance_basis', 'person' );
+	$module->update_november_offer();
+	check_christmas( 'person' === get_post_meta( $campaign, 'hks_christmas_advance_basis', true ), 'Later editorial updates survive repeated admin visits.' );
+} finally {
+	update_post_meta( $campaign, 'hks_hero_headline', $offer_headline );
+	update_post_meta( $campaign, 'hks_christmas_advance_basis', $offer_basis );
+	if ( false === $offer_revision ) { delete_option( 'hks_christmas_coast_november_offer' ); } else { update_option( 'hks_christmas_coast_november_offer', $offer_revision ); }
+}
 $module->ensure_drafts();
 check_christmas( $ids === get_option( 'hks_christmas_coast_drafts' ), 'Repeated setup is idempotent.' );
 ( new FieldsModule() )->register_field_groups();
@@ -59,7 +77,7 @@ try {
 	update_field( 'field_hks_campaign_from_price_ksh', 88000, $campaign );
 	$summary = new ReflectionMethod( TourBlocks::class, 'campaign_price_summary' );
 	check_christmas( array() === $summary->invoke( null, $campaign, $tour ), 'Blank retainer cannot fall back to either full price.' );
-	foreach ( $valid as $key => $value ) { update_post_meta( $campaign, $key, $value ); }
+	foreach ( $valid as $key => $value ) { update_field( $key, $value, $campaign ); }
 	update_field( 'field_hks_christmas_advance_note', 'Local test terms only.', $campaign );
 	wp_update_post( array( 'ID' => $campaign, 'post_status' => 'publish' ) );
 	check_christmas( 'publish' === get_post_status( $campaign ), 'Complete Campaign can publish with a public Tour.' );

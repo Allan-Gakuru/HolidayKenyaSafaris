@@ -534,6 +534,9 @@ function hks_wayfinder_campaign_body_class( array $classes ): array {
 		$post_id = get_queried_object_id();
 		$mode    = function_exists( 'get_field' ) ? get_field( 'hks_navigation_mode', $post_id ) : get_post_meta( $post_id, 'hks_navigation_mode', true );
 		$classes[] = 'hks-campaign-navigation-' . sanitize_html_class( $mode ?: 'campaign_minimal' );
+		if ( class_exists( '\\HolidayKenyaSafaris\\Core\\Campaigns\\ChristmasCoast' ) && \HolidayKenyaSafaris\Core\Campaigns\ChristmasCoast::matches( $post_id ) ) {
+			$classes[] = 'hks-christmas-coast';
+		}
 	}
 
 	if ( is_singular( 'post' ) ) {

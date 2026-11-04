@@ -734,6 +734,19 @@ body:not(.home) .wp-site-blocks > main {
 	max-width: 65ch;
 }
 
+/* This Campaign uses the full title band, with the client-requested 50% type increase. */
+.hks-christmas-coast .hks-title-band .hks-shell {
+	max-width: none;
+	width: calc(100% - clamp(2rem, 6vw, 4rem));
+}
+
+.hks-christmas-coast .hks-title-band h1 {
+	font-size: clamp(1.6875rem, 3.75vw, 2.625rem);
+	max-width: none;
+	width: 100%;
+	text-wrap: wrap;
+}
+
 .hks-campaign-lead__intro > :last-child {
 	margin-bottom: 0;
 }
@@ -3002,7 +3015,8 @@ body:not(.home) .wp-site-blocks > main {
 		z-index: var(--wp--custom--z-index--sticky, 200);
 	}
 
-	.hks-mobile-quote-bar button {
+	.hks-mobile-quote-bar button,
+	.hks-mobile-quote-bar .hks-button {
 		background: var(--wp--preset--color--saffron);
 		color: var(--wp--preset--color--midnight-navy);
 		width: 100%;
