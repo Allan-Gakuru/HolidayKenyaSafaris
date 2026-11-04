@@ -60,6 +60,10 @@ The confirmed cPanel account is `holidayk` and the WordPress document root is
 `hks-wayfinder` theme and `hks-core` plugin into that installation. The recommended
 cPanel-managed clone path is `/home/holidayk/repositories/HolidayKenyaSafaris`.
 
+Production uses **WP Super Cache** for page caching and **Redis Object Cache** (confirmed in the WordPress dashboard on 4 November 2026). After deploying presentation changes, purge the affected page through its **Delete Cache** toolbar action, then verify the ordinary public URL without login cookies or cache-busting parameters. A logged-in preview alone does not confirm what visitors receive. Flush Redis only when the change requires invalidating stored object data.
+
+On 4 November 2026, the Christmas Campaign's installed `TourBlocks.php` still contained the previous first bullet. The theme from repository commit `69fb1ba` was applied through WordPress's theme updater after the file editor failed to save. The Campaign page cache was purged and an anonymous request confirmed the requested SGR, savings and expiry bullets.
+
 Create two independent environments:
 
 | Environment | Example | Requirements |
