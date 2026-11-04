@@ -549,6 +549,22 @@ function hks_wayfinder_campaign_body_class( array $classes ): array {
 }
 add_filter( 'body_class', 'hks_wayfinder_campaign_body_class' );
 
+/** Omit the site header entirely on the Christmas coast Campaign. */
+function hks_wayfinder_christmas_header( $pre_render, array $parsed_block ) {
+	if (
+		null === $pre_render
+		&& 'core/template-part' === ( $parsed_block['blockName'] ?? '' )
+		&& 'header' === ( $parsed_block['attrs']['slug'] ?? '' )
+		&& is_singular( 'hks_campaign' )
+		&& class_exists( '\\HolidayKenyaSafaris\\Core\\Campaigns\\ChristmasCoast' )
+		&& \HolidayKenyaSafaris\Core\Campaigns\ChristmasCoast::matches( get_queried_object_id() )
+	) {
+		return '';
+	}
+	return $pre_render;
+}
+add_filter( 'pre_render_block', 'hks_wayfinder_christmas_header', 10, 2 );
+
 /**
  * Return the current cache generation for catalogue-derived navigation data.
  *
