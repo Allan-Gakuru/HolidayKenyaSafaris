@@ -378,7 +378,7 @@ final class TourBlocks {
 						<?php if ( $christmas ) : ?>
 							<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'SGR return ticket, Hotel Transfer, All Inclusive Meals,', 'hks-wayfinder' ); ?></span></li>
 							<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Save upto 4500 per person', 'hks-wayfinder' ); ?></span></li>
-							<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Offer expires November 10th', 'hks-wayfinder' ); ?></span></li>
+							<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Offer expires November 30th', 'hks-wayfinder' ); ?></span></li>
 						<?php else : ?>
 							<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'Inclusions and exclusions clarified', 'hks-wayfinder' ); ?></span></li>
 							<li><span aria-hidden="true">✅</span><span><?php esc_html_e( 'No booking commitment required', 'hks-wayfinder' ); ?></span></li>

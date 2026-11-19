@@ -14,6 +14,8 @@ On 4 November 2026, the client revised the savings to “Save upto 4500 per pers
 
 The client subsequently removed the site header, including the top logo strip, and then the breadcrumbs from this Christmas Campaign on desktop and mobile. Both are omitted only for the identified Campaign; the page begins directly with its headline.
 
+On 19 November 2026, the client extended this Campaign's expiry bullet to “Offer expires November 30th”. This supersedes the November 10th deadline and remains fixed copy without automatic expiry.
+
 ## Diani presentation registration — 2026-09-30
 
 The client approved a dedicated short webinar landing Page and matching thank-you Page at `/diani-christmas-presentation/` and `/diani-christmas-presentation/thank-you/`. This is an explicit exception to the Tour/Campaign quote flow: register for the presentation, then add it to a calendar. It neither books the holiday nor collects a payment.

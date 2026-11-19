@@ -45,6 +45,8 @@ After deployment and the administrator visit, purge the Campaign page through **
 
 The subsequent header revision omits the entire header template part, including its logo strip, on this Campaign only at all screen widths. The client also removed this Campaign's breadcrumbs, so the headline becomes the start of the page. Other pages retain the shared header and breadcrumbs.
 
+On 19 November 2026, the client extended the expiry bullet to **Offer expires November 30th**, superseding the November 10th deadline above. Deploy the theme change and purge the Campaign page cache; no database update is required for this copy change.
+
 Run `node tools/test_christmas_campaign.mjs`, the existing PHP/JS inquiry validation suites, and `tools/test_christmas_campaign_wp.php` against the isolated local WordPress fixture with SCF and HKS active. The integration test requires `HKS_WEBINAR_TESTING=true` and environment `local`, intercepts mail, and restores the two drafts with no test price. It covers ID isolation, publication, malformed amounts, normal price inheritance/overrides, absent dates, malicious client flags, signed-context tampering, saved inquiries and notification deduplication.
 
 Pushing code to GitHub does not deploy cPanel or publish WordPress content. Use the existing code deployment procedure, then complete the drafts in WordPress.
