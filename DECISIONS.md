@@ -16,6 +16,8 @@ The client subsequently removed the site header, including the top logo strip, a
 
 On 19 November 2026, the client extended this Campaign's expiry bullet to “Offer expires November 30th”. This supersedes the November 10th deadline and remains fixed copy without automatic expiry.
 
+The client then approved replacing this Campaign's traveler-count question with required **Number of adults** and **Number of children (under 13)** (enter 0 if none), plus optional **Family activities** with the prompt “What activities would you like planned for your family?”. The server derives total travelers from the two counts. The reviewed WhatsApp message, private inquiry and queued team notification retain the counts, age band and requested activities. Other Tour and Campaign forms keep their existing questions.
+
 ## Diani presentation registration — 2026-09-30
 
 The client approved a dedicated short webinar landing Page and matching thank-you Page at `/diani-christmas-presentation/` and `/diani-christmas-presentation/thank-you/`. This is an explicit exception to the Tour/Campaign quote flow: register for the presentation, then add it to a calendar. It neither books the holiday nor collects a payment.

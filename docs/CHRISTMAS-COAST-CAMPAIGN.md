@@ -31,7 +31,9 @@ On 27 October 2026, the client requested two quote-panel bullets, **Save upto 60
 
 On 30 October 2026, the client replaced this Campaign's first bullet, **Inclusions and exclusions clarified**, with **SGR return ticket, Hotel Transfer, All Inclusive Meals,**.
 
-The quote form retains name, phone, email, package and traveler count, plus existing Tour-specific optional questions. This Campaign has no date input or calendar. Both browser payload and reviewed WhatsApp message omit the date. The server derives the exemption from the signed Campaign identity, discards unexpected date values, and continues to require dates everywhere else.
+The quote form retains name, phone, email and package. On 19 November 2026, the client approved required **Number of adults** and **Number of children (under 13)**, with **0 if none** for children, replacing the total-traveler question on this Campaign only. Optional **Family activities** asks “What activities would you like planned for your family?” (up to 300 characters). The server validates whole counts and derives the total, bounded to 99 people. Duplicate optional adult/child questions from the linked Tour are omitted. Other Tour-specific optional questions remain. Counts and activities appear in the reviewed WhatsApp message, private inquiry detail and background team notification; only the total's existing count bucket enters analytics.
+
+This Campaign has no date input or calendar. Both browser payload and reviewed WhatsApp message omit the date. The server derives the exemption and family-intake scope from the signed Campaign identity, discards unexpected date values, and continues to require dates everywhere else. Existing inquiries remain unchanged; new records preserve the child age band with an internal family-intake marker.
 
 Private inquiry storage, reference generation, idempotent retries, background team notification and the visitor-controlled WhatsApp launch remain the shared flow. Team email identifies the advance saver offer and omits the blank date line. Stale forms cannot save new inquiries after the payment is cleared. No personal answers enter analytics.
 

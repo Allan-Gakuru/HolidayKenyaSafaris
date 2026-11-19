@@ -133,10 +133,22 @@ final class QuoteBlock {
 									<div id="<?php echo esc_attr( $instance_id ); ?>-calendar" class="hks-inquiry__calendar" data-hks-calendar role="group" aria-label="Choose your travel date" hidden></div>
 								</div>
 								<?php endif; ?>
-								<?php self::text_input( $instance_id, 'travelers', __( 'Number of travelers', 'hks-core' ), 'number', 'off', true, '', '1', $is_group_context ? '999' : '99' ); ?>
+								<?php if ( $christmas ) : ?>
+									<?php self::text_input( $instance_id, 'adults', __( 'Number of adults', 'hks-core' ), 'number', 'off', true, '', '1', '99' ); ?>
+									<?php self::text_input( $instance_id, 'children', __( 'Number of children (under 13)', 'hks-core' ), 'number', 'off', true, __( '0 if none', 'hks-core' ), '0', '99' ); ?>
+								<?php else : ?>
+									<?php self::text_input( $instance_id, 'travelers', __( 'Number of travelers', 'hks-core' ), 'number', 'off', true, '', '1', $is_group_context ? '999' : '99' ); ?>
+								<?php endif; ?>
 							</div>
 
-							<?php self::optional_fields( $instance_id, $context['optional_questions'] ); ?>
+							<?php if ( $christmas ) : ?>
+								<div class="hks-inquiry__field">
+									<label for="<?php echo esc_attr( $instance_id ); ?>-family_activities"><?php esc_html_e( 'Family activities (optional)', 'hks-core' ); ?></label>
+									<input id="<?php echo esc_attr( $instance_id ); ?>-family_activities" name="family_activities" type="text" autocomplete="off" maxlength="300" aria-describedby="<?php echo esc_attr( $instance_id ); ?>-family-activities-hint">
+									<small id="<?php echo esc_attr( $instance_id ); ?>-family-activities-hint"><?php esc_html_e( 'What activities would you like planned for your family?', 'hks-core' ); ?></small>
+								</div>
+							<?php endif; ?>
+							<?php self::optional_fields( $instance_id, $christmas ? array_diff( $context['optional_questions'], array( 'adults_children' ) ) : $context['optional_questions'] ); ?>
 
 							<p class="hks-inquiry__save-note"><?php esc_html_e( 'Backed by over 20 years of Ashford Tours and Travels’ experience, Holiday Kenya Safaris offers thoughtfully planned tours for Kenyans.', 'hks-core' ); ?></p>
 							<p class="hks-inquiry__status" data-hks-inquiry-status role="status" aria-live="polite"></p>
@@ -421,7 +433,7 @@ final class QuoteBlock {
 				autocomplete="<?php echo esc_attr( $autocomplete ); ?>"
 				<?php if ( $placeholder ) : ?>placeholder="<?php echo esc_attr( $placeholder ); ?>"<?php endif; ?>
 				<?php if ( $required ) : ?>required<?php endif; ?>
-				<?php if ( $min ) : ?>min="<?php echo esc_attr( $min ); ?>"<?php endif; ?>
+				<?php if ( '' !== $min ) : ?>min="<?php echo esc_attr( $min ); ?>"<?php endif; ?>
 				<?php if ( $max ) : ?>max="<?php echo esc_attr( $max ); ?>"<?php endif; ?>
 				<?php if ( $maxlength ) : ?>maxlength="<?php echo esc_attr( $maxlength ); ?>"<?php endif; ?>
 			>

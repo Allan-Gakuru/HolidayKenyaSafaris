@@ -7,6 +7,7 @@
 
 namespace HolidayKenyaSafaris\Core\Conversion;
 
+use HolidayKenyaSafaris\Core\Campaigns\ChristmasCoast;
 use HolidayKenyaSafaris\Core\Content\PostTypes\Inquiry;
 
 defined( 'ABSPATH' ) || exit;
@@ -83,12 +84,13 @@ final class InquiryNotification {
 			'email'             => self::meta( $inquiry_id, 'email' ),
 			'preferred_date'    => self::meta( $inquiry_id, 'preferred_date' ),
 			'travelers'         => absint( self::meta( $inquiry_id, 'travelers' ) ),
+			'family_intake'     => '1' === self::meta( $inquiry_id, 'family_intake' ),
 			'destination_label' => self::meta( $inquiry_id, 'destination' ),
 			'inquiry_route'     => self::meta( $inquiry_id, 'route' ),
 			'attribution'       => self::attribution( self::meta( $inquiry_id, 'attribution' ) ),
 		);
 
-		foreach ( array( 'departure_town', 'adults', 'children', 'residency', 'vehicle_preference', 'accommodation_preference', 'budget_range' ) as $field ) {
+		foreach ( array( 'departure_town', 'adults', 'children', 'residency', 'vehicle_preference', 'accommodation_preference', 'budget_range', 'family_activities' ) as $field ) {
 			$value = self::meta( $inquiry_id, $field );
 			if ( '' !== $value ) {
 				$values[ $field ] = in_array( $field, array( 'adults', 'children' ), true ) ? absint( $value ) : $value;
@@ -213,7 +215,7 @@ final class InquiryNotification {
 			self::line( __( 'Email', 'hks-core' ), $values['email'] ),
 			self::line( __( 'Inquiry route', 'hks-core' ), self::route_label( $values['inquiry_route'] ) ),
 			self::line( __( 'Package', 'hks-core' ), $context['package_label'] ),
-			\HolidayKenyaSafaris\Core\Campaigns\ChristmasCoast::matches( $context['campaign_id'] ) ? self::line( __( 'Offer', 'hks-core' ), __( 'Christmas coast advance saver booking inquiry', 'hks-core' ) ) : null,
+			ChristmasCoast::matches( $context['campaign_id'] ) ? self::line( __( 'Offer', 'hks-core' ), __( 'Christmas coast advance saver booking inquiry', 'hks-core' ) ) : null,
 			self::line( __( 'Destination', 'hks-core' ), $values['destination_label'] ),
 			'' !== $values['preferred_date'] ? self::line( __( 'Preferred travel date', 'hks-core' ), $values['preferred_date'] ) : null,
 			self::line( __( 'Travelers', 'hks-core' ), $values['travelers'] ),
@@ -222,11 +224,12 @@ final class InquiryNotification {
 		$optional_labels = array(
 			'departure_town'          => __( 'Departure town', 'hks-core' ),
 			'adults'                  => __( 'Adults', 'hks-core' ),
-			'children'                => __( 'Children', 'hks-core' ),
+			'children'                => ! empty( $values['family_intake'] ) ? __( 'Children (under 13)', 'hks-core' ) : __( 'Children', 'hks-core' ),
 			'residency'               => __( 'Residency', 'hks-core' ),
 			'vehicle_preference'      => __( 'Vehicle preference', 'hks-core' ),
 			'accommodation_preference' => __( 'Accommodation preference', 'hks-core' ),
 			'budget_range'             => __( 'Budget range', 'hks-core' ),
+			'family_activities'        => __( 'Family activities', 'hks-core' ),
 		);
 
 		foreach ( $optional_labels as $key => $label ) {

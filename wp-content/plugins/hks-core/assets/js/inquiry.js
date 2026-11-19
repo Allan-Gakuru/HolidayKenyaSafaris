@@ -354,11 +354,11 @@
 		return '10+';
 	}
 
-	function selectedLabel(form, name) {
+	function selectedLabel(form, name, maxLength = 120) {
 		const field = form.elements[name];
 		if (!field || !field.value) return '';
 		if (field.tagName === 'SELECT') return safeText(field.selectedOptions[0].textContent, 120);
-		return safeText(field.value, 120);
+		return safeText(field.value, maxLength);
 	}
 
 	function buildMessage(form, packageLabel, reference, context) {
@@ -368,7 +368,10 @@
 			'Hi Holiday Kenya Safaris, my name is ' + safeText(data.get('name'), 100) + '.',
 			'',
 			'I am interested in ' + packageLabel + '.',
-			'Travelers: ' + safeText(data.get('travelers'), 3) + '.',
+			...(context.christmasCoast ? [
+				'Adults: ' + safeText(data.get('adults'), 2) + '.',
+				'Children (under 13): ' + safeText(data.get('children'), 2) + '.'
+			] : ['Travelers: ' + safeText(data.get('travelers'), 3) + '.']),
 			'Phone: ' + safeText(data.get('phone'), 30) + '.',
 			'Email: ' + safeText(data.get('email'), 254) + '.'
 		];
@@ -386,9 +389,14 @@
 		};
 
 		Object.keys(optionalLabels).forEach(function (name) {
+			if (context.christmasCoast && ['adults', 'children'].includes(name)) return;
 			const value = selectedLabel(form, name);
 			if (value) lines.push(optionalLabels[name] + ': ' + value + '.');
 		});
+		if (context.christmasCoast) {
+			const activities = selectedLabel(form, 'family_activities', 300);
+			if (activities) lines.push('Family activities: ' + activities + '.');
+		}
 
 		lines.push('', 'Request reference: ' + reference + '.');
 
@@ -427,6 +435,10 @@
 		['adults', 'children'].forEach(function (name) {
 			if (form.elements[name]) payload[name] = data.get(name) === '' ? '' : Number(data.get(name));
 		});
+		if (root.dataset.hksChristmasCoast === 'true') {
+			payload.travelers = Number(data.get('adults')) + Number(data.get('children'));
+			payload.family_activities = safeText(data.get('family_activities'), 300);
+		}
 
 		return payload;
 	}
@@ -592,7 +604,7 @@
 				reviewStep.setAttribute('tabindex', '-1');
 				reviewStep.focus();
 				track(root, 'quote_inquiry_saved', { request_reference: safeText(result.reference, 30) });
-				track(root, 'quote_form_complete', { traveler_count_bucket: travelerBucket(form.elements.travelers.value) });
+				track(root, 'quote_form_complete', { traveler_count_bucket: travelerBucket(formPayload(form, root, {}).travelers) });
 			} catch (error) {
 				status.textContent = error.message || 'We could not save your request. Please try again.';
 				track(root, 'quote_form_error', { field_name: safeText(error.field || 'request', 40), error_type: safeText(error.type || 'network', 40) });

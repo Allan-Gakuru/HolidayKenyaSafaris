@@ -48,6 +48,7 @@ final class InquiryRepository {
 		'vehicle_preference',
 		'accommodation_preference',
 		'budget_range',
+		'family_activities',
 	);
 
 	/**
@@ -269,6 +270,7 @@ final class InquiryRepository {
 			'tour_id'           => $tour_id,
 			'campaign_id'       => $campaign_id,
 			'collects_date'     => ! ChristmasCoast::matches( $campaign_id ),
+			'family_intake'     => ChristmasCoast::matches( $campaign_id ),
 			'package_label'     => $package_label,
 			'destination_label' => $destination_label,
 			'allowed_questions' => is_array( $allowed_questions ) ? $allowed_questions : array(),
@@ -339,6 +341,19 @@ final class InquiryRepository {
 			: ( $context['campaign_id'] ? 'campaign' : ( 'article' === $requested_route ? 'article' : 'tour' ) );
 		$traveler_limit  = 'group_travel' === $inquiry_route ? 999 : 99;
 		$travelers       = absint( $payload['travelers'] ?? 0 );
+		$family_intake   = $context['family_intake'] ?? false;
+		if ( $family_intake ) {
+			foreach ( array( 'adults' => 1, 'children' => 0 ) as $field => $minimum ) {
+				$count = $payload[ $field ] ?? null;
+				if ( ! ( is_int( $count ) || is_string( $count ) ) || ! preg_match( '/^(0|[1-9][0-9]?)$/D', (string) $count ) || (int) $count < $minimum ) {
+					return $this->error( $field, 'adults' === $field ? __( 'Enter the number of adults, from 1 to 99.', 'hks-core' ) : __( 'Enter the number of children under 13, from 0 to 99.', 'hks-core' ) );
+				}
+			}
+			$travelers = (int) $payload['adults'] + (int) $payload['children'];
+			if ( $travelers > $traveler_limit ) {
+				return $this->error( 'children', __( 'The total number of adults and children must be 99 or fewer.', 'hks-core' ) );
+			}
+		}
 
 		if ( $travelers < 1 || $travelers > $traveler_limit ) {
 			return $this->error(
@@ -379,8 +394,17 @@ final class InquiryRepository {
 			'inquiry_route'     => $inquiry_route,
 			'attribution'       => $this->attribution( $payload['attribution'] ?? array() ),
 		);
+		if ( $family_intake ) {
+			$values['family_intake'] = true;
+			$values['adults'] = (int) $payload['adults'];
+			$values['children'] = (int) $payload['children'];
+			$values['family_activities'] = $this->text( $payload['family_activities'] ?? '', 300 );
+		}
 
 		foreach ( self::OPTIONAL_FIELDS as $field ) {
+			if ( 'family_activities' === $field || ( $family_intake && in_array( $field, array( 'adults', 'children' ), true ) ) ) {
+				continue;
+			}
 			if ( ! $this->optional_field_allowed( $field, $allowed_questions ) ) {
 				continue;
 			}
@@ -433,6 +457,7 @@ final class InquiryRepository {
 			'_hks_inquiry_email'           => $values['email'],
 			'_hks_inquiry_preferred_date'  => $values['preferred_date'],
 			'_hks_inquiry_travelers'       => $values['travelers'],
+			'_hks_inquiry_family_intake'   => ! empty( $values['family_intake'] ) ? '1' : '',
 			'_hks_inquiry_tour_id'         => $context['tour_id'],
 			'_hks_inquiry_campaign_id'     => $context['campaign_id'],
 			'_hks_inquiry_package_label'   => $context['package_label'],

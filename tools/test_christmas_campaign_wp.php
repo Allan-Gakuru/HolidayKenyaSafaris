@@ -95,20 +95,41 @@ try {
 		$GLOBALS['post'] = get_post( $id ); setup_postdata( $GLOBALS['post'] );
 		$html = QuoteBlock::render( array() );
 		check_christmas( '' !== $html && str_contains( $html, 'name="preferred_date"' ) === $has_date, 'Only the Christmas form omits its date field.' );
-		check_christmas( str_contains( $html, 'name="email"' ) && str_contains( $html, 'name="travelers"' ), 'Essential qualification fields remain.' );
+		check_christmas( str_contains( $html, 'name="email"' ), 'Contact qualification remains.' );
+		if ( $id === $campaign ) {
+			check_christmas( ! str_contains( $html, 'name="travelers"' ) && substr_count( $html, 'name="adults"' ) === 1 && substr_count( $html, 'name="children"' ) === 1 && str_contains( $html, 'name="family_activities"' ), 'Christmas intake replaces total travelers with adults, children and activities.' );
+			check_christmas( str_contains( $html, 'Number of children (under 13)' ) && str_contains( $html, 'min="0"' ), 'Child count is age-labelled and allows zero.' );
+		} else {
+			check_christmas( str_contains( $html, 'name="travelers"' ) && ! str_contains( $html, 'name="family_activities"' ), 'Other pages retain existing intake fields.' );
+		}
 	}
 	wp_set_current_user( 0 );
-	$base = array( 'tour_id' => $tour, 'campaign_id' => $campaign, 'form_token' => FormToken::issue( $tour, $campaign ), 'request_key' => wp_generate_uuid4(), 'started_at' => (int) ( microtime( true ) * 1000 ) - 3000, 'name' => 'Fixture Traveller', 'phone' => '0712 345 678', 'email' => 'traveller@example.test', 'travelers' => 2, 'website' => '' );
+	$base = array( 'tour_id' => $tour, 'campaign_id' => $campaign, 'form_token' => FormToken::issue( $tour, $campaign ), 'request_key' => wp_generate_uuid4(), 'started_at' => (int) ( microtime( true ) * 1000 ) - 3000, 'name' => 'Fixture Traveller', 'phone' => '0712 345 678', 'email' => 'traveller@example.test', 'travelers' => 99, 'adults' => 2, 'children' => 1, 'family_activities' => 'Beach games for the kids', 'website' => '' );
+	foreach ( array( array( 'adults', 0 ), array( 'adults', -2 ), array( 'adults', 1.5 ), array( 'adults', array( 2 ) ), array( 'children', '' ), array( 'children', -1 ), array( 'children', 1.5 ), array( 'children', true ), array( 'children', 100 ) ) as list( $field, $bad ) ) {
+		$response = christmas_request( array_replace( $base, array( $field => $bad ) ) );
+		check_christmas( 422 === $response->get_status() && $response->get_data()['data']['field'] === $field, 'Malformed family count is rejected without coercion.' );
+	}
+	check_christmas( 422 === christmas_request( array_replace( $base, array( 'adults' => 99, 'children' => 1 ) ) )->get_status(), 'Combined family count is bounded.' );
 	$first = christmas_request( $base );
 	check_christmas( 201 === $first->get_status() && $first->get_data()['saved'], 'Date-free Campaign inquiry saves: ' . wp_json_encode( $first->get_data() ) );
 	$id = (int) substr( $first->get_data()['reference'], 4 ); $inquiries[] = $id;
 	check_christmas( 'private' === get_post_status( $id ) && '' === get_post_meta( $id, '_hks_inquiry_preferred_date', true ), 'Private inquiry contains no fabricated date.' );
+	check_christmas( 3 === (int) get_post_meta( $id, '_hks_inquiry_travelers', true ) && 2 === (int) get_post_meta( $id, '_hks_inquiry_adults', true ) && 1 === (int) get_post_meta( $id, '_hks_inquiry_children', true ) && 'Beach games for the kids' === get_post_meta( $id, '_hks_inquiry_family_activities', true ), 'Stored family answers derive the total and retain activities.' );
 	check_christmas( wp_next_scheduled( InquiryNotification::CRON_HOOK, array( $id ) ) && ! $mail, 'Notification is queued without sending during save.' );
 	check_christmas( 200 === christmas_request( $base )->get_status(), 'Identical retries reuse the saved inquiry.' );
 	check_christmas( 200 === christmas_request( $base + array( 'preferred_date' => 'forged date' ) )->get_status() && '' === get_post_meta( $id, '_hks_inquiry_preferred_date', true ), 'Out-of-scope dates are discarded.' );
 	check_christmas( InquiryNotification::send_saved( $id ) && count( $mail ) === 1, 'Background notification is accepted.' );
 	check_christmas( ! str_contains( $mail[0]['message'], 'Preferred travel date' ) && str_contains( $mail[0]['message'], 'Christmas coast advance saver' ), 'Team notification has offer context and no blank date line.' );
+	check_christmas( str_contains( $mail[0]['message'], 'Children (under 13): 1' ) && str_contains( $mail[0]['message'], 'Family activities: Beach games for the kids' ), 'Queued team email retains the age band and activities.' );
 	check_christmas( InquiryNotification::send_saved( $id ) && count( $mail ) === 1, 'Repeated notification is deduplicated.' );
+	$zero = christmas_request( array_replace( $base, array( 'children' => 0, 'family_activities' => '', 'request_key' => wp_generate_uuid4() ) ) );
+	check_christmas( 201 === $zero->get_status(), 'A family with no children and no activities can inquire.' );
+	$zero_id = (int) substr( $zero->get_data()['reference'], 4 ); $inquiries[] = $zero_id;
+	check_christmas( '0' === get_post_meta( $zero_id, '_hks_inquiry_children', true ) && 2 === (int) get_post_meta( $zero_id, '_hks_inquiry_travelers', true ), 'Zero children survives storage without inflating the total.' );
+	$ordinary = christmas_request( array_replace( $base, array( 'campaign_id' => $normal, 'form_token' => FormToken::issue( $tour, $normal ), 'request_key' => wp_generate_uuid4(), 'preferred_date' => wp_date( 'd-m-Y', time() + 30 * DAY_IN_SECONDS ), 'family_intake' => true ) ) );
+	check_christmas( 201 === $ordinary->get_status(), 'Ordinary Campaign still accepts its normal traveler total and travel date.' );
+	$ordinary_id = (int) substr( $ordinary->get_data()['reference'], 4 ); $inquiries[] = $ordinary_id;
+	check_christmas( 99 === (int) get_post_meta( $ordinary_id, '_hks_inquiry_travelers', true ) && '' === get_post_meta( $ordinary_id, '_hks_inquiry_family_activities', true ) && '' === get_post_meta( $ordinary_id, '_hks_inquiry_family_intake', true ), 'Client flags cannot apply family intake or activities to another Campaign.' );
 	foreach ( array( $normal, 0 ) as $other ) {
 		$payload = array_replace( $base, array( 'campaign_id' => $other, 'form_token' => FormToken::issue( $tour, $other ), 'request_key' => wp_generate_uuid4(), 'collects_date' => false, 'hksChristmasCoast' => true ) );
 		$response = christmas_request( $payload );
